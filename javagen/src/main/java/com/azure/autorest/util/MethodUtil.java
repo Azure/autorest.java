@@ -58,9 +58,12 @@ public class MethodUtil {
         return REPEATABILITY_REQUEST_HTTP_METHODS.contains(httpMethod);
     }
 
-    public static Request findDPGRequestTobeProcessed(List<Request> requests) {
-        // if there is request with binary type, find the request consumes binary type
-        // if all requests are non-binary type, get the first request
+    /**
+     *
+     * @param requests a list of requests
+     * @return the first request consumes binary type, if no binary request, return the first request in requests
+     */
+    public static Request findFirstBinaryRequest(List<Request> requests) {
         Request selectedRequest = requests.get(0);
         for (Request request : requests) {
             if (request.getProtocol().getHttp().getKnownMediaType() != null

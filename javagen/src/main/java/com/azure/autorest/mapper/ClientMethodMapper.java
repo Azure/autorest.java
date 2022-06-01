@@ -162,7 +162,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            Request selectedRequest = MethodUtil.findDPGRequestTobeProcessed(requests);
+            Request selectedRequest = MethodUtil.findFirstBinaryRequest(requests);
             requests = Collections.singletonList(selectedRequest);
         }
 
