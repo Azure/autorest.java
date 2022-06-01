@@ -47,7 +47,7 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,7 +81,7 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -115,7 +115,7 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,7 +149,7 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,7 +183,7 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

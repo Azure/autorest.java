@@ -245,7 +245,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -283,7 +283,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -322,7 +322,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -358,7 +358,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -390,7 +390,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -422,7 +422,7 @@ public final class MediaTypesClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
+     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -547,7 +547,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -583,7 +583,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -622,7 +622,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -655,7 +655,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -691,7 +691,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -730,7 +730,7 @@ public final class MediaTypesClientImpl {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

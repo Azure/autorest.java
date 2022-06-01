@@ -203,7 +203,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -228,7 +228,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -262,7 +262,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -372,7 +372,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -397,7 +397,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -432,7 +432,7 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -610,7 +610,7 @@ public final class MediaTypesClient {
      * byte stream of 'hello, world!' for application/octet-stream.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -641,7 +641,7 @@ public final class MediaTypesClient {
      * byte stream of 'hello, world!' for application/octet-stream.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -660,7 +660,7 @@ public final class MediaTypesClient {
      * byte stream of 'hello, world!' for application/octet-stream.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -678,7 +678,7 @@ public final class MediaTypesClient {
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -709,7 +709,7 @@ public final class MediaTypesClient {
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -728,7 +728,7 @@ public final class MediaTypesClient {
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * @param contentType Upload file type.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
