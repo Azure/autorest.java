@@ -23,6 +23,6 @@ public class MediaTypesTests {
 
   @Test
   public void analyzeWithPdf() throws Exception {
-    client.analyzeBody(ContentType.APPLICATION_PDF, Flux.just(ByteBuffer.wrap("PDF".getBytes(StandardCharsets.UTF_8))), 3L);
+    client.analyzeBody(ContentType.APPLICATION_PDF, 3L, Flux.just(ByteBuffer.wrap("PDF".getBytes(StandardCharsets.UTF_8))));
   }
 }

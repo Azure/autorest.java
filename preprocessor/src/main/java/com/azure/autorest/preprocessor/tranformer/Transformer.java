@@ -399,6 +399,7 @@ public class Transformer {
     Language language = new Language();
     language.setName("contentLength");
     language.setSerializedName("Content-Length");
+    language.setDescription("The Content-Length header for the request");
     contentType.setLanguage(new Languages());
     contentType.getLanguage().setDefault(language);
     contentType.getLanguage().setJava(language);
