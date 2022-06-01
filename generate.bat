@@ -1,6 +1,6 @@
 @echo off
 
-set AUTOREST_CORE_VERSION=3.8.1
+set AUTOREST_CORE_VERSION=3.8.4
 set VANILLA_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
 set AZURE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --add-context-parameter --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL
 set ARM_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false
