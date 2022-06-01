@@ -8,6 +8,9 @@ set PROTOCOL_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --output
 set PROTOCOL_RESILIENCE_ARGUMENTS=--version=%AUTOREST_CORE_VERSION% --java --use=. --data-plane
 set SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
+rem print java version
+java -version
+
 move /Y vanilla-tests\src\main\java\fixtures\report\CoverageReporter.java vanilla-tests\swagger\CoverageReporter.java
 rmdir /S /Q "vanilla-tests\src\main"
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/additionalProperties.json --namespace=fixtures.additionalproperties

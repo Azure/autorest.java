@@ -17,6 +17,9 @@ PROTOCOL_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --output-
 PROTOCOL_RESILIENCE_ARGUMENTS='--version='$AUTOREST_CORE_VERSION' --java --use=./ --data-plane'
 SWAGGER_PATH=node_modules/@microsoft.azure/autorest.testserver/swagger
 
+# print java version
+java -version
+
 # Vanilla
 mv -f vanilla-tests/src/main/java/fixtures/report/CoverageReporter.java vanilla-tests/swagger/CoverageReporter.java
 rm -rf vanilla-tests/src/main
