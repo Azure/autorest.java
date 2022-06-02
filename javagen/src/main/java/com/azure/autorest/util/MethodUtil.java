@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
-import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
@@ -176,7 +175,7 @@ public class MethodUtil {
      */
     private static int getBinarySchemaBodyParameterIndex(List<Parameter> parameters) {
         for (int i = 0; i < parameters.size(); i++) {
-            if(parameters.get(i).getSchema() instanceof BinarySchema) {
+            if (parameters.get(i).getSchema() instanceof BinarySchema) {
                 return i;
             }
         }
