@@ -277,6 +277,71 @@
           }
         }
       }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/binary": {
+      "post": {
+      "description": "json and image types with json type first",
+      "operationId": "jsonAndImageWithJsonFirst",
+      "consumes": [
+        "application/json",
+        "image/jpeg"
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "input",
+          "description": "Input parameter.",
+          "in": "body",
+          "schema": {
+            "format": "binary",
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Received correct format",
+          "schema": {
+            "type": "string"
+          }
+        }
+      }
+    }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/object": {
+      "post": {
+        "description": "json and image types with json type first",
+        "operationId": "jsonAndImageObjectTypeWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   }
 }

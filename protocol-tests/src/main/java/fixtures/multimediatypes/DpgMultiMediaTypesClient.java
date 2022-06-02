@@ -293,4 +293,72 @@ public final class DpgMultiMediaTypesClient {
             String contentType, BinaryData input, RequestOptions requestOptions) {
         return this.client.jsonAndTextWithJsonFirstWithResponse(contentType, input, requestOptions).block();
     }
+
+    /**
+     * json and image types with json type first.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param contentType Upload file type.
+     * @param contentLength The Content-Length header for the request.
+     * @param input Input parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
+            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
+        return this.client
+                .jsonAndImageWithJsonFirstWithResponse(contentType, contentLength, input, requestOptions)
+                .block();
+    }
+
+    /**
+     * json and image types with json type first.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Flux<ByteBuffer>
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The content type for upload.
+     * @param input Input parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
+            long contentLength, String contentType, BinaryData input, RequestOptions requestOptions) {
+        return this.client
+                .jsonAndImageObjectTypeWithJsonFirstWithResponse(contentLength, contentType, input, requestOptions)
+                .block();
+    }
 }
