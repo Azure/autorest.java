@@ -3,12 +3,26 @@
 
 package com.azure.autorest.util;
 
+import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
+import com.azure.autorest.extension.base.model.codemodel.Language;
+import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Protocol;
+import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.Request;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -59,19 +73,134 @@ public class MethodUtil {
     }
 
     /**
-     *
      * @param requests a list of requests
      * @return the first request consumes binary type, if no binary request, return the first request in requests
+     *
+     * If the binary request does not have content-type parameter, we will add one for it
      */
-    public static Request findFirstBinaryRequest(List<Request> requests) {
+    public static Request findFirstBinaryRequest(List<Request> requests, Operation operation) {
         Request selectedRequest = requests.get(0);
         for (Request request : requests) {
             if (request.getProtocol().getHttp().getKnownMediaType() != null
                     && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
+                // add contentType parameter
+                if (haveDifferentContentTypes(requests) && !hasContentTypeParameter(request)) {
+                    Parameter contentTypeParameter = createContentTypeParameter(request, operation);
+                    request.getParameters().add(getBinarySchemaBodyParameterIndex(request.getParameters()), contentTypeParameter);
+                    if (contentTypeParameter.isRequired()) {
+                        request.getSignatureParameters().add(getBinarySchemaBodyParameterIndex(request.getSignatureParameters()), contentTypeParameter);
+                    }
+                }
                 selectedRequest = request;
                 break;
             }
         }
         return selectedRequest;
     }
+
+    /**
+     *
+     * @param request the input request
+     * @return true if there is parameter in the request named "contentType", otherwise, return false
+     */
+    private static boolean hasContentTypeParameter(Request request) {
+        for (Parameter parameter : request.getParameters()) {
+            if (parameter.getLanguage().getDefault().getName().equals("contentType")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param requests a list of requests
+     * @return true if the requests have different content types, otherwise return false
+     */
+    private static boolean haveDifferentContentTypes(List<Request> requests) {
+        Set<KnownMediaType> knownMediaTypes = new HashSet<>();
+        for (Request request : requests) {
+            if (request.getProtocol().getHttp().getKnownMediaType() != null) {
+                knownMediaTypes.add(request.getProtocol().getHttp().getKnownMediaType());
+            }
+        }
+        return knownMediaTypes.size() > 1;
+
+    }
+
+    /**
+     *
+     * @param request the request to put contentType on
+     * @param operation
+     * @return the created content type parameter
+     */
+    private static Parameter createContentTypeParameter(Request request, Operation operation) {
+        List<Request> requests = operation.getRequests();
+        Parameter contentType = new Parameter();
+        contentType.setOperation(operation);
+        contentType.setDescription("The content type for upload");
+        int binarySchemaParameterIndex = getBinarySchemaBodyParameterIndex(request.getParameters());
+        boolean required = binarySchemaParameterIndex != -1 && request.getParameters().get(binarySchemaParameterIndex).isRequired();
+        contentType.setRequired(required);
+        contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
+        SealedChoiceSchema sealedChoiceSchema = new SealedChoiceSchema();
+        StringSchema stringSchema = new StringSchema();
+        stringSchema.setType(Schema.AllSchemaTypes.STRING);
+        sealedChoiceSchema.setChoiceType(stringSchema);
+        sealedChoiceSchema.setChoices(getContentTypeChoiceValues(requests));
+        sealedChoiceSchema.setType(Schema.AllSchemaTypes.fromValue("sealed-choice"));
+        Language language = new Language();
+        language.setName("contentType");
+        language.setSerializedName("Content-Type");
+        language.setDescription("The content type for upload");
+        sealedChoiceSchema.setLanguage(new Languages());
+        sealedChoiceSchema.getLanguage().setJava(language);
+        sealedChoiceSchema.getLanguage().setDefault(language);
+        sealedChoiceSchema.getLanguage().setJava(language);
+        sealedChoiceSchema.setProtocol(new Protocols());
+        contentType.setSchema(sealedChoiceSchema);
+        contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
+        contentType.setProtocol(new Protocols());
+        contentType.getProtocol().setHttp(new Protocol());
+        contentType.getProtocol().getHttp().setIn(RequestParameterLocation.HEADER);
+        contentType.setLanguage(new Languages());
+        contentType.getLanguage().setDefault(language);
+        contentType.getLanguage().setJava(language);
+        return contentType;
+    }
+
+    /**
+     *
+     * @param parameters a list of parameters
+     * @return return the index of the BinarySchema parameter, if not found, return -1
+     */
+    private static int getBinarySchemaBodyParameterIndex(List<Parameter> parameters) {
+        for (int i = 0; i < parameters.size(); i++) {
+            if(parameters.get(i).getSchema() instanceof BinarySchema) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     *
+     * @param requests a list of requests
+     * @return the content type choices of the requests
+     */
+    private static ArrayList<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
+        ArrayList<ChoiceValue> choiceValues = new ArrayList<>();
+        for (Request request : requests) {
+            for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
+                ChoiceValue choiceValue = new ChoiceValue();
+                choiceValue.setValue(mediaType);
+                Language language = new Language();
+                language.setName(mediaType.toUpperCase(Locale.ROOT));
+                language.setDescription("Content Type " + mediaType);
+                choiceValues.add(choiceValue);
+            }
+        }
+        return choiceValues;
+    }
+
 }

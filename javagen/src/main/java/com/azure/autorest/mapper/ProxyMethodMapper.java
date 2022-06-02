@@ -171,7 +171,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            Request selectedRequest = MethodUtil.findFirstBinaryRequest(requests);
+            Request selectedRequest = MethodUtil.findFirstBinaryRequest(requests, operation);
             requests = Collections.singletonList(selectedRequest);
         }
 
