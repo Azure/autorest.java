@@ -104,7 +104,8 @@ public class MethodUtil {
      */
     private static boolean hasContentTypeParameter(Request request) {
         for (Parameter parameter : request.getParameters()) {
-            if (parameter.getLanguage().getDefault().getName() != null && parameter.getLanguage().getDefault().getName().equalsIgnoreCase("contentType")) {
+            if (parameter.getLanguage().getJava().getSerializedName() != null
+                    && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
                 return true;
             }
         }
@@ -154,7 +155,7 @@ public class MethodUtil {
         Language language = new Language();
         language.setName("contentType");
         language.setSerializedName("Content-Type");
-        language.setDescription("The content type for upload");
+        language.setDescription("The content type");
         sealedChoiceSchema.setLanguage(new Languages());
         sealedChoiceSchema.getLanguage().setJava(language);
         sealedChoiceSchema.getLanguage().setDefault(language);
@@ -180,7 +181,7 @@ public class MethodUtil {
         int res = -1;
         for(int i = 0; i < parameters.size(); ++i) {
             if (parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
-                    && parameters.get(i).getLanguage().getDefault().getName().equalsIgnoreCase("contentLength")) {
+                    && "Content-Length".equalsIgnoreCase(parameters.get(i).getLanguage().getJava().getSerializedName())) {
                 res = i;
                 break;
             }
