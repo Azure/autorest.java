@@ -142,6 +142,7 @@ public final class DpgAsyncClient {
      * Object
      * }</pre>
      *
+     * @param contentType The content type for upload.
      * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
@@ -155,8 +156,9 @@ public final class DpgAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponse(
-            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
-        return this.serviceClient.postParametersWithResponseAsync(contentLength, parameter, requestOptions);
+            String contentType, long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+        return this.serviceClient.postParametersWithResponseAsync(
+                contentType, contentLength, parameter, requestOptions);
     }
 
     /**

@@ -126,6 +126,7 @@ public final class ParamsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postParameters(
                 @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
                 @HeaderParam("Content-Length") long contentLength,
                 @BodyParam("image/jpeg") BinaryData parameter,
                 @HeaderParam("Accept") String accept,
@@ -486,6 +487,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentType The content type for upload.
      * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
@@ -498,12 +500,18 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postParameters(
-                                this.client.getHost(), contentLength, parameter, accept, requestOptions, context));
+                                this.client.getHost(),
+                                contentType,
+                                contentLength,
+                                parameter,
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
@@ -521,6 +529,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentType The content type for upload.
      * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
@@ -534,9 +543,14 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            long contentLength, BinaryData parameter, RequestOptions requestOptions, Context context) {
+            String contentType,
+            long contentLength,
+            BinaryData parameter,
+            RequestOptions requestOptions,
+            Context context) {
         final String accept = "application/json";
-        return service.postParameters(this.client.getHost(), contentLength, parameter, accept, requestOptions, context);
+        return service.postParameters(
+                this.client.getHost(), contentType, contentLength, parameter, accept, requestOptions, context);
     }
 
     /**
@@ -554,6 +568,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param contentType The content type for upload.
      * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
@@ -566,8 +581,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
-            long contentLength, BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(contentLength, parameter, requestOptions).block();
+            String contentType, long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+        return postParametersWithResponseAsync(contentType, contentLength, parameter, requestOptions).block();
     }
 
     /**

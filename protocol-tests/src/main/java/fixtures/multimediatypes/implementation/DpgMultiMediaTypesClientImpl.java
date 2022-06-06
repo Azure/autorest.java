@@ -320,8 +320,8 @@ public final class DpgMultiMediaTypesClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirst(
                 @HostParam("$host") String host,
-                @HeaderParam("Content-Length") long contentLength,
                 @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("Content-Length") long contentLength,
                 @BodyParam("image/jpeg") BinaryData input,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -1247,8 +1247,8 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentLength The Content-Length header for the request.
      * @param contentType The content type for upload.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1259,12 +1259,12 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(
-            long contentLength, String contentType, BinaryData input, RequestOptions requestOptions) {
+            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.jsonAndImageObjectTypeWithJsonFirst(
-                                this.getHost(), contentLength, contentType, input, accept, requestOptions, context));
+                                this.getHost(), contentType, contentLength, input, accept, requestOptions, context));
     }
 
     /**
@@ -1282,8 +1282,8 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentLength The Content-Length header for the request.
      * @param contentType The content type for upload.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1295,10 +1295,10 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(
-            long contentLength, String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
+            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.jsonAndImageObjectTypeWithJsonFirst(
-                this.getHost(), contentLength, contentType, input, accept, requestOptions, context);
+                this.getHost(), contentType, contentLength, input, accept, requestOptions, context);
     }
 
     /**
@@ -1316,8 +1316,8 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentLength The Content-Length header for the request.
      * @param contentType The content type for upload.
+     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1328,8 +1328,8 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
-            long contentLength, String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(contentLength, contentType, input, requestOptions)
+            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
+        return jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(contentType, contentLength, input, requestOptions)
                 .block();
     }
 }
