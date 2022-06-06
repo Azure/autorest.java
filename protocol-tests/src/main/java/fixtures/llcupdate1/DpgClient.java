@@ -139,7 +139,7 @@ public final class DpgClient {
      * Object
      * }</pre>
      *
-     * @param contentType The content type for upload.
+     * @param contentType The content type.
      * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.

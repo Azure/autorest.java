@@ -1247,7 +1247,7 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentType The content type for upload.
+     * @param contentType The content type.
      * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1282,7 +1282,7 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentType The content type for upload.
+     * @param contentType The content type.
      * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1316,7 +1316,7 @@ public final class DpgMultiMediaTypesClientImpl {
      * String
      * }</pre>
      *
-     * @param contentType The content type for upload.
+     * @param contentType The content type.
      * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

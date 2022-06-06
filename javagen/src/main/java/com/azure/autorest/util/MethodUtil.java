@@ -104,7 +104,7 @@ public class MethodUtil {
      */
     private static boolean hasContentTypeParameter(Request request) {
         for (Parameter parameter : request.getParameters()) {
-            if (parameter.getLanguage().getJava().getSerializedName() != null
+            if (parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
                     && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
                 return true;
             }
@@ -120,7 +120,8 @@ public class MethodUtil {
     private static boolean haveDifferentContentTypes(List<Request> requests) {
         Set<String> mediaTypes = new HashSet<>();
         for (Request request : requests) {
-            if (request.getProtocol().getHttp().getKnownMediaType() != null) {
+            if (request.getProtocol().getHttp().getMediaTypes() != null
+                    && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
                 mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
             }
         }
