@@ -180,7 +180,7 @@ public class MethodUtil {
         int res = -1;
         for(int i = 0; i < parameters.size(); ++i) {
             if (parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
-                    && parameters.get(i).getLanguage().getDefault().getSerializedName().equalsIgnoreCase("content-length")) {
+                    && parameters.get(i).getLanguage().getDefault().getName().equalsIgnoreCase("contentLength")) {
                 res = i;
                 break;
             }
