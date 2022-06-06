@@ -339,6 +339,10 @@ public class JavaSettings {
 
         this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
         this.genericResponseTypes = genericResponseTypes;
+
+        if (packageName == null || packageName.isEmpty() || packageName.startsWith("java.")) {
+            throw new IllegalArgumentException("Package name / namespace " + packageName + " is invalid");
+        }
     }
 
     private String keyCredentialHeaderName;
