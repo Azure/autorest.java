@@ -118,13 +118,13 @@ public class MethodUtil {
      * @return true if the requests have different content types, otherwise return false
      */
     private static boolean haveDifferentContentTypes(List<Request> requests) {
-        Set<KnownMediaType> knownMediaTypes = new HashSet<>();
+        Set<String> mediaTypes = new HashSet<>();
         for (Request request : requests) {
             if (request.getProtocol().getHttp().getKnownMediaType() != null) {
-                knownMediaTypes.add(request.getProtocol().getHttp().getKnownMediaType());
+                mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
             }
         }
-        return knownMediaTypes.size() > 1;
+        return mediaTypes.size() > 1;
 
     }
 
