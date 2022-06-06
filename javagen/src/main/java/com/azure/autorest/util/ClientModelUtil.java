@@ -9,9 +9,11 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.core.util.CoreUtils;
@@ -300,6 +302,16 @@ public class ClientModelUtil {
 
     public static ClientModel getClientModel(String name) {
         return getClientModelFunction.apply(name);
+    }
+
+    public static boolean isClientModel(IType type) {
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            return classType.getPackage().startsWith(JavaSettings.getInstance().getPackage())
+                    && getClientModel(classType.getName()) != null;
+        } else {
+            return false;
+        }
     }
 
     public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {
