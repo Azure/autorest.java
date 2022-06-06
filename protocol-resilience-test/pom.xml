@@ -48,7 +48,7 @@
           </newArtifacts>
           <analysisConfigurationFiles>
             <configurationFile>
-              <path>${maven.multiModuleProjectDirectory}/protocol-resilience-test/revapi-configuration.json</path>
+              <path>${maven.multiModuleProjectDirectory}/revapi-configuration.json</path>
             </configurationFile>
           </analysisConfigurationFiles>
         </configuration>

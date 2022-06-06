@@ -21,15 +21,13 @@
           "ignore": true,
           "code": "java.method.numberOfParametersChanged",
           "old": "method reactor.core.publisher.Mono<com.azure.core.http.rest.Response<com.azure.core.util.BinaryData>> fixtures.llcresi.DpgAsyncClient::postParametersWithResponse(com.azure.core.util.BinaryData, com.azure.core.http.rest.RequestOptions)",
-          "new": "method reactor.core.publisher.Mono<com.azure.core.http.rest.Response<com.azure.core.util.BinaryData>> fixtures.llcresi.DpgAsyncClient::postParametersWithResponse(long, com.azure.core.util.BinaryData, com.azure.core.http.rest.RequestOptions)",
-          "justification": "We allow parameter number change as we consumes image type and add contentLength parameter"
+          "justification": "We allow parameter number change as we consumes image type and add contentLength and contentType parameter"
         },
         {
           "ignore": true,
           "code": "java.method.numberOfParametersChanged",
           "old": "method com.azure.core.http.rest.Response<com.azure.core.util.BinaryData> fixtures.llcresi.DpgClient::postParametersWithResponse(com.azure.core.util.BinaryData, com.azure.core.http.rest.RequestOptions)",
-          "new": "method com.azure.core.http.rest.Response<com.azure.core.util.BinaryData> fixtures.llcresi.DpgClient::postParametersWithResponse(long, com.azure.core.util.BinaryData, com.azure.core.http.rest.RequestOptions)",
-          "justification": "We allow parameter number change as we consumes image type and add contentLength parameter"
+          "justification": "We allow parameter number change as we consumes image type and add contentLength and contentType parameter"
         }
       ]
     }
