@@ -39,7 +39,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -298,26 +297,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 List<ProxyMethodParameter> proxyMethodParameters = new ArrayList<>(parameters);
                 int i = parameters.indexOf(fluxByteBufferParam);
                 proxyMethodParameters.remove(i);
-                ProxyMethodParameter binaryDataParam = new ProxyMethodParameter.Builder()
-                        .clientType(ClassType.BinaryData)
-                        .alreadyEncoded(fluxByteBufferParam.getAlreadyEncoded())
-                        .collectionFormat(fluxByteBufferParam.getCollectionFormat())
-                        .defaultValue(fluxByteBufferParam.getDefaultValue())
-                        .description(fluxByteBufferParam.getDescription())
-                        .explode(fluxByteBufferParam.getExplode())
-                        .fromClient(fluxByteBufferParam.getFromClient())
-                        .headerCollectionPrefix(fluxByteBufferParam.getHeaderCollectionPrefix())
-                        .isConstant(fluxByteBufferParam.getIsConstant())
-                        .isNullable(fluxByteBufferParam.getIsNullable())
-                        .name(fluxByteBufferParam.getName())
-                        .isRequired(fluxByteBufferParam.getIsRequired())
-                        .origin(fluxByteBufferParam.getOrigin())
-                        .parameterReference(fluxByteBufferParam.getParameterReference())
-                        .rawType(ClassType.BinaryData)
-                        .requestParameterLocation(fluxByteBufferParam.getRequestParameterLocation())
-                        .requestParameterName(fluxByteBufferParam.getRequestParameterName())
+
+                ProxyMethodParameter binaryDataParam = fluxByteBufferParam.toNewBuilder()
                         .wireType(ClassType.BinaryData)
+                        .rawType(ClassType.BinaryData)
+                        .clientType(ClassType.BinaryData)
                         .build();
+
                 proxyMethodParameters.add(i, binaryDataParam);
                 builder.parameters(proxyMethodParameters);
                 proxyMethods.add(builder.build());

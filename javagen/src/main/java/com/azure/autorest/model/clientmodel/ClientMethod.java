@@ -10,7 +10,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
