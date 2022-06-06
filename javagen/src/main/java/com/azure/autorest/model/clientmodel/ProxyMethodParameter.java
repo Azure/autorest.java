@@ -106,7 +106,7 @@ public class ProxyMethodParameter {
      * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
     protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name,
-                                   com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation,
+                                   RequestParameterLocation requestParameterLocation,
                                    String requestParameterName, boolean alreadyEncoded, boolean isConstant,
                                    boolean isRequired, boolean isNullable, boolean fromClient,
                                    String headerCollectionPrefix, String parameterReference, String defaultValue,

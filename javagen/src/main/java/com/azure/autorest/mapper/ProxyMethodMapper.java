@@ -39,6 +39,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -50,7 +51,7 @@ import java.util.stream.Stream;
 /**
  * Maps Swagger definition into the interface methods that RestProxy consumes.
  */
-public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyMethod>> {
+public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<ProxyMethod>>> {
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
 
@@ -61,7 +62,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
     private static final Pattern APOSTROPHE = Pattern.compile("'");
 
-    private final Map<Request, ProxyMethod> parsed = new ConcurrentHashMap<>();
+    private final Map<Request, List<ProxyMethod>> parsed = new ConcurrentHashMap<>();
     protected ProxyMethodMapper() {
     }
 
@@ -70,9 +71,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
     }
 
     @Override
-    public Map<Request, ProxyMethod> map(Operation operation) {
+    public Map<Request, List<ProxyMethod>> map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
-        Map<Request, ProxyMethod> result = new LinkedHashMap<>();
+        Map<Request, List<ProxyMethod>> result = new LinkedHashMap<>();
 
         String operationName = operation.getLanguage().getJava().getName();
         ProxyMethod.Builder builder = createProxyMethodBuilder()
@@ -178,6 +179,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
         Set<List<String>> methodSignatures = new HashSet<>();
 
+
         for (Request request : requests) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
@@ -201,6 +203,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
             List<ProxyMethodParameter> parameters = new ArrayList<>();
             List<ProxyMethodParameter> allParameters = new ArrayList<>();
+            List<ProxyMethod> proxyMethods = new ArrayList<>();
             for (Parameter parameter : request.getParameters().stream()
                     .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null)
                     .collect(Collectors.toList())) {
@@ -284,9 +287,44 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             }
 
             ProxyMethod proxyMethod = builder.build();
+            proxyMethods.add(proxyMethod);
 
-            result.put(request, proxyMethod);
-            parsed.put(request, proxyMethod);
+            ProxyMethodParameter fluxByteBufferParam = parameters.stream()
+                    .filter(parameter -> parameter.getClientType() == GenericType.FluxByteBuffer)
+                    .findFirst()
+                    .orElse(null);
+
+            if (fluxByteBufferParam != null) {
+                List<ProxyMethodParameter> proxyMethodParameters = new ArrayList<>(parameters);
+                int i = parameters.indexOf(fluxByteBufferParam);
+                proxyMethodParameters.remove(i);
+                ProxyMethodParameter binaryDataParam = new ProxyMethodParameter.Builder()
+                        .clientType(ClassType.BinaryData)
+                        .alreadyEncoded(fluxByteBufferParam.getAlreadyEncoded())
+                        .collectionFormat(fluxByteBufferParam.getCollectionFormat())
+                        .defaultValue(fluxByteBufferParam.getDefaultValue())
+                        .description(fluxByteBufferParam.getDescription())
+                        .explode(fluxByteBufferParam.getExplode())
+                        .fromClient(fluxByteBufferParam.getFromClient())
+                        .headerCollectionPrefix(fluxByteBufferParam.getHeaderCollectionPrefix())
+                        .isConstant(fluxByteBufferParam.getIsConstant())
+                        .isNullable(fluxByteBufferParam.getIsNullable())
+                        .name(fluxByteBufferParam.getName())
+                        .isRequired(fluxByteBufferParam.getIsRequired())
+                        .origin(fluxByteBufferParam.getOrigin())
+                        .parameterReference(fluxByteBufferParam.getParameterReference())
+                        .rawType(ClassType.BinaryData)
+                        .requestParameterLocation(fluxByteBufferParam.getRequestParameterLocation())
+                        .requestParameterName(fluxByteBufferParam.getRequestParameterName())
+                        .wireType(ClassType.BinaryData)
+                        .build();
+                proxyMethodParameters.add(i, binaryDataParam);
+                builder.parameters(proxyMethodParameters);
+                proxyMethods.add(builder.build());
+            }
+
+            result.put(request, proxyMethods);
+            parsed.put(request, proxyMethods);
         }
         return result;
     }

@@ -10,6 +10,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -139,6 +141,31 @@ public class ClientMethod {
         this.methodVisibility = methodVisibility;
         this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientMethod that = (ClientMethod) o;
+        return onlyRequiredParameters == that.onlyRequiredParameters
+                && isGroupedParameterRequired == that.isGroupedParameterRequired
+                && implementationOnly == that.implementationOnly
+                && Objects.equals(returnValue.getType(), that.returnValue.getType())
+                && Objects.equals(name, that.name)
+                && Objects.equals(getParametersDeclaration(), that.getParametersDeclaration())
+                && type == that.type
+                && Objects.equals(requiredNullableParameterExpressions, that.requiredNullableParameterExpressions)
+                && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
+                && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
+                && methodVisibility == that.methodVisibility;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
+                requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
+                methodTransformationDetails, methodVisibility, implementationOnly);
     }
 
     public final String getDescription() {

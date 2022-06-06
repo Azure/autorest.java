@@ -294,4 +294,8 @@ public class Javagen extends NewPlugin {
         ClientModels.getInstance().clear();
         JavaSettings.clear();
     }
+
+    public Logger getLogger() {
+        return this.logger;
+    }
 }
