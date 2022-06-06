@@ -85,9 +85,9 @@ public class MethodUtil {
                 // add contentType parameter
                 if (haveDifferentContentTypes(requests) && !hasContentTypeParameter(request)) {
                     Parameter contentTypeParameter = createContentTypeParameter(request, operation);
-                    request.getParameters().add(getBinarySchemaBodyParameterIndex(request.getParameters()), contentTypeParameter);
+                    request.getParameters().add(getBinarySchemaBodyOrContentLengthParameterIndex(request.getParameters()), contentTypeParameter);
                     if (contentTypeParameter.isRequired()) {
-                        request.getSignatureParameters().add(getBinarySchemaBodyParameterIndex(request.getSignatureParameters()), contentTypeParameter);
+                        request.getSignatureParameters().add(getBinarySchemaBodyOrContentLengthParameterIndex(request.getSignatureParameters()), contentTypeParameter);
                     }
                 }
                 selectedRequest = request;
@@ -104,7 +104,7 @@ public class MethodUtil {
      */
     private static boolean hasContentTypeParameter(Request request) {
         for (Parameter parameter : request.getParameters()) {
-            if (parameter.getLanguage().getDefault().getName().equals("contentType")) {
+            if (parameter.getLanguage().getDefault().getName() != null && parameter.getLanguage().getDefault().getName().equalsIgnoreCase("contentType")) {
                 return true;
             }
         }
@@ -137,10 +137,13 @@ public class MethodUtil {
         List<Request> requests = operation.getRequests();
         Parameter contentType = new Parameter();
         contentType.setOperation(operation);
-        contentType.setDescription("The content type for upload");
-        int binarySchemaParameterIndex = getBinarySchemaBodyParameterIndex(request.getParameters());
-        boolean required = binarySchemaParameterIndex != -1 && request.getParameters().get(binarySchemaParameterIndex).isRequired();
-        contentType.setRequired(required);
+        contentType.setDescription("The content type");
+        for (int i = 0; i < request.getParameters().size(); ++i) {
+            if (request.getParameters().get(i).getSchema() instanceof BinarySchema) {
+                contentType.setRequired(request.getParameters().get(i).isRequired());
+                break;
+            }
+        }
         contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
         SealedChoiceSchema sealedChoiceSchema = new SealedChoiceSchema();
         StringSchema stringSchema = new StringSchema();
@@ -173,13 +176,23 @@ public class MethodUtil {
      * @param parameters a list of parameters
      * @return return the index of the BinarySchema parameter, if not found, return -1
      */
-    private static int getBinarySchemaBodyParameterIndex(List<Parameter> parameters) {
-        for (int i = 0; i < parameters.size(); i++) {
-            if (parameters.get(i).getSchema() instanceof BinarySchema) {
-                return i;
+    private static int getBinarySchemaBodyOrContentLengthParameterIndex(List<Parameter> parameters) {
+        int res = -1;
+        for(int i = 0; i < parameters.size(); ++i) {
+            if (parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
+                    && parameters.get(i).getLanguage().getDefault().getSerializedName().equalsIgnoreCase("content-length")) {
+                res = i;
+                break;
             }
         }
-        return -1;
+        if (res == -1) {
+            for (int i = 0; i < parameters.size(); i++) {
+                if (parameters.get(i).getSchema() instanceof BinarySchema) {
+                    res = i;
+                }
+            }
+        }
+        return res;
     }
 
     /**
@@ -187,8 +200,8 @@ public class MethodUtil {
      * @param requests a list of requests
      * @return the content type choices of the requests
      */
-    private static ArrayList<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
-        ArrayList<ChoiceValue> choiceValues = new ArrayList<>();
+    private static List<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
+        List<ChoiceValue> choiceValues = new ArrayList<>();
         for (Request request : requests) {
             for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
                 ChoiceValue choiceValue = new ChoiceValue();
