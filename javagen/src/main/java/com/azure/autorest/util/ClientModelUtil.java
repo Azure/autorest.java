@@ -296,14 +296,34 @@ public class ClientModelUtil {
 
     private static Function<String, ClientModel> getClientModelFunction = name -> ClientModels.getInstance().getModel(name);
 
+    /**
+     * Replace the default function of getting ClientModel by name.
+     * <p>
+     * Used in Fluent for providing additional ClientModel that exists in azure-core-management,
+     * e.g. Resource, ManagementError
+     *
+     * @param function the function of getting ClientModel by name
+     */
     public static void setGetClientModelFunction(Function<String, ClientModel> function) {
         getClientModelFunction = function;
     }
 
+    /**
+     * Get ClientModel by name.
+     *
+     * @param name the name of the ClientModel (without package)
+     * @return the ClientModel instance. <code>null</code> if not found.
+     */
     public static ClientModel getClientModel(String name) {
         return getClientModelFunction.apply(name);
     }
 
+    /**
+     * Check if the type is a ClientModel.
+     *
+     * @param type the type
+     * @return whether the type is a ClientModel.
+     */
     public static boolean isClientModel(IType type) {
         if (type instanceof ClassType) {
             ClassType classType = (ClassType) type;
