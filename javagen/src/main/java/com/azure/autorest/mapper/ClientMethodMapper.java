@@ -616,16 +616,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     private ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
-        return new ClientMethodParameter.Builder()
-                .fromClient(clientMethodParameter.getFromClient())
-                .annotations(clientMethodParameter.getAnnotations())
-                .defaultValue(clientMethodParameter.getDefaultValue())
-                .isConstant(clientMethodParameter.getIsConstant())
-                .description(clientMethodParameter.getDescription())
-                .name(clientMethodParameter.getName())
-                .isFinal(clientMethodParameter.getIsFinal())
-                .isRequired(clientMethodParameter.getIsRequired())
-                .location(clientMethodParameter.getLocation())
+        return clientMethodParameter.toNewBuilder()
                 .rawType(ClassType.BinaryData)
                 .wireType(ClassType.BinaryData)
                 .build();
