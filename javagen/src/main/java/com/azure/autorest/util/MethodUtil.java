@@ -104,7 +104,9 @@ public class MethodUtil {
      */
     private static boolean hasContentTypeParameter(Request request) {
         for (Parameter parameter : request.getParameters()) {
-            if (parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
+            if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
+                    && RequestParameterLocation.HEADER.equals(parameter.getProtocol().getHttp().getIn())
+                    && parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
                     && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
                 return true;
             }
@@ -181,7 +183,9 @@ public class MethodUtil {
     private static int getBinarySchemaBodyOrContentLengthParameterIndex(List<Parameter> parameters) {
         int res = -1;
         for(int i = 0; i < parameters.size(); ++i) {
-            if (parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
+            if (parameters.get(i).getProtocol() != null && parameters.get(i).getProtocol().getHttp() != null
+                    && RequestParameterLocation.HEADER.equals(parameters.get(i).getProtocol().getHttp().getIn())
+                    && parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
                     && "Content-Length".equalsIgnoreCase(parameters.get(i).getLanguage().getJava().getSerializedName())) {
                 res = i;
                 break;
