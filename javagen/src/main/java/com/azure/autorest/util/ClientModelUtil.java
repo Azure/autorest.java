@@ -9,9 +9,11 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -295,12 +297,42 @@ public class ClientModelUtil {
 
     private static Function<String, ClientModel> getClientModelFunction = name -> ClientModels.getInstance().getModel(name);
 
+    /**
+     * Replace the default function of getting ClientModel by name.
+     * <p>
+     * Used in Fluent for providing additional ClientModel that exists in azure-core-management,
+     * e.g. Resource, ManagementError
+     *
+     * @param function the function of getting ClientModel by name
+     */
     public static void setGetClientModelFunction(Function<String, ClientModel> function) {
         getClientModelFunction = function;
     }
 
+    /**
+     * Get ClientModel by name.
+     *
+     * @param name the name of the ClientModel (without package)
+     * @return the ClientModel instance. <code>null</code> if not found.
+     */
     public static ClientModel getClientModel(String name) {
         return getClientModelFunction.apply(name);
+    }
+
+    /**
+     * Check if the type is a ClientModel.
+     *
+     * @param type the type
+     * @return whether the type is a ClientModel.
+     */
+    public static boolean isClientModel(IType type) {
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            return classType.getPackage().startsWith(JavaSettings.getInstance().getPackage())
+                    && getClientModel(classType.getName()) != null;
+        } else {
+            return false;
+        }
     }
 
     /**
