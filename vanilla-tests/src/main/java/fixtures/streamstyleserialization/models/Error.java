@@ -81,9 +81,7 @@ public final class Error implements JsonSerializable<Error> {
                         reader.nextToken();
 
                         if ("status".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                status = reader.getIntValue();
-                            }
+                            status = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("message".equals(fieldName)) {
                             message = reader.getStringValue();
                         } else {

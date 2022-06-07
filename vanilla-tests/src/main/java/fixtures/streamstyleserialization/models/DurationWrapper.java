@@ -59,9 +59,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field = Duration.parse(reader.getStringValue());
-                            }
+                            field = JsonUtils.getNullableProperty(reader, r -> Duration.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

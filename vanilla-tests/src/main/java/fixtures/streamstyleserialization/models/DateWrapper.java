@@ -82,13 +82,11 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field = LocalDate.parse(reader.getStringValue());
-                            }
+                            field =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> LocalDate.parse(reader.getStringValue()));
                         } else if ("leap".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                leap = LocalDate.parse(reader.getStringValue());
-                            }
+                            leap = JsonUtils.getNullableProperty(reader, r -> LocalDate.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

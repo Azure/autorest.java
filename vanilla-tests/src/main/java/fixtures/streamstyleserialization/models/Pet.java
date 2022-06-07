@@ -83,9 +83,7 @@ public class Pet implements JsonSerializable<Pet> {
                         if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("id".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                id = reader.getIntValue();
-                            }
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else {
                             reader.skipChildren();
                         }

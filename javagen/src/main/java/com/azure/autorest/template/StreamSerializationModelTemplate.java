@@ -213,25 +213,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         String condition = "\"" + jsonPropertyName + "\".equals(fieldName)";
 
-        // TODO (alzimmer): Need to exclude constant properties and add validation for required properties.
-        //  Also need to handle flattened values.
+        // TODO (alzimmer): Need to handle flattened values.
         Consumer<JavaBlock> deserializationHandling = deserializationBlock ->
-            handleFieldDeserialization(deserializationBlock, property, settings);
+            generateDeserializationLogic(deserializationBlock, property, settings);
         return (ifBlock == null)
             ? methodBlock.ifBlock(condition, deserializationHandling)
             : ifBlock.elseIfBlock(condition, deserializationHandling);
-    }
-
-    private static void handleFieldDeserialization(JavaBlock deserializationBlock, ClientModelProperty property,
-        JavaSettings settings) {
-        Consumer<JavaBlock> deserializationLogic = deserialization ->
-            generateDeserializationLogic(deserialization, property);
-
-        if (wireTypeNeedsNullCheck(property.getWireType())) {
-            deserializationBlock.ifBlock("reader.currentToken() != JsonToken.NULL", deserializationLogic);
-        } else {
-            deserializationLogic.accept(deserializationBlock);
-        }
     }
 
     /*
@@ -249,11 +236,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             || wireType == ClassType.DateTime
             || wireType == ClassType.LocalDate
             || wireType == ClassType.Duration
-            || wireType instanceof EnumType
+            // Only non-ExpandableStringEnums need null checking. ExpandableStringEnum returns null if null is passed.
+            || (wireType instanceof EnumType && !((EnumType) wireType).getExpandable())
             || wireType instanceof MapType;
     }
 
-    private static void generateDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property) {
+    private static void generateDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property,
+        JavaSettings settings) {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
 
@@ -261,18 +250,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleDeserialization(wireType, clientType);
         if (simpleDeserialization != null) {
-            deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
+            if (wireTypeNeedsNullCheck(wireType)) {
+                deserializationBlock.line(property.getName() + " = JsonUtils.getNullableProperty(reader, r -> " + simpleDeserialization + ");");
+            } else {
+                deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
+            }
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
             String elementDeserialization = getSimpleDeserialization(elementType, clientType);
 
             deserializationBlock.text(property.getName() + " = ");
             if (wireTypeNeedsNullCheck(elementType)) {
-                deserializationBlock.block("JsonUtils.readArray(reader, r ->", readArrayBlock -> {
-                    readArrayBlock.ifBlock("reader.currentToken() == JsonToken.NULL",
-                        ifAction -> ifAction.methodReturn("null"));
-                    readArrayBlock.methodReturn(elementDeserialization);
-                });
+                deserializationBlock.block("JsonUtils.readArray(reader, r ->", readArrayBlock ->
+                    readArrayBlock.methodReturn("JsonUtils.getNullableProperty(r, r1 -> " + elementDeserialization + ");"));
                 deserializationBlock.text(");");
             } else {
                 deserializationBlock.line("JsonUtils.readArray(reader, r -> " + elementDeserialization + ");");
@@ -294,15 +284,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             deserializationBlock.line("reader.nextToken();");
             deserializationBlock.line();
             if (wireTypeNeedsNullCheck(valueType)) {
-                deserializationBlock.line(valueType + " value = (reader.currentToken() == JsonToken.NULL)");
-                deserializationBlock.indent(() -> {
-                    deserializationBlock.line("? null");
-                    deserializationBlock.line(": " + valueDeserialization + ";");
-                });
+                deserializationBlock.line(property.getName() + ".put(fieldName, JsonUtils.getNullableProperty(reader, r -> " + valueDeserialization + "));");
             } else {
-                deserializationBlock.line(valueType + " value = " + valueDeserialization + ";");
+                deserializationBlock.line(property.getName() + ".put(fieldName, " + valueDeserialization + ");");
             }
-            deserializationBlock.line(property.getName() + ".put(fieldName, value);");
 
             deserializationBlock.decreaseIndent();
             deserializationBlock.line("}");

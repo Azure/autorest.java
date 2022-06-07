@@ -86,15 +86,11 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field1 = reader.getDoubleValue();
-                            }
+                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getDoubleValue());
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
-                                        reader.getDoubleValue();
-                            }
+                            field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
+                                    JsonUtils.getNullableProperty(reader, r -> reader.getDoubleValue());
                         } else {
                             reader.skipChildren();
                         }

@@ -76,9 +76,7 @@ public final class Dog extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                id = reader.getIntValue();
-                            }
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("food".equals(fieldName)) {

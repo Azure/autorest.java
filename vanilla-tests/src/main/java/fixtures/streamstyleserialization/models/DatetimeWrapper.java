@@ -82,13 +82,13 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field = OffsetDateTime.parse(reader.getStringValue());
-                            }
+                            field =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                         } else if ("now".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                now = OffsetDateTime.parse(reader.getStringValue());
-                            }
+                            now =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

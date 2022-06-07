@@ -81,13 +81,9 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
                         reader.nextToken();
 
                         if ("field_true".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                fieldTrue = reader.getBooleanValue();
-                            }
+                            fieldTrue = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else if ("field_false".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                fieldFalse = reader.getBooleanValue();
-                            }
+                            fieldFalse = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {
                             reader.skipChildren();
                         }

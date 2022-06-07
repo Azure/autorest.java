@@ -140,9 +140,7 @@ public final class SmartSalmon extends Salmon {
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                iswild = reader.getBooleanValue();
-                            }
+                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else if ("college_degree".equals(fieldName)) {
                             collegeDegree = reader.getStringValue();
                         } else {

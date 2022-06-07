@@ -60,9 +60,9 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field = Base64.getDecoder().decode(reader.getStringValue());
-                            }
+                            field =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> Base64.getDecoder().decode(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

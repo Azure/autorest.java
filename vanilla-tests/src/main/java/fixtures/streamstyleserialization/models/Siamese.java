@@ -93,9 +93,7 @@ public final class Siamese extends Cat {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                id = reader.getIntValue();
-                            }
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {

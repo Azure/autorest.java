@@ -81,13 +81,9 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field1 = reader.getFloatValue();
-                            }
+                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getFloatValue());
                         } else if ("field2".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field2 = reader.getFloatValue();
-                            }
+                            field2 = JsonUtils.getNullableProperty(reader, r -> reader.getFloatValue());
                         } else {
                             reader.skipChildren();
                         }

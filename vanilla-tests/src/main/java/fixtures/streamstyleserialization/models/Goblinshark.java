@@ -128,26 +128,20 @@ public final class Goblinshark extends Shark {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                birthday = OffsetDateTime.parse(reader.getStringValue());
-                                birthdayFound = true;
-                            }
+                            birthday =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
+                            birthdayFound = true;
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
                         } else if ("age".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                age = reader.getIntValue();
-                            }
+                            age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("jawsize".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                jawsize = reader.getIntValue();
-                            }
+                            jawsize = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("color".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                color = GoblinSharkColor.fromString(reader.getStringValue());
-                            }
+                            color = GoblinSharkColor.fromString(reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

@@ -106,15 +106,11 @@ public final class Basic implements JsonSerializable<Basic> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                id = reader.getIntValue();
-                            }
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                color = CMYKColors.fromString(reader.getStringValue());
-                            }
+                            color = CMYKColors.fromString(reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

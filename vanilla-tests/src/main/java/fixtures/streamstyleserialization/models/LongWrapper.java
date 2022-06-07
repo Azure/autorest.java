@@ -81,13 +81,9 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field1 = reader.getLongValue();
-                            }
+                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getLongValue());
                         } else if ("field2".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                field2 = reader.getLongValue();
-                            }
+                            field2 = JsonUtils.getNullableProperty(reader, r -> reader.getLongValue());
                         } else {
                             reader.skipChildren();
                         }

@@ -60,18 +60,15 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                if (defaultProgram == null) {
-                                    defaultProgram = new LinkedHashMap<>();
-                                }
+                            if (defaultProgram == null) {
+                                defaultProgram = new LinkedHashMap<>();
+                            }
 
-                                while (reader.nextToken() != JsonToken.END_OBJECT) {
-                                    fieldName = reader.getFieldName();
-                                    reader.nextToken();
+                            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                                fieldName = reader.getFieldName();
+                                reader.nextToken();
 
-                                    String value = reader.getStringValue();
-                                    defaultProgram.put(fieldName, value);
-                                }
+                                defaultProgram.put(fieldName, reader.getStringValue());
                             }
                         } else {
                             reader.skipChildren();

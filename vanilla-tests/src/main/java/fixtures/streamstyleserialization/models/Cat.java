@@ -105,9 +105,7 @@ public class Cat extends Pet {
                         if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("id".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                id = reader.getIntValue();
-                            }
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("hates".equals(fieldName)) {
                             hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
                         } else if ("color".equals(fieldName)) {

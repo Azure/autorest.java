@@ -122,9 +122,7 @@ public class Salmon extends Fish {
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
-                            if (reader.currentToken() != JsonToken.NULL) {
-                                iswild = reader.getBooleanValue();
-                            }
+                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {
                             reader.skipChildren();
                         }
