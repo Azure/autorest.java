@@ -4,6 +4,7 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.preprocessor.Preprocessor;
@@ -28,8 +29,10 @@ import java.util.Map;
 
 public class MockPreprocessor extends Preprocessor {
 
-
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
+    static {
+        SETTINGS_MAP.put("namespace", "com.azure.mock");
+    }
 
     public MockPreprocessor(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -82,16 +85,14 @@ public class MockPreprocessor extends Preprocessor {
         return newYaml.dump(codeModel);
     }
 
-    /**
-     * override default behavior from fetching settings through json-rpc to read locally
-     * @param type
-     * @param key
-     * @param <T>
-     * @return
-     */
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T getValue(Type type, String key) {
         return (T) SETTINGS_MAP.get(key);
+    }
+
+    @Override
+    public void message(Message message) {
     }
 
     @Override

@@ -25,8 +25,8 @@ import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.management.Region;
 import com.azure.core.util.CoreUtils;
@@ -516,16 +516,7 @@ public class ResourceParser {
 
     private static boolean methodHasBodyParameter(FluentCollectionMethod method) {
         return method.getInnerProxyMethod().getParameters().stream()
-                .filter(p -> nonSimpleJavaType(p.getClientType()))
+                .filter(p -> ClientModelUtil.isClientModel(p.getClientType()))
                 .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY);
-    }
-
-    private static boolean nonSimpleJavaType(IType type) {
-        boolean ret = false;
-        if (type instanceof ClassType) {
-            ClassType classType = (ClassType) type;
-            ret = !classType.getPackage().startsWith("java");
-        }
-        return ret;
     }
 }

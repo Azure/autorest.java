@@ -791,7 +791,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -814,7 +814,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -828,7 +828,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -841,7 +841,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -861,7 +861,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -888,7 +888,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
