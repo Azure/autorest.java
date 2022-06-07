@@ -19,6 +19,7 @@ public class AutorestSettings {
     private String securityHeaderName;
     private String javaSdksFolder;
     private final List<String> inputFiles = new ArrayList<>();
+    private final List<String> require = new ArrayList<>();
 
     public void setTag(String tag) {
         this.tag = tag;
@@ -54,6 +55,10 @@ public class AutorestSettings {
 
     public List<String> getInputFiles() {
         return inputFiles;
+    }
+
+    public List<String> getRequire() {
+        return require;
     }
 
     public Optional<String> getTitle() {
