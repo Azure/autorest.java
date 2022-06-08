@@ -40,8 +40,7 @@ public final class ConstantAndClientParameterServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-client-constant</td><td>Integer</td><td>No</td><td>Constant query property on the client that is a non-required parameter</td></tr>
-     *     <tr><td>query-non-required-constant</td><td>Integer</td><td>No</td><td>Constant query property that is a non-required parameter</td></tr>
+     *     <tr><td>query-non-required-client-param</td><td>Integer</td><td>No</td><td>Query parameter on the client that is required</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

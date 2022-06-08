@@ -150,12 +150,12 @@ public final class ConstantAndClientParameterServiceClientBuilder
     }
 
     /*
-     * Constant header property on the client that is a required parameter
+     * Constant header property that is a required parameter
      */
     @Generated private boolean headerRequiredConstant = true;
 
     /**
-     * Sets Constant header property on the client that is a required parameter.
+     * Sets Constant header property that is a required parameter.
      *
      * @param headerRequiredConstant the headerRequiredConstant value.
      * @return the ConstantAndClientParameterServiceClientBuilder.
@@ -163,76 +163,6 @@ public final class ConstantAndClientParameterServiceClientBuilder
     @Generated
     public ConstantAndClientParameterServiceClientBuilder headerRequiredConstant(boolean headerRequiredConstant) {
         this.headerRequiredConstant = headerRequiredConstant;
-        return this;
-    }
-
-    /*
-     * Query parameter on the client that is required and have default value
-     */
-    @Generated private int queryRequiredDefaultValueParam = 300;
-
-    /**
-     * Sets Query parameter on the client that is required and have default value.
-     *
-     * @param queryRequiredDefaultValueParam the queryRequiredDefaultValueParam value.
-     * @return the ConstantAndClientParameterServiceClientBuilder.
-     */
-    @Generated
-    public ConstantAndClientParameterServiceClientBuilder queryRequiredDefaultValueParam(
-            int queryRequiredDefaultValueParam) {
-        this.queryRequiredDefaultValueParam = queryRequiredDefaultValueParam;
-        return this;
-    }
-
-    /*
-     * Query parameter on the client that is required
-     */
-    @Generated private int queryRequiredClientParam;
-
-    /**
-     * Sets Query parameter on the client that is required.
-     *
-     * @param queryRequiredClientParam the queryRequiredClientParam value.
-     * @return the ConstantAndClientParameterServiceClientBuilder.
-     */
-    @Generated
-    public ConstantAndClientParameterServiceClientBuilder queryRequiredClientParam(int queryRequiredClientParam) {
-        this.queryRequiredClientParam = queryRequiredClientParam;
-        return this;
-    }
-
-    /*
-     * Constant query property on the client that is a required parameter
-     */
-    @Generated private int queryRequiredClientConstant = 100;
-
-    /**
-     * Sets Constant query property on the client that is a required parameter.
-     *
-     * @param queryRequiredClientConstant the queryRequiredClientConstant value.
-     * @return the ConstantAndClientParameterServiceClientBuilder.
-     */
-    @Generated
-    public ConstantAndClientParameterServiceClientBuilder queryRequiredClientConstant(int queryRequiredClientConstant) {
-        this.queryRequiredClientConstant = queryRequiredClientConstant;
-        return this;
-    }
-
-    /*
-     * Constant query property on the client that is a non-required parameter
-     */
-    @Generated private int queryNonRequiredClientConstant = 100;
-
-    /**
-     * Sets Constant query property on the client that is a non-required parameter.
-     *
-     * @param queryNonRequiredClientConstant the queryNonRequiredClientConstant value.
-     * @return the ConstantAndClientParameterServiceClientBuilder.
-     */
-    @Generated
-    public ConstantAndClientParameterServiceClientBuilder queryNonRequiredClientConstant(
-            int queryNonRequiredClientConstant) {
-        this.queryNonRequiredClientConstant = queryNonRequiredClientConstant;
         return this;
     }
 
@@ -254,12 +184,12 @@ public final class ConstantAndClientParameterServiceClientBuilder
     }
 
     /*
-     * Constant query property that is a non-required parameter
+     * Constant query property on the client that is a non-required parameter
      */
     @Generated private int queryNonRequiredConstant = 100;
 
     /**
-     * Sets Constant query property that is a non-required parameter.
+     * Sets Constant query property on the client that is a non-required parameter.
      *
      * @param queryNonRequiredConstant the queryNonRequiredConstant value.
      * @return the ConstantAndClientParameterServiceClientBuilder.
@@ -267,6 +197,58 @@ public final class ConstantAndClientParameterServiceClientBuilder
     @Generated
     public ConstantAndClientParameterServiceClientBuilder queryNonRequiredConstant(int queryNonRequiredConstant) {
         this.queryNonRequiredConstant = queryNonRequiredConstant;
+        return this;
+    }
+
+    /*
+     * Query parameter on the client that is required
+     */
+    @Generated private int queryRequiredClientParam;
+
+    /**
+     * Sets Query parameter on the client that is required.
+     *
+     * @param queryRequiredClientParam the queryRequiredClientParam value.
+     * @return the ConstantAndClientParameterServiceClientBuilder.
+     */
+    @Generated
+    public ConstantAndClientParameterServiceClientBuilder queryRequiredClientParam(int queryRequiredClientParam) {
+        this.queryRequiredClientParam = queryRequiredClientParam;
+        return this;
+    }
+
+    /*
+     * Query parameter on the client that is required and have default value
+     */
+    @Generated private int queryRequiredDefaultValueClientParam = 300;
+
+    /**
+     * Sets Query parameter on the client that is required and have default value.
+     *
+     * @param queryRequiredDefaultValueClientParam the queryRequiredDefaultValueClientParam value.
+     * @return the ConstantAndClientParameterServiceClientBuilder.
+     */
+    @Generated
+    public ConstantAndClientParameterServiceClientBuilder queryRequiredDefaultValueClientParam(
+            int queryRequiredDefaultValueClientParam) {
+        this.queryRequiredDefaultValueClientParam = queryRequiredDefaultValueClientParam;
+        return this;
+    }
+
+    /*
+     * Query parameter on the client that is required
+     */
+    @Generated private int queryNonRequiredClientParam;
+
+    /**
+     * Sets Query parameter on the client that is required.
+     *
+     * @param queryNonRequiredClientParam the queryNonRequiredClientParam value.
+     * @return the ConstantAndClientParameterServiceClientBuilder.
+     */
+    @Generated
+    public ConstantAndClientParameterServiceClientBuilder queryNonRequiredClientParam(int queryNonRequiredClientParam) {
+        this.queryNonRequiredClientParam = queryNonRequiredClientParam;
         return this;
     }
 
@@ -323,12 +305,11 @@ public final class ConstantAndClientParameterServiceClientBuilder
                         pipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         headerRequiredConstant,
-                        queryRequiredDefaultValueParam,
-                        queryRequiredClientParam,
-                        queryRequiredClientConstant,
-                        queryNonRequiredClientConstant,
                         queryRequiredConstant,
                         queryNonRequiredConstant,
+                        queryRequiredClientParam,
+                        queryRequiredDefaultValueClientParam,
+                        queryNonRequiredClientParam,
                         host);
         return client;
     }

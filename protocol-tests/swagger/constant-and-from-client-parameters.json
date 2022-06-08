@@ -22,25 +22,22 @@
         "description": "Pass constants from the client to this function. Will pass in constant path, query, and header parameters.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderRequiredClientConstant"
-          },
-          {
-            "$ref": "#/parameters/QueryRequiredDefaultValueClientParam"
-          },
-          {
-            "$ref": "#/parameters/QueryRequiredClientParam"
-          },
-          {
-            "$ref": "#/parameters/QueryRequiredClientConstant"
-          },
-          {
-            "$ref": "#/parameters/QueryNonRequiredClientConstant"
+            "$ref": "#/parameters/HeaderRequiredConstant"
           },
           {
             "$ref": "#/parameters/QueryRequiredConstant"
           },
           {
             "$ref": "#/parameters/QueryNonRequiredConstant"
+          },
+          {
+            "$ref": "#/parameters/QueryRequiredClientParam"
+          },
+          {
+            "$ref": "#/parameters/QueryRequiredWithDefaultValueClientParam"
+          },
+          {
+            "$ref": "#/parameters/QueryNonRequiredClientParam"
           }
         ],
         "responses": {
@@ -52,13 +49,12 @@
     }
   },
   "parameters": {
-    "HeaderRequiredClientConstant": {
+    "HeaderRequiredConstant": {
       "name": "header-required-constant",
-      "x-ms-parameter-location": "client",
       "in": "header",
       "required": true,
       "type": "boolean",
-      "description": "Constant header property on the client that is a required parameter",
+      "description": "Constant header constant that is a required",
       "enum": [
         true
       ],
@@ -66,58 +62,12 @@
         "modelAsString": false
       }
     },
-    "QueryRequiredDefaultValueClientParam": {
-      "name": "query-required-default-value-param",
-      "x-ms-parameter-location": "client",
-      "in": "query",
-      "required": true,
-      "type": "integer",
-      "description": "Query parameter on the client that is required and have default value",
-      "x-ms-client-default": 300
-    },
-    "QueryRequiredClientParam": {
-      "name": "query-required-client-param",
-      "x-ms-parameter-location": "client",
-      "in": "query",
-      "required": true,
-      "type": "integer",
-      "description": "Query parameter on the client that is required"
-    },
-    "QueryRequiredClientConstant": {
-      "name": "query-required-client-constant",
-      "x-ms-parameter-location": "client",
-      "in": "query",
-      "required": true,
-      "type": "integer",
-      "description": "Constant query property on the client that is a required parameter",
-      "enum": [
-        100
-      ],
-      "x-ms-enum": {
-        "modelAsString": false
-      }
-    },
-    "QueryNonRequiredClientConstant": {
-      "name": "query-non-required-client-constant",
-      "x-ms-parameter-location": "client",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "description": "Constant query property on the client that is a non-required parameter",
-      "enum": [
-        100
-      ],
-      "x-ms-enum": {
-        "modelAsString": false
-      }
-    },
     "QueryRequiredConstant": {
       "name": "query-required-constant",
-      "x-ms-parameter-location": "client",
       "in": "query",
       "required": true,
       "type": "integer",
-      "description": "Constant query property that is a required parameter",
+      "description": "Query constant that is a required",
       "enum": [
         100
       ],
@@ -130,13 +80,38 @@
       "in": "query",
       "required": false,
       "type": "integer",
-      "description": "Constant query property that is a non-required parameter",
+      "description": "Query constant that is non-required",
       "enum": [
         100
       ],
       "x-ms-enum": {
         "modelAsString": false
       }
+    },
+    "QueryRequiredClientParam": {
+      "name": "query-required-client-param",
+      "x-ms-parameter-location": "client",
+      "in": "query",
+      "required": true,
+      "type": "integer",
+      "description": "Query parameter on the client that is required"
+    },
+    "QueryRequiredWithDefaultValueClientParam": {
+      "name": "query-required-default-value-client-param",
+      "x-ms-parameter-location": "client",
+      "in": "query",
+      "required": true,
+      "type": "integer",
+      "description": "Query parameter on the client that is required and have default value",
+      "x-ms-client-default": 300
+    },
+    "QueryNonRequiredClientParam": {
+      "name": "query-non-required-client-param",
+      "x-ms-parameter-location": "client",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "Query parameter on the client that is not required"
     }
   }
 }
