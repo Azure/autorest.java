@@ -72,10 +72,11 @@ public class MethodUtil {
     }
 
     /**
+     * Find the first request consumes binary type, if no binary request, return the first request in requests.
+     * If the selected binary request does not have content-type parameter, we will add one for it
      * @param requests a list of requests
      * @return the first request consumes binary type, if no binary request, return the first request in requests
      *
-     * If the binary request does not have content-type parameter, we will add one for it
      */
     public static Request findFirstBinaryRequest(List<Request> requests, Operation operation) {
         Request selectedRequest = requests.get(0);
@@ -85,9 +86,9 @@ public class MethodUtil {
                 // add contentType parameter
                 if (haveDifferentContentTypes(requests) && !hasContentTypeParameter(request)) {
                     Parameter contentTypeParameter = createContentTypeParameter(request, operation);
-                    request.getParameters().add(getBinarySchemaBodyOrContentLengthParameterIndex(request.getParameters()), contentTypeParameter);
+                    request.getParameters().add(findIndexForContentTypeParam(request.getParameters()), contentTypeParameter);
                     if (contentTypeParameter.isRequired()) {
-                        request.getSignatureParameters().add(getBinarySchemaBodyOrContentLengthParameterIndex(request.getSignatureParameters()), contentTypeParameter);
+                        request.getSignatureParameters().add(findIndexForContentTypeParam(request.getSignatureParameters()), contentTypeParameter);
                     }
                 }
                 selectedRequest = request;
@@ -105,7 +106,7 @@ public class MethodUtil {
     private static boolean hasContentTypeParameter(Request request) {
         for (Parameter parameter : request.getParameters()) {
             if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
-                    && RequestParameterLocation.HEADER.equals(parameter.getProtocol().getHttp().getIn())
+                    && RequestParameterLocation.HEADER == parameter.getProtocol().getHttp().getIn()
                     && parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
                     && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
                 return true;
@@ -180,25 +181,20 @@ public class MethodUtil {
      * @param parameters a list of parameters
      * @return return the index of the BinarySchema parameter, if not found, return -1
      */
-    private static int getBinarySchemaBodyOrContentLengthParameterIndex(List<Parameter> parameters) {
-        int res = -1;
-        for(int i = 0; i < parameters.size(); ++i) {
+    private static int findIndexForContentTypeParam(List<Parameter> parameters) {
+        int binarySchemaBodyIndex = -1;
+        for (int i = 0; i < parameters.size(); ++i) {
             if (parameters.get(i).getProtocol() != null && parameters.get(i).getProtocol().getHttp() != null
-                    && RequestParameterLocation.HEADER.equals(parameters.get(i).getProtocol().getHttp().getIn())
+                    && RequestParameterLocation.HEADER == parameters.get(i).getProtocol().getHttp().getIn()
                     && parameters.get(i).getLanguage() != null && parameters.get(i).getLanguage().getJava() != null
                     && "Content-Length".equalsIgnoreCase(parameters.get(i).getLanguage().getJava().getSerializedName())) {
-                res = i;
-                break;
+                return i;
+            }
+            if (parameters.get(i).getSchema() instanceof BinarySchema) {
+                binarySchemaBodyIndex = i;
             }
         }
-        if (res == -1) {
-            for (int i = 0; i < parameters.size(); i++) {
-                if (parameters.get(i).getSchema() instanceof BinarySchema) {
-                    res = i;
-                }
-            }
-        }
-        return res;
+        return binarySchemaBodyIndex;
     }
 
     /**
