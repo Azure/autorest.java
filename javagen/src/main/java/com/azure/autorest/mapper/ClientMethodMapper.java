@@ -175,7 +175,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             List<Parameter> codeModelParameters;
             if (settings.isDataPlaneClient()) {
-                // Required path and body parameters are allowed
+                // Required path, body, header and query parameters are allowed
                 codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
                         (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
                             p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY ||
