@@ -78,8 +78,8 @@ public final class Explicits {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBinaryBody(
                 @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") BinaryData bodyParameter,
                 @HeaderParam("Content-Length") Long contentLength,
+                @BodyParam("application/octet-stream") BinaryData bodyParameter,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -98,8 +98,8 @@ public final class Explicits {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putRequiredBinaryBody(
                 @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") BinaryData bodyParameter,
                 @HeaderParam("Content-Length") long contentLength,
+                @BodyParam("application/octet-stream") BinaryData bodyParameter,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -385,15 +385,15 @@ public final class Explicits {
     /**
      * Test explicitly optional body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(BinaryData bodyParameter, Long contentLength) {
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(Long contentLength, BinaryData bodyParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -402,36 +402,36 @@ public final class Explicits {
         return FluxUtil.withContext(
                 context ->
                         service.putOptionalBinaryBody(
-                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+                                this.client.getHost(), contentLength, bodyParameter, accept, context));
     }
 
     /**
      * Test explicitly optional body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putOptionalBinaryBodyAsync(BinaryData bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
+    public Mono<Void> putOptionalBinaryBodyAsync(Long contentLength, BinaryData bodyParameter) {
+        return putOptionalBinaryBodyWithResponseAsync(contentLength, bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test explicitly optional body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+    public void putOptionalBinaryBody(Long contentLength, BinaryData bodyParameter) {
+        putOptionalBinaryBodyAsync(contentLength, bodyParameter).block();
     }
 
     /**
@@ -493,15 +493,15 @@ public final class Explicits {
     /**
      * Test explicitly required body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putRequiredBinaryBodyWithResponseAsync(BinaryData bodyParameter, long contentLength) {
+    public Mono<Response<Void>> putRequiredBinaryBodyWithResponseAsync(long contentLength, BinaryData bodyParameter) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -513,36 +513,36 @@ public final class Explicits {
         return FluxUtil.withContext(
                 context ->
                         service.putRequiredBinaryBody(
-                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+                                this.client.getHost(), contentLength, bodyParameter, accept, context));
     }
 
     /**
      * Test explicitly required body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putRequiredBinaryBodyAsync(BinaryData bodyParameter, long contentLength) {
-        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
+    public Mono<Void> putRequiredBinaryBodyAsync(long contentLength, BinaryData bodyParameter) {
+        return putRequiredBinaryBodyWithResponseAsync(contentLength, bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test explicitly required body parameter.
      *
+     * @param contentLength The Content-Length header for the request.
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putRequiredBinaryBody(BinaryData bodyParameter, long contentLength) {
-        putRequiredBinaryBodyAsync(bodyParameter, contentLength).block();
+    public void putRequiredBinaryBody(long contentLength, BinaryData bodyParameter) {
+        putRequiredBinaryBodyAsync(contentLength, bodyParameter).block();
     }
 
     /**
