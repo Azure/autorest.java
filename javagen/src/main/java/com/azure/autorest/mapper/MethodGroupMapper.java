@@ -16,10 +16,12 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupClient> {
     private static final MethodGroupMapper INSTANCE = new MethodGroupMapper();
@@ -82,7 +84,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
-            restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values());
+            restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
         }
         proxyBuilder.methods(restAPIMethods);
 

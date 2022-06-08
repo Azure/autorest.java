@@ -106,7 +106,7 @@ public class ProxyMethodParameter {
      * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
     protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name,
-                                   com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation,
+                                   RequestParameterLocation requestParameterLocation,
                                    String requestParameterName, boolean alreadyEncoded, boolean isConstant,
                                    boolean isRequired, boolean isNullable, boolean fromClient,
                                    String headerCollectionPrefix, String parameterReference, String defaultValue,
@@ -255,6 +255,32 @@ public class ProxyMethodParameter {
 //        }
 
         getWireType().addImportsTo(imports, includeImplementationImports);
+    }
+
+    /**
+     * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     * @return A new builder instance initialized with properties values of this instance.
+     */
+    public ProxyMethodParameter.Builder toNewBuilder() {
+        return new ProxyMethodParameter.Builder()
+                .clientType(this.getClientType())
+                .alreadyEncoded(this.getAlreadyEncoded())
+                .collectionFormat(this.getCollectionFormat())
+                .defaultValue(this.getDefaultValue())
+                .description(this.getDescription())
+                .explode(this.getExplode())
+                .fromClient(this.getFromClient())
+                .headerCollectionPrefix(this.getHeaderCollectionPrefix())
+                .isConstant(this.getIsConstant())
+                .isNullable(this.getIsNullable())
+                .name(this.getName())
+                .isRequired(this.getIsRequired())
+                .origin(this.getOrigin())
+                .parameterReference(this.getParameterReference())
+                .rawType(this.getRawType())
+                .requestParameterLocation(this.getRequestParameterLocation())
+                .requestParameterName(this.getRequestParameterName())
+                .wireType(this.getWireType());
     }
 
     public static class Builder {

@@ -4,6 +4,7 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.Message;
 import org.junit.Assert;
 
 import java.io.IOException;
@@ -11,8 +12,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MockUnitJavagen extends Javagen {
+
+    private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
+    static {
+        SETTINGS_MAP.put("namespace", "com.azure.mock");
+    }
 
     public static class MockConnection extends Connection {
 
@@ -42,8 +50,13 @@ public class MockUnitJavagen extends Javagen {
         return sb.toString();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T getValue(Type type, String key) {
-        return null;
+        return (T) SETTINGS_MAP.get(key);
+    }
+
+    @Override
+    public void message(Message message) {
     }
 }

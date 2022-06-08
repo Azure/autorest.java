@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.AutorestSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.util.TemplateUtil;
@@ -50,7 +51,7 @@ public class SwaggerReadmeTemplate {
         Yaml yaml = new Yaml(dumperOptions);
 
         Map<String, Object> objectNode = new LinkedHashMap<>();
-        objectNode.put("input-file", settings.getAutorestSettings().getInputFiles());
+        addRequireOrInputFile(objectNode, settings.getAutorestSettings());
         // settings from internal
         for (Map.Entry<String, Object> entry : OVERRIDE_OPTIONS.entrySet()) {
             if (entry.getValue() != null) {
@@ -76,6 +77,25 @@ public class SwaggerReadmeTemplate {
         line("```");
 
         return builder.toString();
+    }
+
+    private static void addRequireOrInputFile(Map<String, Object> objectNode, AutorestSettings autorestSettings) {
+        // try use "require"
+        boolean useRequire = false;
+        List<String> requireList = autorestSettings.getRequire();
+        if (!CoreUtils.isNullOrEmpty(requireList)) {
+            String require = requireList.iterator().next();
+
+            if (require.contains("data-plane")) {
+                useRequire = true;
+                objectNode.put("require", require);
+            }
+        }
+
+        if (!useRequire) {
+            // use "input-file"
+            objectNode.put("input-file", autorestSettings.getInputFiles());
+        }
     }
 
     private static Map<String, Object> removeDefaultOptions(Map<String, Object> objectNode) {
