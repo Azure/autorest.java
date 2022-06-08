@@ -280,36 +280,36 @@
     },
     "/mediatypes/jsonandimage/jsonfirst/binary": {
       "post": {
-      "description": "json and image types with json type first",
-      "operationId": "jsonAndImageWithJsonFirst",
-      "consumes": [
-        "application/json",
-        "image/jpeg"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "parameters": [
-        {
-          "name": "input",
-          "description": "Input parameter.",
-          "in": "body",
-          "schema": {
-            "format": "binary",
-            "type": "string"
-          },
-          "required": true
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Received correct format",
-          "schema": {
-            "type": "string"
+        "description": "json and image types with json type first",
+        "operationId": "jsonAndImageWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
-    }
     },
     "/mediatypes/jsonandimage/jsonfirst/object": {
       "post": {
@@ -331,6 +331,103 @@
               "type": "object"
             },
             "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/image/binary/nonrequired": {
+      "post": {
+        "description": "image type with non-required body",
+        "operationId": "imageTypeWithNonRequiredBody",
+        "consumes": [
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/binary/nonrequired": {
+      "post": {
+        "description": "json and image types with non-required body and json type first",
+        "operationId": "jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/object/nonrequired": {
+      "post": {
+        "description": "json and image types with non-required body and json type first",
+        "operationId": "jsonAndImageObjectTypeJsonFirstWithNonRequiredBody",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": false
           }
         ],
         "responses": {
