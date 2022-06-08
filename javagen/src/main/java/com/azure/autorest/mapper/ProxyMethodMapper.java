@@ -219,8 +219,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion");
+                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient();
                     if (parameterIsRequired
-                            || !parameterIsRequired && (proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient())
+                            || parameterIsConstantOrFromClient
                             || parameterIsClientOrApiVersion) {
                         parameters.add(proxyMethodParameter);
                     }

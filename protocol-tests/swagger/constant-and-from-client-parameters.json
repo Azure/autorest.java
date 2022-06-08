@@ -60,7 +60,8 @@
       ],
       "x-ms-enum": {
         "modelAsString": false
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "QueryRequiredConstant": {
       "name": "query-required-constant",
@@ -73,7 +74,8 @@
       ],
       "x-ms-enum": {
         "modelAsString": false
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "QueryNonRequiredConstant": {
       "name": "query-non-required-constant",
@@ -86,7 +88,8 @@
       ],
       "x-ms-enum": {
         "modelAsString": false
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "QueryRequiredClientParam": {
       "name": "query-required-client-param",
