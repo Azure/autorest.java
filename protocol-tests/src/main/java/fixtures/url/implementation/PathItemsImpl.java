@@ -10,6 +10,7 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -68,6 +69,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -90,6 +92,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -112,6 +115,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -134,6 +138,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -174,6 +179,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -213,6 +219,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -283,6 +290,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -322,6 +330,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -392,6 +401,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -431,6 +441,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -501,6 +512,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -540,6 +552,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,

@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
@@ -22,6 +23,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -100,6 +102,7 @@ public final class HttpServerFailuresImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post505(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -117,6 +120,7 @@ public final class HttpServerFailuresImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete505(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -236,8 +240,10 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -259,8 +265,9 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.post505(this.client.getHost(), accept, requestOptions, context);
+        return service.post505(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -302,9 +309,10 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete505(this.client.getHost(), accept, requestOptions, context));
+                context -> service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -326,8 +334,9 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.delete505(this.client.getHost(), accept, requestOptions, context);
+        return service.delete505(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**

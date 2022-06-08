@@ -94,7 +94,10 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
         @ExpectedResponses({201})
@@ -109,7 +112,10 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
@@ -507,10 +513,11 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
             RequestOptions requestOptions) {
+        final String input = "value1";
         return FluxUtil.withContext(
                 context ->
                         service.putNoModelAsStringNoRequiredOneValueNoDefault(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), input, requestOptions, context));
     }
 
     /**
@@ -535,7 +542,9 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNoModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), requestOptions, context);
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueNoDefault(
+                this.client.getHost(), input, requestOptions, context);
     }
 
     /**
@@ -582,10 +591,11 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
             RequestOptions requestOptions) {
+        final String input = "value1";
         return FluxUtil.withContext(
                 context ->
                         service.putNoModelAsStringNoRequiredOneValueDefault(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), input, requestOptions, context));
     }
 
     /**
@@ -610,7 +620,9 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNoModelAsStringNoRequiredOneValueDefault(this.client.getHost(), requestOptions, context);
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueDefault(
+                this.client.getHost(), input, requestOptions, context);
     }
 
     /**
