@@ -50,14 +50,13 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.27.0";
-        private String azureCoreManagementVersion = "1.5.4";
-        private String azureCoreHttpNettyVersion = "1.11.9";
-        private String azureCoreTestVersion = "1.7.10";
-        private String azureIdentityVersion = "1.5.0";
+        private String azureCoreVersion = "1.29.1";
+        private String azureCoreManagementVersion = "1.6.2";
+        private String azureCoreHttpNettyVersion = "1.12.2";
+        private String azureCoreTestVersion = "1.9.1";
+        private String azureIdentityVersion = "1.5.2";
         private String junitVersion = "5.8.2";
-        private String revapiMavenPlugin = "0.14.6";
-        private String slf4jSimple = "1.7.32";
+        private String slf4jSimple = "1.7.36";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
@@ -85,10 +84,6 @@ public class Project {
 
         public String getJunitVersion() {
             return junitVersion;
-        }
-
-        public String getRevapiMavenPlugin() {
-            return revapiMavenPlugin;
         }
 
         public String getSlf4jSimple() {
@@ -218,7 +213,6 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 checkArtifact(line, "org.junit.jupiter:junit-jupiter-engine").ifPresent(v -> packageVersions.junitVersion = v);
-                checkArtifact(line, "org.revapi:revapi-maven-plugin").ifPresent(v -> packageVersions.revapiMavenPlugin = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
