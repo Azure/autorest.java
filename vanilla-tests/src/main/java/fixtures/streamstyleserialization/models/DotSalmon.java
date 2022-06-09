@@ -9,6 +9,7 @@ import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.Objects;
 
 /** The DotSalmon model. */
 @Fluent
@@ -83,6 +84,8 @@ public class DotSalmon extends DotFish {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
+                    boolean discriminatorPropertyFound = false;
+                    String discriminatorProperty = null;
                     String species = null;
                     String location = null;
                     Boolean iswild = null;
@@ -90,7 +93,10 @@ public class DotSalmon extends DotFish {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("species".equals(fieldName)) {
+                        if (fieldName.equals("fish\\.type")) {
+                            discriminatorPropertyFound = true;
+                            discriminatorProperty = reader.getStringValue();
+                        } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
@@ -100,6 +106,14 @@ public class DotSalmon extends DotFish {
                             reader.skipChildren();
                         }
                     }
+
+                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "DotSalmon")) {
+                        throw new IllegalStateException(
+                                "'fish\\.type' was expected to be non-null and equal to 'DotSalmon'. The found 'fish\\.type' was '"
+                                        + discriminatorProperty
+                                        + "'.");
+                    }
+
                     DotSalmon deserializedValue = new DotSalmon();
                     deserializedValue.setSpecies(species);
                     deserializedValue.setLocation(location);

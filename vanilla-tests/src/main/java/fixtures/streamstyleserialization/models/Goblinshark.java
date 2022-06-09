@@ -13,6 +13,7 @@ import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /** The Goblinshark model. */
 @Fluent
@@ -111,6 +112,8 @@ public final class Goblinshark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
+                    boolean discriminatorPropertyFound = false;
+                    String discriminatorProperty = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
@@ -124,7 +127,10 @@ public final class Goblinshark extends Shark {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("length".equals(fieldName)) {
+                        if (fieldName.equals("fishtype")) {
+                            discriminatorPropertyFound = true;
+                            discriminatorProperty = reader.getStringValue();
+                        } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
@@ -146,6 +152,14 @@ public final class Goblinshark extends Shark {
                             reader.skipChildren();
                         }
                     }
+
+                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "goblin")) {
+                        throw new IllegalStateException(
+                                "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
+                                        + discriminatorProperty
+                                        + "'.");
+                    }
+
                     List<String> missingProperties = new ArrayList<>();
                     if (!lengthFound) {
                         missingProperties.add("length");

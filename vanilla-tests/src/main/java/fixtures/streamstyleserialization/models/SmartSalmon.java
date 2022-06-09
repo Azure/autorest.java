@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /** The SmartSalmon model. */
 @Fluent
@@ -87,15 +88,15 @@ public final class SmartSalmon extends Salmon {
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
@@ -118,10 +119,12 @@ public final class SmartSalmon extends Salmon {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
+                    boolean discriminatorPropertyFound = false;
+                    String discriminatorProperty = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
-                    List<Fish> siblings = null;
                     String species = null;
+                    List<Fish> siblings = null;
                     String location = null;
                     Boolean iswild = null;
                     String collegeDegree = null;
@@ -130,13 +133,16 @@ public final class SmartSalmon extends Salmon {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("length".equals(fieldName)) {
+                        if (fieldName.equals("fishtype")) {
+                            discriminatorPropertyFound = true;
+                            discriminatorProperty = reader.getStringValue();
+                        } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
+                        } else if ("siblings".equals(fieldName)) {
+                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
@@ -151,6 +157,14 @@ public final class SmartSalmon extends Salmon {
                             additionalProperties.put(fieldName, JsonUtils.readUntypedField(reader));
                         }
                     }
+
+                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "smart_salmon")) {
+                        throw new IllegalStateException(
+                                "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
+                                        + discriminatorProperty
+                                        + "'.");
+                    }
+
                     List<String> missingProperties = new ArrayList<>();
                     if (!lengthFound) {
                         missingProperties.add("length");
@@ -161,12 +175,11 @@ public final class SmartSalmon extends Salmon {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     SmartSalmon deserializedValue = new SmartSalmon(length);
-                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setSpecies(species);
+                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setLocation(location);
                     deserializedValue.setIswild(iswild);
                     deserializedValue.setCollegeDegree(collegeDegree);
-                    deserializedValue.setAdditionalProperties(additionalProperties);
 
                     return deserializedValue;
                 });

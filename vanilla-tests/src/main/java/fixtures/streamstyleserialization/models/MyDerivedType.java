@@ -9,6 +9,7 @@ import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.Objects;
 
 /** The MyDerivedType model. */
 @Fluent
@@ -68,6 +69,8 @@ public final class MyDerivedType extends MyBaseType {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
+                    boolean discriminatorPropertyFound = false;
+                    String discriminatorProperty = null;
                     String propB1 = null;
                     String propBH1 = null;
                     String propD1 = null;
@@ -75,16 +78,36 @@ public final class MyDerivedType extends MyBaseType {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("propB1".equals(fieldName)) {
+                        if (fieldName.equals("kind")) {
+                            discriminatorPropertyFound = true;
+                            discriminatorProperty = reader.getStringValue();
+                        } else if ("propB1".equals(fieldName)) {
                             propB1 = reader.getStringValue();
-                        } else if ("helper.propBH1".equals(fieldName)) {
-                            propBH1 = reader.getStringValue();
                         } else if ("propD1".equals(fieldName)) {
                             propD1 = reader.getStringValue();
+                        } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                                fieldName = reader.getFieldName();
+                                reader.nextToken();
+
+                                if ("propBH1".equals(fieldName)) {
+                                    propBH1 = reader.getStringValue();
+                                } else {
+                                    reader.skipChildren();
+                                }
+                            }
                         } else {
                             reader.skipChildren();
                         }
                     }
+
+                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "Kind1")) {
+                        throw new IllegalStateException(
+                                "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
+                                        + discriminatorProperty
+                                        + "'.");
+                    }
+
                     MyDerivedType deserializedValue = new MyDerivedType();
                     deserializedValue.setPropB1(propB1);
                     deserializedValue.setPropBH1(propBH1);

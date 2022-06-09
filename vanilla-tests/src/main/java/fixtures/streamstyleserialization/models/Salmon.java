@@ -5,12 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 /** The Salmon model. */
@@ -96,53 +91,5 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         return jsonWriter.flush();
-    }
-
-    public static Salmon fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
-                reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    String location = null;
-                    Boolean iswild = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("length".equals(fieldName)) {
-                            length = reader.getFloatValue();
-                            lengthFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
-                        } else if ("location".equals(fieldName)) {
-                            location = reader.getStringValue();
-                        } else if ("iswild".equals(fieldName)) {
-                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-
-                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
-                        throw new IllegalStateException(
-                                "Missing required property/properties: " + String.join(", ", missingProperties));
-                    }
-                    Salmon deserializedValue = new Salmon(length);
-                    deserializedValue.setSpecies(species);
-                    deserializedValue.setSiblings(siblings);
-                    deserializedValue.setLocation(location);
-                    deserializedValue.setIswild(iswild);
-
-                    return deserializedValue;
-                });
     }
 }

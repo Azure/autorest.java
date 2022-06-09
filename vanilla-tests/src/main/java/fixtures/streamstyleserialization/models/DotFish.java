@@ -5,10 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 
 /** The DotFish model. */
@@ -46,27 +43,5 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         return jsonWriter.flush();
-    }
-
-    public static DotFish fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
-                reader -> {
-                    String species = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    DotFish deserializedValue = new DotFish();
-                    deserializedValue.setSpecies(species);
-
-                    return deserializedValue;
-                });
     }
 }

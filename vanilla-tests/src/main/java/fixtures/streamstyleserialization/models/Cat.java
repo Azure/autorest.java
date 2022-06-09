@@ -5,9 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.util.List;
 
@@ -88,39 +85,5 @@ public class Cat extends Pet {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         return jsonWriter.flush();
-    }
-
-    public static Cat fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
-                reader -> {
-                    String name = null;
-                    Integer id = null;
-                    List<Dog> hates = null;
-                    String color = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
-                        } else if ("id".equals(fieldName)) {
-                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
-                        } else if ("hates".equals(fieldName)) {
-                            hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
-                        } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    Cat deserializedValue = new Cat();
-                    deserializedValue.setName(name);
-                    deserializedValue.setId(id);
-                    deserializedValue.setHates(hates);
-                    deserializedValue.setColor(color);
-
-                    return deserializedValue;
-                });
     }
 }

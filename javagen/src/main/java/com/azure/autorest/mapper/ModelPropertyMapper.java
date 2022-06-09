@@ -59,14 +59,16 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 if (property.getParentSchema() != null) {
                     flattened = property.getParentSchema().getProperties().stream()
-                            .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+                            .anyMatch(p -> !CoreUtils.isNullOrEmpty(p.getFlattenedNames()));
                     if (!flattened) {
                         String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
                         flattened = discriminatorSerializedName.contains(".");
                     }
+                } else {
+                    flattened = !CoreUtils.isNullOrEmpty(property.getFlattenedNames());
                 }
             } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
-                flattened = property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty();
+                flattened = !CoreUtils.isNullOrEmpty(property.getFlattenedNames());
             }
         }
         builder.needsFlatten(flattened);
