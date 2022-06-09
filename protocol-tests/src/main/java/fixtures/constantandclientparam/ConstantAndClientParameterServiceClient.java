@@ -38,7 +38,6 @@ public final class ConstantAndClientParameterServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-client-param</td><td>Integer</td><td>No</td><td>Query parameter on the client that is not required</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
