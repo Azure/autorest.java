@@ -78,7 +78,7 @@ public class MethodUtil {
      * @return the first request consumes binary type, if no binary request, return the first request in requests
      *
      */
-    public static Request findFirstBinaryRequest(List<Request> requests, Operation operation) {
+    public static Request tryMergeBinaryRequests(List<Request> requests, Operation operation) {
         Request selectedRequest = requests.get(0);
         for (Request request : requests) {
             if (request.getProtocol().getHttp().getKnownMediaType() != null
