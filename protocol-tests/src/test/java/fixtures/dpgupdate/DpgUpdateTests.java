@@ -77,7 +77,7 @@ public class DpgUpdateTests {
         Response<BinaryData> response = client.postParametersWithResponse(parameter, requestOptions);
         Assertions.assertEquals(200, response.getStatusCode());
 
-        response = client2.postParametersWithResponse("image/jpeg", parameter.getLength(), parameter, requestOptions);
+        response = client2.postParametersWithResponse("image/jpeg", parameter, requestOptions);
         Assertions.assertEquals(200, response.getStatusCode());
     }
 
