@@ -36,14 +36,6 @@ public final class MediaTypesAsyncClient {
     /**
      * Analyze body, that could be different media types.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -72,14 +64,6 @@ public final class MediaTypesAsyncClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -147,7 +131,6 @@ public final class MediaTypesAsyncClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,9 +142,8 @@ public final class MediaTypesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponse(
-            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
-        return this.serviceClient.binaryBodyWithTwoContentTypesWithResponseAsync(
-                contentType, contentLength, message, requestOptions);
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.serviceClient.binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, requestOptions);
     }
 
     /**
@@ -181,7 +163,6 @@ public final class MediaTypesAsyncClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -193,9 +174,9 @@ public final class MediaTypesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponse(
-            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
+            String contentType, BinaryData message, RequestOptions requestOptions) {
         return this.serviceClient.binaryBodyWithThreeContentTypesWithResponseAsync(
-                contentType, contentLength, message, requestOptions);
+                contentType, message, requestOptions);
     }
 
     /**

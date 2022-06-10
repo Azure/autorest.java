@@ -127,7 +127,6 @@ public final class ParamsImpl {
         Mono<Response<BinaryData>> postParameters(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("Content-Length") long contentLength,
                 @BodyParam("image/jpeg") BinaryData parameter,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -488,7 +487,6 @@ public final class ParamsImpl {
      * }</pre>
      *
      * @param contentType The content type.
-     * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -500,18 +498,12 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            String contentType, long contentLength, BinaryData parameter, RequestOptions requestOptions) {
+            String contentType, BinaryData parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postParameters(
-                                this.client.getHost(),
-                                contentType,
-                                contentLength,
-                                parameter,
-                                accept,
-                                requestOptions,
-                                context));
+                                this.client.getHost(), contentType, parameter, accept, requestOptions, context));
     }
 
     /**
@@ -530,7 +522,6 @@ public final class ParamsImpl {
      * }</pre>
      *
      * @param contentType The content type.
-     * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -543,14 +534,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            String contentType,
-            long contentLength,
-            BinaryData parameter,
-            RequestOptions requestOptions,
-            Context context) {
+            String contentType, BinaryData parameter, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.postParameters(
-                this.client.getHost(), contentType, contentLength, parameter, accept, requestOptions, context);
+        return service.postParameters(this.client.getHost(), contentType, parameter, accept, requestOptions, context);
     }
 
     /**
@@ -569,7 +555,6 @@ public final class ParamsImpl {
      * }</pre>
      *
      * @param contentType The content type.
-     * @param contentLength The Content-Length header for the request.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -581,8 +566,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
-            String contentType, long contentLength, BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(contentType, contentLength, parameter, requestOptions).block();
+            String contentType, BinaryData parameter, RequestOptions requestOptions) {
+        return postParametersWithResponseAsync(contentType, parameter, requestOptions).block();
     }
 
     /**

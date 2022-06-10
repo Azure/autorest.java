@@ -47,7 +47,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -59,10 +58,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(
-            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndBinaryTypesJsonFirstWithResponse(contentType, contentLength, input, requestOptions)
-                .block();
+            String contentType, BinaryData input, RequestOptions requestOptions) {
+        return this.client.jsonAndBinaryTypesJsonFirstWithResponse(contentType, input, requestOptions).block();
     }
 
     /**
@@ -81,7 +78,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -93,10 +89,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(
-            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndBinaryTypesBinaryFirstWithResponse(contentType, contentLength, input, requestOptions)
-                .block();
+            String contentType, BinaryData input, RequestOptions requestOptions) {
+        return this.client.jsonAndBinaryTypesBinaryFirstWithResponse(contentType, input, requestOptions).block();
     }
 
     /**
@@ -115,7 +109,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -127,10 +120,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(
-            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndOctectWithJsonFirstWithResponse(contentType, contentLength, message, requestOptions)
-                .block();
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.client.jsonAndOctectWithJsonFirstWithResponse(contentType, message, requestOptions).block();
     }
 
     /**
@@ -149,7 +140,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -161,10 +151,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(
-            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndOctectWithOctetFirstWithResponse(contentType, contentLength, message, requestOptions)
-                .block();
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.client.jsonAndOctectWithOctetFirstWithResponse(contentType, message, requestOptions).block();
     }
 
     /**
@@ -183,7 +171,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -195,10 +182,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(
-            String contentType, long contentLength, BinaryData message, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndEncodingWithJsonFirstWithResponse(contentType, contentLength, message, requestOptions)
-                .block();
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.client.jsonAndEncodingWithJsonFirstWithResponse(contentType, message, requestOptions).block();
     }
 
     /**
@@ -310,7 +295,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType Upload file type.
-     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -322,10 +306,8 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
-            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndImageWithJsonFirstWithResponse(contentType, contentLength, input, requestOptions)
-                .block();
+            String contentType, BinaryData input, RequestOptions requestOptions) {
+        return this.client.jsonAndImageWithJsonFirstWithResponse(contentType, input, requestOptions).block();
     }
 
     /**
@@ -344,7 +326,6 @@ public final class DpgMultiMediaTypesClient {
      * }</pre>
      *
      * @param contentType The content type.
-     * @param contentLength The Content-Length header for the request.
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -356,22 +337,12 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
-            String contentType, long contentLength, BinaryData input, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType, contentLength, input, requestOptions)
-                .block();
+            String contentType, BinaryData input, RequestOptions requestOptions) {
+        return this.client.jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType, input, requestOptions).block();
     }
 
     /**
      * image type with non-required body.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -400,14 +371,6 @@ public final class DpgMultiMediaTypesClient {
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -447,7 +410,6 @@ public final class DpgMultiMediaTypesClient {
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type</td></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The Content-Length header for the request</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
