@@ -94,7 +94,10 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
         @ExpectedResponses({201})
@@ -109,7 +112,10 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
@@ -489,14 +495,6 @@ public final class ContantsImpl {
     /**
      * Puts constants to the testserver.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -507,22 +505,15 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
             RequestOptions requestOptions) {
+        final String input = "value1";
         return FluxUtil.withContext(
                 context ->
                         service.putNoModelAsStringNoRequiredOneValueNoDefault(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -535,19 +526,13 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNoModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), requestOptions, context);
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueNoDefault(
+                this.client.getHost(), input, requestOptions, context);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -564,14 +549,6 @@ public final class ContantsImpl {
     /**
      * Puts constants to the testserver.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -582,22 +559,15 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
             RequestOptions requestOptions) {
+        final String input = "value1";
         return FluxUtil.withContext(
                 context ->
                         service.putNoModelAsStringNoRequiredOneValueDefault(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -610,19 +580,13 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNoModelAsStringNoRequiredOneValueDefault(this.client.getHost(), requestOptions, context);
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueDefault(
+                this.client.getHost(), input, requestOptions, context);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
