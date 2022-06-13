@@ -76,7 +76,7 @@ def replace_xml_node_text(line: str, text: str) -> str:
 def update_pom(package_versions: List[PackageVersion]):
     versions = {package.package: package.version for package in package_versions}
 
-    pom_files = ['customization-base/src/main/resources/pom.xml']
+    pom_files = ['customization-base/src/main/resources/pom.xml', 'pom.xml']
     for folder in os.listdir(root_path):
         if path.isdir(path.join(root_path, folder)) and path.isfile(path.join(root_path, folder, 'pom.xml')):
             pom_files.append(path.join(folder, 'pom.xml'))

@@ -24,8 +24,8 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -171,7 +171,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            requests = Collections.singletonList(requests.get(0));
+            Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
+            requests = Collections.singletonList(selectedRequest);
         }
 
         // Used to deduplicate method with same signature.

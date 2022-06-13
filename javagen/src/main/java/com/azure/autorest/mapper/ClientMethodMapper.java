@@ -36,8 +36,9 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -162,7 +163,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
-            requests = Collections.singletonList(requests.get(0));
+            Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
+            requests = Collections.singletonList(selectedRequest);
         }
 
         for (Request request : requests) {

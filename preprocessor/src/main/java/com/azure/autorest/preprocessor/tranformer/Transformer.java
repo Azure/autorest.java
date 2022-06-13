@@ -97,14 +97,18 @@ public class Transformer {
             parameter.setOperation(operation);
             renameVariable(parameter);
             // add Content-Length for Flux<ByteBuffer> if not already present
-            if (parameter.getSchema() instanceof BinarySchema) {
-              if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
-                      && p.getProtocol().getHttp() != null
-                      && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER
-                      && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
-                Parameter contentLength = createContentLengthParameter(operation, parameter);
-                request.getParameters().add(++i, contentLength);
-                request.getSignatureParameters().add(request.getSignatureParameters().indexOf(parameter) + 1, contentLength);
+            JavaSettings settings = JavaSettings.getInstance();
+            if (!settings.isDataPlaneClient()) {
+              if (parameter.getSchema() instanceof BinarySchema) {
+                if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
+                        && p.getProtocol().getHttp() != null
+                        && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER
+                        && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
+                  Parameter contentLength = createContentLengthParameter(operation, parameter);
+                  // put contentLength parameter before input body
+                  request.getParameters().add(i++, contentLength);
+                  request.getSignatureParameters().add(request.getSignatureParameters().indexOf(parameter) + 1, contentLength);
+                }
               }
             }
             // convert contentType to header param
@@ -398,6 +402,7 @@ public class Transformer {
     Language language = new Language();
     language.setName("contentLength");
     language.setSerializedName("Content-Length");
+    language.setDescription("The Content-Length header for the request");
     contentType.setLanguage(new Languages());
     contentType.getLanguage().setDefault(language);
     contentType.getLanguage().setJava(language);
