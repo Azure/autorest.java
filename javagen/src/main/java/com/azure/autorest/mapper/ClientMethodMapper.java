@@ -139,7 +139,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient() /* TODO: #1059 */) {
+                    && !settings.isDataPlaneClient()) {
                 asyncReturnType = createAsyncBinaryReturnType();
             } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                 asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
@@ -147,7 +147,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createAsyncVoidReturnType();
             }
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient() /* TODO: #1059 */) {
+                    && !settings.isDataPlaneClient()) {
                 syncReturnType = ClassType.InputStream;
             } else {
                 syncReturnType = responseBodyType.getClientType();
@@ -416,7 +416,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         && (settings.isFluent() || settings.getPollingConfig("default") != null)
                         && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
                     // WithResponseAsync, with required and optional parameters
-                    // TODO: Build protocol LRO methods
                     methods.add(builder
                             .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
                             .name(proxyMethod.getSimpleAsyncRestResponseMethodName())

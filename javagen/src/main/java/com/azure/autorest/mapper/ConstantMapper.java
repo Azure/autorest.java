@@ -31,7 +31,6 @@ public class ConstantMapper implements IMapper<ConstantSchema, IType> {
             return constantType;
         }
 
-        //TODO: constants
         constantType = Mappers.getSchemaMapper().map(constantSchema.getValueType());
         parsed.put(constantSchema, constantType);
 
