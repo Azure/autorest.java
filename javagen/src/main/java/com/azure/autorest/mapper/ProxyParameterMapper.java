@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
@@ -17,6 +18,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -107,6 +109,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         // fallback to dummy description
         if (description == null || description.isEmpty()) {
             description = String.format("The %s parameter", name);
+        }
+        // add allowed enum values
+        if (settings.isDataPlaneClient() && Mappers.getSchemaMapper().map(parameterJvWireType) instanceof EnumType) {
+            description += ". ";
+            description += MethodUtil.buildAllowedEnumValues(parameter);
         }
         builder.description(description);
 

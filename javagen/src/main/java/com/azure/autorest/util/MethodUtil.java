@@ -4,6 +4,7 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Language;
@@ -17,6 +18,8 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -96,6 +99,33 @@ public class MethodUtil {
             }
         }
         return selectedRequest;
+    }
+
+    /**
+     * build the string of allowed values for an enum type parameter
+     * @param parameter an enum type parameter
+     * @return the string of allowed values for this enum type parameter
+     */
+    public static String buildAllowedEnumValues(Parameter parameter) {
+        if (!(Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType)) {
+            return "";
+        }
+        String res = "Allowed values: ";
+        if (parameter.getSchema() != null) {
+            List<ChoiceValue> choices = new ArrayList<>();
+            if (parameter.getSchema() instanceof ChoiceSchema) {
+                choices = ((ChoiceSchema) parameter.getSchema()).getChoices();
+            }
+            if (parameter.getSchema() instanceof SealedChoiceSchema) {
+                choices = ((SealedChoiceSchema) parameter.getSchema()).getChoices();
+            }
+            if (!choices.isEmpty()) {
+                res += choices.stream().map(choice -> choice.getValue()).collect(Collectors.joining(", "));
+            }
+
+        }
+        res += ".";
+        return res;
     }
 
     /**
