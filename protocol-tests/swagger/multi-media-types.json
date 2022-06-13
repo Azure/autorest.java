@@ -1,0 +1,445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "DPGMultiMediaTypesClient",
+    "description": "DPG multi media types client"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/mediatypes/jsonandbinary/jsonfirst": {
+      "post": {
+        "description": "json and binary types with json type first",
+        "operationId": "jsonAndBinaryTypesJsonFirst",
+        "consumes": [
+          "application/json",
+          "application/pdf",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandbinary/binaryfirst": {
+      "post": {
+        "description": "json and binary types with binary type first",
+        "operationId": "jsonAndBinaryTypesBinaryFirst",
+        "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandoctet/jsonfirst": {
+      "post": {
+        "description": "json and octet media types with json type first",
+        "operationId": "jsonAndOctectWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "message",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandoctet/octetfirst": {
+      "post": {
+        "description": "json and octet media types with octet type first",
+        "operationId": "jsonAndOctectWithOctetFirst",
+        "consumes": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "message",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandencoding/jsonfirst": {
+      "post": {
+        "description": "json and encoding types with json type first",
+        "operationId": "jsonAndEncodingWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "text/plain; charset=UTF-8"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "message",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandencoding/encodingfirst": {
+      "post": {
+        "description": "json and encoding types with encoding type first",
+        "operationId": "jsonAndEncodingWithEncodingFirst",
+        "consumes": [
+          "text/plain; charset=UTF-8",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandtext/textfirst": {
+      "post": {
+        "description": "json and text types with text type first",
+        "operationId": "jsonAndTextWithTextFirst",
+        "consumes": [
+          "text/plain",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandtext/jsonfirst": {
+      "post": {
+        "description": "json and text types with json type first",
+        "operationId": "jsonAndTextWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/binary": {
+      "post": {
+        "description": "json and image types with json type first",
+        "operationId": "jsonAndImageWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/object": {
+      "post": {
+        "description": "json and image types with json type first",
+        "operationId": "jsonAndImageObjectTypeWithJsonFirst",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/image/binary/nonrequired": {
+      "post": {
+        "description": "image type with non-required body",
+        "operationId": "imageTypeWithNonRequiredBody",
+        "consumes": [
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/binary/nonrequired": {
+      "post": {
+        "description": "json and image types with non-required body and json type first",
+        "operationId": "jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/mediatypes/jsonandimage/jsonfirst/object/nonrequired": {
+      "post": {
+        "description": "json and image types with non-required body and json type first",
+        "operationId": "jsonAndImageObjectTypeJsonFirstWithNonRequiredBody",
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input parameter.",
+            "in": "body",
+            "schema": {
+              "type": "object"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -34,14 +34,6 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -70,14 +62,6 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Length</td><td>Long</td><td>No</td><td>The contentLength parameter</td></tr>
-     * </table>
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -145,7 +129,6 @@ public final class MediaTypesClient {
      *
      * @param contentType Upload file type.
      * @param message The payload body.
-     * @param contentLength The contentLength parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,10 +139,8 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
-        return this.client
-                .binaryBodyWithTwoContentTypesWithResponse(contentType, message, contentLength, requestOptions)
-                .block();
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.client.binaryBodyWithTwoContentTypesWithResponse(contentType, message, requestOptions).block();
     }
 
     /**
@@ -180,7 +161,6 @@ public final class MediaTypesClient {
      *
      * @param contentType Upload file type.
      * @param message The payload body.
-     * @param contentLength The contentLength parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -191,10 +171,8 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
-            String contentType, BinaryData message, long contentLength, RequestOptions requestOptions) {
-        return this.client
-                .binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, requestOptions)
-                .block();
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.client.binaryBodyWithThreeContentTypesWithResponse(contentType, message, requestOptions).block();
     }
 
     /**
