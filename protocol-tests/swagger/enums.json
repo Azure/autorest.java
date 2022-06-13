@@ -1,0 +1,174 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Enum Service",
+    "description": "Enum Service",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/enums/queryparam": {
+      "put": {
+        "operationId": "putQueryEnums",
+        "description": "query enums operation",
+        "parameters": [
+          {
+            "name": "query-integer-enum",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "integer enum with three values",
+            "enum": [
+              100,
+              200,
+              300
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "query-boolean-enum",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "description": "boolean enum with two values",
+            "enum": [
+              true,
+              false
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "query-non-required-enum",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "non required enum with three values",
+            "enum": [
+              100,
+              200,
+              300
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/enums/headerparam": {
+      "put": {
+        "operationId": "putHeaderEnums",
+        "description": "enums header operation",
+        "parameters": [
+          {
+            "name": "header-required-string-enum",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "required string enum with three values",
+            "enum": [
+              "test1",
+              "test2",
+              "test3"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "header-non-required-string-enum",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "non required string enum with three values",
+            "enum": [
+              "test1",
+              "test2",
+              "test3"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/enums/required/body": {
+      "put": {
+        "operationId": "putRequiredBodyEnums",
+        "description": "enums required body operation",
+        "parameters": [
+          {
+            "name": "body-required-enum",
+            "description": "body required enum",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test1",
+                "test2"
+              ],
+              "x-ms-enum": { "modelAsString": false }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/enums/nonrequired/body": {
+      "put": {
+        "operationId": "putNonRequiredBodyEnums",
+        "description": "enums non required body operation",
+        "parameters": [
+          {
+            "name": "body-non-required-enum",
+            "description": "body non required enum",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test1",
+                "test2"
+              ],
+              "x-ms-enum": { "modelAsString": false }
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    }
+  }
+}

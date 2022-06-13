@@ -46,7 +46,7 @@ public final class MediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: application/pdf, image/jpeg, image/png, image/tiff.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -69,7 +69,7 @@ public final class MediaTypesClient {
      * Flux<ByteBuffer>
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: application/pdf, image/jpeg, image/png, image/tiff.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -127,7 +127,7 @@ public final class MediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: application/json, application/octet-stream.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,7 +159,7 @@ public final class MediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: application/json, application/octet-stream, text/plain.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -190,7 +190,7 @@ public final class MediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: application/json, text/plain.
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
