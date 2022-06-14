@@ -5,6 +5,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -82,7 +83,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             description = String.format("The %s parameter", name);
         }
         // add allowed enum values
-        if (settings.isDataPlaneClient() && Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType) {
+        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY && Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType) {
             description += ". ";
             description += MethodUtil.buildAllowedEnumValues(parameter);
         }
