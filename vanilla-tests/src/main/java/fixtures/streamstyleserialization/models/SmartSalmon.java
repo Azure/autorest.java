@@ -88,15 +88,15 @@ public final class SmartSalmon extends Salmon {
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
@@ -123,8 +123,8 @@ public final class SmartSalmon extends Salmon {
                     String discriminatorProperty = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
-                    String species = null;
                     List<Fish> siblings = null;
+                    String species = null;
                     String location = null;
                     Boolean iswild = null;
                     String collegeDegree = null;
@@ -139,10 +139,10 @@ public final class SmartSalmon extends Salmon {
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
@@ -175,8 +175,8 @@ public final class SmartSalmon extends Salmon {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     SmartSalmon deserializedValue = new SmartSalmon(length);
-                    deserializedValue.setSpecies(species);
                     deserializedValue.setSiblings(siblings);
+                    deserializedValue.setSpecies(species);
                     deserializedValue.setLocation(location);
                     deserializedValue.setIswild(iswild);
                     deserializedValue.setCollegeDegree(collegeDegree);

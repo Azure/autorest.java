@@ -5,8 +5,13 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.serializer.JsonUtils;
+import com.azure.json.DefaultJsonReader;
+import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.Objects;
 
 /** The MyBaseType model. */
 @Fluent
@@ -65,5 +70,95 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         return jsonWriter.flush();
+    }
+
+    public static MyBaseType fromJson(JsonReader jsonReader) {
+        return JsonUtils.readObject(
+                jsonReader,
+                reader -> {
+                    String discriminatorValue = null;
+                    JsonReader readerToUse = null;
+
+                    // Read the first field name and determine if it's the discriminator field.
+                    reader.nextToken();
+                    if ("kind".equals(reader.getFieldName())) {
+                        reader.nextToken();
+                        discriminatorValue = reader.getStringValue();
+                        readerToUse = reader;
+                    } else {
+                        // If it isn't the discriminator field buffer the JSON structure to make it
+                        // replayable and find the discriminator field value.
+                        String json = JsonUtils.bufferJsonObject(reader);
+                        JsonReader replayReader = DefaultJsonReader.fromString(json);
+                        while (replayReader.nextToken() != JsonToken.END_OBJECT) {
+                            String fieldName = replayReader.getFieldName();
+                            replayReader.nextToken();
+                            if ("kind".equals(fieldName)) {
+                                discriminatorValue = replayReader.getStringValue();
+                                break;
+                            } else {
+                                replayReader.skipChildren();
+                            }
+                        }
+                        if (discriminatorValue != null) {
+                            readerToUse = DefaultJsonReader.fromString(json);
+                        }
+                    }
+                    // Use the discriminator value to determine which subtype should be deserialized.
+                    if (discriminatorValue == null || "MyBaseType".equals(discriminatorValue)) {
+                        return fromJsonKnownDiscriminator(readerToUse);
+                    } else {
+                        throw new IllegalStateException(
+                                "Discriminator field 'kind' was present and didn't match one of the expected values 'MyBaseType'");
+                    }
+                });
+    }
+
+    static MyBaseType fromJsonKnownDiscriminator(JsonReader jsonReader) {
+        return JsonUtils.readObject(
+                jsonReader,
+                reader -> {
+                    boolean discriminatorPropertyFound = false;
+                    String discriminatorProperty = null;
+                    String propB1 = null;
+                    String propBH1 = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if (fieldName.equals("kind")) {
+                            discriminatorPropertyFound = true;
+                            discriminatorProperty = reader.getStringValue();
+                        } else if ("propB1".equals(fieldName)) {
+                            propB1 = reader.getStringValue();
+                        } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                                fieldName = reader.getFieldName();
+                                reader.nextToken();
+
+                                if ("propBH1".equals(fieldName)) {
+                                    propBH1 = reader.getStringValue();
+                                } else {
+                                    reader.skipChildren();
+                                }
+                            }
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+
+                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "MyBaseType")) {
+                        throw new IllegalStateException(
+                                "'kind' was expected to be non-null and equal to 'MyBaseType'. The found 'kind' was '"
+                                        + discriminatorProperty
+                                        + "'.");
+                    }
+
+                    MyBaseType deserializedValue = new MyBaseType();
+                    deserializedValue.setPropB1(propB1);
+                    deserializedValue.setPropBH1(propBH1);
+
+                    return deserializedValue;
+                });
     }
 }

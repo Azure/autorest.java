@@ -5,35 +5,18 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.serializer.JsonUtils;
+import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 
 /** The Pet model. */
 @Fluent
 public class Pet implements JsonSerializable<Pet> {
-    private Integer id;
-
     private String name;
 
-    /**
-     * Get the id property: The id property.
-     *
-     * @return the id value.
-     */
-    public Integer getId() {
-        return this.id;
-    }
-
-    /**
-     * Set the id property: The id property.
-     *
-     * @param id the id value to set.
-     * @return the Pet object itself.
-     */
-    public Pet setId(Integer id) {
-        this.id = id;
-        return this;
-    }
+    private Integer id;
 
     /**
      * Get the name property: The name property.
@@ -56,6 +39,26 @@ public class Pet implements JsonSerializable<Pet> {
     }
 
     /**
+     * Get the id property: The id property.
+     *
+     * @return the id value.
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    /**
+     * Set the id property: The id property.
+     *
+     * @param id the id value to set.
+     * @return the Pet object itself.
+     */
+    public Pet setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -65,5 +68,31 @@ public class Pet implements JsonSerializable<Pet> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         return jsonWriter.flush();
+    }
+
+    public static Pet fromJson(JsonReader jsonReader) {
+        return JsonUtils.readObject(
+                jsonReader,
+                reader -> {
+                    String name = null;
+                    Integer id = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = reader.getStringValue();
+                        } else if ("id".equals(fieldName)) {
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    Pet deserializedValue = new Pet();
+                    deserializedValue.setName(name);
+                    deserializedValue.setId(id);
+
+                    return deserializedValue;
+                });
     }
 }

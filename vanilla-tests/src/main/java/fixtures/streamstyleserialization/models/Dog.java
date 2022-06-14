@@ -37,15 +37,15 @@ public final class Dog extends Pet {
 
     /** {@inheritDoc} */
     @Override
-    public Dog setName(String name) {
-        super.setName(name);
+    public Dog setId(Integer id) {
+        super.setId(id);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Dog setId(Integer id) {
-        super.setId(id);
+    public Dog setName(String name) {
+        super.setName(name);
         return this;
     }
 
@@ -68,17 +68,17 @@ public final class Dog extends Pet {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    String name = null;
                     Integer id = null;
+                    String name = null;
                     String food = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
-                        } else if ("id".equals(fieldName)) {
+                        if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                        } else if ("name".equals(fieldName)) {
+                            name = reader.getStringValue();
                         } else if ("food".equals(fieldName)) {
                             food = reader.getStringValue();
                         } else {
@@ -86,8 +86,8 @@ public final class Dog extends Pet {
                         }
                     }
                     Dog deserializedValue = new Dog();
-                    deserializedValue.setName(name);
                     deserializedValue.setId(id);
+                    deserializedValue.setName(name);
                     deserializedValue.setFood(food);
 
                     return deserializedValue;

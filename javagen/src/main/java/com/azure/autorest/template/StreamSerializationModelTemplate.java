@@ -17,9 +17,11 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JsonUtils;
+import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -55,6 +57,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(JsonSerializable.class.getName());
         imports.add(JsonWriter.class.getName());
         imports.add(JsonReader.class.getName());
+        imports.add(DefaultJsonReader.class.getName());
         imports.add(JsonToken.class.getName());
         imports.add(JsonUtils.class.getName());
 
@@ -118,8 +121,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Writes the fromJson(JsonReader) implementation.
      */
     private static void writeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+        boolean hasPolymorphicDiscriminator = !CoreUtils.isNullOrEmpty(model.getPolymorphicDiscriminator());
         boolean isSuperType = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
-        boolean isSubType = !CoreUtils.isNullOrEmpty(model.getParentModelName());
 
         // All classes will create a public fromJson(JsonReader) method that initiates reading.
         // How the implementation looks depends on whether the type is a super type, subtype, both, or is a
@@ -143,116 +146,143 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // In a real scenario someone deserializing to Salmon should have an exception about discriminator types
         // if the JSON payload is a Shark and not get a ClassCastException as it'd be more confusing on why a Shark
         // was trying to be converted to a Salmon.
-        if (!isSuperType && !isSubType) {
-            writeSimpleTypeFromJson(classBlock, model, settings);
-        } else if (isSuperType && isSubType) {
-            writeIntermediateTypeFromJson(classBlock, model, settings);
-        } else if (isSuperType) {
+        if (isSuperType && hasPolymorphicDiscriminator) {
             writeSuperTypeFromJson(classBlock, model, settings);
         } else {
-            writeSubTypeFromJson(classBlock, model, settings);
+            writeTerminalTypeFromJson(classBlock, model, settings);
         }
     }
 
     /**
-     * Writes a simple type's {@code fromJson(JsonReader)} method.
-     * <p>
-     * A simple model is one that doesn't have a super type and isn't a super type, therefore it only needs to worry
-     * about properties that it has defined itself.
-     *
-     * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
-     * @param model The Autorest representation of the model.
-     * @param settings The Autorest generation settings.
-     */
-    private static void writeSimpleTypeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
-        PropertiesManager propertiesManager = new PropertiesManager(model);
-
-        readObject(classBlock, model.getName(), methodBlock -> {
-            // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager);
-
-            // Add the outermost while loop to read the JSON object.
-            addReaderWhileLoop(methodBlock, true, whileBlock -> {
-                JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock, propertiesManager.discriminatorProperty);
-
-                // Loop over all properties and generate their deserialization handling.
-                ifBlock = handlePropertiesDeserialization(propertiesManager.requiredProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.setterProperties, whileBlock, ifBlock);
-
-                handleFlattenedPropertiesDeserialization(propertiesManager.flattenedPropertiesStructure, methodBlock,
-                    ifBlock, propertiesManager.additionalProperties);
-
-                // All properties have been checked for, add an else block that will either ignore unknown properties
-                // or add them into an additional properties bag.
-                handleUnknownFieldDeserialization(whileBlock, ifBlock, propertiesManager.additionalProperties);
-            });
-        }, returnBlock -> handleJsonReadReturn(returnBlock, model.getName(), propertiesManager, settings));
-    }
-
-    /**
-     * Writes an intermediate type's {@code fromJson(JsonReader)} method.
-     * <p>
-     * An intermediate model is one that is both a super type and a subtype. Intermediate models need to worry about
-     * both being called from its super type if the type is determined to be it and calling to its subtypes if the type
-     * is determined to be one of its subtypes.
-     *
-     * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
-     * @param model The Autorest representation of the model.
-     * @param settings The Autorest generation settings.
-     */
-    private static void writeIntermediateTypeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
-
-    }
-
-    /**
      * Writes a super type's {@code fromJson(JsonReader)} method.
-     * <p>
-     * A super type model is one that is a super type and isn't a subtype. Super type models need to worry about calling
-     * into its subtypes if the type is determined to be one of its subtypes.
      *
      * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
      * @param model The Autorest representation of the model.
      * @param settings The Autorest generation settings.
      */
     private static void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+        readObject(classBlock, model.getName(), false, methodBlock -> {
+            methodBlock.line("String discriminatorValue = null;");
+            methodBlock.line("JsonReader readerToUse = null;");
+            methodBlock.line();
+            methodBlock.line("// Read the first field name and determine if it's the discriminator field.");
+            methodBlock.line("reader.nextToken();");
+            methodBlock.ifBlock("\"" + model.getPolymorphicDiscriminator() + "\".equals(reader.getFieldName())",
+                ifBlock -> {
+                    ifBlock.line("reader.nextToken();");
+                    ifBlock.line("discriminatorValue = reader.getStringValue();");
+                    ifBlock.line("readerToUse = reader;");
+                }).elseBlock(elseBlock -> {
+                    elseBlock.line("// If it isn't the discriminator field buffer the JSON structure to make it");
+                    elseBlock.line("// replayable and find the discriminator field value.");
+                    elseBlock.line("String json = JsonUtils.bufferJsonObject(reader);");
+                    elseBlock.line("JsonReader replayReader = DefaultJsonReader.fromString(json);");
+                    elseBlock.line("while (replayReader.nextToken() != JsonToken.END_OBJECT) {");
+                    elseBlock.indent(() -> {
+                        elseBlock.line("String fieldName = replayReader.getFieldName();");
+                        elseBlock.line("replayReader.nextToken();");
+                        elseBlock.ifBlock("\"" + model.getPolymorphicDiscriminator() + "\".equals(fieldName)", ifBlock -> {
+                            ifBlock.line("discriminatorValue = replayReader.getStringValue();");
+                            ifBlock.line("break;");
+                        }).elseBlock(elseBlock2 -> elseBlock2.line("replayReader.skipChildren();"));
+                    });
+                    elseBlock.line("}");
+                    elseBlock.ifBlock("discriminatorValue != null", ifBlock ->
+                        ifBlock.line("readerToUse = DefaultJsonReader.fromString(json);"));
+                });
 
+            methodBlock.line("// Use the discriminator value to determine which subtype should be deserialized.");
+
+            // Add a throw statement if the discriminator value didn't match anything known.
+            StringBuilder exceptionMessage = new StringBuilder("Discriminator field '")
+                .append(model.getPolymorphicDiscriminator())
+                .append("' was present and didn't match one of the expected values '")
+                .append(model.getSerializedName())
+                .append("'");
+
+            // Add deserialization for the super type itself.
+            JavaIfBlock ifBlock = methodBlock.ifBlock(
+                "discriminatorValue == null || \"" + model.getSerializedName() + "\".equals(discriminatorValue)",
+                ifStatement -> ifStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse)"));
+
+            // Add deserialization for all child types.
+            List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
+            for (int i = 0; i < childTypes.size() - 1; i++) {
+                ClientModel childType = childTypes.get(i);
+
+                String condition = "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)";
+                String returnStatement = childType.getName() + ".fromJson(readerToUse)";
+                ifBlock = ifBlock.elseIfBlock(condition, ifStatement -> ifStatement.methodReturn(returnStatement));
+
+                if (i < childTypes.size() - 2) {
+                    exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
+                } else {
+                    exceptionMessage.append(", or '").append(childType.getSerializedName())
+                        .append("'. It was: '\" + discriminatorValue + \"'.");
+                }
+            }
+
+            ifBlock.elseBlock(elseBlock -> elseBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");"));
+        });
+
+        readObject(classBlock, model.getName(), true,
+            methodBlock -> writeFromJsonDeserialization(model, methodBlock, settings));
+    }
+
+    private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
+        for (ClientModel childType : model.getDerivedModels()) {
+            childTypes.add(childType);
+            if (!CoreUtils.isNullOrEmpty(childType.getDerivedModels())) {
+                getAllChildTypes(childType, childTypes);
+            }
+        }
+
+        return childTypes;
     }
 
     /**
-     * Writes a subtype's {@code fromJson(JsonReader)} method.
+     * Writes a terminal type's {@code fromJson(JsonReader)} method.
      * <p>
-     * A subtype model is one that isn't a super type and has a super type, therefore. Subtype models need to worry
-     * about being called by its super type if the type is determined to be it.
+     * A terminal type is either a type without polymorphism or is the terminal type in a polymorphic hierarchy.
      *
      * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
      * @param model The Autorest representation of the model.
      * @param settings The Autorest generation settings.
      */
-    private static void writeSubTypeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
-        PropertiesManager propertiesManager = new PropertiesManager(model);
+    private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+        readObject(classBlock, model.getName(), false,
+            methodBlock -> writeFromJsonDeserialization(model, methodBlock, settings));
+    }
 
-        readObject(classBlock, model.getName(), methodBlock -> {
+    private static void writeFromJsonDeserialization(ClientModel model, JavaBlock methodBlock, JavaSettings settings) {
+        PropertiesManager properties = new PropertiesManager(model);
+
+        // Add the deserialization logic.
+        methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager);
+            initializeLocalVariables(methodBlock, properties);
 
             // Add the outermost while loop to read the JSON object.
             addReaderWhileLoop(methodBlock, true, whileBlock -> {
-                JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock, propertiesManager.discriminatorProperty);
+                JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock, properties.discriminatorProperty);
 
                 // Loop over all properties and generate their deserialization handling.
-                ifBlock = handlePropertiesDeserialization(propertiesManager.superRequiredProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.superSetterProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.requiredProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.setterProperties, whileBlock, ifBlock);
+                ifBlock = handlePropertiesDeserialization(properties.superRequiredProperties, whileBlock, ifBlock);
+                ifBlock = handlePropertiesDeserialization(properties.superSetterProperties, whileBlock, ifBlock);
+                ifBlock = handlePropertiesDeserialization(properties.requiredProperties, whileBlock, ifBlock);
+                ifBlock = handlePropertiesDeserialization(properties.setterProperties, whileBlock, ifBlock);
 
-                handleFlattenedPropertiesDeserialization(propertiesManager.flattenedPropertiesStructure, methodBlock,
-                    ifBlock, propertiesManager.additionalProperties);
+                handleFlattenedPropertiesDeserialization(properties.flattenedPropertiesStructure, methodBlock,
+                    ifBlock, properties.additionalProperties);
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties
                 // or add them into an additional properties bag.
-                handleUnknownFieldDeserialization(whileBlock, ifBlock, propertiesManager.additionalProperties);
+                handleUnknownFieldDeserialization(whileBlock, ifBlock, properties.additionalProperties);
             });
-        }, returnBlock -> handleJsonReadReturn(returnBlock, model.getName(), propertiesManager, settings));
+        });
+
+        // Add the validation and return logic.
+        handleJsonReadReturn(methodBlock, model.getName(), properties, settings);
     }
 
     /**
@@ -331,9 +361,27 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         return structure;
     }
 
-    private static void readObject(JavaClass classBlock, String modelName,
-        Consumer<JavaBlock> deserializationBlock, Consumer<JavaBlock> validationAndReturnBlock) {
-        classBlock.publicStaticMethod(modelName + " fromJson(JsonReader jsonReader)", methodBlock -> {
+    /**
+     * Adds a static method to the class with the signature that handles reading the JSON string into the object type.
+     * <p>
+     * If {@code superTypeReading} is true the method will be package-private and named
+     * {@code fromJsonWithKnownDiscriminator} instead of being public and named {@code fromJson}. This is done as super
+     * types use their {@code fromJson} method to determine the discriminator value and pass the reader to the specific
+     * type being deserialized. The specific type being deserialized may be the super type itself, so it cannot pass
+     * to {@code fromJson} as this will be a circular call and if the specific type being deserialized is an
+     * intermediate type (a type having both super and subclasses) it will attempt to perform discriminator validation
+     * which has already been done.
+     *
+     * @param classBlock The class where the {@code fromJson} method is being written.
+     * @param modelName The name of the class.
+     * @param superTypeReading Whether the object reading is for a super type.
+     * @param deserializationBlock Logic for deserializing the object.
+     */
+    private static void readObject(JavaClass classBlock, String modelName, boolean superTypeReading,
+        Consumer<JavaBlock> deserializationBlock) {
+        JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
+        String methodName = superTypeReading ? "fromJsonKnownDiscriminator" : "fromJson";
+        classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader)", methodBlock -> {
             // For now, use the basic JsonUtils.readObject which will return null if the JsonReader is pointing
             // to JsonToken.NULL.
             //
@@ -341,11 +389,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // from a JSON value instead of JSON object or are an array type.
             methodBlock.line("return JsonUtils.readObject(jsonReader, reader -> {");
 
-            // Add the deserialization logic.
-            methodBlock.indent(() -> deserializationBlock.accept(methodBlock));
-
-            // Add the validation and return logic.
-            validationAndReturnBlock.accept(methodBlock);
+            deserializationBlock.accept(methodBlock);
 
             methodBlock.line("});");
         });
@@ -676,32 +720,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line();
         }
 
-        StringBuilder constructorArgs = new StringBuilder(
-            (propertiesManager.requiredProperties.size() + propertiesManager.superRequiredProperties.size()) * 64);
-
+        StringBuilder constructorArgs = new StringBuilder();
         propertiesManager.superRequiredProperties.stream().map(ClientModelProperty::getName)
-            .forEach(arg -> {
-                if (constructorArgs.length() > 0) {
-                    constructorArgs.append(", ");
-                }
-                constructorArgs.append(arg);
-            });
-
+            .forEach(arg -> addConstructorParameter(constructorArgs, arg));
         propertiesManager.requiredProperties.stream().map(ClientModelProperty::getName)
-            .forEach(arg -> {
-                if (constructorArgs.length() > 0) {
-                    constructorArgs.append(", ");
-                }
-                constructorArgs.append(arg);
-            });
+            .forEach(arg -> addConstructorParameter(constructorArgs, arg));
 
         // If there are required properties of any type we must check that all required fields were found.
         if (!CoreUtils.isNullOrEmpty(propertiesManager.superRequiredProperties) || !CoreUtils.isNullOrEmpty(propertiesManager.requiredProperties)) {
             methodBlock.line("List<String> missingProperties = new ArrayList<>();");
-            propertiesManager.superRequiredProperties.forEach(property -> methodBlock.ifBlock("!" + property.getName() + "Found",
-                ifAction -> ifAction.line("missingProperties.add(\"" + property.getSerializedName() + "\");")));
-            propertiesManager.requiredProperties.forEach(property -> methodBlock.ifBlock("!" + property.getName() + "Found",
-                ifAction -> ifAction.line("missingProperties.add(\"" + property.getSerializedName() + "\");")));
+            propertiesManager.superRequiredProperties.forEach(property -> addFoundValidationIfCheck(methodBlock, property));
+            propertiesManager.requiredProperties.forEach(property -> addFoundValidationIfCheck(methodBlock, property));
 
             methodBlock.line();
             methodBlock.ifBlock("!CoreUtils.isNullOrEmpty(missingProperties)", ifAction ->
@@ -716,6 +745,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         methodBlock.line();
         methodBlock.methodReturn("deserializedValue");
+    }
+
+    private static void addConstructorParameter(StringBuilder constructor, String parameterName) {
+        if (constructor.length() > 0) {
+            constructor.append(", ");
+        }
+
+        constructor.append(parameterName);
+    }
+
+    private static void addFoundValidationIfCheck(JavaBlock methodBlock, ClientModelProperty property) {
+        methodBlock.ifBlock("!" + property.getName() + "Found",
+            ifAction -> ifAction.line("missingProperties.add(\"" + property.getSerializedName() + "\");"));
     }
 
     private static void handleSettingDeserializedValue(JavaBlock methodBlock, ClientModelProperty property,
@@ -733,8 +775,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Helper class to manage properties in the model and how they correlate with serialization and deserialization.
      * <p>
      * This will bucket all properties, and super type properties, into the buckets of required, optional, and
-     * additional properties. In addition to bucketing, each property will be checked if it requires flattening and
-     * be used to generate the flattened properties structure for the model.
+     * additional properties. In addition to bucketing, each property will be checked if it requires flattening and be
+     * used to generate the flattened properties structure for the model.
      * <p>
      * This will also handle getting the discriminator property and the expected value for the field.
      */
