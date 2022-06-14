@@ -32,7 +32,6 @@ public class SchemaUtil {
     private SchemaUtil() {
     }
 
-    // TODO: P3 support multiple inheritance
     public static Schema getLowestCommonParent(List<Schema> schemas) {
         if (schemas == null || schemas.isEmpty()) {
             return null;

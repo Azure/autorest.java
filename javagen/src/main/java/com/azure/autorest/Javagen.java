@@ -253,7 +253,9 @@ public class Javagen extends NewPlugin {
         // Unit tests on client model
         if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
             for (ClientModel model : client.getModels()) {
-                javaPackage.addModelUnitTest(model);
+                if (!(settings.isCustomStronglyTypedHeaderDeserializationUsed() && model.isStronglyTypedHeader())) {
+                    javaPackage.addModelUnitTest(model);
+                }
             }
         }
 
