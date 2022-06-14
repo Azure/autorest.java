@@ -112,7 +112,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         // add allowed enum values
         if (settings.isDataPlaneClient() && parameterRequestLocation != RequestParameterLocation.BODY && Mappers.getSchemaMapper().map(parameterJvWireType) instanceof EnumType) {
-            description += ". ";
+            if (description.endsWith(".")) {
+                description += " ";
+            } else {
+                description += ". ";
+            }
             description += MethodUtil.buildAllowedEnumValues(parameter);
         }
         builder.description(description);
