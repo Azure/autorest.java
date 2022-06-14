@@ -93,7 +93,7 @@ public class DotSalmon extends DotFish {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("fish\\.type")) {
+                        if ("fish\\.type".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {

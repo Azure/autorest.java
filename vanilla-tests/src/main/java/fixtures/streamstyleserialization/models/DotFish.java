@@ -85,9 +85,13 @@ public class DotFish implements JsonSerializable<DotFish> {
                     // Use the discriminator value to determine which subtype should be deserialized.
                     if (discriminatorValue == null || "DotFish".equals(discriminatorValue)) {
                         return fromJsonKnownDiscriminator(readerToUse);
+                    } else if ("DotSalmon".equals(discriminatorValue)) {
+                        return DotSalmon.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fish\\.type' was present and didn't match one of the expected values 'DotFish'");
+                                "Discriminator field 'fish\\.type' was present and didn't match one of the expected values 'DotFish', or 'DotSalmon'. It was: '"
+                                        + discriminatorValue
+                                        + "'.");
                     }
                 });
     }
@@ -103,7 +107,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("fish\\.type")) {
+                        if ("fish\\.type".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {

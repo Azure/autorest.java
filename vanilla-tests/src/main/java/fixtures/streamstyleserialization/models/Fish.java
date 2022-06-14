@@ -144,9 +144,11 @@ public class Fish implements JsonSerializable<Fish> {
                         return Sawshark.fromJson(readerToUse);
                     } else if ("goblin".equals(discriminatorValue)) {
                         return Goblinshark.fromJson(readerToUse);
+                    } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                        return Cookiecuttershark.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'Fish', 'salmon', 'smart_salmon', 'shark', 'sawshark', or 'goblin'. It was: '"
+                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'Fish', 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }
@@ -167,7 +169,7 @@ public class Fish implements JsonSerializable<Fish> {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("fishtype")) {
+                        if ("fishtype".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {

@@ -107,9 +107,13 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                     // Use the discriminator value to determine which subtype should be deserialized.
                     if (discriminatorValue == null || "MyBaseType".equals(discriminatorValue)) {
                         return fromJsonKnownDiscriminator(readerToUse);
+                    } else if ("Kind1".equals(discriminatorValue)) {
+                        return MyDerivedType.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'kind' was present and didn't match one of the expected values 'MyBaseType'");
+                                "Discriminator field 'kind' was present and didn't match one of the expected values 'MyBaseType', or 'Kind1'. It was: '"
+                                        + discriminatorValue
+                                        + "'.");
                     }
                 });
     }
@@ -126,7 +130,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("kind")) {
+                        if ("kind".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {

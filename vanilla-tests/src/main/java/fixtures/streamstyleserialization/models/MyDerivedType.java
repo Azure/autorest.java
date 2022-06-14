@@ -78,7 +78,7 @@ public final class MyDerivedType extends MyBaseType {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("kind")) {
+                        if ("kind".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {

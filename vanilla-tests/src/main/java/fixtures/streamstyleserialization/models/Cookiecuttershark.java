@@ -81,7 +81,7 @@ public final class Cookiecuttershark extends Shark {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("fishtype")) {
+                        if ("fishtype".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {

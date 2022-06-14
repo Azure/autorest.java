@@ -133,7 +133,7 @@ public final class SmartSalmon extends Salmon {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if (fieldName.equals("fishtype")) {
+                        if ("fishtype".equals(fieldName)) {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {

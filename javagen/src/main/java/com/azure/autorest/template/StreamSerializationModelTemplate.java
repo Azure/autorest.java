@@ -207,17 +207,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             // Add deserialization for all child types.
             List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
-            for (int i = 0; i < childTypes.size() - 1; i++) {
+            for (int i = 0; i < childTypes.size(); i++) {
                 ClientModel childType = childTypes.get(i);
 
                 String condition = "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)";
                 String returnStatement = childType.getName() + ".fromJson(readerToUse)";
                 ifBlock = ifBlock.elseIfBlock(condition, ifStatement -> ifStatement.methodReturn(returnStatement));
 
-                if (i < childTypes.size() - 2) {
+                if (i < childTypes.size() - 1) {
                     exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
                 } else {
-                    exceptionMessage.append(", or '").append(childType.getSerializedName())
+                    ((childTypes.size() == 1) ? exceptionMessage.append(" or '") : exceptionMessage.append(", or '"))
+                        .append(childType.getSerializedName())
                         .append("'. It was: '\" + discriminatorValue + \"'.");
                 }
             }
@@ -463,7 +464,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static JavaIfBlock handleDiscriminatorDeserialization(JavaBlock methodBlock,
         String discriminatorProperty) {
         if (!CoreUtils.isNullOrEmpty(discriminatorProperty)) {
-            return methodBlock.ifBlock("fieldName.equals(\"" + discriminatorProperty + "\")",
+            return methodBlock.ifBlock("\"" + discriminatorProperty + "\".equals(fieldName)",
                 ifAction -> {
                     ifAction.line("discriminatorPropertyFound = true;");
                     ifAction.line("discriminatorProperty = reader.getStringValue();");
