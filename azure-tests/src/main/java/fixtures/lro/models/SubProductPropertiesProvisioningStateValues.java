@@ -55,7 +55,11 @@ public final class SubProductPropertiesProvisioningStateValues
         return fromString(name, SubProductPropertiesProvisioningStateValues.class);
     }
 
-    /** @return known SubProductPropertiesProvisioningStateValues values. */
+    /**
+     * Gets known SubProductPropertiesProvisioningStateValues values.
+     *
+     * @return known SubProductPropertiesProvisioningStateValues values.
+     */
     public static Collection<SubProductPropertiesProvisioningStateValues> values() {
         return values(SubProductPropertiesProvisioningStateValues.class);
     }

@@ -10,11 +10,13 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
@@ -75,6 +77,19 @@ public final class LroManager {
     }
 
     /**
+     * Creates an instance of lro service API entry point.
+     *
+     * @param httpPipeline the {@link HttpPipeline} configured with Azure authentication credential.
+     * @param profile the Azure profile for client.
+     * @return the lro service API instance.
+     */
+    public static LroManager authenticate(HttpPipeline httpPipeline, AzureProfile profile) {
+        Objects.requireNonNull(httpPipeline, "'httpPipeline' cannot be null.");
+        Objects.requireNonNull(profile, "'profile' cannot be null.");
+        return new LroManager(httpPipeline, profile, null);
+    }
+
+    /**
      * Gets a Configurable instance that can be used to create LroManager with optional configuration.
      *
      * @return the Configurable instance allowing configurations.
@@ -92,6 +107,7 @@ public final class LroManager {
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
         private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
+        private RetryOptions retryOptions;
         private Duration defaultPollInterval;
 
         private Configurable() {
@@ -153,6 +169,19 @@ public final class LroManager {
         }
 
         /**
+         * Sets the retry options for the HTTP pipeline retry policy.
+         *
+         * <p>This setting has no effect, if retry policy is set via {@link #withRetryPolicy(RetryPolicy)}.
+         *
+         * @param retryOptions the retry options for the HTTP pipeline retry policy.
+         * @return the configurable object itself.
+         */
+        public Configurable withRetryOptions(RetryOptions retryOptions) {
+            this.retryOptions = Objects.requireNonNull(retryOptions, "'retryOptions' cannot be null.");
+            return this;
+        }
+
+        /**
          * Sets the default poll interval, used when service does not provide "Retry-After" header.
          *
          * @param defaultPollInterval the default poll interval.
@@ -198,10 +227,15 @@ public final class LroManager {
                 scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
             }
             if (retryPolicy == null) {
-                retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+                if (retryOptions != null) {
+                    retryPolicy = new RetryPolicy(retryOptions);
+                } else {
+                    retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+                }
             }
             List<HttpPipelinePolicy> policies = new ArrayList<>();
             policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
+            policies.add(new AddHeadersFromContextPolicy());
             policies.add(new RequestIdPolicy());
             policies
                 .addAll(
@@ -232,7 +266,11 @@ public final class LroManager {
         }
     }
 
-    /** @return Resource collection API of LROs. */
+    /**
+     * Gets the resource collection API of LROs.
+     *
+     * @return Resource collection API of LROs.
+     */
     public LROs lROs() {
         if (this.lROs == null) {
             this.lROs = new LROsImpl(clientObject.getLROs(), this);
@@ -240,7 +278,11 @@ public final class LroManager {
         return lROs;
     }
 
-    /** @return Resource collection API of LroRetrys. */
+    /**
+     * Gets the resource collection API of LroRetrys.
+     *
+     * @return Resource collection API of LroRetrys.
+     */
     public LroRetrys lroRetrys() {
         if (this.lroRetrys == null) {
             this.lroRetrys = new LroRetrysImpl(clientObject.getLroRetrys(), this);
@@ -248,7 +290,11 @@ public final class LroManager {
         return lroRetrys;
     }
 
-    /** @return Resource collection API of LrosaDs. */
+    /**
+     * Gets the resource collection API of LrosaDs.
+     *
+     * @return Resource collection API of LrosaDs.
+     */
     public LrosaDs lrosaDs() {
         if (this.lrosaDs == null) {
             this.lrosaDs = new LrosaDsImpl(clientObject.getLrosaDs(), this);
@@ -256,7 +302,11 @@ public final class LroManager {
         return lrosaDs;
     }
 
-    /** @return Resource collection API of LrosCustomHeaders. */
+    /**
+     * Gets the resource collection API of LrosCustomHeaders.
+     *
+     * @return Resource collection API of LrosCustomHeaders.
+     */
     public LrosCustomHeaders lrosCustomHeaders() {
         if (this.lrosCustomHeaders == null) {
             this.lrosCustomHeaders = new LrosCustomHeadersImpl(clientObject.getLrosCustomHeaders(), this);
