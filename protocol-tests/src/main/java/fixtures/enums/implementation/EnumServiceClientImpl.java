@@ -199,7 +199,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: 100, 200, 300.</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
@@ -228,7 +228,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: 100, 200, 300.</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
@@ -255,7 +255,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: 100, 200, 300.</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
@@ -281,10 +281,11 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: test1, test2, test3.</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: test1, test2, test3.
+     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
+     *     "test3".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -307,10 +308,11 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: test1, test2, test3.</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: test1, test2, test3.
+     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
+     *     "test3".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -333,10 +335,11 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: test1, test2, test3.</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: test1, test2, test3.
+     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
+     *     "test3".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -355,7 +358,7 @@ public final class EnumServiceClientImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * String(test1/test2)
+     * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
      * }</pre>
      *
      * @param bodyRequiredEnum body required enum.
@@ -379,7 +382,7 @@ public final class EnumServiceClientImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * String(test1/test2)
+     * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
      * }</pre>
      *
      * @param bodyRequiredEnum body required enum.
@@ -403,7 +406,7 @@ public final class EnumServiceClientImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * String(test1/test2)
+     * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
      * }</pre>
      *
      * @param bodyRequiredEnum body required enum.

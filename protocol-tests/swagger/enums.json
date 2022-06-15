@@ -54,12 +54,12 @@
             "name": "query-non-required-enum",
             "in": "query",
             "required": false,
-            "type": "integer",
+            "type": "string",
             "description": "non required enum with three values",
             "enum": [
-              100,
-              200,
-              300
+              "test1",
+              "test2",
+              "test@</spec.,i`~!&*-al@char/>"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -102,7 +102,7 @@
             "enum": [
               "test1",
               "test2",
-              "test3"
+              "test@</spec.,i`~!&*-al@char/>"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -129,7 +129,8 @@
               "type": "string",
               "enum": [
                 "test1",
-                "test2"
+                "test2",
+                "test@</spec.,i`~!&*-al@char/>"
               ],
               "x-ms-enum": { "modelAsString": false }
             },
