@@ -83,7 +83,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             description = String.format("The %s parameter", name);
         }
         // add allowed enum values
-        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY && Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType) {
+        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
             if (description.endsWith(".")) {
                 description += " ";
             } else {

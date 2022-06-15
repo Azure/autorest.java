@@ -18,6 +18,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
@@ -114,7 +115,13 @@ public class MethodUtil {
         EnumType enumType = (EnumType) Mappers.getSchemaMapper().map(parameter.getSchema());
         List<ClientEnumValue> choices = enumType.getValues();
         if (choices != null && !choices.isEmpty()) {
-            res += choices.stream().map(choice -> choice.getValue()).collect(Collectors.joining(", "));
+            res += choices.stream().map(choice -> {
+                if (enumType.getElementType() == ClassType.String) {
+                    return "\"" + choice.getValue() + "\"";
+                } else {
+                    return choice.getValue();
+                }
+            }).collect(Collectors.joining(", "));
         }
         res += ".";
         return res;
