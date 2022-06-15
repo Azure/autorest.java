@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
@@ -84,12 +83,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         // add allowed enum values
         if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
-            if (description.endsWith(".")) {
-                description += " ";
-            } else {
-                description += ". ";
-            }
-            description += MethodUtil.buildAllowedEnumValues(parameter);
+            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
         }
 
         builder.description(description);

@@ -10,7 +10,6 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
@@ -112,12 +111,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         // add allowed enum values
         if (settings.isDataPlaneClient() && parameterRequestLocation != RequestParameterLocation.BODY) {
-            if (description.endsWith(".")) {
-                description += " ";
-            } else {
-                description += ". ";
-            }
-            description += MethodUtil.buildAllowedEnumValues(parameter);
+            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
         }
         builder.description(description);
 

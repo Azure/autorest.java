@@ -103,15 +103,21 @@ public class MethodUtil {
     }
 
     /**
-     * build the string of allowed values for an enum type parameter
-     * @param parameter an enum type parameter
-     * @return the string of allowed values for this enum type parameter
+     * If the parameter is not enum type, return the description directly, otherwise append the string of allowed values to the description
+     * @param parameter a parameter
+     * @param description parameter description
+     * @return the description that appends the string of allowed values for enum type parameter
      */
-    public static String buildAllowedEnumValues(Parameter parameter) {
+    public static String appendAllowedEnumValuesForEnumType(Parameter parameter, String description) {
         if (parameter.getSchema() == null || !(Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType)) {
-            return "";
+            return description;
         }
-        String res = "Allowed values: ";
+        String res = "";
+        if (description.endsWith(".")) {
+            res = description + " Allowed values: ";
+        } else {
+            res = description + ". Allowed values: ";
+        }
         EnumType enumType = (EnumType) Mappers.getSchemaMapper().map(parameter.getSchema());
         List<ClientEnumValue> choices = enumType.getValues();
         if (choices != null && !choices.isEmpty()) {
