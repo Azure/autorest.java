@@ -56,7 +56,10 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("id", this.id, false);
+        jsonWriter.writeIntegerField("size", this.size, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static ReadonlyObj fromJson(JsonReader jsonReader) {
@@ -70,7 +73,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getStringValue();
+                            id = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("size".equals(fieldName)) {
                             size = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else {

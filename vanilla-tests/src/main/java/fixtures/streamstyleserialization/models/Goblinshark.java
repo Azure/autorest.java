@@ -105,7 +105,17 @@ public final class Goblinshark extends Shark {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "goblin");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeIntegerField("age", getAge(), false);
+        jsonWriter.writeIntegerField("jawsize", this.jawsize, false);
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString(), false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Goblinshark fromJson(JsonReader jsonReader) {
@@ -139,15 +149,19 @@ public final class Goblinshark extends Shark {
                                             reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("age".equals(fieldName)) {
                             age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("jawsize".equals(fieldName)) {
                             jawsize = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("color".equals(fieldName)) {
-                            color = GoblinSharkColor.fromString(reader.getStringValue());
+                            color =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> GoblinSharkColor.fromString(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

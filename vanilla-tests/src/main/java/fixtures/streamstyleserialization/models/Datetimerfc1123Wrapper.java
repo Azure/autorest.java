@@ -83,7 +83,10 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
+        jsonWriter.writeStringField("now", this.now == null ? null : this.now.toString(), false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Datetimerfc1123Wrapper fromJson(JsonReader jsonReader) {

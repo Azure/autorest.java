@@ -76,7 +76,13 @@ public final class Siamese extends Cat {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntegerField("id", getId(), false);
+        jsonWriter.writeStringField("name", getName(), false);
+        jsonWriter.writeStringField("color", getColor(), false);
+        JsonUtils.writeArray(jsonWriter, "hates", getHates(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("breed", this.breed, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Siamese fromJson(JsonReader jsonReader) {
@@ -95,13 +101,15 @@ public final class Siamese extends Cat {
                         if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
+                            color = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("hates".equals(fieldName)) {
-                            hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
+                            hates =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Dog.fromJson(reader)));
                         } else if ("breed".equals(fieldName)) {
-                            breed = reader.getStringValue();
+                            breed = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

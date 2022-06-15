@@ -67,7 +67,10 @@ public class Pet implements JsonSerializable<Pet> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name, false);
+        jsonWriter.writeIntegerField("id", this.id, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Pet fromJson(JsonReader jsonReader) {
@@ -81,7 +84,7 @@ public class Pet implements JsonSerializable<Pet> {
                         reader.nextToken();
 
                         if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else {

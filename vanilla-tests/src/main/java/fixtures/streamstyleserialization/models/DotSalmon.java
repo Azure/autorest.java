@@ -77,7 +77,12 @@ public class DotSalmon extends DotFish {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fish\\.type", "DotSalmon");
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        jsonWriter.writeStringField("location", this.location, false);
+        jsonWriter.writeBooleanField("iswild", this.iswild, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DotSalmon fromJson(JsonReader jsonReader) {
@@ -97,9 +102,9 @@ public class DotSalmon extends DotFish {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getStringValue();
+                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {

@@ -47,14 +47,16 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBinaryField("field", this.field, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static ByteWrapper fromJson(JsonReader jsonReader) {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    byte[] field = new byte[0];
+                    byte[] field = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();

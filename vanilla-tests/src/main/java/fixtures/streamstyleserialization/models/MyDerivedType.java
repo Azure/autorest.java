@@ -62,7 +62,16 @@ public final class MyDerivedType extends MyBaseType {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", "Kind1");
+        jsonWriter.writeStringField("propB1", getPropB1(), false);
+        jsonWriter.writeStringField("propD1", this.propD1, false);
+        if (getPropBH1() != null) {
+            jsonWriter.writeStartObject("helper");
+            jsonWriter.writeStringField("propBH1", getPropBH1(), false);
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static MyDerivedType fromJson(JsonReader jsonReader) {
@@ -82,16 +91,16 @@ public final class MyDerivedType extends MyBaseType {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = reader.getStringValue();
+                            propB1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("propD1".equals(fieldName)) {
-                            propD1 = reader.getStringValue();
+                            propD1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = reader.getStringValue();
+                                    propBH1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                                 } else {
                                     reader.skipChildren();
                                 }

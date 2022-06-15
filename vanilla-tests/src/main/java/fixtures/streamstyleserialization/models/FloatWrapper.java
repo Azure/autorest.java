@@ -67,7 +67,10 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeFloatField("field1", this.field1, false);
+        jsonWriter.writeFloatField("field2", this.field2, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static FloatWrapper fromJson(JsonReader jsonReader) {

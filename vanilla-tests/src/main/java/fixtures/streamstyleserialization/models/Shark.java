@@ -96,7 +96,15 @@ public class Shark extends Fish {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "shark");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("birthday", this.birthday == null ? null : this.birthday.toString(), false);
+        jsonWriter.writeIntegerField("age", this.age, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Shark fromJson(JsonReader jsonReader) {
@@ -173,9 +181,11 @@ public class Shark extends Fish {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("birthday".equals(fieldName)) {
                             birthday =
                                     JsonUtils.getNullableProperty(

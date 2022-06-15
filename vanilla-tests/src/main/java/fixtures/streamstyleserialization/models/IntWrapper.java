@@ -67,7 +67,10 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntegerField("field1", this.field1, false);
+        jsonWriter.writeIntegerField("field2", this.field2, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static IntWrapper fromJson(JsonReader jsonReader) {

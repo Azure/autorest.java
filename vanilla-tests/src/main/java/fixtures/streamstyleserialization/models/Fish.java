@@ -96,7 +96,13 @@ public class Fish implements JsonSerializable<Fish> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "Fish");
+        jsonWriter.writeFloatField("length", this.length);
+        jsonWriter.writeStringField("species", this.species, false);
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", this.siblings, (writer, element) -> writer.writeJson(element, false));
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Fish fromJson(JsonReader jsonReader) {
@@ -135,11 +141,11 @@ public class Fish implements JsonSerializable<Fish> {
                     if (discriminatorValue == null || "Fish".equals(discriminatorValue)) {
                         return fromJsonKnownDiscriminator(readerToUse);
                     } else if ("salmon".equals(discriminatorValue)) {
-                        return Salmon.fromJson(readerToUse);
+                        return Salmon.fromJsonKnownDiscriminator(readerToUse);
                     } else if ("smart_salmon".equals(discriminatorValue)) {
                         return SmartSalmon.fromJson(readerToUse);
                     } else if ("shark".equals(discriminatorValue)) {
-                        return Shark.fromJson(readerToUse);
+                        return Shark.fromJsonKnownDiscriminator(readerToUse);
                     } else if ("sawshark".equals(discriminatorValue)) {
                         return Sawshark.fromJson(readerToUse);
                     } else if ("goblin".equals(discriminatorValue)) {
@@ -176,9 +182,11 @@ public class Fish implements JsonSerializable<Fish> {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else {
                             reader.skipChildren();
                         }

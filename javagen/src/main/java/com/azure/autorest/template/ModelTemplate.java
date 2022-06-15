@@ -805,42 +805,30 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
 
-        boolean needsToBeGuardedAgainstNull = false;
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
-            needsToBeGuardedAgainstNull = wireType == ClassType.Boolean;
             setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Double || wireType == ClassType.Double) {
-            needsToBeGuardedAgainstNull = wireType == ClassType.Double;
             setter = String.format("Double.parseDouble(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Float || wireType == ClassType.Float) {
-            needsToBeGuardedAgainstNull = wireType == ClassType.Float;
             setter = String.format("Float.parseFloat(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Int || wireType == ClassType.Integer) {
-            needsToBeGuardedAgainstNull = wireType == ClassType.Integer;
             setter = String.format("Integer.parseInt(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
-            needsToBeGuardedAgainstNull = wireType == ClassType.Long;
             setter = String.format("Long.parseLong(%s)", rawHeaderAccess);
         } else if (wireType == ArrayType.ByteArray) {
-            needsToBeGuardedAgainstNull = true;
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.String) {
             setter = rawHeaderAccess;
         } else if (wireType == ClassType.DateTimeRfc1123) {
-            needsToBeGuardedAgainstNull = true;
             setter = String.format("new DateTimeRfc1123(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.DateTime) {
-            needsToBeGuardedAgainstNull = true;
             setter = String.format("OffsetDateTime.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.LocalDate) {
-            needsToBeGuardedAgainstNull = true;
             setter = String.format("LocalDate.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Duration) {
-            needsToBeGuardedAgainstNull = true;
             setter = String.format("Duration.parse(%s)", rawHeaderAccess);
         } else if (wireType instanceof EnumType) {
-            needsToBeGuardedAgainstNull = true;
             EnumType enumType = (EnumType) wireType;
             setter = String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
@@ -848,7 +836,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 property.getSerializedName(), getWireTypeJavaType(wireType));
         }
 
-        if (needsToBeGuardedAgainstNull) {
+        // String is special as the setter is null safe for it, unlike other nullable types.
+        if (wireType.isNullable() && wireType != ClassType.String) {
             javaBlock.ifBlock(String.format("%s != null", rawHeaderAccess),
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {

@@ -72,7 +72,13 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeDoubleField("field1", this.field1, false);
+        jsonWriter.writeDoubleField(
+                "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose",
+                this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose,
+                false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DoubleWrapper fromJson(JsonReader jsonReader) {

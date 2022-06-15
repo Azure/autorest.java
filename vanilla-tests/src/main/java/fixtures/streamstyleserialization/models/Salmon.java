@@ -97,7 +97,15 @@ public class Salmon extends Fish {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "salmon");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("location", this.location, false);
+        jsonWriter.writeBooleanField("iswild", this.iswild, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Salmon fromJson(JsonReader jsonReader) {
@@ -139,7 +147,7 @@ public class Salmon extends Fish {
                         return SmartSalmon.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'salmon', or 'smart_salmon'. It was: '"
+                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'salmon' or 'smart_salmon'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }
@@ -169,11 +177,13 @@ public class Salmon extends Fish {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getStringValue();
+                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {

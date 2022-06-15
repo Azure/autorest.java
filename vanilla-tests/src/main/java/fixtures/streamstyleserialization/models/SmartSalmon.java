@@ -112,7 +112,23 @@ public final class SmartSalmon extends Salmon {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "smart_salmon");
+        jsonWriter.writeFloatField("length", getLength());
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        jsonWriter.writeStringField("location", getLocation(), false);
+        jsonWriter.writeBooleanField("iswild", iswild(), false);
+        jsonWriter.writeStringField("college_degree", this.collegeDegree, false);
+        if (additionalProperties != null) {
+            additionalProperties.forEach(
+                    (key, value) -> {
+                        jsonWriter.writeFieldName(key);
+                        JsonUtils.writeUntypedField(jsonWriter, value);
+                    });
+        }
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static SmartSalmon fromJson(JsonReader jsonReader) {
@@ -140,15 +156,17 @@ public final class SmartSalmon extends Salmon {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getStringValue();
+                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else if ("college_degree".equals(fieldName)) {
-                            collegeDegree = reader.getStringValue();
+                            collegeDegree = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             if (additionalProperties == null) {
                                 additionalProperties = new LinkedHashMap<>();

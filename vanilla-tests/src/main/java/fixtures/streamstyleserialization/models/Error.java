@@ -67,7 +67,10 @@ public final class Error implements JsonSerializable<Error> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntegerField("status", this.status, false);
+        jsonWriter.writeStringField("message", this.message, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Error fromJson(JsonReader jsonReader) {
@@ -83,7 +86,7 @@ public final class Error implements JsonSerializable<Error> {
                         if ("status".equals(fieldName)) {
                             status = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("message".equals(fieldName)) {
-                            message = reader.getStringValue();
+                            message = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

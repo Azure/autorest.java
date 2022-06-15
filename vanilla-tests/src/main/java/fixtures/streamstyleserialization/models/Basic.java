@@ -91,7 +91,11 @@ public final class Basic implements JsonSerializable<Basic> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntegerField("id", this.id, false);
+        jsonWriter.writeStringField("name", this.name, false);
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString(), false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Basic fromJson(JsonReader jsonReader) {
@@ -108,9 +112,11 @@ public final class Basic implements JsonSerializable<Basic> {
                         if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("color".equals(fieldName)) {
-                            color = CMYKColors.fromString(reader.getStringValue());
+                            color =
+                                    JsonUtils.getNullableProperty(
+                                            reader, r -> CMYKColors.fromString(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }

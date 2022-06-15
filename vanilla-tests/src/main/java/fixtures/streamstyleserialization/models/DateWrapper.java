@@ -68,7 +68,10 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
+        jsonWriter.writeStringField("leap", this.leap == null ? null : this.leap.toString(), false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DateWrapper fromJson(JsonReader jsonReader) {

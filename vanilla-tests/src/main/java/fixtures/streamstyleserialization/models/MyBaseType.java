@@ -69,7 +69,15 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", "MyBaseType");
+        jsonWriter.writeStringField("propB1", this.propB1, false);
+        if (propBH1 != null) {
+            jsonWriter.writeStartObject("helper");
+            jsonWriter.writeStringField("propBH1", this.propBH1, false);
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static MyBaseType fromJson(JsonReader jsonReader) {
@@ -111,7 +119,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                         return MyDerivedType.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'kind' was present and didn't match one of the expected values 'MyBaseType', or 'Kind1'. It was: '"
+                                "Discriminator field 'kind' was present and didn't match one of the expected values 'MyBaseType' or 'Kind1'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }
@@ -134,14 +142,14 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = reader.getStringValue();
+                            propB1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = reader.getStringValue();
+                                    propBH1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                                 } else {
                                     reader.skipChildren();
                                 }

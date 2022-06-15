@@ -84,7 +84,16 @@ public final class Sawshark extends Shark {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "sawshark");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
+        JsonUtils.writeArray(
+                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("species", getSpecies(), false);
+        jsonWriter.writeIntegerField("age", getAge(), false);
+        jsonWriter.writeBinaryField("picture", this.picture, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Sawshark fromJson(JsonReader jsonReader) {
@@ -100,7 +109,7 @@ public final class Sawshark extends Shark {
                     List<Fish> siblings = null;
                     String species = null;
                     Integer age = null;
-                    byte[] picture = new byte[0];
+                    byte[] picture = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
@@ -117,9 +126,11 @@ public final class Sawshark extends Shark {
                                             reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = JsonUtils.readArray(reader, r -> Fish.fromJson(reader));
+                            siblings =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("age".equals(fieldName)) {
                             age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("picture".equals(fieldName)) {

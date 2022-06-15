@@ -15,21 +15,21 @@ public class EnumType implements IType {
     /**
      * The name of the new Enum.
      */
-    private String name;
+    private final String name;
     /**
      * The package that this enumeration belongs to.
      */
-    private String packageName;
+    private final String packageName;
     /**
      * Whether this will be an ExpandableStringEnum type.
      */
-    private boolean expandable;
+    private final boolean expandable;
     /**
      * The values of the Enum.
      */
-    private List<ClientEnumValue> values;
+    private final List<ClientEnumValue> values;
 
-    private IType elementType;
+    private final IType elementType;
 
     /**
      * Create a new Enum with the provided properties.
@@ -73,6 +73,10 @@ public class EnumType implements IType {
         imports.add("java.util.stream.Collectors");
     }
 
+    public final boolean isNullable() {
+        return expandable;
+    }
+
     public final IType asNullable() {
         return this;
     }
@@ -91,7 +95,9 @@ public class EnumType implements IType {
                     return String.format("%1$s.%2$s", getName(), enumValue.getName());
                 }
             }
-            return String.format("%1$s.from%2$s(%3$s)", getName(), CodeNamer.toPascalCase(this.getElementType().toString()), this.getElementType().defaultValueExpression(sourceExpression));
+            return String.format("%1$s.from%2$s(%3$s)", getName(),
+                CodeNamer.toPascalCase(this.getElementType().toString()),
+                this.getElementType().defaultValueExpression(sourceExpression));
         } else {
             for (ClientEnumValue enumValue : this.getValues()) {
                 if (sourceExpression.equals(enumValue.getValue())) {
@@ -139,6 +145,16 @@ public class EnumType implements IType {
 
     public final String validate(String expression) {
         return null;
+    }
+
+    @Override
+    public String streamStyleJsonFieldSerializationMethod() {
+        return "writeStringField";
+    }
+
+    @Override
+    public String streamStyleJsonValueSerializationMethod() {
+        return "writeString";
     }
 
     @Override
@@ -209,13 +225,7 @@ public class EnumType implements IType {
          * @return an immutable EnumType instance with the configurations on this builder.
          */
         public EnumType build() {
-            return new EnumType(
-                    packageName,
-                    name,
-                    expandable,
-                    values,
-                    elementType
-            );
+            return new EnumType(packageName, name, expandable, values, elementType);
         }
     }
 }

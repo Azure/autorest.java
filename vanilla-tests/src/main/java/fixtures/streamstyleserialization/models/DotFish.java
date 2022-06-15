@@ -47,7 +47,10 @@ public class DotFish implements JsonSerializable<DotFish> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fish\\.type", "DotFish");
+        jsonWriter.writeStringField("species", this.species, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DotFish fromJson(JsonReader jsonReader) {
@@ -89,7 +92,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                         return DotSalmon.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fish\\.type' was present and didn't match one of the expected values 'DotFish', or 'DotSalmon'. It was: '"
+                                "Discriminator field 'fish\\.type' was present and didn't match one of the expected values 'DotFish' or 'DotSalmon'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }
@@ -111,7 +114,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                             discriminatorPropertyFound = true;
                             discriminatorProperty = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

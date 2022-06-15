@@ -67,7 +67,10 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeLongField("field1", this.field1, false);
+        jsonWriter.writeLongField("field2", this.field2, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static LongWrapper fromJson(JsonReader jsonReader) {

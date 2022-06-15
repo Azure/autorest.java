@@ -125,7 +125,13 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeJsonField("sampleSalmon", this.sampleSalmon, false);
+        JsonUtils.writeArray(
+                jsonWriter, "salmons", this.salmons, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeJsonField("sampleFish", this.sampleFish, false);
+        JsonUtils.writeArray(jsonWriter, "fishes", this.fishes, (writer, element) -> writer.writeJson(element, false));
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DotFishMarket fromJson(JsonReader jsonReader) {
@@ -141,13 +147,19 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
                         reader.nextToken();
 
                         if ("sampleSalmon".equals(fieldName)) {
-                            sampleSalmon = DotSalmon.fromJson(reader);
+                            sampleSalmon = JsonUtils.getNullableProperty(reader, r -> DotSalmon.fromJson(reader));
                         } else if ("salmons".equals(fieldName)) {
-                            salmons = JsonUtils.readArray(reader, r -> DotSalmon.fromJson(reader));
+                            salmons =
+                                    JsonUtils.readArray(
+                                            reader,
+                                            r -> JsonUtils.getNullableProperty(r, r1 -> DotSalmon.fromJson(reader)));
                         } else if ("sampleFish".equals(fieldName)) {
-                            sampleFish = DotFish.fromJson(reader);
+                            sampleFish = JsonUtils.getNullableProperty(reader, r -> DotFish.fromJson(reader));
                         } else if ("fishes".equals(fieldName)) {
-                            fishes = JsonUtils.readArray(reader, r -> DotFish.fromJson(reader));
+                            fishes =
+                                    JsonUtils.readArray(
+                                            reader,
+                                            r -> JsonUtils.getNullableProperty(r, r1 -> DotFish.fromJson(reader)));
                         } else {
                             reader.skipChildren();
                         }

@@ -67,7 +67,10 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("field_true", this.fieldTrue, false);
+        jsonWriter.writeBooleanField("field_false", this.fieldFalse, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static BooleanWrapper fromJson(JsonReader jsonReader) {

@@ -47,7 +47,13 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        JsonUtils.writeMap(
+                jsonWriter,
+                "defaultProgram",
+                this.defaultProgram,
+                (writer, element) -> writer.writeString(element, false));
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static DictionaryWrapper fromJson(JsonReader jsonReader) {
@@ -68,7 +74,8 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
-                                defaultProgram.put(fieldName, reader.getStringValue());
+                                defaultProgram.put(
+                                        fieldName, JsonUtils.getNullableProperty(reader, r -> reader.getStringValue()));
                             }
                         } else {
                             reader.skipChildren();

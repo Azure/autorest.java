@@ -87,7 +87,12 @@ public class Cat extends Pet {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
-        return jsonWriter.flush();
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", getName(), false);
+        jsonWriter.writeIntegerField("id", getId(), false);
+        JsonUtils.writeArray(jsonWriter, "hates", this.hates, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("color", this.color, false);
+        return jsonWriter.writeEndObject().flush();
     }
 
     public static Cat fromJson(JsonReader jsonReader) {
@@ -103,13 +108,15 @@ public class Cat extends Pet {
                         reader.nextToken();
 
                         if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("hates".equals(fieldName)) {
-                            hates = JsonUtils.readArray(reader, r -> Dog.fromJson(reader));
+                            hates =
+                                    JsonUtils.readArray(
+                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Dog.fromJson(reader)));
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
+                            color = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }
