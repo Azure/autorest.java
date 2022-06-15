@@ -1836,7 +1836,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1862,7 +1862,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1888,7 +1888,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1911,7 +1911,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1936,7 +1936,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1961,7 +1961,7 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: red color, green color, blue color.</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -2135,7 +2135,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: White, black, GREY.</td></tr>
+     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
@@ -2161,7 +2161,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: White, black, GREY.</td></tr>
+     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
@@ -2188,7 +2188,7 @@ public final class HeadersImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: White, black, GREY.</td></tr>
+     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
