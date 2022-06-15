@@ -1,0 +1,10 @@
+{
+  "name": "cadl_lab",
+  "type": "module",
+  "dependencies": {
+    "@cadl-lang/compiler": "~0.30.0",
+    "@cadl-lang/rest": "~0.13.0",
+    "@cadl-lang/openapi3": "~0.10.0"
+  },
+  "private": true
+}

@@ -1,0 +1,3 @@
+emitters:
+  '@cadl-lang/openapi3': true
+  '@cadl-lang/java-client-emitter': true
