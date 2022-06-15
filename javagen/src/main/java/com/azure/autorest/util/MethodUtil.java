@@ -21,6 +21,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -109,16 +110,17 @@ public class MethodUtil {
      * @return the description that appends the string of allowed values for enum type parameter
      */
     public static String appendAllowedEnumValuesForEnumType(Parameter parameter, String description) {
-        if (parameter.getSchema() == null || !(Mappers.getSchemaMapper().map(parameter.getSchema()) instanceof EnumType)) {
+        IType type = Mappers.getSchemaMapper().map(parameter.getSchema());
+        if (parameter.getSchema() == null || !(type instanceof EnumType)) {
             return description;
         }
-        String res = "";
+        String res = description;
         if (description.endsWith(".")) {
-            res = description + " Allowed values: ";
+            res += " Allowed values: ";
         } else {
-            res = description + ". Allowed values: ";
+            res += ". Allowed values: ";
         }
-        EnumType enumType = (EnumType) Mappers.getSchemaMapper().map(parameter.getSchema());
+        EnumType enumType = (EnumType) type;
         List<ClientEnumValue> choices = enumType.getValues();
         if (choices != null && !choices.isEmpty()) {
             res += choices.stream().map(choice -> {
