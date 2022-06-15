@@ -103,7 +103,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
-        if(!hasOptionalParameters(parameters)) {
+        if (!hasParametersToPrintInJavadoc(parameters)) {
             return;
         }
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
@@ -111,7 +111,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         commentBlock.line(String.format("    <caption>%s</caption>", title));
         commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>");
         for (ProxyMethodParameter parameter : parameters) {
-            if (!parameter.getIsRequired()) {
+            boolean parameterIsConstantOrFromClient = parameter.getIsConstant() || parameter.getFromClient();
+            if (!parameter.getIsRequired() && !parameterIsConstantOrFromClient) {
                 commentBlock.line(String.format(
                         "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                         parameter.getRequestParameterName(),
@@ -124,8 +125,12 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         commentBlock.line("</table>");
     }
 
-    private static boolean hasOptionalParameters(List<ProxyMethodParameter> parameters) {
-        return parameters.stream().anyMatch(parameter -> !parameter.getIsRequired());
+    private static boolean hasParametersToPrintInJavadoc(List<ProxyMethodParameter> parameters) {
+        return parameters.stream().anyMatch(parameter -> {
+            boolean parameterIsConstantOrFromClient = parameter.getIsConstant() || parameter.getFromClient();
+            boolean parameterIsRequired = parameter.getIsRequired();
+            return !parameterIsRequired && !parameterIsConstantOrFromClient;
+        });
     }
 
     private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {

@@ -126,6 +126,16 @@ jobs:
         displayName: 'Publish coverage report to storage account'
 
       - task: Maven@3
+        displayName: 'Verify Javadoc of protocol'
+        inputs:
+          mavenPomFile: protocol-tests/pom.xml
+          goals: 'javadoc:javadoc'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: Maven@3
         displayName: 'Run protocol resilience tests'
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml

@@ -14,9 +14,10 @@ context-client-method-parameter: true
 sync-methods: all
 
 use-default-http-status-code-to-exception-type-mapping: true
+polling: {}
 
 models-subpackage: implementation.models
 client-logger: true
 model-override-setter-from-superclass: true
-polling: {}
+custom-strongly-typed-header-deserialization: true
 ```

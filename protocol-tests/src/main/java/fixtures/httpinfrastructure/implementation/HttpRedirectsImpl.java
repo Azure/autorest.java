@@ -4,6 +4,7 @@
 
 package fixtures.httpinfrastructure.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
@@ -143,6 +144,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put301(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -197,6 +199,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patch302(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -215,6 +218,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post303(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -287,6 +291,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put307(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -305,6 +310,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patch307(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -323,6 +329,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post307(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -341,6 +348,7 @@ public final class HttpRedirectsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete307(
                 @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -581,8 +589,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put301(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.put301(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -605,8 +615,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.put301(this.client.getHost(), accept, requestOptions, context);
+        return service.put301(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -746,9 +757,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.patch302(this.client.getHost(), accept, requestOptions, context));
+                context -> service.patch302(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -771,8 +783,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.patch302(this.client.getHost(), accept, requestOptions, context);
+        return service.patch302(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -816,8 +829,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post303(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.post303(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -840,8 +855,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.post303(this.client.getHost(), accept, requestOptions, context);
+        return service.post303(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1029,8 +1045,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put307(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.put307(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1052,8 +1070,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.put307(this.client.getHost(), accept, requestOptions, context);
+        return service.put307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1095,9 +1114,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.patch307(this.client.getHost(), accept, requestOptions, context));
+                context -> service.patch307(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1119,8 +1139,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.patch307(this.client.getHost(), accept, requestOptions, context);
+        return service.patch307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1162,8 +1183,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post307(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.post307(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1185,8 +1208,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.post307(this.client.getHost(), accept, requestOptions, context);
+        return service.post307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1228,9 +1252,10 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307WithResponseAsync(RequestOptions requestOptions) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete307(this.client.getHost(), accept, requestOptions, context));
+                context -> service.delete307(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1252,8 +1277,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final BinaryData booleanValue = BinaryData.fromObject("true");
         final String accept = "application/json";
-        return service.delete307(this.client.getHost(), accept, requestOptions, context);
+        return service.delete307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**

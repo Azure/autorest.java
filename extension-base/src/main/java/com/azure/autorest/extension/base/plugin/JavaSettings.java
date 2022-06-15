@@ -79,11 +79,19 @@ public class JavaSettings {
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
+            // input-file
             List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
                     inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
+            }
+            // require (readme.md etc.)
+            List<Object> require = host.getValue(List.class, "require");
+            if (require != null) {
+                autorestSettings.getRequire().addAll(
+                        require.stream().map(Object::toString).collect(Collectors.toList()));
+                logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
             setHeader(getStringValue(host, "license-header"));

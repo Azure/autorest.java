@@ -10,6 +10,7 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -68,6 +69,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -90,6 +92,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -112,6 +115,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -134,6 +138,7 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -151,7 +156,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -174,6 +178,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -191,7 +196,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -213,6 +217,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -230,7 +235,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -260,7 +264,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -283,6 +286,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -300,7 +304,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -322,6 +325,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -339,7 +343,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
@@ -369,7 +372,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
      *
@@ -392,6 +394,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -409,7 +412,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
      *
@@ -431,6 +433,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -448,7 +451,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
      *
@@ -478,7 +480,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
      *
@@ -501,6 +502,7 @@ public final class PathItemsImpl {
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
                                 accept,
                                 requestOptions,
@@ -518,7 +520,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
      *
@@ -540,6 +541,7 @@ public final class PathItemsImpl {
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
                 accept,
                 requestOptions,
@@ -557,7 +559,6 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
      *
