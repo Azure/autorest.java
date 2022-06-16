@@ -30,7 +30,6 @@ public class CadlMain {
 
     public static void main(String[] args) throws IOException {
         Client client = loadClient("client-model.yaml");
-//        Client client = loadClient("c:/github_lab/cadl_lab/cadl-output/client-model.yaml");
         Javagen javagen = new MockUnitJavagen();
         JavaPackage javaPackage = javagen.writeToTemplates(JavaSettings.getInstance(), null, client);
 
@@ -45,8 +44,6 @@ public class CadlMain {
             new File("cadl-sample/" + javaFile.getFilePath()).getParentFile().mkdirs();
             writeFile("cadl-sample/" + javaFile.getFilePath(), content);
         }
-
-        int i = 1;
     }
 
     private static Client loadClient(String filename) throws IOException {
