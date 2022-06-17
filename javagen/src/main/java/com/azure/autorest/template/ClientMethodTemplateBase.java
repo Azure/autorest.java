@@ -245,6 +245,6 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         if (CoreUtils.isNullOrEmpty(doc)) {
             doc = String.format("The %1$s parameter", p.getName());
         }
-        return CodeNamer.escapeXmlComment(doc);
+        return doc;
     }
 }
