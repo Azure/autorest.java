@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and Package
         run: |
-          mvn package -f pom.xml -P local
+          mvn package -f pom.xml -P local --no-transfer-progress
           npm pack
 
       - name: Create Pre-release

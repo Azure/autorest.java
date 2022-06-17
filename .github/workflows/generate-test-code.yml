@@ -22,14 +22,14 @@ jobs:
 
       - name: Build and Package
         run: |
-          mvn package -f pom.xml -P local
+          mvn package -f pom.xml -P local --no-transfer-progress
           npm pack
 
-      - name: Codegen
+      - name: Generate code
         run: |
           ./generate
 
-      - name: Commit report
+      - name: Commit generated code
         run: |
           git config --global user.name 'actions-user'
           git config --global user.email 'action@github.com'
