@@ -121,6 +121,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     final boolean wrapServiceClient = methodGroupClient == null;
     if (wrapServiceClient) {
       serviceClient.getClientMethods().stream()
+          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
           .filter(clientMethod -> !clientMethod.isImplementationOnly())
           .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
           .forEach(clientMethod -> {
@@ -128,6 +129,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
           });
     } else {
       methodGroupClient.getClientMethods().stream()
+          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
           .filter(clientMethod -> !clientMethod.isImplementationOnly())
           .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
           .forEach(clientMethod -> {

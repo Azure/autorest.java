@@ -181,7 +181,7 @@ public final class LrosCustomHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
@@ -238,7 +238,7 @@ public final class LrosCustomHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
@@ -478,7 +478,7 @@ public final class LrosCustomHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context));
@@ -535,7 +535,7 @@ public final class LrosCustomHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context);
@@ -756,7 +756,7 @@ public final class LrosCustomHeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.post202Retry200(this.client.getHost(), accept, requestOptions, context));
@@ -794,7 +794,7 @@ public final class LrosCustomHeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.post202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
@@ -958,7 +958,7 @@ public final class LrosCustomHeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> postAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
@@ -997,7 +997,7 @@ public final class LrosCustomHeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetrySucceededWithResponseAsync(
+    private Mono<Response<Void>> postAsyncRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
