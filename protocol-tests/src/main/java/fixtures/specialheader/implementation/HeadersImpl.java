@@ -482,7 +482,7 @@ public final class HeadersImpl {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
@@ -521,7 +521,7 @@ public final class HeadersImpl {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(
+    private Mono<Response<BinaryData>> paramRepeatabilityRequestLroWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;

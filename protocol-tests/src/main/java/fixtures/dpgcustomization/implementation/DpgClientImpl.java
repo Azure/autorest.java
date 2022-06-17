@@ -637,7 +637,7 @@ public final class DpgClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponseAsync(String mode, RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> lroWithResponseAsync(String mode, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.lro(this.getHost(), mode, accept, requestOptions, context));
     }
@@ -666,7 +666,7 @@ public final class DpgClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponseAsync(
+    private Mono<Response<BinaryData>> lroWithResponseAsync(
             String mode, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.lro(this.getHost(), mode, accept, requestOptions, context);
