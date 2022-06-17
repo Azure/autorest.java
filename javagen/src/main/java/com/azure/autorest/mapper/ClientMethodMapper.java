@@ -415,6 +415,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
                         && (settings.isFluent() || settings.getPollingConfig("default") != null)
                         && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
+                    JavaVisibility simpleAsyncMethodVisibility =
+                            methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false);
+                    JavaVisibility simpleAsyncMethodVisibilityWithContext =
+                            methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true);
+                    if (settings.isDataPlaneClient()) {
+                        simpleAsyncMethodVisibility = JavaVisibility.Private;
+                        simpleAsyncMethodVisibilityWithContext = JavaVisibility.Private;
+                    }
+
                     // WithResponseAsync, with required and optional parameters
                     methods.add(builder
                             .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
@@ -422,12 +431,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .onlyRequiredParameters(false)
                             .type(ClientMethodType.SimpleAsyncRestResponse)
                             .isGroupedParameterRequired(false)
-                            .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
+                            .methodVisibility(simpleAsyncMethodVisibility)
                             .build());
 
                     if (settings.isContextClientMethodParameter()) {
                         addClientMethodWithContext(methods,
-                                builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                                builder.methodVisibility(simpleAsyncMethodVisibilityWithContext),
                                 parameters);
                     }
 
@@ -671,7 +680,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
         boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation);
 
-        // If LLC is being generated or the response doesn't contain headers return Response<T>
+        // If DPG is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>
         // Else named response types are being used and return that.
         if (settings.isDataPlaneClient() || !responseContainsHeaders) {
@@ -808,7 +817,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             /*
-            Rule for LLC
+            Rule for DPG
 
             1. Only generate "WithResponse" method for simple API (hence exclude SimpleAsync and SimpleSync).
             2. For sync method, Context is included in "RequestOptions", hence do not generate method with Context parameter.

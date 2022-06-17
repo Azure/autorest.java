@@ -234,7 +234,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context));
@@ -290,7 +290,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context);
@@ -526,7 +526,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -583,7 +583,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.putAsyncRelativeRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
@@ -801,7 +801,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
             RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -842,7 +842,7 @@ public final class LroRetrysImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.deleteProvisioning202Accepted200Succeeded(
@@ -990,7 +990,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete202Retry200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> delete202Retry200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.delete202Retry200(this.client.getHost(), accept, requestOptions, context));
@@ -1009,7 +1009,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
+    private Mono<Response<Void>> delete202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.delete202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
@@ -1096,7 +1096,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -1117,7 +1117,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.deleteAsyncRelativeRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
@@ -1224,7 +1224,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.post202Retry200(this.client.getHost(), accept, requestOptions, context));
@@ -1261,7 +1261,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.post202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
@@ -1421,7 +1421,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -1461,7 +1461,7 @@ public final class LroRetrysImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponseAsync(
+    private Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         return service.postAsyncRelativeRetrySucceeded(this.client.getHost(), accept, requestOptions, context);

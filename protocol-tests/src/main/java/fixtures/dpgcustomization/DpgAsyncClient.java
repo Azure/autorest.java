@@ -151,34 +151,6 @@ public final class DpgAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponse(String mode, RequestOptions requestOptions) {
-        return this.serviceClient.lroWithResponseAsync(mode, requestOptions);
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model)
-     *     provisioningState: String
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
