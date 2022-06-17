@@ -64,6 +64,21 @@
             "x-ms-enum": {
               "modelAsString": false
             }
+          },
+          {
+            "name": "query-required-enum",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "required enum with three values",
+            "enum": [
+              "test1",
+              "test2",
+              "test@</spec.,i`~!&*-al@char/>"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -87,7 +102,7 @@
             "enum": [
               "test1",
               "test2",
-              "test3"
+              "test@</spec.,i`~!&*-al@char/>"
             ],
             "x-ms-enum": {
               "modelAsString": false
