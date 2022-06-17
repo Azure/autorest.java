@@ -182,7 +182,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.streamStyleJsonFieldSerializationMethod();
         if (fieldSerializationMethod != null) {
-            if (wireType.isNullable()) {
+            if (wireType.isNullable() && wireType != ClassType.String) {
                 methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", "
                     + addPotentialSerializationNullCheck(wireType, fieldSerializationMethod, propertyValueGetter) + ", false);");
             } else {
@@ -190,12 +190,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType instanceof IterableType) {
             serializeContainerProperty(methodBlock, "writeArray", wireType, ((IterableType) wireType).getElementType(),
-                serializedName, propertyValueGetter);
+                serializedName, propertyValueGetter, 0);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
             serializeContainerProperty(methodBlock, "writeMap", wireType, ((MapType) wireType).getValueType(),
-                serializedName, propertyValueGetter);
+                serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
             throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
@@ -212,29 +212,45 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * {@link Map} this is the value type.
      * @param serializedName The serialized property name.
      * @param propertyValueGetter The property or property getter for the field being serialized.
+     * @param depth Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
+     * {@code Map} is being handled and then 1 when {@code List} is being handled.
      */
     private static void serializeContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
-        IType elementType, String serializedName, String propertyValueGetter) {
+        IType elementType, String serializedName, String propertyValueGetter, int depth) {
         String valueSerializationMethod = elementType.streamStyleJsonValueSerializationMethod();
-
-        if (valueSerializationMethod == null) {
-            throw new RuntimeException("Unknown value type " + elementType + " in " + containerType + " serialization. "
-                + "Need to add support for it.");
-        }
+        String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
 
         // TODO (alzimmer): Determine if the writeNull property should ever be set to true for writing the container
         //  property. Right now this won't serialize anything if the container value is null.
-        methodBlock.line("JsonUtils." + utilityMethod + "(jsonWriter, \"" + serializedName + "\", " + propertyValueGetter + ", (writer, element) -> ");
+        methodBlock.line("JsonUtils." + utilityMethod + "(jsonWriter, \"" + serializedName + "\", " + propertyValueGetter + ", (" + lambdaWriterName + ", element) -> ");
         methodBlock.indent(() -> {
-            // TODO (alzimmer): Determine if null list elements and null values in a key-value pair should be serialized.
-            if (elementType.isNullable()) {
-                methodBlock.line("writer." + valueSerializationMethod + "("
-                    + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, "element") + ", false)");
+            if (valueSerializationMethod != null) {
+                // TODO (alzimmer): Determine if null list elements and null values in a key-value pair should be serialized.
+                if (elementType.isNullable()) {
+                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "("
+                        + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, "element") + ", false)");
+                } else {
+                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(element)");
+                }
+            } else if (elementType instanceof IterableType) {
+                serializeContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
+                    serializedName, propertyValueGetter, depth + 1);
+            } else if (elementType instanceof MapType) {
+                // Assumption is that the key type for the Map is a String. This may not always hold true and when that
+                // becomes reality this will need to be reworked to handle that case.
+                serializeContainerProperty(methodBlock, "writeMap", elementType, ((MapType) elementType).getValueType(),
+                    serializedName, propertyValueGetter, depth + 1);
             } else {
-                methodBlock.line("writer::" + valueSerializationMethod);
+                throw new RuntimeException("Unknown value type " + elementType + " in " + containerType
+                    + " serialization. Need to add support for it.");
             }
         });
-        methodBlock.line(");");
+
+        if (depth > 0) {
+            methodBlock.line(")");
+        } else {
+            methodBlock.line(");");
+        }
     }
 
     /**

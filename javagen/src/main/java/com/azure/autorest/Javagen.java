@@ -43,8 +43,13 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 
@@ -85,19 +90,35 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = writeToTemplates(settings, codeModel, client);
 
             //Step 4: Print to files
+            Map<String, String> formattedFiles = new ConcurrentHashMap<>();
+            List<CompletableFuture<Void>> formattingTasks = new ArrayList<>();
+
             Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String content = javaFile.getContents().toString();
-                if (!settings.isSkipFormatting()) {
-                    try {
-                        content = formatter.formatSourceAndFixImports(content);
-                    } catch (Exception e) {
-                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        return false;
+                // Formatting Java source files can be expensive but can be run in parallel.
+                // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+                // complete.
+                formattingTasks.add(CompletableFuture.runAsync(() -> {
+                    String formattedSource = javaFile.getContents().toString();
+                    if (!settings.isSkipFormatting()) {
+                        try {
+                            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                        } catch (Exception e) {
+                            logger.error("Unable to format output file " + javaFile.getFilePath(), e);
+                            throw new CompletionException(e);
+                        }
                     }
-                }
-                writeFile(javaFile.getFilePath(), content, null);
+
+                    formattedFiles.put(javaFile.getFilePath(), formattedSource);
+                }));
             }
+
+            CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).get();
+
+            // Then for each formatted file write the file. This is done synchronously as there is potential race
+            // conditions that can lead to deadlocking.
+            formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
+
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
             }
@@ -108,7 +129,7 @@ public class Javagen extends NewPlugin {
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
-                        "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
             logger.error("Failed to generate code.", ex);
@@ -126,8 +147,7 @@ public class Javagen extends NewPlugin {
                 // if value of property is null, ignore it.
                 if (propertyValue == null) {
                     return null;
-                }
-                else {
+                } else {
                     return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
                 }
             }
@@ -158,10 +178,10 @@ public class Javagen extends NewPlugin {
         }
         for (AsyncSyncClient syncClient : client.getSyncClients()) {
             boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
-                    // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
-                    && settings.isDataPlaneClient()
-                    // 1-1 match of SyncClient and AsyncClient
-                    && client.getAsyncClients().size() == client.getSyncClients().size();
+                // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
+                && settings.isDataPlaneClient()
+                // 1-1 match of SyncClient and AsyncClient
+                && client.getAsyncClients().size() == client.getSyncClients().size();
             javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
         }
 

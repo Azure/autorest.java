@@ -723,7 +723,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (sourceTypeName.equals(targetTypeName)) {
             if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()
-                && (property.getWireType() instanceof IterableType || property.getWireType() instanceof ListType)) {
+                && (property.getWireType() instanceof IterableType)) {
                 methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
                     ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
                         getPropertyXmlWrapperClassName(property),
