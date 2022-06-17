@@ -3,12 +3,8 @@
 
 package fixtures.dpgcustomization;
 
-import com.azure.core.http.HttpMethod;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.HttpResponse;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.rest.PagedFlux;
@@ -20,7 +16,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.paging.PageRetriever;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.PollerFlux;
@@ -181,20 +176,6 @@ public class DpgCustomizationTests {
         LroProduct model = modelPoller.getFinalResult();
         Assertions.assertEquals(ProductReceived.MODEL, model.getReceived());
         Assertions.assertEquals("Succeeded", model.getProvisioningState());
-
-        // PollerFlux<LroProduct, LroProduct>
-        HttpPipeline httpPipeline = new HttpPipelineBuilder().build();  // httpPipeline exists in serviceClient
-        PollerFlux<LroProduct, LroProduct> modelPollerFlux = PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> asyncClient.lroWithResponse("model", null),
-                new DefaultPollingStrategy<>(httpPipeline),
-                new TypeReferenceLroProduct(),
-                new TypeReferenceLroProduct());
-        model = modelPollerFlux.last().block().getFinalResult().block();
-        Assertions.assertEquals(ProductReceived.MODEL, model.getReceived());
-        Assertions.assertEquals("Succeeded", model.getProvisioningState());
-        // SyncPoller from PollerFlux
-        modelPoller = modelPollerFlux.getSyncPoller();
     }
 
     private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {
