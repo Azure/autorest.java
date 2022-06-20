@@ -47,6 +47,8 @@ public class ClientModelUtil {
     public static void getAsyncSyncClients(ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
         String packageName = getAsyncSyncClientPackageName(serviceClient);
+        boolean generateSyncMethods = JavaSettings.SyncMethodsGeneration.ALL
+            .equals(JavaSettings.getInstance().getSyncMethods());
 
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
@@ -56,7 +58,7 @@ public class ClientModelUtil {
             String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
             asyncClients.add(builder.className(asyncClassName).build());
 
-            if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
+            if (generateSyncMethods) {
                 String syncClassName =
                         serviceClient.getClientBaseName().endsWith("Client")
                                 ? serviceClient.getClientBaseName()
@@ -78,7 +80,7 @@ public class ClientModelUtil {
                 String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
                 asyncClients.add(builder.className(asyncClassName).build());
 
-                if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
+                if (generateSyncMethods) {
                     String syncClassName =
                             serviceClient.getClientBaseName().endsWith("Client")
                                     ? serviceClient.getClientBaseName()
@@ -89,7 +91,7 @@ public class ClientModelUtil {
                 String asyncClassName = clientNameToAsyncClientName(methodGroupClient.getClassBaseName());
                 asyncClients.add(builder.className(asyncClassName).build());
 
-                if (JavaSettings.SyncMethodsGeneration.ALL.equals(JavaSettings.getInstance().getSyncMethods())) {
+                if (generateSyncMethods) {
                     String syncClassName =
                             methodGroupClient.getClassBaseName().endsWith("Client")
                                     ? methodGroupClient.getClassBaseName()
@@ -244,7 +246,7 @@ public class ClientModelUtil {
     }
 
     public static String getFirstApiVersion(CodeModel codeModel) {
-        String apiVersion = codeModel.getOperationGroups().stream()
+        return codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .filter(o -> o.getApiVersions() != null)
                 .flatMap(o -> o.getApiVersions().stream())
@@ -253,7 +255,6 @@ public class ClientModelUtil {
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
-        return apiVersion;
     }
 
     public static String getArtifactId() {
@@ -346,9 +347,11 @@ public class ClientModelUtil {
         ClientModel parentModel = getClientModel(model.getParentModelName());
         List<ClientModelProperty> parentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
-            List<ClientModelProperty> parentProps = parentModel.getProperties();
-            Collections.reverse(parentProps);
-            parentProperties.addAll(parentProps);
+            // Add the properties in inverse order as they be reverse at the end.
+            List<ClientModelProperty> parentProps = new ArrayList<>(parentModel.getProperties());
+            for (int i = parentProps.size() - 1; i >= 0; i--) {
+                parentProperties.add(parentProps.get(i));
+            }
 
             lastParentName = parentModel.getName();
             parentModel = getClientModel(parentModel.getParentModelName());
@@ -362,14 +365,14 @@ public class ClientModelUtil {
         ClientModel parentModel = getClientModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
-            List<ClientModelProperty> ctorArgs =
-                    parentModel.getProperties().stream().filter(ClientModelProperty::isRequired)
-                            .filter(property -> !property.getIsConstant())
-                            .collect(Collectors.toList());
-            // this will be reversed again, so, it will be in the right order if a
-            // super class has multiple ctor args
-            Collections.reverse(ctorArgs);
-            requiredParentProperties.addAll(ctorArgs);
+            // Add the properties in inverse order as they be reverse at the end.
+            List<ClientModelProperty> ctorArgs = parentModel.getProperties().stream()
+                .filter(property -> property.isRequired() && !property.getIsConstant())
+                .collect(Collectors.toList());
+
+            for (int i = ctorArgs.size() - 1; i >= 0; i--) {
+                requiredParentProperties.add(ctorArgs.get(i));
+            }
 
             lastParentName = parentModel.getName();
             parentModel = getClientModel(parentModel.getParentModelName());

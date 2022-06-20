@@ -188,6 +188,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else {
                 methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", " + propertyValueGetter + ");");
             }
+        } else if (wireType == ClassType.Object) {
+            methodBlock.line("JsonUtils.writeUntypedField(jsonWriter, " + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
             serializeContainerProperty(methodBlock, "writeArray", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
@@ -232,6 +234,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 } else {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(element)");
                 }
+            } else if (elementType == ClassType.Object) {
+                methodBlock.line("JsonUtils.writeUntypedField(" + lambdaWriterName + ", element)");
             } else if (elementType instanceof IterableType) {
                 serializeContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
                     serializedName, propertyValueGetter, depth + 1);
@@ -798,11 +802,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleDeserialization(wireType, clientType);
         if (simpleDeserialization != null) {
-            if (wireType.isNullable()) {
+            if (wireType.isNullable() && wireType != ClassType.String) {
                 deserializationBlock.line(property.getName() + " = JsonUtils.getNullableProperty(reader, r -> " + simpleDeserialization + ");");
             } else {
                 deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
             }
+        } else if (wireType == ClassType.Object) {
+            deserializationBlock.line(property.getName() + " = JsonUtils.readUntypedField(reader);");
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
             String elementDeserialization = getSimpleDeserialization(elementType, clientType);

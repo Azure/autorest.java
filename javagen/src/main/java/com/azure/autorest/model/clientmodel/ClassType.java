@@ -120,7 +120,9 @@ public class ClassType implements IType {
         .streamStyleJsonValueSerializationMethod("writeString")
         .build();
 
-    public static final ClassType Object = new ClassType.Builder(false).knownClass(java.lang.Object.class).build();
+    public static final ClassType Object = new ClassType.Builder(false)
+        .knownClass(java.lang.Object.class)
+        .build();
 
     public static final ClassType TokenCredential = new ClassType.Builder(false)
         .knownClass(com.azure.core.credential.TokenCredential.class)
