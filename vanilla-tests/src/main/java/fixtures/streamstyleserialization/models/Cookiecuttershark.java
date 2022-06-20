@@ -18,6 +18,8 @@ import java.util.Objects;
 /** The Cookiecuttershark model. */
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    private String fishtype = "cookiecuttershark";
+
     /**
      * Creates an instance of Cookiecuttershark class.
      *
@@ -37,15 +39,15 @@ public final class Cookiecuttershark extends Shark {
 
     /** {@inheritDoc} */
     @Override
-    public Cookiecuttershark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public Cookiecuttershark setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Cookiecuttershark setSpecies(String species) {
-        super.setSpecies(species);
+    public Cookiecuttershark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
@@ -62,12 +64,12 @@ public final class Cookiecuttershark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "cookiecuttershark");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
+        jsonWriter.writeStringField("species", getSpecies(), false);
         JsonUtils.writeArray(
                 jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
-        jsonWriter.writeStringField("species", getSpecies(), false);
         jsonWriter.writeIntegerField("age", getAge(), false);
         return jsonWriter.writeEndObject().flush();
     }
@@ -76,22 +78,22 @@ public final class Cookiecuttershark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
                     OffsetDateTime birthday = null;
-                    List<Fish> siblings = null;
                     String species = null;
+                    List<Fish> siblings = null;
                     Integer age = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
@@ -100,12 +102,12 @@ public final class Cookiecuttershark extends Shark {
                                     JsonUtils.getNullableProperty(
                                             reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
-                        } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("age".equals(fieldName)) {
                             age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else {
@@ -113,10 +115,10 @@ public final class Cookiecuttershark extends Shark {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "cookiecuttershark")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "cookiecuttershark")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'cookiecuttershark'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 
@@ -133,8 +135,8 @@ public final class Cookiecuttershark extends Shark {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     Cookiecuttershark deserializedValue = new Cookiecuttershark(length, birthday);
-                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setSpecies(species);
+                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setAge(age);
 
                     return deserializedValue;

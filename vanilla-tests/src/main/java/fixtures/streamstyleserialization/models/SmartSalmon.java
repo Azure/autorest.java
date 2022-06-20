@@ -19,6 +19,8 @@ import java.util.Objects;
 /** The SmartSalmon model. */
 @Fluent
 public final class SmartSalmon extends Salmon {
+    private String fishtype = "smart_salmon";
+
     private String collegeDegree;
 
     private Map<String, Object> additionalProperties;
@@ -88,15 +90,15 @@ public final class SmartSalmon extends Salmon {
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
@@ -113,11 +115,11 @@ public final class SmartSalmon extends Salmon {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "smart_salmon");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies(), false);
         JsonUtils.writeArray(
                 jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
-        jsonWriter.writeStringField("species", getSpecies(), false);
         jsonWriter.writeStringField("location", getLocation(), false);
         jsonWriter.writeBooleanField("iswild", iswild(), false);
         jsonWriter.writeStringField("college_degree", this.collegeDegree, false);
@@ -135,12 +137,12 @@ public final class SmartSalmon extends Salmon {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
-                    List<Fish> siblings = null;
                     String species = null;
+                    List<Fish> siblings = null;
                     String location = null;
                     Boolean iswild = null;
                     String collegeDegree = null;
@@ -150,23 +152,23 @@ public final class SmartSalmon extends Salmon {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
-                        } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("location".equals(fieldName)) {
-                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else if ("college_degree".equals(fieldName)) {
-                            collegeDegree = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            collegeDegree = reader.getStringValue();
                         } else {
                             if (additionalProperties == null) {
                                 additionalProperties = new LinkedHashMap<>();
@@ -176,10 +178,10 @@ public final class SmartSalmon extends Salmon {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "smart_salmon")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "smart_salmon")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 
@@ -193,8 +195,8 @@ public final class SmartSalmon extends Salmon {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     SmartSalmon deserializedValue = new SmartSalmon(length);
-                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setSpecies(species);
+                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setLocation(location);
                     deserializedValue.setIswild(iswild);
                     deserializedValue.setCollegeDegree(collegeDegree);

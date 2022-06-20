@@ -171,7 +171,7 @@ public class Postprocessor extends NewPlugin {
             }));
         }
 
-        CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).get();
+        CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).join();
 
         // Then for each formatted file write the file. This is done synchronously as there is potential race
         // conditions that can lead to deadlocking.

@@ -18,6 +18,8 @@ import java.util.Objects;
 /** The Salmon model. */
 @Fluent
 public class Salmon extends Fish {
+    private String fishtype = "salmon";
+
     private String location;
 
     private Boolean iswild;
@@ -98,7 +100,7 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "salmon");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies(), false);
         JsonUtils.writeArray(
@@ -158,8 +160,8 @@ public class Salmon extends Fish {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     String species = null;
@@ -171,19 +173,19 @@ public class Salmon extends Fish {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
                         } else if ("location".equals(fieldName)) {
-                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {
@@ -191,10 +193,10 @@ public class Salmon extends Fish {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "salmon")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "salmon")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 

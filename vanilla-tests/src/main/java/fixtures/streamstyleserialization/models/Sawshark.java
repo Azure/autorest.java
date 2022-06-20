@@ -19,6 +19,8 @@ import java.util.Objects;
 /** The Sawshark model. */
 @Fluent
 public final class Sawshark extends Shark {
+    private String fishtype = "sawshark";
+
     private byte[] picture;
 
     /**
@@ -60,15 +62,15 @@ public final class Sawshark extends Shark {
 
     /** {@inheritDoc} */
     @Override
-    public Sawshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
+    public Sawshark setSpecies(String species) {
+        super.setSpecies(species);
         return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Sawshark setSpecies(String species) {
-        super.setSpecies(species);
+    public Sawshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 
@@ -85,12 +87,12 @@ public final class Sawshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "sawshark");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
+        jsonWriter.writeStringField("species", getSpecies(), false);
         JsonUtils.writeArray(
                 jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
-        jsonWriter.writeStringField("species", getSpecies(), false);
         jsonWriter.writeIntegerField("age", getAge(), false);
         jsonWriter.writeBinaryField("picture", this.picture, false);
         return jsonWriter.writeEndObject().flush();
@@ -100,14 +102,14 @@ public final class Sawshark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
                     OffsetDateTime birthday = null;
-                    List<Fish> siblings = null;
                     String species = null;
+                    List<Fish> siblings = null;
                     Integer age = null;
                     byte[] picture = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -115,8 +117,8 @@ public final class Sawshark extends Shark {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
@@ -125,12 +127,12 @@ public final class Sawshark extends Shark {
                                     JsonUtils.getNullableProperty(
                                             reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
+                        } else if ("species".equals(fieldName)) {
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
-                        } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else if ("age".equals(fieldName)) {
                             age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("picture".equals(fieldName)) {
@@ -142,10 +144,10 @@ public final class Sawshark extends Shark {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "sawshark")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "sawshark")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'sawshark'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 
@@ -162,8 +164,8 @@ public final class Sawshark extends Shark {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     Sawshark deserializedValue = new Sawshark(length, birthday);
-                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setSpecies(species);
+                    deserializedValue.setSiblings(siblings);
                     deserializedValue.setAge(age);
                     deserializedValue.setPicture(picture);
 

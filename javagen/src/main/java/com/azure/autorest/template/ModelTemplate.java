@@ -135,6 +135,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addModelConstructor(model, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
+                // For now, don't add a getter if the property is a polymorphic discriminator and stream-style
+                // serialization is being used.
+                if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
+                    continue;
+                }
+
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
 

@@ -14,6 +14,8 @@ import java.util.Objects;
 /** The DotSalmon model. */
 @Fluent
 public class DotSalmon extends DotFish {
+    private String fishType = "DotSalmon";
+
     private String location;
 
     private Boolean iswild;
@@ -78,7 +80,7 @@ public class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", "DotSalmon");
+        jsonWriter.writeStringField("fish\\.type", fishType);
         jsonWriter.writeStringField("species", getSpecies(), false);
         jsonWriter.writeStringField("location", this.location, false);
         jsonWriter.writeBooleanField("iswild", this.iswild, false);
@@ -89,8 +91,8 @@ public class DotSalmon extends DotFish {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishTypeFound = false;
+                    String fishType = null;
                     String species = null;
                     String location = null;
                     Boolean iswild = null;
@@ -99,12 +101,12 @@ public class DotSalmon extends DotFish {
                         reader.nextToken();
 
                         if ("fish\\.type".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishTypeFound = true;
+                            fishType = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            species = reader.getStringValue();
                         } else if ("location".equals(fieldName)) {
-                            location = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
                             iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
                         } else {
@@ -112,10 +114,10 @@ public class DotSalmon extends DotFish {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "DotSalmon")) {
+                    if (!fishTypeFound || !Objects.equals(fishType, "DotSalmon")) {
                         throw new IllegalStateException(
                                 "'fish\\.type' was expected to be non-null and equal to 'DotSalmon'. The found 'fish\\.type' was '"
-                                        + discriminatorProperty
+                                        + fishType
                                         + "'.");
                     }
 

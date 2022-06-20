@@ -14,29 +14,9 @@ import java.util.List;
 /** The Cat model. */
 @Fluent
 public class Cat extends Pet {
-    private List<Dog> hates;
-
     private String color;
 
-    /**
-     * Get the hates property: The hates property.
-     *
-     * @return the hates value.
-     */
-    public List<Dog> getHates() {
-        return this.hates;
-    }
-
-    /**
-     * Set the hates property: The hates property.
-     *
-     * @param hates the hates value to set.
-     * @return the Cat object itself.
-     */
-    public Cat setHates(List<Dog> hates) {
-        this.hates = hates;
-        return this;
-    }
+    private List<Dog> hates;
 
     /**
      * Get the color property: The color property.
@@ -58,10 +38,23 @@ public class Cat extends Pet {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Cat setName(String name) {
-        super.setName(name);
+    /**
+     * Get the hates property: The hates property.
+     *
+     * @return the hates value.
+     */
+    public List<Dog> getHates() {
+        return this.hates;
+    }
+
+    /**
+     * Set the hates property: The hates property.
+     *
+     * @param hates the hates value to set.
+     * @return the Cat object itself.
+     */
+    public Cat setHates(List<Dog> hates) {
+        this.hates = hates;
         return this;
     }
 
@@ -69,6 +62,13 @@ public class Cat extends Pet {
     @Override
     public Cat setId(Integer id) {
         super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cat setName(String name) {
+        super.setName(name);
         return this;
     }
 
@@ -88,10 +88,10 @@ public class Cat extends Pet {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", getName(), false);
         jsonWriter.writeIntegerField("id", getId(), false);
-        JsonUtils.writeArray(jsonWriter, "hates", this.hates, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeStringField("name", getName(), false);
         jsonWriter.writeStringField("color", this.color, false);
+        JsonUtils.writeArray(jsonWriter, "hates", this.hates, (writer, element) -> writer.writeJson(element, false));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -99,33 +99,33 @@ public class Cat extends Pet {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    String name = null;
                     Integer id = null;
-                    List<Dog> hates = null;
+                    String name = null;
                     String color = null;
+                    List<Dog> hates = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("name".equals(fieldName)) {
-                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
-                        } else if ("id".equals(fieldName)) {
+                        if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                        } else if ("name".equals(fieldName)) {
+                            name = reader.getStringValue();
+                        } else if ("color".equals(fieldName)) {
+                            color = reader.getStringValue();
                         } else if ("hates".equals(fieldName)) {
                             hates =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Dog.fromJson(reader)));
-                        } else if ("color".equals(fieldName)) {
-                            color = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }
                     }
                     Cat deserializedValue = new Cat();
-                    deserializedValue.setName(name);
                     deserializedValue.setId(id);
-                    deserializedValue.setHates(hates);
+                    deserializedValue.setName(name);
                     deserializedValue.setColor(color);
+                    deserializedValue.setHates(hates);
 
                     return deserializedValue;
                 });

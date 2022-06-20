@@ -108,11 +108,11 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            field = reader.getStringValue();
                         } else if ("empty".equals(fieldName)) {
-                            empty = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            empty = reader.getStringValue();
                         } else if ("null".equals(fieldName)) {
-                            nullProperty = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            nullProperty = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }

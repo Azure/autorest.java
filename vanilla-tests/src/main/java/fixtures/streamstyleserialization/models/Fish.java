@@ -19,6 +19,8 @@ import java.util.Objects;
 /** The Fish model. */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
+    private String fishtype;
+
     private String species;
 
     private float length;
@@ -97,7 +99,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "Fish");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("species", this.species, false);
         JsonUtils.writeArray(
@@ -165,8 +167,8 @@ public class Fish implements JsonSerializable<Fish> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     String species = null;
@@ -176,13 +178,13 @@ public class Fish implements JsonSerializable<Fish> {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
@@ -192,10 +194,10 @@ public class Fish implements JsonSerializable<Fish> {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "Fish")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "Fish")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'Fish'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 

@@ -42,7 +42,6 @@ import java.util.stream.Collectors;
 /**
  * Writes a ClientModel to a JavaFile using stream-style serialization.
  */
-// TODO (alzimmer): Determine if this can be merged back into ModelTemplate with if checks
 public class StreamSerializationModelTemplate extends ModelTemplate {
     private static final StreamSerializationModelTemplate INSTANCE = new StreamSerializationModelTemplate();
     private static final Pattern SPLIT_KEY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
@@ -120,9 +119,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeStartObject();");
 
             // If the model has a discriminator property serialize it first.
-            if (!CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty)) {
-                methodBlock.line("jsonWriter.writeStringField(\"" + propertiesManager.discriminatorProperty
-                    + "\", \"" + propertiesManager.expectedDiscriminator + "\");");
+            if (propertiesManager.discriminatorProperty != null) {
+                ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
+                methodBlock.line("jsonWriter.writeStringField(\"" + discriminatorProperty.getSerializedName()
+                    + "\", " + discriminatorProperty.getName() + ");");
             }
 
             propertiesManager.superRequiredProperties.forEach(property ->
@@ -182,7 +182,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.streamStyleJsonFieldSerializationMethod();
         if (fieldSerializationMethod != null) {
-            if (wireType.isNullable() && wireType != ClassType.String) {
+            if (wireType.isNullable()) {
                 methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", "
                     + addPotentialSerializationNullCheck(wireType, fieldSerializationMethod, propertyValueGetter) + ", false);");
             } else {
@@ -389,7 +389,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (isSuperTypeWithDiscriminator(model)) {
             writeSuperTypeFromJson(classBlock, model, propertiesManager, settings);
         } else {
-            writeTerminalTypeFromJson(classBlock, model, propertiesManager, settings);
+            writeTerminalTypeFromJson(classBlock, propertiesManager, settings);
         }
     }
 
@@ -471,7 +471,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         readObject(classBlock, model.getName(), true,
-            methodBlock -> writeFromJsonDeserialization(model, methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -491,18 +491,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * A terminal type is either a type without polymorphism or is the terminal type in a polymorphic hierarchy.
      *
      * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
-     * @param model The Autorest representation of the model.
      * @param propertiesManager The properties for the model.
      * @param settings The Autorest generation settings.
      */
-    private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModel model,
-        PropertiesManager propertiesManager, JavaSettings settings) {
-        readObject(classBlock, model.getName(), false,
-            methodBlock -> writeFromJsonDeserialization(model, methodBlock, propertiesManager, settings));
+    private static void writeTerminalTypeFromJson(JavaClass classBlock, PropertiesManager propertiesManager,
+        JavaSettings settings) {
+        readObject(classBlock, propertiesManager.modelName, false,
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
     }
 
-    private static void writeFromJsonDeserialization(ClientModel model, JavaBlock methodBlock,
-        PropertiesManager propertiesManager, JavaSettings settings) {
+    private static void writeFromJsonDeserialization(JavaBlock methodBlock, PropertiesManager propertiesManager,
+        JavaSettings settings) {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
@@ -510,7 +509,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             // Add the outermost while loop to read the JSON object.
             addReaderWhileLoop(methodBlock, true, whileBlock -> {
-                JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock, propertiesManager.discriminatorProperty);
+                JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock,
+                    propertiesManager.discriminatorProperty);
 
                 // Loop over all properties and generate their deserialization handling.
                 ifBlock = handlePropertiesDeserialization(propertiesManager.superRequiredProperties, whileBlock, ifBlock);
@@ -528,7 +528,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleJsonReadReturn(methodBlock, model.getName(), propertiesManager, settings);
+        handleJsonReadReturn(methodBlock, propertiesManager.modelName, propertiesManager, settings);
     }
 
     /**
@@ -653,10 +653,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Begin with adding a potential discriminator property, for now assume this is a String property.
         // Then add all instance level properties that associated with JSON property names.
         // Last add a potential additional properties Map.
-        if (!CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty)) {
+        if (propertiesManager.discriminatorProperty != null) {
             // Discriminator properties are always required.
-            methodBlock.line("boolean discriminatorPropertyFound = false;");
-            methodBlock.line("String discriminatorProperty = null;");
+            String propertyName = propertiesManager.discriminatorProperty.getName();
+            methodBlock.line("boolean " + propertyName + "Found = false;");
+            methodBlock.line("String " + propertyName + " = null;");
         }
 
         propertiesManager.superRequiredProperties.forEach(property -> initializeLocalVariable(methodBlock, property));
@@ -711,12 +712,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     private static JavaIfBlock handleDiscriminatorDeserialization(JavaBlock methodBlock,
-        String discriminatorProperty) {
-        if (!CoreUtils.isNullOrEmpty(discriminatorProperty)) {
-            return methodBlock.ifBlock("\"" + discriminatorProperty + "\".equals(fieldName)",
+        ClientModelProperty discriminatorProperty) {
+        if (discriminatorProperty != null) {
+            return methodBlock.ifBlock("\"" + discriminatorProperty.getSerializedName() + "\".equals(fieldName)",
                 ifAction -> {
-                    ifAction.line("discriminatorPropertyFound = true;");
-                    ifAction.line("discriminatorProperty = reader.getStringValue();");
+                    ifAction.line(discriminatorProperty.getName() + "Found = true;");
+                    ifAction.line(discriminatorProperty.getName() + " = reader.getStringValue();");
                 });
         }
 
@@ -940,13 +941,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // If the model has a discriminator property it needs to be null checked and validated that it matches
         // the discriminator of the model.
-        if (!CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty)) {
+        if (propertiesManager.discriminatorProperty != null) {
+            ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
             methodBlock.line();
             methodBlock.ifBlock(
-                "!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, \"" + propertiesManager.expectedDiscriminator + "\")",
-                ifAction -> ifAction.line("throw new IllegalStateException(\"'" + propertiesManager.discriminatorProperty
+                "!" + discriminatorProperty.getName() + "Found || !Objects.equals(" + discriminatorProperty.getName() + ", \"" + propertiesManager.expectedDiscriminator + "\")",
+                ifAction -> ifAction.line("throw new IllegalStateException(\"'" + discriminatorProperty.getSerializedName()
                     + "' was expected to be non-null and equal to '" + propertiesManager.expectedDiscriminator + "'. "
-                    + "The found " + "'" + propertiesManager.discriminatorProperty + "' was '\" + discriminatorProperty + \"'.\");"));
+                    + "The found " + "'" + discriminatorProperty.getSerializedName() + "' was '\" + " + discriminatorProperty.getName() + " + \"'.\");"));
             methodBlock.line();
         }
 
@@ -957,7 +959,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             .forEach(arg -> addConstructorParameter(constructorArgs, arg));
 
         // If there are required properties of any type we must check that all required fields were found.
-        if (!CoreUtils.isNullOrEmpty(propertiesManager.superRequiredProperties) || !CoreUtils.isNullOrEmpty(propertiesManager.requiredProperties)) {
+        if (!CoreUtils.isNullOrEmpty(propertiesManager.superRequiredProperties)
+            || !CoreUtils.isNullOrEmpty(propertiesManager.requiredProperties)) {
             methodBlock.line("List<String> missingProperties = new ArrayList<>();");
             propertiesManager.superRequiredProperties.forEach(property -> addFoundValidationIfCheck(methodBlock, property));
             propertiesManager.requiredProperties.forEach(property -> addFoundValidationIfCheck(methodBlock, property));
@@ -1016,26 +1019,29 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * This will also handle getting the discriminator property and the expected value for the field.
      */
     private static final class PropertiesManager {
+        private final String modelName;
         private final List<ClientModelProperty> superRequiredProperties;
         private final List<ClientModelProperty> superSetterProperties;
         private final List<ClientModelProperty> requiredProperties;
         private final List<ClientModelProperty> setterProperties;
         private final ClientModelProperty additionalProperties;
-        private final String discriminatorProperty;
+        private final ClientModelProperty discriminatorProperty;
         private final String expectedDiscriminator;
         private final FlattenedPropertiesStructure flattenedPropertiesStructure;
 
 
         PropertiesManager(ClientModel model) {
-            this.discriminatorProperty = model.getPolymorphicDiscriminator();
+            this.modelName = model.getName();
             this.expectedDiscriminator = model.getSerializedName();
 
             Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
             List<ClientModelProperty> superRequiredProperties = new ArrayList<>();
             List<ClientModelProperty> superSetterProperties = new ArrayList<>();
             for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
-                // Ignore constants and additional properties.
-                if (property.getIsConstant() || property.isAdditionalProperties()) {
+                // Ignore constants, additional, and discriminator properties.
+                if (property.getIsConstant()
+                    || property.isAdditionalProperties()
+                    || property.isPolymorphicDiscriminator()) {
                     continue;
                 } else if (property.isRequired()) {
                     superRequiredProperties.add(property);
@@ -1050,6 +1056,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             List<ClientModelProperty> requiredProperties = new ArrayList<>();
             List<ClientModelProperty> setterProperties = new ArrayList<>();
+            ClientModelProperty discriminatorProperty = null;
             ClientModelProperty additionalProperties = null;
             for (ClientModelProperty property : model.getProperties()) {
                 // Ignore constant properties.
@@ -1061,6 +1068,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     // Extract the additionalProperties property as this will need to be passed into all deserialization
                     // logic creation calls.
                     additionalProperties = property;
+                } else if (property.isPolymorphicDiscriminator()) {
+                    discriminatorProperty = property;
                 } else {
                     setterProperties.add(property);
                 }
@@ -1070,12 +1079,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
             }
 
+            this.discriminatorProperty = discriminatorProperty;
             this.superRequiredProperties = superRequiredProperties;
             this.superSetterProperties = superSetterProperties;
             this.requiredProperties = requiredProperties;
             this.setterProperties = setterProperties;
             this.additionalProperties = additionalProperties;
-            this.flattenedPropertiesStructure = getFlattenedPropertiesHierarchy(discriminatorProperty,
+            this.flattenedPropertiesStructure = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
                 flattenedProperties);
         }
     }

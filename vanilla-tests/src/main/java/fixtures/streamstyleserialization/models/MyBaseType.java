@@ -16,6 +16,8 @@ import java.util.Objects;
 /** The MyBaseType model. */
 @Fluent
 public class MyBaseType implements JsonSerializable<MyBaseType> {
+    private MyKind kind;
+
     private String propB1;
 
     private String propBH1;
@@ -70,7 +72,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "MyBaseType");
+        jsonWriter.writeStringField("kind", kind);
         jsonWriter.writeStringField("propB1", this.propB1, false);
         if (propBH1 != null) {
             jsonWriter.writeStartObject("helper");
@@ -130,8 +132,8 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean kindFound = false;
+                    String kind = null;
                     String propB1 = null;
                     String propBH1 = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -139,17 +141,17 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                         reader.nextToken();
 
                         if ("kind".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            kindFound = true;
+                            kind = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            propB1 = reader.getStringValue();
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                                    propBH1 = reader.getStringValue();
                                 } else {
                                     reader.skipChildren();
                                 }
@@ -159,10 +161,10 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "MyBaseType")) {
+                    if (!kindFound || !Objects.equals(kind, "MyBaseType")) {
                         throw new IllegalStateException(
                                 "'kind' was expected to be non-null and equal to 'MyBaseType'. The found 'kind' was '"
-                                        + discriminatorProperty
+                                        + kind
                                         + "'.");
                     }
 

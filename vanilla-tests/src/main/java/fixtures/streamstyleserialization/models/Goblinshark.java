@@ -18,6 +18,8 @@ import java.util.Objects;
 /** The Goblinshark model. */
 @Fluent
 public final class Goblinshark extends Shark {
+    private String fishtype = "goblin";
+
     private Integer jawsize;
 
     private GoblinSharkColor color;
@@ -106,7 +108,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "goblin");
+        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
         jsonWriter.writeStringField("species", getSpecies(), false);
@@ -122,8 +124,8 @@ public final class Goblinshark extends Shark {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishtypeFound = false;
+                    String fishtype = null;
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
@@ -138,8 +140,8 @@ public final class Goblinshark extends Shark {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishtypeFound = true;
+                            fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
@@ -149,7 +151,7 @@ public final class Goblinshark extends Shark {
                                             reader, r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
                             siblings =
                                     JsonUtils.readArray(
@@ -167,10 +169,10 @@ public final class Goblinshark extends Shark {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "goblin")) {
+                    if (!fishtypeFound || !Objects.equals(fishtype, "goblin")) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
-                                        + discriminatorProperty
+                                        + fishtype
                                         + "'.");
                     }
 

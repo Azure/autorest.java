@@ -101,15 +101,15 @@ public final class Siamese extends Cat {
                         if ("id".equals(fieldName)) {
                             id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("name".equals(fieldName)) {
-                            name = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {
-                            color = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            color = reader.getStringValue();
                         } else if ("hates".equals(fieldName)) {
                             hates =
                                     JsonUtils.readArray(
                                             reader, r -> JsonUtils.getNullableProperty(r, r1 -> Dog.fromJson(reader)));
                         } else if ("breed".equals(fieldName)) {
-                            breed = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            breed = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }

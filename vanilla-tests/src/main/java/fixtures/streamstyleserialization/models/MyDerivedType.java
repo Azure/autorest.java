@@ -14,6 +14,8 @@ import java.util.Objects;
 /** The MyDerivedType model. */
 @Fluent
 public final class MyDerivedType extends MyBaseType {
+    private MyKind kind = MyKind.KIND1;
+
     private String propD1;
 
     /**
@@ -63,7 +65,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "Kind1");
+        jsonWriter.writeStringField("kind", kind);
         jsonWriter.writeStringField("propB1", getPropB1(), false);
         jsonWriter.writeStringField("propD1", this.propD1, false);
         if (getPropBH1() != null) {
@@ -78,8 +80,8 @@ public final class MyDerivedType extends MyBaseType {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean kindFound = false;
+                    String kind = null;
                     String propB1 = null;
                     String propBH1 = null;
                     String propD1 = null;
@@ -88,19 +90,19 @@ public final class MyDerivedType extends MyBaseType {
                         reader.nextToken();
 
                         if ("kind".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            kindFound = true;
+                            kind = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            propB1 = reader.getStringValue();
                         } else if ("propD1".equals(fieldName)) {
-                            propD1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            propD1 = reader.getStringValue();
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                                    propBH1 = reader.getStringValue();
                                 } else {
                                     reader.skipChildren();
                                 }
@@ -110,10 +112,10 @@ public final class MyDerivedType extends MyBaseType {
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "Kind1")) {
+                    if (!kindFound || !Objects.equals(kind, "Kind1")) {
                         throw new IllegalStateException(
                                 "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
-                                        + discriminatorProperty
+                                        + kind
                                         + "'.");
                     }
 

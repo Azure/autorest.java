@@ -16,6 +16,8 @@ import java.util.Objects;
 /** The DotFish model. */
 @Fluent
 public class DotFish implements JsonSerializable<DotFish> {
+    private String fishType;
+
     private String species;
 
     /**
@@ -48,7 +50,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", "DotFish");
+        jsonWriter.writeStringField("fish\\.type", fishType);
         jsonWriter.writeStringField("species", this.species, false);
         return jsonWriter.writeEndObject().flush();
     }
@@ -103,27 +105,27 @@ public class DotFish implements JsonSerializable<DotFish> {
         return JsonUtils.readObject(
                 jsonReader,
                 reader -> {
-                    boolean discriminatorPropertyFound = false;
-                    String discriminatorProperty = null;
+                    boolean fishTypeFound = false;
+                    String fishType = null;
                     String species = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("fish\\.type".equals(fieldName)) {
-                            discriminatorPropertyFound = true;
-                            discriminatorProperty = reader.getStringValue();
+                            fishTypeFound = true;
+                            fishType = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {
-                            species = JsonUtils.getNullableProperty(reader, r -> reader.getStringValue());
+                            species = reader.getStringValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
 
-                    if (!discriminatorPropertyFound || !Objects.equals(discriminatorProperty, "DotFish")) {
+                    if (!fishTypeFound || !Objects.equals(fishType, "DotFish")) {
                         throw new IllegalStateException(
                                 "'fish\\.type' was expected to be non-null and equal to 'DotFish'. The found 'fish\\.type' was '"
-                                        + discriminatorProperty
+                                        + fishType
                                         + "'.");
                     }
 
