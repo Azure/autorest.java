@@ -74,8 +74,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
-                                defaultProgram.put(
-                                        fieldName, JsonUtils.getNullableProperty(reader, r -> reader.getStringValue()));
+                                defaultProgram.put(fieldName, reader.getStringValue());
                             }
                         } else {
                             reader.skipChildren();

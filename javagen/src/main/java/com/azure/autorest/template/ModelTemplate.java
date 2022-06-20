@@ -66,7 +66,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         JavaSettings settings = JavaSettings.getInstance();
-        Set<String> imports = new HashSet<>();
+        Set<String> imports = settings.isStreamStyleSerialization() ? new StreamStyleImports() : new HashSet<>();
 
         addImports(imports, model, settings);
 
@@ -437,6 +437,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
+            if (property.isPolymorphicDiscriminator() && CoreUtils.isNullOrEmpty(property.getDefaultValue())) {
+                continue;
+            }
+
             addFieldAnnotations(property, classBlock, settings);
 
             String propertyName = property.getName();
@@ -1008,5 +1012,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             comment.param(property.getName(), String.format("the %s value to set", property.getName()));
             comment.methodReturns(String.format("the %s object itself.", model.getName()));
         });
+    }
+
+    private static final class StreamStyleImports extends HashSet<String> {
+        @Override
+        public boolean add(String s) {
+            if (s != null && s.contains("fasterxml")) {
+                return true;
+            }
+
+            return super.add(s);
+        }
     }
 }

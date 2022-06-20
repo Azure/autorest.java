@@ -28,9 +28,11 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -119,7 +121,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeStartObject();");
 
             // If the model has a discriminator property serialize it first.
-            if (propertiesManager.discriminatorProperty != null) {
+            if (propertiesManager.discriminatorProperty != null
+                && !CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty.getDefaultValue())) {
                 ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
                 methodBlock.line("jsonWriter.writeStringField(\"" + discriminatorProperty.getSerializedName()
                     + "\", " + discriminatorProperty.getName() + ");");
@@ -182,7 +185,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.streamStyleJsonFieldSerializationMethod();
         if (fieldSerializationMethod != null) {
-            if (wireType.isNullable()) {
+            if (wireType instanceof EnumType) {
+                methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", "
+                    + propertyValueGetter + " == null ? null : " + propertyValueGetter + ".toString(), false);");
+            } else if (wireType.isNullable()) {
                 methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", "
                     + addPotentialSerializationNullCheck(wireType, fieldSerializationMethod, propertyValueGetter) + ", false);");
             } else {
@@ -228,7 +234,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (valueSerializationMethod != null) {
                 // TODO (alzimmer): Determine if null list elements and null values in a key-value pair should be serialized.
-                if (elementType.isNullable()) {
+                if (elementType instanceof EnumType) {
+                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(element == null ? null : element.toString())");
+                } else if (elementType.isNullable()) {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "("
                         + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, "element") + ", false)");
                 } else {
@@ -403,13 +411,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model,
         PropertiesManager propertiesManager, JavaSettings settings) {
+        String fieldNameVariableName = propertiesManager.readerFieldNameVariableName;
+        ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
         readObject(classBlock, model.getName(), false, methodBlock -> {
             methodBlock.line("String discriminatorValue = null;");
             methodBlock.line("JsonReader readerToUse = null;");
             methodBlock.line();
             methodBlock.line("// Read the first field name and determine if it's the discriminator field.");
             methodBlock.line("reader.nextToken();");
-            methodBlock.ifBlock("\"" + model.getPolymorphicDiscriminator() + "\".equals(reader.getFieldName())",
+            methodBlock.ifBlock("\"" + discriminatorProperty.getSerializedName() + "\".equals(reader.getFieldName())",
                 ifBlock -> {
                     ifBlock.line("reader.nextToken();");
                     ifBlock.line("discriminatorValue = reader.getStringValue();");
@@ -421,9 +431,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 elseBlock.line("JsonReader replayReader = DefaultJsonReader.fromString(json);");
                 elseBlock.line("while (replayReader.nextToken() != JsonToken.END_OBJECT) {");
                 elseBlock.indent(() -> {
-                    elseBlock.line("String fieldName = replayReader.getFieldName();");
+                    elseBlock.line("String " + fieldNameVariableName + " = replayReader.getFieldName();");
                     elseBlock.line("replayReader.nextToken();");
-                    elseBlock.ifBlock("\"" + model.getPolymorphicDiscriminator() + "\".equals(fieldName)", ifBlock -> {
+                    elseBlock.ifBlock("\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")", ifBlock -> {
                         ifBlock.line("discriminatorValue = replayReader.getStringValue();");
                         ifBlock.line("break;");
                     }).elseBlock(elseBlock2 -> elseBlock2.line("replayReader.skipChildren();"));
@@ -437,14 +447,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             // Add a throw statement if the discriminator value didn't match anything known.
             StringBuilder exceptionMessage = new StringBuilder("Discriminator field '")
-                .append(model.getPolymorphicDiscriminator())
-                .append("' was present and didn't match one of the expected values '")
-                .append(model.getSerializedName())
-                .append("'");
+                .append(discriminatorProperty.getSerializedName())
+                .append("' didn't match one of the expected values ");
+
+            if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
+                exceptionMessage.append("'").append(propertiesManager.expectedDiscriminator).append("'");
+            }
 
             // Add deserialization for the super type itself.
-            JavaIfBlock ifBlock = methodBlock.ifBlock(
-                "discriminatorValue == null || \"" + model.getSerializedName() + "\".equals(discriminatorValue)",
+            JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
+                : methodBlock.ifBlock("discriminatorValue == null || \"" + propertiesManager.expectedDiscriminator + "\".equals(discriminatorValue)",
                 ifStatement -> ifStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse)"));
 
             // Add deserialization for all child types.
@@ -456,9 +468,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 String returnStatement = childType.getName() + (isSuperTypeWithDiscriminator(childType)
                     ? ".fromJsonKnownDiscriminator(readerToUse)"
                     : ".fromJson(readerToUse)");
-                ifBlock = ifBlock.elseIfBlock(condition, ifStatement -> ifStatement.methodReturn(returnStatement));
+                ifBlock = ifBlock == null
+                    ? methodBlock.ifBlock(condition, ifStatement -> ifStatement.methodReturn(returnStatement))
+                    : ifBlock.elseIfBlock(condition, ifStatement -> ifStatement.methodReturn(returnStatement));
 
-                if (i < childTypes.size() - 1) {
+                if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
+                    exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
+                } else if (i < childTypes.size() - 1) {
                     exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
                 } else {
                     ((childTypes.size() == 1) ? exceptionMessage.append(" or '") : exceptionMessage.append(", or '"))
@@ -467,11 +483,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
             }
 
-            ifBlock.elseBlock(elseBlock -> elseBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");"));
+            if (ifBlock == null) {
+                methodBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");");
+            } else {
+                ifBlock.elseBlock(elseBlock -> elseBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");"));
+            }
         });
 
-        readObject(classBlock, model.getName(), true,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+        if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
+            readObject(classBlock, model.getName(), true,
+                methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+        }
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -508,22 +530,28 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             initializeLocalVariables(methodBlock, propertiesManager);
 
             // Add the outermost while loop to read the JSON object.
-            addReaderWhileLoop(methodBlock, true, whileBlock -> {
+            String fieldNameVariableName = propertiesManager.readerFieldNameVariableName;
+            addReaderWhileLoop(methodBlock, true, fieldNameVariableName, whileBlock -> {
                 JavaIfBlock ifBlock = handleDiscriminatorDeserialization(whileBlock,
-                    propertiesManager.discriminatorProperty);
+                    propertiesManager.discriminatorProperty, propertiesManager.readerFieldNameVariableName);
 
                 // Loop over all properties and generate their deserialization handling.
-                ifBlock = handlePropertiesDeserialization(propertiesManager.superRequiredProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.superSetterProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.requiredProperties, whileBlock, ifBlock);
-                ifBlock = handlePropertiesDeserialization(propertiesManager.setterProperties, whileBlock, ifBlock);
+                ifBlock = handlePropertiesDeserialization(propertiesManager.superRequiredProperties, whileBlock,
+                    ifBlock, fieldNameVariableName);
+                ifBlock = handlePropertiesDeserialization(propertiesManager.superSetterProperties, whileBlock,
+                    ifBlock, fieldNameVariableName);
+                ifBlock = handlePropertiesDeserialization(propertiesManager.requiredProperties, whileBlock,
+                    ifBlock, fieldNameVariableName);
+                ifBlock = handlePropertiesDeserialization(propertiesManager.setterProperties, whileBlock,
+                    ifBlock, fieldNameVariableName);
 
                 handleFlattenedPropertiesDeserialization(propertiesManager.flattenedPropertiesStructure, methodBlock,
-                    ifBlock, propertiesManager.additionalProperties);
+                    ifBlock, propertiesManager.additionalProperties, propertiesManager.readerFieldNameVariableName);
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties
                 // or add them into an additional properties bag.
-                handleUnknownFieldDeserialization(whileBlock, ifBlock, propertiesManager.additionalProperties);
+                handleUnknownFieldDeserialization(whileBlock, ifBlock, propertiesManager.additionalProperties,
+                    propertiesManager.readerFieldNameVariableName);
             });
         });
 
@@ -689,18 +717,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Adds the while loop that handles reading the JSON object until it is fully consumed.
      *
      * @param methodBlock The method handling deserialization.
-     * @param initializeFieldNameVariable Whether the {@code fieldName} variable needs to be initialized. If this is a
-     * nested while loop the variable doesn't need to be initialized.
+     * @param initializeFieldNameVariable Whether the {@code fieldNameVariableName} variable needs to be initialized. If
+     * this is a nested while loop the variable doesn't need to be initialized.
+     * @param fieldNameVariableName The name for the variable that tracks the JSON field name.
      * @param whileBlock The consumer that adds deserialization logic into the while loop.
      */
     private static void addReaderWhileLoop(JavaBlock methodBlock, boolean initializeFieldNameVariable,
-        Consumer<JavaBlock> whileBlock) {
+        String fieldNameVariableName, Consumer<JavaBlock> whileBlock) {
         methodBlock.line("while (reader.nextToken() != JsonToken.END_OBJECT) {");
         methodBlock.increaseIndent();
         if (initializeFieldNameVariable) {
-            methodBlock.line("String fieldName = reader.getFieldName();");
+            methodBlock.line("String " + fieldNameVariableName + " = reader.getFieldName();");
         } else {
-            methodBlock.line("fieldName = reader.getFieldName();");
+            methodBlock.line(fieldNameVariableName + " = reader.getFieldName();");
         }
         methodBlock.line("reader.nextToken();");
         methodBlock.line("");
@@ -712,9 +741,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     private static JavaIfBlock handleDiscriminatorDeserialization(JavaBlock methodBlock,
-        ClientModelProperty discriminatorProperty) {
+        ClientModelProperty discriminatorProperty, String fieldNameVariableName) {
         if (discriminatorProperty != null) {
-            return methodBlock.ifBlock("\"" + discriminatorProperty.getSerializedName() + "\".equals(fieldName)",
+            return methodBlock.ifBlock("\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")",
                 ifAction -> {
                     ifAction.line(discriminatorProperty.getName() + "Found = true;");
                     ifAction.line(discriminatorProperty.getName() + " = reader.getStringValue();");
@@ -725,30 +754,30 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     private static JavaIfBlock handlePropertiesDeserialization(List<ClientModelProperty> properties,
-        JavaBlock methodBlock, JavaIfBlock ifBlock) {
+        JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName) {
         for (ClientModelProperty property : properties) {
             // Property will be handled later by flattened deserialization.
             if (property.getNeedsFlatten()) {
                 continue;
             }
 
-            ifBlock = handlePropertyDeserialization(property, methodBlock, ifBlock);
+            ifBlock = handlePropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName);
         }
 
         return ifBlock;
     }
 
     private static JavaIfBlock handlePropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
-        JavaIfBlock ifBlock) {
+        JavaIfBlock ifBlock, String fieldNameVariableName) {
         String jsonPropertyName = property.getSerializedName();
         if (CoreUtils.isNullOrEmpty(jsonPropertyName)) {
             return ifBlock;
         }
 
-        String condition = "\"" + jsonPropertyName + "\".equals(fieldName)";
+        String condition = "\"" + jsonPropertyName + "\".equals(" + fieldNameVariableName + ")";
 
         Consumer<JavaBlock> deserializationHandling = deserializationBlock ->
-            generateDeserializationLogic(deserializationBlock, property);
+            generateDeserializationLogic(deserializationBlock, property, fieldNameVariableName);
         return (ifBlock == null)
             ? methodBlock.ifBlock(condition, deserializationHandling)
             : ifBlock.elseIfBlock(condition, deserializationHandling);
@@ -756,21 +785,22 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void handleFlattenedPropertiesDeserialization(
         FlattenedPropertiesStructure flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
-        ClientModelProperty additionalProperties) {
+        ClientModelProperty additionalProperties, String fieldNameVariableName) {
         // The initial call to handle flattened properties is using the base node which is just a holder.
         for (FlattenedPropertiesStructure structure : flattenedProperties.subNodes.values()) {
-            handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, ifBlock, additionalProperties);
+            handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, ifBlock, additionalProperties,
+                fieldNameVariableName);
         }
     }
 
     private static JavaIfBlock handleFlattenedPropertiesDeserializationHelper(
         FlattenedPropertiesStructure flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
-        ClientModelProperty additionalProperties) {
+        ClientModelProperty additionalProperties, String fieldNameVariableName) {
         if (flattenedProperties.property != null) {
             // This is a terminal location, so only need to handle checking for the property name.
-            String condition = "\"" + flattenedProperties.nodeName + "\".equals(fieldName)";
+            String condition = "\"" + flattenedProperties.nodeName + "\".equals(" + fieldNameVariableName + ")";
             Consumer<JavaBlock> deserializationHandling = deserializationBlock ->
-                generateDeserializationLogic(deserializationBlock, flattenedProperties.property.property);
+                generateDeserializationLogic(deserializationBlock, flattenedProperties.property.property, fieldNameVariableName);
 
             return (ifBlock == null)
                 ? methodBlock.ifBlock(condition, deserializationHandling)
@@ -778,15 +808,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         } else {
             // Otherwise this is an intermediate location and a while loop reader needs to be added.
-            String condition = "\"" + flattenedProperties.nodeName + "\".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT";
-            Consumer<JavaBlock> ifActionConsumer = ifAction -> addReaderWhileLoop(ifAction, false, whileBlock -> {
+            String condition = "\"" + flattenedProperties.nodeName + "\".equals(" + fieldNameVariableName + ") && reader.currentToken() == JsonToken.START_OBJECT";
+            Consumer<JavaBlock> ifActionConsumer = ifAction -> addReaderWhileLoop(ifAction, false, fieldNameVariableName, whileBlock -> {
                 JavaIfBlock innerIfBlock = null;
                 for (FlattenedPropertiesStructure structure : flattenedProperties.subNodes.values()) {
                     innerIfBlock = handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, innerIfBlock,
-                        additionalProperties);
+                        additionalProperties, fieldNameVariableName);
                 }
 
-                handleUnknownFieldDeserialization(whileBlock, innerIfBlock, additionalProperties);
+                handleUnknownFieldDeserialization(whileBlock, innerIfBlock, additionalProperties, fieldNameVariableName);
             });
 
             return (ifBlock == null)
@@ -795,7 +825,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
-    private static void generateDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property) {
+    private static void generateDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property,
+        String fieldNameVariableName) {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
 
@@ -803,7 +834,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleDeserialization(wireType, clientType);
         if (simpleDeserialization != null) {
-            if (wireType.isNullable() && wireType != ClassType.String) {
+            if (deserializationNeedsNullGuard(wireType)) {
                 deserializationBlock.line(property.getName() + " = JsonUtils.getNullableProperty(reader, r -> " + simpleDeserialization + ");");
             } else {
                 deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
@@ -815,7 +846,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             String elementDeserialization = getSimpleDeserialization(elementType, clientType);
 
             deserializationBlock.text(property.getName() + " = ");
-            if (elementType.isNullable()) {
+            if (deserializationNeedsNullGuard(elementType)) {
                 deserializationBlock.line("JsonUtils.readArray(reader, r -> JsonUtils.getNullableProperty(r, r1 -> " + elementDeserialization + "));");
             } else {
                 deserializationBlock.line("JsonUtils.readArray(reader, r -> " + elementDeserialization + ");");
@@ -833,13 +864,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             deserializationBlock.line("while (reader.nextToken() != JsonToken.END_OBJECT) {");
             deserializationBlock.increaseIndent();
 
-            deserializationBlock.line("fieldName = reader.getFieldName();");
+            deserializationBlock.line(fieldNameVariableName + " = reader.getFieldName();");
             deserializationBlock.line("reader.nextToken();");
             deserializationBlock.line();
-            if (valueType.isNullable()) {
-                deserializationBlock.line(property.getName() + ".put(fieldName, JsonUtils.getNullableProperty(reader, r -> " + valueDeserialization + "));");
+            if (deserializationNeedsNullGuard(valueType)) {
+                deserializationBlock.line(property.getName() + ".put(" + fieldNameVariableName + ", JsonUtils.getNullableProperty(reader, r -> " + valueDeserialization + "));");
             } else {
-                deserializationBlock.line(property.getName() + ".put(fieldName, " + valueDeserialization + ");");
+                deserializationBlock.line(property.getName() + ".put(" + fieldNameVariableName + ", " + valueDeserialization + ");");
             }
 
             deserializationBlock.decreaseIndent();
@@ -867,6 +898,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             wireTypeDeserialization = "reader.getIntValue()";
         } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
             wireTypeDeserialization = "reader.getLongValue()";
+        } else if (wireType == PrimitiveType.Char || wireType == ClassType.Character) {
+            wireTypeDeserialization = "reader.getStringValue().charAt(0)";
         } else if (wireType == ArrayType.ByteArray) {
             wireTypeDeserialization = "Base64.getDecoder().decode(reader.getStringValue())";
         } else if (wireType == ClassType.String) {
@@ -882,6 +915,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else if (wireType instanceof EnumType) {
             EnumType enumType = (EnumType) wireType;
             wireTypeDeserialization = enumType.getName() + "." + enumType.getFromJsonMethodName() + "(reader.getStringValue())";
+        } else if (wireType == ClassType.UUID) {
+            wireTypeDeserialization = "UUID.fromString(reader.getStringValue())";
+        } else if (wireType == ClassType.Object) {
+            wireTypeDeserialization = "JsonUtils.readUntypedField(reader)";
         } else if (wireType instanceof ClassType) {
             wireTypeDeserialization = wireType + ".fromJson(reader)";
         } else {
@@ -895,8 +932,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
+    private static boolean deserializationNeedsNullGuard(IType wireType) {
+        return wireType.isNullable()
+            && wireType != ClassType.String // Strings are deserialization null safe.
+            && !(wireType instanceof EnumType && ((EnumType) wireType).getExpandable()); // ExpandableStringEnums are deserialization null safe.
+    }
+
     private static void handleUnknownFieldDeserialization(JavaBlock methodBlock, JavaIfBlock ifBlock,
-        ClientModelProperty additionalProperties) {
+        ClientModelProperty additionalProperties, String fieldNameVariableName) {
         Consumer<JavaBlock> unknownFieldConsumer = javaBlock -> {
             if (additionalProperties != null) {
                 javaBlock.ifBlock(additionalProperties.getName() + " == null",
@@ -907,10 +950,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 IType valueType = ((MapType) additionalProperties.getWireType()).getValueType();
                 if (valueType == ClassType.Object) {
                     // String fieldName should be a local variable accessible in this spot of code.
-                    javaBlock.line(additionalProperties.getName() + ".put(fieldName, JsonUtils.readUntypedField(reader));");
+                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", JsonUtils.readUntypedField(reader));");
                 } else {
                     // Another assumption, the additional properties value type is simple.
-                    javaBlock.line(additionalProperties.getName() + ".put(fieldName, "
+                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "
                         + getSimpleDeserialization(valueType, valueType) + ");");
                 }
             } else {
@@ -1028,9 +1071,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         private final ClientModelProperty discriminatorProperty;
         private final String expectedDiscriminator;
         private final FlattenedPropertiesStructure flattenedPropertiesStructure;
-
+        private final String readerFieldNameVariableName;
 
         PropertiesManager(ClientModel model) {
+            // The reader JSON field name variable needs to be mutable as it may match a JSON property name in the class.
+            Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
+                "fieldName", "jsonFieldName", "deserializationFieldName"));
             this.modelName = model.getName();
             this.expectedDiscriminator = model.getSerializedName();
 
@@ -1052,6 +1098,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (property.getNeedsFlatten()) {
                     flattenedProperties.put(property.getName(), new ClientModelPropertyWithMetadata(property, true));
                 }
+
+                possibleReaderFieldNameVariableNames.remove(property.getName());
             }
 
             List<ClientModelProperty> requiredProperties = new ArrayList<>();
@@ -1077,6 +1125,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (property.getNeedsFlatten()) {
                     flattenedProperties.put(property.getName(), new ClientModelPropertyWithMetadata(property, false));
                 }
+
+                possibleReaderFieldNameVariableNames.remove(property.getName());
             }
 
             this.discriminatorProperty = discriminatorProperty;
@@ -1087,6 +1137,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             this.additionalProperties = additionalProperties;
             this.flattenedPropertiesStructure = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
                 flattenedProperties);
+            this.readerFieldNameVariableName = possibleReaderFieldNameVariableNames.iterator().next();
         }
     }
 

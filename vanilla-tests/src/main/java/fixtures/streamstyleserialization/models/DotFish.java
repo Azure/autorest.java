@@ -11,13 +11,10 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.Objects;
 
 /** The DotFish model. */
 @Fluent
 public class DotFish implements JsonSerializable<DotFish> {
-    private String fishType;
-
     private String species;
 
     /**
@@ -50,7 +47,6 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", fishType);
         jsonWriter.writeStringField("species", this.species, false);
         return jsonWriter.writeEndObject().flush();
     }
@@ -88,51 +84,12 @@ public class DotFish implements JsonSerializable<DotFish> {
                         }
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.
-                    if (discriminatorValue == null || "DotFish".equals(discriminatorValue)) {
-                        return fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("DotSalmon".equals(discriminatorValue)) {
+                    if ("DotSalmon".equals(discriminatorValue)) {
                         return DotSalmon.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fish\\.type' was present and didn't match one of the expected values 'DotFish' or 'DotSalmon'. It was: '"
-                                        + discriminatorValue
-                                        + "'.");
+                                "Discriminator field 'fish\\.type' didn't match one of the expected values 'DotSalmon'");
                     }
-                });
-    }
-
-    static DotFish fromJsonKnownDiscriminator(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
-                reader -> {
-                    boolean fishTypeFound = false;
-                    String fishType = null;
-                    String species = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("fish\\.type".equals(fieldName)) {
-                            fishTypeFound = true;
-                            fishType = reader.getStringValue();
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-
-                    if (!fishTypeFound || !Objects.equals(fishType, "DotFish")) {
-                        throw new IllegalStateException(
-                                "'fish\\.type' was expected to be non-null and equal to 'DotFish'. The found 'fish\\.type' was '"
-                                        + fishType
-                                        + "'.");
-                    }
-
-                    DotFish deserializedValue = new DotFish();
-                    deserializedValue.setSpecies(species);
-
-                    return deserializedValue;
                 });
     }
 }

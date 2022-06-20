@@ -152,7 +152,7 @@ public class Shark extends Fish {
                         return Cookiecuttershark.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
+                                "Discriminator field 'fishtype' didn't match one of the expected values 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }

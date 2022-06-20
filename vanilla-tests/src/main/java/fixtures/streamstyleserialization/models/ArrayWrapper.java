@@ -61,10 +61,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array =
-                                    JsonUtils.readArray(
-                                            reader,
-                                            r -> JsonUtils.getNullableProperty(r, r1 -> reader.getStringValue()));
+                            array = JsonUtils.readArray(reader, r -> reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

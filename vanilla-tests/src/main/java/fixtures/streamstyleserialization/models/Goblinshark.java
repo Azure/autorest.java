@@ -161,9 +161,7 @@ public final class Goblinshark extends Shark {
                         } else if ("jawsize".equals(fieldName)) {
                             jawsize = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
                         } else if ("color".equals(fieldName)) {
-                            color =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> GoblinSharkColor.fromString(reader.getStringValue()));
+                            color = GoblinSharkColor.fromString(reader.getStringValue());
                         } else {
                             reader.skipChildren();
                         }

@@ -5,22 +5,17 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /** The Fish model. */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
-    private String fishtype;
-
     private String species;
 
     private float length;
@@ -99,7 +94,6 @@ public class Fish implements JsonSerializable<Fish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("species", this.species, false);
         JsonUtils.writeArray(
@@ -140,9 +134,7 @@ public class Fish implements JsonSerializable<Fish> {
                         }
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.
-                    if (discriminatorValue == null || "Fish".equals(discriminatorValue)) {
-                        return fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("salmon".equals(discriminatorValue)) {
+                    if ("salmon".equals(discriminatorValue)) {
                         return Salmon.fromJsonKnownDiscriminator(readerToUse);
                     } else if ("smart_salmon".equals(discriminatorValue)) {
                         return SmartSalmon.fromJson(readerToUse);
@@ -156,65 +148,10 @@ public class Fish implements JsonSerializable<Fish> {
                         return Cookiecuttershark.fromJson(readerToUse);
                     } else {
                         throw new IllegalStateException(
-                                "Discriminator field 'fishtype' was present and didn't match one of the expected values 'Fish', 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
+                                "Discriminator field 'fishtype' didn't match one of the expected values 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
                                         + discriminatorValue
                                         + "'.");
                     }
-                });
-    }
-
-    static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
-                reader -> {
-                    boolean fishtypeFound = false;
-                    String fishtype = null;
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("fishtype".equals(fieldName)) {
-                            fishtypeFound = true;
-                            fishtype = reader.getStringValue();
-                        } else if ("length".equals(fieldName)) {
-                            length = reader.getFloatValue();
-                            lengthFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings =
-                                    JsonUtils.readArray(
-                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-
-                    if (!fishtypeFound || !Objects.equals(fishtype, "Fish")) {
-                        throw new IllegalStateException(
-                                "'fishtype' was expected to be non-null and equal to 'Fish'. The found 'fishtype' was '"
-                                        + fishtype
-                                        + "'.");
-                    }
-
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-
-                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
-                        throw new IllegalStateException(
-                                "Missing required property/properties: " + String.join(", ", missingProperties));
-                    }
-                    Fish deserializedValue = new Fish(length);
-                    deserializedValue.setSpecies(species);
-                    deserializedValue.setSiblings(siblings);
-
-                    return deserializedValue;
                 });
     }
 }
