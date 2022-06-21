@@ -27,6 +27,7 @@ public class FluentPomMapper extends PomMapper {
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         List<String> dependencyIdentifiers = new ArrayList<>();
+        dependencyIdentifiers.add(JSON_PREFIX + project.getPackageVersions().getAzureJsonVersion());
         dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
         dependencyIdentifiers.add(CORE_MANAGEMENT_PREFIX + project.getPackageVersions().getAzureCoreManagementVersion());
         if (JavaSettings.getInstance().isGenerateTests()) {

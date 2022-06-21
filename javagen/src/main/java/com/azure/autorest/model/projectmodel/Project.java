@@ -50,7 +50,8 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.29.1";
+        private String azureJsonVersion = "1.0.0-beta.1";
+        private String azureCoreVersion = "1.30.0-beta.1";
         private String azureCoreManagementVersion = "1.6.2";
         private String azureCoreHttpNettyVersion = "1.12.2";
         private String azureCoreTestVersion = "1.9.1";
@@ -60,6 +61,10 @@ public class Project {
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
+        }
+
+        public String getAzureJsonVersion() {
+            return azureJsonVersion;
         }
 
         public String getAzureCoreVersion() {

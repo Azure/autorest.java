@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -348,7 +349,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
             if (parameterLocation != RequestParameterLocation.BODY &&
                     //parameterLocation != RequestParameterLocation.FormData &&
-                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+                    (parameterClientType instanceof ArrayType || parameterClientType instanceof IterableType)) {
 
                 if (parameterClientType == ArrayType.ByteArray) {
                     String expression = "null";
@@ -360,15 +361,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
                     function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
                     addedConversion = true;
-                } else if (parameterClientType instanceof ListType) {
+                } else if (parameterClientType instanceof IterableType) {
                     boolean alreadyNullChecked = clientMethod.getRequiredNullableParameterExpressions()
                         .contains(parameterName);
+                    IType elementType = ((IterableType) parameterClientType).getElementType();
                     String expression;
                     if (alwaysNull) {
                         expression = "null";
                     } else if (!parameter.getExplode()) {
                         CollectionFormat collectionFormat = parameter.getCollectionFormat();
-                        if (((ListType) parameterClientType).getElementType() instanceof EnumType) {
+                        if (elementType instanceof EnumType) {
                             // EnumTypes should provide a toString implementation that represents the wire value.
                             // Circumvent the use of JacksonAdapter and handle this manually.
 
@@ -387,10 +389,15 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             }
                         } else {
-                            expression = String.format(
-                                "JacksonAdapter.createDefaultSerializerAdapter().serialize%s(%s, CollectionFormat.%s)",
-                                settings.shouldUseIterable() ? "Iterable" : "List", parameterName,
-                                collectionFormat.toString().toUpperCase());
+                            if (elementType == ClassType.String) {
+                                expression = "(" + parameterName + " == null) ? null : String.join(CollectionFormat."
+                                    + collectionFormat.toString().toUpperCase() + ", " + parameterName + ")";
+                            } else {
+                                expression = String.format(
+                                    "JacksonAdapter.createDefaultSerializerAdapter().serialize%s(%s, CollectionFormat.%s)",
+                                    settings.shouldUseIterable() ? "Iterable" : "List", parameterName,
+                                    collectionFormat.toString().toUpperCase());
+                            }
                         }
                     } else {
                         if (alreadyNullChecked) {

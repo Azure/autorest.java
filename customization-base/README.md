@@ -706,3 +706,11 @@ Steps to diagnose and fix:
 2. Compile or inspect the generated code, find the error.
 3. Determine the root cause. If it is caused by bug in customization code, fix it. If it is caused by bug in `customization-base` package, report it in GitHub issues.
 4. Remove `skip-formatting` flag.
+
+# Developer note
+
+`azure-autorest-customization` passes all generated code files to an Eclipse language server process to enable richer,
+IDE-like functionality. For this to work correctly all required dependencies must be passed to the language server using
+a dummy `pom.xml`, which can be found in `src/main/resources`. If you make changes to code generation and begin seeing
+code customizations failing it may be that the `pom.xml` is missing required dependencies and is causing the language
+server to change processing from IDE-like to a regex, or find and replace, style.
