@@ -68,6 +68,8 @@ public class FluentJavaSettings {
 
     private String artifactVersion;
 
+    private boolean generateAsyncMethods = false;
+
     private SampleGeneration generateSamples = SampleGeneration.NONE;
 
     private boolean sdkIntegration = false;
@@ -134,6 +136,10 @@ public class FluentJavaSettings {
         return Optional.ofNullable(artifactVersion);
     }
 
+    public boolean isGenerateAsyncMethods() {
+        return generateAsyncMethods;
+    }
+
     public boolean isGenerateSamples() {
         return generateSamples != SampleGeneration.NONE;
     }
@@ -176,6 +182,8 @@ public class FluentJavaSettings {
 
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
+
+        loadBooleanSetting("generate-async-methods", s -> generateAsyncMethods = s);
 
         loadBooleanSetting("generate-samples", s -> generateSamples = (s ? SampleGeneration.AGGREGATED : SampleGeneration.NONE));
 
