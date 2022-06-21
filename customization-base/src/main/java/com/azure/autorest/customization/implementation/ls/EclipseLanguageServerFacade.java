@@ -3,8 +3,6 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
-import com.sun.jna.Platform;
-
 import java.io.InputStream;
 import java.nio.file.Paths;
 
@@ -26,9 +24,11 @@ public class EclipseLanguageServerFacade {
             if (version >= 9) {
                 command += "--add-modules=ALL-SYSTEM --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED ";
             }
-            if (Platform.isWindows()) {
+
+            String osName = System.getProperty("os.name");
+            if (osName.startsWith("Windows")) {
                 command += "-configuration ./config_win";
-            } else if (Platform.isMac()) {
+            } else if (osName.startsWith("Mac") || osName.startsWith("Darwin")) {
                 command += "-configuration ./config_mac";
             } else {
                 command += "-configuration ./config_linux";

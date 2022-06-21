@@ -41,10 +41,6 @@ import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.Platform;
-import com.sun.jna.platform.win32.Kernel32;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,7 +88,9 @@ public class EclipseLanguageClient implements AutoCloseable {
             } else {
                 this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin, port);
             }
-            thread.join(10000);
+
+            thread.join();
+
             connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -100,14 +98,10 @@ public class EclipseLanguageClient implements AutoCloseable {
     }
 
     public void initialize() {
-        int pid;
-        if (Platform.isWindows()) {
-            pid = Kernel32.INSTANCE.GetCurrentProcessId();
-        } else {
-            pid = CLibrary.INSTANCE.getpid();
-        }
+        long pid = ProcessHandle.current().pid();
+
         InitializeParams initializeParams = new InitializeParams();
-        initializeParams.setProcessId(pid);
+        initializeParams.setProcessId(Math.toIntExact(pid));
         initializeParams.setRootUri(workspaceDir);
         initializeParams.setWorkspaceFolders(new ArrayList<>());
         WorkspaceFolder workspaceFolder = new WorkspaceFolder();
@@ -275,11 +269,5 @@ public class EclipseLanguageClient implements AutoCloseable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private interface CLibrary extends Library {
-        CLibrary INSTANCE = Native.load("c", CLibrary.class);
-
-        int getpid();
     }
 }
