@@ -309,11 +309,12 @@ public class ClassType implements IType {
     private final List<String> implementationImports;
     private final XmsExtensions extensions;
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final boolean isSwaggerType;
     private final String streamStyleJsonFieldSerializationMethod;
     private final String streamStyleJsonValueSerializationMethod;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
-        java.util.function.Function<String, String> defaultValueExpressionConverter,
+        java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
         String streamStyleJsonFieldSerializationMethod, String streamStyleJsonValueSerializationMethod) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
@@ -321,6 +322,7 @@ public class ClassType implements IType {
         this.implementationImports = implementationImports;
         this.extensions = extensions;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
+        this.isSwaggerType = isSwaggerType;
         this.streamStyleJsonFieldSerializationMethod = streamStyleJsonFieldSerializationMethod;
         this.streamStyleJsonValueSerializationMethod = streamStyleJsonValueSerializationMethod;
     }
@@ -461,6 +463,10 @@ public class ClassType implements IType {
         }
     }
 
+    public boolean isSwaggerType() {
+        return isSwaggerType;
+    }
+
     @Override
     public String streamStyleJsonFieldSerializationMethod() {
         return streamStyleJsonFieldSerializationMethod;
@@ -547,7 +553,7 @@ public class ClassType implements IType {
                         : this.streamStyleJsonValueSerializationMethod;
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
-                streamStyleJsonFieldSerializationMethod, streamStyleJsonValueSerializationMethod);
+                isSwaggerType, streamStyleJsonFieldSerializationMethod, streamStyleJsonValueSerializationMethod);
         }
     }
 

@@ -227,23 +227,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         IType elementType, String serializedName, String propertyValueGetter, int depth) {
         String valueSerializationMethod = elementType.streamStyleJsonValueSerializationMethod();
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
+        String elementName = depth == 0 ? "element" : "element" + depth;
+        String serializeValue = depth == 0 ? propertyValueGetter
+            : ((depth == 1) ? "element" : "element" + (depth - 1));
 
         // TODO (alzimmer): Determine if the writeNull property should ever be set to true for writing the container
         //  property. Right now this won't serialize anything if the container value is null.
-        methodBlock.line("JsonUtils." + utilityMethod + "(jsonWriter, \"" + serializedName + "\", " + propertyValueGetter + ", (" + lambdaWriterName + ", element) -> ");
+        methodBlock.line("JsonUtils." + utilityMethod + "(jsonWriter, \"" + serializedName + "\", " + serializeValue + ", (" + lambdaWriterName + ", " + elementName + ") -> ");
         methodBlock.indent(() -> {
             if (valueSerializationMethod != null) {
                 // TODO (alzimmer): Determine if null list elements and null values in a key-value pair should be serialized.
                 if (elementType instanceof EnumType) {
-                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(element == null ? null : element.toString())");
+                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(" + elementName + " == null ? null : " + elementName + ".toString())");
                 } else if (elementType.isNullable()) {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "("
-                        + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, "element") + ", false)");
+                        + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, elementName) + ", false)");
                 } else {
-                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(element)");
+                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(" + elementName + ")");
                 }
             } else if (elementType == ClassType.Object) {
-                methodBlock.line("JsonUtils.writeUntypedField(" + lambdaWriterName + ", element)");
+                methodBlock.line("JsonUtils.writeUntypedField(" + lambdaWriterName + ", " + elementName + ")");
             } else if (elementType instanceof IterableType) {
                 serializeContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
                     serializedName, propertyValueGetter, depth + 1);
@@ -918,7 +921,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static boolean deserializationNeedsNullGuard(IType wireType) {
         return wireType.isNullable()
             && wireType != ClassType.String // Strings are deserialization null safe.
-            && !(wireType instanceof EnumType && ((EnumType) wireType).getExpandable()); // ExpandableStringEnums are deserialization null safe.
+            && !(wireType instanceof EnumType && ((EnumType) wireType).getExpandable()) // ExpandableStringEnums are deserialization null safe.
+            && !(wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()); // Swagger types will use fromJson which is null safe.
     }
 
     private static void handleUnknownFieldDeserialization(JavaBlock methodBlock, JavaIfBlock ifBlock,

@@ -390,8 +390,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             }
                         } else {
                             if (elementType == ClassType.String) {
-                                expression = "(" + parameterName + " == null) ? null : String.join(CollectionFormat."
-                                    + collectionFormat.toString().toUpperCase() + ", " + parameterName + ")";
+                                expression = "(" + parameterName + " == null) ? null : String.join(\""
+                                    + collectionFormat.getDelimiter() + "\", " + parameterName + ")";
                             } else {
                                 expression = String.format(
                                     "JacksonAdapter.createDefaultSerializerAdapter().serialize%s(%s, CollectionFormat.%s)",
