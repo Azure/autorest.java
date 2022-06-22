@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.CodeNamer;
 
@@ -76,10 +77,20 @@ public class FluentResourceCollection {
                 .collect(Collectors.toSet());
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()
-                .filter(m -> m.getType() == ClientMethodType.SimpleSync
-                        || m.getType() == ClientMethodType.PagingSync
-                        || m.getType() == ClientMethodType.LongRunningSync
-                        || m.getType() == ClientMethodType.SimpleSyncRestResponse)
+                .filter(m -> !m.isImplementationOnly() && m.getMethodVisibility() == JavaVisibility.Public)
+                .filter(m -> {
+                            boolean isSyncMethod = m.getType() == ClientMethodType.SimpleSync
+                                    || m.getType() == ClientMethodType.PagingSync
+                                    || m.getType() == ClientMethodType.LongRunningSync
+                                    || m.getType() == ClientMethodType.SimpleSyncRestResponse;
+                            boolean isAsyncMethod = m.getType() == ClientMethodType.SimpleAsync
+                                    || m.getType() == ClientMethodType.PagingAsync
+                                    || m.getType() == ClientMethodType.LongRunningAsync
+                                    || m.getType() == ClientMethodType.SimpleAsyncRestResponse;
+                            // by default, only add sync methods
+                            return isSyncMethod;
+//                                    || (FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods() && isAsyncMethod);
+                        })
                 .map(m -> {
                     // map "delete" in client to "deleteByResourceGroup" in collection
                     if (WellKnownMethodName.DELETE.getMethodName().equals(m.getName())

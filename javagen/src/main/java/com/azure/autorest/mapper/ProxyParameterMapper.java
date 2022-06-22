@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter.Builder;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -107,6 +108,10 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         // fallback to dummy description
         if (description == null || description.isEmpty()) {
             description = String.format("The %s parameter", name);
+        }
+        // add allowed enum values
+        if (settings.isDataPlaneClient() && parameterRequestLocation != RequestParameterLocation.BODY) {
+            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
         }
         builder.description(description);
 
