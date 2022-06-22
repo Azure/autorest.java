@@ -1049,11 +1049,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.line(modelName + " deserializedValue = new " + modelName + "(" + constructorArgs + ");");
 
         if (propertiesManager.discriminatorProperty != null) {
-            handleSettingDeserializedValue(methodBlock, propertiesManager.discriminatorProperty, settings);
+            handleSettingDeserializedValue(methodBlock, propertiesManager.discriminatorProperty, settings, false);
         }
 
-        propertiesManager.superSetterProperties.forEach(property -> handleSettingDeserializedValue(methodBlock, property, settings));
-        propertiesManager.setterProperties.forEach(property -> handleSettingDeserializedValue(methodBlock, property, settings));
+        propertiesManager.superSetterProperties.forEach(property ->
+            handleSettingDeserializedValue(methodBlock, property, settings, true));
+        propertiesManager.setterProperties.forEach(property ->
+            handleSettingDeserializedValue(methodBlock, property, settings, false));
 
         methodBlock.line();
         methodBlock.methodReturn("deserializedValue");
@@ -1073,10 +1075,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     private static void handleSettingDeserializedValue(JavaBlock methodBlock, ClientModelProperty property,
-        JavaSettings settings) {
+        JavaSettings settings, boolean fromSuper) {
         // If the property has a setter use it.
         // Otherwise, set the property directly.
-        if (ClientModelUtil.hasSetter(property, settings)) {
+        if (fromSuper) {
             methodBlock.line("deserializedValue." + property.getSetterName() + "(" + property.getName() + ");");
         } else {
             methodBlock.line("deserializedValue." + property.getName() + " = " + property.getName() + ";");
@@ -1134,10 +1136,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             List<ClientModelProperty> superRequiredProperties = new ArrayList<>();
             List<ClientModelProperty> superSetterProperties = new ArrayList<>();
             for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
-                // Ignore constants, additional, and discriminator properties.
-                if (property.getIsConstant()
-                    || property.isAdditionalProperties()
-                    || property.isPolymorphicDiscriminator()) {
+                // Ignore additional and discriminator properties.
+                if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
                     continue;
                 } else if (property.isRequired()) {
                     superRequiredProperties.add(property);
@@ -1157,10 +1157,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClientModelProperty discriminatorProperty = null;
             ClientModelProperty additionalProperties = null;
             for (ClientModelProperty property : model.getProperties()) {
-                // Ignore constant properties.
-                if (property.getIsConstant()) {
-                    continue;
-                } else if (property.isRequired()) {
+                if (property.isRequired()) {
                     requiredProperties.add(property);
                 } else if (property.isAdditionalProperties()) {
                     // Extract the additionalProperties property as this will need to be passed into all deserialization

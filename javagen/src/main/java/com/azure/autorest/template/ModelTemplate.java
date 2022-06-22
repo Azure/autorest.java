@@ -462,7 +462,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
                 } else {
                     // handle x-ms-client-default
-                    if (property.getDefaultValue() != null) {
+                    if (property.getDefaultValue() != null && !settings.isStreamStyleSerialization()) {
                         fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
@@ -470,8 +470,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            if (property.isRequired()
-                && settings.isRequiredFieldsAsConstructorArgs()
+            if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
                 && settings.isStreamStyleSerialization()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
