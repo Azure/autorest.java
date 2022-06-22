@@ -99,6 +99,7 @@ call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-t
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/required-header-query.json --namespace=fixtures.requiredheaderquery
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/constant-and-from-client-parameters.json --namespace=fixtures.constantandclientparam
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/multi-media-types.json --namespace=fixtures.multimediatypes
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/enums.json --namespace=fixtures.enums
 call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
 call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models

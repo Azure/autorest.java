@@ -17,6 +17,11 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientEnumValue;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -96,6 +101,38 @@ public class MethodUtil {
             }
         }
         return selectedRequest;
+    }
+
+    /**
+     * If the parameter is not enum type, return the description directly, otherwise append the string of allowed values to the description
+     * @param parameter a parameter
+     * @param description parameter description
+     * @return the description that appends the string of allowed values for enum type parameter
+     */
+    public static String appendAllowedEnumValuesForEnumType(Parameter parameter, String description) {
+        IType type = Mappers.getSchemaMapper().map(parameter.getSchema());
+        if (parameter.getSchema() == null || !(type instanceof EnumType)) {
+            return description;
+        }
+        String res = description;
+        if (description.endsWith(".")) {
+            res += " Allowed values: ";
+        } else {
+            res += ". Allowed values: ";
+        }
+        EnumType enumType = (EnumType) type;
+        List<ClientEnumValue> choices = enumType.getValues();
+        if (choices != null && !choices.isEmpty()) {
+            res += choices.stream().map(choice -> {
+                if (enumType.getElementType() == ClassType.String) {
+                    return "\"" + choice.getValue() + "\"";
+                } else {
+                    return choice.getValue();
+                }
+            }).collect(Collectors.joining(", "));
+        }
+        res += ".";
+        return res;
     }
 
     /**
