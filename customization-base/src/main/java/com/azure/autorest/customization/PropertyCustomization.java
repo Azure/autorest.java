@@ -152,11 +152,12 @@ public final class PropertyCustomization extends CodeCustomization {
      * in the bitwise OR isn't a valid property {@link Modifier}.
      */
     public PropertyCustomization setModifier(int modifiers) {
+        String target = " *(?:(?:public|protected|private|static|final|transient|volatile) ?)*(.* )";
         languageClient.listDocumentSymbols(symbol.getLocation().getUri())
             .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
-                "(?:.+ )? " + propertyName, propertyName, Modifier.fieldModifiers(), modifiers));
+                target + propertyName, "$1" + propertyName, Modifier.fieldModifiers(), modifiers));
 
         return refreshCustomization(propertyName);
     }
