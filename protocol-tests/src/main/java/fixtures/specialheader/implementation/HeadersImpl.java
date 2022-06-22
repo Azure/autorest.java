@@ -659,10 +659,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -712,10 +712,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -763,10 +763,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -805,10 +805,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -851,10 +851,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -877,10 +877,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -918,10 +918,10 @@ public final class HeadersImpl {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *

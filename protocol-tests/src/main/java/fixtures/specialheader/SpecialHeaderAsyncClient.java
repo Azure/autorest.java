@@ -166,10 +166,10 @@ public final class SpecialHeaderAsyncClient {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *

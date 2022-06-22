@@ -132,8 +132,8 @@ public final class EnumAsyncClient {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -158,8 +158,8 @@ public final class EnumAsyncClient {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *

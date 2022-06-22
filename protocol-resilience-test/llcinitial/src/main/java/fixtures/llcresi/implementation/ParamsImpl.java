@@ -392,7 +392,7 @@ public final class ParamsImpl {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *
@@ -425,7 +425,7 @@ public final class ParamsImpl {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *
@@ -458,7 +458,7 @@ public final class ParamsImpl {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *

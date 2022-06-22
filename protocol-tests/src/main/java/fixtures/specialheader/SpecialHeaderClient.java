@@ -164,10 +164,10 @@ public final class SpecialHeaderClient {
      *
      * <pre>{@code
      * {
-     *     value: [
-     *         Object
+     *     value (Optional): [
+     *         Object (Optional)
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *

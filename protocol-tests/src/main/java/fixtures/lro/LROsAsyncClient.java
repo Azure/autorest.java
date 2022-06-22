@@ -40,16 +40,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -58,16 +58,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -93,16 +93,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -111,16 +111,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -145,16 +145,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -163,16 +163,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -197,16 +197,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -215,16 +215,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -251,16 +251,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -269,16 +269,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -304,17 +304,17 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -341,16 +341,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -359,16 +359,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -394,16 +394,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -412,16 +412,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -448,16 +448,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -466,16 +466,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -502,16 +502,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -520,16 +520,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -556,16 +556,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -574,16 +574,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -610,16 +610,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -628,16 +628,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -663,16 +663,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -681,16 +681,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -717,16 +717,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -735,16 +735,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -771,16 +771,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -789,16 +789,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -825,16 +825,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -843,16 +843,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -879,16 +879,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -897,16 +897,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -932,16 +932,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -950,16 +950,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -984,8 +984,8 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -993,8 +993,8 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -1018,8 +1018,8 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -1027,8 +1027,8 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -1052,10 +1052,10 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1064,10 +1064,10 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1092,10 +1092,10 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1104,10 +1104,10 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1134,16 +1134,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1171,16 +1171,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1208,16 +1208,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1260,16 +1260,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1295,16 +1295,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1432,8 +1432,8 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -1458,16 +1458,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1493,16 +1493,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1511,16 +1511,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1546,16 +1546,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1581,16 +1581,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1617,16 +1617,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1654,16 +1654,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1672,16 +1672,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1708,16 +1708,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1726,16 +1726,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1762,16 +1762,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1798,16 +1798,16 @@ public final class LROsAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>

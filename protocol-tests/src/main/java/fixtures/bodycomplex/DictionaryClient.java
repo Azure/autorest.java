@@ -38,8 +38,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>
@@ -64,8 +64,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>
@@ -92,8 +92,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>
@@ -118,8 +118,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>
@@ -145,8 +145,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>
@@ -171,8 +171,8 @@ public final class DictionaryClient {
      *
      * <pre>{@code
      * {
-     *     defaultProgram: {
-     *         String: String
+     *     defaultProgram (Optional): {
+     *         String: String (Optional)
      *     }
      * }
      * }</pre>

@@ -117,7 +117,7 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *

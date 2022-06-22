@@ -18,10 +18,9 @@ public class HeaderParamters {
         DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient =
                 new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
-        RequestOptions requestOptions = new RequestOptions();
+        RequestOptions requestOptions = new RequestOptions().addHeader("parameter_int", "31");
         Response<BinaryData> response =
                 dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(
-                        31,
                         false,
                         Arrays.asList("one", "two", "three"),
                         Arrays.asList(1, 2, 3),

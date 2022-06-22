@@ -114,7 +114,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *
