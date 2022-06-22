@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -389,12 +388,10 @@ public class ClientModelUtil {
      * @return Whether the property will have a setter method.
      */
     public static boolean hasSetter(ClientModelProperty property, JavaSettings settings) {
-        JavaVisibility methodVisibility = property.getClientFlatten() ? JavaVisibility.Private : JavaVisibility.Public;
-
         // If the property isn't read-only or required and part of the constructor, and it isn't private,
         // add a setter.
         return !property.getIsReadOnly()
             && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())
-            && methodVisibility == JavaVisibility.Public;
+            && !property.getClientFlatten();
     }
 }

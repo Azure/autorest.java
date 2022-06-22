@@ -34,6 +34,12 @@ public class JavaClass implements JavaType {
         addNewLine = true;
     }
 
+    public final void privateFinalMemberVariable(String variableDeclaration) {
+        addExpectedNewLine();
+        contents.line("private final " + variableDeclaration + ";");
+        addNewLine = true;
+    }
+
     public final void privateFinalMemberVariable(String variableType, String variableName) {
         addExpectedNewLine();
         contents.line(String.format("private final %1$s %2$s;", variableType, variableName));

@@ -156,8 +156,7 @@ public class Javagen extends NewPlugin {
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
-        return codeModel;
+        return newYaml.loadAs(file, CodeModel.class);
     }
 
     JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {

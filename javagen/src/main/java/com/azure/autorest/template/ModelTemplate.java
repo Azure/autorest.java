@@ -470,7 +470,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            classBlock.privateMemberVariable(fieldSignature);
+            if (property.isRequired()
+                && settings.isRequiredFieldsAsConstructorArgs()
+                && settings.isStreamStyleSerialization()) {
+                classBlock.privateFinalMemberVariable(fieldSignature);
+            } else {
+                classBlock.privateMemberVariable(fieldSignature);
+            }
         }
     }
 
