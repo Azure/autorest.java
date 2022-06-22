@@ -200,13 +200,14 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values</td></tr>
      * </table>
      *
-     * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
-     * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
+     * @param queryIntegerEnum integer enum with three values.
+     * @param queryBooleanEnum boolean enum with two values.
+     * @param queryRequiredEnum required enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -236,13 +237,14 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values</td></tr>
      * </table>
      *
-     * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
-     * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
+     * @param queryIntegerEnum integer enum with three values.
+     * @param queryBooleanEnum boolean enum with two values.
+     * @param queryRequiredEnum required enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -270,13 +272,14 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values</td></tr>
      * </table>
      *
-     * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
-     * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
+     * @param queryIntegerEnum integer enum with three values.
+     * @param queryBooleanEnum boolean enum with two values.
+     * @param queryRequiredEnum required enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -299,11 +302,12 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     *
+     * @param headerRequiredStringEnum required string enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -326,11 +330,12 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     *
+     * @param headerRequiredStringEnum required string enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -353,11 +358,12 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values</td></tr>
      * </table>
      *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     *
+     * @param headerRequiredStringEnum required string enum with three values.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

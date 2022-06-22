@@ -44,6 +44,8 @@ public final class PathItemsClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -74,6 +76,8 @@ public final class PathItemsClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -103,6 +107,8 @@ public final class PathItemsClient {
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -135,6 +141,8 @@ public final class PathItemsClient {
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.

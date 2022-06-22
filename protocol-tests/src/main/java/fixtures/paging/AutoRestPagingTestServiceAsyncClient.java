@@ -174,6 +174,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -205,7 +207,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
+     * RequestOptions.addQueryParam()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -250,6 +253,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -291,6 +296,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -485,7 +492,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment.
+     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
+     * new RequestOptions.addQueryParam()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -520,7 +528,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
+     * a request with {@code new RequestOptions.addQueryParam()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -566,6 +575,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *

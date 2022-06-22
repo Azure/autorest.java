@@ -44,7 +44,6 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
      *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
@@ -57,6 +56,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray I am a required csv string array parameter.
      * @param parameterCsvIntArray I am a required csv int array parameter.
@@ -74,6 +74,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredQueryParamWithResponse(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -83,6 +84,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
             OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
         return this.serviceClient.getRequiredQueryParamWithResponseAsync(
+                parameterInt,
                 parameterBoolean,
                 parameterCsvStringArray,
                 parameterCsvIntArray,
@@ -94,17 +96,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
     }
 
     /**
-     * Get Required Header Parameters.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -112,6 +104,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
@@ -127,6 +120,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredHeaderWithResponse(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -134,6 +128,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
             Duration parameterDuration,
             RequestOptions requestOptions) {
         return this.serviceClient.getRequiredHeaderWithResponseAsync(
+                parameterInt,
                 parameterBoolean,
                 parameterCsvStringArray,
                 parameterCsvIntArray,

@@ -276,7 +276,7 @@ public final class PathsClient {
     /**
      * Get using uri with 'green color' in path parameter.
      *
-     * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
+     * @param enumPath send the value green.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -293,7 +293,7 @@ public final class PathsClient {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
-     * @param enumPath send null should throw. Allowed values: "red color", "green color", "blue color".
+     * @param enumPath send null should throw.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -445,7 +445,7 @@ public final class PathsClient {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

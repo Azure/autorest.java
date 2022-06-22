@@ -19,12 +19,12 @@ public class QueryParamters {
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
         RequestOptions requestOptions =
                 new RequestOptions()
-                        .addQueryParam("parameter_int", "17")
                         .addQueryParam("parameter_optional_csv_int_array", "6,7,8")
                         .addQueryParam("parameter_optional_multi_int_array", "9")
                         .addQueryParam("parameter_optional_multi_int_array", "10");
         Response<BinaryData> response =
                 dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(
+                        17,
                         true,
                         Arrays.asList("one", "two", "three"),
                         Arrays.asList(1, 2, 3),

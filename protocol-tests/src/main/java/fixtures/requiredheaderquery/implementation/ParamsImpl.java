@@ -73,6 +73,7 @@ public final class ParamsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRequiredQueryParam(
                 @HostParam("$host") String host,
+                @QueryParam("parameter_int") int parameterInt,
                 @QueryParam("parameter_boolean") boolean parameterBoolean,
                 @QueryParam("parameter_csv_string_array") String parameterCsvStringArray,
                 @QueryParam("parameter_csv_int_array") String parameterCsvIntArray,
@@ -101,6 +102,7 @@ public final class ParamsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRequiredHeader(
                 @HostParam("$host") String host,
+                @HeaderParam("parameter_int") int parameterInt,
                 @HeaderParam("parameter_boolean") boolean parameterBoolean,
                 @HeaderParam("parameter_csv_string_array") String parameterCsvStringArray,
                 @HeaderParam("parameter_csv_int_array") String parameterCsvIntArray,
@@ -119,7 +121,6 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
      *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
@@ -132,6 +133,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray I am a required csv string array parameter.
      * @param parameterCsvIntArray I am a required csv int array parameter.
@@ -148,6 +150,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredQueryParamWithResponseAsync(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -173,6 +176,7 @@ public final class ParamsImpl {
                 context ->
                         service.getRequiredQueryParam(
                                 this.client.getHost(),
+                                parameterInt,
                                 parameterBoolean,
                                 parameterCsvStringArrayConverted,
                                 parameterCsvIntArrayConverted,
@@ -193,7 +197,6 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
      *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
@@ -206,6 +209,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray I am a required csv string array parameter.
      * @param parameterCsvIntArray I am a required csv int array parameter.
@@ -223,6 +227,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredQueryParamWithResponseAsync(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -247,6 +252,7 @@ public final class ParamsImpl {
                 parameterMultiEnumArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.getRequiredQueryParam(
                 this.client.getHost(),
+                parameterInt,
                 parameterBoolean,
                 parameterCsvStringArrayConverted,
                 parameterCsvIntArrayConverted,
@@ -267,7 +273,6 @@ public final class ParamsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
      *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
@@ -280,6 +285,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray I am a required csv string array parameter.
      * @param parameterCsvIntArray I am a required csv int array parameter.
@@ -296,6 +302,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredQueryParamWithResponse(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -305,6 +312,7 @@ public final class ParamsImpl {
             OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
         return getRequiredQueryParamWithResponseAsync(
+                        parameterInt,
                         parameterBoolean,
                         parameterCsvStringArray,
                         parameterCsvIntArray,
@@ -317,17 +325,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -335,6 +333,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
@@ -349,6 +348,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredHeaderWithResponseAsync(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -367,6 +367,7 @@ public final class ParamsImpl {
                 context ->
                         service.getRequiredHeader(
                                 this.client.getHost(),
+                                parameterInt,
                                 parameterBoolean,
                                 parameterCsvStringArrayConverted,
                                 parameterCsvIntArrayConverted,
@@ -378,17 +379,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -396,6 +387,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
@@ -411,6 +403,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredHeaderWithResponseAsync(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -428,6 +421,7 @@ public final class ParamsImpl {
         DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return service.getRequiredHeader(
                 this.client.getHost(),
+                parameterInt,
                 parameterBoolean,
                 parameterCsvStringArrayConverted,
                 parameterCsvIntArrayConverted,
@@ -439,17 +433,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_int</td><td>Integer</td><td>No</td><td>I am a required int parameter</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -457,6 +441,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
+     * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray The array of string collect by csv.
      * @param parameterCsvIntArray The array of integer collect by csv.
@@ -471,6 +456,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredHeaderWithResponse(
+            int parameterInt,
             boolean parameterBoolean,
             List<String> parameterCsvStringArray,
             List<Integer> parameterCsvIntArray,
@@ -478,6 +464,7 @@ public final class ParamsImpl {
             Duration parameterDuration,
             RequestOptions requestOptions) {
         return getRequiredHeaderWithResponseAsync(
+                        parameterInt,
                         parameterBoolean,
                         parameterCsvStringArray,
                         parameterCsvIntArray,

@@ -44,6 +44,8 @@ public final class DpgAsyncClient {
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -73,6 +75,8 @@ public final class DpgAsyncClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -106,6 +110,8 @@ public final class DpgAsyncClient {
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -128,7 +134,7 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * POST a JSON or a JPEG.
+     * POST a JSON or a JPEG. You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -142,7 +148,7 @@ public final class DpgAsyncClient {
      * Object
      * }</pre>
      *
-     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
+     * @param contentType The content type.
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -186,6 +192,8 @@ public final class DpgAsyncClient {
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
      *
      * <p><strong>Response Body Schema</strong>
      *
