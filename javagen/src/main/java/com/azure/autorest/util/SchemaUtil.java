@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -135,14 +136,18 @@ public class SchemaUtil {
     }
 
     /**
+     * Whether response contains header schemas.
+     * Long-Running-Operation headers will be omitted and won't count as header schemas.
      * @param operation the operation
+     * @param settings the JavaSetting object
      * @return whether response of the operation contains headers
      */
-    public static boolean responseContainsHeaderSchemas(Operation operation) {
+    public static boolean responseContainsHeaderSchemas(Operation operation, JavaSettings settings) {
         return operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
-                .anyMatch(Objects::nonNull);
+                .anyMatch(Objects::nonNull)
+                && notFluentLRO(operation, settings);
     }
 
     public static String mergeDescription(String summary, String description) {
@@ -176,5 +181,10 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+    private static boolean notFluentLRO(Operation operation, JavaSettings settings) {
+        return !(settings.isFluent() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
     }
 }
