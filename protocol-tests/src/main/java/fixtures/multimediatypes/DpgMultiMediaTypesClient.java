@@ -47,7 +47,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -79,7 +79,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -111,7 +111,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -143,7 +143,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -175,7 +175,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -207,7 +207,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -239,7 +239,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -271,7 +271,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -303,7 +303,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -335,7 +335,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType The content type.
+     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -395,7 +395,7 @@ public final class DpgMultiMediaTypesClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -420,7 +420,7 @@ public final class DpgMultiMediaTypesClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type</td></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json", "image/jpeg".</td></tr>
      * </table>
      *
      * You can add these to a request with {@code new RequestOptions.addHeader()}

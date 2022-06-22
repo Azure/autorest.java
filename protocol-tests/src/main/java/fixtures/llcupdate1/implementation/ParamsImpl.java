@@ -504,7 +504,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
-     * @param contentType The content type.
+     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -539,7 +539,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
-     * @param contentType The content type.
+     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -572,7 +572,7 @@ public final class ParamsImpl {
      * Object
      * }</pre>
      *
-     * @param contentType The content type.
+     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
