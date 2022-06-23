@@ -106,7 +106,7 @@ public class Transformer {
                         && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
                   Parameter contentLength = createContentLengthParameter(operation, parameter);
                   // put contentLength parameter before input body
-                  request.getParameters().add(i++, contentLength);
+                  request.getParameters().add(++i, contentLength);
                   request.getSignatureParameters().add(request.getSignatureParameters().indexOf(parameter) + 1, contentLength);
                 }
               }
