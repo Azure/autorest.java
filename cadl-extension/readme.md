@@ -46,7 +46,7 @@ Copy it to AutoRest.Java folder.
 
 ### Step 3, AutoRest.Java
 
-After `client-model.yaml` is ready, run [`CadlMain.java`](../javagen/src/test/java/com/azure/autorest/CadlMain.java).
+After [`client-model.yaml`](../client-model.yaml) is ready, run [`CadlMain.java`](../javagen/src/test/java/com/azure/autorest/CadlMain.java).
 Generated Java files will be at `cadl-sample` folder.
 
 ### BASH command lines
