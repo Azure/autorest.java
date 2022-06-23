@@ -45,7 +45,7 @@ public final class SpecialHeaderClient {
      *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -78,7 +78,7 @@ public final class SpecialHeaderClient {
      *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -133,7 +133,7 @@ public final class SpecialHeaderClient {
      *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -166,7 +166,7 @@ public final class SpecialHeaderClient {
      *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *

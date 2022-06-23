@@ -75,7 +75,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -134,7 +134,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -193,7 +193,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -252,7 +252,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -311,7 +311,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -387,7 +387,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -413,7 +413,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -440,7 +440,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -466,7 +466,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -509,7 +509,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -552,7 +552,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -595,7 +595,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -622,7 +622,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -649,7 +649,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -676,7 +676,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -704,7 +704,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -730,7 +730,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -757,7 +757,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -785,7 +785,7 @@ public final class QueriesAsyncClient {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -45,7 +45,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     .collect(Collectors.toList());
             if (!queryParameters.isEmpty() && hasParametersToPrintInJavadoc(queryParameters)) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
-                commentBlock.line("You can add these to a request with {@code new RequestOptions.addQueryParam()}");
+                commentBlock.line("You can add these to a request with {@link RequestOptions#addQueryParam}");
             }
 
             List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters().stream()
@@ -56,7 +56,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     .collect(Collectors.toList());
             if (!headerParameters.isEmpty() && hasParametersToPrintInJavadoc(headerParameters)) {
                 optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
-                commentBlock.line("You can add these to a request with {@code new RequestOptions.addHeader()}");
+                commentBlock.line("You can add these to a request with {@link RequestOptions#addHeader}");
             }
 
             // Request body

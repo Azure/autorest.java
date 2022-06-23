@@ -89,7 +89,7 @@ public final class DpgAsyncClient {
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -154,7 +154,7 @@ public final class DpgAsyncClient {
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *

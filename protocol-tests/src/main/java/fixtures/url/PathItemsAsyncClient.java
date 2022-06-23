@@ -46,7 +46,7 @@ public final class PathItemsAsyncClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -79,7 +79,7 @@ public final class PathItemsAsyncClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -112,7 +112,7 @@ public final class PathItemsAsyncClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -145,7 +145,7 @@ public final class PathItemsAsyncClient {
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.

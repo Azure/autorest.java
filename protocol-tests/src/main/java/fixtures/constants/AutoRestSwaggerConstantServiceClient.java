@@ -41,7 +41,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -67,7 +67,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -193,7 +193,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -219,7 +219,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -245,7 +245,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -271,7 +271,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

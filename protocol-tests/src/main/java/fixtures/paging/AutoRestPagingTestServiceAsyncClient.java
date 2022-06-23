@@ -174,7 +174,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -252,7 +252,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -296,7 +296,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -573,7 +573,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *

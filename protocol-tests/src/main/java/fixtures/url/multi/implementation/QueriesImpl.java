@@ -115,7 +115,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -143,7 +143,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -171,7 +171,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,7 +196,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -224,7 +224,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -252,7 +252,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -277,7 +277,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -305,7 +305,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -333,7 +333,7 @@ public final class QueriesImpl {
      *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -42,7 +42,7 @@ public final class EnumServiceClient {
      *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
@@ -75,7 +75,7 @@ public final class EnumServiceClient {
      *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
      *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
