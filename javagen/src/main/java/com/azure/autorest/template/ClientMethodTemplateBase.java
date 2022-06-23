@@ -43,7 +43,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     // ignore if synthesized by modelerfour, i.e. api-version
                     .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
                     .collect(Collectors.toList());
-            if (!queryParameters.isEmpty()) {
+            if (!queryParameters.isEmpty() && hasParametersToPrintInJavadoc(queryParameters)) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
                 commentBlock.line("You can add these to a request with {@code new RequestOptions.addQueryParam()}");
             }
@@ -54,7 +54,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     // we would want user to provide a correct "content-type" if it is not a constant
                     .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE || !p.getIsConstant())
                     .collect(Collectors.toList());
-            if (!headerParameters.isEmpty()) {
+            if (!headerParameters.isEmpty() && hasParametersToPrintInJavadoc(headerParameters)) {
                 optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
                 commentBlock.line("You can add these to a request with {@code new RequestOptions.addHeader()}");
             }
@@ -109,9 +109,6 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
-        if (!hasParametersToPrintInJavadoc(parameters)) {
-            return;
-        }
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));

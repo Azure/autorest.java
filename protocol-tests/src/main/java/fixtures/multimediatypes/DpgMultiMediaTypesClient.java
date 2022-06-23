@@ -32,8 +32,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and binary types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and binary types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -64,8 +63,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and binary types with binary type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and binary types with binary type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -96,8 +94,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and octet media types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and octet media types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -128,8 +125,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and octet media types with octet type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and octet media types with octet type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -160,8 +156,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and encoding types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and encoding types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -192,8 +187,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and encoding types with encoding type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and encoding types with encoding type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -224,8 +218,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and text types with text type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and text types with text type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -256,8 +249,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and text types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and text types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -288,8 +280,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and image types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and image types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -320,8 +311,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and image types with json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and image types with json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -380,8 +370,7 @@ public final class DpgMultiMediaTypesClient {
     }
 
     /**
-     * json and image types with non-required body and json type first. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * json and image types with non-required body and json type first.
      *
      * <p><strong>Request Body Schema</strong>
      *

@@ -490,7 +490,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * POST a JSON or a JPEG. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * POST a JSON or a JPEG.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -525,7 +525,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * POST a JSON or a JPEG. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * POST a JSON or a JPEG.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -558,7 +558,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * POST a JSON or a JPEG. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * POST a JSON or a JPEG.
      *
      * <p><strong>Request Body Schema</strong>
      *

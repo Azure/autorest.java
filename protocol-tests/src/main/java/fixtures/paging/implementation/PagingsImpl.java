@@ -1702,8 +1702,7 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
-     * RequestOptions.addQueryParam()}
+     * nextOperationWithQueryParams. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1756,8 +1755,7 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
-     * RequestOptions.addQueryParam()}
+     * nextOperationWithQueryParams. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1804,8 +1802,7 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
-     * RequestOptions.addQueryParam()}
+     * nextOperationWithQueryParams. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1845,8 +1842,7 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
-     * RequestOptions.addQueryParam()}
+     * nextOperationWithQueryParams. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1888,8 +1884,7 @@ public final class PagingsImpl {
 
     /**
      * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult. You can add these to a request with {@code new
-     * RequestOptions.addQueryParam()}
+     * nextOperationWithQueryParams. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1921,8 +1916,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. You can add these
-     * to a request with {@code new RequestOptions.addQueryParam()}
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1967,8 +1961,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. You can add these
-     * to a request with {@code new RequestOptions.addQueryParam()}
+     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3516,8 +3509,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3564,8 +3556,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3611,8 +3602,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3653,8 +3643,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3697,8 +3686,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3732,8 +3720,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
-     * a request with {@code new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3780,8 +3767,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
-     * a request with {@code new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3827,8 +3813,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
-     * a request with {@code new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3871,8 +3856,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
-     * a request with {@code new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -3918,8 +3902,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped. You can add these to
-     * a request with {@code new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4207,8 +4190,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4262,8 +4244,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4310,8 +4291,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -4365,8 +4345,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment. You can add these to a request with {@code
-     * new RequestOptions.addQueryParam()}
+     * A paging operation that doesn't return a full URL, just a fragment.
      *
      * <p><strong>Response Body Schema</strong>
      *

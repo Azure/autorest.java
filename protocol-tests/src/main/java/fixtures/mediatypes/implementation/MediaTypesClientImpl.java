@@ -236,8 +236,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Analyze body, that could be different media types.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -267,8 +266,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Analyze body, that could be different media types.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -299,8 +297,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Analyze body, that could be different media types.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -328,8 +325,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. You can add
-     * these to a request with {@code new RequestOptions.addHeader()}
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -353,8 +349,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. You can add
-     * these to a request with {@code new RequestOptions.addHeader()}
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -378,8 +373,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. You can add
-     * these to a request with {@code new RequestOptions.addHeader()}
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -488,8 +482,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * byte stream of 'hello, world!' for application/octet-stream.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -524,8 +517,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * byte stream of 'hello, world!' for application/octet-stream.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -559,8 +551,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * byte stream of 'hello, world!' for application/octet-stream.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -591,8 +582,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'. You can add these
-     * to a request with {@code new RequestOptions.addHeader()}
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -628,8 +618,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'. You can add these
-     * to a request with {@code new RequestOptions.addHeader()}
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -664,8 +653,7 @@ public final class MediaTypesClientImpl {
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'. You can add these
-     * to a request with {@code new RequestOptions.addHeader()}
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -696,8 +684,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Body that's either text/plain or application/json. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Body that's either text/plain or application/json.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -731,8 +718,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Body that's either text/plain or application/json. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Body that's either text/plain or application/json.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -764,8 +750,7 @@ public final class MediaTypesClientImpl {
     }
 
     /**
-     * Body that's either text/plain or application/json. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Body that's either text/plain or application/json.
      *
      * <p><strong>Request Body Schema</strong>
      *

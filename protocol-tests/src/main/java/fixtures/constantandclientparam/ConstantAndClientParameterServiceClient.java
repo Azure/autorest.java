@@ -31,9 +31,7 @@ public final class ConstantAndClientParameterServiceClient {
     }
 
     /**
-     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters. You
-     * can add these to a request with {@code new RequestOptions.addQueryParam()} You can add these to a request with
-     * {@code new RequestOptions.addHeader()}
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

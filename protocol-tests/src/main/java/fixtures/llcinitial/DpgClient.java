@@ -54,7 +54,7 @@ public final class DpgClient {
     }
 
     /**
-     * Get true Boolean value on path. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Get true Boolean value on path.
      *
      * <p><strong>Response Body Schema</strong>
      *

@@ -505,7 +505,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -525,7 +525,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -544,7 +544,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -559,7 +559,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -579,7 +579,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -598,7 +598,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -613,7 +613,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -633,7 +633,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -652,7 +652,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -669,7 +669,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -689,7 +689,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -707,7 +707,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -724,7 +724,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -744,7 +744,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -763,7 +763,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -778,7 +778,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -798,7 +798,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -816,7 +816,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1155,7 +1155,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1175,7 +1175,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1193,7 +1193,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1210,7 +1210,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1230,7 +1230,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1248,7 +1248,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1265,7 +1265,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1285,7 +1285,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1303,7 +1303,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1320,7 +1320,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1340,7 +1340,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1358,7 +1358,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Puts constants to the testserver. You can add these to a request with {@code new RequestOptions.addQueryParam()}
+     * Puts constants to the testserver.
      *
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1375,9 +1375,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters. You
-     * can add these to a request with {@code new RequestOptions.addQueryParam()} You can add these to a request with
-     * {@code new RequestOptions.addHeader()}
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1400,9 +1398,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters. You
-     * can add these to a request with {@code new RequestOptions.addQueryParam()} You can add these to a request with
-     * {@code new RequestOptions.addHeader()}
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1424,9 +1420,7 @@ public final class ContantsImpl {
     }
 
     /**
-     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters. You
-     * can add these to a request with {@code new RequestOptions.addQueryParam()} You can add these to a request with
-     * {@code new RequestOptions.addHeader()}
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

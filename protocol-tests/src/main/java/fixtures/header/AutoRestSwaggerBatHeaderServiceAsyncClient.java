@@ -35,8 +35,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header value "User-Agent": "overwrite". You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -70,8 +69,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header value "Content-Type": "text/html". You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -106,7 +104,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
@@ -124,8 +121,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header value "value": 1 or -2. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -144,7 +140,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
-     * -2. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -162,8 +158,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header value "value": 105 or -2. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -182,7 +177,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
-     * -3.0. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -200,8 +195,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header value "value": 0.07 or -3.0. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -220,7 +214,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
-     * -3.0. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -238,8 +232,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header value "value": 7e120 or -3.0. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -258,7 +251,6 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     * You can add these to a request with {@code new RequestOptions.addHeader()}
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
@@ -276,8 +268,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header value "value": true or false. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -323,8 +314,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". You can add these
-     * to a request with {@code new RequestOptions.addHeader()}
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -343,7 +333,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
-     * "0001-01-01". You can add these to a request with {@code new RequestOptions.addHeader()}
+     * "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -361,8 +351,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "2010-01-01" or "0001-01-01". You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -381,7 +370,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
-     * "value": "0001-01-01T00:00:00Z". You can add these to a request with {@code new RequestOptions.addHeader()}
+     * "value": "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -400,8 +389,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". You can add these to a
-     * request with {@code new RequestOptions.addHeader()}
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -447,8 +435,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". You can add
-     * these to a request with {@code new RequestOptions.addHeader()}
+     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -466,8 +453,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S". You can add these to
-     * a request with {@code new RequestOptions.addHeader()}
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
@@ -486,8 +472,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "P123DT22H14M12.011S". You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -505,8 +490,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩". You can add these to a request
-     * with {@code new RequestOptions.addHeader()}
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
@@ -524,8 +508,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -570,8 +553,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Get a response with header values "GREY" or null. You can add these to a request with {@code new
-     * RequestOptions.addHeader()}
+     * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

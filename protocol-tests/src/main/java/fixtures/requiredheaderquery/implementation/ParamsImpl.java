@@ -325,7 +325,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -379,7 +379,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -433,7 +433,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Get Required Header Parameters. You can add these to a request with {@code new RequestOptions.addHeader()}
+     * Get Required Header Parameters.
      *
      * <p><strong>Response Body Schema</strong>
      *
