@@ -83,6 +83,12 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             generateJavadocExceptions(clientMethod, commentBlock, false);
         }
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
+
+
+        // add external documentation
+        if (clientMethod.getExternalDocumentation() != null) {
+            commentBlock.line("@see <a href=" + clientMethod.getExternalDocumentation().getUrl() + ">" + clientMethod.getExternalDocumentation().getDescription() + "</a>");
+        }
     }
 
     protected static void generateJavadocExceptions(ClientMethod clientMethod, JavaJavadocComment commentBlock, boolean useFullClassName) {

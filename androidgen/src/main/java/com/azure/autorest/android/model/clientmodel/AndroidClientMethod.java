@@ -3,6 +3,7 @@
 
 package com.azure.autorest.android.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.ExternalDocumentation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -36,7 +37,7 @@ public class AndroidClientMethod extends ClientMethod {
      * @param isGroupedParameterRequired The parameter that needs to transformed before pagination.
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
-     * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
+     * @param methodTransformationDetails The parameter transformations before calling ProxyMethod
      */
     protected AndroidClientMethod(String description, ReturnValue returnValue, String name,
                                   List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
@@ -44,7 +45,7 @@ public class AndroidClientMethod extends ClientMethod {
                                   String clientReference, List<String> requiredNullableParameterExpressions,
                                   boolean isGroupedParameterRequired, String groupedParameterTypeName,
                                   MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
-                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails) {
+                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         super(description,
                 returnValue,
                 name,
@@ -61,7 +62,8 @@ public class AndroidClientMethod extends ClientMethod {
                 methodTransformationDetails,
                 methodVisibility,
                 false,
-                methodPollingDetails);
+                methodPollingDetails,
+                externalDocumentation);
     }
 
     @Override
@@ -116,7 +118,8 @@ public class AndroidClientMethod extends ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
-                    methodPollingDetails);
+                    methodPollingDetails,
+                    externalDocumentation);
         }
     }
 }
