@@ -163,7 +163,7 @@ public class ClientMethod {
                 && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
                 && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
                 && methodVisibility == that.methodVisibility
-                && externalDocumentation.equals(that.externalDocumentation);
+                && Objects.equals(externalDocumentation, that.externalDocumentation);
     }
 
     @Override
