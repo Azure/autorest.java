@@ -1401,6 +1401,8 @@ public final class HeadersImpl {
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1427,6 +1429,8 @@ public final class HeadersImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1455,6 +1459,8 @@ public final class HeadersImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1770,6 +1776,8 @@ public final class HeadersImpl {
      *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1798,6 +1806,8 @@ public final class HeadersImpl {
      *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1825,6 +1835,8 @@ public final class HeadersImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2138,6 +2150,8 @@ public final class HeadersImpl {
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2163,6 +2177,8 @@ public final class HeadersImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2190,6 +2206,8 @@ public final class HeadersImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

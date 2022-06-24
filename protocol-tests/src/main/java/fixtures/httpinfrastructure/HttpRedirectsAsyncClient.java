@@ -56,7 +56,7 @@ public final class HttpRedirectsAsyncClient {
      *
      * <pre>{@code
      * [
-     *     String
+     *     String (Required)
      * ]
      * }</pre>
      *

@@ -171,9 +171,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -199,9 +199,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -227,9 +227,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -252,9 +252,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -287,9 +287,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -322,9 +322,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -348,9 +348,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -376,9 +376,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -404,9 +404,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -429,9 +429,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -456,9 +456,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -483,9 +483,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -508,9 +508,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -535,9 +535,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -563,9 +563,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -588,9 +588,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -616,9 +616,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -644,9 +644,9 @@ public final class BasicsImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *

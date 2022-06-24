@@ -99,8 +99,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -126,8 +126,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -153,8 +153,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -177,8 +177,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -204,8 +204,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -232,8 +232,8 @@ public final class ReadonlypropertiesImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *

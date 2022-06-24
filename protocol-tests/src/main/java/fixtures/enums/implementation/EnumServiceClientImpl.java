@@ -203,6 +203,8 @@ public final class EnumServiceClientImpl {
      *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
@@ -239,6 +241,8 @@ public final class EnumServiceClientImpl {
      *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
@@ -273,6 +277,8 @@ public final class EnumServiceClientImpl {
      *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
@@ -302,6 +308,8 @@ public final class EnumServiceClientImpl {
      *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
      *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -329,6 +337,8 @@ public final class EnumServiceClientImpl {
      *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
      *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -355,6 +365,8 @@ public final class EnumServiceClientImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
      *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".

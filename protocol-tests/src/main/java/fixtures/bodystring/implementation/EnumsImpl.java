@@ -457,8 +457,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -484,8 +484,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -512,8 +512,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -536,8 +536,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -566,8 +566,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *
@@ -594,8 +594,8 @@ public final class EnumsImpl {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String
-     *     field1: String
+     *     colorConstant: String (Required)
+     *     field1: String (Optional)
      * }
      * }</pre>
      *

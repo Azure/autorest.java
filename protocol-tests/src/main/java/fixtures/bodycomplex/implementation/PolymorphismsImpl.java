@@ -227,9 +227,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -256,9 +256,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -285,9 +285,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -312,9 +312,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -347,9 +347,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -383,9 +383,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -416,7 +416,7 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
+     *     species: String (Optional)
      * }
      * }</pre>
      *
@@ -442,7 +442,7 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
+     *     species: String (Optional)
      * }
      * }</pre>
      *
@@ -468,7 +468,7 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
+     *     species: String (Optional)
      * }
      * }</pre>
      *
@@ -492,18 +492,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -533,18 +533,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -574,18 +574,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -612,18 +612,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -654,18 +654,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -695,18 +695,18 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     sampleSalmon: {
-     *         species: String
-     *         location: String
-     *         iswild: Boolean
+     *     sampleSalmon (Optional): {
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      *     }
-     *     salmons: [
+     *     salmons (Optional): [
      *         (recursive schema, see above)
      *     ]
-     *     sampleFish: {
-     *         species: String
+     *     sampleFish (Optional): {
+     *         species: String (Optional)
      *     }
-     *     fishes: [
+     *     fishes (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -732,19 +732,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -770,19 +770,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -808,19 +808,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -844,19 +844,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -882,19 +882,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -921,19 +921,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -957,19 +957,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -977,19 +977,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1018,19 +1018,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1038,19 +1038,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1077,19 +1077,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1097,19 +1097,19 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
-     *         {
-     *             species: String
-     *             length: float
-     *             siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
      *                 (recursive schema, see above)
      *             ]
      *         }
      *     ]
-     *     location: String
-     *     iswild: Boolean
+     *     location: String (Optional)
+     *     iswild: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1135,9 +1135,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -1173,9 +1173,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -1209,9 +1209,9 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }

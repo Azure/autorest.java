@@ -40,8 +40,8 @@ public final class ArrayAsyncClient {
      *
      * <pre>{@code
      * {
-     *     array: [
-     *         String
+     *     array (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -66,8 +66,8 @@ public final class ArrayAsyncClient {
      *
      * <pre>{@code
      * {
-     *     array: [
-     *         String
+     *     array (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -94,8 +94,8 @@ public final class ArrayAsyncClient {
      *
      * <pre>{@code
      * {
-     *     array: [
-     *         String
+     *     array (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -121,8 +121,8 @@ public final class ArrayAsyncClient {
      *
      * <pre>{@code
      * {
-     *     array: [
-     *         String
+     *     array (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -148,8 +148,8 @@ public final class ArrayAsyncClient {
      *
      * <pre>{@code
      * {
-     *     array: [
-     *         String
+     *     array (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>

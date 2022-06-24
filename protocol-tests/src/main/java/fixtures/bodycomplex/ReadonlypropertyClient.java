@@ -38,8 +38,8 @@ public final class ReadonlypropertyClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *
@@ -63,8 +63,8 @@ public final class ReadonlypropertyClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     size: Integer
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      *

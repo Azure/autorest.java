@@ -46,6 +46,8 @@ public final class DpgRequiredHeaderQueryClient {
      *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code

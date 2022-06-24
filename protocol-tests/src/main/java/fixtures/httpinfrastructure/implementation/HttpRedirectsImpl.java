@@ -409,7 +409,7 @@ public final class HttpRedirectsImpl {
      *
      * <pre>{@code
      * [
-     *     String
+     *     String (Required)
      * ]
      * }</pre>
      *
@@ -433,7 +433,7 @@ public final class HttpRedirectsImpl {
      *
      * <pre>{@code
      * [
-     *     String
+     *     String (Required)
      * ]
      * }</pre>
      *
@@ -458,7 +458,7 @@ public final class HttpRedirectsImpl {
      *
      * <pre>{@code
      * [
-     *     String
+     *     String (Required)
      * ]
      * }</pre>
      *

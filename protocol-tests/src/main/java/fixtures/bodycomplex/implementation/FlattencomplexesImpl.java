@@ -76,9 +76,9 @@ public final class FlattencomplexesImpl {
      *
      * <pre>{@code
      * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      *     }
      * }
      * }</pre>
@@ -102,9 +102,9 @@ public final class FlattencomplexesImpl {
      *
      * <pre>{@code
      * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      *     }
      * }
      * }</pre>
@@ -128,9 +128,9 @@ public final class FlattencomplexesImpl {
      *
      * <pre>{@code
      * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      *     }
      * }
      * }</pre>

@@ -40,8 +40,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Integer
-     *     field2: Integer
+     *     field1: Integer (Optional)
+     *     field2: Integer (Optional)
      * }
      * }</pre>
      *
@@ -66,8 +66,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Integer
-     *     field2: Integer
+     *     field1: Integer (Optional)
+     *     field2: Integer (Optional)
      * }
      * }</pre>
      *
@@ -92,8 +92,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Long
-     *     field2: Long
+     *     field1: Long (Optional)
+     *     field2: Long (Optional)
      * }
      * }</pre>
      *
@@ -117,8 +117,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Long
-     *     field2: Long
+     *     field1: Long (Optional)
+     *     field2: Long (Optional)
      * }
      * }</pre>
      *
@@ -143,8 +143,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Float
-     *     field2: Float
+     *     field1: Float (Optional)
+     *     field2: Float (Optional)
      * }
      * }</pre>
      *
@@ -168,8 +168,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Float
-     *     field2: Float
+     *     field1: Float (Optional)
+     *     field2: Float (Optional)
      * }
      * }</pre>
      *
@@ -194,8 +194,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Double
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     *     field1: Double (Optional)
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -220,8 +220,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field1: Double
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double
+     *     field1: Double (Optional)
+     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -246,8 +246,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean
-     *     fieldFalse: Boolean
+     *     fieldTrue: Boolean (Optional)
+     *     fieldFalse: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -271,8 +271,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean
-     *     fieldFalse: Boolean
+     *     fieldTrue: Boolean (Optional)
+     *     fieldFalse: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -297,9 +297,9 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     empty: String
-     *     nullProperty: String
+     *     field: String (Optional)
+     *     empty: String (Optional)
+     *     nullProperty: String (Optional)
      * }
      * }</pre>
      *
@@ -324,9 +324,9 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     empty: String
-     *     nullProperty: String
+     *     field: String (Optional)
+     *     empty: String (Optional)
+     *     nullProperty: String (Optional)
      * }
      * }</pre>
      *
@@ -351,8 +351,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     leap: String
+     *     field: String (Optional)
+     *     leap: String (Optional)
      * }
      * }</pre>
      *
@@ -376,8 +376,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: String
-     *     leap: String
+     *     field: String (Optional)
+     *     leap: String (Optional)
      * }
      * }</pre>
      *
@@ -402,8 +402,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: OffsetDateTime (Optional)
+     *     now: OffsetDateTime (Optional)
      * }
      * }</pre>
      *
@@ -428,8 +428,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: OffsetDateTime (Optional)
+     *     now: OffsetDateTime (Optional)
      * }
      * }</pre>
      *
@@ -454,8 +454,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: OffsetDateTime (Optional)
+     *     now: OffsetDateTime (Optional)
      * }
      * }</pre>
      *
@@ -480,8 +480,8 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime
-     *     now: OffsetDateTime
+     *     field: OffsetDateTime (Optional)
+     *     now: OffsetDateTime (Optional)
      * }
      * }</pre>
      *
@@ -506,7 +506,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: Duration (Optional)
      * }
      * }</pre>
      *
@@ -531,7 +531,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: Duration
+     *     field: Duration (Optional)
      * }
      * }</pre>
      *
@@ -556,7 +556,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: byte[]
+     *     field: byte[] (Optional)
      * }
      * }</pre>
      *
@@ -580,7 +580,7 @@ public final class PrimitiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     field: byte[]
+     *     field: byte[] (Optional)
      * }
      * }</pre>
      *

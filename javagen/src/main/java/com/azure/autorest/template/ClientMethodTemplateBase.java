@@ -43,8 +43,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     // ignore if synthesized by modelerfour, i.e. api-version
                     .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
                     .collect(Collectors.toList());
-            if (!queryParameters.isEmpty()) {
+            if (!queryParameters.isEmpty() && hasParametersToPrintInJavadoc(queryParameters)) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
+                commentBlock.line("You can add these to a request with {@link RequestOptions#addQueryParam}");
             }
 
             List<ProxyMethodParameter> headerParameters = clientMethod.getProxyMethod().getAllParameters().stream()
@@ -53,18 +54,23 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     // we would want user to provide a correct "content-type" if it is not a constant
                     .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE || !p.getIsConstant())
                     .collect(Collectors.toList());
-            if (!headerParameters.isEmpty()) {
+            if (!headerParameters.isEmpty() && hasParametersToPrintInJavadoc(headerParameters)) {
                 optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
+                commentBlock.line("You can add these to a request with {@link RequestOptions#addHeader}");
             }
 
             // Request body
             Set<IType> typesInJavadoc = new HashSet<>();
 
+            boolean isBodyParamRequired = clientMethod.getProxyMethod().getAllParameters()
+                    .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
+                            .map(ProxyMethodParameter::getIsRequired).findFirst().orElse(false);
+
             clientMethod.getProxyMethod().getAllParameters()
                     .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
                     .map(ProxyMethodParameter::getRawType)
                     .findFirst()
-                    .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc));
+                    .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));
 
             // Response body
             IType responseBodyType;
@@ -103,9 +109,6 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
-        if (!hasParametersToPrintInJavadoc(parameters)) {
-            return;
-        }
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
@@ -133,7 +136,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         });
     }
 
-    private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {
+    private static void requestBodySchemaJavadoc(IType requestBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc, boolean isBodyParamRequired) {
         typesInJavadoc.clear();
 
         if (requestBodyType == null) {
@@ -141,7 +144,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Request Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc);
+        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, true);
         commentBlock.line("}</pre>");
     }
 
@@ -153,62 +156,62 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Response Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc);
+        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true);
         commentBlock.line("}</pre>");
     }
 
-    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc) {
+    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema) {
         String nextIndent = indent + "    ";
         if (ClientModelUtil.isClientModel(type) && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (name != null) {
-                commentBlock.line(indent + name + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
             }
             List<ClientModelProperty> properties = new ArrayList<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties) {
-                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc);
+                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc, property.isRequired(), false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {
             if (name != null) {
-                commentBlock.line(indent + name + ": (recursive schema, see " + name + " above)");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": (recursive schema, see " + name + " above)");
             } else {
                 commentBlock.line(indent + "(recursive schema, see above)");
             }
         } else if (type instanceof ListType) {
             if (name != null) {
-                commentBlock.line(indent + name + ": [");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": [");
             } else {
-                commentBlock.line(indent + "[");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "[");
             }
-            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc);
+            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, false);
             commentBlock.line(indent + "]");
         } else if (type instanceof EnumType) {
             String values = ((EnumType) type).getValues().stream()
                     .map(ClientEnumValue::getValue)
                     .collect(Collectors.joining("/"));
             if (name != null) {
-                commentBlock.line(indent + name + ": String(" + values + ")");
+                commentBlock.line(indent + name + ": String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             } else {
-                commentBlock.line(indent + "String(" + values + ")");
+                commentBlock.line(indent + "String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             }
         } else if (type instanceof MapType) {
             if (name != null) {
-                commentBlock.line(indent + name + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
             }
-            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc);
+            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, isRequired, false);
             commentBlock.line(indent + "}");
         } else {
             if (name != null) {
-                commentBlock.line(indent + name + ": " + type.toString());
+                commentBlock.line(indent + name + ": " + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             } else {
-                commentBlock.line(indent + type.toString());
+                commentBlock.line(indent + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             }
         }
     }
@@ -246,5 +249,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             doc = String.format("The %1$s parameter", p.getName());
         }
         return doc;
+    }
+
+    private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRootSchema) {
+        return isRootSchema ? "" : isRequired ? " (Required)" : " (Optional)";
     }
 }

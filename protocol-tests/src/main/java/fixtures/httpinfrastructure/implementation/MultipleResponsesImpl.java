@@ -636,7 +636,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -664,7 +664,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -691,7 +691,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -714,7 +714,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -742,7 +742,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -769,7 +769,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -792,7 +792,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -820,7 +820,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -847,7 +847,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -870,7 +870,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -898,7 +898,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -924,7 +924,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -947,7 +947,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -975,7 +975,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1002,7 +1002,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1025,7 +1025,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1053,7 +1053,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1079,7 +1079,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1102,7 +1102,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1130,7 +1130,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1156,7 +1156,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1179,7 +1179,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1207,7 +1207,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1233,7 +1233,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1886,7 +1886,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1911,7 +1911,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1937,7 +1937,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1960,7 +1960,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -1985,7 +1985,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2011,7 +2011,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2325,7 +2325,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2351,7 +2351,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2378,7 +2378,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2401,7 +2401,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2426,7 +2426,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2452,7 +2452,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2475,7 +2475,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2500,7 +2500,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2526,7 +2526,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2549,7 +2549,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2574,7 +2574,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2600,7 +2600,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2623,7 +2623,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2648,7 +2648,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2674,7 +2674,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2697,7 +2697,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2722,7 +2722,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2748,7 +2748,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2771,7 +2771,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2796,7 +2796,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -2822,7 +2822,7 @@ public final class MultipleResponsesImpl {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *

@@ -87,6 +87,8 @@ public final class DpgClient {
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -114,7 +116,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     url: String
+     *     url: String (Required)
      * }
      * }</pre>
      *
@@ -148,6 +150,8 @@ public final class DpgClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
