@@ -369,9 +369,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
-        if (settings.isFluent()
-                && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
-            // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+        if (!SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             return null;
         }
 

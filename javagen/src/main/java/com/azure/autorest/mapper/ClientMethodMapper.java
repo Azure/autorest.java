@@ -683,7 +683,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
-        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation);
+        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation, settings);
 
         // If DPG is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>
