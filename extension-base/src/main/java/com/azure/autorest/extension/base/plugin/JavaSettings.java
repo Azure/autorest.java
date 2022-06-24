@@ -104,7 +104,7 @@ public class JavaSettings {
                 getStringValue(host, "fluent"),
                 getBooleanValue(host, "regenerate-pom", false),
                     header,
-                80,
+                120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "").toLowerCase(),
                 getBooleanValue(host, "enable-xml", false),

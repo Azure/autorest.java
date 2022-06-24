@@ -441,6 +441,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 continue;
             }
 
+            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
+                comment -> comment.line(property.getDescription()));
+
             addFieldAnnotations(property, classBlock, settings);
 
             String propertyName = property.getName();

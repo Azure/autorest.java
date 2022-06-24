@@ -434,6 +434,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 "    // If it isn't the discriminator field buffer the JSON to make it replayable and find the discriminator field value.",
                 "    String json = JsonUtils.bufferJsonObject(reader);",
                 "    JsonReader replayReader = DefaultJsonReader.fromString(json);",
+                "    replayReader.nextToken(); // Prepare for reading",
                 "    while (replayReader.nextToken() != JsonToken.END_OBJECT) {",
                 "        String " + fieldNameVariableName + " = replayReader.getFieldName();",
                 "        replayReader.nextToken();",
@@ -722,7 +723,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Then add all instance level properties that associated with JSON property names.
         // Last add a potential additional properties Map.
         if (propertiesManager.discriminatorProperty != null) {
-            initializeLocalVariable(methodBlock, propertiesManager.discriminatorProperty);
+            ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
+            methodBlock.line(discriminatorProperty.getClientType() + " " + discriminatorProperty.getName()
+                + " = \"" + propertiesManager.expectedDiscriminator + "\";");
         }
 
         propertiesManager.superRequiredProperties.forEach(property -> initializeLocalVariable(methodBlock, property));
@@ -1056,6 +1059,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             handleSettingDeserializedValue(methodBlock, property, settings, true));
         propertiesManager.setterProperties.forEach(property ->
             handleSettingDeserializedValue(methodBlock, property, settings, false));
+
+        if (propertiesManager.additionalProperties != null) {
+            handleSettingDeserializedValue(methodBlock, propertiesManager.additionalProperties, settings, false);
+        }
 
         methodBlock.line();
         methodBlock.methodReturn("deserializedValue");
