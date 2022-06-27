@@ -83,6 +83,10 @@ public class TestUtils {
         public void message(Message message) {
 //            System.out.println(String.format("[%1$s] %2$s", message.getChannel(), message.getText()));
         }
+
+        @Override
+        public void writeFile(String fileName, String content, List<Object> sourceMap) {
+        }
     }
 
     // code-model-fluentnamer-locks.yaml is produced by fluentnamer on https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
