@@ -20,6 +20,7 @@ import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.DateTimeRfc1123;
 
+import java.lang.reflect.Method;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,7 +99,7 @@ public class ClientMethod {
 
     private MethodPollingDetails methodPollingDetails;
 
-    private ExternalDocumentation externalDocumentation;
+    private MethodDocumentation methodDocumentation;
 
     /**
      * Create a new ClientMethod with the provided properties.
@@ -116,7 +117,7 @@ public class ClientMethod {
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
-     * @param externalDocumentation The external documentation.
+     * @param methodDocumentation The method level documentation.
      */
     protected ClientMethod(String description, ReturnValue returnValue, String name,
                            List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
@@ -126,7 +127,7 @@ public class ClientMethod {
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
                            JavaVisibility methodVisibility, boolean implementationOnly,
-                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
+                           MethodPollingDetails methodPollingDetails, MethodDocumentation methodDocumentation) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -144,7 +145,7 @@ public class ClientMethod {
         this.methodVisibility = methodVisibility;
         this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
-        this.externalDocumentation = externalDocumentation;
+        this.methodDocumentation = methodDocumentation;
     }
 
     @Override
@@ -292,8 +293,8 @@ public class ClientMethod {
         return methodTransformationDetails;
     }
 
-    public ExternalDocumentation getExternalDocumentation() {
-        return externalDocumentation;
+    public MethodDocumentation getMethodDocumentation() {
+        return methodDocumentation;
     }
 
     public final List<String> getProxyMethodArguments(JavaSettings settings) {
@@ -483,7 +484,7 @@ public class ClientMethod {
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
         protected boolean implementationOnly = false;
         protected MethodPollingDetails methodPollingDetails;
-        protected  ExternalDocumentation externalDocumentation;
+        protected MethodDocumentation methodDocumentation;
 
         /**
          * Sets the description of this ClientMethod.
@@ -656,12 +657,12 @@ public class ClientMethod {
         }
 
         /**
-         * Sets external documentation
-         * @param externalDocumentation external documentation
+         * Sets method documentation
+         * @param methodDocumentation method level documentation
          * @return the Builder itself
          */
-        public Builder externalDocumentation(ExternalDocumentation externalDocumentation) {
-            this.externalDocumentation = externalDocumentation;
+        public Builder methodDocumentation(MethodDocumentation methodDocumentation) {
+            this.methodDocumentation = methodDocumentation;
             return this;
         }
 
@@ -687,7 +688,7 @@ public class ClientMethod {
                     methodVisibility,
                     implementationOnly,
                     methodPollingDetails,
-                    externalDocumentation);
+                    methodDocumentation);
         }
     }
 }

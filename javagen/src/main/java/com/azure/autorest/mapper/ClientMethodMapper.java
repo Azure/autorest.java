@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.MethodDocumentation;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -156,7 +157,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // map externalDocs property
         if (operation.getExternalDocs() != null) {
-            builder.externalDocumentation(operation.getExternalDocs()).build();
+            MethodDocumentation methodDocumentation = new MethodDocumentation.Builder()
+                    .description(operation.getExternalDocs().getDescription())
+                    .url(operation.getExternalDocs().getUrl())
+                    .extensions(operation.getExternalDocs().getExtensions())
+                    .build();
+            builder.methodDocumentation(methodDocumentation);
         }
 
         if (syncReturnType == ClassType.InputStream) {

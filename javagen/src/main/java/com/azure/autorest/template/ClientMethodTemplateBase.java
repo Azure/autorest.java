@@ -92,8 +92,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
 
         // add external documentation
-        if (clientMethod.getExternalDocumentation() != null) {
-            commentBlock.line("@see <a href=" + clientMethod.getExternalDocumentation().getUrl() + ">" + clientMethod.getExternalDocumentation().getDescription() + "</a>");
+        if (clientMethod.getMethodDocumentation() != null) {
+            commentBlock.line("@see <a href=" + clientMethod.getMethodDocumentation().getUrl() + ">" + clientMethod.getMethodDocumentation().getDescription() + "</a>");
         }
     }
 
