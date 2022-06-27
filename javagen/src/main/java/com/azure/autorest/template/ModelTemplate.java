@@ -465,7 +465,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
                 } else {
                     // handle x-ms-client-default
-                    if (property.getDefaultValue() != null && !settings.isStreamStyleSerialization()) {
+                    if (property.getDefaultValue() != null
+                        && (!settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
                         fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
