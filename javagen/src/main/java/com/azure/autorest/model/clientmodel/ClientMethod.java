@@ -10,7 +10,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.ExternalDocumentation;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
@@ -20,7 +19,6 @@ import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.DateTimeRfc1123;
 
-import java.lang.reflect.Method;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,15 +161,14 @@ public class ClientMethod {
                 && Objects.equals(requiredNullableParameterExpressions, that.requiredNullableParameterExpressions)
                 && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
                 && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
-                && methodVisibility == that.methodVisibility
-                && Objects.equals(externalDocumentation, that.externalDocumentation);
+                && methodVisibility == that.methodVisibility;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
                 requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
-                methodTransformationDetails, methodVisibility, implementationOnly, externalDocumentation);
+                methodTransformationDetails, methodVisibility, implementationOnly);
     }
 
     public final String getDescription() {
