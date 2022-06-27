@@ -154,6 +154,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         }
 
+        // map externalDocs property
+        if (operation.getExternalDocs() != null) {
+            builder.externalDocumentation(operation.getExternalDocs()).build();
+        }
+
         if (syncReturnType == ClassType.InputStream) {
             syncReturnWithResponse = ClassType.StreamResponse;
         } else {

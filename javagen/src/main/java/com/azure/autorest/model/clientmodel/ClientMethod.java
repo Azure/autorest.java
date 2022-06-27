@@ -10,6 +10,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.ExternalDocumentation;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
@@ -97,6 +98,8 @@ public class ClientMethod {
 
     private MethodPollingDetails methodPollingDetails;
 
+    private ExternalDocumentation externalDocumentation;
+
     /**
      * Create a new ClientMethod with the provided properties.
      * @param description The description of this ClientMethod.
@@ -113,6 +116,7 @@ public class ClientMethod {
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
+     * @param externalDocumentation The external documentation.
      */
     protected ClientMethod(String description, ReturnValue returnValue, String name,
                            List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
@@ -122,7 +126,7 @@ public class ClientMethod {
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
                            JavaVisibility methodVisibility, boolean implementationOnly,
-                           MethodPollingDetails methodPollingDetails) {
+                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -140,6 +144,7 @@ public class ClientMethod {
         this.methodVisibility = methodVisibility;
         this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
+        this.externalDocumentation = externalDocumentation;
     }
 
     @Override
@@ -157,14 +162,15 @@ public class ClientMethod {
                 && Objects.equals(requiredNullableParameterExpressions, that.requiredNullableParameterExpressions)
                 && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
                 && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
-                && methodVisibility == that.methodVisibility;
+                && methodVisibility == that.methodVisibility
+                && Objects.equals(externalDocumentation, that.externalDocumentation);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
                 requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
-                methodTransformationDetails, methodVisibility, implementationOnly);
+                methodTransformationDetails, methodVisibility, implementationOnly, externalDocumentation);
     }
 
     public final String getDescription() {
@@ -284,6 +290,10 @@ public class ClientMethod {
 
     public final List<MethodTransformationDetail> getMethodTransformationDetails() {
         return methodTransformationDetails;
+    }
+
+    public ExternalDocumentation getExternalDocumentation() {
+        return externalDocumentation;
     }
 
     public final List<String> getProxyMethodArguments(JavaSettings settings) {
@@ -473,6 +483,7 @@ public class ClientMethod {
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
         protected boolean implementationOnly = false;
         protected MethodPollingDetails methodPollingDetails;
+        protected  ExternalDocumentation externalDocumentation;
 
         /**
          * Sets the description of this ClientMethod.
@@ -645,6 +656,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets external documentation
+         * @param externalDocumentation external documentation
+         * @return the Builder itself
+         */
+        public Builder externalDocumentation(ExternalDocumentation externalDocumentation) {
+            this.externalDocumentation = externalDocumentation;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -665,7 +686,8 @@ public class ClientMethod {
                     methodTransformationDetails,
                     methodVisibility,
                     implementationOnly,
-                    methodPollingDetails);
+                    methodPollingDetails,
+                    externalDocumentation);
         }
     }
 }
