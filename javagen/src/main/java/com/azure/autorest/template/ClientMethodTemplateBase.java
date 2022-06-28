@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -144,7 +145,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Request Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, true);
+        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, true, true);
         commentBlock.line("}</pre>");
     }
 
@@ -156,11 +157,11 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Response Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true);
+        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true, false);
         commentBlock.line("}</pre>");
     }
 
-    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema) {
+    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema, boolean isInRequestBody) {
         String nextIndent = indent + "    ";
         if (ClientModelUtil.isClientModel(type) && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
@@ -173,7 +174,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             List<ClientModelProperty> properties = new ArrayList<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties) {
-                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc, property.isRequired(), false);
+                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc, property.isRequired(), false, true);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {
@@ -188,7 +189,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             } else {
                 commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "[");
             }
-            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, false);
+            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, false, true);
             commentBlock.line(indent + "]");
         } else if (type instanceof EnumType) {
             String values = ((EnumType) type).getValues().stream()
@@ -205,15 +206,32 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             } else {
                 commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
             }
-            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, isRequired, false);
+            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, isRequired, false, true);
             commentBlock.line(indent + "}");
         } else {
-            if (name != null) {
-                commentBlock.line(indent + name + ": " + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+            String javadoc;
+            if (isInRequestBody) {
+                javadoc = convertToRequestBodySchemaJavadoc(type);
             } else {
-                commentBlock.line(indent + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                javadoc = type.toString();
+            }
+            if (name != null) {
+                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+            } else {
+                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             }
         }
+    }
+
+    /*
+     * Converts raw type into type to display in javadoc as request body schema type.
+     * 1. converts Flux<ByteBuffer> to BinaryData
+     */
+    private static String convertToRequestBodySchemaJavadoc(IType type) {
+        if (GenericType.FluxByteBuffer.equals(type)) {
+            return ClassType.BinaryData.toString();
+        }
+        return type.toString();
     }
 
     private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
