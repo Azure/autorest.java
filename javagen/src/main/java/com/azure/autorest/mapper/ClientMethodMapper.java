@@ -160,7 +160,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             MethodDocumentation methodDocumentation = new MethodDocumentation.Builder()
                     .description(operation.getExternalDocs().getDescription())
                     .url(operation.getExternalDocs().getUrl())
-                    .extensions(operation.getExternalDocs().getExtensions())
                     .build();
             builder.methodDocumentation(methodDocumentation);
         }

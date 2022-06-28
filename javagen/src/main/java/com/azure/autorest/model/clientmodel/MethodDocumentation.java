@@ -3,19 +3,15 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.DictionaryAny;
-
 import java.util.Objects;
 
 public class MethodDocumentation {
     private String description;
     private String url;
-    private DictionaryAny extensions;
 
-    protected MethodDocumentation(String description, String url, DictionaryAny extensions) {
+    protected MethodDocumentation(String description, String url) {
         this.description = description;
         this.url = url;
-        this.extensions = extensions;
     }
 
     public String getDescription() {
@@ -26,16 +22,12 @@ public class MethodDocumentation {
         return url;
     }
 
-    public DictionaryAny getExtensions() {
-        return extensions;
-    }
 
     @Override
     public String toString() {
         return "MethodDocumentation{" +
                 "description='" + description + '\'' +
                 ", url='" + url + '\'' +
-                ", extensions=" + extensions +
                 '}';
     }
 
@@ -44,12 +36,12 @@ public class MethodDocumentation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MethodDocumentation that = (MethodDocumentation) o;
-        return Objects.equals(description, that.description) && Objects.equals(url, that.url) && Objects.equals(extensions, that.extensions);
+        return Objects.equals(description, that.description) && Objects.equals(url, that.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, url, extensions);
+        return Objects.hash(description, url);
     }
 
     public static class Builder {
@@ -57,8 +49,6 @@ public class MethodDocumentation {
         protected String description;
 
         protected String url;
-
-        protected DictionaryAny extensions;
 
         /**
          * Sets the description of this MethodDocumentation.
@@ -80,21 +70,10 @@ public class MethodDocumentation {
             return this;
         }
 
-        /**
-         * Sets the extensions of this MethodDocumentation.
-         * @param extensions of this MethodDocumentation
-         * @return the Builder itself
-         */
-        public MethodDocumentation.Builder extensions(DictionaryAny extensions) {
-            this.extensions = extensions;
-            return this;
-        }
-
         public MethodDocumentation build() {
             return new MethodDocumentation(
                     description,
-                    url,
-                    extensions);
+                    url);
         }
 
     }
