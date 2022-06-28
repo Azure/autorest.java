@@ -196,7 +196,7 @@ public class ExampleParser {
         return ret;
     }
 
-    private static FluentCollectionMethodExample parseMethodForExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
+    protected static FluentCollectionMethodExample parseMethodForExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
                                                                        List<MethodParameter> methodParameters,
                                                                        String exampleName, ProxyMethodExample proxyMethodExample) {
         FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(
@@ -272,7 +272,7 @@ public class ExampleParser {
         return ret;
     }
 
-    private static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate, ProxyMethodExample example, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
+    protected static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate, ProxyMethodExample example, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
         FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(
                 example.getName(), example.getRelativeOriginalFileName(),
                 FluentStatic.getFluentManager(), collection, resourceCreate);
@@ -460,7 +460,7 @@ public class ExampleParser {
 
     }
 
-    private static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
+    protected static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
         return methodParameters.stream()
                 .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
                 .findFirst().orElse(null);

@@ -19,14 +19,12 @@ import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -356,17 +354,8 @@ public class FluentGen extends Javagen {
                 }
 
                 // Unit tests for APIs
-                for (MethodGroupClient methodGroup : client.getServiceClient().getMethodGroupClients()) {
-                    methodGroup.getClientMethods().stream()
-                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
-                            .filter(m -> !m.isImplementationOnly())
-                            // only take the overload with max parameters
-                            .filter(m -> !m.getOnlyRequiredParameters()
-                                    && m.getParameters().stream().anyMatch(p -> p.getClientType() == ClassType.Context))
-                            .filter(m -> m.getType() == ClientMethodType.SimpleSync
-                                    || m.getType() == ClientMethodType.PagingSync
-                                    || (m.getType() == ClientMethodType.LongRunningSync && m.getProxyMethod().getResponseExpectedStatusCodes().contains(200)))
-                            .forEach(m -> javaPackage.addOperationUnitTest(methodGroup, m));
+                for (FluentMethodUnitTest unitTest : fluentClient.getUnitTests()) {
+                    javaPackage.addOperationUnitTest(unitTest);
                 }
                 // enable inline mock maker for final class/method
                 writeFile("src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker",

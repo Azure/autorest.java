@@ -11,12 +11,11 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.template.ClientMethodTestTemplate;
+import com.azure.autorest.fluent.template.FluentMethodTestTemplate;
 import com.azure.autorest.fluent.template.FluentLiveTestsTemplate;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
 import com.azure.autorest.fluent.template.FluentExampleTemplate;
@@ -111,12 +110,15 @@ public class FluentJavaPackage extends JavaPackage {
         return javaFile;
     }
 
-    public void addOperationUnitTest(MethodGroupClient methodGroup, ClientMethod clientMethod) {
-        String className = methodGroup.getInterfaceName() + CodeNamer.toPascalCase(clientMethod.getName()) + "Tests";
+    public void addOperationUnitTest(FluentMethodUnitTest unitTest) {
+
+        String className = unitTest.getResourceCollection().getInterfaceType().getName()
+                + CodeNamer.toPascalCase(unitTest.getCollectionMethod().getMethodName())
+                + "Tests";
         JavaFile javaFile = getJavaFileFactory().createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
-        ClientMethodTestTemplate.ClientMethodInfo info = new ClientMethodTestTemplate.ClientMethodInfo(
-                className, methodGroup, clientMethod);
-        ClientMethodTestTemplate.getInstance().write(info, javaFile);
+        FluentMethodTestTemplate.ClientMethodInfo info = new FluentMethodTestTemplate.ClientMethodInfo(
+                className, unitTest);
+        FluentMethodTestTemplate.getInstance().write(info, javaFile);
         addJavaFile(javaFile);
     }
 
