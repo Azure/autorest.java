@@ -596,6 +596,16 @@ public final class HttpSuccessImpl {
     /**
      * Put boolean value true returning 200 success.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -619,6 +629,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Put boolean value true returning 200 success.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -644,6 +664,16 @@ public final class HttpSuccessImpl {
     /**
      * Put boolean value true returning 200 success.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -664,6 +694,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Patch true Boolean value in request returning 200.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -689,6 +729,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returning 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -713,6 +763,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returning 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -733,6 +793,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Post bollean value true in request that returns a 200.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -758,6 +828,16 @@ public final class HttpSuccessImpl {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -782,6 +862,16 @@ public final class HttpSuccessImpl {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -802,6 +892,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Delete simple boolean value true returns 200.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -827,6 +927,16 @@ public final class HttpSuccessImpl {
     /**
      * Delete simple boolean value true returns 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -851,6 +961,16 @@ public final class HttpSuccessImpl {
     /**
      * Delete simple boolean value true returns 200.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -871,6 +991,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Put true Boolean value in request returns 201.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -896,6 +1026,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -920,6 +1060,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -940,6 +1090,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -965,6 +1125,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -989,6 +1159,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1009,6 +1189,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1034,6 +1224,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1058,6 +1258,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1078,6 +1288,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Patch true Boolean value in request returns 202.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1103,6 +1323,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returns 202.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1127,6 +1357,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returns 202.
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1147,6 +1387,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1172,6 +1422,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1196,6 +1456,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1216,6 +1486,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1241,6 +1521,16 @@ public final class HttpSuccessImpl {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1264,6 +1554,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1334,6 +1634,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1357,6 +1667,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1382,6 +1702,16 @@ public final class HttpSuccessImpl {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1402,6 +1732,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1427,6 +1767,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1451,6 +1801,16 @@ public final class HttpSuccessImpl {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1471,6 +1831,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1496,6 +1866,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1520,6 +1900,16 @@ public final class HttpSuccessImpl {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1540,6 +1930,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -1565,6 +1965,16 @@ public final class HttpSuccessImpl {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -1588,6 +1998,16 @@ public final class HttpSuccessImpl {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
