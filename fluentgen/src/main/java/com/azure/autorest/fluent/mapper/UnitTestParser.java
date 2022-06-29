@@ -92,6 +92,8 @@ public class UnitTestParser extends ExampleParser {
                 .name(clientMethod.getName());
 
         for (MethodParameter methodParameter : methodParameters) {
+            // create mock data for each parameter
+
             String serializedName = methodParameter.getSerializedName();
             if (serializedName == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
                 serializedName = methodParameter.getProxyMethodParameter().getName();
@@ -110,7 +112,8 @@ public class UnitTestParser extends ExampleParser {
         private final ExampleNode verificationNode;
         private final String verificationObjectName;
 
-        public ResponseInfo(ProxyMethodExample.Response responseExample, ExampleNode verificationNode, String verificationObjectName) {
+        private ResponseInfo(ProxyMethodExample.Response responseExample,
+                             ExampleNode verificationNode, String verificationObjectName) {
             this.responseExample = responseExample;
             this.verificationNode = verificationNode;
             this.verificationObjectName = verificationObjectName;
@@ -118,6 +121,8 @@ public class UnitTestParser extends ExampleParser {
     }
 
     private static ResponseInfo createProxyMethodExampleResponse(ClientMethod clientMethod) {
+        // create a mock response
+
         int statusCode = clientMethod.getProxyMethod().getResponseExpectedStatusCodes().iterator().next();
         Object jsonObject;
         ExampleNode verificationNode;
@@ -128,12 +133,13 @@ public class UnitTestParser extends ExampleParser {
                 IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
 
                 Object firstJsonObjectInPageable = ModelTestCaseUtil.jsonFromType(0, elementType);
-
+                // put to first element in array
                 Map<String, Object> jsonMap = new HashMap<>();
                 jsonMap.put(clientMethod.getMethodPageDetails().getRawItemName(), Collections.singletonList(firstJsonObjectInPageable));
 
                 jsonObject = jsonMap;
 
+                // pageable will verify the first element
                 verificationObjectName = "response.iterator().next()";
                 verificationNode = ModelExampleUtil.parseNode(elementType, firstJsonObjectInPageable);
             } else {
@@ -172,6 +178,7 @@ public class UnitTestParser extends ExampleParser {
 
     @SuppressWarnings("unchecked")
     private static void setProvisioningState(Object jsonObject) {
+        // properties.provisioningState = Succeeded
         if ((jsonObject instanceof Map) && ((Map<String, Object>) jsonObject).containsKey("properties")) {
             Object propertiesObject = ((Map<String, Object>) jsonObject).get("properties");
             if ((propertiesObject instanceof Map) && ((Map<String, Object>) propertiesObject).containsKey("provisioningState")) {

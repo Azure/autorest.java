@@ -53,10 +53,16 @@ public class FluentMethodUnitTest {
         this.responseVerificationNode = responseVerificationNode;
     }
 
+    /**
+     * @return example of method in collection, mutually exclusive with {@link #getFluentResourceCreateExample()}.
+     */
     public FluentMethodExample getFluentMethodExample() {
         return fluentMethodExample;
     }
 
+    /**
+     * @return example of resource creation, mutually exclusive with {@link #getFluentMethodExample()}.
+     */
     public FluentResourceCreateExample getFluentResourceCreateExample() {
         return fluentResourceCreateExample;
     }
@@ -69,14 +75,23 @@ public class FluentMethodUnitTest {
         return collectionMethod;
     }
 
+    /**
+     * @return the mock data response with status code and "body" and "headers".
+     */
     public ProxyMethodExample.Response getResponse() {
         return response;
     }
 
+    /**
+     * @return variable name for verification, e.g. "response", "response.iterator().next()" for pageable.
+     */
     public String getResponseVerificationVariableName() {
         return responseVerificationVariableName;
     }
 
+    /**
+     * @return example node as data of the variable for verification.
+     */
     public ExampleNode getResponseVerificationNode() {
         return responseVerificationNode;
     }

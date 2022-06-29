@@ -74,14 +74,10 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
                 OffsetDateTime.class.getName()
         ));
 
-        // create method with mocked data on parameters
         String className = info.className;
         FluentMethodUnitTest fluentMethodUnitTest = info.fluentMethodUnitTest;
-
         ClientMethod clientMethod = fluentMethodUnitTest.getCollectionMethod().getInnerClientMethod();
-
         final boolean hasReturnValue = clientMethod.getReturnValue().getType() != PrimitiveType.Void;
-
         IType fluentReturnType = fluentMethodUnitTest.getCollectionMethod().getFluentReturnType();
 
         // method invocation
@@ -116,6 +112,7 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
             throw new IllegalStateException("Failed to serialize Object to JSON string", e);
         }
 
+        // prepare assertions
         ModelExampleWriter.ExampleNodeAssertionVisitor assertionVisitor = new ModelExampleWriter.ExampleNodeAssertionVisitor();
         if (hasReturnValue) {
             imports.add("org.junit.jupiter.api.Assertions");
@@ -129,12 +126,15 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         javaFile.publicFinalClass(className, classBlock -> {
             classBlock.annotation("Test");
             classBlock.publicMethod(String.format("void test%1$s() throws Exception", CodeNamer.toPascalCase(clientMethod.getName())), methodBlock -> {
+                // prepare mock class
                 methodBlock.line("HttpClient httpClient = Mockito.mock(HttpClient.class);");
                 methodBlock.line("HttpResponse httpResponse = Mockito.mock(HttpResponse.class);");
                 methodBlock.line("ArgumentCaptor<HttpRequest> httpRequest = ArgumentCaptor.forClass(HttpRequest.class);");
                 methodBlock.line();
+                // response
                 methodBlock.line("String responseStr = " + ClassType.String.defaultValueExpression(jsonStr) + ";");
                 methodBlock.line();
+                // mock class
                 methodBlock.line("Mockito.when(httpResponse.getStatusCode()).thenReturn(" + statusCode + ");");
                 methodBlock.line("Mockito.when(httpResponse.getHeaders()).thenReturn(new HttpHeaders());");
                 methodBlock.line("Mockito.when(httpResponse.getBody()).thenReturn(Flux.just(ByteBuffer.wrap(responseStr.getBytes(StandardCharsets.UTF_8))));");
@@ -144,15 +144,19 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
                 methodBlock.line("    return Mono.just(httpResponse);");
                 methodBlock.line("}));");
                 methodBlock.line();
+                // initialize manager
                 methodBlock.line(String.format("%1$s manager = %1$s.configure().withHttpClient(httpClient).authenticate(tokenRequestContext -> Mono.just(new AccessToken(\"this_is_a_token\", OffsetDateTime.MAX)), new AzureProfile(\"\", \"\", AzureEnvironment.AZURE));", exampleMethod.getExample().getEntryType().getName()));
                 methodBlock.line();
+                // method invocation
                 methodBlock.line(clientMethodInvocationWithResponse);
                 methodBlock.line();
+                // verification
                 if (hasReturnValue) {
                     assertionVisitor.getAssertions().forEach(methodBlock::line);
                 }
             });
 
+            // helper method
             if (!exampleMethod.getHelperFeatures().isEmpty()) {
                 ModelExampleWriter.writeMapOfMethod(classBlock);
             }

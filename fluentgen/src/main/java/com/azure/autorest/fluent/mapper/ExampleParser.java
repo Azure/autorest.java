@@ -223,7 +223,7 @@ public class ExampleParser {
         return clientMethodExample;
     }
 
-    protected static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
+    private static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
         for (MethodParameter methodParameter : methodParameters) {
             ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
 
