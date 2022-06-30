@@ -68,11 +68,19 @@ public class FluentMapper {
         }
 
         // live tests
-        fluentClient.getLiveTests().addAll(
-                client.getLiveTests()
-                        .stream()
-                        .map(liveTests -> FluentLiveTestsMapper.getInstance().map(liveTests, fluentClient, codeModel, fluentJavaSettings))
-                        .collect(Collectors.toList()));
+        if (JavaSettings.getInstance().isGenerateTests()) {
+            fluentClient.getLiveTests().addAll(
+                    client.getLiveTests()
+                            .stream()
+                            .map(liveTests -> FluentLiveTestsMapper.getInstance().map(liveTests, fluentClient, codeModel, fluentJavaSettings))
+                            .collect(Collectors.toList()));
+
+            UnitTestParser unitTestParser = new UnitTestParser();
+            fluentClient.getUnitTests().addAll(
+                    fluentClient.getResourceCollections().stream()
+                            .flatMap(rc -> unitTestParser.parseResourceCollectionForUnitTest(rc).stream())
+                            .collect(Collectors.toList()));
+        }
 
         return fluentClient;
     }
