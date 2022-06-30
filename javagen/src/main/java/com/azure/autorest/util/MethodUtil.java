@@ -152,8 +152,7 @@ public class MethodUtil {
     public static int getContentTypeCount(List<Request> requests) {
         Set<String> mediaTypes = new HashSet<>();
         for (Request request : requests) {
-            if (request.getProtocol().getHttp().getMediaTypes() != null
-                    && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
+            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
                 mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
             }
         }
@@ -237,8 +236,7 @@ public class MethodUtil {
     private static List<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
         List<ChoiceValue> choiceValues = new ArrayList<>();
         for (Request request : requests) {
-            if (request.getProtocol().getHttp().getMediaTypes() != null
-                    && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
+            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
                 for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
                     ChoiceValue choiceValue = new ChoiceValue();
                     choiceValue.setValue(mediaType);
