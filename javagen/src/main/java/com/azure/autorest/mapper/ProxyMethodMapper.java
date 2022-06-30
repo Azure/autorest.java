@@ -478,7 +478,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     private static final class SwaggerExceptionDefinitions {
-
         private ClassType defaultExceptionType;
         private Map<Integer, ClassType> exceptionTypeMapping;
     }
