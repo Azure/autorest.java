@@ -101,7 +101,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+            if (SchemaUtil.containsBinaryResponse(operation)
+                    || responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+                if (responseBodyType == PrimitiveType.Void) { // binary response body
+                    builder.rawResponseBodyType(ClassType.BinaryData);
+                }
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {
                 responseBodyType = ClassType.String;
@@ -111,7 +115,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
         if (settings.isDataPlaneClient()) {
             IType singleValueType;
-            if (responseBodyType.equals(PrimitiveType.Void)) {
+            if (SchemaUtil.containsBinaryResponse(operation)) {
+                singleValueType = GenericType.Response(ClassType.BinaryData);
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
             } else {
                 singleValueType = GenericType.Response(responseBodyType);
@@ -121,7 +127,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
                 && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
             builder.returnType(createBinaryContentAsyncReturnType());
-        } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+        } else if (SchemaUtil.containsBinaryResponse(operation)) {
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
             builder.returnType(GenericType.Mono(singleValueType));
@@ -472,6 +478,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     private static final class SwaggerExceptionDefinitions {
+
         private ClassType defaultExceptionType;
         private Map<Integer, ClassType> exceptionTypeMapping;
     }

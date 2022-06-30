@@ -78,6 +78,9 @@ public class SchemaUtil {
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
     }
 
+    /*
+     * Note: returns PrimitiveType.Void for operation that contains binary response body schema, can be checked by SchemaUtil.containsBinaryResponse(operation)
+     */
     public static IType getOperationResponseType(Operation operation) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
@@ -181,6 +184,10 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    public static boolean containsBinaryResponse(Operation operation) {
+        return operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()));
     }
 
     // SyncPoller or PollerFlux does not contain full Response and hence does not have headers

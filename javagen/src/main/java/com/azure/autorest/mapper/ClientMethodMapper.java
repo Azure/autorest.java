@@ -131,23 +131,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
             if (settings.isDataPlaneClient()) {
-                if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+                if (SchemaUtil.containsBinaryResponse(operation)
+                        || responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
                     responseBodyType = ClassType.String;
                 }
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
-            if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient()) {
+            if (SchemaUtil.containsBinaryResponse(operation) && !settings.isDataPlaneClient()) {
                 asyncReturnType = createAsyncBinaryReturnType();
             } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                 asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
             } else {
                 asyncReturnType = createAsyncVoidReturnType();
             }
-            if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient()) {
+            if (SchemaUtil.containsBinaryResponse(operation) && !settings.isDataPlaneClient()) {
                 syncReturnType = ClassType.InputStream;
             } else {
                 syncReturnType = responseBodyType.getClientType();
