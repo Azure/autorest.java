@@ -112,7 +112,7 @@ public final class AvailabilitySets {
     public Mono<Void> updateAsync(
             String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
         return updateWithResponseAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**

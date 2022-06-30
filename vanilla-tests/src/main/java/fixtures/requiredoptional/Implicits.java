@@ -19,6 +19,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.requiredoptional.models.ErrorException;
@@ -98,6 +99,16 @@ public final class Implicits {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Put("/reqopt/implicit/optional/binary-body")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> putOptionalBinaryBody(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") BinaryData bodyParameter,
+                @HeaderParam("Content-Length") Long contentLength,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Get("/reqopt/global/required/path/{required-global-path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -160,7 +171,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredPathAsync(String pathParameter) {
-        return getRequiredPathWithResponseAsync(pathParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredPathWithResponseAsync(pathParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -207,7 +218,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync(String queryParameter) {
-        return putOptionalQueryWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalQueryWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -220,7 +231,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync() {
         final String queryParameter = null;
-        return putOptionalQueryWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalQueryWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -279,7 +290,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync(String queryParameter) {
-        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -292,7 +303,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync() {
         final String queryParameter = null;
-        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalHeaderWithResponseAsync(queryParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -323,7 +334,7 @@ public final class Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -343,7 +354,7 @@ public final class Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -351,7 +362,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync(String bodyParameter) {
-        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -364,13 +375,13 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync() {
         final String bodyParameter = null;
-        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBodyWithResponseAsync(bodyParameter).flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test implicitly optional body parameter.
      *
-     * @param bodyParameter simple string.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -396,7 +407,7 @@ public final class Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -420,7 +431,7 @@ public final class Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -428,8 +439,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -443,15 +453,14 @@ public final class Implicits {
     public Mono<Void> putOptionalBinaryBodyAsync() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter The bodyParameter parameter.
-     * @param contentLength The contentLength parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -471,6 +480,58 @@ public final class Implicits {
     public void putOptionalBinaryBody() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
+        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(BinaryData bodyParameter, Long contentLength) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.putOptionalBinaryBody(
+                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBinaryBodyAsync(BinaryData bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
         putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
     }
 
@@ -508,7 +569,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalPathAsync() {
-        return getRequiredGlobalPathWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredGlobalPathWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -556,7 +617,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalQueryAsync() {
-        return getRequiredGlobalQueryWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getRequiredGlobalQueryWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -599,7 +660,7 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getOptionalGlobalQueryAsync() {
-        return getOptionalGlobalQueryWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return getOptionalGlobalQueryWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

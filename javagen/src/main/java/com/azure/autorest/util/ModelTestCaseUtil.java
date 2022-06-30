@@ -29,7 +29,7 @@ public class ModelTestCaseUtil {
     private static final class Configuration {
         private final float nullableProbability = 0.0f;
 
-        private final int maxDepth = 10;
+        private final int maxDepth = 5;
 
         private final int maxStringLen = 16 + 1;
         private final int maxList = 4 + 1;
@@ -84,7 +84,7 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
-    static Object jsonFromType(int depth, IType type) {
+    public static Object jsonFromType(int depth, IType type) {
         if (type.asNullable() == ClassType.Integer) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
         } else if (type.asNullable() == ClassType.Long) {

@@ -9,9 +9,11 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.core.util.CoreUtils;
@@ -105,7 +107,7 @@ public class ClientModelUtil {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
-        if (settings.isLowLevelClient()) {
+        if (settings.isDataPlaneClient()) {
             // mandate ending Client for LLC
             if (!serviceClientInterfaceName.endsWith("Client")) {
                 String serviceName = settings.getServiceName();
@@ -175,7 +177,7 @@ public class ClientModelUtil {
         if (!settings.isFluent()
                 && settings.shouldGenerateClientAsImpl()
                 && !settings.shouldGenerateSyncAsyncClients()
-                && !settings.isLowLevelClient()) {
+                && !settings.isDataPlaneClient()) {
             builderSuffix.append("Impl");
         }
         builderSuffix.append("Builder");
@@ -185,7 +187,7 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if ((settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) && !settings.isFluent()) {
+        if ((settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) && !settings.isFluent()) {
             builderPackage = settings.getPackage();
         } else if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -256,7 +258,7 @@ public class ClientModelUtil {
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = settings.getArtifactId();
-        if (settings.isLowLevelClient() && CoreUtils.isNullOrEmpty(artifactId)) {
+        if (settings.isDataPlaneClient() && CoreUtils.isNullOrEmpty(artifactId)) {
             // convert package/namespace to artifact
             artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
                     .replace("com.", "")
@@ -294,12 +296,42 @@ public class ClientModelUtil {
 
     private static Function<String, ClientModel> getClientModelFunction = name -> ClientModels.getInstance().getModel(name);
 
+    /**
+     * Replace the default function of getting ClientModel by name.
+     * <p>
+     * Used in Fluent for providing additional ClientModel that exists in azure-core-management,
+     * e.g. Resource, ManagementError
+     *
+     * @param function the function of getting ClientModel by name
+     */
     public static void setGetClientModelFunction(Function<String, ClientModel> function) {
         getClientModelFunction = function;
     }
 
+    /**
+     * Get ClientModel by name.
+     *
+     * @param name the name of the ClientModel (without package)
+     * @return the ClientModel instance. <code>null</code> if not found.
+     */
     public static ClientModel getClientModel(String name) {
         return getClientModelFunction.apply(name);
+    }
+
+    /**
+     * Check if the type is a ClientModel.
+     *
+     * @param type the type
+     * @return whether the type is a ClientModel.
+     */
+    public static boolean isClientModel(IType type) {
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            return classType.getPackage().startsWith(JavaSettings.getInstance().getPackage())
+                    && getClientModel(classType.getName()) != null;
+        } else {
+            return false;
+        }
     }
 
     public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {

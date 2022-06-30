@@ -25,7 +25,7 @@ public final class HeadersResponseLongHeaders {
      */
     public HeadersResponseLongHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
-            this.value = Long.valueOf(rawHeaders.getValue("value"));
+            this.value = Long.parseLong(rawHeaders.getValue("value"));
         }
     }
 

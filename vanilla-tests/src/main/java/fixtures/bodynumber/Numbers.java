@@ -249,15 +249,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Float> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -303,15 +295,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getInvalidFloatAsync() {
-        return getInvalidFloatWithResponseAsync()
-                .flatMap(
-                        (Response<Float> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidFloatWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -357,15 +341,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getInvalidDoubleAsync() {
-        return getInvalidDoubleWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidDoubleWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -411,15 +387,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getInvalidDecimalAsync() {
-        return getInvalidDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<BigDecimal> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -464,7 +432,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigFloatAsync(float numberBody) {
-        return putBigFloatWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBigFloatWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -506,15 +474,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getBigFloatAsync() {
-        return getBigFloatWithResponseAsync()
-                .flatMap(
-                        (Response<Float> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigFloatWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -565,7 +525,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoubleAsync(double numberBody) {
-        return putBigDoubleWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDoubleWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -607,15 +567,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoubleAsync() {
-        return getBigDoubleWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDoubleWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -663,7 +615,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoublePositiveDecimalAsync() {
-        return putBigDoublePositiveDecimalWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDoublePositiveDecimalWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -704,15 +656,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoublePositiveDecimalAsync() {
-        return getBigDoublePositiveDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDoublePositiveDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -760,7 +704,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoubleNegativeDecimalAsync() {
-        return putBigDoubleNegativeDecimalWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDoubleNegativeDecimalWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -801,15 +745,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoubleNegativeDecimalAsync() {
-        return getBigDoubleNegativeDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDoubleNegativeDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -863,7 +799,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalAsync(BigDecimal numberBody) {
-        return putBigDecimalWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDecimalWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -905,15 +841,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalAsync() {
-        return getBigDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<BigDecimal> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -956,7 +884,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalPositiveDecimalAsync() {
-        return putBigDecimalPositiveDecimalWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDecimalPositiveDecimalWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -997,15 +925,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalPositiveDecimalAsync() {
-        return getBigDecimalPositiveDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<BigDecimal> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDecimalPositiveDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1048,7 +968,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalNegativeDecimalAsync() {
-        return putBigDecimalNegativeDecimalWithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return putBigDecimalNegativeDecimalWithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1089,15 +1009,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalNegativeDecimalAsync() {
-        return getBigDecimalNegativeDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<BigDecimal> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBigDecimalNegativeDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1143,7 +1055,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallFloatAsync(float numberBody) {
-        return putSmallFloatWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putSmallFloatWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1185,15 +1097,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getSmallFloatAsync() {
-        return getSmallFloatWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getSmallFloatWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1244,7 +1148,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallDoubleAsync(double numberBody) {
-        return putSmallDoubleWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putSmallDoubleWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1286,15 +1190,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getSmallDoubleAsync() {
-        return getSmallDoubleWithResponseAsync()
-                .flatMap(
-                        (Response<Double> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getSmallDoubleWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1348,7 +1244,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallDecimalAsync(BigDecimal numberBody) {
-        return putSmallDecimalWithResponseAsync(numberBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putSmallDecimalWithResponseAsync(numberBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1390,15 +1286,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getSmallDecimalAsync() {
-        return getSmallDecimalWithResponseAsync()
-                .flatMap(
-                        (Response<BigDecimal> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getSmallDecimalWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

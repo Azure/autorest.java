@@ -81,6 +81,10 @@ public final class JavadocCustomization {
         parseJavadoc(symbolLine);
     }
 
+    Range getJavadocRange() {
+        return javadocRange;
+    }
+
     public JavadocCustomization replace(JavadocCustomization other) {
         this.descriptionDocs = other.descriptionDocs;
 
@@ -234,8 +238,7 @@ public final class JavadocCustomization {
      *
      * @param seeDoc the link to the extra documentation
      * @return the Javadoc customization object for chaining
-     * @see <a href=https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#see>Oracle docs on see
-     * tag</a>
+     * @see <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#see">Oracle docs on see tag</a>
      */
     public JavadocCustomization addSee(String seeDoc) {
         seeDocs.add(seeDoc);
@@ -396,7 +399,7 @@ public final class JavadocCustomization {
             writeLine(stringBuilder.append(indent).append(" * "), descriptionDocs);
         }
 
-        if (!paramDocs.isEmpty() || !throwsDocs.isEmpty() || returnDoc != null) {
+        if (!paramDocs.isEmpty() || !throwsDocs.isEmpty() || returnDoc != null || deprecatedDoc != null) {
             writeLine(stringBuilder.append(indent), " * ");
 
             for (Map.Entry<String, String> paramDoc : paramDocs.entrySet()) {

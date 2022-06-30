@@ -4,10 +4,12 @@
 
 package fixtures.httpinfrastructure.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Options;
@@ -25,6 +27,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -67,7 +70,11 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head408(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head408(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/retry/500")
         @ExpectedResponses({200})
@@ -81,7 +88,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put500(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put500(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/retry/500")
         @ExpectedResponses({200})
@@ -95,7 +107,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch500(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch500(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/retry/502")
         @ExpectedResponses({200})
@@ -109,7 +126,11 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get502(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get502(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Options("/http/retry/502")
         @ExpectedResponses({200})
@@ -124,7 +145,10 @@ public final class HttpRetriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> options502(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/retry/503")
         @ExpectedResponses({200})
@@ -138,7 +162,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post503(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post503(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/retry/503")
         @ExpectedResponses({200})
@@ -152,7 +181,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete503(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete503(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/retry/504")
         @ExpectedResponses({200})
@@ -166,7 +200,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put504(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put504(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/retry/504")
         @ExpectedResponses({200})
@@ -180,7 +219,12 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch504(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch504(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -195,7 +239,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head408(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head408(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -211,7 +256,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head408(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head408(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -247,7 +293,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put500(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put500(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -269,7 +318,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put500(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put500(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -311,7 +362,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch500(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch500(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -333,7 +387,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch500(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch500(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -369,7 +425,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get502(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get502(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -385,7 +442,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get502(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get502(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -421,7 +479,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options502WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.options502(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.options502(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -443,7 +503,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options502WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.options502(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.options502(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -485,7 +546,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post503(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post503(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -507,7 +571,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post503(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post503(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -549,7 +615,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete503(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete503(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -571,7 +640,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete503(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete503(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -613,7 +684,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put504(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put504(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -635,7 +709,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put504(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put504(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -677,7 +753,10 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch504(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch504(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -699,7 +778,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch504(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch504(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**

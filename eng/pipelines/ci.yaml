@@ -16,7 +16,8 @@ jobs:
       NodeVersion: '14.x'
 
     pool:
-      vmImage: ubuntu-latest
+      name: "azsdk-pool-mms-ubuntu-2004-general"
+      vmImage: "MMSUbuntu20.04"
 
     steps:
       - task: NodeTool@0
@@ -123,6 +124,16 @@ jobs:
           npm run testserver-coverage-publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
         condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
         displayName: 'Publish coverage report to storage account'
+
+      - task: Maven@3
+        displayName: 'Verify Javadoc of protocol'
+        inputs:
+          mavenPomFile: protocol-tests/pom.xml
+          goals: 'javadoc:javadoc'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
 
       - task: Maven@3
         displayName: 'Run protocol resilience tests'

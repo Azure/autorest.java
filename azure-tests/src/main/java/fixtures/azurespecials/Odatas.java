@@ -116,7 +116,7 @@ public final class Odatas {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
-        return getWithFilterWithResponseAsync(filter, top, orderby).flatMap((Response<Void> res) -> Mono.empty());
+        return getWithFilterWithResponseAsync(filter, top, orderby).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -131,7 +131,7 @@ public final class Odatas {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        return getWithFilterWithResponseAsync(filter, top, orderby).flatMap((Response<Void> res) -> Mono.empty());
+        return getWithFilterWithResponseAsync(filter, top, orderby).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -148,8 +148,7 @@ public final class Odatas {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getWithFilterAsync(String filter, Integer top, String orderby, Context context) {
-        return getWithFilterWithResponseAsync(filter, top, orderby, context)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return getWithFilterWithResponseAsync(filter, top, orderby, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

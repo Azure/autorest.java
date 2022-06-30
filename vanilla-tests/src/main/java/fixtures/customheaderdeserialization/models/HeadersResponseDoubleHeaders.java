@@ -25,7 +25,7 @@ public final class HeadersResponseDoubleHeaders {
      */
     public HeadersResponseDoubleHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
-            this.value = Double.valueOf(rawHeaders.getValue("value"));
+            this.value = Double.parseDouble(rawHeaders.getValue("value"));
         }
     }
 

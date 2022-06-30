@@ -188,15 +188,15 @@ public class ExampleParser {
             for (Map.Entry<String, ProxyMethodExample> entry : clientMethod.getProxyMethod().getExamples().entrySet()) {
                 LOGGER.info("Parse client method example '{}'", entry.getKey());
 
-                FluentClientMethodExample collectionMethodExample =
+                FluentClientMethodExample clientMethodExample =
                         parseMethodForExample(methodGroup, clientMethod, methodParameters, entry.getKey(), entry.getValue());
-                ret.add(collectionMethodExample);
+                ret.add(clientMethodExample);
             }
         }
         return ret;
     }
 
-    private static FluentCollectionMethodExample parseMethodForExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
+    protected static FluentCollectionMethodExample parseMethodForExample(FluentResourceCollection collection, FluentCollectionMethod collectionMethod,
                                                                        List<MethodParameter> methodParameters,
                                                                        String exampleName, ProxyMethodExample proxyMethodExample) {
         FluentCollectionMethodExample collectionMethodExample = new FluentCollectionMethodExample(
@@ -212,14 +212,15 @@ public class ExampleParser {
         return parseMethodForExample(resourceCollection, collectionMethod, getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
     }
 
-    private static FluentClientMethodExample parseMethodForExample(MethodGroupClient methodGroup, ClientMethod clientMethod,
-                                                                       List<MethodParameter> methodParameters,
-                                                                       String exampleName, ProxyMethodExample proxyMethodExample) {
-        FluentClientMethodExample collectionMethodExample = new FluentClientMethodExample(
+    private static FluentClientMethodExample parseMethodForExample(
+            MethodGroupClient methodGroup, ClientMethod clientMethod, List<MethodParameter> methodParameters,
+            String exampleName, ProxyMethodExample proxyMethodExample) {
+
+        FluentClientMethodExample clientMethodExample = new FluentClientMethodExample(
                 exampleName, proxyMethodExample.getRelativeOriginalFileName(), methodGroup, clientMethod);
 
-        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, collectionMethodExample);
-        return collectionMethodExample;
+        addMethodParametersToMethodExample(methodParameters, proxyMethodExample, clientMethodExample);
+        return clientMethodExample;
     }
 
     private static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
@@ -271,7 +272,7 @@ public class ExampleParser {
         return ret;
     }
 
-    private static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate, ProxyMethodExample example, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
+    protected static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate, ProxyMethodExample example, List<MethodParameter> methodParameters, MethodParameter requestBodyParameter) {
         FluentResourceCreateExample resourceCreateExample = new FluentResourceCreateExample(
                 example.getName(), example.getRelativeOriginalFileName(),
                 FluentStatic.getFluentManager(), collection, resourceCreate);
@@ -459,7 +460,7 @@ public class ExampleParser {
 
     }
 
-    private static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
+    protected static MethodParameter findRequestBodyParameter(List<MethodParameter> methodParameters) {
         return methodParameters.stream()
                 .filter(p -> p.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY)
                 .findFirst().orElse(null);
@@ -542,21 +543,22 @@ public class ExampleParser {
             List<String> elements;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(",")));
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
                     break;
                 case SSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(" ")));
+                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
                     break;
                 case PIPES:
-                    elements = Arrays.asList(value.split(Pattern.quote("|")));
+                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
                     break;
                 case TSV:
-                    elements = Arrays.asList(value.split(Pattern.quote("\t")));
+                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.stream(value.split(Pattern.quote(","))).collect(Collectors.toList());
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
                     LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+                    break;
             }
             for (String childObjectValue : elements) {
                 ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);
@@ -568,7 +570,7 @@ public class ExampleParser {
         }
     }
 
-    private static List<MethodParameter> getParameters(ClientMethod clientMethod) {
+    protected static List<MethodParameter> getParameters(ClientMethod clientMethod) {
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return clientMethod.getMethodParameters().stream()

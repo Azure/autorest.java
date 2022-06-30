@@ -4,6 +4,7 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -48,8 +49,8 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
             }
         }
-        if (JavaSettings.getInstance().isFluentLite()) {
-            // Fluent lite disable all async method
+        if (JavaSettings.getInstance().isFluentLite() && !FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods()) {
+            // by default, Fluent lite disable all async method
             if (visibility == JavaVisibility.Public && methodType.name().contains("Async")) {
                 visibility = JavaVisibility.Private;
             }

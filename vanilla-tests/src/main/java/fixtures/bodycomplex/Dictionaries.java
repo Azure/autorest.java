@@ -119,15 +119,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<DictionaryWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -179,7 +171,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(DictionaryWrapper complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -223,15 +215,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<DictionaryWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -281,7 +265,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody) {
-        return putEmptyWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -324,15 +308,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<DictionaryWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -375,15 +351,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
-        return getNotProvidedWithResponseAsync()
-                .flatMap(
-                        (Response<DictionaryWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotProvidedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

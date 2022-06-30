@@ -40,9 +40,9 @@ public final class BasicAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -63,21 +63,13 @@ public final class BasicAsyncClient {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -102,9 +94,9 @@ public final class BasicAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -129,9 +121,9 @@ public final class BasicAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -155,9 +147,9 @@ public final class BasicAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *
@@ -182,9 +174,9 @@ public final class BasicAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String(cyan/Magenta/YELLOW/blacK)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      *

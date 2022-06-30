@@ -25,7 +25,7 @@ public final class HeadersResponseBoolHeaders {
      */
     public HeadersResponseBoolHeaders(HttpHeaders rawHeaders) {
         if (rawHeaders.getValue("value") != null) {
-            this.value = Boolean.valueOf(rawHeaders.getValue("value"));
+            this.value = Boolean.parseBoolean(rawHeaders.getValue("value"));
         }
     }
 

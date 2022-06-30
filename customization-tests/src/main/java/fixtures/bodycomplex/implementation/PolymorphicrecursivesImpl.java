@@ -106,15 +106,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<Fish> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -129,15 +121,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync(Context context) {
-        return getValidWithResponseAsync(context)
-                .flatMap(
-                        (Response<Fish> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -226,7 +210,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -247,7 +231,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody, Context context) {
-        return putValidWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Schema extends Metadata {
     /**
@@ -30,11 +31,16 @@ public class Schema extends Metadata {
      * 
      */
     private Object defaultValue;
+    // serialization and usage in SchemaUsage
     /**
      * custom extensible metadata for individual serialization formats
      * 
      */
     private SerializationFormats serialization;
+    /**
+     * Usage of the schema.
+     */
+    private Set<SchemaContext> usage;
     /**
      * 
      * (Required)
@@ -251,6 +257,14 @@ public class Schema extends Metadata {
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
+    }
+
+    public Set<SchemaContext> getUsage() {
+        return usage;
+    }
+
+    public void setUsage(Set<SchemaContext> usage) {
+        this.usage = usage;
     }
 
     public enum AllSchemaTypes {

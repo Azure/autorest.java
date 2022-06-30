@@ -6,8 +6,10 @@ package fixtures.url.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -19,8 +21,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -61,7 +65,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/bool/false")
         @ExpectedResponses({200})
@@ -76,7 +84,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/bool/null")
         @ExpectedResponses({200})
@@ -91,7 +103,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getBooleanNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/int/1000000")
         @ExpectedResponses({200})
@@ -106,7 +121,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/int/-1000000")
         @ExpectedResponses({200})
@@ -121,7 +140,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/int/null")
         @ExpectedResponses({200})
@@ -136,7 +159,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getIntNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/long/10000000000")
         @ExpectedResponses({200})
@@ -151,7 +177,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/long/-10000000000")
         @ExpectedResponses({200})
@@ -166,7 +196,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/long/null")
         @ExpectedResponses({200})
@@ -181,7 +215,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getLongNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/float/1.034E+20")
         @ExpectedResponses({200})
@@ -196,7 +233,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/float/-1.034E-20")
         @ExpectedResponses({200})
@@ -211,7 +252,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/float/null")
         @ExpectedResponses({200})
@@ -225,7 +270,11 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> floatNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/double/9999999.999")
         @ExpectedResponses({200})
@@ -240,7 +289,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/double/-9999999.999")
         @ExpectedResponses({200})
@@ -255,7 +308,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/double/null")
         @ExpectedResponses({200})
@@ -270,7 +327,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> doubleNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/string/unicode/")
         @ExpectedResponses({200})
@@ -285,7 +345,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
@@ -300,7 +364,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/string/empty")
         @ExpectedResponses({200})
@@ -315,7 +383,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/string/null")
         @ExpectedResponses({200})
@@ -330,7 +402,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/enum/green%20color")
         @ExpectedResponses({200})
@@ -344,7 +419,11 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumValid(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> enumValid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/enum/null")
         @ExpectedResponses({200})
@@ -358,7 +437,11 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> enumNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/byte/multibyte")
         @ExpectedResponses({200})
@@ -373,7 +456,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/byte/empty")
         @ExpectedResponses({200})
@@ -387,7 +473,12 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> byteEmpty(
+                @HostParam("$host") String host,
+                @QueryParam("byteQuery") String byteQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/byte/null")
         @ExpectedResponses({200})
@@ -401,7 +492,11 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> byteNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/date/2012-01-01")
         @ExpectedResponses({200})
@@ -415,7 +510,12 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateValid(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> dateValid(
+                @HostParam("$host") String host,
+                @QueryParam("dateQuery") String dateQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/date/null")
         @ExpectedResponses({200})
@@ -429,7 +529,11 @@ public final class QueriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateNull(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> dateNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
@@ -444,7 +548,11 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/datetime/null")
         @ExpectedResponses({200})
@@ -459,7 +567,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/csv/string/valid")
         @ExpectedResponses({200})
@@ -474,7 +585,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringCsvValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/csv/string/null")
         @ExpectedResponses({200})
@@ -489,7 +603,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringCsvNull(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/csv/string/empty")
         @ExpectedResponses({200})
@@ -504,7 +621,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringCsvEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/none/string/empty")
         @ExpectedResponses({200})
@@ -519,7 +639,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/ssv/string/valid")
         @ExpectedResponses({200})
@@ -534,7 +657,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringSsvValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/tsv/string/valid")
         @ExpectedResponses({200})
@@ -549,7 +675,10 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringTsvValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/queries/array/pipes/string/valid")
         @ExpectedResponses({200})
@@ -564,19 +693,14 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringPipesValid(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>true boolean value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -587,19 +711,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getBooleanTrue(this.client.getHost(), requestOptions, context));
+        final boolean boolQuery = true;
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, requestOptions, context));
     }
 
     /**
      * Get true Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>true boolean value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -611,19 +730,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getBooleanTrue(this.client.getHost(), requestOptions, context);
+        final boolean boolQuery = true;
+        final String accept = "application/json";
+        return service.getBooleanTrue(this.client.getHost(), boolQuery, accept, requestOptions, context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>true boolean value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -640,14 +753,6 @@ public final class QueriesImpl {
     /**
      * Get false Boolean value on path.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>false boolean value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -657,19 +762,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getBooleanFalse(this.client.getHost(), requestOptions, context));
+        final boolean boolQuery = false;
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context));
     }
 
     /**
      * Get false Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>false boolean value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -681,19 +781,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getBooleanFalse(this.client.getHost(), requestOptions, context);
+        final boolean boolQuery = false;
+        final String accept = "application/json";
+        return service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context);
     }
 
     /**
      * Get false Boolean value on path.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>boolean</td><td>Yes</td><td>false boolean value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -715,8 +809,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>String</td><td>No</td><td>null boolean value</td></tr>
+     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -728,7 +824,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getBooleanNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getBooleanNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -739,8 +837,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>String</td><td>No</td><td>null boolean value</td></tr>
+     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -753,7 +853,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getBooleanNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getBooleanNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -764,8 +865,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>String</td><td>No</td><td>null boolean value</td></tr>
+     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -782,14 +885,6 @@ public final class QueriesImpl {
     /**
      * Get '1000000' integer value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'1000000' integer value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -799,20 +894,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions) {
+        final int intQuery = 1000000;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), requestOptions, context));
+                context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '1000000' integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'1000000' integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -824,19 +913,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getIntOneMillion(this.client.getHost(), requestOptions, context);
+        final int intQuery = 1000000;
+        final String accept = "application/json";
+        return service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '1000000' integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'1000000' integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -853,14 +936,6 @@ public final class QueriesImpl {
     /**
      * Get '-1000000' integer value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'-1000000' integer value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -870,20 +945,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(RequestOptions requestOptions) {
+        final int intQuery = -1000000;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntNegativeOneMillion(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.getIntNegativeOneMillion(
+                                this.client.getHost(), intQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '-1000000' integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'-1000000' integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -896,19 +967,13 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.getIntNegativeOneMillion(this.client.getHost(), requestOptions, context);
+        final int intQuery = -1000000;
+        final String accept = "application/json";
+        return service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '-1000000' integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>int</td><td>Yes</td><td>'-1000000' integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -930,8 +995,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>String</td><td>No</td><td>null integer value</td></tr>
+     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -943,7 +1010,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getIntNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getIntNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -954,8 +1023,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>String</td><td>No</td><td>null integer value</td></tr>
+     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -968,7 +1039,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getIntNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getIntNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -979,8 +1051,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>String</td><td>No</td><td>null integer value</td></tr>
+     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -997,14 +1071,6 @@ public final class QueriesImpl {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'10000000000' 64 bit integer value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1014,19 +1080,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getTenBillion(this.client.getHost(), requestOptions, context));
+        final long longQuery = 10000000000L;
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'10000000000' 64 bit integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1038,19 +1099,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getTenBillion(this.client.getHost(), requestOptions, context);
+        final long longQuery = 10000000000L;
+        final String accept = "application/json";
+        return service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'10000000000' 64 bit integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1067,14 +1122,6 @@ public final class QueriesImpl {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'-10000000000' 64 bit integer value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1084,20 +1131,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions) {
+        final long longQuery = -10000000000L;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getNegativeTenBillion(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.getNegativeTenBillion(
+                                this.client.getHost(), longQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'-10000000000' 64 bit integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1109,19 +1152,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getNegativeTenBillion(this.client.getHost(), requestOptions, context);
+        final long longQuery = -10000000000L;
+        final String accept = "application/json";
+        return service.getNegativeTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>long</td><td>Yes</td><td>'-10000000000' 64 bit integer value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1143,8 +1180,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>String</td><td>No</td><td>null 64 bit integer value</td></tr>
+     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1156,7 +1195,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getLongNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getLongNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1167,8 +1208,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>String</td><td>No</td><td>null 64 bit integer value</td></tr>
+     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1181,7 +1224,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getLongNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.getLongNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1192,8 +1236,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>String</td><td>No</td><td>null 64 bit integer value</td></tr>
+     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1210,14 +1256,6 @@ public final class QueriesImpl {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'1.034E+20'numeric value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1227,20 +1265,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(RequestOptions requestOptions) {
+        final float floatQuery = 103400000000000000000f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificPositive(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.floatScientificPositive(
+                                this.client.getHost(), floatQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'1.034E+20'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1253,19 +1287,13 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.floatScientificPositive(this.client.getHost(), requestOptions, context);
+        final float floatQuery = 103400000000000000000f;
+        final String accept = "application/json";
+        return service.floatScientificPositive(this.client.getHost(), floatQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'1.034E+20'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1282,14 +1310,6 @@ public final class QueriesImpl {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'-1.034E-20'numeric value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1299,20 +1319,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(RequestOptions requestOptions) {
+        final float floatQuery = -1.034E-20f;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificNegative(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.floatScientificNegative(
+                                this.client.getHost(), floatQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'-1.034E-20'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1325,19 +1341,13 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.floatScientificNegative(this.client.getHost(), requestOptions, context);
+        final float floatQuery = -1.034E-20f;
+        final String accept = "application/json";
+        return service.floatScientificNegative(this.client.getHost(), floatQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>float</td><td>Yes</td><td>'-1.034E-20'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1359,8 +1369,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1372,7 +1384,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.floatNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.floatNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1383,8 +1397,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1397,7 +1413,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.floatNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.floatNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1408,8 +1425,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1426,14 +1445,6 @@ public final class QueriesImpl {
     /**
      * Get '9999999.999' numeric value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'9999999.999'numeric value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1443,20 +1454,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions) {
+        final double doubleQuery = 9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalPositive(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.doubleDecimalPositive(
+                                this.client.getHost(), doubleQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'9999999.999'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1468,19 +1475,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.doubleDecimalPositive(this.client.getHost(), requestOptions, context);
+        final double doubleQuery = 9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'9999999.999'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1497,14 +1498,6 @@ public final class QueriesImpl {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'-9999999.999'numeric value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1514,20 +1507,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions) {
+        final double doubleQuery = -9999999.999;
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.doubleDecimalNegative(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.doubleDecimalNegative(
+                                this.client.getHost(), doubleQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'-9999999.999'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1539,19 +1528,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.doubleDecimalNegative(this.client.getHost(), requestOptions, context);
+        final double doubleQuery = -9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>double</td><td>Yes</td><td>'-9999999.999'numeric value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1573,8 +1556,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1586,7 +1571,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.doubleNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.doubleNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1597,8 +1584,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1611,7 +1600,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.doubleNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.doubleNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1622,8 +1612,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>String</td><td>No</td><td>null numeric value</td></tr>
+     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1640,14 +1632,6 @@ public final class QueriesImpl {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1658,19 +1642,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.stringUnicode(this.client.getHost(), requestOptions, context));
+        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1683,19 +1662,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.stringUnicode(this.client.getHost(), requestOptions, context);
+        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
+        final String accept = "application/json";
+        return service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1712,14 +1685,6 @@ public final class QueriesImpl {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1729,20 +1694,15 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions) {
+        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUrlEncoded(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1754,19 +1714,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.stringUrlEncoded(this.client.getHost(), requestOptions, context);
+        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
+        final String accept = "application/json";
+        return service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, requestOptions, context);
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1783,14 +1737,6 @@ public final class QueriesImpl {
     /**
      * Get ''.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'' string value</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1800,19 +1746,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.stringEmpty(this.client.getHost(), requestOptions, context));
+        final String stringQuery = "";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get ''.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'' string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1824,19 +1765,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.stringEmpty(this.client.getHost(), requestOptions, context);
+        final String stringQuery = "";
+        final String accept = "application/json";
+        return service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context);
     }
 
     /**
      * Get ''.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>Yes</td><td>'' string value</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1861,6 +1796,8 @@ public final class QueriesImpl {
      *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1870,7 +1807,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.stringNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1883,6 +1822,8 @@ public final class QueriesImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1894,7 +1835,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.stringNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.stringNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1907,6 +1849,8 @@ public final class QueriesImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1928,8 +1872,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1941,7 +1887,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.enumValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1952,8 +1900,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1966,7 +1916,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.enumValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.enumValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1977,8 +1928,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2000,8 +1953,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2012,7 +1967,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.enumNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2023,8 +1980,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2036,7 +1995,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.enumNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.enumNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2047,8 +2007,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2070,8 +2032,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2083,7 +2047,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.byteMultiByte(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.byteMultiByte(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2094,8 +2060,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2108,7 +2076,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.byteMultiByte(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.byteMultiByte(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2119,8 +2088,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2137,14 +2108,6 @@ public final class QueriesImpl {
     /**
      * Get '' as byte array.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>Yes</td><td>'' as byte array</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2154,19 +2117,16 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.byteEmpty(this.client.getHost(), requestOptions, context));
+        final byte[] byteQuery = "".getBytes();
+        final String accept = "application/json";
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
+        return FluxUtil.withContext(
+                context ->
+                        service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context));
     }
 
     /**
      * Get '' as byte array.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>Yes</td><td>'' as byte array</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2178,19 +2138,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.byteEmpty(this.client.getHost(), requestOptions, context);
+        final byte[] byteQuery = "".getBytes();
+        final String accept = "application/json";
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
+        return service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context);
     }
 
     /**
      * Get '' as byte array.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>Yes</td><td>'' as byte array</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2212,8 +2167,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2225,7 +2182,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.byteNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.byteNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2236,8 +2195,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2250,7 +2211,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.byteNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.byteNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2261,8 +2223,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>String</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2279,14 +2243,6 @@ public final class QueriesImpl {
     /**
      * Get '2012-01-01' as date.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>Yes</td><td>'2012-01-01' as date</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2296,19 +2252,14 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.dateValid(this.client.getHost(), requestOptions, context));
+        final String dateQuery = "2012-01-01";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01' as date.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>Yes</td><td>'2012-01-01' as date</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2320,19 +2271,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.dateValid(this.client.getHost(), requestOptions, context);
+        final String dateQuery = "2012-01-01";
+        final String accept = "application/json";
+        return service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '2012-01-01' as date.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>Yes</td><td>'2012-01-01' as date</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2357,6 +2302,8 @@ public final class QueriesImpl {
      *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
      *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2367,7 +2314,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.dateNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2380,6 +2329,8 @@ public final class QueriesImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2392,7 +2343,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.dateNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.dateNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2405,6 +2357,8 @@ public final class QueriesImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2421,14 +2375,6 @@ public final class QueriesImpl {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>Yes</td><td>'2012-01-01T01:01:01Z' as date-time</td></tr>
-     * </table>
-     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2438,19 +2384,15 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.dateTimeValid(this.client.getHost(), requestOptions, context));
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>Yes</td><td>'2012-01-01T01:01:01Z' as date-time</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2462,19 +2404,13 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.dateTimeValid(this.client.getHost(), requestOptions, context);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
+        return service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context);
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>Yes</td><td>'2012-01-01T01:01:01Z' as date-time</td></tr>
-     * </table>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2496,8 +2432,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2509,7 +2447,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.dateTimeNull(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.dateTimeNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2520,8 +2460,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2534,7 +2476,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.dateTimeNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.dateTimeNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2545,8 +2488,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>String</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2568,8 +2513,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2581,8 +2528,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvValid(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2593,8 +2541,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2607,7 +2557,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringCsvValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2618,8 +2569,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2642,8 +2595,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2655,8 +2610,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvNull(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringCsvNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2667,8 +2623,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2681,7 +2639,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringCsvNull(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringCsvNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2692,8 +2651,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2715,8 +2676,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2728,8 +2691,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvEmpty(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2740,8 +2704,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2754,7 +2720,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringCsvEmpty(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2765,8 +2732,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2789,8 +2758,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2801,8 +2772,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.arrayStringNoCollectionFormatEmpty(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2814,8 +2788,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2828,7 +2804,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2840,8 +2817,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2863,8 +2842,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2876,8 +2857,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringSsvValid(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2888,8 +2870,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2902,7 +2886,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringSsvValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2913,8 +2898,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2937,8 +2924,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2950,8 +2939,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringTsvValid(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringTsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2962,8 +2952,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -2976,7 +2968,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringTsvValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringTsvValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2987,8 +2980,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3012,8 +3007,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3025,8 +3022,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringPipesValid(this.client.getHost(), requestOptions, context));
+                context -> service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3038,8 +3036,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -3052,7 +3052,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.arrayStringPipesValid(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3064,8 +3065,10 @@ public final class QueriesImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>String</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

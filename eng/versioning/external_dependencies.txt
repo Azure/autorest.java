@@ -6,7 +6,11 @@ com.azure:azure-identity
 
 com.fasterxml.jackson.core:jackson-core
 com.fasterxml.jackson.core:jackson-databind
+org.slf4j:slf4j-api
+org.slf4j:slf4j-nop
 org.slf4j:slf4j-simple
 junit:junit
 org.junit.jupiter:junit-jupiter-api
 org.junit.jupiter:junit-jupiter-engine
+
+com.azure.tools:codesnippet-maven-plugin

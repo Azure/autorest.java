@@ -130,15 +130,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -179,15 +171,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getInvalidDateAsync() {
-        return getInvalidDateWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -228,15 +212,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getOverflowDateAsync() {
-        return getOverflowDateWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getOverflowDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -277,15 +253,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getUnderflowDateAsync() {
-        return getUnderflowDateWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUnderflowDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -333,7 +301,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMaxDateAsync(LocalDate dateBody) {
-        return putMaxDateWithResponseAsync(dateBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMaxDateWithResponseAsync(dateBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -375,15 +343,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMaxDateAsync() {
-        return getMaxDateWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getMaxDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -431,7 +391,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMinDateAsync(LocalDate dateBody) {
-        return putMinDateWithResponseAsync(dateBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMinDateWithResponseAsync(dateBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -473,15 +433,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMinDateAsync() {
-        return getMinDateWithResponseAsync()
-                .flatMap(
-                        (Response<LocalDate> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getMinDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

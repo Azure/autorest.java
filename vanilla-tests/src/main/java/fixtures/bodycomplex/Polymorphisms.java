@@ -145,15 +145,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<Fish> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -213,7 +205,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -261,15 +253,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFish> getDotSyntaxAsync() {
-        return getDotSyntaxWithResponseAsync()
-                .flatMap(
-                        (Response<DotFish> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDotSyntaxWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -315,15 +299,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync() {
-        return getComposedWithDiscriminatorWithResponseAsync()
-                .flatMap(
-                        (Response<DotFishMarket> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComposedWithDiscriminatorWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -371,15 +347,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync() {
-        return getComposedWithoutDiscriminatorWithResponseAsync()
-                .flatMap(
-                        (Response<DotFishMarket> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComposedWithoutDiscriminatorWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -424,15 +392,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync() {
-        return getComplicatedWithResponseAsync()
-                .flatMap(
-                        (Response<Salmon> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplicatedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -484,7 +444,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplicatedAsync(Salmon complexBody) {
-        return putComplicatedWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putComplicatedWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -536,15 +496,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> putMissingDiscriminatorAsync(Salmon complexBody) {
-        return putMissingDiscriminatorWithResponseAsync(complexBody)
-                .flatMap(
-                        (Response<Salmon> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return putMissingDiscriminatorWithResponseAsync(complexBody).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -607,7 +559,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidMissingRequiredAsync(Fish complexBody) {
-        return putValidMissingRequiredWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidMissingRequiredWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**

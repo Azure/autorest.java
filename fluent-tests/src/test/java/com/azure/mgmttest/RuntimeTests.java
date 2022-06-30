@@ -203,7 +203,13 @@ public class RuntimeTests {
                     .withMinimumTlsVersion(MinimumTlsVersion.TLS1_2)
                     .create();
 
+            Assertions.assertEquals(saName, storageAccount.name());
+            Assertions.assertEquals(rgName, storageAccount.resourceGroupName());
+
             storageAccount.refresh();
+
+            Assertions.assertEquals(saName, storageAccount.name());
+            Assertions.assertEquals(rgName, storageAccount.resourceGroupName());
 
             StorageAccount storageAccount2 = storageManager.storageAccounts().getById(storageAccount.id());
             storageAccount2.update()
@@ -214,24 +220,30 @@ public class RuntimeTests {
 
             // container
             BlobContainer blobContainer = storageManager.blobContainers().define(blobContainerName)
-                    .withExistingStorageAccount(rgName, saName)
+                    .withExistingStorageAccount(storageAccount.resourceGroupName(), storageAccount.name())
                     .withPublicAccess(PublicAccess.BLOB)
                     .create(new Context("key", "value"));
 
+            Assertions.assertEquals(blobContainerName, blobContainer.name());
+            Assertions.assertEquals(rgName, blobContainer.resourceGroupName());
+
             blobContainer.refresh();
+
+            Assertions.assertEquals(blobContainerName, blobContainer.name());
+            Assertions.assertEquals(rgName, blobContainer.resourceGroupName());
 
             BlobContainer blobContainer2 = storageManager.blobContainers().getById(blobContainer.id());
             blobContainer2.update()
                     .withPublicAccess(PublicAccess.NONE)
                     .apply(new Context("key", "value"));
 
-            Assertions.assertEquals(1, storageManager.blobContainers().list(rgName, saName).stream().count());
+            Assertions.assertEquals(1, storageManager.blobContainers().list(storageAccount.resourceGroupName(), storageAccount.name()).stream().count());
 
             storageManager.blobContainers().deleteById(blobContainer.id());
 
             // container blob service properties
             BlobServiceProperties blobService = storageManager.blobServices().define()
-                    .withExistingStorageAccount(rgName, saName)
+                    .withExistingStorageAccount(storageAccount.resourceGroupName(), storageAccount.name())
                     .create();
 
             blobService.update()

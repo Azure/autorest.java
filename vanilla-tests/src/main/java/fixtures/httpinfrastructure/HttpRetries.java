@@ -152,7 +152,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async() {
-        return head408WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head408WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -193,7 +193,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async() {
-        return put500WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put500WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -234,7 +234,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async() {
-        return patch500WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return patch500WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -274,7 +274,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async() {
-        return get502WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return get502WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -314,15 +314,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> options502Async() {
-        return options502WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return options502WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -369,7 +361,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async() {
-        return post503WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post503WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -410,7 +402,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async() {
-        return delete503WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return delete503WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -451,7 +443,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async() {
-        return put504WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put504WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -492,7 +484,7 @@ public final class HttpRetries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async() {
-        return patch504WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return patch504WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**

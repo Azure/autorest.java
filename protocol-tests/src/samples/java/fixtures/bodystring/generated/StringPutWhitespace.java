@@ -15,10 +15,11 @@ public class StringPutWhitespace {
         StringOperationClient stringOperationClient =
                 new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringputwhitespace.stringputwhitespace
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setBody(
-                BinaryData.fromString(
-                        "\"<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>\""));
+        RequestOptions requestOptions =
+                new RequestOptions()
+                        .setBody(
+                                BinaryData.fromString(
+                                        "\"<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>\""));
         Response<Void> response = stringOperationClient.putWhitespaceWithResponse(requestOptions);
         // END:fixtures.bodystring.generated.stringputwhitespace.stringputwhitespace
     }

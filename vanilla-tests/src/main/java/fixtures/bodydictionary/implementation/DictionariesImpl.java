@@ -16,12 +16,9 @@ import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
@@ -527,15 +524,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -576,15 +565,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -632,7 +613,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(Map<String, String> arrayBody) {
-        return putEmptyWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putEmptyWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -674,15 +655,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullValueAsync() {
-        return getNullValueWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullValueWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -723,15 +696,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullKeyAsync() {
-        return getNullKeyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullKeyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -772,15 +737,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getEmptyStringKeyAsync() {
-        return getEmptyStringKeyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyStringKeyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -821,15 +778,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -872,15 +821,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
-        return getBooleanTfftWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanTfftWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -929,7 +870,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
-        return putBooleanTfftWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBooleanTfftWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -972,15 +913,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
-        return getBooleanInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1023,15 +956,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
-        return getBooleanInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Boolean>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBooleanInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1073,15 +998,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntegerValidAsync() {
-        return getIntegerValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntegerValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1130,7 +1047,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
-        return putIntegerValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putIntegerValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1173,15 +1090,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
-        return getIntInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1223,15 +1132,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
-        return getIntInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Integer>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1273,15 +1174,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongValidAsync() {
-        return getLongValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1329,7 +1222,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody) {
-        return putLongValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putLongValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1372,15 +1265,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidNullAsync() {
-        return getLongInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1422,15 +1307,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidStringAsync() {
-        return getLongInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Long>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1472,15 +1349,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatValidAsync() {
-        return getFloatValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1529,7 +1398,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody) {
-        return putFloatValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putFloatValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1572,15 +1441,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
-        return getFloatInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1622,15 +1483,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
-        return getFloatInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Float>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1672,15 +1525,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleValidAsync() {
-        return getDoubleValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1729,7 +1574,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
-        return putDoubleValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDoubleValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1772,15 +1617,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
-        return getDoubleInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1822,15 +1659,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
-        return getDoubleInvalidStringWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Double>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleInvalidStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1872,15 +1701,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringValidAsync() {
-        return getStringValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1929,7 +1750,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringValidAsync(Map<String, String> arrayBody) {
-        return putStringValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putStringValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1972,15 +1793,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithNullAsync() {
-        return getStringWithNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2022,15 +1835,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithInvalidAsync() {
-        return getStringWithInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, String>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2073,15 +1878,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateValidAsync() {
-        return getDateValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2129,7 +1926,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
-        return putDateValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2173,15 +1970,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
-        return getDateInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2223,15 +2012,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
-        return getDateInvalidCharsWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, LocalDate>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateInvalidCharsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2276,15 +2057,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
-        return getDateTimeValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2339,7 +2112,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody) {
-        return putDateTimeValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2384,15 +2157,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
-        return getDateTimeInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2435,15 +2200,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
-        return getDateTimeInvalidCharsWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeInvalidCharsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2489,15 +2246,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
-        return getDateTimeRfc1123ValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, OffsetDateTime>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeRfc1123ValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2557,7 +2306,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody) {
-        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2603,15 +2352,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Duration>> getDurationValidAsync() {
-        return getDurationValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Duration>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDurationValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2660,7 +2401,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody) {
-        return putDurationValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDurationValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2706,15 +2447,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteValidAsync() {
-        return getByteValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2768,7 +2501,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
-        return putByteValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putByteValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2814,15 +2547,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
-        return getByteInvalidNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteInvalidNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2867,15 +2592,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getBase64UrlAsync() {
-        return getBase64UrlWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, byte[]>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBase64UrlWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2919,15 +2636,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexNullAsync() {
-        return getComplexNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Widget>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2968,15 +2677,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexEmptyAsync() {
-        return getComplexEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Widget>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3021,15 +2722,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemNullAsync() {
-        return getComplexItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Widget>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3076,15 +2769,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
-        return getComplexItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Widget>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3131,15 +2816,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexValidAsync() {
-        return getComplexValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Widget>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getComplexValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3203,7 +2880,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
-        return putComplexValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putComplexValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3247,15 +2924,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayNullAsync() {
-        return getArrayNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3296,15 +2965,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
-        return getArrayEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3347,15 +3008,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
-        return getArrayItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3398,15 +3051,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
-        return getArrayItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3449,15 +3094,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayValidAsync() {
-        return getArrayValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, List<String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getArrayValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3506,7 +3143,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
-        return putArrayValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putArrayValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3549,15 +3186,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Map<String, String>>> getDictionaryNullAsync() {
-        return getDictionaryNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3600,15 +3229,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
-        return getDictionaryEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3655,15 +3276,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
-        return getDictionaryItemNullWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryItemNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3712,15 +3325,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
-        return getDictionaryItemEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryItemEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3769,15 +3374,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Map<String, String>>> getDictionaryValidAsync() {
-        return getDictionaryValidWithResponseAsync()
-                .flatMap(
-                        (Response<Map<String, Map<String, String>>> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDictionaryValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3838,7 +3435,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
-        return putDictionaryValidWithResponseAsync(arrayBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDictionaryValidWithResponseAsync(arrayBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3855,46 +3452,5 @@ public final class DictionariesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         putDictionaryValidAsync(arrayBody).block();
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
-        return FluxUtil.withContext(
-                context ->
-                        this.client
-                                .getHttpPipeline()
-                                .send(httpRequest, context)
-                                .flatMap(
-                                        response ->
-                                                BinaryData.fromFlux(response.getBody())
-                                                        .map(
-                                                                body ->
-                                                                        new SimpleResponse<>(
-                                                                                response.getRequest(),
-                                                                                response.getStatusCode(),
-                                                                                response.getHeaders(),
-                                                                                body))));
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.sendRequestAsync(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
     }
 }

@@ -54,7 +54,7 @@ public final class HttpRedirectsClient {
      *
      * <pre>{@code
      * [
-     *     String
+     *     String (Required)
      * ]
      * }</pre>
      *

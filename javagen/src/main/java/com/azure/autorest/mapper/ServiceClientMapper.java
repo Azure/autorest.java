@@ -27,6 +27,7 @@ import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -82,7 +83,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             .getProtocol().getHttp().getUri());
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
-                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
+                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
             }
             proxyBuilder.methods(restAPIMethods);
             proxy = proxyBuilder.build();
@@ -140,7 +141,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
             boolean serviceClientPropertyRequired = p.isRequired();
 
-            if (settings.isLowLevelClient() && serviceClientPropertyName.equals("apiVersion")) {
+            if (settings.isDataPlaneClient() && serviceClientPropertyName.equals("apiVersion")) {
                 String enumTypeName = ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()

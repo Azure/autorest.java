@@ -7,6 +7,7 @@ package fixtures.dpgcustomization.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -22,7 +23,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
@@ -33,7 +33,6 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -43,6 +42,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
+import fixtures.dpgcustomization.models.LroProduct;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -147,6 +147,7 @@ public final class DpgClientImpl {
         Mono<Response<BinaryData>> getModel(
                 @HostParam("$host") String host,
                 @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -166,6 +167,7 @@ public final class DpgClientImpl {
                 @HostParam("$host") String host,
                 @PathParam(value = "mode", encoded = true) String mode,
                 @BodyParam("application/json") BinaryData input,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -184,6 +186,7 @@ public final class DpgClientImpl {
         Mono<Response<BinaryData>> getPages(
                 @HostParam("$host") String host,
                 @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -202,6 +205,7 @@ public final class DpgClientImpl {
         Mono<Response<BinaryData>> lro(
                 @HostParam("$host") String host,
                 @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -220,6 +224,7 @@ public final class DpgClientImpl {
         Mono<Response<BinaryData>> getPagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -231,7 +236,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -247,7 +252,8 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(String mode, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getModel(this.getHost(), mode, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getModel(this.getHost(), mode, accept, requestOptions, context));
     }
 
     /**
@@ -257,7 +263,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -275,7 +281,8 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(
             String mode, RequestOptions requestOptions, Context context) {
-        return service.getModel(this.getHost(), mode, requestOptions, context);
+        final String accept = "application/json";
+        return service.getModel(this.getHost(), mode, accept, requestOptions, context);
     }
 
     /**
@@ -285,7 +292,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -312,7 +319,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -320,7 +327,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -337,7 +344,9 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postModelWithResponseAsync(
             String mode, BinaryData input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.postModel(this.getHost(), mode, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.postModel(this.getHost(), mode, input, accept, requestOptions, context));
     }
 
     /**
@@ -348,7 +357,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -356,7 +365,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -374,7 +383,8 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postModelWithResponseAsync(
             String mode, BinaryData input, RequestOptions requestOptions, Context context) {
-        return service.postModel(this.getHost(), mode, input, requestOptions, context);
+        final String accept = "application/json";
+        return service.postModel(this.getHost(), mode, input, accept, requestOptions, context);
     }
 
     /**
@@ -385,7 +395,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -393,7 +403,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -419,12 +429,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -440,7 +450,8 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getPages(this.getHost(), mode, requestOptions, context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getPages(this.getHost(), mode, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -459,12 +470,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -482,7 +493,8 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(
             String mode, RequestOptions requestOptions, Context context) {
-        return service.getPages(this.getHost(), mode, requestOptions, context)
+        final String accept = "application/json";
+        return service.getPages(this.getHost(), mode, accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -501,12 +513,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -539,12 +551,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -578,12 +590,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -610,8 +622,8 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -625,8 +637,9 @@ public final class DpgClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponseAsync(String mode, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.lro(this.getHost(), mode, requestOptions, context));
+    private Mono<Response<BinaryData>> lroWithResponseAsync(String mode, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.lro(this.getHost(), mode, accept, requestOptions, context));
     }
 
     /**
@@ -637,8 +650,8 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -653,9 +666,10 @@ public final class DpgClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponseAsync(
+    private Mono<Response<BinaryData>> lroWithResponseAsync(
             String mode, RequestOptions requestOptions, Context context) {
-        return service.lro(this.getHost(), mode, requestOptions, context);
+        final String accept = "application/json";
+        return service.lro(this.getHost(), mode, accept, requestOptions, context);
     }
 
     /**
@@ -666,8 +680,8 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -703,8 +717,8 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -742,8 +756,8 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -762,18 +776,121 @@ public final class DpgClientImpl {
     }
 
     /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(String mode, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponseAsync(mode, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                new TypeReferenceLroProduct(),
+                new TypeReferenceLroProduct());
+    }
+
+    /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(
+            String mode, RequestOptions requestOptions, Context context) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponseAsync(mode, requestOptions, context),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                new TypeReferenceLroProduct(),
+                new TypeReferenceLroProduct());
+    }
+
+    /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LroProduct, LroProduct> beginLroWithModel(String mode, RequestOptions requestOptions) {
+        return this.beginLroWithModelAsync(mode, requestOptions).getSyncPoller();
+    }
+
+    /**
      * Get the next page of items.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -787,7 +904,9 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.getPagesNext(nextLink, this.getHost(), requestOptions, context))
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -806,12 +925,12 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -827,7 +946,8 @@ public final class DpgClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
-        return service.getPagesNext(nextLink, this.getHost(), requestOptions, context)
+        final String accept = "application/json";
+        return service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -839,42 +959,8 @@ public final class DpgClientImpl {
                                         null));
     }
 
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> sendRequestAsync(HttpRequest httpRequest) {
-        return FluxUtil.withContext(
-                context ->
-                        this.getHttpPipeline()
-                                .send(httpRequest, context)
-                                .flatMap(
-                                        response ->
-                                                BinaryData.fromFlux(response.getBody())
-                                                        .map(
-                                                                body ->
-                                                                        new SimpleResponse<>(
-                                                                                response.getRequest(),
-                                                                                response.getStatusCode(),
-                                                                                response.getHeaders(),
-                                                                                body))));
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.sendRequestAsync(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
+    private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {
+        // empty
     }
 
     private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {

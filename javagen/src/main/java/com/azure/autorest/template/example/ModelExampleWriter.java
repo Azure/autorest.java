@@ -97,7 +97,7 @@ public class ModelExampleWriter {
         });
     }
 
-    private static class ExampleNodeAssertionVisitor {
+    public static class ExampleNodeAssertionVisitor {
 
         private final Set<String> imports = new HashSet<>();
 
@@ -107,7 +107,7 @@ public class ModelExampleWriter {
             assertions.add(String.format("Assertions.assertEquals(%1$s, %2$s);", expected, code));
         }
 
-        private void accept(ExampleNode node, String getterCode) {
+        public void accept(ExampleNode node, String getterCode) {
             if (node instanceof LiteralNode) {
                 node.getClientType().addImportsTo(imports, false);
 
@@ -142,6 +142,14 @@ public class ModelExampleWriter {
                     accept(childNode, childGetterCode);
                 }
             }
+        }
+
+        public Set<String> getImports() {
+            return imports;
+        }
+
+        public List<String> getAssertions() {
+            return assertions;
         }
     }
 

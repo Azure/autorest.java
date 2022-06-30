@@ -13,11 +13,9 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import fixtures.lro.implementation.LroRetrysImpl;
-import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestServiceClient type. */
 @ServiceClient(builder = LroRetrysClientBuilder.class, isAsync = true)
@@ -43,70 +41,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.put201CreatingSucceeded200WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -115,16 +59,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -151,70 +95,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.putAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -223,16 +113,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -259,53 +149,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponse(
-            RequestOptions requestOptions) {
-        return this.serviceClient.deleteProvisioning202Accepted200SucceededWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -322,23 +175,6 @@ public final class LroRetrysAsyncClient {
     public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
             RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteProvisioning202Accepted200SucceededAsync(requestOptions);
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
-     * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete202Retry200WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.delete202Retry200WithResponseAsync(requestOptions);
     }
 
     /**
@@ -367,23 +203,6 @@ public final class LroRetrysAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.deleteAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint
-     * indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
@@ -400,51 +219,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.post202Retry200WithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
-     * 'Retry-After' headers, Polls return a 200 with a response body after success.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -471,52 +255,16 @@ public final class LroRetrysAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRelativeRetrySucceededWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.postAsyncRelativeRetrySucceededWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
-     *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>

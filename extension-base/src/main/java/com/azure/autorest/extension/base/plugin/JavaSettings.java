@@ -5,6 +5,7 @@ package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,8 @@ public class JavaSettings {
     private static String header;
 
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
+
+    private static Logger logger;
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -57,6 +60,7 @@ public class JavaSettings {
 
     static void setHost(NewPlugin host) {
         JavaSettings.host = host;
+        logger = new PluginLogger(host, JavaSettings.class);
     }
 
     public static void clear() {
@@ -75,10 +79,19 @@ public class JavaSettings {
             loadStringSetting("base-folder", autorestSettings::setBaseFolder);
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
+            // input-file
             List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
                     inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                logger.debug("List of input files : {}", autorestSettings.getInputFiles());
+            }
+            // require (readme.md etc.)
+            List<Object> require = host.getValue(List.class, "require");
+            if (require != null) {
+                autorestSettings.getRequire().addAll(
+                        require.stream().map(Object::toString).collect(Collectors.toList()));
+                logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
             setHeader(getStringValue(host, "license-header"));
@@ -133,7 +146,7 @@ public class JavaSettings {
                 }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
-                getBooleanValue(host, "generate-send-request-method", false),
+                false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
@@ -225,7 +238,7 @@ public class JavaSettings {
         String customizationClass,
         boolean overrideSetterFromSuperclass,
         boolean optionalConstantAsEnum,
-        boolean lowLevelClient,
+        boolean dataPlaneClient,
         boolean useIterable,
         List<String> serviceVersions,
         boolean requireXMsFlattenedToFlatten,
@@ -280,7 +293,7 @@ public class JavaSettings {
         this.artifactId = artifactId;
         this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
-        this.lowLevelClient = lowLevelClient;
+        this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
         this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
@@ -745,10 +758,10 @@ public class JavaSettings {
         return optionalConstantAsEnum;
     }
 
-    private final boolean lowLevelClient;
+    private final boolean dataPlaneClient;
 
-    public boolean isLowLevelClient() {
-        return lowLevelClient;
+    public boolean isDataPlaneClient() {
+        return dataPlaneClient;
     }
 
     private final boolean useIterable;
@@ -973,6 +986,7 @@ public class JavaSettings {
     private static void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
         if (settingValue != null) {
+            logger.debug("Option, string, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
@@ -980,6 +994,7 @@ public class JavaSettings {
     private static String getStringValue(NewPlugin host, String settingName) {
         String value = host.getStringValue(settingName);
         if (value != null) {
+            logger.debug("Option, string, {} : {}", settingName, value);
             SIMPLE_JAVA_SETTINGS.put(settingName, value);
         }
         return value;
@@ -990,6 +1005,7 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
+            logger.debug("Option, string, {} : {}", settingName, ret);
             SIMPLE_JAVA_SETTINGS.put(settingName, ret);
             return ret;
         }
@@ -1000,6 +1016,7 @@ public class JavaSettings {
         if (ret == null) {
             return defaultValue;
         } else {
+            logger.debug("Option, boolean, {} : {}", settingName, ret);
             SIMPLE_JAVA_SETTINGS.put(settingName, ret);
             return ret;
         }
@@ -1010,9 +1027,11 @@ public class JavaSettings {
         List<String> settingValues = new ArrayList<>();
         Object settingValue = host.getValue(Object.class, settingName);
         if (settingValue instanceof String) {
+            logger.debug("Option, string, {} : {}", settingName, settingValue);
             settingValues.add(settingValue.toString());
         } else if (settingValue instanceof List) {
             List<String> settingValueList = (List<String>) settingValue;
+            logger.debug("Option, array, {} : {}", settingName, settingValueList);
             settingValues.addAll(settingValueList);
         }
         if (!settingValues.isEmpty()) {

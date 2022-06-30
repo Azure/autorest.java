@@ -93,15 +93,7 @@ public final class Readonlyproperties {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ReadonlyObj> getValidAsync() {
-        return getValidWithResponseAsync()
-                .flatMap(
-                        (Response<ReadonlyObj> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -151,7 +143,7 @@ public final class Readonlyproperties {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ReadonlyObj complexBody) {
-        return putValidWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**

@@ -19,17 +19,16 @@ public class MediaTypesTests {
     @Test
     public void analyzeWithJson() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("Content-Type", "application/json");
         requestOptions.setBody(BinaryData.fromString("{\"source\": \"source\"}"));
-        client.analyzeBodyWithResponse(requestOptions);
+        client.analyzeBodyWithResponse("application/json", requestOptions);
     }
 
     @Test
     public void analyzeWithPdf() throws Exception {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addHeader("Content-Type", "application/pdf");
         requestOptions.addHeader("Content-Length", "3");
         requestOptions.setBody(BinaryData.fromString("PDF"));
-        client.analyzeBodyWithResponse(requestOptions);
+        client.analyzeBodyWithResponse("application/pdf", requestOptions);
     }
+    
 }

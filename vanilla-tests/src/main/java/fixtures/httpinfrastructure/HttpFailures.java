@@ -92,15 +92,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync() {
-        return getEmptyErrorWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getEmptyErrorWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -146,15 +138,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync() {
-        return getNoModelErrorWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNoModelErrorWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -200,15 +184,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync() {
-        return getNoModelEmptyWithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNoModelEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

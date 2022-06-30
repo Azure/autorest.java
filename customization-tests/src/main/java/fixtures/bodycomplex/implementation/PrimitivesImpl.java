@@ -264,15 +264,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<IntWrapper> getIntAsync() {
-        return getIntWithResponseAsync()
-                .flatMap(
-                        (Response<IntWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -286,15 +278,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<IntWrapper> getIntAsync(Context context) {
-        return getIntWithResponseAsync(context)
-                .flatMap(
-                        (Response<IntWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getIntWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -365,7 +349,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntAsync(IntWrapper complexBody) {
-        return putIntWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putIntWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -380,7 +364,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntAsync(IntWrapper complexBody, Context context) {
-        return putIntWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putIntWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -448,15 +432,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LongWrapper> getLongAsync() {
-        return getLongWithResponseAsync()
-                .flatMap(
-                        (Response<LongWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -470,15 +446,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LongWrapper> getLongAsync(Context context) {
-        return getLongWithResponseAsync(context)
-                .flatMap(
-                        (Response<LongWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLongWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -549,7 +517,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongAsync(LongWrapper complexBody) {
-        return putLongWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putLongWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -564,7 +532,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongAsync(LongWrapper complexBody, Context context) {
-        return putLongWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putLongWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -632,15 +600,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FloatWrapper> getFloatAsync() {
-        return getFloatWithResponseAsync()
-                .flatMap(
-                        (Response<FloatWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -654,15 +614,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FloatWrapper> getFloatAsync(Context context) {
-        return getFloatWithResponseAsync(context)
-                .flatMap(
-                        (Response<FloatWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getFloatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -733,7 +685,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatAsync(FloatWrapper complexBody) {
-        return putFloatWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putFloatWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -748,7 +700,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatAsync(FloatWrapper complexBody, Context context) {
-        return putFloatWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putFloatWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -818,15 +770,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DoubleWrapper> getDoubleAsync() {
-        return getDoubleWithResponseAsync()
-                .flatMap(
-                        (Response<DoubleWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -840,15 +784,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DoubleWrapper> getDoubleAsync(Context context) {
-        return getDoubleWithResponseAsync(context)
-                .flatMap(
-                        (Response<DoubleWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDoubleWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -919,7 +855,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleAsync(DoubleWrapper complexBody) {
-        return putDoubleWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDoubleWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -934,7 +870,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleAsync(DoubleWrapper complexBody, Context context) {
-        return putDoubleWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putDoubleWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1002,15 +938,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BooleanWrapper> getBoolAsync() {
-        return getBoolWithResponseAsync()
-                .flatMap(
-                        (Response<BooleanWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBoolWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1024,15 +952,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BooleanWrapper> getBoolAsync(Context context) {
-        return getBoolWithResponseAsync(context)
-                .flatMap(
-                        (Response<BooleanWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getBoolWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1103,7 +1023,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBoolAsync(BooleanWrapper complexBody) {
-        return putBoolWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putBoolWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1118,7 +1038,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBoolAsync(BooleanWrapper complexBody, Context context) {
-        return putBoolWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putBoolWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1188,15 +1108,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StringWrapper> getStringAsync() {
-        return getStringWithResponseAsync()
-                .flatMap(
-                        (Response<StringWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1210,15 +1122,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StringWrapper> getStringAsync(Context context) {
-        return getStringWithResponseAsync(context)
-                .flatMap(
-                        (Response<StringWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1289,7 +1193,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringAsync(StringWrapper complexBody) {
-        return putStringWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putStringWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1304,7 +1208,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringAsync(StringWrapper complexBody, Context context) {
-        return putStringWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putStringWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1372,15 +1276,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DateWrapper> getDateAsync() {
-        return getDateWithResponseAsync()
-                .flatMap(
-                        (Response<DateWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1394,15 +1290,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DateWrapper> getDateAsync(Context context) {
-        return getDateWithResponseAsync(context)
-                .flatMap(
-                        (Response<DateWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1473,7 +1361,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateAsync(DateWrapper complexBody) {
-        return putDateWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1488,7 +1376,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateAsync(DateWrapper complexBody, Context context) {
-        return putDateWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1558,15 +1446,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DatetimeWrapper> getDateTimeAsync() {
-        return getDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<DatetimeWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1580,15 +1460,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DatetimeWrapper> getDateTimeAsync(Context context) {
-        return getDateTimeWithResponseAsync(context)
-                .flatMap(
-                        (Response<DatetimeWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1660,7 +1532,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
-        return putDateTimeWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1675,7 +1547,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeAsync(DatetimeWrapper complexBody, Context context) {
-        return putDateTimeWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1745,15 +1617,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
-        return getDateTimeRfc1123WithResponseAsync()
-                .flatMap(
-                        (Response<Datetimerfc1123Wrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeRfc1123WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1767,15 +1631,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(Context context) {
-        return getDateTimeRfc1123WithResponseAsync(context)
-                .flatMap(
-                        (Response<Datetimerfc1123Wrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDateTimeRfc1123WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1848,7 +1704,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeRfc1123WithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1863,7 +1719,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, Context context) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putDateTimeRfc1123WithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1933,15 +1789,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DurationWrapper> getDurationAsync() {
-        return getDurationWithResponseAsync()
-                .flatMap(
-                        (Response<DurationWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDurationWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1955,15 +1803,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DurationWrapper> getDurationAsync(Context context) {
-        return getDurationWithResponseAsync(context)
-                .flatMap(
-                        (Response<DurationWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getDurationWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2035,7 +1875,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationAsync(DurationWrapper complexBody) {
-        return putDurationWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putDurationWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2050,7 +1890,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationAsync(DurationWrapper complexBody, Context context) {
-        return putDurationWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putDurationWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2118,15 +1958,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ByteWrapper> getByteAsync() {
-        return getByteWithResponseAsync()
-                .flatMap(
-                        (Response<ByteWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2140,15 +1972,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ByteWrapper> getByteAsync(Context context) {
-        return getByteWithResponseAsync(context)
-                .flatMap(
-                        (Response<ByteWrapper> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getByteWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2219,7 +2043,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteAsync(ByteWrapper complexBody) {
-        return putByteWithResponseAsync(complexBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putByteWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -2234,7 +2058,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteAsync(ByteWrapper complexBody, Context context) {
-        return putByteWithResponseAsync(complexBody, context).flatMap((Response<Void> res) -> Mono.empty());
+        return putByteWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**

@@ -137,8 +137,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customNamedRequestIdAsync(String fooClientRequestId) {
-        return customNamedRequestIdWithResponseAsync(fooClientRequestId)
-                .flatMap((HeadersCustomNamedRequestIdResponse res) -> Mono.empty());
+        return customNamedRequestIdWithResponseAsync(fooClientRequestId).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -153,8 +152,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customNamedRequestIdAsync(String fooClientRequestId, Context context) {
-        return customNamedRequestIdWithResponseAsync(fooClientRequestId, context)
-                .flatMap((HeadersCustomNamedRequestIdResponse res) -> Mono.empty());
+        return customNamedRequestIdWithResponseAsync(fooClientRequestId, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -263,7 +261,7 @@ public final class Headers {
     public Mono<Void> customNamedRequestIdParamGroupingAsync(
             HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-                .flatMap((HeadersCustomNamedRequestIdParamGroupingResponse res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -283,7 +281,7 @@ public final class Headers {
             Context context) {
         return customNamedRequestIdParamGroupingWithResponseAsync(
                         headerCustomNamedRequestIdParamGroupingParameters, context)
-                .flatMap((HeadersCustomNamedRequestIdParamGroupingResponse res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -384,14 +382,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId)
-                .flatMap(
-                        (HeadersCustomNamedRequestIdHeadResponse res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -407,14 +398,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, Context context) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context)
-                .flatMap(
-                        (HeadersCustomNamedRequestIdHeadResponse res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

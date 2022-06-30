@@ -12,12 +12,9 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
@@ -44,6 +41,8 @@ public final class DpgClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -72,9 +71,10 @@ public final class DpgClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -82,6 +82,7 @@ public final class DpgClient {
      * Object
      * }</pre>
      *
+     * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,8 +92,8 @@ public final class DpgClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredWithResponse(RequestOptions requestOptions) {
-        return this.client.getRequiredWithResponse(requestOptions).block();
+    public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
+        return this.client.getRequiredWithResponse(parameter, requestOptions).block();
     }
 
     /**
@@ -103,10 +104,11 @@ public final class DpgClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>requiredParam</td><td>String</td><td>Yes</td><td>I am a required parameter</td></tr>
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -114,6 +116,7 @@ public final class DpgClient {
      * Object
      * }</pre>
      *
+     * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -123,8 +126,8 @@ public final class DpgClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putRequiredOptionalWithResponse(RequestOptions requestOptions) {
-        return this.client.putRequiredOptionalWithResponse(requestOptions).block();
+    public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
+        return this.client.putRequiredOptionalWithResponse(requiredParam, requestOptions).block();
     }
 
     /**
@@ -133,9 +136,7 @@ public final class DpgClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     url: String
-     * }
+     * BinaryData
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -144,6 +145,7 @@ public final class DpgClient {
      * Object
      * }</pre>
      *
+     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
      *     "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -155,8 +157,9 @@ public final class DpgClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return this.client.postParametersWithResponse(parameter, requestOptions).block();
+    public Response<BinaryData> postParametersWithResponse(
+            String contentType, BinaryData parameter, RequestOptions requestOptions) {
+        return this.client.postParametersWithResponse(contentType, parameter, requestOptions).block();
     }
 
     /**
@@ -186,6 +189,8 @@ public final class DpgClient {
      *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -226,21 +231,5 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
         return this.client.getNewOperationWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.client
-                .sendRequest(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
     }
 }

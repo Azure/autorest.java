@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.PathsImpl;
+import java.time.OffsetDateTime;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestUrlTestServiceClient type. */
@@ -277,7 +279,7 @@ public final class PathsAsyncClient {
     /**
      * Get using uri with 'green color' in path parameter.
      *
-     * @param enumPath send the value green.
+     * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -295,7 +297,7 @@ public final class PathsAsyncClient {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
-     * @param enumPath send null should throw.
+     * @param enumPath send null should throw. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -324,7 +326,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteMultiByteWithResponseAsync(bytePath, requestOptions);
     }
 
@@ -357,7 +359,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponse(String bytePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         return this.serviceClient.byteNullWithResponseAsync(bytePath, requestOptions);
     }
 
@@ -425,7 +427,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponse(String dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
         return this.serviceClient.dateTimeNullWithResponseAsync(dateTimePath, requestOptions);
     }
 
@@ -443,14 +445,14 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponse(String base64UrlPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         return this.serviceClient.base64UrlWithResponseAsync(base64UrlPath, requestOptions);
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -462,7 +464,7 @@ public final class PathsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayCsvInPathWithResponse(String arrayPath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         return this.serviceClient.arrayCsvInPathWithResponseAsync(arrayPath, requestOptions);
     }
 

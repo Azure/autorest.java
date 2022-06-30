@@ -148,7 +148,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isLowLevelClient()) {
+                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -193,14 +193,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isLowLevelClient() || settings.isGenerateModels()) {
+        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
                     && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
 
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-                if (!packageInfos.containsKey(modelsPackage) && !settings.isLowLevelClient()) {
+                if (!packageInfos.containsKey(modelsPackage)) {
                     packageInfos.put(modelsPackage, new PackageInfo(
                             modelsPackage,
                             String.format("Package containing the data models for %s.\n%s", serviceClientName,
@@ -242,7 +242,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 // service client builder per service client
                 for (int i = 0; i < asyncClients.size(); ++i) {
                     AsyncSyncClient asyncClient = asyncClients.get(i);
-                    AsyncSyncClient syncClient = (i > syncClients.size()) ? null : syncClients.get(i);
+                    AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
                     String clientName = ((syncClient != null)
                             ? syncClient.getClassName()
                             : asyncClient.getClassName().replace("AsyncClient", "Client"));
@@ -276,7 +276,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         // example/test
-        if (settings.isLowLevelClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
+        if (settings.isDataPlaneClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
             List<ProtocolExample> protocolExamples = new ArrayList<>();
             Set<String> protocolExampleNameSet = new HashSet<>();
 
@@ -369,9 +369,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
-        if (settings.isFluent()
-                && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
-            // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+        if (!SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             return null;
         }
 
@@ -447,9 +445,24 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
 
         if (settings.isGenerateModels()) {
+            // export if models is not in implementation
+            final String implementationSubpackagePrefix = "implementation.";
+            if (!CoreUtils.isNullOrEmpty(settings.getModelsSubpackage()) && !settings.getModelsSubpackage().startsWith(implementationSubpackagePrefix)) {
+                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
+            }
+            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage()) && !settings.getCustomTypesSubpackage().startsWith(implementationSubpackagePrefix)) {
+                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getCustomTypesSubpackage())));
+            }
+
+            // open models package to azure-core and jaskson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
             openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+
+            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage())
+                    && !settings.getCustomTypesSubpackage().equals(settings.getModelsSubpackage())) {
+                openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getCustomTypesSubpackage()), openToModules));
+            }
         }
 
         return moduleInfo;

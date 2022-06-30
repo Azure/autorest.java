@@ -40,7 +40,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -65,7 +65,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -90,7 +90,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -115,7 +115,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -140,7 +140,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -165,7 +165,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -190,7 +190,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -215,7 +215,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -440,7 +440,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -464,7 +464,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -585,7 +585,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -609,7 +609,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -633,7 +633,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -657,7 +657,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -681,7 +681,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -705,7 +705,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -729,7 +729,7 @@ public final class MultipleResponsesAsyncClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *

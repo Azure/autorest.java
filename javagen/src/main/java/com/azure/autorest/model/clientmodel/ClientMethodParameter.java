@@ -175,6 +175,26 @@ public class ClientMethodParameter {
     }
 
     /**
+     * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     * @return A new builder instance initialized with properties values of this instance.
+     */
+    public ClientMethodParameter.Builder toNewBuilder() {
+        return new ClientMethodParameter.Builder()
+                .fromClient(this.getFromClient())
+                .annotations(this.getAnnotations())
+                .defaultValue(this.getDefaultValue())
+                .isConstant(this.getIsConstant())
+                .description(this.getDescription())
+                .name(this.getName())
+                .isFinal(this.getIsFinal())
+                .isRequired(this.getIsRequired())
+                .location(this.getLocation())
+                .rawType(this.getRawType())
+                .wireType(this.getWireType());
+    }
+
+
+    /**
      * The full declaration of this parameter as it appears in a method signature.
      */
     public final String getDeclaration() {

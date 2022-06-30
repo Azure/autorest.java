@@ -246,15 +246,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -295,15 +287,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -344,15 +328,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getOverflowAsync() {
-        return getOverflowWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getOverflowWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -393,15 +369,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUnderflowAsync() {
-        return getUnderflowWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUnderflowWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -450,7 +418,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putUtcMaxDateTimeWithResponseAsync(datetimeBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putUtcMaxDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -500,7 +468,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTime7DigitsAsync(OffsetDateTime datetimeBody) {
-        return putUtcMaxDateTime7DigitsWithResponseAsync(datetimeBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putUtcMaxDateTime7DigitsWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -544,15 +512,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
-        return getUtcLowercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUtcLowercaseMaxDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -595,15 +555,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
-        return getUtcUppercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUtcUppercaseMaxDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -645,15 +597,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsAsync() {
-        return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -704,8 +648,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalPositiveOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putLocalPositiveOffsetMaxDateTimeWithResponseAsync(datetimeBody)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putLocalPositiveOffsetMaxDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -751,14 +694,7 @@ public final class DatetimeOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -803,14 +739,7 @@ public final class DatetimeOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -861,8 +790,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalNegativeOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putLocalNegativeOffsetMaxDateTimeWithResponseAsync(datetimeBody)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putLocalNegativeOffsetMaxDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -908,14 +836,7 @@ public final class DatetimeOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -960,14 +881,7 @@ public final class DatetimeOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1016,7 +930,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMinDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putUtcMinDateTimeWithResponseAsync(datetimeBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putUtcMinDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1059,15 +973,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
-        return getUtcMinDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUtcMinDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1118,8 +1024,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalPositiveOffsetMinDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putLocalPositiveOffsetMinDateTimeWithResponseAsync(datetimeBody)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putLocalPositiveOffsetMinDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1163,15 +1068,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync() {
-        return getLocalPositiveOffsetMinDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLocalPositiveOffsetMinDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1222,8 +1119,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLocalNegativeOffsetMinDateTimeAsync(OffsetDateTime datetimeBody) {
-        return putLocalNegativeOffsetMinDateTimeWithResponseAsync(datetimeBody)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return putLocalNegativeOffsetMinDateTimeWithResponseAsync(datetimeBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -1267,15 +1163,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync() {
-        return getLocalNegativeOffsetMinDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLocalNegativeOffsetMinDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -1318,15 +1206,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNoOffsetMinDateTimeAsync() {
-        return getLocalNoOffsetMinDateTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getLocalNoOffsetMinDateTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

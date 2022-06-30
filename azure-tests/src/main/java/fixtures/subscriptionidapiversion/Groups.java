@@ -108,14 +108,7 @@ public final class Groups {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithResponseAsync(resourceGroupName)
-                .flatMap(
-                        (Response<SampleResourceGroup> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

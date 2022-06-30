@@ -3,7 +3,6 @@
 
 package com.azure.autorest.fluent.util;
 
-import com.azure.autorest.extension.base.plugin.AutorestSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.core.util.CoreUtils;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -70,11 +68,11 @@ public class FluentJavaSettings {
 
     private String artifactVersion;
 
+    private boolean generateAsyncMethods = false;
+
     private SampleGeneration generateSamples = SampleGeneration.NONE;
 
     private boolean sdkIntegration = false;
-
-    private AutorestSettings autorestSettings;
 
     private enum SampleGeneration {
         NONE,
@@ -138,32 +136,16 @@ public class FluentJavaSettings {
         return Optional.ofNullable(artifactVersion);
     }
 
+    public boolean isGenerateAsyncMethods() {
+        return generateAsyncMethods;
+    }
+
     public boolean isGenerateSamples() {
         return generateSamples != SampleGeneration.NONE;
     }
 
     public boolean isSdkIntegration() {
         return sdkIntegration;
-    }
-
-    public AutorestSettings getAutorestSettings() {
-        if (autorestSettings == null) {
-            autorestSettings = new AutorestSettings();
-
-            loadStringSetting("tag", autorestSettings::setTag);
-
-            loadStringSetting("base-folder", autorestSettings::setBaseFolder);
-            loadStringSetting("output-folder", autorestSettings::setOutputFolder);
-            loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
-
-            List<Object> inputFiles = host.getValue(List.class, "input-file");
-            if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
-                logger.info("List of input files : {}", autorestSettings.getInputFiles());
-            }
-        }
-
-        return autorestSettings;
     }
 
     private void loadSettings() {
@@ -201,6 +183,8 @@ public class FluentJavaSettings {
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
 
+        loadBooleanSetting("generate-async-methods", s -> generateAsyncMethods = s);
+
         loadBooleanSetting("generate-samples", s -> generateSamples = (s ? SampleGeneration.AGGREGATED : SampleGeneration.NONE));
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
@@ -222,16 +206,16 @@ public class FluentJavaSettings {
 
     private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
         Boolean settingValue = host.getBooleanValue(settingName);
-        logger.info("Option, boolean, {} : {}", settingName, settingValue);
         if (settingValue != null) {
+            logger.debug("Option, boolean, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
 
     private void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
-        logger.info("Option, string, {} : {}", settingName, settingValue);
         if (settingValue != null) {
+            logger.debug("Option, string, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }

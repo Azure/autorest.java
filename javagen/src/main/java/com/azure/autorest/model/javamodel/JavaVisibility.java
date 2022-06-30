@@ -14,14 +14,4 @@ public enum JavaVisibility {
     Private,
 
     PackagePrivate;
-
-    public static final int SIZE = java.lang.Integer.SIZE;
-
-    public static JavaVisibility forValue(int value) {
-        return values()[value];
-    }
-
-    public int getValue() {
-        return this.ordinal();
-    }
 }

@@ -124,15 +124,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Colors> getNotExpandableAsync() {
-        return getNotExpandableWithResponseAsync()
-                .flatMap(
-                        (Response<Colors> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNotExpandableWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -181,7 +173,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(Colors stringBody) {
-        return putNotExpandableWithResponseAsync(stringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putNotExpandableWithResponseAsync(stringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -225,15 +217,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Colors> getReferencedAsync() {
-        return getReferencedWithResponseAsync()
-                .flatMap(
-                        (Response<Colors> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getReferencedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -282,7 +266,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(Colors enumStringBody) {
-        return putReferencedWithResponseAsync(enumStringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putReferencedWithResponseAsync(enumStringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -325,15 +309,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RefColorConstant> getReferencedConstantAsync() {
-        return getReferencedConstantWithResponseAsync()
-                .flatMap(
-                        (Response<RefColorConstant> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getReferencedConstantWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -384,7 +360,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
-        return putReferencedConstantWithResponseAsync(enumStringBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putReferencedConstantWithResponseAsync(enumStringBody).flatMap(ignored -> Mono.empty());
     }
 
     /**

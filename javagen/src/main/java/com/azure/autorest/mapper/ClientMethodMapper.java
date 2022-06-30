@@ -36,8 +36,9 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -85,13 +86,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private List<ClientMethod> createClientMethods(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        Map<Request, ProxyMethod> proxyMethods = Mappers.getProxyMethodMapper().map(operation);
+        Map<Request, List<ProxyMethod>> proxyMethodsMap = Mappers.getProxyMethodMapper().map(operation);
 
         List<ClientMethod> methods = new ArrayList<>();
 
+
         ClientMethod.Builder builder = getClientMethodBuilder()
-            .description(operation.getLanguage().getJava().getDescription())
-            .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this": "this.client");
+                .description(operation.getLanguage().getJava().getDescription())
+                .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
 
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
@@ -101,22 +103,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             // Mono<SimpleResponse<Page>>
             Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
             if (!(responseBodySchema instanceof ObjectSchema)) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] no common parent found for client models %s",
-                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).map(s -> s.getLanguage().getJava().getName()).collect(Collectors.toList())));
+                        operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).map(s -> s.getLanguage().getJava().getName()).collect(Collectors.toList())));
             }
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
             Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
-                .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                .findFirst();
+                    .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+                    .findFirst();
             if (!itemPropertyOpt.isPresent()) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] item name %s not found among properties of client model %s",
-                    operation.getExtensions().getXmsPageable().getItemName(), responseBodyModel.getName()));
+                        operation.getExtensions().getXmsPageable().getItemName(), responseBodyModel.getName()));
             }
             IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
                 asyncReturnType = createProtocolPagedAsyncReturnType();
                 syncReturnType = createProtocolPagedSyncReturnType();
@@ -128,7 +130,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         } else {
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
-            if (settings.isLowLevelClient()) {
+            if (settings.isDataPlaneClient()) {
                 if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
@@ -137,7 +139,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                && !settings.isLowLevelClient() /* TODO: #1059 */) {
+                    && !settings.isDataPlaneClient()) {
                 asyncReturnType = createAsyncBinaryReturnType();
             } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                 asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
@@ -145,7 +147,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createAsyncVoidReturnType();
             }
             if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                && !settings.isLowLevelClient() /* TODO: #1059 */) {
+                    && !settings.isDataPlaneClient()) {
                 syncReturnType = ClassType.InputStream;
             } else {
                 syncReturnType = responseBodyType.getClientType();
@@ -160,452 +162,515 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // Low-level client only requires one request per operation
         List<Request> requests = operation.getRequests();
-        if (settings.isLowLevelClient()) {
-            requests = Collections.singletonList(requests.get(0));
+        if (settings.isDataPlaneClient()) {
+            Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
+            requests = Collections.singletonList(selectedRequest);
         }
 
         for (Request request : requests) {
-            ProxyMethod proxyMethod = proxyMethods.get(request);
-            builder.proxyMethod(proxyMethod);
+            List<ProxyMethod> proxyMethods = proxyMethodsMap.get(request);
+            for (ProxyMethod proxyMethod : proxyMethods) {
+                builder.proxyMethod(proxyMethod);
+                List<ClientMethodParameter> parameters = new ArrayList<>();
+                List<String> requiredParameterExpressions = new ArrayList<>();
+                Map<String, String> validateExpressions = new HashMap<>();
+                List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
-            List<ClientMethodParameter> parameters = new ArrayList<>();
-            List<String> requiredParameterExpressions = new ArrayList<>();
-            Map<String, String> validateExpressions = new HashMap<>();
-            List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
-
-            List<Parameter> codeModelParameters;
-            if (settings.isLowLevelClient()) {
-                // Required path and body parameters are allowed
-                codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
-                        (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
-                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY))
-                    .collect(Collectors.toList());
-            } else {
-                codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
-            }
-
-            Set<Parameter> originalParameters = new HashSet<>();
-            for (Parameter parameter : codeModelParameters) {
-                ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
-
-                if (request.getProtocol() != null
-                    && request.getProtocol().getHttp() != null
-                    && request.getProtocol().getHttp().getMediaTypes() != null
-                    && request.getProtocol().getHttp().getMediaTypes().stream().anyMatch(mediaType -> mediaType.equals(
-                    "application/json-patch+json"))) {
-                    clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
+                List<Parameter> codeModelParameters;
+                if (settings.isDataPlaneClient()) {
+                    // Required path, body, header and query parameters are allowed
+                    codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
+                                    (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
+                                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY ||
+                                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER ||
+                                            p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY))
+                            .collect(Collectors.toList());
+                } else {
+                    codeModelParameters = request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
                 }
 
-                if (request.getSignatureParameters().contains(parameter)) {
-                    parameters.add(clientMethodParameter);
-                }
+                Set<Parameter> originalParameters = new HashSet<>();
+                for (Parameter parameter : codeModelParameters) {
+                    ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
 
-                if (!(parameter.getSchema() instanceof ConstantSchema) && parameter.getGroupedBy() == null) {
-                    if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
-                        // Validations
-                        if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
-                            requiredParameterExpressions.add(clientMethodParameter.getName());
-                        }
-                        String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
-                        if (validation != null) {
-                            validateExpressions.put(clientMethodParameter.getName(), validation);
-                        }
-                    } else {
-                        ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
-                        String exp = proxyParameter.getParameterReference();
-
-                        if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
-                            requiredParameterExpressions.add(exp);
-                        }
-
-                        String validation = proxyParameter.getClientType().validate(exp);
-                        if (validation != null) {
-                            validateExpressions.put(exp, validation);
-                        }
-                    }
-                }
-
-                // Transformations
-                if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
-                    && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isLowLevelClient()) {
-                    ClientMethodParameter outParameter;
-                    if (parameter.getOriginalParameter() != null) {
-                        originalParameters.add(parameter.getOriginalParameter());
-                        outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
-                    } else {
-                        outParameter = clientMethodParameter;
-                    }
-                    MethodTransformationDetail detail = methodTransformationDetails.stream()
-                        .filter(d -> outParameter.getName().equals(d.getOutParameter().getName()))
-                        .findFirst().orElse(null);
-                    if (detail == null) {
-                        detail = new MethodTransformationDetail(outParameter, new ArrayList<>());
-                        methodTransformationDetails.add(detail);
-                    }
-                    ParameterMapping mapping = new ParameterMapping();
-                    if (parameter.getGroupedBy() != null) {
-                        mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy()));
-                        ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
-                        ClientModelProperty inputProperty = groupModel.getProperties().stream()
-                            .filter(p -> parameter.getLanguage().getJava().getName().equals(p.getName()))
-                            .findFirst().get();
-                        mapping.setInputParameterProperty(inputProperty);
-                    } else {
-                        mapping.setInputParameter(clientMethodParameter);
-                    }
-                    if (parameter.getOriginalParameter() != null) {
-                        mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
-                    }
-                    detail.getParameterMappings().add(mapping);
-                }
-            }
-            // handle the case that the flattened parameter is model with all its properties read-only
-            // in this case, it is not original parameter from any other parameters
-            for (Parameter parameter : request.getParameters().stream()
-                .filter(p -> p.isFlattened() && p.getProtocol() != null && p.getProtocol().getHttp() != null)   // flattened proxy parameter
-                .filter(p -> !originalParameters.contains(p))                                                   // but not original parameter from any other parameters
-                .collect(Collectors.toList())) {
-                ClientMethodParameter outParameter = Mappers.getClientParameterMapper().map(parameter);
-                methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
-            }
-
-            if (settings.isLowLevelClient()) {
-                ClientMethodParameter requestOptions = new ClientMethodParameter.Builder()
-                    .description("The options to configure the HTTP request before HTTP client sends it")
-                    .wireType(ClassType.RequestOptions)
-                    .name("requestOptions")
-                    .location(RequestParameterLocation.NONE)
-                    .isConstant(false)
-                    .isRequired(false)
-                    .fromClient(false)
-                    .annotations(Collections.emptyList())
-                    .build();
-                parameters.add(requestOptions);
-            }
-
-            final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
-
-            builder.parameters(parameters)
-                .requiredNullableParameterExpressions(requiredParameterExpressions)
-                .validateExpressions(validateExpressions)
-                .methodTransformationDetails(methodTransformationDetails)
-                .methodPageDetails(null);
-
-            if (operation.getExtensions() != null
-                && operation.getExtensions().getXmsPageable() != null
-                && shouldGeneratePagingMethods()) {
-                String pageableItemName = getPageableItemName(operation);
-                if (pageableItemName != null) {
-                    boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
-
-                    IType lroIntermediateType = null;
-                    if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
-                        lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
+                    if (request.getProtocol() != null
+                            && request.getProtocol().getHttp() != null
+                            && request.getProtocol().getHttp().getMediaTypes() != null
+                            && request.getProtocol().getHttp().getMediaTypes().stream().anyMatch(mediaType -> mediaType.equals(
+                            "application/json-patch+json"))) {
+                        clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
                     }
 
-                    List<ClientMethod> nextMethods = (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation());
-
-                    MethodPageDetails details = new MethodPageDetails(
-                        CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        pageableItemName,
-                        (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
-                        lroIntermediateType,
-                        operation.getExtensions().getXmsPageable().getNextLinkName(),
-                        operation.getExtensions().getXmsPageable().getItemName());
-                    builder.methodPageDetails(details);
-
-                    if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                        && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
-                        methods.add(builder
-                            .returnValue(createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType))
-                            .name(proxyMethod.getPagingAsyncSinglePageMethodName())
-                            .onlyRequiredParameters(false)
-                            .type(ClientMethodType.PagingAsyncSinglePage)
-                            .isGroupedParameterRequired(false)
-                            .methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, false))
-                            .build());
+                    // If the codemodel parameter and proxy method parameter types don't match, update the client
+                    // method param to use proxy method parameter type.
+                    if (clientMethodParameter.getClientType() == GenericType.FluxByteBuffer
+                            && proxyMethod.getParameters().stream().anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BinaryData)) {
+                        clientMethodParameter = updateClientMethodParameter(clientMethodParameter);
                     }
-                    if (settings.isContextClientMethodParameter()) {
-                        builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, true));
-                        addClientMethodWithContext(methods, builder, proxyMethod, parameters,
-                            ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
-                            createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType),
-                            details);
+                    if (request.getSignatureParameters().contains(parameter)) {
+                        parameters.add(clientMethodParameter);
                     }
 
-                    if (!isNextMethod) {
-                        if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                            methods.add(builder
-                                .returnValue(createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType))
-                                .name(proxyMethod.getSimpleAsyncMethodName())
-                                .onlyRequiredParameters(false)
-                                .type(ClientMethodType.PagingAsync)
-                                .isGroupedParameterRequired(false)
-                                .methodVisibility(methodVisibility(ClientMethodType.PagingAsync, false))
-                                .build());
+                    if (!(parameter.getSchema() instanceof ConstantSchema) && parameter.getGroupedBy() == null) {
+                        if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
+                            // Validations
+                            if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
+                                requiredParameterExpressions.add(clientMethodParameter.getName());
+                            }
+                            String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
+                            if (validation != null) {
+                                validateExpressions.put(clientMethodParameter.getName(), validation);
+                            }
+                        } else {
+                            ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
+                            String exp = proxyParameter.getParameterReference();
 
-                            if (generateClientMethodWithOnlyRequiredParameters) {
-                                methods.add(builder
-                                    .onlyRequiredParameters(true)
-                                    .build());
+                            if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
+                                requiredParameterExpressions.add(exp);
                             }
 
-                            if (settings.isContextClientMethodParameter()) {
-                                MethodPageDetails detailsWithContext = details;
-                                if (nextMethods != null) {
-                                    detailsWithContext = new MethodPageDetails(
-                                        CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                                        pageableItemName,
-                                        nextMethods.stream()
-                                            .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
-                                            .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
-                                        lroIntermediateType,
-                                        operation.getExtensions().getXmsPageable().getNextLinkName(),
-                                        operation.getExtensions().getXmsPageable().getItemName());
+                            String validation = proxyParameter.getClientType().validate(exp);
+                            if (validation != null) {
+                                validateExpressions.put(exp, validation);
+                            }
+                        }
+                    }
+
+                    // Transformations
+                    if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
+                            && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isDataPlaneClient()) {
+                        ClientMethodParameter outParameter;
+                        if (parameter.getOriginalParameter() != null) {
+                            originalParameters.add(parameter.getOriginalParameter());
+                            outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
+                        } else {
+                            outParameter = clientMethodParameter;
+                        }
+                        MethodTransformationDetail detail = methodTransformationDetails.stream()
+                                .filter(d -> outParameter.getName().equals(d.getOutParameter().getName()))
+                                .findFirst().orElse(null);
+                        if (detail == null) {
+                            detail = new MethodTransformationDetail(outParameter, new ArrayList<>());
+                            methodTransformationDetails.add(detail);
+                        }
+                        ParameterMapping mapping = new ParameterMapping();
+                        if (parameter.getGroupedBy() != null) {
+                            mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy()));
+                            ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
+                            ClientModelProperty inputProperty = groupModel.getProperties().stream()
+                                    .filter(p -> parameter.getLanguage().getJava().getName().equals(p.getName()))
+                                    .findFirst().get();
+                            mapping.setInputParameterProperty(inputProperty);
+                        } else {
+                            mapping.setInputParameter(clientMethodParameter);
+                        }
+                        if (parameter.getOriginalParameter() != null) {
+                            mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
+                        }
+                        detail.getParameterMappings().add(mapping);
+                    }
+                }
+                // handle the case that the flattened parameter is model with all its properties read-only
+                // in this case, it is not original parameter from any other parameters
+                for (Parameter parameter : request.getParameters().stream()
+                        .filter(p -> p.isFlattened() && p.getProtocol() != null && p.getProtocol().getHttp() != null)   // flattened proxy parameter
+                        .filter(p -> !originalParameters.contains(p))                                                   // but not original parameter from any other parameters
+                        .collect(Collectors.toList())) {
+                    ClientMethodParameter outParameter = Mappers.getClientParameterMapper().map(parameter);
+                    methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
+                }
+
+                if (settings.isDataPlaneClient()) {
+                    ClientMethodParameter requestOptions = new ClientMethodParameter.Builder()
+                            .description("The options to configure the HTTP request before HTTP client sends it")
+                            .wireType(ClassType.RequestOptions)
+                            .name("requestOptions")
+                            .location(RequestParameterLocation.NONE)
+                            .isConstant(false)
+                            .isRequired(false)
+                            .fromClient(false)
+                            .annotations(Collections.emptyList())
+                            .build();
+                    parameters.add(requestOptions);
+                }
+
+                final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
+
+                builder.parameters(parameters)
+                        .requiredNullableParameterExpressions(requiredParameterExpressions)
+                        .validateExpressions(validateExpressions)
+                        .methodTransformationDetails(methodTransformationDetails)
+                        .methodPageDetails(null);
+
+                if (operation.getExtensions() != null
+                        && operation.getExtensions().getXmsPageable() != null
+                        && shouldGeneratePagingMethods()) {
+                    String pageableItemName = getPageableItemName(operation);
+                    if (pageableItemName != null) {
+                        boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
+
+                        IType lroIntermediateType = null;
+                        if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
+                            lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
+                        }
+
+                        List<ClientMethod> nextMethods = (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation());
+
+                        MethodPageDetails details = new MethodPageDetails(
+                                CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                                pageableItemName,
+                                (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
+                                lroIntermediateType,
+                                operation.getExtensions().getXmsPageable().getNextLinkName(),
+                                operation.getExtensions().getXmsPageable().getItemName());
+                        builder.methodPageDetails(details);
+
+                        if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                                && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
+                            methods.add(builder
+                                    .returnValue(createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType))
+                                    .name(proxyMethod.getPagingAsyncSinglePageMethodName())
+                                    .onlyRequiredParameters(false)
+                                    .type(ClientMethodType.PagingAsyncSinglePage)
+                                    .isGroupedParameterRequired(false)
+                                    .methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, false))
+                                    .build());
+                        }
+                        if (settings.isContextClientMethodParameter()) {
+                            builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsyncSinglePage, true));
+                            addClientMethodWithContext(methods, builder, proxyMethod, parameters,
+                                    ClientMethodType.PagingAsyncSinglePage, proxyMethod.getPagingAsyncSinglePageMethodName(),
+                                    createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType),
+                                    details);
+                        }
+
+                        if (!isNextMethod) {
+                            if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                                methods.add(builder
+                                        .returnValue(createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType))
+                                        .name(proxyMethod.getSimpleAsyncMethodName())
+                                        .onlyRequiredParameters(false)
+                                        .type(ClientMethodType.PagingAsync)
+                                        .isGroupedParameterRequired(false)
+                                        .methodVisibility(methodVisibility(ClientMethodType.PagingAsync, false))
+                                        .build());
+
+                                if (generateClientMethodWithOnlyRequiredParameters) {
+                                    methods.add(builder
+                                            .onlyRequiredParameters(true)
+                                            .build());
                                 }
 
-                                addClientMethodWithContext(methods,
-                                    builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true)),
-                                    proxyMethod, parameters,
-                                    ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
-                                    createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType),
-                                    detailsWithContext);
+                                if (settings.isContextClientMethodParameter()) {
+                                    MethodPageDetails detailsWithContext = details;
+                                    if (nextMethods != null) {
+                                        detailsWithContext = new MethodPageDetails(
+                                                CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                                                pageableItemName,
+                                                nextMethods.stream()
+                                                        .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
+                                                        .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
+                                                lroIntermediateType,
+                                                operation.getExtensions().getXmsPageable().getNextLinkName(),
+                                                operation.getExtensions().getXmsPageable().getItemName());
+                                    }
+
+                                    addClientMethodWithContext(methods,
+                                            builder.methodVisibility(methodVisibility(ClientMethodType.PagingAsync, true)),
+                                            proxyMethod, parameters,
+                                            ClientMethodType.PagingAsync, proxyMethod.getSimpleAsyncMethodName(),
+                                            createPagingAsyncReturnValue(operation, asyncReturnType, syncReturnType),
+                                            detailsWithContext);
+                                }
+                            }
+
+                            if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                                builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, false));
+
+                                builder
+                                        .returnValue(createPagingSyncReturnValue(operation, syncReturnType))
+                                        .name(proxyMethod.getName())
+                                        .onlyRequiredParameters(false)
+                                        .type(ClientMethodType.PagingSync)
+                                        .isGroupedParameterRequired(false)
+                                        .build();
+
+                                if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                                    // if context parameter is required, that method will do the overload with max parameters
+                                    methods.add(builder.build());
+                                }
+
+                                if (generateClientMethodWithOnlyRequiredParameters) {
+                                    methods.add(builder
+                                            .onlyRequiredParameters(true)
+                                            .build());
+                                }
+
+                                if (settings.isContextClientMethodParameter()) {
+                                    addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, true)), parameters);
+                                }
                             }
                         }
+                    }
+                } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
+                        && (settings.isFluent() || settings.getPollingConfig("default") != null)
+                        && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
+                    JavaVisibility simpleAsyncMethodVisibility =
+                            methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false);
+                    JavaVisibility simpleAsyncMethodVisibilityWithContext =
+                            methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true);
+                    if (settings.isDataPlaneClient()) {
+                        simpleAsyncMethodVisibility = JavaVisibility.Private;
+                        simpleAsyncMethodVisibilityWithContext = JavaVisibility.Private;
+                    }
 
-                        if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                            builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, false));
+                    // WithResponseAsync, with required and optional parameters
+                    methods.add(builder
+                            .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
+                            .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.SimpleAsyncRestResponse)
+                            .isGroupedParameterRequired(false)
+                            .methodVisibility(simpleAsyncMethodVisibility)
+                            .build());
 
-                            builder
-                                .returnValue(createPagingSyncReturnValue(operation, syncReturnType))
-                                .name(proxyMethod.getName())
-                                .onlyRequiredParameters(false)
-                                .type(ClientMethodType.PagingSync)
-                                .isGroupedParameterRequired(false)
-                                .build();
+                    if (settings.isContextClientMethodParameter()) {
+                        addClientMethodWithContext(methods,
+                                builder.methodVisibility(simpleAsyncMethodVisibilityWithContext),
+                                parameters);
+                    }
 
-                            if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
-                                // if context parameter is required, that method will do the overload with max parameters
-                                methods.add(builder.build());
-                            }
+                    JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(proxyMethod.getOperationId());
+
+                    MethodPollingDetails methodPollingDetails = null;
+                    MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
+                    if (pollingDetails != null) {
+                        methodPollingDetails = new MethodPollingDetails(
+                                pollingDetails.getStrategy(),
+                                getPollingIntermediateType(pollingDetails, syncReturnType),
+                                getPollingFinalType(pollingDetails, syncReturnType),
+                                pollingDetails.getPollIntervalInSeconds());
+
+                        if (settings.isDataPlaneClient() &&
+                                !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
+                                        && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
+                            // a new method to be added as implementation only (not exposed to client) for developer
+                            dpgMethodPollingDetailsWithModel = methodPollingDetails;
+
+                            // DPG keep the method with BinaryData
+                            methodPollingDetails = new MethodPollingDetails(
+                                    dpgMethodPollingDetailsWithModel.getPollingStrategy(),
+                                    ClassType.BinaryData, ClassType.BinaryData,
+                                    dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
+                        }
+                    }
+
+                    addLroMethods(operation, builder, methods,
+                            "begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()),
+                            "begin" + CodeNamer.toPascalCase(proxyMethod.getName()),
+                            parameters, proxyMethod, syncReturnType, methodPollingDetails, settings);
+
+                    if (dpgMethodPollingDetailsWithModel != null) {
+                        builder = builder.implementationOnly(true);
+
+                        String modelSuffix = "WithModel";
+                        addLroMethods(operation, builder, methods,
+                                "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix + "Async"),
+                                "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
+                                parameters, proxyMethod, syncReturnType, dpgMethodPollingDetailsWithModel, settings);
+
+                        builder = builder.implementationOnly(false);
+                    }
+
+                    if (settings.isFluent()) {
+                        if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                            methods.add(builder
+                                    .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
+                                    .name(proxyMethod.getSimpleAsyncMethodName())
+                                    .onlyRequiredParameters(false)
+                                    .type(ClientMethodType.LongRunningAsync)
+                                    .isGroupedParameterRequired(false)
+                                    .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
+                                    .build());
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
                                 methods.add(builder
-                                    .onlyRequiredParameters(true)
-                                    .build());
+                                        .onlyRequiredParameters(true)
+                                        .build());
                             }
 
                             if (settings.isContextClientMethodParameter()) {
-                                addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.PagingSync, true)), parameters);
+                                addClientMethodWithContext(methods,
+                                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
+                                        parameters);
+                            }
+                        }
+                        if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                            builder.methodVisibility(VISIBLE);
+
+                            methods.add(builder
+                                    .returnValue(createLongRunningSyncReturnValue(operation, syncReturnType))
+                                    .name(proxyMethod.getName())
+                                    .onlyRequiredParameters(false)
+                                    .type(ClientMethodType.LongRunningSync)
+                                    .isGroupedParameterRequired(false)
+                                    .build());
+
+                            if (generateClientMethodWithOnlyRequiredParameters) {
+                                methods.add(builder
+                                        .onlyRequiredParameters(true)
+                                        .build());
+                            }
+
+                            if (settings.isContextClientMethodParameter()) {
+                                addClientMethodWithContext(methods, builder, parameters);
                             }
                         }
                     }
-                }
-            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
-                && (settings.isFluent() || settings.getPollingConfig("default") != null)
-                && !syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
-                // WithResponseAsync, with required and optional parameters
-                // TODO: Build protocol LRO methods
-                methods.add(builder
-                    .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
-                    .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
-                    .onlyRequiredParameters(false)
-                    .type(ClientMethodType.SimpleAsyncRestResponse)
-                    .isGroupedParameterRequired(false)
-                    .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
-                    .build());
+                } else {
+                    // WithResponseAsync, with required and optional parameters
+                    if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                            && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
 
-                if (settings.isContextClientMethodParameter()) {
-                    addClientMethodWithContext(methods,
-                        builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
-                        parameters);
-                }
-
-                JavaSettings.PollingDetails pollingDetails = settings.getPollingConfig(proxyMethod.getOperationId());
-
-                MethodPollingDetails methodPollingDetails = null;
-                if (pollingDetails != null) {
-                    methodPollingDetails = new MethodPollingDetails(
-                        pollingDetails.getStrategy(),
-                        getPollingIntermediateType(pollingDetails, syncReturnType),
-                        getPollingFinalType(pollingDetails, syncReturnType),
-                        pollingDetails.getPollIntervalInSeconds());
-                    builder = builder.methodPollingDetails(methodPollingDetails);
-                }
-
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    // begin method async
-                    methods.add(builder
-                        .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
-                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()))
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningBeginAsync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
-                        .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
-                            parameters);
-                    }
-                }
-
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    // begin method sync
-                    methods.add(builder
-                        .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
-                        .name("begin" + CodeNamer.toPascalCase(proxyMethod.getName()))
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningBeginSync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
-                        .build());
-
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
-                    }
-                }
-
-                if (settings.isFluent()
-                    && settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    methods.add(builder
-                        .returnValue(createLongRunningAsyncReturnValue(operation, asyncReturnType, syncReturnType))
-                        .name(proxyMethod.getSimpleAsyncMethodName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningAsync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false))
-                        .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
                         methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
+                                .parameters(parameters) // update builder parameters to include context
+                                .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
+                                .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.SimpleAsyncRestResponse)
+                                .isGroupedParameterRequired(false)
+                                .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
+                                .build());
                     }
 
                     if (settings.isContextClientMethodParameter()) {
                         addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, true)),
-                            parameters);
+                                builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
+                                proxyMethod, parameters,
+                                ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
+                                createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType),
+                                null);
                     }
-                }
 
-                if (settings.isFluent()
-                    && settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    builder.methodVisibility(VISIBLE);
-
-                    methods.add(builder
-                        .returnValue(createLongRunningSyncReturnValue(operation, syncReturnType))
-                        .name(proxyMethod.getName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.LongRunningSync)
-                        .isGroupedParameterRequired(false)
-                        .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
+                    if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
                         methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
-                    }
+                                .returnValue(createSimpleAsyncReturnValue(operation, asyncReturnType, syncReturnType))
+                                .name(proxyMethod.getSimpleAsyncMethodName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.SimpleAsync)
+                                .isGroupedParameterRequired(false)
+                                .methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, false))
+                                .build());
 
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods, builder, parameters);
-                    }
-                }
-            } else {
-                // WithResponseAsync, with required and optional parameters
-                if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                    && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
-
-                    methods.add(builder
-                        .parameters(parameters) // update builder parameters to include context
-                        .returnValue(createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType))
-                        .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.SimpleAsyncRestResponse)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, false))
-                        .build());
-                }
-
-                if (settings.isContextClientMethodParameter()) {
-                    addClientMethodWithContext(methods,
-                        builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true)),
-                        proxyMethod, parameters,
-                        ClientMethodType.SimpleAsyncRestResponse, proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                        createSimpleAsyncRestResponseReturnValue(operation, proxyMethod, syncReturnType),
-                        null);
-                }
-
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    methods.add(builder
-                        .returnValue(createSimpleAsyncReturnValue(operation, asyncReturnType, syncReturnType))
-                        .name(proxyMethod.getSimpleAsyncMethodName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.SimpleAsync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, false))
-                        .build());
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
-                        methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
-                    }
-
-                    if (settings.isContextClientMethodParameter()) {
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, true)),
-                            parameters);
-                    }
-                }
-
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    builder
-                        .returnValue(createSimpleSyncReturnValue(operation, syncReturnType))
-                        .name(proxyMethod.getName())
-                        .onlyRequiredParameters(false)
-                        .type(ClientMethodType.SimpleSync)
-                        .isGroupedParameterRequired(false)
-                        .methodVisibility(methodVisibility(ClientMethodType.SimpleSync, false));
-
-                    if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
-                        // if context parameter is required, that method will do the overload with max parameters
-                        methods.add(builder.build());
-                    }
-
-                    if (generateClientMethodWithOnlyRequiredParameters) {
-                        methods.add(builder
-                            .onlyRequiredParameters(true)
-                            .build());
-                    }
-
-                    if (settings.isContextClientMethodParameter()) {
-                        builder.type(ClientMethodType.SimpleSyncRestResponse)
-                            .onlyRequiredParameters(false)
-                            .name(proxyMethod.getSimpleRestResponseMethodName())
-                            .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
-                        if (syncReturnWithResponse instanceof GenericType) {
-                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnType));
-                        } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
-                            builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
+                        if (generateClientMethodWithOnlyRequiredParameters) {
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
                         }
-                        if (settings.isLowLevelClient()) {
-                            // SimpleSyncRestResponse with RequestOptions but without Context
+
+                        if (settings.isContextClientMethodParameter()) {
+                            addClientMethodWithContext(methods,
+                                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleAsync, true)),
+                                    parameters);
+                        }
+                    }
+
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                        builder
+                                .returnValue(createSimpleSyncReturnValue(operation, syncReturnType))
+                                .name(proxyMethod.getName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.SimpleSync)
+                                .isGroupedParameterRequired(false)
+                                .methodVisibility(methodVisibility(ClientMethodType.SimpleSync, false));
+
+                        if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                            // if context parameter is required, that method will do the overload with max parameters
                             methods.add(builder.build());
                         }
 
-                        addClientMethodWithContext(methods,
-                                builder.methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, true)),
-                                parameters);
+                        if (generateClientMethodWithOnlyRequiredParameters) {
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
+                        }
+
+                        if (settings.isContextClientMethodParameter()) {
+                            builder.type(ClientMethodType.SimpleSyncRestResponse)
+                                    .onlyRequiredParameters(false)
+                                    .name(proxyMethod.getSimpleRestResponseMethodName())
+                                    .methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, false));
+                            if (syncReturnWithResponse instanceof GenericType) {
+                                builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnType));
+                            } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
+                                builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
+                            }
+                            if (settings.isDataPlaneClient()) {
+                                // SimpleSyncRestResponse with RequestOptions but without Context
+                                methods.add(builder.build());
+                            }
+
+                            addClientMethodWithContext(methods,
+                                    builder.methodVisibility(methodVisibility(ClientMethodType.SimpleSyncRestResponse, true)),
+                                    parameters);
+                        }
                     }
                 }
             }
         }
+
         return methods.stream()
-            .filter(m -> m.getMethodVisibility() != NOT_GENERATE)
-            .collect(Collectors.toList());
+                .distinct()
+                .filter(m -> m.getMethodVisibility() != NOT_GENERATE)
+                .collect(Collectors.toList());
+    }
+
+    private ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
+        return clientMethodParameter.toNewBuilder()
+                .rawType(ClassType.BinaryData)
+                .wireType(ClassType.BinaryData)
+                .build();
+    }
+
+    private void addLroMethods(Operation operation, ClientMethod.Builder builder, List<ClientMethod> methods,
+                               String asyncMethodName, String syncMethodName,
+                               List<ClientMethodParameter> parameters, ProxyMethod proxyMethod,
+                               IType syncReturnType, MethodPollingDetails methodPollingDetails,
+                               JavaSettings settings) {
+        builder.methodPollingDetails(methodPollingDetails);
+        if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+            // begin method async
+            methods.add(builder
+                    .returnValue(createLongRunningBeginAsyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
+                    .name(asyncMethodName)
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.LongRunningBeginAsync)
+                    .isGroupedParameterRequired(false)
+                    .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false))
+                    .build());
+
+            if (settings.isContextClientMethodParameter()) {
+                addClientMethodWithContext(methods,
+                        builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, true)),
+                        parameters);
+            }
+        }
+
+        if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+            // begin method sync
+            methods.add(builder
+                    .returnValue(createLongRunningBeginSyncReturnValue(operation, proxyMethod, syncReturnType, methodPollingDetails))
+                    .name(syncMethodName)
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.LongRunningBeginSync)
+                    .isGroupedParameterRequired(false)
+                    .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false))
+                    .build());
+
+            if (settings.isContextClientMethodParameter()) {
+                addClientMethodWithContext(methods, builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, true)), parameters);
+            }
+        }
     }
 
     protected IType getContextType() {
@@ -613,16 +678,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
-        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation);
+        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation, settings);
 
-        // If LLC is being generated or the response doesn't contain headers return Response<T>
+        // If DPG is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>
         // Else named response types are being used and return that.
-        if (settings.isLowLevelClient() || !responseContainsHeaders) {
+        if (settings.isDataPlaneClient() || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                syncReturnType);
+                    syncReturnType);
         } else {
             return ClientMapper.getClientResponseClassType(operation, settings);
         }
@@ -745,19 +810,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * Extension for configuration on method visibility.
      * <p>
      * ClientMethodTemplate.writeMethod (and whether it is called) would also decide the visibility in generated code.
-     *
      * @param methodType the type of the client method.
      * @param hasContextParameter whether the method has Context parameter.
      * @return method visibility, null if do not generate.
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter) {
-        if (JavaSettings.getInstance().isLowLevelClient()) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
             /*
-            Rule for LLC
+            Rule for DPG
 
             1. Only generate "WithResponse" method for simple API (hence exclude SimpleAsync and SimpleSync).
             2. For sync method, Context is included in "RequestOptions", hence do not generate method with Context parameter.
-            3. For async method, Context is not included in the first place (this rule is valid for all clients).
+            3. For async method, Context is not included in method (this rule is valid for all clients).
              */
 
             return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
@@ -772,20 +836,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     private void addClientMethodWithContext(List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod,
-        List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
-        ReturnValue returnValue, MethodPageDetails details) {
+                                            List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
+                                            ReturnValue returnValue, MethodPageDetails details) {
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
         withContextParameters.add(getContextParameter());
 
         methods.add(builder
-            .parameters(withContextParameters) // update builder parameters to include context
-            .returnValue(returnValue)
-            .name(proxyMethodName)
-            .onlyRequiredParameters(false)
-            .type(clientMethodType)
-            .isGroupedParameterRequired(false)
-            .methodPageDetails(details)
-            .build());
+                .parameters(withContextParameters) // update builder parameters to include context
+                .returnValue(returnValue)
+                .name(proxyMethodName)
+                .onlyRequiredParameters(false)
+                .type(clientMethodType)
+                .isGroupedParameterRequired(false)
+                .methodPageDetails(details)
+                .build());
         // reset the parameters to original params
         builder.parameters(parameters);
     }
@@ -809,11 +873,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private String getPageableItemName(Operation operation) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
         return responseBodyModel.getProperties().stream()
-            .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-            .map(ClientModelProperty::getName).findAny().orElse(null);
+                .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+                .map(ClientModelProperty::getName).findAny().orElse(null);
     }
 
     private IType getPollingIntermediateType(JavaSettings.PollingDetails details, IType syncReturnType) {
@@ -899,11 +963,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             // Mono<Boolean> of HEAD method
             if (description == null
-                && baseType == PrimitiveType.Boolean
-                && operation.getRequests() != null && !operation.getRequests().isEmpty()
-                && operation.getRequests().get(0).getProtocol() != null
-                && operation.getRequests().get(0).getProtocol().getHttp() != null
-                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())
+                    && baseType == PrimitiveType.Boolean
+                    && operation.getRequests() != null && !operation.getRequests().isEmpty()
+                    && operation.getRequests().get(0).getProtocol() != null
+                    && operation.getRequests().get(0).getProtocol().getHttp() != null
+                    && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())
             ) {
                 description = "whether resource exists";
             }

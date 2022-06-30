@@ -17,15 +17,15 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -121,6 +121,8 @@ public class ClientMethod {
 
     private JavaVisibility methodVisibility = JavaVisibility.Public;
 
+    private boolean implementationOnly = false;
+
     private MethodPollingDetails methodPollingDetails;
 
     /**
@@ -140,7 +142,15 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    protected ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails) {
+    protected ClientMethod(String description, ReturnValue returnValue, String name,
+                           List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
+                           ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions,
+                           String clientReference, List<String> requiredNullableParameterExpressions,
+                           boolean isGroupedParameterRequired, String groupedParameterTypeName,
+                           MethodPageDetails methodPageDetails,
+                           List<MethodTransformationDetail> methodTransformationDetails,
+                           JavaVisibility methodVisibility, boolean implementationOnly,
+                           MethodPollingDetails methodPollingDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -156,7 +166,33 @@ public class ClientMethod {
         this.methodPageDetails = methodPageDetails;
         this.methodTransformationDetails = methodTransformationDetails;
         this.methodVisibility = methodVisibility;
+        this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientMethod that = (ClientMethod) o;
+        return onlyRequiredParameters == that.onlyRequiredParameters
+                && isGroupedParameterRequired == that.isGroupedParameterRequired
+                && implementationOnly == that.implementationOnly
+                && Objects.equals(returnValue.getType(), that.returnValue.getType())
+                && Objects.equals(name, that.name)
+                && Objects.equals(getParametersDeclaration(), that.getParametersDeclaration())
+                && type == that.type
+                && Objects.equals(requiredNullableParameterExpressions, that.requiredNullableParameterExpressions)
+                && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
+                && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
+                && methodVisibility == that.methodVisibility;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
+                requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
+                methodTransformationDetails, methodVisibility, implementationOnly);
     }
 
     public final String getDescription() {
@@ -309,6 +345,10 @@ public class ClientMethod {
         return methodVisibility;
     }
 
+    public boolean isImplementationOnly() {
+        return implementationOnly;
+    }
+
     public MethodPollingDetails getMethodPollingDetails() {
         return methodPollingDetails;
     }
@@ -323,117 +363,95 @@ public class ClientMethod {
         imports.add("com.azure.core.annotation.ServiceMethod");
         imports.add("com.azure.core.annotation.ReturnType");
 
+        imports.add("java.util.Objects");
+        imports.add("java.util.stream.Collectors");
+
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        if (settings.isLowLevelClient()) {
-            imports.add("com.azure.core.http.HttpMethod");
-            imports.add("com.azure.core.http.rest.Response");
-            imports.add("com.azure.core.http.rest.RequestOptions");
-            imports.add("com.azure.core.util.BinaryData");
-
-            if (includeImplementationImports) {
-                imports.add("com.azure.core.http.rest.SimpleResponse");
-                imports.add("com.azure.core.http.HttpRequest");
-                if (settings.getAddContextParameter() || settings.isContextClientMethodParameter()) {
-                    imports.add("com.azure.core.util.FluxUtil");
-                }
-            }
-
-            if (settings.isContextClientMethodParameter()) {
-                imports.add("com.azure.core.util.Context");
-            }
-
-            // Paging
-            if (getMethodPageDetails() != null) {
-                imports.add("com.azure.core.http.rest.PagedResponseBase");
-                imports.add("com.azure.core.http.rest.PagedResponse");
-                imports.add("com.azure.core.http.rest.PagedFlux");
-                imports.add("com.azure.core.http.rest.PagedIterable");
-                imports.add("java.util.List");
-                imports.add("java.util.Map");
-                imports.add("java.util.stream.Collectors");
-            }
-        } else {
-            for (ClientMethodParameter parameter : getParameters()) {
-                parameter.addImportsTo(imports, includeImplementationImports);
-            }
-
-            if (getMethodPageDetails() != null) {
-                imports.add("com.azure.core.http.rest.PagedResponseBase");
-            }
-
-            if (includeImplementationImports) {
-                if (proxyMethod != null) {
-                    proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
-                    for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
-                        parameter.getClientType().addImportsTo(imports, true);
-
-                        if (parameter.getExplode()) {
-                            imports.add("java.util.Objects");
-                            imports.add("java.util.Optional");
-                            imports.add("java.util.stream.Stream");
-                            imports.add("java.util.stream.Collectors");
-                            imports.add("java.util.Collection");
-                        }
-                    }
-                }
-
-                if (getReturnValue().getType() == ClassType.InputStream) {
-                    imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
-                    imports.add("java.io.SequenceInputStream");
-                    imports.add("java.util.Enumeration");
-                    imports.add("java.util.Iterator");
-                }
-
-                if (settings.getAddContextParameter()
-                        && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                        && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
-                        && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                        || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                        || this.getType() == ClientMethodType.LongRunningAsync)) {
-                    imports.add("com.azure.core.util.FluxUtil");
-                }
-            }
+        for (ClientMethodParameter parameter : getParameters()) {
+            parameter.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (type == ClientMethodType.LongRunningBeginAsync) {
-            if (settings.isFluent()) {
-                if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                    imports.add("com.fasterxml.jackson.core.type.TypeReference");
-                }
-            } else {
-                imports.add("com.azure.core.util.serializer.TypeReference");
-                imports.add("java.time.Duration");
+        if (includeImplementationImports) {
+            ClassType.Context.addImportsTo(imports, false);
 
-                if (getMethodPollingDetails().getPollingStrategy() != null) {
-                    List<String> knownPollingStrategies = Arrays.asList(
-                            "DefaultPollingStrategy",
-                            "ChainedPollingStrategy",
-                            "OperationResourcePollingStrategy",
-                            "LocationPollingStrategy",
-                            "StatusCheckPollingStrategy");
-                    for (String pollingStrategy : knownPollingStrategies) {
-                        if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
-                            imports.add("com.azure.core.util.polling." + pollingStrategy);
+            if (proxyMethod != null) {
+                proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
+                for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
+                    parameter.getClientType().addImportsTo(imports, true);
+
+                    if (parameter.getExplode()) {
+                        imports.add("java.util.Optional");
+                        imports.add("java.util.stream.Stream");
+                        imports.add(ArrayList.class.getName());
+                        imports.add("java.util.Collection");
+                    }
+                }
+            }
+
+            if (getReturnValue().getType() == ClassType.InputStream) {
+                imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
+                imports.add("java.io.SequenceInputStream");
+                imports.add("java.util.Enumeration");
+                imports.add("java.util.Iterator");
+            }
+
+            if (settings.getAddContextParameter()
+                    && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                    && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
+                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
+                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
+                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+                imports.add("com.azure.core.util.FluxUtil");
+            }
+
+            if (getMethodPageDetails() != null) {
+                imports.add("com.azure.core.http.rest.PagedResponseBase");
+
+                if (settings.isDataPlaneClient()) {
+                    imports.add("java.util.List");
+                    imports.add("java.util.Map");
+                    ClassType.BinaryData.addImportsTo(imports, includeImplementationImports);
+                }
+            }
+
+            if (type == ClientMethodType.LongRunningBeginAsync) {
+                if (settings.isFluent()) {
+                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                    }
+                } else {
+                    imports.add("com.azure.core.util.serializer.TypeReference");
+                    imports.add("java.time.Duration");
+
+                    if (getMethodPollingDetails().getPollingStrategy() != null) {
+                        List<String> knownPollingStrategies = Arrays.asList(
+                                "DefaultPollingStrategy",
+                                "ChainedPollingStrategy",
+                                "OperationResourcePollingStrategy",
+                                "LocationPollingStrategy",
+                                "StatusCheckPollingStrategy");
+                        for (String pollingStrategy : knownPollingStrategies) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                                imports.add("com.azure.core.util.polling." + pollingStrategy);
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if (includeImplementationImports
-                && (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync)) {
-            imports.add(SimpleResponse.class.getName());
-            ClassType.BinaryData.addImportsTo(imports, false);
-        }
+            if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
+                // Repeatable Requests
+                imports.add(UUID.class.getName());
+                imports.add(OffsetDateTime.class.getName());
+                imports.add(DateTimeRfc1123.class.getName());
+            }
 
-        if (includeImplementationImports && MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
-            // Repeatable Requests
-            imports.add(UUID.class.getName());
-            imports.add(DateTimeFormatter.class.getName());
-            imports.add(Locale.class.getName());
-            imports.add(ZoneId.class.getName());
-            imports.add(OffsetDateTime.class.getName());
+            if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
+                imports.add(SimpleResponse.class.getName());
+                ClassType.BinaryData.addImportsTo(imports, false);
+                ClassType.HttpRequest.addImportsTo(imports, false);
+            }
         }
     }
 
@@ -481,6 +499,7 @@ public class ClientMethod {
         protected MethodPageDetails methodPageDetails;
         protected List<MethodTransformationDetail> methodTransformationDetails;
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
+        protected boolean implementationOnly = false;
         protected MethodPollingDetails methodPollingDetails;
 
         /**
@@ -644,6 +663,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets whether the method is only in implementation.
+         * @param implementationOnly whether the method is only in implementation
+         * @return the Builder itself
+         */
+        public Builder implementationOnly(boolean implementationOnly) {
+            this.implementationOnly = implementationOnly;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -663,6 +692,7 @@ public class ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
+                    implementationOnly,
                     methodPollingDetails);
         }
     }

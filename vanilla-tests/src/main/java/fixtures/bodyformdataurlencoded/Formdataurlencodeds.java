@@ -127,7 +127,7 @@ public final class Formdataurlencodeds {
     public Mono<Void> updatePetWithFormAsync(
             int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -147,7 +147,7 @@ public final class Formdataurlencodeds {
         final String name = null;
         final String status = null;
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status)
-                .flatMap((Response<Void> res) -> Mono.empty());
+                .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -229,8 +229,7 @@ public final class Formdataurlencodeds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> partialConstantBodyAsync(String serviceParam, String accessToken) {
-        return partialConstantBodyWithResponseAsync(serviceParam, accessToken)
-                .flatMap((Response<Void> res) -> Mono.empty());
+        return partialConstantBodyWithResponseAsync(serviceParam, accessToken).flatMap(ignored -> Mono.empty());
     }
 
     /**

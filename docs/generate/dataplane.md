@@ -60,17 +60,6 @@ Here is an [example in Purview][sample-examples].
 
 The flag `--generate-tests` generates test classes in `src/tests/java/<namespace>/generated`, which can be selectively modified and moved to `src/tests/java/<namespace>` as live tests or recorded tests.
 
-### Additional Methods
-
-The flag `--generate-send-request-method` generates `sendRequest` method for each Client class, which can send any request to any endpoint.
-
-Note that paged operation and long-running operation is not automatically handled by the `sendRequest` method.
-
-```java
-@ServiceMethod(returns = ReturnType.SINGLE)
-public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context)
-```
-
 ### POM
 
 The flag `--regenerate-pom` generates the Maven POM for the library.

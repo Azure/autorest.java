@@ -6,6 +6,7 @@ package fixtures.lro.implementation;
 
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -70,7 +71,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200Succeeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/lro/patch/200/succeeded/ignoreheaders")
         @ExpectedResponses({200})
@@ -85,7 +89,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> patch200SucceededIgnoreHeaders(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/lro/patch/201/retry/onlyAsyncHeader")
         @ExpectedResponses({200, 201})
@@ -100,7 +107,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> patch201RetryWithAsyncHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/lro/patch/202/retry/asyncAndLocationHeader")
         @ExpectedResponses({200, 202})
@@ -115,7 +125,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeader(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/201/succeeded")
         @ExpectedResponses({201})
@@ -130,7 +143,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put201Succeeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/list")
         @ExpectedResponses({200, 202})
@@ -145,7 +161,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post202List(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/200/succeeded/nostate")
         @ExpectedResponses({200})
@@ -160,7 +179,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200SucceededNoState(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/202/retry/200")
         @ExpectedResponses({202})
@@ -175,7 +197,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put202Retry200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201})
@@ -190,7 +215,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put201CreatingSucceeded200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200})
@@ -205,7 +233,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200UpdatingSucceeded204(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201})
@@ -220,7 +251,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put201CreatingFailed200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200})
@@ -235,7 +269,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200Acceptedcanceled200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/put/noheader/202/200")
         @ExpectedResponses({202})
@@ -250,7 +287,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNoHeaderInRetry(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putasync/retry/succeeded")
         @ExpectedResponses({200})
@@ -265,7 +305,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putasync/noretry/succeeded")
         @ExpectedResponses({200})
@@ -280,7 +323,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncNoRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putasync/retry/failed")
         @ExpectedResponses({200})
@@ -295,7 +341,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncRetryFailed(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putasync/noretry/canceled")
         @ExpectedResponses({200})
@@ -310,7 +359,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncNoRetrycanceled(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putasync/noheader/201/200")
         @ExpectedResponses({201})
@@ -325,7 +377,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncNoHeaderInRetry(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putnonresource/202/200")
         @ExpectedResponses({202})
@@ -340,7 +395,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNonResource(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putnonresourceasync/202/200")
         @ExpectedResponses({202})
@@ -355,7 +413,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncNonResource(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putsubresource/202/200")
         @ExpectedResponses({202})
@@ -370,7 +431,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putSubResource(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/lro/putsubresourceasync/202/200")
         @ExpectedResponses({202})
@@ -385,7 +449,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putAsyncSubResource(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202})
@@ -400,7 +467,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> deleteProvisioning202Accepted200Succeeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202})
@@ -415,7 +485,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> deleteProvisioning202DeletingFailed200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202})
@@ -430,7 +503,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> deleteProvisioning202Deletingcanceled200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/204/succeeded")
         @ExpectedResponses({204})
@@ -445,7 +521,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete204Succeeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/202/retry/200")
         @ExpectedResponses({200, 202})
@@ -460,7 +539,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> delete202Retry200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202})
@@ -475,7 +557,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> delete202NoRetry204(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/delete/noheader")
         @ExpectedResponses({202, 204})
@@ -490,7 +575,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteNoHeaderInRetry(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/deleteasync/noheader/202/204")
         @ExpectedResponses({202, 204})
@@ -505,7 +593,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncNoHeaderInRetry(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/deleteasync/retry/succeeded")
         @ExpectedResponses({202})
@@ -520,7 +611,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({202})
@@ -535,7 +629,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncNoRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/deleteasync/retry/failed")
         @ExpectedResponses({202})
@@ -550,7 +647,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRetryFailed(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/lro/deleteasync/retry/canceled")
         @ExpectedResponses({202})
@@ -565,7 +665,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteAsyncRetrycanceled(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/post/payload/200")
         @ExpectedResponses({200, 202})
@@ -580,7 +683,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post200WithPayload(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/post/202/retry/200")
         @ExpectedResponses({202})
@@ -595,7 +701,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post202Retry200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/post/202/noretry/204")
         @ExpectedResponses({202})
@@ -610,7 +719,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post202NoRetry204(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/LROPostDoubleHeadersFinalLocationGet")
         @ExpectedResponses({202})
@@ -625,7 +737,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postDoubleHeadersFinalLocationGet(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/LROPostDoubleHeadersFinalAzureHeaderGet")
         @ExpectedResponses({202})
@@ -640,7 +755,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGet(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/LROPostDoubleHeadersFinalAzureHeaderGetDefault")
         @ExpectedResponses({202})
@@ -655,7 +773,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202})
@@ -670,7 +791,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postAsyncRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202})
@@ -685,7 +809,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postAsyncNoRetrySucceeded(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/postasync/retry/failed")
         @ExpectedResponses({202})
@@ -700,7 +827,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRetryFailed(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/lro/postasync/retry/canceled")
         @ExpectedResponses({202})
@@ -715,7 +845,10 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postAsyncRetrycanceled(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -726,16 +859,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -744,16 +877,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -766,8 +899,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put200Succeeded(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put200Succeeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -778,16 +913,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -796,16 +931,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -819,8 +954,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put200Succeeded(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> put200SucceededWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.put200Succeeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -831,16 +968,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -849,16 +986,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -893,16 +1030,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -911,16 +1048,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -957,16 +1094,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -975,16 +1112,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1009,16 +1146,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1027,16 +1164,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1049,9 +1186,11 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch200SucceededIgnoreHeadersWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> patch200SucceededIgnoreHeadersWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.patch200SucceededIgnoreHeaders(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.patch200SucceededIgnoreHeaders(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1062,16 +1201,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1080,16 +1219,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1103,9 +1242,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch200SucceededIgnoreHeadersWithResponseAsync(
+    private Mono<Response<BinaryData>> patch200SucceededIgnoreHeadersWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.patch200SucceededIgnoreHeaders(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch200SucceededIgnoreHeaders(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1116,16 +1256,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1134,16 +1274,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1178,16 +1318,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1196,16 +1336,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1242,16 +1382,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1260,16 +1400,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1293,16 +1433,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1311,16 +1451,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1333,9 +1473,11 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.patch201RetryWithAsyncHeader(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.patch201RetryWithAsyncHeader(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1345,16 +1487,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1363,16 +1505,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1386,9 +1528,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponseAsync(
+    private Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.patch201RetryWithAsyncHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch201RetryWithAsyncHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1398,16 +1541,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1416,16 +1559,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1459,16 +1602,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1477,16 +1620,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1522,16 +1665,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1540,16 +1683,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1573,16 +1716,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1591,16 +1734,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1613,12 +1756,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(
+    private Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.patch202RetryWithAsyncAndLocationHeader(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1628,16 +1772,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1646,16 +1790,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1669,9 +1813,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(
+    private Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.patch202RetryWithAsyncAndLocationHeader(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.patch202RetryWithAsyncAndLocationHeader(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1681,16 +1826,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1699,16 +1844,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1743,16 +1888,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1761,16 +1906,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1806,16 +1951,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1824,16 +1969,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1859,16 +2004,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1877,16 +2022,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1899,8 +2044,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201SucceededWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put201Succeeded(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> put201SucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put201Succeeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1911,16 +2058,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1929,16 +2076,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1952,8 +2099,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201SucceededWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put201Succeeded(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> put201SucceededWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.put201Succeeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1964,16 +2113,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -1982,16 +2131,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2026,16 +2175,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2044,16 +2193,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2090,16 +2239,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2108,16 +2257,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2142,17 +2291,17 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -2166,8 +2315,10 @@ public final class LROsImpl {
      * @return array of Product along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post202ListWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post202List(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> post202ListWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post202List(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2178,17 +2329,17 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -2203,8 +2354,9 @@ public final class LROsImpl {
      * @return array of Product along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post202ListWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post202List(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> post202ListWithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.post202List(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2215,17 +2367,17 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -2261,17 +2413,17 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -2308,17 +2460,17 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * [
-     *     {
-     *         id: String
-     *         type: String
-     *         tags: {
-     *             String: String
+     *      (Required){
+     *         id: String (Optional)
+     *         type: String (Optional)
+     *         tags (Optional): {
+     *             String: String (Optional)
      *         }
-     *         location: String
-     *         name: String
-     *         properties: {
-     *             provisioningState: String
-     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *         location: String (Optional)
+     *         name: String (Optional)
+     *         properties (Optional): {
+     *             provisioningState: String (Optional)
+     *             provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *         }
      *     }
      * ]
@@ -2344,16 +2496,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2362,16 +2514,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2384,9 +2536,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200SucceededNoStateWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put200SucceededNoStateWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put200SucceededNoState(this.client.getHost(), requestOptions, context));
+                context -> service.put200SucceededNoState(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2397,16 +2550,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2415,16 +2568,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2438,9 +2591,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200SucceededNoStateWithResponseAsync(
+    private Mono<Response<BinaryData>> put200SucceededNoStateWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put200SucceededNoState(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put200SucceededNoState(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2451,16 +2605,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2469,16 +2623,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2513,16 +2667,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2531,16 +2685,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2577,16 +2731,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2595,16 +2749,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2629,16 +2783,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2647,16 +2801,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2669,8 +2823,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put202Retry200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put202Retry200(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> put202Retry200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put202Retry200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2681,16 +2837,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2699,16 +2855,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2722,8 +2878,9 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put202Retry200(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> put202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.put202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2734,16 +2891,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2752,16 +2909,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2796,16 +2953,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2814,16 +2971,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2859,16 +3016,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2877,16 +3034,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2912,16 +3069,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2930,16 +3087,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2952,9 +3109,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put201CreatingSucceeded200(this.client.getHost(), requestOptions, context));
+                context -> service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -2966,16 +3124,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -2984,16 +3142,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3007,9 +3165,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
+    private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put201CreatingSucceeded200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3021,16 +3180,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3039,16 +3198,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3084,16 +3243,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3102,16 +3261,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3149,16 +3308,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3167,16 +3326,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3202,16 +3361,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3220,16 +3379,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3242,9 +3401,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200UpdatingSucceeded204WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put200UpdatingSucceeded204WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put200UpdatingSucceeded204(this.client.getHost(), requestOptions, context));
+                context -> service.put200UpdatingSucceeded204(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3256,16 +3416,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3274,16 +3434,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3297,9 +3457,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200UpdatingSucceeded204WithResponseAsync(
+    private Mono<Response<BinaryData>> put200UpdatingSucceeded204WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put200UpdatingSucceeded204(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put200UpdatingSucceeded204(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3311,16 +3472,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3329,16 +3490,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3374,16 +3535,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3392,16 +3553,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3439,16 +3600,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3457,16 +3618,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3492,16 +3653,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3510,16 +3671,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3532,9 +3693,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingFailed200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put201CreatingFailed200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put201CreatingFailed200(this.client.getHost(), requestOptions, context));
+                context -> service.put201CreatingFailed200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3546,16 +3708,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3564,16 +3726,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3587,9 +3749,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put201CreatingFailed200WithResponseAsync(
+    private Mono<Response<BinaryData>> put201CreatingFailed200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put201CreatingFailed200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put201CreatingFailed200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3601,16 +3764,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3619,16 +3782,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3664,16 +3827,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3682,16 +3845,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3729,16 +3892,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3747,16 +3910,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3782,16 +3945,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3800,16 +3963,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3822,9 +3985,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200Acceptedcanceled200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> put200Acceptedcanceled200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put200Acceptedcanceled200(this.client.getHost(), requestOptions, context));
+                context -> service.put200Acceptedcanceled200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -3836,16 +4000,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3854,16 +4018,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3877,9 +4041,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> put200Acceptedcanceled200WithResponseAsync(
+    private Mono<Response<BinaryData>> put200Acceptedcanceled200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.put200Acceptedcanceled200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.put200Acceptedcanceled200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -3891,16 +4056,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3909,16 +4074,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3954,16 +4119,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -3972,16 +4137,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4019,16 +4184,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4037,16 +4202,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4071,16 +4236,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4089,16 +4254,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4111,9 +4276,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putNoHeaderInRetry(this.client.getHost(), requestOptions, context));
+                context -> service.putNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4124,16 +4290,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4142,16 +4308,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4165,9 +4331,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putNoHeaderInRetryWithResponseAsync(
+    private Mono<Response<BinaryData>> putNoHeaderInRetryWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putNoHeaderInRetry(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4178,16 +4345,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4196,16 +4363,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4240,16 +4407,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4258,16 +4425,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4304,16 +4471,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4322,16 +4489,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4357,16 +4524,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4375,16 +4542,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4397,9 +4564,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4411,16 +4579,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4429,16 +4597,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4452,9 +4620,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4466,16 +4635,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4484,16 +4653,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4529,16 +4698,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4547,16 +4716,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4594,16 +4763,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4612,16 +4781,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4647,16 +4816,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4665,16 +4834,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4687,9 +4856,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4701,16 +4871,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4719,16 +4889,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4742,9 +4912,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncNoRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -4756,16 +4927,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4774,16 +4945,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4819,16 +4990,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4837,16 +5008,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4884,16 +5055,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4902,16 +5073,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4937,16 +5108,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4955,16 +5126,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -4977,9 +5148,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncRetryFailed(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -4991,16 +5163,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5009,16 +5181,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5032,9 +5204,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncRetryFailedWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncRetryFailedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncRetryFailed(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5046,16 +5219,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5064,16 +5237,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5109,16 +5282,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5127,16 +5300,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5174,16 +5347,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5192,16 +5365,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5227,16 +5400,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5245,16 +5418,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5267,9 +5440,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncNoRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncNoRetrycanceled(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncNoRetrycanceled(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5281,16 +5455,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5299,16 +5473,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5322,9 +5496,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoRetrycanceledWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncNoRetrycanceledWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncNoRetrycanceled(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncNoRetrycanceled(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5336,16 +5511,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5354,16 +5529,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5399,16 +5574,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5417,16 +5592,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5464,16 +5639,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5482,16 +5657,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5516,16 +5691,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5534,16 +5709,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5556,9 +5731,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncNoHeaderInRetry(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5569,16 +5745,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5587,16 +5763,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5610,9 +5786,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNoHeaderInRetryWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncNoHeaderInRetryWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncNoHeaderInRetry(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5623,16 +5800,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5641,16 +5818,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5685,16 +5862,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5703,16 +5880,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5749,16 +5926,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5767,16 +5944,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -5800,8 +5977,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5809,8 +5986,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5822,8 +5999,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putNonResourceWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.putNonResource(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> putNonResourceWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putNonResource(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -5833,8 +6012,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5842,8 +6021,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5856,8 +6035,9 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putNonResourceWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.putNonResource(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> putNonResourceWithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.putNonResource(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -5867,8 +6047,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5876,8 +6056,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5910,8 +6090,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5919,8 +6099,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5954,8 +6134,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5963,8 +6143,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5987,8 +6167,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -5996,8 +6176,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6009,9 +6189,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNonResourceWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncNonResourceWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncNonResource(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncNonResource(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -6021,8 +6202,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6030,8 +6211,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6044,9 +6225,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncNonResourceWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncNonResourceWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncNonResource(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncNonResource(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -6056,8 +6238,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6065,8 +6247,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6099,8 +6281,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6108,8 +6290,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6144,8 +6326,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6153,8 +6335,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -6177,10 +6359,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6189,10 +6371,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6205,8 +6387,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putSubResourceWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.putSubResource(this.client.getHost(), requestOptions, context));
+    private Mono<Response<BinaryData>> putSubResourceWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.putSubResource(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -6216,10 +6400,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6228,10 +6412,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6245,8 +6429,9 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putSubResourceWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.putSubResource(this.client.getHost(), requestOptions, context);
+    private Mono<Response<BinaryData>> putSubResourceWithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.putSubResource(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -6256,10 +6441,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6268,10 +6453,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6305,10 +6490,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6317,10 +6502,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6355,10 +6540,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6367,10 +6552,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6394,10 +6579,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6406,10 +6591,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6422,9 +6607,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncSubResourceWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> putAsyncSubResourceWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putAsyncSubResource(this.client.getHost(), requestOptions, context));
+                context -> service.putAsyncSubResource(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -6434,10 +6620,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6446,10 +6632,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6463,9 +6649,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putAsyncSubResourceWithResponseAsync(
+    private Mono<Response<BinaryData>> putAsyncSubResourceWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.putAsyncSubResource(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.putAsyncSubResource(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -6475,10 +6662,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6487,10 +6674,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6524,10 +6711,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6536,10 +6723,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6575,10 +6762,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6587,10 +6774,10 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     id: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6616,16 +6803,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6638,12 +6825,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.deleteProvisioning202Accepted200Succeeded(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -6655,16 +6843,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6678,9 +6866,11 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Accepted200SucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteProvisioning202Accepted200Succeeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteProvisioning202Accepted200Succeeded(
+                this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -6692,16 +6882,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6738,16 +6928,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6785,16 +6975,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6821,16 +7011,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6843,11 +7033,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202DeletingFailed200WithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202DeletingFailed200WithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.deleteProvisioning202DeletingFailed200(this.client.getHost(), requestOptions, context));
+                        service.deleteProvisioning202DeletingFailed200(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -6859,16 +7051,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6882,9 +7074,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202DeletingFailed200WithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202DeletingFailed200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteProvisioning202DeletingFailed200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteProvisioning202DeletingFailed200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -6896,16 +7089,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6942,16 +7135,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -6989,16 +7182,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7025,16 +7218,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7047,12 +7240,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Deletingcanceled200WithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Deletingcanceled200WithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.deleteProvisioning202Deletingcanceled200(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7064,16 +7258,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7087,9 +7281,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> deleteProvisioning202Deletingcanceled200WithResponseAsync(
+    private Mono<Response<BinaryData>> deleteProvisioning202Deletingcanceled200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteProvisioning202Deletingcanceled200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteProvisioning202Deletingcanceled200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7101,16 +7296,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7147,16 +7342,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7194,16 +7389,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7232,9 +7427,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete204Succeeded(this.client.getHost(), requestOptions, context));
+                context -> service.delete204Succeeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7249,8 +7445,9 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete204Succeeded(this.client.getHost(), requestOptions, context);
+    private Mono<Response<Void>> delete204SucceededWithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.delete204Succeeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7328,16 +7525,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7350,9 +7547,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> delete202Retry200WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> delete202Retry200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete202Retry200(this.client.getHost(), requestOptions, context));
+                context -> service.delete202Retry200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7363,16 +7561,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7386,9 +7584,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> delete202Retry200WithResponseAsync(
+    private Mono<Response<BinaryData>> delete202Retry200WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.delete202Retry200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7399,16 +7598,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7443,16 +7642,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7489,16 +7688,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7523,16 +7722,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7545,9 +7744,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> delete202NoRetry204WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> delete202NoRetry204WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete202NoRetry204(this.client.getHost(), requestOptions, context));
+                context -> service.delete202NoRetry204(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7558,16 +7758,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7581,9 +7781,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> delete202NoRetry204WithResponseAsync(
+    private Mono<Response<BinaryData>> delete202NoRetry204WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.delete202NoRetry204(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.delete202NoRetry204(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7594,16 +7795,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7638,16 +7839,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7684,16 +7885,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -7722,9 +7923,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteNoHeaderInRetry(this.client.getHost(), requestOptions, context));
+                context -> service.deleteNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7740,8 +7942,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.deleteNoHeaderInRetry(this.client.getHost(), requestOptions, context);
+    private Mono<Response<Void>> deleteNoHeaderInRetryWithResponseAsync(
+            RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.deleteNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7826,9 +8030,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncNoHeaderInRetry(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7844,9 +8049,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncNoHeaderInRetryWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncNoHeaderInRetryWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncNoHeaderInRetry(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -7931,9 +8137,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -7949,9 +8156,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetrySucceededWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8036,9 +8244,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8054,9 +8263,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncNoRetrySucceededWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncNoRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8141,9 +8351,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncRetryFailed(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8159,9 +8370,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetryFailedWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncRetryFailedWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRetryFailed(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8246,9 +8458,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> deleteAsyncRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteAsyncRetrycanceled(this.client.getHost(), requestOptions, context));
+                context -> service.deleteAsyncRetrycanceled(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8264,9 +8477,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteAsyncRetrycanceledWithResponseAsync(
+    private Mono<Response<Void>> deleteAsyncRetrycanceledWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.deleteAsyncRetrycanceled(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.deleteAsyncRetrycanceled(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8347,8 +8561,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -8360,9 +8574,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post200WithPayloadWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> post200WithPayloadWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.post200WithPayload(this.client.getHost(), requestOptions, context));
+                context -> service.post200WithPayload(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8373,8 +8588,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -8387,9 +8602,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post200WithPayloadWithResponseAsync(
+    private Mono<Response<BinaryData>> post200WithPayloadWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.post200WithPayload(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post200WithPayload(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8400,8 +8616,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -8435,8 +8651,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -8472,8 +8688,8 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String
-     *     id: String
+     *     name: String (Optional)
+     *     id: String (Optional)
      * }
      * }</pre>
      *
@@ -8497,16 +8713,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8519,8 +8735,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post202Retry200(this.client.getHost(), requestOptions, context));
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post202Retry200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8531,16 +8749,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8554,8 +8772,9 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post202Retry200(this.client.getHost(), requestOptions, context);
+    private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.post202Retry200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8566,16 +8785,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8610,16 +8829,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8656,16 +8875,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8690,16 +8909,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8708,16 +8927,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8730,9 +8949,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post202NoRetry204WithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> post202NoRetry204WithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.post202NoRetry204(this.client.getHost(), requestOptions, context));
+                context -> service.post202NoRetry204(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -8743,16 +8963,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8761,16 +8981,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8784,9 +9004,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> post202NoRetry204WithResponseAsync(
+    private Mono<Response<BinaryData>> post202NoRetry204WithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.post202NoRetry204(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.post202NoRetry204(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -8797,16 +9018,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8815,16 +9036,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8859,16 +9080,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8877,16 +9098,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8923,16 +9144,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8941,16 +9162,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8975,16 +9196,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -8997,10 +9218,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalLocationGetWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalLocationGetWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postDoubleHeadersFinalLocationGet(this.client.getHost(), requestOptions, context));
+                context ->
+                        service.postDoubleHeadersFinalLocationGet(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -9011,16 +9235,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9034,9 +9258,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalLocationGetWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalLocationGetWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postDoubleHeadersFinalLocationGet(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postDoubleHeadersFinalLocationGet(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -9047,16 +9272,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9092,16 +9317,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9138,16 +9363,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9172,16 +9397,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9194,11 +9419,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.postDoubleHeadersFinalAzureHeaderGet(this.client.getHost(), requestOptions, context));
+                        service.postDoubleHeadersFinalAzureHeaderGet(
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -9209,16 +9436,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9232,9 +9459,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postDoubleHeadersFinalAzureHeaderGet(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postDoubleHeadersFinalAzureHeaderGet(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -9245,16 +9473,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9290,16 +9518,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9336,16 +9564,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9371,16 +9599,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9393,12 +9621,13 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(
             RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.postDoubleHeadersFinalAzureHeaderGetDefault(
-                                this.client.getHost(), requestOptions, context));
+                                this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -9410,16 +9639,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9433,9 +9662,11 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(
+    private Mono<Response<BinaryData>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postDoubleHeadersFinalAzureHeaderGetDefault(
+                this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -9447,16 +9678,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9493,16 +9724,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9540,16 +9771,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9576,16 +9807,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9594,16 +9825,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9616,9 +9847,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> postAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -9630,16 +9862,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9648,16 +9880,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9671,9 +9903,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postAsyncRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> postAsyncRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -9685,16 +9918,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9703,16 +9936,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9748,16 +9981,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9766,16 +9999,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9813,16 +10046,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9831,16 +10064,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9866,16 +10099,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9884,16 +10117,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9906,9 +10139,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> postAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context));
+                context -> service.postAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -9920,16 +10154,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9938,16 +10172,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9961,9 +10195,10 @@ public final class LROsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postAsyncNoRetrySucceededWithResponseAsync(
+    private Mono<Response<BinaryData>> postAsyncNoRetrySucceededWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncNoRetrySucceeded(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -9975,16 +10210,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -9993,16 +10228,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10038,16 +10273,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10056,16 +10291,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10103,16 +10338,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10121,16 +10356,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10156,16 +10391,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10178,9 +10413,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> postAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRetryFailed(this.client.getHost(), requestOptions, context));
+                context -> service.postAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -10192,16 +10428,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10215,8 +10451,9 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.postAsyncRetryFailed(this.client.getHost(), requestOptions, context);
+    private Mono<Response<Void>> postAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.postAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -10228,16 +10465,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10273,16 +10510,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10320,16 +10557,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10355,16 +10592,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10377,9 +10614,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+    private Mono<Response<Void>> postAsyncRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postAsyncRetrycanceled(this.client.getHost(), requestOptions, context));
+                context -> service.postAsyncRetrycanceled(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -10391,16 +10629,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10414,9 +10652,10 @@ public final class LROsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> postAsyncRetrycanceledWithResponseAsync(
+    private Mono<Response<Void>> postAsyncRetrycanceledWithResponseAsync(
             RequestOptions requestOptions, Context context) {
-        return service.postAsyncRetrycanceled(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.postAsyncRetrycanceled(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -10428,16 +10667,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10473,16 +10712,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>
@@ -10520,16 +10759,16 @@ public final class LROsImpl {
      *
      * <pre>{@code
      * {
-     *     id: String
-     *     type: String
-     *     tags: {
-     *         String: String
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Optional)
      *     }
-     *     location: String
-     *     name: String
-     *     properties: {
-     *         provisioningState: String
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK)
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      *     }
      * }
      * }</pre>

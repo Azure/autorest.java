@@ -61,15 +61,13 @@ public class FluentProject extends Project {
     }
 
     protected FluentProject(String serviceName, String clientDescription) {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-
         this.groupId = "com.azure.resourcemanager";
 
         this.serviceName = serviceName;
         this.namespace = JavaSettings.getInstance().getPackage();
         this.artifactId = FluentUtils.getArtifactId();
 
-        settings.getArtifactVersion().ifPresent(version -> this.version = version);
+        FluentStatic.getFluentJavaSettings().getArtifactVersion().ifPresent(version -> this.version = version);
 
         if (clientDescription == null) {
             clientDescription = "";
@@ -83,7 +81,7 @@ public class FluentProject extends Project {
 
         this.serviceDescription.simpleDescription = String.format(simpleDescriptionTemplate, serviceName);
         this.serviceDescription.clientDescription = clientDescription;
-        this.serviceDescription.tagDescription = String.format(tagDescriptionTemplate, settings.getAutorestSettings().getTag());
+        this.serviceDescription.tagDescription = String.format(tagDescriptionTemplate, JavaSettings.getInstance().getAutorestSettings().getTag());
 
         this.changelog = new Changelog(this);
     }
@@ -104,8 +102,7 @@ public class FluentProject extends Project {
     }
 
     private void updateChangelog() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        String outputFolder = JavaSettings.getInstance().getAutorestSettings().getOutputFolder();
         if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
             Path changelogPath = Paths.get(outputFolder, "CHANGELOG.md");
 
@@ -126,8 +123,7 @@ public class FluentProject extends Project {
     }
 
     private void findCodeSamples() {
-        FluentJavaSettings settings = FluentStatic.getFluentJavaSettings();
-        String outputFolder = settings.getAutorestSettings().getOutputFolder();
+        String outputFolder = JavaSettings.getInstance().getAutorestSettings().getOutputFolder();
         if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
             Path srcTestJavaPath = Paths.get(outputFolder).resolve(Paths.get("src", "test", "java"));
             if (Files.isDirectory(srcTestJavaPath)) {

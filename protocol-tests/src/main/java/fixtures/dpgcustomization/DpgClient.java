@@ -12,13 +12,10 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.SyncPoller;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
@@ -43,7 +40,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -71,7 +68,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -79,7 +76,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -106,12 +103,12 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -139,8 +136,8 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -157,21 +154,5 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
         return this.client.beginLro(mode, requestOptions).getSyncPoller();
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @param context The context to associate with this operation.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> sendRequest(HttpRequest httpRequest, Context context) {
-        return this.client
-                .sendRequest(httpRequest)
-                .contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly()))
-                .block();
     }
 }

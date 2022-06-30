@@ -123,6 +123,8 @@ public class ProxyMethodParameter {
      */
     private boolean explode;
 
+    private ParameterSynthesizedOrigin origin;
+
     /**
      * Create a new RestAPIParameter based on the provided properties.
      * @param description The description of this parameter.
@@ -143,7 +145,12 @@ public class ProxyMethodParameter {
      * @param collectionFormat The collection format if the parameter is a list type.
      * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
      */
-    protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode) {
+    protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name,
+                                   RequestParameterLocation requestParameterLocation,
+                                   String requestParameterName, boolean alreadyEncoded, boolean isConstant,
+                                   boolean isRequired, boolean isNullable, boolean fromClient,
+                                   String headerCollectionPrefix, String parameterReference, String defaultValue,
+                                   CollectionFormat collectionFormat, boolean explode, ParameterSynthesizedOrigin origin) {
         this.description = description;
         this.rawType = rawType;
         this.wireType = wireType;
@@ -161,6 +168,7 @@ public class ProxyMethodParameter {
         this.collectionFormat = collectionFormat;
         this.explode = explode;
         this.defaultValue = defaultValue;
+        this.origin = origin;
     }
 
     public final String getDefaultValue() {
@@ -235,6 +243,10 @@ public class ProxyMethodParameter {
         return explode;
     }
 
+    public ParameterSynthesizedOrigin getOrigin() {
+        return origin;
+    }
+
     public final String convertFromClientType(String source, String target, boolean alwaysNull) {
         return convertFromClientType(source, target, alwaysNull, false);
     }
@@ -273,9 +285,7 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.util.Base64Util");
             } else if (getClientType() instanceof ListType && !getExplode()) {
                 imports.add("com.azure.core.util.serializer.CollectionFormat");
-                if (!settings.isLowLevelClient()) {
-                    imports.add("com.azure.core.util.serializer.JacksonAdapter");
-                }
+                imports.add("com.azure.core.util.serializer.JacksonAdapter");
             } else if (getClientType() instanceof ListType && getExplode()) {
                 imports.add("java.util.stream.Collectors");
             }
@@ -285,6 +295,32 @@ public class ProxyMethodParameter {
 //        }
 
         getWireType().addImportsTo(imports, includeImplementationImports);
+    }
+
+    /**
+     * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     * @return A new builder instance initialized with properties values of this instance.
+     */
+    public ProxyMethodParameter.Builder toNewBuilder() {
+        return new ProxyMethodParameter.Builder()
+                .clientType(this.getClientType())
+                .alreadyEncoded(this.getAlreadyEncoded())
+                .collectionFormat(this.getCollectionFormat())
+                .defaultValue(this.getDefaultValue())
+                .description(this.getDescription())
+                .explode(this.getExplode())
+                .fromClient(this.getFromClient())
+                .headerCollectionPrefix(this.getHeaderCollectionPrefix())
+                .isConstant(this.getIsConstant())
+                .isNullable(this.getIsNullable())
+                .name(this.getName())
+                .isRequired(this.getIsRequired())
+                .origin(this.getOrigin())
+                .parameterReference(this.getParameterReference())
+                .rawType(this.getRawType())
+                .requestParameterLocation(this.getRequestParameterLocation())
+                .requestParameterName(this.getRequestParameterName())
+                .wireType(this.getWireType());
     }
 
     public static class Builder {
@@ -305,6 +341,7 @@ public class ProxyMethodParameter {
         protected String defaultValue;
         protected CollectionFormat collectionFormat;
         protected boolean explode;
+        protected ParameterSynthesizedOrigin origin;
 
         /**
          * Sets the description of this parameter.
@@ -476,6 +513,17 @@ public class ProxyMethodParameter {
             return this;
         }
 
+        /**
+         * Sets origin of the parameter.
+         *
+         * @param origin the origin of the parameter.
+         * @return the Builder itself
+         */
+        public Builder origin(ParameterSynthesizedOrigin origin) {
+            this.origin = origin;
+            return this;
+        }
+
         public ProxyMethodParameter build() {
             return new ProxyMethodParameter(description,
                     rawType,
@@ -493,7 +541,8 @@ public class ProxyMethodParameter {
                     parameterReference,
                     defaultValue,
                     collectionFormat,
-                    explode);
+                    explode,
+                    origin);
         }
     }
 }

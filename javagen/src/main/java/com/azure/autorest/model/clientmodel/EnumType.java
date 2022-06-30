@@ -21,7 +21,7 @@ public class EnumType implements IType {
      */
     private String packageName;
     /**
-     * Whether or not this will be an ExpandableStringEnum type.
+     * Whether this will be an ExpandableStringEnum type.
      */
     private boolean expandable;
     /**
@@ -34,7 +34,7 @@ public class EnumType implements IType {
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
-     * @param expandable Whether or not this will be an ExpandableStringEnum type.
+     * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
     private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
@@ -67,6 +67,9 @@ public class EnumType implements IType {
 
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(String.format("%1$s.%2$s", getPackage(), getName()));
+
+        // EnumTypes may result in Collectors being used, if Collectors isn't used the unused import will be removed.
+        imports.add("java.util.stream.Collectors");
     }
 
     public final IType asNullable() {

@@ -178,15 +178,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getNullAsync() {
-        return getNullWithResponseAsync()
-                .flatMap(
-                        (Response<Integer> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -232,15 +224,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getInvalidAsync() {
-        return getInvalidWithResponseAsync()
-                .flatMap(
-                        (Response<Integer> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -286,15 +270,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getOverflowInt32Async() {
-        return getOverflowInt32WithResponseAsync()
-                .flatMap(
-                        (Response<Integer> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getOverflowInt32WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -340,15 +316,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Integer> getUnderflowInt32Async() {
-        return getUnderflowInt32WithResponseAsync()
-                .flatMap(
-                        (Response<Integer> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUnderflowInt32WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -394,15 +362,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Long> getOverflowInt64Async() {
-        return getOverflowInt64WithResponseAsync()
-                .flatMap(
-                        (Response<Long> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getOverflowInt64WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -448,15 +408,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Long> getUnderflowInt64Async() {
-        return getUnderflowInt64WithResponseAsync()
-                .flatMap(
-                        (Response<Long> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUnderflowInt64WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -506,7 +458,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax32Async(int intBody) {
-        return putMax32WithResponseAsync(intBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMax32WithResponseAsync(intBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -552,7 +504,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMax64Async(long intBody) {
-        return putMax64WithResponseAsync(intBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMax64WithResponseAsync(intBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -598,7 +550,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin32Async(int intBody) {
-        return putMin32WithResponseAsync(intBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMin32WithResponseAsync(intBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -644,7 +596,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMin64Async(long intBody) {
-        return putMin64WithResponseAsync(intBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putMin64WithResponseAsync(intBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -686,15 +638,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUnixTimeAsync() {
-        return getUnixTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getUnixTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -744,7 +688,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUnixTimeDateAsync(OffsetDateTime intBody) {
-        return putUnixTimeDateWithResponseAsync(intBody).flatMap((Response<Void> res) -> Mono.empty());
+        return putUnixTimeDateWithResponseAsync(intBody).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -786,15 +730,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getInvalidUnixTimeAsync() {
-        return getInvalidUnixTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getInvalidUnixTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -835,15 +771,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getNullUnixTimeAsync() {
-        return getNullUnixTimeWithResponseAsync()
-                .flatMap(
-                        (Response<OffsetDateTime> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return getNullUnixTimeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

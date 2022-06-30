@@ -19,12 +19,10 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.url.multi.models.ErrorException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -98,11 +96,9 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                Optional.ofNullable(arrayQuery)
-                        .map(Collection::stream)
-                        .orElseGet(Stream::empty)
-                        .map((item) -> Objects.toString(item, ""))
-                        .collect(Collectors.toList());
+                (arrayQuery == null)
+                        ? new ArrayList<>()
+                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -118,7 +114,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiNullAsync(List<String> arrayQuery) {
-        return arrayStringMultiNullWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiNullWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -131,7 +127,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiNullAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringMultiNullWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiNullWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -177,11 +173,9 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                Optional.ofNullable(arrayQuery)
-                        .map(Collection::stream)
-                        .orElseGet(Stream::empty)
-                        .map((item) -> Objects.toString(item, ""))
-                        .collect(Collectors.toList());
+                (arrayQuery == null)
+                        ? new ArrayList<>()
+                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -197,7 +191,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiEmptyAsync(List<String> arrayQuery) {
-        return arrayStringMultiEmptyWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -210,7 +204,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiEmptyAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringMultiEmptyWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiEmptyWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -257,11 +251,9 @@ public final class Queries {
         }
         final String accept = "application/json";
         List<String> arrayQueryConverted =
-                Optional.ofNullable(arrayQuery)
-                        .map(Collection::stream)
-                        .orElseGet(Stream::empty)
-                        .map((item) -> Objects.toString(item, ""))
-                        .collect(Collectors.toList());
+                (arrayQuery == null)
+                        ? new ArrayList<>()
+                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -279,7 +271,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync(List<String> arrayQuery) {
-        return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -293,7 +285,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync() {
         final List<String> arrayQuery = null;
-        return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap((Response<Void> res) -> Mono.empty());
+        return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
     /**

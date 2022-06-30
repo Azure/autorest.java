@@ -12,7 +12,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
@@ -43,7 +42,7 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -71,7 +70,7 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -79,7 +78,7 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -107,12 +106,12 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -140,36 +139,8 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> lroWithResponse(String mode, RequestOptions requestOptions) {
-        return this.serviceClient.lroWithResponseAsync(mode, requestOptions);
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *
@@ -186,17 +157,5 @@ public final class DpgAsyncClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
         return this.serviceClient.beginLroAsync(mode, requestOptions);
-    }
-
-    /**
-     * Sends the {@code httpRequest}.
-     *
-     * @param httpRequest The HTTP request to send.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> sendRequest(HttpRequest httpRequest) {
-        return this.serviceClient.sendRequestAsync(httpRequest);
     }
 }

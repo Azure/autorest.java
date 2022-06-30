@@ -6,9 +6,11 @@ package fixtures.url.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -67,7 +69,9 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -88,7 +92,9 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -109,7 +115,9 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -130,7 +138,9 @@ public final class PathItemsImpl {
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
                 @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -146,9 +156,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -162,13 +173,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getAllWithValues(
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -184,9 +198,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -201,11 +216,14 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getAllWithValues(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -221,9 +239,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -251,9 +270,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -267,13 +287,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalQueryNull(
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -289,9 +312,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -306,11 +330,14 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getGlobalQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -326,9 +353,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -356,9 +384,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -372,13 +401,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getGlobalAndLocalQueryNull(
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -394,9 +426,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -411,11 +444,14 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getGlobalAndLocalQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -431,9 +467,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -461,9 +498,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -477,13 +515,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.getLocalPathItemQueryNull(
                                 this.client.getHost(),
                                 pathItemStringPath,
                                 this.client.getGlobalStringPath(),
+                                this.client.getGlobalStringQuery(),
                                 localStringPath,
+                                accept,
                                 requestOptions,
                                 context));
     }
@@ -499,9 +540,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -516,11 +558,14 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
         return service.getLocalPathItemQueryNull(
                 this.client.getHost(),
                 pathItemStringPath,
                 this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
                 localStringPath,
+                accept,
                 requestOptions,
                 context);
     }
@@ -536,9 +581,10 @@ public final class PathItemsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>globalStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
      * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.

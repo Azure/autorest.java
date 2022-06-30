@@ -236,7 +236,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
-        return head200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -276,15 +276,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> get200Async() {
-        return get200WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return get200WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -330,15 +322,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> options200Async() {
-        return options200WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return options200WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -385,7 +369,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put200Async() {
-        return put200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -426,7 +410,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch200Async() {
-        return patch200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return patch200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -467,7 +451,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post200Async() {
-        return post200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -508,7 +492,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete200Async() {
-        return delete200WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return delete200WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -549,7 +533,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put201Async() {
-        return put201WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put201WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -590,7 +574,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post201Async() {
-        return post201WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post201WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -631,7 +615,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put202Async() {
-        return put202WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put202WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -672,7 +656,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch202Async() {
-        return patch202WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return patch202WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -713,7 +697,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post202Async() {
-        return post202WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post202WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -754,7 +738,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete202Async() {
-        return delete202WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return delete202WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -794,7 +778,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
-        return head204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return head204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -835,7 +819,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put204Async() {
-        return put204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return put204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -876,7 +860,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch204Async() {
-        return patch204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return patch204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -917,7 +901,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post204Async() {
-        return post204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return post204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -958,7 +942,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete204Async() {
-        return delete204WithResponseAsync().flatMap((Response<Void> res) -> Mono.empty());
+        return delete204WithResponseAsync().flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -998,15 +982,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async() {
-        return head404WithResponseAsync()
-                .flatMap(
-                        (Response<Boolean> res) -> {
-                            if (res.getValue() != null) {
-                                return Mono.just(res.getValue());
-                            } else {
-                                return Mono.empty();
-                            }
-                        });
+        return head404WithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

@@ -4,10 +4,12 @@
 
 package fixtures.httpinfrastructure.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Options;
@@ -25,6 +27,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -67,7 +70,11 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head200(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/http/success/200")
         @ExpectedResponses({200})
@@ -81,7 +88,11 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> get200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Boolean>> get200(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Options("/http/success/200")
         @ExpectedResponses({200})
@@ -96,7 +107,10 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> options200(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/success/200")
         @ExpectedResponses({200})
@@ -110,7 +124,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/success/200")
         @ExpectedResponses({200})
@@ -124,7 +143,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/success/200")
         @ExpectedResponses({200})
@@ -138,7 +162,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/success/200")
         @ExpectedResponses({200})
@@ -152,7 +181,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/success/201")
         @ExpectedResponses({201})
@@ -166,7 +200,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put201(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put201(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/success/201")
         @ExpectedResponses({201})
@@ -180,7 +219,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post201(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post201(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/success/202")
         @ExpectedResponses({202})
@@ -194,7 +238,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/success/202")
         @ExpectedResponses({202})
@@ -208,7 +257,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/success/202")
         @ExpectedResponses({202})
@@ -222,7 +276,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/success/202")
         @ExpectedResponses({202})
@@ -236,7 +295,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete202(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Head("/http/success/204")
         @ExpectedResponses({204})
@@ -250,7 +314,11 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> head204(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Put("/http/success/204")
         @ExpectedResponses({204})
@@ -264,7 +332,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Patch("/http/success/204")
         @ExpectedResponses({204})
@@ -278,7 +351,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patch204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> patch204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Post("/http/success/204")
         @ExpectedResponses({204})
@@ -292,7 +370,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> post204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> post204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Delete("/http/success/204")
         @ExpectedResponses({204})
@@ -306,7 +389,12 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
@@ -318,7 +406,10 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> head404(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -333,7 +424,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -349,7 +441,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -385,7 +478,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get200(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -407,7 +501,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.get200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.get200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -449,7 +544,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.options200(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.options200(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -471,7 +568,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.options200(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.options200(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -513,7 +611,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put200(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -535,7 +636,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put200(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -577,7 +680,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch200(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -599,7 +705,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch200(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -641,7 +749,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post200(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -663,7 +774,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post200(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -705,7 +818,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete200(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -727,7 +843,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete200(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete200(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -769,7 +887,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put201(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -791,7 +912,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put201(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put201(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -833,7 +956,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post201(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -855,7 +981,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post201(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post201(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -897,7 +1025,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put202(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -919,7 +1050,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put202(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -961,7 +1094,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch202(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -983,7 +1119,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch202(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1025,7 +1163,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post202(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1047,7 +1188,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post202(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1089,7 +1232,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete202(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1111,7 +1257,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete202(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete202(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1147,7 +1295,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1163,7 +1312,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head204(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head204(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1199,7 +1349,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.put204(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1221,7 +1374,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.put204(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1263,7 +1418,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.patch204(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1285,7 +1443,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.patch204(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1327,7 +1487,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.post204(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1349,7 +1512,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.post204(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1391,7 +1556,10 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.delete204(this.client.getHost(), requestOptions, context));
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context));
     }
 
     /**
@@ -1413,7 +1581,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.delete204(this.client.getHost(), requestOptions, context);
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete204(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1454,7 +1624,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1475,7 +1646,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.head404(this.client.getHost(), requestOptions, context);
+        final String accept = "application/json";
+        return service.head404(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

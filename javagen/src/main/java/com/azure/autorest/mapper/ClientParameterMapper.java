@@ -10,8 +10,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,12 +48,9 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             wireType = wireType.asNullable();
         }
         builder.rawType(wireType);
-        if (settings.isLowLevelClient() && !(wireType instanceof PrimitiveType)) {
-            if (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY) {
-                wireType = ClassType.BinaryData;
-            } else {
-                wireType = ClassType.String;
-            }
+
+        if (settings.isDataPlaneClient()) {
+            wireType = SchemaUtil.removeModelFromParameter(parameter.getProtocol().getHttp().getIn(), wireType);
         }
         builder.wireType(wireType);
 
@@ -83,6 +81,11 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         if (description == null || description.isEmpty()) {
             description = String.format("The %s parameter", name);
         }
+        // add allowed enum values
+        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
+            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
+        }
+
         builder.description(description);
         return builder.build();
     }
