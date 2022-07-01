@@ -28,8 +28,8 @@ import {
   CodeModel
 } from "@autorest/codemodel";
 import {
-  createCodeMode
-} from "./code-model.js";
+  CodeModelBuilder
+} from "./code-model-builder.js";
 
 let program: Program;
 let namespace: string;
@@ -37,7 +37,8 @@ let namespace: string;
 export async function $onEmit(program1: Program) {
   program = program1;
   // const yamlMap = createClientModel();
-  const codeModel = createCodeMode(program);
+  const builder = new CodeModelBuilder(program);
+  const codeModel = builder.build();
   await program.host.writeFile(resolvePath(program.compilerOptions.outputPath || "", "./code-model.yaml"), dump(codeModel, { schema }));
 }
 
