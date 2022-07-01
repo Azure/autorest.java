@@ -706,7 +706,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             //
             // Support for a default value if null will need to be supported and for objects that get their value
             // from a JSON value instead of JSON object or are an array type.
-            methodBlock.line("return JsonUtils.readObject(jsonReader, reader -> {");
+            methodBlock.line("return jsonReader.readObject(reader -> {");
 
             deserializationBlock.accept(methodBlock);
 
