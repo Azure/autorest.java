@@ -124,7 +124,7 @@ export class CodeModelBuilder {
           in: param.type
         }
       },
-      clientDefaultValue: param.param.default ? this.processSchema(param.param.default, param.param.name) : undefined,
+      clientDefaultValue: this.getDefaultValue(param.param.default),
       language: {
         default: {
           serializedName: param.name
@@ -146,7 +146,8 @@ export class CodeModelBuilder {
         return this.processStringSchema(type, name);
         
       case "Number":
-        return this.processNumberSchema(type, name);
+        const isInteger = getFormat(this.program, type)?.startsWith("int");
+        return isInteger ? this.processIntegerSchema(type, name) : this.processNumberSchema(type, name);
 
       case "Array":
         return this.processArraySchema(type, name);
@@ -160,6 +161,8 @@ export class CodeModelBuilder {
             return this.processIntegerSchema(type, name);
           } else if (type.name.startsWith("float")) {
             return this.processNumberSchema(type, name);
+          } else {
+            throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
           }
         } else {
           return this.processObjectSchema(type, this.getName(type, type.name));
@@ -180,9 +183,8 @@ export class CodeModelBuilder {
   }
 
   private processIntegerSchema(type: NumericLiteralType | ModelType, name: string): NumberSchema {
-    const isInteger = getFormat(this.program, type)?.startsWith("int");
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), isInteger ? SchemaType.Integer : SchemaType.Number, 64, {
+      new NumberSchema(name, this.getDoc(type), SchemaType.Integer, 64, {
         summary: this.getSummary(type),
         maximum: getMaxValue(this.program, type),
         minimum: getMinValue(this.program, type)
@@ -191,9 +193,8 @@ export class CodeModelBuilder {
   }
 
   private processNumberSchema(type: NumericLiteralType | ModelType, name: string): NumberSchema {
-    const isInteger = getFormat(this.program, type)?.startsWith("int");
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), isInteger ? SchemaType.Integer : SchemaType.Number, 64, {
+      new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
         summary: this.getSummary(type),
         maximum: getMaxValue(this.program, type),
         minimum: getMinValue(this.program, type)
@@ -233,6 +234,22 @@ export class CodeModelBuilder {
     }
 
     return objectSchema;
+  }
+
+  private getDefaultValue(type: Type | undefined): any {
+    if (type) {
+      switch (type.kind) {
+        case "String":
+          return type.value;
+        case "Number":
+          return type.value;
+        case "Boolean":
+          return type.value;
+        // case "Tuple":
+        //   return type.values.map(getDefaultValue);
+      }
+    }
+    return undefined;
   }
 
   private getDoc(target: Type): string {
