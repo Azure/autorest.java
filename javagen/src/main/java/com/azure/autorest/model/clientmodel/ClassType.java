@@ -20,6 +20,7 @@ public class ClassType implements IType {
 
     public static final ClassType Boolean = new Builder(false).knownClass(Boolean.class)
         .defaultValueExpressionConverter(java.lang.String::toLowerCase)
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeBooleanField")
         .streamStyleJsonValueSerializationMethod("writeBoolean")
         .build();
@@ -31,24 +32,28 @@ public class ClassType implements IType {
 
     public static final ClassType Integer = new ClassType.Builder(false).knownClass(Integer.class)
         .defaultValueExpressionConverter(java.util.function.Function.identity())
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeIntegerField")
         .streamStyleJsonValueSerializationMethod("writeInteger")
         .build();
 
     public static final ClassType Long = new ClassType.Builder(false).knownClass(Long.class)
         .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeLongField")
         .streamStyleJsonValueSerializationMethod("writeLong")
         .build();
 
     public static final ClassType Float = new ClassType.Builder(false).knownClass(Float.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'f')
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'F')
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeFloatField")
         .streamStyleJsonValueSerializationMethod("writeFloat")
         .build();
 
     public static final ClassType Double = new ClassType.Builder(false).knownClass(Double.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeDoubleField")
         .streamStyleJsonValueSerializationMethod("writeDouble")
         .build();
@@ -61,6 +66,7 @@ public class ClassType implements IType {
 
     public static final ClassType String = new ClassType.Builder(false).knownClass(String.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "\"" + escapeString(defaultValueExpression) + "\"")
+        .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
         .build();
@@ -310,12 +316,14 @@ public class ClassType implements IType {
     private final XmsExtensions extensions;
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
     private final boolean isSwaggerType;
+    private final boolean serializationNeedsNullGuarding;
     private final String streamStyleJsonFieldSerializationMethod;
     private final String streamStyleJsonValueSerializationMethod;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
-        String streamStyleJsonFieldSerializationMethod, String streamStyleJsonValueSerializationMethod) {
+        boolean serializationNeedsNullGuarding, String streamStyleJsonFieldSerializationMethod,
+        String streamStyleJsonValueSerializationMethod) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -323,6 +331,7 @@ public class ClassType implements IType {
         this.extensions = extensions;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.isSwaggerType = isSwaggerType;
+        this.serializationNeedsNullGuarding = serializationNeedsNullGuarding;
         this.streamStyleJsonFieldSerializationMethod = streamStyleJsonFieldSerializationMethod;
         this.streamStyleJsonValueSerializationMethod = streamStyleJsonValueSerializationMethod;
     }
@@ -356,6 +365,11 @@ public class ClassType implements IType {
                 || this.equals(ClassType.Long)
                 || this.equals(ClassType.Float)
                 || this.equals(ClassType.Double);
+    }
+
+    @Override
+    public boolean deserializationNeedsNullGuarding() {
+        return serializationNeedsNullGuarding;
     }
 
     @Override
@@ -489,6 +503,8 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
+        // By default, class types need null guarding in serialization.
+        private boolean serializationNeedsNullGuarding = true;
         private String streamStyleJsonFieldSerializationMethod;
         private String streamStyleJsonValueSerializationMethod;
 
@@ -530,6 +546,11 @@ public class ClassType implements IType {
             return this;
         }
 
+        public Builder serializationNeedsNullGuarding(boolean serializationNeedsNullGuarding) {
+            this.serializationNeedsNullGuarding = serializationNeedsNullGuarding;
+            return this;
+        }
+
         public Builder streamStyleJsonFieldSerializationMethod(String streamStyleJsonFieldSerializationMethod) {
             this.streamStyleJsonFieldSerializationMethod = streamStyleJsonFieldSerializationMethod;
             return this;
@@ -553,7 +574,8 @@ public class ClassType implements IType {
                         : this.streamStyleJsonValueSerializationMethod;
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
-                isSwaggerType, streamStyleJsonFieldSerializationMethod, streamStyleJsonValueSerializationMethod);
+                isSwaggerType, serializationNeedsNullGuarding && !isSwaggerType,
+                streamStyleJsonFieldSerializationMethod, streamStyleJsonValueSerializationMethod);
         }
     }
 

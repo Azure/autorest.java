@@ -80,6 +80,15 @@ public interface IType {
     String validate(String expression);
 
     /**
+     * Indicates whether the type needs null guarding in deserialization.
+     *
+     * @return Whether the type needs null guarding in deserialization.
+     */
+    default boolean deserializationNeedsNullGuarding() {
+        return true;
+    }
+
+    /**
      * Gets the method that handles field serialization for the type.
      * <p>
      * The field serialization method handles writing both the JSON field name and value.

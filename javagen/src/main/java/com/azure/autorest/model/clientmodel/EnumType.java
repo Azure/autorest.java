@@ -74,7 +74,7 @@ public class EnumType implements IType {
     }
 
     public final boolean isNullable() {
-        return expandable;
+        return true;
     }
 
     public final IType asNullable() {
@@ -145,6 +145,10 @@ public class EnumType implements IType {
 
     public final String validate(String expression) {
         return null;
+    }
+
+    public final boolean deserializationNeedsNullGuarding() {
+        return expandable;
     }
 
     @Override

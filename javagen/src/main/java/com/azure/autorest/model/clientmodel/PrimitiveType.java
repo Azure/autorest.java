@@ -102,6 +102,11 @@ public class PrimitiveType implements IType {
     }
 
     @Override
+    public final boolean deserializationNeedsNullGuarding() {
+        return false;
+    }
+
+    @Override
     public final boolean isNullable() {
         return false;
     }

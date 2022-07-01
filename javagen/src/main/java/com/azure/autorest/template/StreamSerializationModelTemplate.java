@@ -200,12 +200,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else if (wireType == ClassType.Object) {
             methodBlock.line("JsonUtils.writeUntypedField(jsonWriter, " + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
-            serializeContainerProperty(methodBlock, "writeArray", wireType, ((IterableType) wireType).getElementType(),
+            serializeContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
-            serializeContainerProperty(methodBlock, "writeMap", wireType, ((MapType) wireType).getValueType(),
+            serializeContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
                 serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
@@ -229,22 +229,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void serializeContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
         IType elementType, String serializedName, String propertyValueGetter, int depth) {
         String valueSerializationMethod = elementType.streamStyleJsonValueSerializationMethod();
+        String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
         String elementName = depth == 0 ? "element" : "element" + depth;
         String serializeValue = depth == 0 ? propertyValueGetter
             : ((depth == 1) ? "element" : "element" + (depth - 1));
 
-        // TODO (alzimmer): Determine if the writeNull property should ever be set to true for writing the container
-        //  property. Right now this won't serialize anything if the container value is null.
-        methodBlock.line("JsonUtils." + utilityMethod + "(jsonWriter, \"" + serializedName + "\", " + serializeValue + ", (" + lambdaWriterName + ", " + elementName + ") -> ");
+        // First call into serialize container property will need to write the property name. Subsequent calls must
+        // not write the property name as that would be invalid, ex "myList":["myList":["innerListElement"]].
+        if (depth == 0) {
+            // Container property shouldn't be written if it's null.
+            methodBlock.line("%s.%s(\"%s\", %s, false, (%s, %s) -> ", callingWriterName, utilityMethod, serializedName, serializeValue, lambdaWriterName, elementName);
+        } else {
+            // But the inner container should be written if it's null.
+            methodBlock.line("%s.%s(%s, (%s, %s) -> ", callingWriterName, utilityMethod, serializeValue, lambdaWriterName, elementName);
+        }
+
         methodBlock.indent(() -> {
             if (valueSerializationMethod != null) {
-                // TODO (alzimmer): Determine if null list elements and null values in a key-value pair should be serialized.
                 if (elementType instanceof EnumType) {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(" + elementName + " == null ? null : " + elementName + ".toString())");
-                } else if (elementType.isNullable()) {
-                    methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "("
-                        + addPotentialSerializationNullCheck(elementType, valueSerializationMethod, elementName) + ", false)");
                 } else {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(" + elementName + ")");
                 }
@@ -352,7 +356,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /**
      * Adds a potential null check to the serialized value.
      * <p>
-     * This will only modify the serialization value if the {@code type} {@link IType#isNullable() is nullable} and
+     * This will only modify the serialization value if the {@code type} {@link IType#deserializationNeedsNullGuarding() is nullable} and
      * isn't a boxed type and the {@code serializationMethod} is either {@code writeString} or {@code writeStringField}.
      * In this case the property will be stringified before being written so it needs to be null checked to prevent a
      * {@link NullPointerException}.
@@ -364,7 +368,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static String addPotentialSerializationNullCheck(IType type, String serializationMethod, String value) {
         if (type.isNullable()
-            && (!(type instanceof ClassType) || !((ClassType) type).isBoxedType())
+            && (type instanceof ClassType && !((ClassType) type).isBoxedType())
             && type != ClassType.String
             && serializationMethod.startsWith("writeString")) {
             return value + " == null ? null : " + value + ".toString()";
@@ -746,7 +750,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Always instantiate the local variable.
         IType clientType = property.getClientType();
-        if (clientType.isNullable()) {
+        if (clientType.deserializationNeedsNullGuarding()) {
             methodBlock.line(clientType + " " + property.getName() + " = null;");
         } else {
             methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
@@ -846,7 +850,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleDeserialization(wireType, clientType, "reader");
         if (simpleDeserialization != null) {
-            if (deserializationNeedsNullGuard(wireType)) {
+            if (wireType.deserializationNeedsNullGuarding()) {
                 deserializationBlock.line(property.getName() + " = JsonUtils.getNullableProperty(reader, r -> " + simpleDeserialization + ");");
             } else {
                 deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
@@ -886,14 +890,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void deserializeContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
         IType elementType, int depth) {
+        String callingReaderName = depth == 0 ? "reader" : "reader" + depth;
         String lambdaReaderName = "reader" + (depth + 1);
         String valueDeserializationMethod = getSimpleDeserialization(elementType, elementType, lambdaReaderName);
 
-        String utilsReaderName = depth == 0 ? "reader" : "reader" + depth;
-        methodBlock.line("JsonUtils." + utilityMethod + "(" + utilsReaderName + ", " + lambdaReaderName + " -> ");
+        methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> ");
         methodBlock.indent(() -> {
             if (valueDeserializationMethod != null) {
-                if (deserializationNeedsNullGuard(elementType)) {
+                if (elementType.deserializationNeedsNullGuarding()) {
                     methodBlock.line("JsonUtils.getNullableProperty(" + lambdaReaderName + ", r -> " + valueDeserializationMethod + ")");
                 } else {
                     methodBlock.line(valueDeserializationMethod);
@@ -923,16 +927,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static String getSimpleDeserialization(IType wireType, IType clientType, String readerName) {
         String wireTypeDeserialization;
-        if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
+        if (wireType == PrimitiveType.Boolean) {
             wireTypeDeserialization = readerName + ".getBooleanValue()";
-        } else if (wireType == PrimitiveType.Double || wireType == ClassType.Double) {
+        } else if (wireType == ClassType.Boolean) {
+            wireTypeDeserialization = readerName + ".getBooleanNullableValue()";
+        } else if (wireType == PrimitiveType.Double) {
             wireTypeDeserialization = readerName + ".getDoubleValue()";
-        } else if (wireType == PrimitiveType.Float || wireType == ClassType.Float) {
+        } else if (wireType == ClassType.Double) {
+            wireTypeDeserialization = readerName + ".getDoubleNullableValue()";
+        } else if (wireType == PrimitiveType.Float) {
             wireTypeDeserialization = readerName + ".getFloatValue()";
-        } else if (wireType == PrimitiveType.Int || wireType == ClassType.Integer) {
+        } else if (wireType == ClassType.Float) {
+            wireTypeDeserialization = readerName + ".getFloatNullableValue()";
+        } else if (wireType == PrimitiveType.Int) {
             wireTypeDeserialization = readerName + ".getIntValue()";
-        } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
+        } else if (wireType == ClassType.Integer) {
+            wireTypeDeserialization = readerName + ".getIntegerNullableValue()";
+        } else if (wireType == PrimitiveType.Long) {
             wireTypeDeserialization = readerName + ".getLongValue()";
+        } else if (wireType == ClassType.Long) {
+            wireTypeDeserialization = readerName + ".getLongNullableValue()";
         } else if (wireType == PrimitiveType.Char || wireType == ClassType.Character) {
             wireTypeDeserialization = readerName + ".getStringValue().charAt(0)";
         } else if (wireType == ArrayType.ByteArray) {
@@ -952,9 +966,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             wireTypeDeserialization = enumType.getName() + "." + enumType.getFromJsonMethodName() + "(" + readerName + ".getStringValue())";
         } else if (wireType == ClassType.UUID) {
             wireTypeDeserialization = "UUID.fromString(" + readerName + ".getStringValue())";
-        } else if (wireType == ClassType.Object) {
-            wireTypeDeserialization = "JsonUtils.readUntypedField(" + readerName + ")";
-        } else if (wireType instanceof ClassType) {
+        } else if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
             wireTypeDeserialization = wireType + ".fromJson(" + readerName + ")";
         } else {
             wireTypeDeserialization = null;
@@ -965,13 +977,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else {
             return wireTypeDeserialization;
         }
-    }
-
-    private static boolean deserializationNeedsNullGuard(IType wireType) {
-        return wireType.isNullable()
-            && wireType != ClassType.String // Strings are deserialization null safe.
-            && !(wireType instanceof EnumType && ((EnumType) wireType).getExpandable()) // ExpandableStringEnums are deserialization null safe.
-            && !(wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()); // Swagger types will use fromJson which is null safe.
     }
 
     private static void handleUnknownFieldDeserialization(JavaBlock methodBlock, JavaIfBlock ifBlock,
