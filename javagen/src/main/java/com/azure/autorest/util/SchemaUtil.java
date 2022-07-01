@@ -79,9 +79,12 @@ public class SchemaUtil {
     }
 
     /*
-     * Note: returns PrimitiveType.Void for operation that contains binary response body schema, can be checked by SchemaUtil.containsBinaryResponse(operation)
+     * Returns raw response type.
+     * In case of binary response:
+     *   For DPG, returns BinaryData
+     *   For vanilla/mgmt, returns InputStream
      */
-    public static IType getOperationResponseType(Operation operation) {
+    public static IType getOperationResponseType(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
@@ -91,6 +94,12 @@ public class SchemaUtil {
                     && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
+            } else if (containsBinaryResponse(operation)) {
+                if (settings.isDataPlaneClient()) {
+                    responseBodyType = ClassType.BinaryData;
+                } else {
+                    responseBodyType = ClassType.InputStream;
+                }
             } else {
                 responseBodyType = PrimitiveType.Void;
             }
@@ -186,7 +195,7 @@ public class SchemaUtil {
         return returnType;
     }
 
-    public static boolean containsBinaryResponse(Operation operation) {
+    private static boolean containsBinaryResponse(Operation operation) {
         return operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()));
     }
 

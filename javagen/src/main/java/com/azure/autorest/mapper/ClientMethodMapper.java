@@ -127,36 +127,31 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createPagedAsyncReturnType(elementType);
                 syncReturnType = createPagedSyncReturnType(elementType);
             }
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         } else {
             asyncRestResponseReturnType = null;
-            IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+            IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
             if (settings.isDataPlaneClient()) {
-                if (SchemaUtil.containsBinaryResponse(operation)
-                        || responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+                if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
                     responseBodyType = ClassType.String;
                 }
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
-            if (SchemaUtil.containsBinaryResponse(operation) && !settings.isDataPlaneClient()) {
+            if (responseBodyType.equals(ClassType.InputStream)) {
                 asyncReturnType = createAsyncBinaryReturnType();
-            } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
-                asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
-            } else {
-                asyncReturnType = createAsyncVoidReturnType();
-            }
-            if (SchemaUtil.containsBinaryResponse(operation) && !settings.isDataPlaneClient()) {
                 syncReturnType = ClassType.InputStream;
+                syncReturnWithResponse = ClassType.StreamResponse;
             } else {
+                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+                    asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
+                } else {
+                    asyncReturnType = createAsyncVoidReturnType();
+                }
                 syncReturnType = responseBodyType.getClientType();
+                syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
             }
-        }
-
-        if (syncReturnType == ClassType.InputStream) {
-            syncReturnWithResponse = ClassType.StreamResponse;
-        } else {
-            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
         // Low-level client only requires one request per operation
@@ -310,7 +305,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         IType lroIntermediateType = null;
                         if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
-                            lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
+                            lroIntermediateType = SchemaUtil.getOperationResponseType(operation, settings);
                         }
 
                         List<ClientMethod> nextMethods = (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation());

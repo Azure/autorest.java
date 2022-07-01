@@ -98,14 +98,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            if (SchemaUtil.containsBinaryResponse(operation)
-                    || responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
-                if (responseBodyType == PrimitiveType.Void) { // binary response body
-                    builder.rawResponseBodyType(ClassType.BinaryData);
-                }
+            if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {
                 responseBodyType = ClassType.String;
@@ -115,9 +111,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
         if (settings.isDataPlaneClient()) {
             IType singleValueType;
-            if (SchemaUtil.containsBinaryResponse(operation)) {
-                singleValueType = GenericType.Response(ClassType.BinaryData);
-            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+            if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
             } else {
                 singleValueType = GenericType.Response(responseBodyType);
@@ -127,10 +121,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
                 && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
             builder.returnType(createBinaryContentAsyncReturnType());
-        } else if (SchemaUtil.containsBinaryResponse(operation)) {
-            // BinaryResponse
-            IType singleValueType = ClassType.StreamResponse;
-            builder.returnType(GenericType.Mono(singleValueType));
         } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
@@ -145,7 +135,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             builder.returnType(GenericType.Mono(clientResponseClassType));
         } else {
             IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)
+                    || responseBodyType.equals(ClassType.InputStream)) {
                 singleValueType = ClassType.StreamResponse;
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
