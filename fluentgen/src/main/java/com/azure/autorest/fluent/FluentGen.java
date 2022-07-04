@@ -19,6 +19,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
@@ -274,6 +275,7 @@ public class FluentGen extends Javagen {
         }
 
         if (javaSettings.isGenerateTests()) {
+            // Unit tests for models
             for (ClientModel model : client.getModels()) {
                 javaPackage.addModelUnitTest(model);
             }
@@ -350,8 +352,15 @@ public class FluentGen extends Javagen {
                 for (FluentLiveTests liveTests : fluentClient.getLiveTests()) {
                     javaPackage.addLiveTests(liveTests);
                 }
-            }
 
+                // Unit tests for APIs
+                for (FluentMethodUnitTest unitTest : fluentClient.getUnitTests()) {
+                    javaPackage.addOperationUnitTest(unitTest);
+                }
+                // enable inline mock maker for final class/method
+                writeFile("src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker",
+                        "mock-maker-inline\n", null);
+            }
         }
 
         return fluentClient;

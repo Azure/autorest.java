@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -214,12 +215,24 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, isRequired, false);
             commentBlock.line(indent + "}");
         } else {
+            String javadoc = convertToBodySchemaJavadoc(type);
             if (name != null) {
-                commentBlock.line(indent + name + ": " + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             } else {
-                commentBlock.line(indent + type.toString() + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
             }
         }
+    }
+
+    /*
+     * Converts raw type into type to display in javadoc as body schema type.
+     * 1. converts Flux<ByteBuffer> to BinaryData (applies to request body schema, since DPG response type can't be Flux<ByteBuffer>)
+     */
+    private static String convertToBodySchemaJavadoc(IType type) {
+        if (GenericType.FluxByteBuffer.equals(type)) {
+            return ClassType.BinaryData.toString();
+        }
+        return type.toString();
     }
 
     private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
