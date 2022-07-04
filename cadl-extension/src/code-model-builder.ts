@@ -20,6 +20,7 @@ import {
   getFriendlyName,
   getVisibility,
   isIntrinsic,
+  getServiceVersion,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
@@ -57,6 +58,7 @@ import { fail } from "assert";
 export class CodeModelBuilder {
   private program: Program;
   private namespace: string;
+  private version: string;
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) =>
@@ -76,6 +78,7 @@ export class CodeModelBuilder {
     //   versions = [getServiceVersion(this.program)];
     // }
     this.namespace = getServiceNamespaceString(this.program)?.toLowerCase() || "client";
+    this.version = getServiceVersion(this.program);
 
     const title = getServiceTitle(this.program);
     const description = this.getDoc(serviceNamespace);
@@ -116,7 +119,10 @@ export class CodeModelBuilder {
         default: {
           summary: this.getSummary(op.operation)
         }
-      }
+      },
+      apiVersions: [{
+        version: this.version
+      }]
     });
 
     operation.addRequest(new Request({
@@ -140,31 +146,37 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
-    const schema = this.processSchema(param.param.type, param.param.name);
-    const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
-      implementation: ImplementationLocation.Method,
-      required: !param.param.optional,
-      protocol: {
-        http: {
-          in: param.type
+    if (param.name === 'api-version') {
+      const parameter = this.apiVersionParameter;
+      op.addParameter(parameter);
+    } else {
+      const schema = this.processSchema(param.param.type, param.param.name);
+      const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
+        implementation: ImplementationLocation.Method,
+        required: !param.param.optional,
+        protocol: {
+          http: {
+            in: param.type
+          }
+        },
+        clientDefaultValue: this.getDefaultValue(param.param.default),
+        language: {
+          default: {
+            serializedName: param.name
+          }
         }
-      },
-      clientDefaultValue: this.getDefaultValue(param.param.default),
-      language: {
-        default: {
-          serializedName: param.name
-        }
-      }
-    });
-    op.addParameter(parameter);
+      });
+      op.addParameter(parameter);
+    }
   }
 
   private addAcceptHeaderParameter(op: Operation, responses: HttpOperationResponse[]) {
     const produces = new Set<string>(["application/json"]);
-
     for (const resp of responses) {
-      if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-        resp.responses[0].body.contentTypes.forEach(it => produces.add(it));
+      if (resp.responses && resp.responses.length > 0) {
+        for (const response of resp.responses) {
+          response.body?.contentTypes.forEach(it => produces.add(it));
+        }
       }
     }
     const acceptTypes = Array.from(produces.values()).join(", ");
@@ -437,7 +449,7 @@ export class CodeModelBuilder {
   get hostParameter() {
     return (
       this._hostParameter ||
-      (this._hostParameter = new Parameter("$host", "server parameter", this.stringSchema, {
+      (this._hostParameter = new Parameter("$host", "Server parameter", this.stringSchema, {
         implementation: ImplementationLocation.Client,
         required: true,
         protocol: {
@@ -451,6 +463,29 @@ export class CodeModelBuilder {
         },
         extensions: {
           "x-ms-skip-url-encoding": true
+        }
+      }))
+    );
+  }
+
+  private _apiVersionParameter?: Parameter;
+  get apiVersionParameter() {
+    return (
+      this._apiVersionParameter ||
+      (this._apiVersionParameter = new Parameter("api-version", "Version parameter", this.codeModel.schemas.add(new ConstantSchema("accept", `api-version: ${this.version}`, {
+        valueType: this.stringSchema,
+        value: new ConstantValue(this.version)
+      })), {
+        implementation: ImplementationLocation.Client,
+        required: true,
+        protocol: {
+          http: new HttpParameter(ParameterLocation.Query),
+        },
+        clientDefaultValue: this.version,
+        language: {
+          default: {
+            serializedName: "api-version"
+          }
         }
       }))
     );
