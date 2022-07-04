@@ -8,6 +8,7 @@ import {
   ArrayType,
   StringLiteralType,
   NumericLiteralType,
+  ModelTypeProperty,
   getSummary,
   getDoc,
   getMaxLength,
@@ -110,8 +111,26 @@ export class CodeModelBuilder {
     });
 
     op.parameters.parameters.map(it => this.processParameter(operation, it));
+    this.processBody(operation, op.parameters.body);
 
     operationGroup.addOperation(operation);
+  }
+
+  private processBody(op: Operation, body: ModelTypeProperty | undefined) {
+    if (body) {
+      const schema = this.processSchema(body.type, body.name);
+      const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+        implementation: ImplementationLocation.Method,
+        required: !body.optional,
+        protocol: {
+          http: {
+            in: "body"
+          }
+        },
+        clientDefaultValue: this.getDefaultValue(body.default),
+      });
+      op.addParameter(parameter);
+    }
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
