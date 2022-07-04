@@ -23,6 +23,7 @@ import {
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
+  getStatusCodeDescription,
   HttpOperationParameter,
   HttpOperationResponse,
   OperationDetails,
@@ -42,6 +43,10 @@ import {
   ArraySchema,
   ObjectSchema,
   Property,
+  Response,
+  Request,
+  SchemaResponse,
+  BinarySchema,
 } from "@autorest/codemodel";
 import { fail } from "assert";
 
@@ -110,27 +115,23 @@ export class CodeModelBuilder {
       }
     });
 
+    operation.addRequest(new Request({
+      protocol: {
+        http: {
+          path: op.path,
+          method: op.verb,
+          uri: "{$host}"
+        }
+      }
+    }));
+
     op.parameters.parameters.map(it => this.processParameter(operation, it));
-    this.processBody(operation, op.parameters.body);
+    if (op.parameters.body) {
+      this.processBody(operation, op.parameters.body);
+    }
+    op.responses.map(it => this.processResponse(operation, it));
 
     operationGroup.addOperation(operation);
-  }
-
-  private processBody(op: Operation, body: ModelTypeProperty | undefined) {
-    if (body) {
-      const schema = this.processSchema(body.type, body.name);
-      const parameter = new Parameter(body.name, this.getDoc(body), schema, {
-        implementation: ImplementationLocation.Method,
-        required: !body.optional,
-        protocol: {
-          http: {
-            in: "body"
-          }
-        },
-        clientDefaultValue: this.getDefaultValue(body.default),
-      });
-      op.addParameter(parameter);
-    }
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
@@ -151,6 +152,68 @@ export class CodeModelBuilder {
       }
     });
     op.addParameter(parameter);
+  }
+
+  private processBody(op: Operation, body: ModelTypeProperty) {
+    const schema = this.processSchema(body.type, body.name);
+    const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+      implementation: ImplementationLocation.Method,
+      required: !body.optional,
+      protocol: {
+        http: {
+          in: "body"
+        }
+      },
+      clientDefaultValue: this.getDefaultValue(body.default),
+    });
+    op.addParameter(parameter);
+  }
+
+  private processResponse(op: Operation, resp: HttpOperationResponse) {
+    // TODO: what to do if more than 1?
+    let response;
+    if (resp.responses && resp.responses[0].body) {
+      if (resp.responses[0].body.type.kind === "Model" && resp.responses[0].body.type.name === "bytes") {
+        response = new BinarySchema(this.getResponseDescription(resp));
+      } else {
+        const schema = this.processSchema(resp.responses[0].body?.type, "response");
+        response = new SchemaResponse(schema, {
+          protocol: {
+            http: {
+              statusCodes: [resp.statusCode === "*" ? "default" : resp.statusCode]
+            }
+          },
+          language: {
+            default: {
+              description: this.getResponseDescription(resp)
+            }
+          }
+        });
+      }
+    } else {
+      response = new Response({
+        protocol: {
+          http: {
+            statusCodes: [resp.statusCode === "*" ? "default" : resp.statusCode]
+          }
+        },
+        language: {
+          default: {
+            description: this.getResponseDescription(resp)
+          }
+        }
+      });
+    }
+    if (resp.statusCode === "*") {
+      // TODO: x-ms-error-response
+      op.addException(response);
+    } else {
+      op.addResponse(response);
+    }
+  }
+
+  private getResponseDescription(resp: HttpOperationResponse): string {
+    return resp.description || (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) || "";
   }
 
   private processSchema(type: Type, name: string): Schema {
@@ -288,6 +351,14 @@ export class CodeModelBuilder {
     return (
       this._stringSchema ||
       (this._stringSchema = this.codeModel.schemas.add(new StringSchema("string", "simple string")))
+    );
+  }
+
+  private _binarySchema?: BinarySchema;
+  get binarySchema() {
+    return (
+      this._binarySchema ||
+      (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("binary")))
     );
   }
 
