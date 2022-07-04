@@ -21,6 +21,7 @@ import {
   getVisibility,
   isIntrinsic,
   getServiceVersion,
+  EnumType,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
@@ -52,6 +53,8 @@ import {
   HttpHeader,
   ConstantSchema,
   ConstantValue,
+  SealedChoiceSchema,
+  ChoiceValue,
 } from "@autorest/codemodel";
 import { fail } from "assert";
 
@@ -312,6 +315,9 @@ export class CodeModelBuilder {
       case "Array":
         return this.processArraySchema(type, name);
 
+      case "Enum":
+        return this.processChoiceSchema(type, name);
+
       case "Model":
         if (isIntrinsic(this.program, type)) {
           // TODO: bytes, plainDate, zonedDateTime, plainTime, duration
@@ -372,6 +378,32 @@ export class CodeModelBuilder {
       }));
   }
 
+  private processChoiceSchema(type: EnumType, name: string): SealedChoiceSchema | ConstantSchema {
+    const isConstant = type.members.length === 1;
+    const valueType = typeof type.members[0].value === "number" ? this.integerSchema : this.stringSchema;
+    
+    if (isConstant) {
+      return this.codeModel.schemas.add(
+        new ConstantSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+          valueType: valueType,
+          value: new ConstantValue(type.members[0].value)
+        })
+      );
+    } else {
+      const choices: ChoiceValue[] = [];
+      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value || it.name)));
+
+      return this.codeModel.schemas.add(
+        new SealedChoiceSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+          choiceType: valueType as any,
+          choices: choices
+        })
+      );
+    }
+  }
+
   private processObjectSchema(type: ModelType, name: string): ObjectSchema {
     const objectSchema = this.codeModel.schemas.add(
       new ObjectSchema(name, this.getDoc(type), {
@@ -429,6 +461,14 @@ export class CodeModelBuilder {
     return (
       this._stringSchema ||
       (this._stringSchema = this.codeModel.schemas.add(new StringSchema("string", "simple string")))
+    );
+  }
+
+  private _integerSchema?: NumberSchema;
+  get integerSchema() {
+    return (
+      this._integerSchema ||
+      (this._integerSchema = this.codeModel.schemas.add(new NumberSchema("integer", "simple integer", SchemaType.Integer, 64)))
     );
   }
 
