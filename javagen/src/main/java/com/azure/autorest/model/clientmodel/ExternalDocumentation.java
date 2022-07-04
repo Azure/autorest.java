@@ -5,7 +5,6 @@ package com.azure.autorest.model.clientmodel;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 
 /**
  *  External documentation, can be used to link to rest API documentation
