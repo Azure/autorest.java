@@ -26,10 +26,12 @@ import {
 import {
   getAllRoutes,
   getStatusCodeDescription,
+  getServers,
   HttpOperationParameter,
   HttpOperationResponse,
   OperationDetails,
   StatusCode,
+  HttpServer,
 } from "@cadl-lang/rest/http";
 import {
   CodeModel, 
@@ -62,6 +64,9 @@ export class CodeModelBuilder {
   private program: Program;
   private namespace: string;
   private version: string;
+  private baseUri: string;
+  private hostParameters: Parameter[];
+
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) =>
@@ -97,19 +102,45 @@ export class CodeModelBuilder {
         }
       }
     });
+
+    // host
+    this.baseUri = "{endpoint}";
+    const servers = getServers(this.program, serviceNamespace);
+    // TODO: multiple servers
+    if (servers && servers.length === 1) {
+      this.baseUri = servers[0].url;
+    }
+    this.hostParameters = [];
+    this.processHost(servers?.length === 1 ? servers[0] : undefined);
   }
 
   public build(): CodeModel {
-    // TODO: parameterized host
-    this.processHost();
-
     getAllRoutes(this.program)[0].map(it => this.processRoute(it));
 
     return this.codeModel;
   }
 
-  private processHost() {
-    this.codeModel.addGlobalParameter(this.hostParameter);
+  private processHost(server: HttpServer | undefined) {
+    if (server) {
+      server.parameters.forEach(it => {
+        const schema = this.processSchema(it.type, it.name);
+        return this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter(it.name, this.getDoc(it), schema, {
+          implementation: ImplementationLocation.Method,
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Uri)
+          },
+          clientDefaultValue: this.getDefaultValue(it.default),
+          language: {
+            default: {
+              serializedName: it.name
+            }
+          }
+        })));
+      });
+    } else {
+      this.hostParameters.push(this.codeModel.addGlobalParameter(this.hostParameter));
+    }
   }
 
   private processRoute(op: OperationDetails) {
@@ -133,11 +164,12 @@ export class CodeModelBuilder {
         http: {
           path: op.path,
           method: op.verb,
-          uri: "{$host}"
+          uri: this.baseUri
         }
       }
     }));
 
+    this.hostParameters.forEach(it => operation.addParameter(it));
     op.parameters.parameters.map(it => this.processParameter(operation, it));
     this.addAcceptHeaderParameter(operation, op.responses);
     if (op.parameters.body) {
@@ -158,9 +190,7 @@ export class CodeModelBuilder {
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,
         protocol: {
-          http: {
-            in: param.type
-          }
+          http: new HttpParameter(param.type)
         },
         clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
@@ -194,9 +224,7 @@ export class CodeModelBuilder {
       implementation: ImplementationLocation.Method,
       required: true,
       protocol: {
-        http: {
-          in: ParameterLocation.Header
-        }
+        http: new HttpParameter(ParameterLocation.Header)
       },
       language: {
         default: {
@@ -212,9 +240,7 @@ export class CodeModelBuilder {
       implementation: ImplementationLocation.Method,
       required: !body.optional,
       protocol: {
-        http: {
-          in: ParameterLocation.Body
-        }
+        http: new HttpParameter(ParameterLocation.Body)
       },
       clientDefaultValue: this.getDefaultValue(body.default),
     });
@@ -489,7 +515,7 @@ export class CodeModelBuilder {
   get hostParameter() {
     return (
       this._hostParameter ||
-      (this._hostParameter = new Parameter("$host", "Server parameter", this.stringSchema, {
+      (this._hostParameter = new Parameter("endpoint", "Server parameter", this.stringSchema, {
         implementation: ImplementationLocation.Client,
         required: true,
         protocol: {
@@ -498,7 +524,7 @@ export class CodeModelBuilder {
         clientDefaultValue: "",
         language: {
           default: {
-            serializedName: "$host"
+            serializedName: "endpoint"
           }
         },
         extensions: {
