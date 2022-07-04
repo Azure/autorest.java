@@ -98,7 +98,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
             if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
@@ -121,10 +121,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
                 && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
             builder.returnType(createBinaryContentAsyncReturnType());
-        } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-            // BinaryResponse
-            IType singleValueType = ClassType.StreamResponse;
-            builder.returnType(GenericType.Mono(singleValueType));
         } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
@@ -139,7 +135,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             builder.returnType(GenericType.Mono(clientResponseClassType));
         } else {
             IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)
+                    || responseBodyType.equals(ClassType.InputStream)) {
                 singleValueType = ClassType.StreamResponse;
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);

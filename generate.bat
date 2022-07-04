@@ -95,6 +95,7 @@ call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameterized-endpoint.json --namespace=fixtures.parameterizedendpoint --generate-send-request-method
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/required-header-query.json --namespace=fixtures.requiredheaderquery
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/constant-and-from-client-parameters.json --namespace=fixtures.constantandclientparam

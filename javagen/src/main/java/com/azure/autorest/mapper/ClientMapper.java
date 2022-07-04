@@ -429,7 +429,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .packageName(classType.getPackage())
             .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
             .headersType(Mappers.getSchemaMapper().map(headerSchema))
-            .bodyType(SchemaUtil.getOperationResponseType(method))
+            .bodyType(SchemaUtil.getOperationResponseType(method, settings))
             .build();
     }
 
