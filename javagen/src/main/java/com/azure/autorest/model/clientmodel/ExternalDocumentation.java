@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.Objects;
 
 /**
- *  External documentation at operation level, can be used to link to rest API documentation
+ *  External documentation, can be used to link to rest API documentation
  */
 public class ExternalDocumentation {
     private String description;

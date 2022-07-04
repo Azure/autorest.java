@@ -115,7 +115,7 @@ public class ClientMethod {
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
-     * @param externalDocumentation The method level documentation.
+     * @param externalDocumentation The external documentation.
      */
     protected ClientMethod(String description, ReturnValue returnValue, String name,
                            List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
