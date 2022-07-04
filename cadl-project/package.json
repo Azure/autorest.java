@@ -2,10 +2,12 @@
   "name": "cadl_lab",
   "type": "module",
   "dependencies": {
-    "@cadl-lang/compiler": "~0.32.0",
-    "@cadl-lang/rest": "~0.15.0",
-    "@cadl-lang/openapi3": "~0.12.0",
-    "@autorest/codemodel": "~4.18.2"
+    "@cadl-lang/compiler": "next",
+    "@cadl-lang/rest": "next",
+    "@cadl-lang/openapi3": "next",
+    "@autorest/codemodel": "next",
+    "@azure-tools/cadl-autorest": "next",
+    "@azure-tools/cadl-azure-core": "next"
   },
   "private": true
 }
