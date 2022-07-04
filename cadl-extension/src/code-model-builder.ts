@@ -48,6 +48,9 @@ import {
   Request,
   SchemaResponse,
   BinarySchema,
+  HttpHeader,
+  ConstantSchema,
+  ConstantValue,
 } from "@autorest/codemodel";
 import { fail } from "assert";
 
@@ -127,6 +130,7 @@ export class CodeModelBuilder {
     }));
 
     op.parameters.parameters.map(it => this.processParameter(operation, it));
+    this.addAcceptHeaderParameter(operation, op.responses);
     if (op.parameters.body) {
       this.processBody(operation, op.parameters.body);
     }
@@ -155,6 +159,38 @@ export class CodeModelBuilder {
     op.addParameter(parameter);
   }
 
+  private addAcceptHeaderParameter(op: Operation, responses: HttpOperationResponse[]) {
+    const produces = new Set<string>(["application/json"]);
+
+    for (const resp of responses) {
+      if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+        resp.responses[0].body.contentTypes.forEach(it => produces.add(it));
+      }
+    }
+    const acceptTypes = Array.from(produces.values()).join(", ");
+
+    const acceptSchema = this.codeModel.schemas.constants?.find(
+      it => it.language.default.name === "accept" && it.value.value === acceptTypes,
+    ) || this.codeModel.schemas.add(new ConstantSchema("accept", `Accept: ${acceptTypes}`, {
+      valueType: this.stringSchema,
+      value: new ConstantValue(acceptTypes)
+    }));
+    op.addParameter(new Parameter("accept", "Accept header", acceptSchema, {
+      implementation: ImplementationLocation.Method,
+      required: true,
+      protocol: {
+        http: {
+          in: ParameterLocation.Header
+        }
+      },
+      language: {
+        default: {
+          serializedName: "accept",
+        },
+      }
+    }));
+  }
+
   private processBody(op: Operation, body: ModelTypeProperty) {
     const schema = this.processSchema(body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
@@ -162,7 +198,7 @@ export class CodeModelBuilder {
       required: !body.optional,
       protocol: {
         http: {
-          in: "body"
+          in: ParameterLocation.Body
         }
       },
       clientDefaultValue: this.getDefaultValue(body.default),
@@ -171,26 +207,39 @@ export class CodeModelBuilder {
   }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
-    // TODO: what to do if more than 1?
+    // TODO: what to do if more than 1 response?
     let response;
+    let headers;
+    if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+      // headers
+      headers = [];
+      for (const [key, header] of Object.entries(resp.responses[0].headers)) {
+        const schema = this.processSchema(header.type, key);
+        headers.push(new HttpHeader(key, schema));
+      }
+    }
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
       if (responseBody.type.kind === "Model" && responseBody.type.name === "bytes") {
+        // binary
         response = new BinarySchema(this.getResponseDescription(resp), {
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
+              headers: headers,
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary"
             }
           }
         });
       } else {
+        // schema (usually JSON)
         const schema = this.processSchema(responseBody.type, "response");
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
+              headers: headers,
               mediaTypes: responseBody.contentTypes
             }
           },
@@ -202,10 +251,12 @@ export class CodeModelBuilder {
         });
       }
     } else {
+      // not binary nor schema, usually NoContent
       response = new Response({
         protocol: {
           http: {
-            statusCodes: [this.getStatusCode(resp.statusCode)]
+            statusCodes: [this.getStatusCode(resp.statusCode)],
+            headers: headers,
           }
         },
         language: {
