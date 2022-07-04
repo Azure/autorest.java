@@ -27,6 +27,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   OperationDetails,
+  StatusCode,
 } from "@cadl-lang/rest/http";
 import {
   CodeModel, 
@@ -172,15 +173,25 @@ export class CodeModelBuilder {
   private processResponse(op: Operation, resp: HttpOperationResponse) {
     // TODO: what to do if more than 1?
     let response;
-    if (resp.responses && resp.responses[0].body) {
-      if (resp.responses[0].body.type.kind === "Model" && resp.responses[0].body.type.name === "bytes") {
-        response = new BinarySchema(this.getResponseDescription(resp));
+    if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+      const responseBody = resp.responses[0].body;
+      if (responseBody.type.kind === "Model" && responseBody.type.name === "bytes") {
+        response = new BinarySchema(this.getResponseDescription(resp), {
+          protocol: {
+            http: {
+              statusCodes: [this.getStatusCode(resp.statusCode)],
+              mediaTypes: responseBody.contentTypes,
+              knownMediaType: "binary"
+            }
+          }
+        });
       } else {
-        const schema = this.processSchema(resp.responses[0].body?.type, "response");
+        const schema = this.processSchema(responseBody.type, "response");
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
-              statusCodes: [resp.statusCode === "*" ? "default" : resp.statusCode]
+              statusCodes: [this.getStatusCode(resp.statusCode)],
+              mediaTypes: responseBody.contentTypes
             }
           },
           language: {
@@ -194,7 +205,7 @@ export class CodeModelBuilder {
       response = new Response({
         protocol: {
           http: {
-            statusCodes: [resp.statusCode === "*" ? "default" : resp.statusCode]
+            statusCodes: [this.getStatusCode(resp.statusCode)]
           }
         },
         language: {
@@ -210,6 +221,10 @@ export class CodeModelBuilder {
     } else {
       op.addResponse(response);
     }
+  }
+
+  private getStatusCode(statusCode: StatusCode): string {
+    return statusCode === "*" ? "default" : statusCode;
   }
 
   private getResponseDescription(resp: HttpOperationResponse): string {
