@@ -3,13 +3,12 @@
 
 package com.azure.autorest.android.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.ExternalDocumentation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.MethodDocumentation;
+import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -39,7 +38,7 @@ public class AndroidClientMethod extends ClientMethod {
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
-     * @param methodDocumentation The parameter transformations before calling ProxyMethod.
+     * @param externalDocumentation The parameter transformations before calling ProxyMethod.
      */
     protected AndroidClientMethod(String description, ReturnValue returnValue, String name,
                                   List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
@@ -47,7 +46,7 @@ public class AndroidClientMethod extends ClientMethod {
                                   String clientReference, List<String> requiredNullableParameterExpressions,
                                   boolean isGroupedParameterRequired, String groupedParameterTypeName,
                                   MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
-                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails, MethodDocumentation methodDocumentation) {
+                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         super(description,
                 returnValue,
                 name,
@@ -65,7 +64,7 @@ public class AndroidClientMethod extends ClientMethod {
                 methodVisibility,
                 false,
                 methodPollingDetails,
-                methodDocumentation);
+                externalDocumentation);
     }
 
     @Override
@@ -121,7 +120,7 @@ public class AndroidClientMethod extends ClientMethod {
                     methodTransformationDetails,
                     methodVisibility,
                     methodPollingDetails,
-                    methodDocumentation);
+                    externalDocumentation);
         }
     }
 }
