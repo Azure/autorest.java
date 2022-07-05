@@ -26,6 +26,18 @@ public final class AutoRestPagingTestService {
         return this.host;
     }
 
+    /** Api Version. */
+    private final String apiVersion;
+
+    /**
+     * Gets Api Version.
+     *
+     * @return the apiVersion value.
+     */
+    public String getApiVersion() {
+        return this.apiVersion;
+    }
+
     /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
@@ -66,14 +78,16 @@ public final class AutoRestPagingTestService {
      * Initializes an instance of AutoRestPagingTestService client.
      *
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestPagingTestService(String host) {
+    AutoRestPagingTestService(String host, String apiVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+                host,
+                apiVersion);
     }
 
     /**
@@ -81,9 +95,10 @@ public final class AutoRestPagingTestService {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestPagingTestService(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    AutoRestPagingTestService(HttpPipeline httpPipeline, String host, String apiVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, apiVersion);
     }
 
     /**
@@ -92,11 +107,14 @@ public final class AutoRestPagingTestService {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param apiVersion Api Version.
      */
-    AutoRestPagingTestService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    AutoRestPagingTestService(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.apiVersion = apiVersion;
         this.pagings = new Pagings(this);
     }
 }
