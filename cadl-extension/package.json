@@ -1,7 +1,7 @@
 {
-  "name": "@cadl-lang/java-client-emitter",
-  "version": "0.1.0",
-  "description": "",
+  "name": "@azure-tools/java-client-emitter",
+  "version": "0.1.0-dev.1",
+  "description": "Java client emitter for CADL compiler",
   "keywords": [
     "cadl"
   ],
@@ -12,16 +12,6 @@
   "exports": {
     ".": "./dist/src/emitter.js",
     "./testing": "./dist/src/testing/index.js"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/src/emitter.d.ts"
-      ],
-      "testing": [
-        "./dist/src/testing/index.d.ts"
-      ]
-    }
   },
   "cadlMain": "dist/src/emitter.js",
   "engines": {
@@ -39,21 +29,22 @@
   "files": [
     "lib/*.cadl",
     "dist/**",
-    "!dist/test/**"
+    "!dist/test/**",
+    "target/azure-cadl-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@cadl-lang/compiler": "~0.32.0",
-    "@cadl-lang/rest": "~0.15.0",
-    "@cadl-lang/versioning": "~0.6.0"
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/versioning": "latest"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.18.2",
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
-    "@cadl-lang/compiler": "~0.32.0",
-    "@cadl-lang/rest": "~0.15.0",
-    "@cadl-lang/versioning": "~0.6.0",
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/versioning": "latest",
     "@types/js-yaml": "~4.0.1",
     "@types/mocha": "~9.1.0",
     "@types/node": "~14.0.27",

@@ -4,21 +4,22 @@
 package com.azure.cadl;
 
 import com.azure.autorest.CadlPlugin;
+import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.model.projectmodel.TextFile;
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.google.googlejavaformat.java.Formatter;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.BufferedWriter;
@@ -36,8 +37,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         String inputYamlFileName = "cadl-project/cadl-output/code-model.yaml";
-        if (args.length > 1) {
-            inputYamlFileName = args[1];
+        String outputFolder = "cadl-sample/";
+        if (args.length >= 1) {
+            inputYamlFileName = args[0];
+        }
+        if (args.length >= 2) {
+            outputFolder = args[1];
+            if (!outputFolder.endsWith("/")) {
+                outputFolder += "/";
+            }
         }
 
         CadlPlugin cadlPlugin = new CadlPlugin();
@@ -57,8 +65,18 @@ public class Main {
             } catch (Exception e) {
                 continue;
             }
-            new File("cadl-sample/" + javaFile.getFilePath()).getParentFile().mkdirs();
-            writeFile("cadl-sample/" + javaFile.getFilePath(), content);
+            new File(outputFolder + javaFile.getFilePath()).getParentFile().mkdirs();
+            writeFile(outputFolder + javaFile.getFilePath(), content);
+        }
+        for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
+            String content = xmlFile.getContents().toString();
+            new File(outputFolder + xmlFile.getFilePath()).getParentFile().mkdirs();
+            writeFile(outputFolder + xmlFile.getFilePath(), content);
+        }
+        for (TextFile testFile : javaPackage.getTextFiles()) {
+            String content = testFile.getContents();
+            new File(outputFolder + testFile.getFilePath()).getParentFile().mkdirs();
+            writeFile(outputFolder + testFile.getFilePath(), content);
         }
     }
 
@@ -71,24 +89,14 @@ public class Main {
     private static CodeModel loadCodeModel(String filename) throws IOException {
         String file = readFile(filename);
 
-        Representer representer = new Representer() {
-            @Override
-            protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
-                                                          Tag customTag) {
-                // if value of property is null, ignore it.
-                if (propertyValue == null) {
-                    return null;
-                }
-                else {
-                    return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-                }
-            }
-        };
-
+        Representer representer = new Representer();
+        representer.setPropertyUtils(new AnnotatedPropertyUtils());
+        representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-        Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+        Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
+        Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
+        CodeModel codeModel = yamlMapper.loadAs(file, CodeModel.class);
         return codeModel;
     }
 

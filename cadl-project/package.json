@@ -2,12 +2,12 @@
   "name": "cadl_lab",
   "type": "module",
   "dependencies": {
-    "@cadl-lang/compiler": "next",
-    "@cadl-lang/rest": "next",
-    "@cadl-lang/openapi3": "next",
-    "@autorest/codemodel": "next",
-    "@azure-tools/cadl-autorest": "next",
-    "@azure-tools/cadl-azure-core": "next"
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/openapi3": "latest",
+    "@azure-tools/cadl-autorest": "latest",
+    "@azure-tools/cadl-azure-core": "latest",
+    "@azure-tools/java-client-emitter": "file:/../cadl-extension/azure-tools-java-client-emitter-0.1.0-dev.1.tgz"
   },
   "private": true
 }

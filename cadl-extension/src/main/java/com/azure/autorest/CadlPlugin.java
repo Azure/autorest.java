@@ -25,6 +25,8 @@ public class CadlPlugin extends Javagen {
     static {
         SETTINGS_MAP.put("namespace", "com.azure.cadl");
 
+        SETTINGS_MAP.put("data-plane", true);
+
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
         SETTINGS_MAP.put("generate-client-interfaces", false);
         SETTINGS_MAP.put("generate-client-as-impl", true);
@@ -32,7 +34,7 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("generate-builder-per-client", true);
         SETTINGS_MAP.put("add-context-parameter", true);
         SETTINGS_MAP.put("context-client-method-parameter", true);
-        SETTINGS_MAP.put("sync-methods", "ALL");
+        SETTINGS_MAP.put("sync-methods", "all");
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());

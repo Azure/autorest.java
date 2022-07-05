@@ -6,11 +6,27 @@ import {
   dump, 
 } from "js-yaml";
 import {
+  execFile 
+} from "child_process";
+import {
   CodeModelBuilder,
 } from "./code-model-builder.js";
 
 export async function $onEmit(program: Program) {
   const builder = new CodeModelBuilder(program);
   const codeModel = builder.build();
-  await program.host.writeFile(resolvePath(program.compilerOptions.outputPath || "", "./code-model.yaml"), dump(codeModel));
+  const outputPath = program.compilerOptions.outputPath || "./";
+  const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
+  await program.host.writeFile(codeModelFileName, dump(codeModel));
+  await execFile("java", [
+    "-jar",
+    "node_modules/@azure-tools/java-client-emitter/target/azure-cadl-extension-jar-with-dependencies.jar",
+    codeModelFileName,
+    resolvePath(outputPath, "java")
+  ], (error, stdout, stderr) => {
+    if (error) {
+      throw error;
+    }
+    console.log(stdout);
+  });
 }

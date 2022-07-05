@@ -1,7 +1,8 @@
 cd ../cadl-extension/
+npm install
 npm run build
+npm pack
 cd ../cadl-project/
-mkdir node_modules/\@cadl-lang/java-client-emitter/
-tar -c --exclude node_modules -C ../cadl-extension/ . | tar -x -C node_modules/\@cadl-lang/java-client-emitter/
-
-cadl compile confidentialledger.cadl
+rm -rf node_modules
+rm package-lock.json
+npm install
