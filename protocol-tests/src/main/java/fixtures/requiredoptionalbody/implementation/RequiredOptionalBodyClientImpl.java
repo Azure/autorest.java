@@ -207,6 +207,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
+     * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateDeploymentWithResponseAsync(
@@ -266,6 +267,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
+     * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateDeploymentWithResponseAsync(
@@ -322,6 +324,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return deployment metadata along with {@link Response}.
+     * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateDeploymentWithResponse(

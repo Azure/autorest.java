@@ -79,6 +79,7 @@ public final class RequiredOptionalBodyClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return deployment metadata along with {@link Response}.
+     * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -97,6 +97,8 @@ public class ClientMethod {
 
     private MethodPollingDetails methodPollingDetails;
 
+    private ExternalDocumentation externalDocumentation;
+
     /**
      * Create a new ClientMethod with the provided properties.
      * @param description The description of this ClientMethod.
@@ -113,6 +115,7 @@ public class ClientMethod {
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
+     * @param externalDocumentation The external documentation.
      */
     protected ClientMethod(String description, ReturnValue returnValue, String name,
                            List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
@@ -122,7 +125,7 @@ public class ClientMethod {
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
                            JavaVisibility methodVisibility, boolean implementationOnly,
-                           MethodPollingDetails methodPollingDetails) {
+                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -140,6 +143,7 @@ public class ClientMethod {
         this.methodVisibility = methodVisibility;
         this.implementationOnly = implementationOnly;
         this.methodPollingDetails = methodPollingDetails;
+        this.externalDocumentation = externalDocumentation;
     }
 
     @Override
@@ -284,6 +288,10 @@ public class ClientMethod {
 
     public final List<MethodTransformationDetail> getMethodTransformationDetails() {
         return methodTransformationDetails;
+    }
+
+    public ExternalDocumentation getMethodDocumentation() {
+        return externalDocumentation;
     }
 
     public final List<String> getProxyMethodArguments(JavaSettings settings) {
@@ -473,6 +481,7 @@ public class ClientMethod {
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
         protected boolean implementationOnly = false;
         protected MethodPollingDetails methodPollingDetails;
+        protected ExternalDocumentation externalDocumentation;
 
         /**
          * Sets the description of this ClientMethod.
@@ -645,6 +654,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets method documentation
+         * @param externalDocumentation method level documentation
+         * @return the Builder itself
+         */
+        public Builder methodDocumentation(ExternalDocumentation externalDocumentation) {
+            this.externalDocumentation = externalDocumentation;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
@@ -665,7 +684,8 @@ public class ClientMethod {
                     methodTransformationDetails,
                     methodVisibility,
                     implementationOnly,
-                    methodPollingDetails);
+                    methodPollingDetails,
+                    externalDocumentation);
         }
     }
 }
