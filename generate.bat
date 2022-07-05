@@ -91,8 +91,8 @@ call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url.json --namespace=fixtures.url
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/url-multi-collectionFormat.json --namespace=fixtures.url.multi
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/lro.json --namespace=fixtures.lro
-call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcinitial
-call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-initial.json --namespace=fixtures.llcinitial
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-update1.json --namespace=fixtures.llcupdate1 --generate-send-request-method
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameterized-endpoint.json --namespace=fixtures.parameterizedendpoint --generate-send-request-method
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/constants.json --namespace=fixtures.constants
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile
@@ -111,8 +111,8 @@ del protocol-tests\src\main\java\module-info.java
 rem Protocol resilience
 rmdir /S /Q "protocol-resilience-test\llcinitial\src\main"
 rmdir /S /Q "protocol-resilience-test\llcupdate1\src\main"
-call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
-call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg_update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
+call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial
+call :log-and-call-autorest autorest %PROTOCOL_RESILIENCE_ARGUMENTS% --input-file=%SWAGGER_PATH%/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1
 del protocol-resilience-test\llcinitial\src\main\java\module-info.java
 del protocol-resilience-test\llcupdate1\src\main\java\module-info.java
 

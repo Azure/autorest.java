@@ -8,6 +8,7 @@ import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -95,6 +96,7 @@ public class PathsTests {
         client.stringEmptyWithResponse(null);
     }
 
+    @Disabled("client validation is not supported")
     @Test
     public void stringNull() {
         try {
@@ -109,6 +111,8 @@ public class PathsTests {
         client.enumValidWithResponse("green color", null);
     }
 
+
+    @Disabled("client validation is not supported")
     @Test
     public void enumNull() {
         try {
@@ -128,6 +132,7 @@ public class PathsTests {
         client.byteEmptyWithResponse(null).getValue();
     }
 
+    @Disabled("client validation is not supported")
     @Test
     public void byteNull() {
         try {
@@ -142,6 +147,7 @@ public class PathsTests {
         client.dateValidWithResponse(null).getValue();
     }
 
+    @Disabled("client validation is not supported")
     @Test
     public void dateNull() {
         try {
@@ -156,6 +162,7 @@ public class PathsTests {
         client.dateTimeValidWithResponse(null).getValue();
     }
 
+    @Disabled("client validation is not supported")
     @Test
     public void dateTimeNull() {
         try {

@@ -161,6 +161,23 @@ public final class AutoRestPagingTestServiceBuilder
     }
 
     /*
+     * Api Version
+     */
+    @Generated private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     *
+     * @param apiVersion the apiVersion value.
+     * @return the AutoRestPagingTestServiceBuilder.
+     */
+    @Generated
+    public AutoRestPagingTestServiceBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * The serializer to serialize an object into a string
      */
     @Generated private SerializerAdapter serializerAdapter;
@@ -208,10 +225,13 @@ public final class AutoRestPagingTestServiceBuilder
         if (host == null) {
             this.host = "http://localhost:3000";
         }
+        if (apiVersion == null) {
+            this.apiVersion = "1.0.0";
+        }
         if (serializerAdapter == null) {
             this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
         }
-        AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline, serializerAdapter, host);
+        AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline, serializerAdapter, host, apiVersion);
         return client;
     }
 

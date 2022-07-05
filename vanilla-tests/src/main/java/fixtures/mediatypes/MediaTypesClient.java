@@ -232,6 +232,44 @@ public final class MediaTypesClient {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/mediatypes/bodyThreeTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<String>> bodyThreeTypes(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
+                @HeaderParam("Content-Length") long contentLength,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/mediatypes/bodyThreeTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<String>> bodyThreeTypes(
+                @HostParam("$host") String host,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Content-Length") long contentLength,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/mediatypes/bodyThreeTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<String>> bodyThreeTypes(
+                @HostParam("$host") String host,
+                @BodyParam("text/plain") String message,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/mediatypes/bodyThreeTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<String>> bodyThreeTypes(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Object message,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/mediatypes/textAndJson")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -1032,6 +1070,234 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithThreeContentTypes(ContentType2 contentType, BinaryData message, long contentLength) {
         return binaryBodyWithThreeContentTypesAsync(contentType, message, contentLength).block();
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (message == null) {
+            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
+        }
+        final String accept = "text/plain";
+        return FluxUtil.withContext(
+                context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength) {
+        return bodyThreeTypesWithResponseAsync(message, contentLength).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String bodyThreeTypes(Flux<ByteBuffer> message, long contentLength) {
+        return bodyThreeTypesAsync(message, contentLength).block();
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, long contentLength) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (message == null) {
+            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
+        }
+        final String accept = "text/plain";
+        return FluxUtil.withContext(
+                context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> bodyThreeTypesAsync(BinaryData message, long contentLength) {
+        return bodyThreeTypesWithResponseAsync(message, contentLength).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String bodyThreeTypes(BinaryData message, long contentLength) {
+        return bodyThreeTypesAsync(message, contentLength).block();
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(String message) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (message == null) {
+            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
+        }
+        final String accept = "text/plain";
+        return FluxUtil.withContext(context -> service.bodyThreeTypes(this.getHost(), message, accept, context));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> bodyThreeTypesAsync(String message) {
+        return bodyThreeTypesWithResponseAsync(message).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String bodyThreeTypes(String message) {
+        return bodyThreeTypesAsync(message).block();
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (message == null) {
+            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
+        }
+        final String accept = "text/plain";
+        return FluxUtil.withContext(context -> service.bodyThreeTypes(this.getHost(), message, accept, context));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> bodyThreeTypesAsync(Object message) {
+        return bodyThreeTypesWithResponseAsync(message).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String bodyThreeTypes(Object message) {
+        return bodyThreeTypesAsync(message).block();
     }
 
     /**
