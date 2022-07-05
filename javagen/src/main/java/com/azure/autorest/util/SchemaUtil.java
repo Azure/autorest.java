@@ -78,7 +78,13 @@ public class SchemaUtil {
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
     }
 
-    public static IType getOperationResponseType(Operation operation) {
+    /*
+     * Returns raw response type.
+     * In case of binary response:
+     *   For DPG, returns BinaryData
+     *   For vanilla/mgmt, returns InputStream
+     */
+    public static IType getOperationResponseType(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
@@ -88,6 +94,12 @@ public class SchemaUtil {
                     && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
+            } else if (containsBinaryResponse(operation)) {
+                if (settings.isDataPlaneClient()) {
+                    responseBodyType = ClassType.BinaryData;
+                } else {
+                    responseBodyType = ClassType.InputStream;
+                }
             } else {
                 responseBodyType = PrimitiveType.Void;
             }
@@ -181,6 +193,10 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    private static boolean containsBinaryResponse(Operation operation) {
+        return operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()));
     }
 
     // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
