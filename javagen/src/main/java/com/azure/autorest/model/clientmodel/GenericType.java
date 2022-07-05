@@ -11,22 +11,6 @@ import java.util.stream.Collectors;
  * A generic type that is used by the client.
  */
 public class GenericType implements IType {
-
-    public GenericType() {
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public void setTypeArguments(IType[] typeArguments) {
-        this.typeArguments = typeArguments;
-    }
-
     public static final GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
     /**
      * The main non-generic type of this generic type.

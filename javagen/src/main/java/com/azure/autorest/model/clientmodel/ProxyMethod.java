@@ -15,7 +15,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,58 +23,10 @@ import java.util.Set;
  * A method within a Proxy.
  */
 public class ProxyMethod {
-
-    public ProxyMethod() {
-    }
-
-    public void setRequestContentType(String requestContentType) {
-        this.requestContentType = requestContentType;
-    }
-
-    public void setReturnType(IType returnType) {
-        this.returnType = returnType;
-    }
-
-    public void setHttpMethod(HttpMethod httpMethod) {
-        this.httpMethod = httpMethod;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    public void setUrlPath(String urlPath) {
-        this.urlPath = urlPath;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setParameters(List<ProxyMethodParameter> parameters) {
-        this.parameters = parameters;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setReturnValueWireType(IType returnValueWireType) {
-        this.returnValueWireType = returnValueWireType;
-    }
-
-    public void setResponseBodyType(IType responseBodyType) {
-        this.responseBodyType = responseBodyType;
-    }
-
-    public void setResponseContentTypes(Set<String> responseContentTypes) {
-        this.responseContentTypes = responseContentTypes;
-    }
-
     /**
      * Get the Content-Type of the request.
      */
-    private String requestContentType;
+    private final String requestContentType;
     /**
      * The value that is returned from this method.
      */
@@ -83,33 +34,33 @@ public class ProxyMethod {
     /**
      * Get the HTTP method that will be used for this method.
      */
-    private HttpMethod httpMethod;
+    private final HttpMethod httpMethod;
     /**
      * Get the base URL that will be used for each REST API method.
      */
-    private String baseUrl;
+    private final String baseUrl;
     /**
      * Get the path of this method's request URL.
      */
-    private String urlPath;
+    private final String urlPath;
     /**
      * Get the status codes that are expected in the response.
      */
-    private List<Integer> responseExpectedStatusCodes = Collections.emptyList();
+    private final List<Integer> responseExpectedStatusCodes;
 
-    private Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes = Collections.emptyMap();
+    private final Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes;
     /**
      * Get the exception type to throw if this method receives and unexpected response status code.
      */
-    private ClassType unexpectedResponseExceptionType;
+    private final ClassType unexpectedResponseExceptionType;
     /**
      * Get the name of this Rest API method.
      */
-    private String name;
+    private final String name;
     /**
      * Get the parameters that are provided to this method.
      */
-    protected List<ProxyMethodParameter> parameters = Collections.emptyList();
+    protected List<ProxyMethodParameter> parameters;
     /**
      * Get all parameters defined in swagger to this method.
      */
@@ -117,7 +68,7 @@ public class ProxyMethod {
     /**
      * Get the description of this method.
      */
-    private String description;
+    private final String description;
     /**
      * The value of the ReturnValueWireType annotation for this method.
      */
@@ -125,25 +76,25 @@ public class ProxyMethod {
     /**
      * The response body type.
      */
-    private IType responseBodyType;
+    private final IType responseBodyType;
     /**
      * The raw response body type. responseBodyType is set to BinaryData in low-level mode. We need raw type.
      */
-    private IType rawResponseBodyType;
+    private final IType rawResponseBodyType;
     /**
      * Get whether this method resumes polling of an LRO.
      */
-    private boolean isResumable;
+    private final boolean isResumable;
     /**
      * The media-types in response.
      */
-    private Set<String> responseContentTypes;
+    private final Set<String> responseContentTypes;
 
-    private Map<String, ProxyMethodExample> examples;
+    private final Map<String, ProxyMethodExample> examples;
 
-    private List<String> specialHeaders;
+    private final List<String> specialHeaders;
 
-    private String operationId;
+    private final String operationId;
 
     /**
      * Create a new RestAPIMethod with the provided properties.

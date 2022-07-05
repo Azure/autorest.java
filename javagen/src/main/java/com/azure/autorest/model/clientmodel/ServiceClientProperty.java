@@ -12,59 +12,35 @@ import java.util.Set;
  * A property that exists within a service's client.
  */
 public class ServiceClientProperty {
-
-    public ServiceClientProperty() {
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setType(IType type) {
-        this.type = type;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDefaultValueExpression(String defaultValueExpression) {
-        this.defaultValueExpression = defaultValueExpression;
-    }
-
-    public void setReadOnly(boolean readOnly) {
-        this.readOnly = readOnly;
-    }
-
     /**
      * The description of this property.
      */
-    private String description;
+    private final String description;
     /**
      * The type of this property that is exposed via the client.
      */
-    private IType type;
+    private final IType type;
     /**
      * The name of this property.
      */
-    private String name;
+    private final String name;
 
     /**
      * THe accessor method suffix of this property
      */
-    private String accessorMethodSuffix;
+    private final String accessorMethodSuffix;
     /**
      * Get whether or not this property's value can be changed by the client library.
      */
-    private boolean readOnly;
+    private final boolean readOnly;
     /**
      * Get the expression that evaluates to this property's default value.
      */
-    private String defaultValueExpression;
+    private final String defaultValueExpression;
 
-    private JavaVisibility methodVisibility = JavaVisibility.Public;
+    private final JavaVisibility methodVisibility;
 
-    private boolean required;
+    private final boolean required;
 
     /**
      * Create a new ServiceClientProperty with the provided properties.

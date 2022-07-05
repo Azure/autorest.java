@@ -4,33 +4,12 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * A container for the types associated for accessing a specific service.
  */
 public class Client {
-
-    public Client() {
-    }
-
-    public void setName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public void setDescription(String clientDescription) {
-        this.clientDescription = clientDescription;
-    }
-
-    public void setModels(List<ClientModel> models) {
-        this.models = models;
-    }
-
-    public void setServiceClient(ServiceClient serviceClient) {
-        this.serviceClient = serviceClient;
-    }
-
     /**
      * The name of this service client.
      */
@@ -42,27 +21,27 @@ public class Client {
     /**
      * Get the enum types that are used by this service.
      */
-    private List<EnumType> enums = Collections.emptyList();
+    private List<EnumType> enums;
     /**
      * Get the exception types that are used by this service.
      */
-    private List<ClientException> exceptions = Collections.emptyList();
+    private List<ClientException> exceptions;
     /**
      * Get the XML sequence wrappers that are used by this service.
      */
-    private List<XmlSequenceWrapper> xmlSequenceWrappers = Collections.emptyList();
+    private List<XmlSequenceWrapper> xmlSequenceWrappers;
     /**
      * Get the response models which contain the response status code, headers and body for each service method.
      */
-    private List<ClientResponse> responseModels = Collections.emptyList();
+    private List<ClientResponse> responseModels;
     /**
      * Get the model types that are used by this service.
      */
-    private List<ClientModel> models = Collections.emptyList();
+    private List<ClientModel> models;
     /**
      * Get the package infos.
      */
-    private List<PackageInfo> packageInfos = Collections.emptyList();
+    private List<PackageInfo> packageInfos;
     /**
      * Get the manager for this service.
      */
@@ -76,11 +55,11 @@ public class Client {
      */
     private ModuleInfo moduleInfo;
 
-    private List<AsyncSyncClient> syncClients = Collections.emptyList();
-    private List<AsyncSyncClient> asyncClients = Collections.emptyList();
-    private List<ClientBuilder> clientBuilders = Collections.emptyList();
-    private List<ProtocolExample> protocolExamples;
-    private List<LiveTests> liveTests;
+    private final List<AsyncSyncClient> syncClients;
+    private final List<AsyncSyncClient> asyncClients;
+    private final List<ClientBuilder> clientBuilders;
+    private final List<ProtocolExample> protocolExamples;
+    private final List<LiveTests> liveTests;
 
     /**
      * Create a new Client with the provided values.

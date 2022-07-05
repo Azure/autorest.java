@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -11,18 +10,10 @@ import java.util.Set;
  * The constructor in a ServiceClient.
  */
 public class Constructor {
-
-    public Constructor() {
-    }
-
-    public void setParameters(List<ClientMethodParameter> parameters) {
-        this.parameters = parameters;
-    }
-
     /**
      * The parameters of this constructor.
      */
-    private List<ClientMethodParameter> parameters = Collections.emptyList();
+    private List<ClientMethodParameter> parameters;
 
     public Constructor(List<ClientMethodParameter> parameters) {
         this.parameters = parameters;

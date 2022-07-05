@@ -24,83 +24,59 @@ import java.util.Set;
  * A property that exists within a model defined by the client.
  */
 public class ClientModelProperty implements ClientModelPropertyAccess {
-
-    public ClientModelProperty() {
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setSerializedName(String serializedName) {
-        this.serializedName = serializedName;
-    }
-
-    public void setWireType(IType wireType) {
-        this.wireType = wireType;
-    }
-
-    public void setClientType(IType clientType) {
-        this.clientType = clientType;
-    }
-
     /**
      * Get the name of this property.
      */
-    private String name;
+    private final String name;
     /**
      * Get the description of this property.
      */
-    private String description;
+    private final String description;
     /**
      * Get the arguments that go into this property's JsonProperty annotation.
      */
-    private String annotationArguments;
+    private final String annotationArguments;
     /**
      * Get whether this property is an attribute when serialized to XML.
      */
-    private boolean isXmlAttribute;
+    private final boolean isXmlAttribute;
     /**
      * Get this property's name when serialized to XML.
      */
-    private String xmlName;
-    private String xmlNamespace;
+    private final String xmlName;
+    private final String xmlNamespace;
     /**
      * Get this property's name when it is serialized.
      */
-    private String serializedName;
+    private final String serializedName;
     /**
      * Get whether this property is a container.
      */
-    private boolean isXmlWrapper;
+    private final boolean isXmlWrapper;
     /**
      * The name of each list element tag within an XML list property.
      */
-    private String xmlListElementName;
+    private final String xmlListElementName;
     /**
      * The type of this property as it is transmitted across the network (across the wire).
      */
-    private IType wireType;
+    private final IType wireType;
     /**
      * The type of this property as it will be exposed via the client.
      */
-    private IType clientType;
+    private final IType clientType;
     /**
      * Get whether this property has a constant value.
      */
-    private boolean isConstant;
+    private final boolean isConstant;
     /**
      * Get the default value expression of this property.
      */
-    private String defaultValue;
+    private final String defaultValue;
     /**
      * Get whether this property's value can be changed by the client library.
      */
-    private boolean isReadOnly;
+    private final boolean isReadOnly;
     /**
      * Whether this property is required.
      */
@@ -108,16 +84,16 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     /**
      * The prefix of the headers that make up this property's values.
      */
-    private String headerCollectionPrefix;
+    private final String headerCollectionPrefix;
 
-    private boolean isAdditionalProperties;
+    private final boolean isAdditionalProperties;
 
-    private List<Mutability> mutabilities;
+    private final List<Mutability> mutabilities;
 
-    private boolean needsFlatten;
-    private boolean clientFlatten;
-    private boolean polymorphicDiscriminator;
-    private boolean isXmlText;
+    private final boolean needsFlatten;
+    private final boolean clientFlatten;
+    private final boolean polymorphicDiscriminator;
+    private final boolean isXmlText;
 
     /**
      * Create a new ClientModelProperty with the provided properties.

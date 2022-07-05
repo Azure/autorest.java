@@ -16,18 +16,6 @@ import java.util.Set;
  * The details of a class type that is used by a client.
  */
 public class ClassType implements IType {
-
-    public ClassType() {
-    }
-
-    public void setPackageName(java.lang.String packageName) {
-        this.packageName = packageName;
-    }
-
-    public void setName(java.lang.String name) {
-        this.name = name;
-    }
-
     public static final ClassType Void = new ClassType.Builder().knownClass(java.lang.Void.class).build();
     public static final ClassType Boolean = new ClassType.Builder().knownClass(java.lang.Boolean.class).defaultValueExpressionConverter(java.lang.String::toLowerCase).build();
     public static final ClassType Byte = new ClassType.Builder().knownClass(java.lang.Byte.class).build();
@@ -97,11 +85,11 @@ public class ClassType implements IType {
     public static final ClassType ResourceNotFoundException = new Builder().knownClass(com.azure.core.exception.ResourceNotFoundException.class).build();
     public static final ClassType TooManyRedirectsException = new Builder().knownClass(com.azure.core.exception.TooManyRedirectsException.class).build();
 
-    private String packageName;
-    private String name;
-    private List<String> implementationImports;
-    private XmsExtensions extensions;
-    private java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final String packageName;
+    private final String name;
+    private final List<String> implementationImports;
+    private final XmsExtensions extensions;
+    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
         packageName = packageKeyword;

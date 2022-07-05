@@ -6,7 +6,6 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.ClientModelUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -14,58 +13,6 @@ import java.util.Set;
  * The details of a ServiceClient.
  */
 public class ServiceClient {
-
-    public ServiceClient() {
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
-    }
-
-    public void setClientBaseName(String clientBaseName) {
-        this.clientBaseName = clientBaseName;
-    }
-
-    public void setProxy(Proxy proxy) {
-        this.proxy = proxy;
-    }
-
-    public void setClientMethods(List<ClientMethod> clientMethods) {
-        this.clientMethods = clientMethods;
-    }
-
-    public void setConstructors(List<Constructor> constructors) {
-        this.constructors = constructors;
-    }
-
-    public void setHttpPipelineParameter(ClientMethodParameter httpPipelineParameter) {
-        this.httpPipelineParameter = httpPipelineParameter;
-    }
-
-    public void setSerializerAdapterParameter(ClientMethodParameter serializerAdapterParameter) {
-        this.serializerAdapterParameter = serializerAdapterParameter;
-    }
-
-    public void setProperties(List<ServiceClientProperty> properties) {
-        this.properties = properties;
-    }
-
-    public boolean isBuilderDisabled() {
-        return builderDisabled;
-    }
-
-    public void setBuilderDisabled(boolean builderDisabled) {
-        this.builderDisabled = builderDisabled;
-    }
-
     /**
      * The package that this service client belongs to.
      */
@@ -85,19 +32,19 @@ public class ServiceClient {
     /**
      * The MethodGroupClients that belong to this ServiceClient.
      */
-    private List<MethodGroupClient> methodGroupClients = Collections.emptyList();
+    private List<MethodGroupClient> methodGroupClients;
     /**
      * The properties of this ServiceClient.
      */
-    private List<ServiceClientProperty> properties = Collections.emptyList();
+    private List<ServiceClientProperty> properties;
     /**
      * The constructors for this ServiceClient.
      */
-    private List<Constructor> constructors = Collections.emptyList();
+    private List<Constructor> constructors;
     /**
      * The client method overloads for this ServiceClient.
      */
-    private List<ClientMethod> clientMethods = Collections.emptyList();
+    private List<ClientMethod> clientMethods;
     /**
      * The azure environment parameter.
      */
