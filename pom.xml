@@ -365,6 +365,18 @@
         <module>./fluent-tests</module>
       </modules>
     </profile>
+
+    <profile>
+      <id>cadl</id>
+      <activation>
+        <property>
+          <name>cadl</name>
+        </property>
+      </activation>
+      <modules>
+        <module>./cadl-extension</module>
+      </modules>
+    </profile>
   </profiles>
 
 </project>

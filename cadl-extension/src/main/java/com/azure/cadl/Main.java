@@ -1,12 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest;
+package com.azure.cadl;
 
+import com.azure.autorest.CadlPlugin;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.google.googlejavaformat.java.Formatter;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -26,12 +30,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class CadlMain {
+public class Main {
+
+    // java -jar target/azure-cadl-extension-jar-with-dependencies.jar
 
     public static void main(String[] args) throws IOException {
-        Client client = loadClient("client-model.yaml");
-        Javagen javagen = new MockUnitJavagen();
-        JavaPackage javaPackage = javagen.writeToTemplates(JavaSettings.getInstance(), null, client);
+        String inputYamlFileName = "cadl-project/cadl-output/code-model.yaml";
+        if (args.length > 1) {
+            inputYamlFileName = args[1];
+        }
+
+        CadlPlugin cadlPlugin = new CadlPlugin();
+        CodeModel codeModel = loadCodeModel(inputYamlFileName);
+
+        codeModel = new Transformer().transform(codeModel);
+
+        Client client = Mappers.getClientMapper().map(codeModel);
+
+        JavaPackage javaPackage = cadlPlugin.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
 
         Formatter formatter = new Formatter();
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
@@ -46,7 +62,13 @@ public class CadlMain {
         }
     }
 
-    private static Client loadClient(String filename) throws IOException {
+    private static void writeFile(String path, String content) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            writer.write(content);
+        }
+    }
+
+    private static CodeModel loadCodeModel(String filename) throws IOException {
         String file = readFile(filename);
 
         Representer representer = new Representer() {
@@ -66,14 +88,8 @@ public class CadlMain {
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        Client client = newYaml.loadAs(file, Client.class);
-        return client;
-    }
-
-    private static void writeFile(String path, String content) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            writer.write(content);
-        }
+        CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+        return codeModel;
     }
 
     private static String readFile(String path) throws IOException {

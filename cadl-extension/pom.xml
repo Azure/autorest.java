@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.azure.tools</groupId>
+    <artifactId>azure-autorest-parent</artifactId>
+    <version>1.0.0-beta.1</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <groupId>com.azure.tools</groupId>
+  <artifactId>azure-cadl-extension</artifactId>
+  <version>1.0.0-beta.1</version>
+
+  <repositories>
+    <repository>
+      <id>azuresdkmaven</id>
+      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-javagen</artifactId>
+      <version>1.0.0-beta.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-preprocessor</artifactId>
+      <version>1.0.0-beta.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-extension</artifactId>
+      <version>1.0.0-beta.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core</artifactId>
+      <version>1.29.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.googlejavaformat</groupId>
+      <artifactId>google-java-format</artifactId>
+      <version>1.0.0-beta.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>local</id>
+      <activation>
+        <property>
+          <name>local</name>
+        </property>
+      </activation>
+      <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <mainClass>com.azure.cadl.Main</mainClass>
+                    </manifest>
+                  </archive>
+                  <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
