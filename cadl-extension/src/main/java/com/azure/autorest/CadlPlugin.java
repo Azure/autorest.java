@@ -46,6 +46,7 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
 
         SETTINGS_MAP.put("regenerate-pom", true);
+        SETTINGS_MAP.put("generate-models", true);
     }
 
     public static class MockConnection extends Connection {
