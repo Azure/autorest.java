@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -152,6 +153,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 syncReturnType = responseBodyType.getClientType();
                 syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
             }
+        }
+
+        // map externalDocs property
+        if (operation.getExternalDocs() != null) {
+            ExternalDocumentation externalDocumentation = new ExternalDocumentation.Builder()
+                    .description(operation.getExternalDocs().getDescription())
+                    .url(operation.getExternalDocs().getUrl())
+                    .build();
+            builder.methodDocumentation(externalDocumentation);
+        }
+
+        if (syncReturnType == ClassType.InputStream) {
+            syncReturnWithResponse = ClassType.StreamResponse;
+        } else {
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
         // Low-level client only requires one request per operation
