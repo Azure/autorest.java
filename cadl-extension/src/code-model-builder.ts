@@ -62,7 +62,7 @@ import { fail } from "assert";
 
 export class CodeModelBuilder {
   private program: Program;
-  private namespace: string;
+  private _namespace: string;
   private version: string;
   private baseUri: string;
   private hostParameters: Parameter[];
@@ -81,13 +81,13 @@ export class CodeModelBuilder {
       throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    // let versions = getVersions(this.program, serviceNamespace);
-    // if (versions.length === 0 && getServiceVersion(this.program)) {
-    //   versions = [getServiceVersion(this.program)];
-    // }
-    this.namespace = getServiceNamespaceString(this.program)?.toLowerCase() || "client";
+    // java namespace
+    this._namespace = "com." + (getServiceNamespaceString(this.program) || "Azure.Client").toLowerCase;
+
+    // service version
     this.version = getServiceVersion(this.program);
 
+    // init code model
     const title = getServiceTitle(this.program);
     const description = this.getDoc(serviceNamespace);
     this.codeModel = new CodeModel(title, false, {
@@ -118,6 +118,10 @@ export class CodeModelBuilder {
     getAllRoutes(this.program)[0].map(it => this.processRoute(it));
 
     return this.codeModel;
+  }
+
+  public namespace(): string {
+    return this._namespace;
   }
 
   private processHost(server: HttpServer | undefined) {
@@ -483,7 +487,7 @@ export class CodeModelBuilder {
   }
 
   private _stringSchema?: StringSchema;
-  get stringSchema() {
+  get stringSchema(): StringSchema {
     return (
       this._stringSchema ||
       (this._stringSchema = this.codeModel.schemas.add(new StringSchema("string", "simple string")))
@@ -491,7 +495,7 @@ export class CodeModelBuilder {
   }
 
   private _integerSchema?: NumberSchema;
-  get integerSchema() {
+  get integerSchema(): NumberSchema {
     return (
       this._integerSchema ||
       (this._integerSchema = this.codeModel.schemas.add(new NumberSchema("integer", "simple integer", SchemaType.Integer, 64)))
@@ -499,7 +503,7 @@ export class CodeModelBuilder {
   }
 
   private _binarySchema?: BinarySchema;
-  get binarySchema() {
+  get binarySchema(): BinarySchema {
     return (
       this._binarySchema ||
       (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("binary")))
@@ -512,7 +516,7 @@ export class CodeModelBuilder {
   }
 
   private _hostParameter?: Parameter;
-  get hostParameter() {
+  get hostParameter(): Parameter {
     return (
       this._hostParameter ||
       (this._hostParameter = new Parameter("endpoint", "Server parameter", this.stringSchema, {
@@ -535,7 +539,7 @@ export class CodeModelBuilder {
   }
 
   private _apiVersionParameter?: Parameter;
-  get apiVersionParameter() {
+  get apiVersionParameter(): Parameter {
     return (
       this._apiVersionParameter ||
       (this._apiVersionParameter = new Parameter("api-version", "Version parameter", this.codeModel.schemas.add(new ConstantSchema("accept", `api-version: ${this.version}`, {

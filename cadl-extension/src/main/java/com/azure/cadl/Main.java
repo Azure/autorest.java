@@ -38,6 +38,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String inputYamlFileName = "cadl-project/cadl-output/code-model.yaml";
         String outputFolder = "cadl-sample/";
+        String namespace = "com.azure.cadl";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
         }
@@ -47,8 +48,11 @@ public class Main {
                 outputFolder += "/";
             }
         }
+        if (args.length >= 3) {
+            namespace = args[2];
+        }
 
-        CadlPlugin cadlPlugin = new CadlPlugin();
+        CadlPlugin cadlPlugin = new CadlPlugin(namespace);
         CodeModel codeModel = loadCodeModel(inputYamlFileName);
 
         codeModel = new Transformer().transform(codeModel);

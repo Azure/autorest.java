@@ -23,8 +23,6 @@ public class CadlPlugin extends Javagen {
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
     static {
-        SETTINGS_MAP.put("namespace", "com.azure.cadl");
-
         SETTINGS_MAP.put("data-plane", true);
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
@@ -56,8 +54,9 @@ public class CadlPlugin extends Javagen {
         }
     }
 
-    public CadlPlugin() {
+    public CadlPlugin(String namespace) {
         super(new MockConnection(), "dummy", "dummy");
+        SETTINGS_MAP.put("namespace", namespace);
         JavaSettingsAccessor.setHost(this);
         JavaSettings.getInstance();
     }
