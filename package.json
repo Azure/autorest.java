@@ -30,13 +30,21 @@
   "files": [
     "*/package.json",
     "/readme.md",
-    "androidgen/*.md",
-    "fluentgen/*.md",
-    "fluentnamer/*.md",
-    "javagen/*.md",
-    "postprocessor/*.md",
-    "preprocessor/*.md",
-    "*/target/*-jar-with-dependencies.jar"
+    "/androidgen/*.md",
+    "/fluentgen/*.md",
+    "/fluentnamer/*.md",
+    "/javagen/*.md",
+    "/postprocessor/*.md",
+    "/preprocessor/*.md",
+    "*/target/*-jar-with-dependencies.jar",
+    "/postprocessor/jdt-language-server/config_linux/*.ini",
+    "/postprocessor/jdt-language-server/config_mac/*.ini",
+    "/postprocessor/jdt-language-server/config_ss_linux/*.ini",
+    "/postprocessor/jdt-language-server/config_ss_mac/*.ini",
+    "/postprocessor/jdt-language-server/config_ss_win/*.ini",
+    "/postprocessor/jdt-language-server/config_win/*.ini",
+    "/postprocessor/jdt-language-server/features",
+    "/postprocessor/jdt-language-server/plugins"
   ],
   "devDependencies": {
     "autorest": "^3.0.0",
