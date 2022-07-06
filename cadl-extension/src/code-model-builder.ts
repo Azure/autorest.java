@@ -1,64 +1,65 @@
 import {
+  ArrayType,
+  EnumType,
+  getDoc,
+  getFormat,
+  getFriendlyName,
+  getMaxLength,
+  getMaxValue,
+  getMinLength,
+  getMinValue,
+  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
-  Program,
-  Type,
-  ModelType,
-  ArrayType,
-  StringLiteralType,
-  NumericLiteralType,
-  ModelTypeProperty,
+  getServiceVersion,
   getSummary,
-  getDoc,
-  getMaxLength,
-  getPattern,
-  getMinLength,
-  getFormat,
-  getMaxValue,
-  getMinValue,
-  getFriendlyName,
   getVisibility,
   isIntrinsic,
-  getServiceVersion,
-  EnumType,
+  ModelType,
+  ModelTypeProperty,
+  NumericLiteralType,
+  Program,
+  StringLiteralType,
+  Type, UnionType,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
-  getStatusCodeDescription,
   getServers,
+  getStatusCodeDescription,
   HttpOperationParameter,
   HttpOperationResponse,
+  HttpServer,
   OperationDetails,
   StatusCode,
-  HttpServer,
 } from "@cadl-lang/rest/http";
 import {
-  CodeModel, 
-  Operation, 
-  Parameter, 
-  Schema,
-  StringSchema,
-  HttpParameter,
-  ImplementationLocation, 
-  ParameterLocation,
   AnySchema,
-  NumberSchema,
-  SchemaType,
   ArraySchema,
-  ObjectSchema,
-  Property,
-  Response,
-  Request,
-  SchemaResponse,
   BinarySchema,
-  HttpHeader,
+  ChoiceValue,
+  CodeModel,
   ConstantSchema,
   ConstantValue,
+  DateTimeSchema,
+  HttpHeader,
+  HttpParameter,
+  ImplementationLocation,
+  NumberSchema,
+  ObjectSchema,
+  Operation,
+  Parameter,
+  ParameterLocation,
+  Property,
+  Request,
+  Response,
+  Schema,
+  SchemaResponse,
+  SchemaType,
   SealedChoiceSchema,
-  ChoiceValue,
+  StringSchema,
 } from "@autorest/codemodel";
-import { fail } from "assert";
+import {fail} from "assert";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -75,7 +76,6 @@ export class CodeModelBuilder {
 
   public constructor(program1: Program) {
     this.program = program1;
-
     const serviceNamespace = getServiceNamespace(this.program);
     if (serviceNamespace === undefined) {
       throw Error("Can not emit yaml for a namespace that doesn't exist.");
@@ -348,15 +348,20 @@ export class CodeModelBuilder {
       case "Enum":
         return this.processChoiceSchema(type, name);
 
+      // case "Union":
+      //   return this.processUnionSchema(type, name)
+
       case "Model":
         if (isIntrinsic(this.program, type)) {
-          // TODO: bytes, plainDate, zonedDateTime, plainTime, duration
+          // TODO: bytes, plainDate, zonedDateTime, duration
           if (type.name === "string") {
             return this.processStringSchema(type, name);
           } else if (type.name.startsWith("int") || type.name.startsWith("uint") || type.name === "safeint") {
             return this.processIntegerSchema(type, name);
           } else if (type.name.startsWith("float")) {
             return this.processNumberSchema(type, name);
+          } else if(type.name.startsWith("plainTime")) {
+            return this.processDateTimeSchema(type, name);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
           }
@@ -558,6 +563,24 @@ export class CodeModelBuilder {
           }
         }
       }))
+    );
+  }
+
+  private processDateTimeSchema(type: ModelType, name: string) {
+    return this.codeModel.schemas.add(
+        new DateTimeSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+          type: SchemaType.DateTime,
+          format: "date-time-rfc1123",
+        })
+    );
+  }
+
+  private processUnionSchema(type: UnionType, name: string) {
+    return this.codeModel.schemas.add(
+        new ObjectSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+        })
     );
   }
 }
