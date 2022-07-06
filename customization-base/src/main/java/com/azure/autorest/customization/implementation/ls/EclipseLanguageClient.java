@@ -92,7 +92,12 @@ public class EclipseLanguageClient implements AutoCloseable {
             } else {
                 this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin, port);
             }
-            thread.join(10000);
+            thread.join(10 * 1000);
+            if (clientSocket.get() == null) {
+                throw new IllegalStateException("EclipseLanguageServer failed to start on CLIENT_PORT " + port + ". "
+                        + "Make sure you have stopped any previous EclipseLanguageServer. "
+                        + "If not sure, you may kill all 'java' process.");
+            }
             connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
