@@ -30,12 +30,12 @@
   "files": [
     "*/package.json",
     "/readme.md",
-    "androidgen/readme.md",
-    "fluentgen/readme.md",
-    "fluentnamer/readme.md",
-    "javagen/readme.md",
-    "postprocessor/readme.md",
-    "preprocessor/readme.md",
+    "androidgen/*.md",
+    "fluentgen/*.md",
+    "fluentnamer/*.md",
+    "javagen/*.md",
+    "postprocessor/*.md",
+    "preprocessor/*.md",
     "*/target/*-jar-with-dependencies.jar"
   ],
   "devDependencies": {
