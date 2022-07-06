@@ -1,6 +1,6 @@
 {
   "name": "@autorest/java",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -27,6 +27,17 @@
     "url": "https://github.com/Azure/autorest.java/issues"
   },
   "homepage": "https://github.com/Azure/autorest.java/blob/main/readme.md",
+  "files": [
+    "*/package.json",
+    "/readme.md",
+    "androidgen/readme.md",
+    "fluentgen/readme.md",
+    "fluentnamer/readme.md",
+    "javagen/readme.md",
+    "postprocessor/readme.md",
+    "preprocessor/readme.md",
+    "*/target/*-jar-with-dependencies.jar"
+  ],
   "devDependencies": {
     "autorest": "^3.0.0",
     "@microsoft.azure/autorest.testserver": "3.3.31"

@@ -65,6 +65,7 @@ javagen/*.yaml
 /*.yaml
 *.log
 *.log.gz
+*.tgz
 
 # Generated code for tests #
 fluent-tests/src/main/java/com/azure/mgmttest/**
