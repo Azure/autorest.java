@@ -16,6 +16,8 @@ import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.google.googlejavaformat.java.Formatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -32,6 +34,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     // java -jar target/azure-cadl-extension-jar-with-dependencies.jar
 
@@ -52,6 +56,10 @@ public class Main {
             namespace = args[2];
         }
 
+        LOGGER.info("Code model file: {}", inputYamlFileName);
+        LOGGER.info("Output folder: {}", outputFolder);
+        LOGGER.info("Namespace: {}", namespace);
+
         CadlPlugin cadlPlugin = new CadlPlugin(namespace);
         CodeModel codeModel = loadCodeModel(inputYamlFileName);
 
@@ -61,33 +69,37 @@ public class Main {
 
         JavaPackage javaPackage = cadlPlugin.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
 
+        LOGGER.info("Count of Java files: {}", javaPackage.getJavaFiles().size());
+        LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
+        LOGGER.info("Count of text files: {}", javaPackage.getTextFiles().size());
+
         Formatter formatter = new Formatter();
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             String content = javaFile.getContents().toString();
             try {
                 content = formatter.formatSourceAndFixImports(content);
             } catch (Exception e) {
+                LOGGER.error("Failed to format file: {}", outputFolder + javaFile.getFilePath(), e);
                 continue;
             }
-            new File(outputFolder + javaFile.getFilePath()).getParentFile().mkdirs();
             writeFile(outputFolder + javaFile.getFilePath(), content);
         }
         for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
             String content = xmlFile.getContents().toString();
-            new File(outputFolder + xmlFile.getFilePath()).getParentFile().mkdirs();
             writeFile(outputFolder + xmlFile.getFilePath(), content);
         }
         for (TextFile testFile : javaPackage.getTextFiles()) {
             String content = testFile.getContents();
-            new File(outputFolder + testFile.getFilePath()).getParentFile().mkdirs();
             writeFile(outputFolder + testFile.getFilePath(), content);
         }
     }
 
     private static void writeFile(String path, String content) throws IOException {
+        new File(path).getParentFile().mkdirs();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write(content);
         }
+        LOGGER.info("Write file: {}", path);
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {

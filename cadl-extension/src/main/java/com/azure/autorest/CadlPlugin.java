@@ -9,12 +9,16 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CadlPlugin extends Javagen {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
 
     @Override
     public JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
@@ -69,5 +73,28 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void message(Message message) {
+        String log = message.getText();
+        switch (message.getChannel()) {
+            case INFORMATION:
+                LOGGER.info(log);
+                break;
+
+            case WARNING:
+                LOGGER.warn(log);
+                break;
+
+            case ERROR:
+            case FATAL:
+                LOGGER.error(log);
+                break;
+
+            case DEBUG:
+                LOGGER.debug(log);
+                break;
+
+            default:
+                LOGGER.info(log);
+                break;
+        }
     }
 }

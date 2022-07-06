@@ -29,16 +29,33 @@
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-javagen</artifactId>
       <version>1.0.0-beta.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-preprocessor</artifactId>
       <version>1.0.0-beta.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>

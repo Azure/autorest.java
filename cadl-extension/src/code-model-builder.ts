@@ -82,7 +82,7 @@ export class CodeModelBuilder {
     }
 
     // java namespace
-    this._namespace = "com." + (getServiceNamespaceString(this.program) || "Azure.Client").toLowerCase;
+    this._namespace = "com." + (getServiceNamespaceString(this.program) || "Azure.Client").toLowerCase();
 
     // service version
     this.version = getServiceVersion(this.program);
