@@ -129,7 +129,7 @@ export class CodeModelBuilder {
       server.parameters.forEach(it => {
         const schema = this.processSchema(it.type, it.name);
         return this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter(it.name, this.getDoc(it), schema, {
-          implementation: ImplementationLocation.Method,
+          implementation: ImplementationLocation.Client,
           required: true,
           protocol: {
             http: new HttpParameter(ParameterLocation.Uri)
