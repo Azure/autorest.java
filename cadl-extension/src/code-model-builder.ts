@@ -70,6 +70,8 @@ import {
   SealedChoiceSchema,
   StringSchema,
   TimeSchema,
+  DurationSchema,
+  ByteArraySchema,
 } from "@autorest/codemodel";
 import {fail} from "assert";
 
@@ -370,13 +372,12 @@ export class CodeModelBuilder {
       case "Enum":
         return this.processChoiceSchema(type, name, true);
 
-      // case "Union":
-      //   return this.processUnionSchema(type, name)
+      case "Union":
+        return this.processUnionSchema(type, name)
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
           const intrinsicModelName = getIntrinsicModelName(this.program, type);
-          // TODO: bytes, duration
           switch (intrinsicModelName) {
             case "string":
               const enumType = getKnownValues(this.program, type);
@@ -385,6 +386,9 @@ export class CodeModelBuilder {
               } else {
                 return this.processStringSchema(type, name);
               }
+
+            case "bytes":
+              return this.processByteArraySchema(type, name);
 
             case "boolean":
               return this.processBooleanSchema(type, name);
@@ -400,6 +404,9 @@ export class CodeModelBuilder {
 
             case "zonedDateTime":
               return this.processDateTimeSchema(type, name, false);
+
+            case "duration":
+              return this.processDurationSchema(type, name);
           }
 
           if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
@@ -425,6 +432,15 @@ export class CodeModelBuilder {
         maxLength: getMaxLength(this.program, type),
         minLength: getMinLength(this.program, type),
         pattern: getPattern(this.program, type)
+      })
+    );
+  }
+
+  private processByteArraySchema(type: ModelType, name: string): ByteArraySchema {
+    return this.codeModel.schemas.add(
+      new ByteArraySchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        format: "byte"
       })
     );
   }
@@ -544,6 +560,14 @@ export class CodeModelBuilder {
     );
   }
 
+  private processDurationSchema(type: ModelType, name: string): DurationSchema {
+    return this.codeModel.schemas.add(
+        new DurationSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+        })
+    );
+  }
+
   private processObjectSchema(type: ModelType, name: string): ObjectSchema {
     const objectSchema = this.codeModel.schemas.add(
       new ObjectSchema(name, this.getDoc(type), {
@@ -566,6 +590,22 @@ export class CodeModelBuilder {
     }
 
     return objectSchema;
+  }
+
+  private processUnionSchema(type: UnionType, name: string): Schema {
+    const nonNullVariants = Array.from(type.variants.values())
+        .filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
+    if (nonNullVariants.length === 1) {
+      // nullable
+      return this.processSchema(nonNullVariants[0].type, name);
+    }
+
+    // TODO
+    return this.codeModel.schemas.add(
+        new ObjectSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+        })
+    );
   }
 
   private getDefaultValue(type: Type | undefined): any {
@@ -668,15 +708,6 @@ export class CodeModelBuilder {
           }
         }
       }))
-    );
-  }
-
-  private processUnionSchema(type: UnionType, name: string) {
-    // TODO
-    return this.codeModel.schemas.add(
-        new ObjectSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-        })
     );
   }
 }
