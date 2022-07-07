@@ -361,18 +361,29 @@ export class CodeModelBuilder {
         if (isIntrinsic(this.program, type)) {
           const intrinsicModelName = getIntrinsicModelName(this.program, type);
           // TODO: bytes, plainDate, zonedDateTime, duration
-          if (intrinsicModelName === "string") {
-            return this.processStringSchema(type, name);
-          } else if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
+          switch (intrinsicModelName) {
+            case "string":
+              return this.processStringSchema(type, name);
+
+            case "boolean":
+              return this.processBooleanSchema(type, name);
+              
+            case "Map":
+              return this.processMapSchema(type, name);
+
+            case "plainTime":
+            case "plainDate":
+            case "zonedDateTime":
+              // TODO
+              return this.processDateTimeSchema(type, name);
+          }
+
+          if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
+            // integer
             return this.processIntegerSchema(type, name);
           } else if (intrinsicModelName.startsWith("float")) {
+            // float point
             return this.processNumberSchema(type, name);
-          } else if (intrinsicModelName === "plainTime") {
-            return this.processDateTimeSchema(type, name);
-          } else if (intrinsicModelName === "boolean") {
-            return this.processBooleanSchema(type, name);
-          } else if (intrinsicModelName === "Map") {
-            return this.processMapSchema(type, name);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
@@ -433,12 +444,19 @@ export class CodeModelBuilder {
   }
 
   private processMapSchema(type: ModelType, name: string): DictionarySchema {
-    const elementType = type.properties.get("v")!;
-    const elementSchema = this.processSchema(elementType.type, elementType.name);
-    return this.codeModel.schemas.add(
-      new DictionarySchema(name, this.getDoc(type), elementSchema, {
+    const dictSchema = this.codeModel.schemas.add(
+      new DictionarySchema<any>(name, this.getDoc(type), null, {
         summary: this.getSummary(type),
       }));
+
+    // cache this now before we accidentally recurse on this type.
+    this.schemaCache.set(type, dictSchema);
+
+    const elementType = type.properties.get("v")!;
+    const elementSchema = this.processSchema(elementType.type, elementType.name);
+    dictSchema.elementType = elementSchema;
+
+    return this.codeModel.schemas.add(dictSchema);
   }
 
   private processChoiceSchema(type: EnumType, name: string): SealedChoiceSchema | ConstantSchema {
