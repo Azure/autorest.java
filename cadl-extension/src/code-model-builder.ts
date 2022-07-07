@@ -38,6 +38,9 @@ import {
   StatusCode,
 } from "@cadl-lang/rest/http";
 import {
+  getVersion 
+} from "@cadl-lang/versioning";
+import {
   AnySchema,
   ArraySchema,
   BinarySchema,
@@ -95,6 +98,13 @@ export class CodeModelBuilder {
 
     // service version
     this.version = getServiceVersion(this.program);
+    if (this.version === "0000-00-00") {
+      const versioning = getVersion(this.program, serviceNamespace);
+      if (versioning) {
+        // TODO: versioning support
+        this.version = versioning.getVersions()[0].value;
+      }
+    }
 
     // init code model
     const title = getServiceTitle(this.program);

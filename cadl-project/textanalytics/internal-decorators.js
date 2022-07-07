@@ -18,4 +18,3 @@ export function $isTaggedWith(context, _, target, tag, message) {
     }
 }
 export const namespace = "Azure.Language.Private";
-//# sourceMappingURL=internal-decorators.js.map
