@@ -211,9 +211,10 @@ export class CodeModelBuilder {
       op.addParameter(parameter);
     } else {
       const schema = this.processSchema(param.param.type, param.param.name);
+      const nullable = this.isNullableType(param.param.type);
       const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
         implementation: ImplementationLocation.Method,
-        required: !param.param.optional,
+        required: !param.param.optional && !nullable,
         protocol: {
           http: new HttpParameter(param.type)
         },
@@ -580,9 +581,10 @@ export class CodeModelBuilder {
 
     for (const [_, prop] of type.properties) {
       const schema = this.processSchema(prop.type, prop.name);
+      const nullable = this.isNullableType(prop.type);
       objectSchema.addProperty(
         new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
-          required: !prop.optional,
+          required: !prop.optional && !nullable,
           readOnly: !getVisibility(this.program, prop)?.includes("write"),
           serializedName: prop.name
         })
@@ -593,8 +595,7 @@ export class CodeModelBuilder {
   }
 
   private processUnionSchema(type: UnionType, name: string): Schema {
-    const nonNullVariants = Array.from(type.variants.values())
-        .filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
+    const nonNullVariants = Array.from(type.variants.values()).filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
     if (nonNullVariants.length === 1) {
       // nullable
       return this.processSchema(nonNullVariants[0].type, name);
@@ -606,6 +607,15 @@ export class CodeModelBuilder {
           summary: this.getSummary(type),
         })
     );
+  }
+
+  private isNullableType(type: Type): boolean {
+    if (type.kind === "Union") {
+      const nonNullVariants = Array.from(type.variants.values()).filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
+      return nonNullVariants.length === 1;
+    } else {
+      return false;
+    }
   }
 
   private getDefaultValue(type: Type | undefined): any {
