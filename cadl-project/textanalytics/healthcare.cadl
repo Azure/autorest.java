@@ -1,0 +1,180 @@
+import "./lib.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+model HealthcareLROTask extends LROTask<"Healthcare", HealthcareTaskParameters> {}
+model HealthcareLROResult extends LROTaskResult<"HealthcareLROResults", HealthcareResult> {}
+
+@doc("Supported parameters for a Healthcare task.")
+model HealthcareTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+
+  @doc("The FHIR version.")
+  fhirVersion?: FhirVersion;
+}
+model HealthcareResult is PreBuiltResult<HealthcareEntitiesDocumentResult> {}
+model HealthcareEntitiesDocumentResult is DocumentResult {
+  @doc("Healthcare entities.")
+  entities: HealthcareEntity[];
+
+  @doc("Healthcare entity relations.")
+  relations: HealthcareRelation[];
+
+  @doc("The FHIR bundle.")
+  fhirBundle?: Map<string, string>;
+}
+
+@doc("""
+  Every relation is an entity graph of a certain relationType, where all entities
+  are connected and have specific roles within the relation context.
+  """)
+model HealthcareRelation {
+  @doc("The entities in the relation.")
+  entities: HealthcareRelationEntity[];
+
+  @doc("Type of relation.")
+  relationType: HealthcareRelationType;
+}
+
+@knownValues(HealthcareRelationTypeKV)
+model HealthcareRelationType is string {}
+enum HealthcareRelationTypeKV {
+  Abbreviation,
+  DirectionOfBodyStructure,
+  DirectionOfCondition,
+  DirectionOfExamination,
+  DirectionOfTreatment,
+  DosageOfMedication,
+  FormOfMedication,
+  FrequencyOfMedication,
+  FrequencyOfTreatment,
+  QualifierOfCondition,
+  RelationOfExamination,
+  RouteOfMedication,
+  TimeOfCondition,
+  TimeOfEvent,
+  TimeOfExamination,
+  TimeOfMedication,
+  TimeOfTreatment,
+  UnitOfCondition,
+  UnitOfExamination,
+  ValueOfCondition,
+  ValueOfExamination,
+}
+
+model HealthcareRelationEntity {
+  @doc("Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .")
+  ref: string;
+
+  @doc("""
+    Role of entity in the relationship.    
+
+    For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their 
+    roles in parenthesis: CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma 
+    (Diagnosis).
+    """)
+  role: string;
+}
+
+model HealthcareEntity {
+  @doc("Entity text as appears in the request.")
+  text: string;
+
+  @doc("Healthcare Entity Category.")
+  category: HealthcareEntityCategory;
+
+  @doc("Entity sub type")
+  subcategory?: string;
+
+  @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
+  offset: int32;
+
+  @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
+  length: int32;
+
+  @doc("Confidence score between 0 and 1 of the extracted entity.")
+  confidenceScore: float64;
+  assertion?: HealthcareAssertion;
+
+  @doc("Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.")
+  name?: string;
+
+  @doc("Entity references in known data sources.")
+  links?: HealthcareEntityLink[];
+}
+
+@knownValues(HealthcareEntityCategoryKV)
+model HealthcareEntityCategory is string {}
+enum HealthcareEntityCategoryKV {
+  BODY_STRUCTURE,
+  AGE,
+  GENDER,
+  EXAMINATION_NAME,
+  DATE,
+  DIRECTION,
+  FREQUENCY,
+  MEASUREMENT_VALUE,
+  MEASUREMENT_UNIT,
+  RELATIONAL_OPERATOR,
+  TIME,
+  GENE_OR_PROTEIN,
+  VARIANT,
+  ADMINISTRATIVE_EVENT,
+  CARE_ENVIRONMENT,
+  HEALTHCARE_PROFESSION,
+  DIAGNOSIS,
+  SYMPTOM_OR_SIGN,
+  CONDITION_QUALIFIER,
+  MEDICATION_CLASS,
+  MEDICATION_NAME,
+  DOSAGE,
+  MEDICATION_FORM,
+  MEDICATION_ROUTE,
+  FAMILY_RELATION,
+  TREATMENT_NAME,
+}
+
+model HealthcareAssertion {
+  @doc("Describes any conditionality on the entity.")
+  conditionality?: Conditionality;
+
+  @doc("Describes the entities certainty and polarity.")
+  certainty?: Certainty;
+
+  @doc("Describes if the entity is the subject of the text or if it describes someone else.")
+  association?: Association;
+}
+
+model HealthcareEntityLink {
+  @doc("Entity Catalog. Examples include: UMLS, CHV, MSH, etc.")
+  dataSource: string;
+
+  @doc("Entity id in the given source catalog.")
+  id: string;
+}
+
+enum Conditionality {
+  hypothetical,
+  conditional,
+}
+
+enum Certainty {
+  positive,
+  positivePossible,
+  neutralPossible,
+  negativePossible,
+  negative,
+}
+
+@knownValues(AssociationKV)
+model Association is string {}
+enum AssociationKV {
+  subject,
+  other,
+}
+
+@knownValues(FhirVersionKV)
+model FhirVersion is string {}
+enum FhirVersionKV {
+  "4.0.1",
+}
