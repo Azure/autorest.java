@@ -22,7 +22,7 @@ import {
   NumericLiteralType,
   Program,
   StringLiteralType,
-  Type, UnionType,
+  Type, UnionType, BooleanLiteralType,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
@@ -38,6 +38,7 @@ import {
   AnySchema,
   ArraySchema,
   BinarySchema,
+  BooleanSchema,
   ChoiceValue,
   CodeModel,
   ConstantSchema,
@@ -343,6 +344,9 @@ export class CodeModelBuilder {
         const isInteger = getFormat(this.program, type)?.startsWith("int");
         return isInteger ? this.processIntegerSchema(type, name) : this.processNumberSchema(type, name);
 
+      case "Boolean":
+        return this.processBooleanSchema(type, name);
+
       case "Array":
         return this.processArraySchema(type, name);
 
@@ -362,8 +366,10 @@ export class CodeModelBuilder {
             return this.processIntegerSchema(type, name);
           } else if (intrinsicModelName.startsWith("float")) {
             return this.processNumberSchema(type, name);
-          } else if(intrinsicModelName.startsWith("plainTime")) {
+          } else if (intrinsicModelName.startsWith("plainTime")) {
             return this.processDateTimeSchema(type, name);
+          } else if (intrinsicModelName.startsWith("boolean")) {
+            return this.processBooleanSchema(type, name);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
@@ -401,6 +407,14 @@ export class CodeModelBuilder {
         summary: this.getSummary(type),
         maximum: getMaxValue(this.program, type),
         minimum: getMinValue(this.program, type)
+      })
+    );
+  }
+
+  private processBooleanSchema(type: BooleanLiteralType | ModelType, name: string): BooleanSchema {
+    return this.codeModel.schemas.add(
+      new BooleanSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type)
       })
     );
   }
