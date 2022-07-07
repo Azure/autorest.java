@@ -16,6 +16,7 @@ import {
   getSummary,
   getVisibility,
   isIntrinsic,
+  getIntrinsicModelName,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
@@ -353,17 +354,18 @@ export class CodeModelBuilder {
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
+          const intrinsicModelName = getIntrinsicModelName(this.program, type);
           // TODO: bytes, plainDate, zonedDateTime, duration
-          if (type.name === "string") {
+          if (intrinsicModelName === "string") {
             return this.processStringSchema(type, name);
-          } else if (type.name.startsWith("int") || type.name.startsWith("uint") || type.name === "safeint") {
+          } else if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
             return this.processIntegerSchema(type, name);
-          } else if (type.name.startsWith("float")) {
+          } else if (intrinsicModelName.startsWith("float")) {
             return this.processNumberSchema(type, name);
-          } else if(type.name.startsWith("plainTime")) {
+          } else if(intrinsicModelName.startsWith("plainTime")) {
             return this.processDateTimeSchema(type, name);
           } else {
-            throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+            throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
         } else {
           return this.processObjectSchema(type, this.getName(type, type.name));
