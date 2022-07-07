@@ -6,6 +6,7 @@ import {
   getFormat,
   getFriendlyName,
   getIntrinsicModelName,
+  getKnownValues,
   getMaxLength,
   getMaxValue,
   getMinLength,
@@ -40,6 +41,7 @@ import {
   ArraySchema,
   BinarySchema,
   BooleanSchema,
+  ChoiceSchema,
   ChoiceValue,
   CodeModel,
   ConstantSchema,
@@ -355,7 +357,7 @@ export class CodeModelBuilder {
         return this.processArraySchema(type, name);
 
       case "Enum":
-        return this.processChoiceSchema(type, name);
+        return this.processChoiceSchema(type, name, true);
 
       // case "Union":
       //   return this.processUnionSchema(type, name)
@@ -366,7 +368,12 @@ export class CodeModelBuilder {
           // TODO: bytes, duration
           switch (intrinsicModelName) {
             case "string":
-              return this.processStringSchema(type, name);
+              const enumType = getKnownValues(this.program, type);
+              if (enumType) {
+                return this.processChoiceSchema(enumType, name, false);
+              } else {
+                return this.processStringSchema(type, name);
+              }
 
             case "boolean":
               return this.processBooleanSchema(type, name);
@@ -465,8 +472,8 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(dictSchema);
   }
 
-  private processChoiceSchema(type: EnumType, name: string): SealedChoiceSchema | ConstantSchema {
-    const isConstant = type.members.length === 1;
+  private processChoiceSchema(type: EnumType, name: string, sealed: boolean): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
+    const isConstant = sealed && type.members.length === 1;
     const valueType = typeof type.members[0].value === "number" ? this.integerSchema : this.stringSchema;
     
     if (isConstant) {
@@ -481,13 +488,23 @@ export class CodeModelBuilder {
       const choices: ChoiceValue[] = [];
       type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value || it.name)));
 
-      return this.codeModel.schemas.add(
-        new SealedChoiceSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          choiceType: valueType as any,
-          choices: choices
-        })
-      );
+      if (sealed) {
+        return this.codeModel.schemas.add(
+          new SealedChoiceSchema(name, this.getDoc(type), {
+            summary: this.getSummary(type),
+            choiceType: valueType as any,
+            choices: choices
+          })
+        );
+      } else {
+        return this.codeModel.schemas.add(
+          new ChoiceSchema(name, this.getDoc(type), {
+            summary: this.getSummary(type),
+            choiceType: valueType as any,
+            choices: choices
+          })
+        );
+      }
     }
   }
 
