@@ -44,6 +44,7 @@ import {
   ConstantSchema,
   ConstantValue,
   DateTimeSchema,
+  DictionarySchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
@@ -366,10 +367,12 @@ export class CodeModelBuilder {
             return this.processIntegerSchema(type, name);
           } else if (intrinsicModelName.startsWith("float")) {
             return this.processNumberSchema(type, name);
-          } else if (intrinsicModelName.startsWith("plainTime")) {
+          } else if (intrinsicModelName === "plainTime") {
             return this.processDateTimeSchema(type, name);
-          } else if (intrinsicModelName.startsWith("boolean")) {
+          } else if (intrinsicModelName === "boolean") {
             return this.processBooleanSchema(type, name);
+          } else if (intrinsicModelName === "Map") {
+            return this.processMapSchema(type, name);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
@@ -426,6 +429,15 @@ export class CodeModelBuilder {
         summary: this.getSummary(type),
         maxItems: getMaxLength(this.program, type),
         minItems: getMinLength(this.program, type),
+      }));
+  }
+
+  private processMapSchema(type: ModelType, name: string): DictionarySchema {
+    const elementType = type.properties.get("v")!;
+    const elementSchema = this.processSchema(elementType.type, elementType.name);
+    return this.codeModel.schemas.add(
+      new DictionarySchema(name, this.getDoc(type), elementSchema, {
+        summary: this.getSummary(type),
       }));
   }
 
