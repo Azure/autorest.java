@@ -18,6 +18,7 @@ import {
   getServiceVersion,
   getSummary,
   getVisibility,
+  ignoreDiagnostics,
   isIntrinsic,
   ModelType,
   ModelTypeProperty,
@@ -123,7 +124,7 @@ export class CodeModelBuilder {
   }
 
   public build(): CodeModel {
-    getAllRoutes(this.program)[0].map(it => this.processRoute(it));
+    ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
 
     return this.codeModel;
   }
