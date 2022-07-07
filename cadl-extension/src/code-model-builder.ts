@@ -582,17 +582,17 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateTimeSchema(type: ModelType, name: string) {
+  private processDateTimeSchema(type: ModelType, name: string): DateTimeSchema {
     return this.codeModel.schemas.add(
         new DateTimeSchema(name, this.getDoc(type), {
           summary: this.getSummary(type),
-          type: SchemaType.DateTime,
           format: "date-time-rfc1123",
         })
     );
   }
 
   private processUnionSchema(type: UnionType, name: string) {
+    // TODO
     return this.codeModel.schemas.add(
         new ObjectSchema(name, this.getDoc(type), {
           summary: this.getSummary(type),
