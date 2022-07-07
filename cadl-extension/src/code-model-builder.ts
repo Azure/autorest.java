@@ -44,6 +44,7 @@ import {
   ConstantSchema,
   ConstantValue,
   DateTimeSchema,
+  DateSchema,
   DictionarySchema,
   HttpHeader,
   HttpParameter,
@@ -61,6 +62,7 @@ import {
   SchemaType,
   SealedChoiceSchema,
   StringSchema,
+  TimeSchema,
 } from "@autorest/codemodel";
 import {fail} from "assert";
 
@@ -372,10 +374,13 @@ export class CodeModelBuilder {
               return this.processMapSchema(type, name);
 
             case "plainTime":
+              return this.processTimeSchema(type, name);
+
             case "plainDate":
+              return this.processDateSchema(type, name);
+
             case "zonedDateTime":
-              // TODO
-              return this.processDateTimeSchema(type, name);
+              return this.processDateTimeSchema(type, name, false);
           }
 
           if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
@@ -483,6 +488,31 @@ export class CodeModelBuilder {
         })
       );
     }
+  }
+
+  private processDateTimeSchema(type: ModelType, name: string, rfc1123: boolean): DateTimeSchema {
+    return this.codeModel.schemas.add(
+        new DateTimeSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+          format: rfc1123 ? "date-time-rfc1123" : "date-time",
+        })
+    );
+  }
+
+  private processDateSchema(type: ModelType, name: string): DateSchema {
+    return this.codeModel.schemas.add(
+        new DateSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+        })
+    );
+  }
+
+  private processTimeSchema(type: ModelType, name: string): TimeSchema {
+    return this.codeModel.schemas.add(
+        new TimeSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+        })
+    );
   }
 
   private processObjectSchema(type: ModelType, name: string): ObjectSchema {
@@ -609,15 +639,6 @@ export class CodeModelBuilder {
           }
         }
       }))
-    );
-  }
-
-  private processDateTimeSchema(type: ModelType, name: string): DateTimeSchema {
-    return this.codeModel.schemas.add(
-        new DateTimeSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          format: "date-time-rfc1123",
-        })
     );
   }
 
