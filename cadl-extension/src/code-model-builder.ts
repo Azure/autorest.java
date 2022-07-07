@@ -1,9 +1,11 @@
 import {
   ArrayType,
+  BooleanLiteralType,
   EnumType,
   getDoc,
   getFormat,
   getFriendlyName,
+  getIntrinsicModelName,
   getMaxLength,
   getMaxValue,
   getMinLength,
@@ -16,13 +18,12 @@ import {
   getSummary,
   getVisibility,
   isIntrinsic,
-  getIntrinsicModelName,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
   Program,
   StringLiteralType,
-  Type, UnionType, BooleanLiteralType,
+  Type, UnionType,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
@@ -362,7 +363,7 @@ export class CodeModelBuilder {
       case "Model":
         if (isIntrinsic(this.program, type)) {
           const intrinsicModelName = getIntrinsicModelName(this.program, type);
-          // TODO: bytes, plainDate, zonedDateTime, duration
+          // TODO: bytes, duration
           switch (intrinsicModelName) {
             case "string":
               return this.processStringSchema(type, name);
