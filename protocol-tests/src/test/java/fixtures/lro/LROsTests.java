@@ -45,6 +45,7 @@ public class LROsTests {
         Assertions.assertTrue(poller.getFinalResult().toString().contains("\"provisioningState\": \"Succeeded\""));
     }
 
+    @Disabled("Azure-AsyncOperation header not supported")
     @Test
     public void beginPatch201RetryOnlyAsyncHeader() {
         RequestOptions requestOptions = new RequestOptions()
