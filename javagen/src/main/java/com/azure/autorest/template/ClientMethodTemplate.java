@@ -940,7 +940,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 .replace("{context}", contextParam)
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString())
+                .replace("{endpoint}", "\"https://\"+" + clientMethod.getClientReference() + ".getEndpoint()");
     }
 
     /**
