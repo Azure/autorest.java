@@ -13,6 +13,7 @@ import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class LROsTests {
@@ -33,6 +34,7 @@ public class LROsTests {
         Assertions.assertTrue(poller.getFinalResult().toString().contains("\"provisioningState\": \"Succeeded\""));
     }
 
+    @Disabled("Azure-AsyncOperation header not supported")
     @Test
     public void beginPatch200SucceededIgnoreHeaders() {
         RequestOptions requestOptions = new RequestOptions()
