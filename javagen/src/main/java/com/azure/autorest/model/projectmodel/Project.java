@@ -50,11 +50,11 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureCoreVersion = "1.29.1";
-        private String azureCoreManagementVersion = "1.6.2";
-        private String azureCoreHttpNettyVersion = "1.12.2";
-        private String azureCoreTestVersion = "1.9.1";
-        private String azureIdentityVersion = "1.5.2";
+        private String azureCoreVersion = "1.30.0";
+        private String azureCoreManagementVersion = "1.7.0";
+        private String azureCoreHttpNettyVersion = "1.12.3";
+        private String azureCoreTestVersion = "1.10.0";
+        private String azureIdentityVersion = "1.5.3";
         private String junitVersion = "5.8.2";
         private String mockitoVersion = "4.5.1";
         private String slf4jSimpleVersion = "1.7.36";
