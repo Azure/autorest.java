@@ -214,7 +214,8 @@ export class CodeModelBuilder {
       const nullable = this.isNullableType(param.param.type);
       const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
         implementation: ImplementationLocation.Method,
-        required: !param.param.optional && !nullable,
+        required: !param.param.optional,
+        nullable: nullable,
         protocol: {
           http: new HttpParameter(param.type)
         },
@@ -584,7 +585,8 @@ export class CodeModelBuilder {
       const nullable = this.isNullableType(prop.type);
       objectSchema.addProperty(
         new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
-          required: !prop.optional && !nullable,
+          required: !prop.optional,
+          nullable: nullable,
           readOnly: !getVisibility(this.program, prop)?.includes("write"),
           serializedName: prop.name
         })
