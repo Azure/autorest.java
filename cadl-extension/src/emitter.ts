@@ -19,7 +19,7 @@ export async function $onEmit(program: Program) {
   const codeModel = builder.build();
   const namespace = builder.namespace();
 
-  const outputPath = program.compilerOptions.outputPath || "./";
+  const outputPath = program.compilerOptions.outputPath || "./cadl-output/";
   const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 
   await program.host.writeFile(codeModelFileName, dump(codeModel));
