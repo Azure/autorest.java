@@ -69,7 +69,7 @@ public class DpgCustomizationTests {
         Response<BinaryData> response = client.postModelWithResponse("raw", rawInput, null);
         Assertions.assertEquals(200, response.getStatusCode());
 
-        Input modelInput = new Input().setHello("world!");
+        Input modelInput = new Input("world!");
         response = client.postModelWithResponse("model", BinaryData.fromObject(modelInput), null);
         Assertions.assertEquals(200, response.getStatusCode());
         Product model = response.getValue().toObject(Product.class);

@@ -5,6 +5,7 @@
 package fixtures.dpgcustomization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Input model. */
@@ -17,22 +18,21 @@ public final class Input {
     private String hello;
 
     /**
+     * Creates an instance of Input class.
+     *
+     * @param hello the hello value to set.
+     */
+    @JsonCreator
+    public Input(@JsonProperty(value = "hello", required = true) String hello) {
+        this.hello = hello;
+    }
+
+    /**
      * Get the hello property: The hello property.
      *
      * @return the hello value.
      */
     public String getHello() {
         return this.hello;
-    }
-
-    /**
-     * Set the hello property: The hello property.
-     *
-     * @param hello the hello value to set.
-     * @return the Input object itself.
-     */
-    public Input setHello(String hello) {
-        this.hello = hello;
-        return this;
     }
 }
