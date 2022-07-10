@@ -587,7 +587,7 @@ export class CodeModelBuilder {
         new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
           required: !prop.optional,
           nullable: nullable,
-          readOnly: !getVisibility(this.program, prop)?.includes("write"),
+          readOnly: this.isReadOnly(prop),
           serializedName: prop.name
         })
       );
@@ -646,6 +646,15 @@ export class CodeModelBuilder {
 
   private getName(target: Type, name: string): string {
     return getFriendlyName(this.program, target) || name;
+  }
+
+  private isReadOnly(target: Type): boolean {
+    const visibility = getVisibility(this.program, target);
+    if (visibility) {
+      return visibility.includes("write");
+    } else {
+      return false;
+    }
   }
 
   private _stringSchema?: StringSchema;
