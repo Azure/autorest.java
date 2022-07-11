@@ -162,7 +162,16 @@ public class SchemaUtil {
                 && notFluentLRO(operation, settings);
     }
 
-    public static String mergeDescription(String summary, String description) {
+    /**
+     * Merge summary and description.
+     *
+     * If summary exists, it will take 1st line, and description will be moved to 2nd line in Javadoc.
+     *
+     * @param summary the summary text.
+     * @param description the description text.
+     * @return the merged text for Javadoc.
+     */
+    public static String mergeSummaryWithDescription(String summary, String description) {
         if (Objects.equals(summary, description)) {
             summary = null;
         }

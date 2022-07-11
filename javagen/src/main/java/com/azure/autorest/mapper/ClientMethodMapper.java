@@ -100,7 +100,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
             builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));
         } else {
-            builder.description(SchemaUtil.mergeDescription(summary, description));
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
         }
 
         IType asyncRestResponseReturnType;
