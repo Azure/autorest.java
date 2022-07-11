@@ -72,7 +72,9 @@ public final class FlattencomplexesImpl {
     }
 
     /**
-     * <strong>Response Body Schema</strong>
+     * The getValid operation.
+     *
+     * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
@@ -98,7 +100,9 @@ public final class FlattencomplexesImpl {
     }
 
     /**
-     * <strong>Response Body Schema</strong>
+     * The getValid operation.
+     *
+     * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
@@ -124,7 +128,9 @@ public final class FlattencomplexesImpl {
     }
 
     /**
-     * <strong>Response Body Schema</strong>
+     * The getValid operation.
+     *
+     * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
