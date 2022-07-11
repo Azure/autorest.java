@@ -174,7 +174,7 @@ public class SchemaUtil {
         if (!CoreUtils.isNullOrEmpty(description)) {
             parts.add(description);
         }
-        return String.join(" ", parts);
+        return String.join("\n\n", parts);
     }
 
     public static IType removeModelFromParameter(RequestParameterLocation parameterRequestLocation, IType type) {

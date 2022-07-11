@@ -37,7 +37,9 @@ public final class DpgRequiredHeaderQueryAsyncClient {
     }
 
     /**
-     * Get Required Query Parameters.
+     * Test Case for Required Query Parameters
+     *
+     * <p>Get Required Query Parameters.
      *
      * <p><strong>Query Parameters</strong>
      *
