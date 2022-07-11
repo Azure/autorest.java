@@ -32,6 +32,8 @@ public class Language {
      */
     private String description;
 
+    private String summary;
+
     /**
      * name used in actual implementation
      * (Required)
@@ -74,5 +76,13 @@ public class Language {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

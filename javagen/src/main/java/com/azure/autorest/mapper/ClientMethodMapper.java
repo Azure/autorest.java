@@ -91,10 +91,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-
         ClientMethod.Builder builder = getClientMethodBuilder()
-                .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
+
+        // merge summary and description
+        String summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
+        String description = operation.getLanguage().getJava() == null ? null : operation.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));
+        } else {
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
+        }
 
         IType asyncRestResponseReturnType;
         IType asyncReturnType;

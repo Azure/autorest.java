@@ -377,6 +377,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The getWithConstantInPath operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -391,6 +393,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The getWithConstantInPath operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -401,6 +405,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The getWithConstantInPath operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -410,6 +416,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The postWithConstantInBody operation.
+     *
      * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -431,6 +439,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The postWithConstantInBody operation.
+     *
      * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -443,6 +453,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The postWithConstantInBody operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation on successful completion of {@link Mono}.
@@ -454,6 +466,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The postWithConstantInBody operation.
+     *
      * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -466,6 +480,8 @@ public final class AutoRestValidationTest {
     }
 
     /**
+     * The postWithConstantInBody operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
