@@ -1,7 +1,7 @@
 import {
   resolvePath,
   getNormalizedAbsolutePath,
-  Program
+  Program,
 } from "@cadl-lang/compiler";
 import { 
   dump
@@ -35,11 +35,12 @@ export async function $onEmit(program: Program) {
 
   await program.host.writeFile(codeModelFileName, dump(codeModel));
 
-  await promisify(execFile)("java", [
+  const output = await promisify(execFile)("java", [
     "-jar",
     "node_modules/@azure-tools/java-client-emitter/target/azure-cadl-extension-jar-with-dependencies.jar",
     codeModelFileName,
     resolvePath(outputPath, "java"),
     namespace
   ]);
+  program.logger.info(output.stdout ? output.stdout : output.stderr);
 }
