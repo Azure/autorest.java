@@ -17,3 +17,14 @@ It makes the npm package in `./cadl-extension`, then install it to `./cadl-proje
 `cadl compile <target.cadl>` in `./cadl-project` folder.
 
 Generated code will be at `./cadl-project/cadl-ouput/java` folder.
+
+## Troubleshooting
+
+### New version of `@cadl-lang/compiler` etc.
+
+Force an install of new version via deleting `package-lock.json` and `node_modules` in `./cadl-extension` folder.
+
+```shell
+rm -rf node_modules
+rm package-lock.json
+```
