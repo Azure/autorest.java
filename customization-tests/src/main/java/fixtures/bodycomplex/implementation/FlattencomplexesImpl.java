@@ -56,6 +56,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -67,6 +69,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -80,6 +84,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -90,6 +96,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,6 +110,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -112,6 +122,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
+     * The getValid operation.
+     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -20,6 +20,10 @@
         ],
         "description": "Creates or updates a deployment.",
         "operationId": "CreateOrUpdateDeployment",
+        "externalDocs": {
+          "description": "Rest API Documentation",
+          "url": "https://docs.microsoft.com/azure/developer/java/sdk/overview"
+        },
         "parameters": [
           {
             "name": "deployment",

@@ -34,7 +34,7 @@ public class HttpSuccessTests {
         return Stream.of(
             Arguments.of(Mono.defer(() -> client.getHttpSuccess().head200WithResponseAsync()), 200),
             Arguments.of(Mono.defer(() -> client.getHttpSuccess().get200WithResponseAsync()), 200),
-            Arguments.of(Mono.defer(() -> client.getHttpSuccess().options200WithResponseAsync()), 200),
+//            Arguments.of(Mono.defer(() -> client.getHttpSuccess().options200WithResponseAsync()), 200),
             Arguments.of(Mono.defer(() -> client.getHttpSuccess().put200WithResponseAsync()), 200),
             Arguments.of(Mono.defer(() -> client.getHttpSuccess().patch200WithResponseAsync()), 200),
             Arguments.of(Mono.defer(() -> client.getHttpSuccess().post200WithResponseAsync()), 200),

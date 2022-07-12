@@ -56,6 +56,8 @@ public final class Flattencomplexes {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -71,6 +73,8 @@ public final class Flattencomplexes {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -81,6 +85,8 @@ public final class Flattencomplexes {
     }
 
     /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

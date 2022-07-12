@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -90,10 +91,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-
         ClientMethod.Builder builder = getClientMethodBuilder()
-                .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
+
+        // merge summary and description
+        String summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
+        String description = operation.getLanguage().getJava() == null ? null : operation.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));
+        } else {
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
+        }
 
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
@@ -152,6 +160,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 syncReturnType = responseBodyType.getClientType();
                 syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
             }
+        }
+
+        // map externalDocs property
+        if (operation.getExternalDocs() != null) {
+            ExternalDocumentation externalDocumentation = new ExternalDocumentation.Builder()
+                    .description(operation.getExternalDocs().getDescription())
+                    .url(operation.getExternalDocs().getUrl())
+                    .build();
+            builder.methodDocumentation(externalDocumentation);
+        }
+
+        if (syncReturnType == ClassType.InputStream) {
+            syncReturnWithResponse = ClassType.StreamResponse;
+        } else {
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         }
 
         // Low-level client only requires one request per operation
