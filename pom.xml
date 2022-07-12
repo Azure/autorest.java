@@ -284,18 +284,6 @@
     </plugins>
   </build>
 
-  <modules>
-    <module>./javagen</module>
-    <module>./preprocessor</module>
-    <module>./postprocessor</module>
-    <module>./customization-base</module>
-    <module>./customization-tests</module>
-    <module>./extension-base</module>
-    <module>./fluentgen</module>
-    <module>./fluentnamer</module>
-    <module>./androidgen</module>
-  </modules>
-
   <profiles>
     <profile>
       <id>local</id>
@@ -369,12 +357,30 @@
     <profile>
       <id>cadl</id>
       <activation>
-        <property>
-          <name>cadl</name>
-        </property>
       </activation>
       <modules>
+        <module>./javagen</module>
+        <module>./preprocessor</module>
+        <module>./extension-base</module>
         <module>./cadl-extension</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>autorest</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>./javagen</module>
+        <module>./preprocessor</module>
+        <module>./postprocessor</module>
+        <module>./customization-base</module>
+        <module>./customization-tests</module>
+        <module>./extension-base</module>
+        <module>./fluentgen</module>
+        <module>./fluentnamer</module>
+        <module>./androidgen</module>
       </modules>
     </profile>
   </profiles>
