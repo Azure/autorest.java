@@ -25,7 +25,7 @@ import {
   NumericLiteralType,
   Program,
   StringLiteralType,
-  Type, UnionType,
+  Type, UnionType, UnionTypeVariant,
 } from "@cadl-lang/compiler";
 import {
   getAllRoutes,
@@ -550,6 +550,22 @@ export class CodeModelBuilder {
     );
   }
 
+  private processChoiceSchemaForUnion(type: UnionType, variants: UnionTypeVariant[], name: string): ChoiceSchema {
+    const kind = variants[0].type.kind;
+    const valueType = (kind === "String") ? this.stringSchema : ((kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
+
+    const choices: ChoiceValue[] = [];
+    variants.forEach(it => choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)));
+
+    return this.codeModel.schemas.add(
+      new ChoiceSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        choiceType: valueType as any,
+        choices: choices
+      })
+    );
+  }
+
   private processDateTimeSchema(type: ModelType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
         new DateTimeSchema(name, this.getDoc(type), {
@@ -640,6 +656,11 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
+    if (this.isSameLiteralTypes(nonNullVariants)) {
+      // enum
+      return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
+    }
+
     // TODO
     return this.codeModel.schemas.add(
         new ObjectSchema(name, this.getDoc(type), {
@@ -650,8 +671,18 @@ export class CodeModelBuilder {
 
   private isNullableType(type: Type): boolean {
     if (type.kind === "Union") {
-      const nonNullVariants = Array.from(type.variants.values()).filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
-      return nonNullVariants.length === 1;
+      const nullVariants = Array.from(type.variants.values()).filter(it => isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null");
+      return nullVariants.length >= 1;
+    } else {
+      return false;
+    }
+  }
+
+  private isSameLiteralTypes(variants: UnionTypeVariant[]): boolean {
+    const kindSet = new Set(variants.map(it => it.type.kind));
+    if (kindSet.size === 1) {
+      const kind = kindSet.values().next().value;
+      return kind === "String" || kind === "Number" || kind === "Boolean";
     } else {
       return false;
     }
