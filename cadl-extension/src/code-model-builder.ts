@@ -27,6 +27,9 @@ import {
   Type, UnionType, UnionTypeVariant,
 } from "@cadl-lang/compiler";
 import {
+  getDiscriminator,
+} from "@cadl-lang/rest";
+import {
   getAllRoutes,
   getServers,
   getStatusCodeDescription,
@@ -72,6 +75,7 @@ import {
   DurationSchema,
   ByteArraySchema,
   Relations,
+  Discriminator,
 } from "@autorest/codemodel";
 import {fail} from "assert";
 
@@ -610,21 +614,22 @@ export class CodeModelBuilder {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, objectSchema);
 
-    for (const prop of type.properties.values()) {
-      const schema = this.processSchema(prop.type, prop.name);
-      const nullable = this.isNullableType(prop.type);
-      objectSchema.addProperty(
-        new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
-          required: !prop.optional,
-          nullable: nullable,
-          readOnly: this.isReadOnly(prop),
-          serializedName: prop.name
+    // discriminator
+    let discriminatorPropertyName: string | undefined = undefined;
+    const discriminator = getDiscriminator(this.program, type);
+    if (discriminator) {
+      discriminatorPropertyName = discriminator.propertyName;
+      objectSchema.discriminator = new Discriminator(
+        new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+          required: true,
+          serializedName: discriminatorPropertyName
         })
       );
     }
 
+    // parent
     if (type.baseModel) {
-      const parentSchema = this.processSchema(type.baseModel, type.baseModel.name);
+      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel, type.baseModel.name));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
 
@@ -646,6 +651,46 @@ export class CodeModelBuilder {
         }
       }
     }
+
+    // value of the discriminator property
+    if (objectSchema.parents) {
+      const parentWithDiscriminator = objectSchema.parents.all.find(it => it instanceof ObjectSchema && it.discriminator);
+      if (parentWithDiscriminator) {
+        discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
+
+        const discriminatorProperty = Array.from(type.properties.values()).find(it => it.name === discriminatorPropertyName && it.type.kind === "String");
+        if (discriminatorProperty) {
+          // value of the StringLiteralType of the discriminator property
+          objectSchema.discriminatorValue = (discriminatorProperty.type as StringLiteralType).value;
+        } else {
+          // fallback to name of the ModelType
+          objectSchema.discriminatorValue = name;
+        }
+      }
+    }
+
+    // properties
+    for (const prop of type.properties.values()) {
+      if (prop.name === discriminatorPropertyName) {
+        // skip the discriminator property
+        continue;
+      }
+
+      const schema = this.processSchema(prop.type, prop.name);
+      const nullable = this.isNullableType(prop.type);
+
+      objectSchema.addProperty(
+        new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
+          required: !prop.optional,
+          nullable: nullable,
+          readOnly: this.isReadOnly(prop),
+          serializedName: prop.name
+        })
+      );
+    }
+
+    // process all children
+    type.derivedModels?.forEach(it => this.processSchema(it, this.getName(it, it.name)));
 
     return objectSchema;
   }
