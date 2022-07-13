@@ -152,6 +152,7 @@ export class CodeModelBuilder {
         const schema = this.processSchema(it.type, it.name);
         return this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter(it.name, this.getDoc(it), schema, {
           implementation: ImplementationLocation.Client,
+          origin: "modelerfour:synthesized/host",
           required: true,
           protocol: {
             http: new HttpParameter(ParameterLocation.Uri)
@@ -250,6 +251,7 @@ export class CodeModelBuilder {
     }));
     op.addParameter(new Parameter("accept", "Accept header", acceptSchema, {
       implementation: ImplementationLocation.Method,
+      origin: "modelerfour:synthesized/accept",
       required: true,
       protocol: {
         http: new HttpParameter(ParameterLocation.Header)
@@ -717,6 +719,7 @@ export class CodeModelBuilder {
       this._hostParameter ||
       (this._hostParameter = new Parameter("endpoint", "Server parameter", this.stringSchema, {
         implementation: ImplementationLocation.Client,
+        origin: "modelerfour:synthesized/host",
         required: true,
         protocol: {
           http: new HttpParameter(ParameterLocation.Uri),
@@ -743,6 +746,7 @@ export class CodeModelBuilder {
         value: new ConstantValue(this.version)
       })), {
         implementation: ImplementationLocation.Client,
+        origin: "modelerfour:synthesized/api-version",
         required: true,
         protocol: {
           http: new HttpParameter(ParameterLocation.Query),
