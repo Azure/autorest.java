@@ -72,6 +72,7 @@ import {
   TimeSchema,
   DurationSchema,
   ByteArraySchema,
+  Relations,
 } from "@autorest/codemodel";
 import {fail} from "assert";
 
@@ -593,6 +594,30 @@ export class CodeModelBuilder {
       );
     }
 
+    if (type.baseModel) {
+      const parentSchema = this.processSchema(type.baseModel, type.baseModel.name);
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+
+      if (parentSchema instanceof ObjectSchema) {
+        pushDistinct(objectSchema.parents.all, parentSchema);
+
+        parentSchema.children = parentSchema.children || new Relations();
+        pushDistinct(parentSchema.children.immediate, objectSchema);
+        pushDistinct(parentSchema.children.all, objectSchema);
+
+        if (parentSchema.parents) {
+          pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
+
+          parentSchema.parents.all.forEach(it => {
+            if (it instanceof ObjectSchema && it.children) {
+              pushDistinct(it.children.all, objectSchema);
+            }
+          });
+        }
+      }
+    }
+
     return objectSchema;
   }
 
@@ -733,6 +758,13 @@ export class CodeModelBuilder {
   }
 }
 
+/** Acts as a cache for processing inputs.
+ *
+ * If the input is undefined, the ouptut is always undefined.
+ * for a given input, the process is only ever called once.
+ *
+ *
+ */
 class ProcessingCache<In, Out> {
   private results = new Map<In, Out>();
   constructor(private transform: (orig: In, ...args: Array<any>) => Out) {}
@@ -751,4 +783,18 @@ class ProcessingCache<In, Out> {
     }
     return undefined;
   }
+}
+
+/** adds only if the item is not in the collection already
+ *
+ * @note  While this isn't very efficient, it doesn't disturb the original
+ * collection, so you won't get inadvertent side effects from using Set, etc.
+ */
+function pushDistinct<T>(targetArray: Array<T>, ...items: Array<T>): Array<T> {
+  for (const i of items) {
+    if (!targetArray.includes(i)) {
+      targetArray.push(i);
+    }
+  }
+  return targetArray;
 }
