@@ -3,7 +3,6 @@ import {
   BooleanLiteralType,
   EnumType,
   getDoc,
-  getFormat,
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
@@ -383,11 +382,13 @@ export class CodeModelBuilder {
           const intrinsicModelName = getIntrinsicModelName(this.program, type);
           switch (intrinsicModelName) {
             case "string":
-              const enumType = getKnownValues(this.program, type);
-              if (enumType) {
-                return this.processChoiceSchema(enumType, name, false);
-              } else {
-                return this.processStringSchema(type, name);
+              {
+                const enumType = getKnownValues(this.program, type);
+                if (enumType) {
+                  return this.processChoiceSchema(enumType, name, false);
+                } else {
+                  return this.processStringSchema(type, name);
+                }
               }
 
             case "bytes":
@@ -609,7 +610,7 @@ export class CodeModelBuilder {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, objectSchema);
 
-    for (const [_, prop] of type.properties) {
+    for (const prop of type.properties.values()) {
       const schema = this.processSchema(prop.type, prop.name);
       const nullable = this.isNullableType(prop.type);
       objectSchema.addProperty(

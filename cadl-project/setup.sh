@@ -4,6 +4,7 @@ cd ../cadl-extension/
 # rm package-lock.json
 npm install
 npm run build
+npm run lint
 npm pack
 
 # re-install
