@@ -360,16 +360,14 @@ export class CodeModelBuilder {
   private processSchemaImpl(type: Type, name: string): Schema {
     switch (type.kind) {
       case "String":
-        // TODO: getFormat
-        // byte, binary, date, date-time, password
-        return this.processStringSchema(type, name);
+        return this.processChoiceSchemaForLiteral(type, name);
         
       case "Number":
-        const isInteger = getFormat(this.program, type)?.startsWith("int");
-        return isInteger ? this.processIntegerSchema(type, name) : this.processNumberSchema(type, name);
+        // TODO: float
+        return this.processChoiceSchemaForLiteral(type, name);
 
       case "Boolean":
-        return this.processBooleanSchema(type, name);
+        return this.processChoiceSchemaForLiteral(type, name);
 
       case "Array":
         return this.processArraySchema(type, name);
@@ -540,6 +538,18 @@ export class CodeModelBuilder {
     }
   }
 
+  private processChoiceSchemaForLiteral(type: StringLiteralType | NumericLiteralType | BooleanLiteralType, name: string): ChoiceSchema {
+    const valueType = (type.kind === "String") ? this.stringSchema : ((type.kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
+
+    return this.codeModel.schemas.add(
+      new ChoiceSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        choiceType: valueType as any,
+        choices: [new ChoiceValue(type.value.toString(), this.getDoc(type), type.value)]
+      })
+    );
+  }
+
   private processDateTimeSchema(type: ModelType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
         new DateTimeSchema(name, this.getDoc(type), {
@@ -697,6 +707,14 @@ export class CodeModelBuilder {
     return (
       this._integerSchema ||
       (this._integerSchema = this.codeModel.schemas.add(new NumberSchema("integer", "simple integer", SchemaType.Integer, 64)))
+    );
+  }
+
+  private _booleanSchema?: BooleanSchema;
+  get booleanSchema(): BooleanSchema {
+    return (
+      this._booleanSchema ||
+      (this._booleanSchema = this.codeModel.schemas.add(new BooleanSchema("boolean", "simple boolean")))
     );
   }
 
