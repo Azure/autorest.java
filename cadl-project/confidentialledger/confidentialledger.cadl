@@ -67,8 +67,12 @@ model Collection {
 }
 
 @doc("A list of identifiers for ledger collections.")
+@pagedResult
 model CollectionArray {
-  items: Collection[];
+  @items
+  collections: Collection[];
+  @nextLink
+  nextLink?: string;
 }
 
 model LedgerUser {

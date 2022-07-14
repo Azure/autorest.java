@@ -1,6 +1,7 @@
 import {
   ArrayType,
   BooleanLiteralType,
+  DecoratedType,
   EnumType,
   getDoc,
   getFriendlyName,
@@ -24,7 +25,9 @@ import {
   NumericLiteralType,
   Program,
   StringLiteralType,
-  Type, UnionType, UnionTypeVariant,
+  Type,
+  UnionType,
+  UnionTypeVariant,
 } from "@cadl-lang/compiler";
 import {
   getDiscriminator,
@@ -77,7 +80,9 @@ import {
   Relations,
   Discriminator,
 } from "@autorest/codemodel";
-import {fail} from "assert";
+import {
+  fail
+} from "assert";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -207,7 +212,35 @@ export class CodeModelBuilder {
     }
     op.responses.map(it => this.processResponse(operation, it));
 
+    this.processRouteForPaged(operation, op.responses);
+
     operationGroup.addOperation(operation);
+  }
+
+  private processRouteForPaged(op: Operation, responses: HttpOperationResponse[]) {
+    for (const response of responses) {
+      if (response.responses && response.responses.length > 0) {
+        const responseBody = response.responses[0].body;
+        if (responseBody && responseBody.type.kind === "Model") {
+          if (this.hasDecorator(responseBody.type, "$pagedResult")) {
+            const itemsProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$items"));
+            const nextLinkProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
+
+            op.extensions = op.extensions || {};
+            op.extensions["x-ms-pageable"] = {
+              itemName: itemsProperty?.name,
+              nextLinkName: nextLinkProperty?.name
+            };
+
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  private hasDecorator(type: DecoratedType, name: string): boolean {
+    return type.decorators.find(it => it.decorator.name === name) !== undefined;
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
