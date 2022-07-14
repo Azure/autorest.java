@@ -22,7 +22,6 @@ import {
 export async function $onEmit(program: Program) {
   const builder = new CodeModelBuilder(program);
   const codeModel = builder.build();
-  const namespace = builder.namespace();
 
   const outputPath = program.compilerOptions.outputPath ?? getNormalizedAbsolutePath("./cadl-output", undefined);
   const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
@@ -39,8 +38,7 @@ export async function $onEmit(program: Program) {
     "-jar",
     "node_modules/@azure-tools/java-client-emitter/target/azure-cadl-extension-jar-with-dependencies.jar",
     codeModelFileName,
-    resolvePath(outputPath, "java"),
-    namespace
+    resolvePath(outputPath, "java")
   ]);
   program.logger.info(output.stdout ? output.stdout : output.stderr);
 }

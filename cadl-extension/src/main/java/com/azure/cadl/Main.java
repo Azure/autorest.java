@@ -15,6 +15,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +41,9 @@ public class Main {
     // java -jar target/azure-cadl-extension-jar-with-dependencies.jar
 
     public static void main(String[] args) throws IOException {
+        // parameters
         String inputYamlFileName = "cadl-project/cadl-output/code-model.yaml";
-        String outputFolder = "cadl-sample/";
+        String outputFolder = "cadl-project/cadl-output/java/";
         String namespace = "com.azure.cadl";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
@@ -52,27 +54,35 @@ public class Main {
                 outputFolder += "/";
             }
         }
-        if (args.length >= 3) {
-            namespace = args[2];
-        }
 
         LOGGER.info("Code model file: {}", inputYamlFileName);
         LOGGER.info("Output folder: {}", outputFolder);
-        LOGGER.info("Namespace: {}", namespace);
 
-        CadlPlugin cadlPlugin = new CadlPlugin(namespace);
+        // load code-model.yaml
         CodeModel codeModel = loadCodeModel(inputYamlFileName);
 
+        if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+            namespace = codeModel.getLanguage().getJava().getNamespace();
+        }
+        LOGGER.info("Namespace: {}", namespace);
+
+        // initialize plugin
+        CadlPlugin cadlPlugin = new CadlPlugin(namespace);
+
+        // transform cod emodel
         codeModel = new Transformer().transform(codeModel);
 
+        // map to client model
         Client client = Mappers.getClientMapper().map(codeModel);
 
+        // template
         JavaPackage javaPackage = cadlPlugin.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
 
         LOGGER.info("Count of Java files: {}", javaPackage.getJavaFiles().size());
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
         LOGGER.info("Count of text files: {}", javaPackage.getTextFiles().size());
 
+        // write output
         Formatter formatter = new Formatter();
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             String content = javaFile.getContents().toString();

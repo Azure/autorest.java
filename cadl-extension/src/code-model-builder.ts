@@ -81,7 +81,6 @@ import {fail} from "assert";
 
 export class CodeModelBuilder {
   private program: Program;
-  private _namespace: string;
   private version: string;
   private baseUri: string;
   private hostParameters: Parameter[];
@@ -100,7 +99,8 @@ export class CodeModelBuilder {
     }
 
     // java namespace
-    this._namespace = "com." + (getServiceNamespaceString(this.program) || "Azure.Client").toLowerCase();
+    const namespace = getServiceNamespaceString(this.program)|| "Azure.Client";
+    const javaNamespace = "com." + namespace.toLowerCase();
 
     // service version
     this.version = getServiceVersion(this.program);
@@ -123,7 +123,11 @@ export class CodeModelBuilder {
         default: {
           name: title,
           description: description,
-          summary: this.getSummary(serviceNamespace)
+          summary: this.getSummary(serviceNamespace),
+          namespace: namespace
+        },
+        java: {
+          namespace: javaNamespace
         }
       }
     });
@@ -143,10 +147,6 @@ export class CodeModelBuilder {
     ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
 
     return this.codeModel;
-  }
-
-  public namespace(): string {
-    return this._namespace;
   }
 
   private processHost(server: HttpServer | undefined) {
