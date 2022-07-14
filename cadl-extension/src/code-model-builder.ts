@@ -543,19 +543,27 @@ export class CodeModelBuilder {
     }
   }
 
-  private processChoiceSchemaForLiteral(type: StringLiteralType | NumericLiteralType | BooleanLiteralType, name: string): ChoiceSchema {
+  private processChoiceSchemaForLiteral(type: StringLiteralType | NumericLiteralType | BooleanLiteralType, name: string): ConstantSchema {
     const valueType = (type.kind === "String") ? this.stringSchema : ((type.kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
 
     return this.codeModel.schemas.add(
-      new ChoiceSchema(name, this.getDoc(type), {
+      new ConstantSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-        choiceType: valueType as any,
-        choices: [new ChoiceValue(type.value.toString(), this.getDoc(type), type.value)]
+        valueType: valueType,
+        value: new ConstantValue(type.value)
       })
     );
+
+    // return this.codeModel.schemas.add(
+    //   new ChoiceSchema(name, this.getDoc(type), {
+    //     summary: this.getSummary(type),
+    //     choiceType: valueType as any,
+    //     choices: [new ChoiceValue(type.value.toString(), this.getDoc(type), type.value)]
+    //   })
+    // );
   }
 
-  private processChoiceSchemaForUnion(type: UnionType, variants: UnionTypeVariant[], name: string): ChoiceSchema {
+  private processChoiceSchemaForUnion(type: UnionType, variants: UnionTypeVariant[], name: string): SealedChoiceSchema {
     const kind = variants[0].type.kind;
     const valueType = (kind === "String") ? this.stringSchema : ((kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
 
@@ -563,7 +571,7 @@ export class CodeModelBuilder {
     variants.forEach(it => choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)));
 
     return this.codeModel.schemas.add(
-      new ChoiceSchema(name, this.getDoc(type), {
+      new SealedChoiceSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
         choiceType: valueType as any,
         choices: choices
