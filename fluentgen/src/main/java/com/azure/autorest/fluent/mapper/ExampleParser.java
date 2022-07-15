@@ -492,6 +492,18 @@ public class ExampleParser {
         }
 
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
+        if (parameterValue == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
+            // special handling for body, as it does not have serializedName
+            String paramSuffix = "Param";
+            if (serializedName.endsWith(paramSuffix)) {
+                // hack, remove Param, as it likely added by codegen to avoid naming conflict
+                serializedName = serializedName.substring(0, serializedName.length() - paramSuffix.length());
+                if (!serializedName.isEmpty()) {
+                    parameterValue = findParameter(example, serializedName);
+                }
+            }
+        }
+
         ExampleNode node;
         if (parameterValue == null) {
             if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
