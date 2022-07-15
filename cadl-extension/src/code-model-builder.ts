@@ -118,7 +118,10 @@ export class CodeModelBuilder {
     }
 
     // init code model
-    const title = getServiceTitle(this.program);
+    let title = getServiceTitle(this.program);
+    if (title === "(title)") {
+      title = namespace;
+    }
     const description = this.getDoc(serviceNamespace);
     this.codeModel = new CodeModel(title, false, {
       info: {
