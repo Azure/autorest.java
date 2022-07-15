@@ -469,7 +469,7 @@ export class CodeModelBuilder {
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
-  private processStringSchema(type: StringLiteralType | ModelType, name: string): StringSchema {
+  private processStringSchema(type: ModelType, name: string): StringSchema {
     return this.codeModel.schemas.add(
       new StringSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -489,7 +489,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processIntegerSchema(type: NumericLiteralType | ModelType, name: string): NumberSchema {
+  private processIntegerSchema(type: ModelType, name: string): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Integer, 64, {
         summary: this.getSummary(type),
@@ -499,7 +499,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processNumberSchema(type: NumericLiteralType | ModelType, name: string): NumberSchema {
+  private processNumberSchema(type: ModelType, name: string): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
         summary: this.getSummary(type),
@@ -509,7 +509,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processBooleanSchema(type: BooleanLiteralType | ModelType, name: string): BooleanSchema {
+  private processBooleanSchema(type: ModelType, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
       new BooleanSchema(name, this.getDoc(type), {
         summary: this.getSummary(type)
