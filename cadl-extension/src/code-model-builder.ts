@@ -738,11 +738,7 @@ export class CodeModelBuilder {
     }
 
     // TODO
-    return this.codeModel.schemas.add(
-        new ObjectSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-        })
-    );
+    throw new Error(`Unsupported Union type: '${name}'.`);
   }
 
   private isNullableType(type: Type): boolean {
