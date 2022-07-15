@@ -541,7 +541,7 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchema(type: EnumType, name: string, sealed: boolean): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
-    const isConstant = sealed && type.members.length === 1;
+    const isConstant = false;//sealed && type.members.length === 1;
     const valueType = typeof type.members[0].value === "number" ? this.integerSchema : this.stringSchema;
     
     if (isConstant) {
