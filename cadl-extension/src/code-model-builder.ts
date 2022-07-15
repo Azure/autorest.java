@@ -7,11 +7,6 @@ import {
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
-  getMaxLength,
-  getMaxValue,
-  getMinLength,
-  getMinValue,
-  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
@@ -473,9 +468,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new StringSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-        maxLength: getMaxLength(this.program, type),
-        minLength: getMinLength(this.program, type),
-        pattern: getPattern(this.program, type)
       })
     );
   }
@@ -493,8 +485,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Integer, 64, {
         summary: this.getSummary(type),
-        maximum: getMaxValue(this.program, type),
-        minimum: getMinValue(this.program, type)
       })
     );
   }
@@ -503,8 +493,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
         summary: this.getSummary(type),
-        maximum: getMaxValue(this.program, type),
-        minimum: getMinValue(this.program, type)
       })
     );
   }
@@ -522,8 +510,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new ArraySchema(name, this.getDoc(type), elementSchema, {
         summary: this.getSummary(type),
-        maxItems: getMaxLength(this.program, type),
-        minItems: getMinLength(this.program, type),
       }));
   }
 
