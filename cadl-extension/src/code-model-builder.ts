@@ -7,6 +7,11 @@ import {
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
+  getMaxLength,
+  getMaxValue,
+  getMinLength,
+  getMinValue,
+  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
@@ -45,6 +50,7 @@ import {
   ArraySchema,
   BinarySchema,
   BooleanSchema,
+  ByteArraySchema,
   ChoiceSchema,
   ChoiceValue,
   CodeModel,
@@ -53,6 +59,8 @@ import {
   DateTimeSchema,
   DateSchema,
   DictionarySchema,
+  Discriminator,
+  DurationSchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
@@ -62,6 +70,7 @@ import {
   Parameter,
   ParameterLocation,
   Property,
+  Relations,
   Request,
   Response,
   Schema,
@@ -70,14 +79,11 @@ import {
   SealedChoiceSchema,
   StringSchema,
   TimeSchema,
-  DurationSchema,
-  ByteArraySchema,
-  Relations,
-  Discriminator,
 } from "@autorest/codemodel";
 import {
   fail
 } from "assert";
+import { languages } from "@cadl-lang/compiler/dist/formatter";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -410,7 +416,10 @@ export class CodeModelBuilder {
         return this.processChoiceSchema(type, name, true);
 
       case "Union":
-        return this.processUnionSchema(type, name)
+        return this.processUnionSchema(type, name);
+
+      case "ModelProperty":
+        return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
@@ -706,23 +715,59 @@ export class CodeModelBuilder {
         continue;
       }
 
-      const schema = this.processSchema(prop.type, prop.name);
-      const nullable = this.isNullableType(prop.type);
-
-      objectSchema.addProperty(
-        new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
-          required: !prop.optional,
-          nullable: nullable,
-          readOnly: this.isReadOnly(prop),
-          serializedName: prop.name
-        })
-      );
+      objectSchema.addProperty(this.processModelProperty(prop));
     }
 
     // process all children
     type.derivedModels?.forEach(it => this.processSchema(it, this.getName(it, it.name)));
 
     return objectSchema;
+  }
+
+  private applyModelPropertyDecorators(prop: ModelTypeProperty, schema: Schema): Schema {
+    if (schema instanceof StringSchema) {
+      const decorators = {
+        minLength: getMinLength(this.program, prop),
+        maxLength: getMaxLength(this.program, prop),
+        pattern: getPattern(this.program, prop),
+      };
+
+      if (Object.values(decorators).some(it => it !== undefined)) {
+        schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
+          language: schema.language,
+          summary: schema.summary,
+          extensions: schema.extensions,
+          ...decorators
+        });
+      }
+    } else if (schema instanceof NumberSchema) {
+      const decorators = {
+        minimum: getMinValue(this.program, prop),
+        maximum: getMaxValue(this.program, prop),
+      };
+
+      if (Object.values(decorators).some(it => it !== undefined)) {
+        schema = new NumberSchema(schema.language.default.name, schema.language.default.description, schema.type, schema.precision, {
+          language: schema.language,
+          summary: schema.summary,
+          extensions: schema.extensions,
+          ...decorators
+        });
+      }
+    }
+    return schema;
+  }
+
+  private processModelProperty(prop: ModelTypeProperty): Property {
+    const schema = this.processSchema(prop, prop.name);
+    const nullable = this.isNullableType(prop.type);
+
+    return new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
+      required: !prop.optional,
+      nullable: nullable,
+      readOnly: this.isReadOnly(prop),
+      serializedName: prop.name
+    });
   }
 
   private processUnionSchema(type: UnionType, name: string): Schema {
