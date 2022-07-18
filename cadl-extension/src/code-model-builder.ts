@@ -23,6 +23,7 @@ import {
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
+  OperationType,
   Program,
   StringLiteralType,
   Type,
@@ -83,7 +84,6 @@ import {
 import {
   fail
 } from "assert";
-import { languages } from "@cadl-lang/compiler/dist/formatter";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -106,7 +106,7 @@ export class CodeModelBuilder {
 
     // java namespace
     const namespace = getServiceNamespaceString(this.program)|| "Azure.Client";
-    const javaNamespace = "com." + namespace.toLowerCase();
+    const javaNamespace = getJavaNamespace(namespace);
 
     // service version
     this.version = getServiceVersion(this.program);
@@ -539,6 +539,7 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchema(type: EnumType, name: string, sealed: boolean): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
+    const namespace = getNamespace(type);
     const isConstant = false;//sealed && type.members.length === 1;
     const valueType = typeof type.members[0].value === "number" ? this.integerSchema : this.stringSchema;
     
@@ -559,7 +560,15 @@ export class CodeModelBuilder {
           new SealedChoiceSchema(name, this.getDoc(type), {
             summary: this.getSummary(type),
             choiceType: valueType as any,
-            choices: choices
+            choices: choices,
+            language: {
+              default: {
+                namespace: namespace,
+              },
+              java: {
+                namespace: getJavaNamespace(namespace),
+              },
+            }
           })
         );
       } else {
@@ -567,7 +576,15 @@ export class CodeModelBuilder {
           new ChoiceSchema(name, this.getDoc(type), {
             summary: this.getSummary(type),
             choiceType: valueType as any,
-            choices: choices
+            choices: choices,
+            language: {
+              default: {
+                namespace: namespace,
+              },
+              java: {
+                namespace: getJavaNamespace(namespace),
+              },
+            }    
           })
         );
       }
@@ -601,11 +618,20 @@ export class CodeModelBuilder {
     const choices: ChoiceValue[] = [];
     variants.forEach(it => choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)));
 
+    const namespace = getNamespace(type);
     return this.codeModel.schemas.add(
       new SealedChoiceSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
         choiceType: valueType as any,
-        choices: choices
+        choices: choices,
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        }
       })
     );
   }
@@ -644,9 +670,18 @@ export class CodeModelBuilder {
   }
 
   private processObjectSchema(type: ModelType, name: string): ObjectSchema {
+    const namespace = getNamespace(type);
     const objectSchema = this.codeModel.schemas.add(
       new ObjectSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type)
+        summary: this.getSummary(type),
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        }
       })
     );
 
@@ -967,4 +1002,18 @@ function pushDistinct<T>(targetArray: Array<T>, ...items: Array<T>): Array<T> {
     }
   }
   return targetArray;
+}
+
+function getNamespace(type: ModelType | EnumType | UnionType | OperationType): string | undefined {
+  let namespaceRef = type.namespace;
+  let namespaceStr: string | undefined = undefined;
+  while (namespaceRef && namespaceRef.name.length !== 0) {
+    namespaceStr = namespaceRef.name + (namespaceStr ? ("." + namespaceStr) : "");
+    namespaceRef = namespaceRef.namespace;
+  }
+  return namespaceStr;
+}
+
+function getJavaNamespace(namespace: string | undefined): string | undefined {
+  return namespace ? "com." + namespace.toLowerCase() : undefined;
 }
