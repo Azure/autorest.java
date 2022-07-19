@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,11 +35,9 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private ClassType createClassType(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        if (settings.isFluent()) {
-            ClassType result = mapPredefinedModel(compositeType);
-            if (result != null) {
-                return result;
-            }
+        ClassType result = mapPredefinedModel(compositeType);
+        if (result != null) {
+            return result;
         }
 
         if (isPlainObject(compositeType)) {
@@ -78,13 +77,13 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     }
 
     /**
-     * Extension for Fluent predefined type.
+     * Extension for predefined types in azure-core.
      *
      * @param compositeType object type
      * @return The predefined type.
      */
     protected ClassType mapPredefinedModel(ObjectSchema compositeType) {
-        return null;
+        return SchemaUtil.mapExternalModel(compositeType).orElse(null);
     }
 
     /**

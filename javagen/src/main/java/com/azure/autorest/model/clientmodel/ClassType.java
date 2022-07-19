@@ -85,6 +85,10 @@ public class ClassType implements IType {
     public static final ClassType ResourceNotFoundException = new Builder().knownClass(com.azure.core.exception.ResourceNotFoundException.class).build();
     public static final ClassType TooManyRedirectsException = new Builder().knownClass(com.azure.core.exception.TooManyRedirectsException.class).build();
 
+    // models of error
+    public static final ClassType ResponseError = new Builder().knownClass(com.azure.core.models.ResponseError.class).build();
+    public static final ClassType ResponseInnerError = new Builder().packageName("com.azure.core.models").name("ResponseInnerError").build();
+
     private final String packageName;
     private final String name;
     private final List<String> implementationImports;

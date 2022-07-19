@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -202,6 +203,36 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    /**
+     * Maps CADL model to model from external packages.
+     *
+     * @param compositeType the CADL model.
+     * @return the model from external packages, if available.
+     */
+    public static Optional<ClassType> mapExternalModel(ObjectSchema compositeType) {
+        // For now, the external packages is the azure-core
+
+        ClassType classType = null;
+        if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
+            String namespace = compositeType.getLanguage().getDefault().getNamespace();
+            String name = compositeType.getLanguage().getDefault().getName();
+
+            if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
+                if ("Azure.Core.Operations".equals(namespace)) {
+                    // https://github.com/Azure/cadl-azure/blob/main/packages/cadl-azure-core/lib/operations.cadl
+                    if ("Error".equals(name)) {
+                        classType = ClassType.ResponseError;
+                    } else if ("InnerError".equals(name)) {
+                        // InnerError is not public, but usually it is only referenced from Error
+                        classType = ClassType.ResponseInnerError;
+                    }
+                    // ErrorResponse is not available
+                }
+            }
+        }
+        return Optional.ofNullable(classType);
     }
 
     private static boolean containsBinaryResponse(Operation operation) {

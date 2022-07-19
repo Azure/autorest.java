@@ -59,7 +59,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !isPredefinedModel(modelType))) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && !isPredefinedModel(modelType)) {
             ClientModel.Builder builder = createModelBuilder()
                     .name(modelName)
                     .packageName(modelType.getPackage())
@@ -531,13 +531,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     }
 
     /**
-     * Extension for Fluent predefined type.
+     * Extension for predefined types in azure-core.
      *
      * @param compositeType object type
      * @return Whether the type is predefined.
      */
     protected boolean isPredefinedModel(ClassType compositeType) {
-        return false;
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            // see ObjectMapper.mapPredefinedModel
+            // this might be too simplified, and Android might require a different implementation
+            return compositeType.getPackage().startsWith("com.azure.core.");
+        } else {
+            return false;
+        }
     }
 
     private static String disambiguatePropertyNameOfFlattenedSchema(Set<String> propertyNames, String originalFlattenedPropertyName, String propertyName) {
