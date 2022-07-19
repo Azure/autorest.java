@@ -5,8 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The MyBaseType model. */
 @Fluent
 public class MyBaseType implements JsonSerializable<MyBaseType> {
+    /*
+     * The propB1 property.
+     */
     private String propB1;
 
+    /*
+     * The propBH1 property.
+     */
     private String propBH1;
 
     /**
@@ -78,9 +82,16 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of MyBaseType from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MyBaseType if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     */
     public static MyBaseType fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
                     JsonReader readerToUse = null;
@@ -92,10 +103,10 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                         discriminatorValue = reader.getStringValue();
                         readerToUse = reader;
                     } else {
-                        // If it isn't the discriminator field buffer the JSON structure to make it
-                        // replayable and find the discriminator field value.
-                        String json = JsonUtils.bufferJsonObject(reader);
-                        JsonReader replayReader = DefaultJsonReader.fromString(json);
+                        // If it isn't the discriminator field buffer the JSON to make it replayable and find the
+                        // discriminator field value.
+                        JsonReader replayReader = reader.bufferObject();
+                        replayReader.nextToken(); // Prepare for reading
                         while (replayReader.nextToken() != JsonToken.END_OBJECT) {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
@@ -106,8 +117,9 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                                 replayReader.skipChildren();
                             }
                         }
+
                         if (discriminatorValue != null) {
-                            readerToUse = DefaultJsonReader.fromString(json);
+                            readerToUse = replayReader.reset();
                         }
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.

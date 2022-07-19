@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,6 +14,9 @@ import java.time.Duration;
 /** The DurationWrapper model. */
 @Fluent
 public final class DurationWrapper implements JsonSerializable<DurationWrapper> {
+    /*
+     * The field property.
+     */
     private Duration field;
 
     /**
@@ -51,9 +53,15 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DurationWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DurationWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DurationWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Duration field = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -61,13 +69,13 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = JsonUtils.getNullableProperty(reader, r -> Duration.parse(reader.getStringValue()));
+                            field = reader.getNullableValue(r -> Duration.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DurationWrapper deserializedValue = new DurationWrapper();
-                    deserializedValue.setField(field);
+                    deserializedValue.field = field;
 
                     return deserializedValue;
                 });

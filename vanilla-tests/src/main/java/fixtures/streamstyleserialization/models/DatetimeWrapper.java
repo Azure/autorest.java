@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,8 +14,14 @@ import java.time.OffsetDateTime;
 /** The DatetimeWrapper model. */
 @Fluent
 public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> {
+    /*
+     * The field property.
+     */
     private OffsetDateTime field;
 
+    /*
+     * The now property.
+     */
     private OffsetDateTime now;
 
     /**
@@ -74,9 +79,15 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DatetimeWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DatetimeWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DatetimeWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     OffsetDateTime field = null;
                     OffsetDateTime now = null;
@@ -85,20 +96,16 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
+                            field = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
                         } else if ("now".equals(fieldName)) {
-                            now =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
+                            now = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DatetimeWrapper deserializedValue = new DatetimeWrapper();
-                    deserializedValue.setField(field);
-                    deserializedValue.setNow(now);
+                    deserializedValue.field = field;
+                    deserializedValue.now = now;
 
                     return deserializedValue;
                 });

@@ -525,9 +525,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             });
         }
 
-        classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
-            comment -> comment.line(property.getDescription()));
-
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
             classBlock.annotation("JsonFlatten");
         }

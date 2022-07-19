@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The LongWrapper model. */
 @Fluent
 public final class LongWrapper implements JsonSerializable<LongWrapper> {
+    /*
+     * The field1 property.
+     */
     private Long field1;
 
+    /*
+     * The field2 property.
+     */
     private Long field2;
 
     /**
@@ -73,9 +78,15 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of LongWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of LongWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static LongWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Long field1 = null;
                     Long field2 = null;
@@ -84,16 +95,16 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getLongValue());
+                            field1 = reader.getLongNullableValue();
                         } else if ("field2".equals(fieldName)) {
-                            field2 = JsonUtils.getNullableProperty(reader, r -> reader.getLongValue());
+                            field2 = reader.getLongNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
                     LongWrapper deserializedValue = new LongWrapper();
-                    deserializedValue.setField1(field1);
-                    deserializedValue.setField2(field2);
+                    deserializedValue.field1 = field1;
+                    deserializedValue.field2 = field2;
 
                     return deserializedValue;
                 });

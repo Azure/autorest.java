@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -14,8 +13,14 @@ import java.util.List;
 /** The Cat model. */
 @Fluent
 public class Cat extends Pet {
+    /*
+     * The color property.
+     */
     private String color;
 
+    /*
+     * The hates property.
+     */
     private List<Dog> hates;
 
     /**
@@ -91,13 +96,19 @@ public class Cat extends Pet {
         jsonWriter.writeIntegerField("id", getId(), false);
         jsonWriter.writeStringField("name", getName(), false);
         jsonWriter.writeStringField("color", this.color, false);
-        JsonUtils.writeArray(jsonWriter, "hates", this.hates, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("hates", this.hates, false, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Cat from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Cat if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     */
     public static Cat fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
                     String name = null;
@@ -108,15 +119,13 @@ public class Cat extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            id = reader.getIntegerNullableValue();
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {
                             color = reader.getStringValue();
                         } else if ("hates".equals(fieldName)) {
-                            hates =
-                                    JsonUtils.readArray(
-                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Dog.fromJson(reader)));
+                            hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
                         } else {
                             reader.skipChildren();
                         }
@@ -124,8 +133,8 @@ public class Cat extends Pet {
                     Cat deserializedValue = new Cat();
                     deserializedValue.setId(id);
                     deserializedValue.setName(name);
-                    deserializedValue.setColor(color);
-                    deserializedValue.setHates(hates);
+                    deserializedValue.color = color;
+                    deserializedValue.hates = hates;
 
                     return deserializedValue;
                 });

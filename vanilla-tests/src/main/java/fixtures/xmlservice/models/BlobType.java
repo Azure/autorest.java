@@ -33,6 +33,9 @@ public enum BlobType {
      */
     @JsonCreator
     public static BlobType fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         BlobType[] items = BlobType.values();
         for (BlobType item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

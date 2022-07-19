@@ -20,7 +20,6 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -66,7 +65,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(JsonReader.class.getName());
         imports.add(DefaultJsonReader.class.getName());
         imports.add(JsonToken.class.getName());
-        imports.add(JsonUtils.class.getName());
 
         imports.add(CoreUtils.class.getName());
 
@@ -144,14 +142,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             ClientModelProperty additionalProperties = propertiesManager.additionalProperties;
             if (additionalProperties != null) {
-                methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
-                    ifAction.line(additionalProperties.getName() + ".forEach((key, value) -> {");
-                    ifAction.indent(() -> {
-                        ifAction.line("jsonWriter.writeFieldName(key);");
-                        ifAction.line("JsonUtils.writeUntypedField(jsonWriter, value);");
-                    });
-                    ifAction.line("});");
-                });
+                methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction ->
+                    ifAction.line(additionalProperties.getName() + ".forEach(jsonWriter::writeUntypedField);"));
             }
 
             methodBlock.methodReturn("jsonWriter.writeEndObject().flush()");
@@ -198,7 +190,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line("jsonWriter." + fieldSerializationMethod + "(\"" + serializedName + "\", " + propertyValueGetter + ");");
             }
         } else if (wireType == ClassType.Object) {
-            methodBlock.line("JsonUtils.writeUntypedField(jsonWriter, " + propertyValueGetter + ");");
+            methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
             serializeContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
@@ -217,7 +209,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Helper method to serialize a container property (such as {@link List} and {@link Map}).
      *
      * @param methodBlock The method handling serialization.
-     * @param utilityMethod The {@link JsonUtils} method aiding in the serialization of the container.
+     * @param utilityMethod The method aiding in the serialization of the container.
      * @param containerType The container type.
      * @param elementType The element type for the container, for a {@link List} this is the element type and for a
      * {@link Map} this is the value type.
@@ -253,7 +245,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     methodBlock.line(lambdaWriterName + "." + valueSerializationMethod + "(" + elementName + ")");
                 }
             } else if (elementType == ClassType.Object) {
-                methodBlock.line("JsonUtils.writeUntypedField(" + lambdaWriterName + ", " + elementName + ")");
+                methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
             } else if (elementType instanceof IterableType) {
                 serializeContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
                     serializedName, propertyValueGetter, depth + 1);
@@ -436,8 +428,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 "    readerToUse = reader;",
                 "} else {",
                 "    // If it isn't the discriminator field buffer the JSON to make it replayable and find the discriminator field value.",
-                "    String json = JsonUtils.bufferJsonObject(reader);",
-                "    JsonReader replayReader = DefaultJsonReader.fromString(json);",
+                "    JsonReader replayReader = reader.bufferObject();",
                 "    replayReader.nextToken(); // Prepare for reading",
                 "    while (replayReader.nextToken() != JsonToken.END_OBJECT) {",
                 "        String " + fieldNameVariableName + " = replayReader.getFieldName();",
@@ -451,7 +442,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 "    }",
                 "",
                 "    if (discriminatorValue != null) {",
-                "        readerToUse = DefaultJsonReader.fromString(json);",
+                "        readerToUse = replayReader.reset();",
                 "    }",
                 "}"
             ));
@@ -701,8 +692,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader)", methodBlock -> {
-            // For now, use the basic JsonUtils.readObject which will return null if the JsonReader is pointing
-            // to JsonToken.NULL.
+            // For now, use the basic readObject which will return null if the JsonReader is pointing to JsonToken.NULL.
             //
             // Support for a default value if null will need to be supported and for objects that get their value
             // from a JSON value instead of JSON object or are an array type.
@@ -844,19 +834,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
 
-        // TODO (alzimmer): Handle recursive container deserialization.
-
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleDeserialization(wireType, clientType, "reader");
         if (simpleDeserialization != null) {
             if (wireType.deserializationNeedsNullGuarding()) {
-                deserializationBlock.line(property.getName() + " = JsonUtils.getNullableProperty(reader, r -> " + simpleDeserialization + ");");
+                deserializationBlock.line(property.getName() + " = reader.getNullableValue(r -> " + simpleDeserialization + ");");
             } else {
                 deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
             }
         } else if (wireType == ClassType.Object) {
-            deserializationBlock.line(property.getName() + " = JsonUtils.readUntypedField(reader);");
+            deserializationBlock.line(property.getName() + " = reader.readUntyped();");
         } else if (wireType instanceof IterableType) {
             deserializationBlock.text(property.getName() + " = ");
             deserializeContainerProperty(deserializationBlock, "readArray", wireType,
@@ -881,7 +869,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Helper method to deserialize a container property (such as {@link List} and {@link Map}).
      *
      * @param methodBlock The method handling deserialization.
-     * @param utilityMethod The {@link JsonUtils} method aiding in the deserialization of the container.
+     * @param utilityMethod The method aiding in the deserialization of the container.
      * @param containerType The container type.
      * @param elementType The element type for the container, for a {@link List} this is the element type and for a
      * {@link Map} this is the value type.
@@ -898,12 +886,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (valueDeserializationMethod != null) {
                 if (elementType.deserializationNeedsNullGuarding()) {
-                    methodBlock.line("JsonUtils.getNullableProperty(" + lambdaReaderName + ", r -> " + valueDeserializationMethod + ")");
+                    methodBlock.line(lambdaReaderName + ".getNullableValue(r -> " + valueDeserializationMethod + ")");
                 } else {
                     methodBlock.line(valueDeserializationMethod);
                 }
             } else if (elementType == ClassType.Object) {
-                methodBlock.line("JsonUtils.readUntypedField(" + lambdaReaderName + ")");
+                methodBlock.line(lambdaReaderName + ".readUntyped()");
             } else if (elementType instanceof IterableType) {
                 deserializeContainerProperty(methodBlock, "readArray", elementType,
                     ((IterableType) elementType).getElementType(), depth + 1);
@@ -991,7 +979,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 IType valueType = ((MapType) additionalProperties.getWireType()).getValueType();
                 if (valueType == ClassType.Object) {
                     // String fieldName should be a local variable accessible in this spot of code.
-                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", JsonUtils.readUntypedField(reader));");
+                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
                 } else {
                     // Another assumption, the additional properties value type is simple.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "

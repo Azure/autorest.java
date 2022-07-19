@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,12 +14,24 @@ import java.util.List;
 /** The DotFishMarket model. */
 @Fluent
 public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
+    /*
+     * The sampleSalmon property.
+     */
     private DotSalmon sampleSalmon;
 
+    /*
+     * The salmons property.
+     */
     private List<DotSalmon> salmons;
 
+    /*
+     * The sampleFish property.
+     */
     private DotFish sampleFish;
 
+    /*
+     * The fishes property.
+     */
     private List<DotFish> fishes;
 
     /**
@@ -127,16 +138,21 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeJsonField("sampleSalmon", this.sampleSalmon, false);
-        JsonUtils.writeArray(
-                jsonWriter, "salmons", this.salmons, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("salmons", this.salmons, false, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("sampleFish", this.sampleFish, false);
-        JsonUtils.writeArray(jsonWriter, "fishes", this.fishes, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("fishes", this.fishes, false, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DotFishMarket from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DotFishMarket if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DotFishMarket fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     DotSalmon sampleSalmon = null;
                     List<DotSalmon> salmons = null;
@@ -147,28 +163,22 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
                         reader.nextToken();
 
                         if ("sampleSalmon".equals(fieldName)) {
-                            sampleSalmon = JsonUtils.getNullableProperty(reader, r -> DotSalmon.fromJson(reader));
+                            sampleSalmon = DotSalmon.fromJson(reader);
                         } else if ("salmons".equals(fieldName)) {
-                            salmons =
-                                    JsonUtils.readArray(
-                                            reader,
-                                            r -> JsonUtils.getNullableProperty(r, r1 -> DotSalmon.fromJson(reader)));
+                            salmons = reader.readArray(reader1 -> DotSalmon.fromJson(reader1));
                         } else if ("sampleFish".equals(fieldName)) {
-                            sampleFish = JsonUtils.getNullableProperty(reader, r -> DotFish.fromJson(reader));
+                            sampleFish = DotFish.fromJson(reader);
                         } else if ("fishes".equals(fieldName)) {
-                            fishes =
-                                    JsonUtils.readArray(
-                                            reader,
-                                            r -> JsonUtils.getNullableProperty(r, r1 -> DotFish.fromJson(reader)));
+                            fishes = reader.readArray(reader1 -> DotFish.fromJson(reader1));
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DotFishMarket deserializedValue = new DotFishMarket();
-                    deserializedValue.setSampleSalmon(sampleSalmon);
-                    deserializedValue.setSalmons(salmons);
-                    deserializedValue.setSampleFish(sampleFish);
-                    deserializedValue.setFishes(fishes);
+                    deserializedValue.sampleSalmon = sampleSalmon;
+                    deserializedValue.salmons = salmons;
+                    deserializedValue.sampleFish = sampleFish;
+                    deserializedValue.fishes = fishes;
 
                     return deserializedValue;
                 });

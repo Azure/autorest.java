@@ -25,8 +25,6 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.OffsetDateTime;
 import java.util.List;
 import reactor.core.publisher.Mono;
@@ -1926,8 +1924,7 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = (arrayPath == null) ? null : String.join(",", arrayPath);
         return FluxUtil.withContext(
                 context ->
                         service.arrayCsvInPath(
@@ -1952,8 +1949,7 @@ public final class PathsImpl {
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(
             List<String> arrayPath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = (arrayPath == null) ? null : String.join(",", arrayPath);
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
     }
 

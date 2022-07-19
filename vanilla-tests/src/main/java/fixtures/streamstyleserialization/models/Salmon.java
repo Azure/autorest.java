@@ -6,22 +6,28 @@ package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /** The Salmon model. */
 @Fluent
 public class Salmon extends Fish {
+    /*
+     * The fishtype property.
+     */
     private String fishtype = "salmon";
 
+    /*
+     * The location property.
+     */
     private String location;
 
+    /*
+     * The iswild property.
+     */
     private Boolean iswild;
 
     /**
@@ -103,16 +109,23 @@ public class Salmon extends Fish {
         jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies(), false);
-        JsonUtils.writeArray(
-                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("siblings", getSiblings(), false, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", this.location, false);
         jsonWriter.writeBooleanField("iswild", this.iswild, false);
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Salmon from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     */
     public static Salmon fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
                     JsonReader readerToUse = null;
@@ -124,10 +137,10 @@ public class Salmon extends Fish {
                         discriminatorValue = reader.getStringValue();
                         readerToUse = reader;
                     } else {
-                        // If it isn't the discriminator field buffer the JSON structure to make it
-                        // replayable and find the discriminator field value.
-                        String json = JsonUtils.bufferJsonObject(reader);
-                        JsonReader replayReader = DefaultJsonReader.fromString(json);
+                        // If it isn't the discriminator field buffer the JSON to make it replayable and find the
+                        // discriminator field value.
+                        JsonReader replayReader = reader.bufferObject();
+                        replayReader.nextToken(); // Prepare for reading
                         while (replayReader.nextToken() != JsonToken.END_OBJECT) {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
@@ -138,8 +151,9 @@ public class Salmon extends Fish {
                                 replayReader.skipChildren();
                             }
                         }
+
                         if (discriminatorValue != null) {
-                            readerToUse = DefaultJsonReader.fromString(json);
+                            readerToUse = replayReader.reset();
                         }
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.
@@ -157,11 +171,9 @@ public class Salmon extends Fish {
     }
 
     static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
-                    boolean fishtypeFound = false;
-                    String fishtype = null;
+                    String fishtype = "salmon";
                     boolean lengthFound = false;
                     float length = 0.0f;
                     String species = null;
@@ -173,7 +185,6 @@ public class Salmon extends Fish {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            fishtypeFound = true;
                             fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
@@ -181,19 +192,17 @@ public class Salmon extends Fish {
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
-                            siblings =
-                                    JsonUtils.readArray(
-                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
+                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
+                            iswild = reader.getBooleanNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
 
-                    if (!fishtypeFound || !Objects.equals(fishtype, "salmon")) {
+                    if (!"salmon".equals(fishtype)) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
                                         + fishtype
@@ -210,10 +219,11 @@ public class Salmon extends Fish {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     Salmon deserializedValue = new Salmon(length);
+                    deserializedValue.fishtype = fishtype;
                     deserializedValue.setSpecies(species);
                     deserializedValue.setSiblings(siblings);
-                    deserializedValue.setLocation(location);
-                    deserializedValue.setIswild(iswild);
+                    deserializedValue.location = location;
+                    deserializedValue.iswild = iswild;
 
                     return deserializedValue;
                 });

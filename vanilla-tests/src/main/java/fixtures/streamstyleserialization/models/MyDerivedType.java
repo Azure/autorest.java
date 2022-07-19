@@ -5,17 +5,21 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.Objects;
 
 /** The MyDerivedType model. */
 @Fluent
 public final class MyDerivedType extends MyBaseType {
+    /*
+     * The kind property.
+     */
     private MyKind kind = MyKind.KIND1;
 
+    /*
+     * The propD1 property.
+     */
     private String propD1;
 
     /**
@@ -76,12 +80,18 @@ public final class MyDerivedType extends MyBaseType {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of MyDerivedType from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     */
     public static MyDerivedType fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
-                    boolean kindFound = false;
-                    String kind = null;
+                    MyKind kind = "Kind1";
                     String propB1 = null;
                     String propBH1 = null;
                     String propD1 = null;
@@ -90,7 +100,6 @@ public final class MyDerivedType extends MyBaseType {
                         reader.nextToken();
 
                         if ("kind".equals(fieldName)) {
-                            kindFound = true;
                             kind = reader.getStringValue();
                         } else if ("propB1".equals(fieldName)) {
                             propB1 = reader.getStringValue();
@@ -112,7 +121,7 @@ public final class MyDerivedType extends MyBaseType {
                         }
                     }
 
-                    if (!kindFound || !Objects.equals(kind, "Kind1")) {
+                    if (!"Kind1".equals(kind)) {
                         throw new IllegalStateException(
                                 "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
                                         + kind
@@ -120,9 +129,10 @@ public final class MyDerivedType extends MyBaseType {
                     }
 
                     MyDerivedType deserializedValue = new MyDerivedType();
+                    deserializedValue.kind = kind;
                     deserializedValue.setPropB1(propB1);
                     deserializedValue.setPropBH1(propBH1);
-                    deserializedValue.setPropD1(propD1);
+                    deserializedValue.propD1 = propD1;
 
                     return deserializedValue;
                 });

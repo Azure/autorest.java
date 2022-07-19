@@ -5,19 +5,26 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.Objects;
 
 /** The DotSalmon model. */
 @Fluent
 public class DotSalmon extends DotFish {
+    /*
+     * The fish.type property.
+     */
     private String fishType = "DotSalmon";
 
+    /*
+     * The location property.
+     */
     private String location;
 
+    /*
+     * The iswild property.
+     */
     private Boolean iswild;
 
     /**
@@ -87,12 +94,18 @@ public class DotSalmon extends DotFish {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DotSalmon from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DotSalmon if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     */
     public static DotSalmon fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
-                    boolean fishTypeFound = false;
-                    String fishType = null;
+                    String fishType = "DotSalmon";
                     String species = null;
                     String location = null;
                     Boolean iswild = null;
@@ -101,20 +114,19 @@ public class DotSalmon extends DotFish {
                         reader.nextToken();
 
                         if ("fish\\.type".equals(fieldName)) {
-                            fishTypeFound = true;
                             fishType = reader.getStringValue();
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
+                            iswild = reader.getBooleanNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
 
-                    if (!fishTypeFound || !Objects.equals(fishType, "DotSalmon")) {
+                    if (!"DotSalmon".equals(fishType)) {
                         throw new IllegalStateException(
                                 "'fish\\.type' was expected to be non-null and equal to 'DotSalmon'. The found 'fish\\.type' was '"
                                         + fishType
@@ -122,9 +134,10 @@ public class DotSalmon extends DotFish {
                     }
 
                     DotSalmon deserializedValue = new DotSalmon();
+                    deserializedValue.fishType = fishType;
                     deserializedValue.setSpecies(species);
-                    deserializedValue.setLocation(location);
-                    deserializedValue.setIswild(iswild);
+                    deserializedValue.location = location;
+                    deserializedValue.iswild = iswild;
 
                     return deserializedValue;
                 });

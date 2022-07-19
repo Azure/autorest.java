@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,10 +13,19 @@ import com.azure.json.JsonWriter;
 /** The Basic model. */
 @Fluent
 public final class Basic implements JsonSerializable<Basic> {
+    /*
+     * Basic Id
+     */
     private Integer id;
 
+    /*
+     * Name property with a very long description that does not fit on a single line and a line break.
+     */
     private String name;
 
+    /*
+     * The color property.
+     */
     private CMYKColors color;
 
     /**
@@ -98,9 +106,15 @@ public final class Basic implements JsonSerializable<Basic> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Basic from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     */
     public static Basic fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
                     String name = null;
@@ -110,7 +124,7 @@ public final class Basic implements JsonSerializable<Basic> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            id = reader.getIntegerNullableValue();
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("color".equals(fieldName)) {
@@ -120,9 +134,9 @@ public final class Basic implements JsonSerializable<Basic> {
                         }
                     }
                     Basic deserializedValue = new Basic();
-                    deserializedValue.setId(id);
-                    deserializedValue.setName(name);
-                    deserializedValue.setColor(color);
+                    deserializedValue.id = id;
+                    deserializedValue.name = name;
+                    deserializedValue.color = color;
 
                     return deserializedValue;
                 });

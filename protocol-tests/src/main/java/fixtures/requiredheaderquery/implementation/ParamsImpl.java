@@ -159,8 +159,7 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
@@ -235,8 +234,7 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
@@ -351,8 +349,7 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
@@ -407,8 +404,7 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeList(parameterCsvIntArray, CollectionFormat.CSV);

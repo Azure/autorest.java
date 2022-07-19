@@ -20,8 +20,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -1827,8 +1825,7 @@ public final class Explicits {
                     new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
         }
         final String accept = "application/json";
-        String headerParameterConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = (headerParameter == null) ? null : String.join(",", headerParameter);
         return FluxUtil.withContext(
                 context ->
                         service.postRequiredArrayHeader(
@@ -1880,8 +1877,7 @@ public final class Explicits {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String headerParameterConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = (headerParameter == null) ? null : String.join(",", headerParameter);
         return FluxUtil.withContext(
                 context ->
                         service.postOptionalArrayHeader(

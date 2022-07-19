@@ -19,8 +19,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.time.LocalDate;
@@ -1928,8 +1926,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2007,8 +2004,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2082,8 +2078,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2157,8 +2152,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
         return FluxUtil.withContext(
                 context ->
                         service.arrayStringNoCollectionFormatEmpty(
@@ -2239,8 +2233,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(" ", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2319,8 +2312,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join("	", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2400,8 +2392,7 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = (arrayQuery == null) ? null : String.join("|", arrayQuery);
         return FluxUtil.withContext(
                 context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }

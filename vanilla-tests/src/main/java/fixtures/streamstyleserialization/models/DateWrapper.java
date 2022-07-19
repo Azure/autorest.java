@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,8 +14,14 @@ import java.time.LocalDate;
 /** The DateWrapper model. */
 @Fluent
 public final class DateWrapper implements JsonSerializable<DateWrapper> {
+    /*
+     * The field property.
+     */
     private LocalDate field;
 
+    /*
+     * The leap property.
+     */
     private LocalDate leap;
 
     /**
@@ -74,9 +79,15 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DateWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DateWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     LocalDate field = null;
                     LocalDate leap = null;
@@ -85,18 +96,16 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> LocalDate.parse(reader.getStringValue()));
+                            field = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
                         } else if ("leap".equals(fieldName)) {
-                            leap = JsonUtils.getNullableProperty(reader, r -> LocalDate.parse(reader.getStringValue()));
+                            leap = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DateWrapper deserializedValue = new DateWrapper();
-                    deserializedValue.setField(field);
-                    deserializedValue.setLeap(leap);
+                    deserializedValue.field = field;
+                    deserializedValue.leap = leap;
 
                     return deserializedValue;
                 });

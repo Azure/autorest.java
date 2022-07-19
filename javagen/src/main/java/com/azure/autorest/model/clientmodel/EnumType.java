@@ -148,7 +148,7 @@ public class EnumType implements IType {
     }
 
     public final boolean deserializationNeedsNullGuarding() {
-        return expandable;
+        return false;
     }
 
     @Override

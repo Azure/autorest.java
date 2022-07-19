@@ -18,8 +18,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     private String name;
 
     /*
-     * Specifies the primary network interface in case the virtual machine has
-     * more than 1 network interface.
+     * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      */
     @JsonFlatten
     @JsonProperty(value = "properties.primary")

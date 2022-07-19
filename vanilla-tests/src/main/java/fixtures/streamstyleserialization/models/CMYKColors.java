@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Defines values for CMYKColors. */
@@ -28,7 +27,6 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * @param name a name to look for.
      * @return the corresponding CMYKColors.
      */
-    @JsonCreator
     public static CMYKColors fromString(String name) {
         return fromString(name, CMYKColors.class);
     }

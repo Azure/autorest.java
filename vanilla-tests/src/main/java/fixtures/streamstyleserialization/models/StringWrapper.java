@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,10 +13,19 @@ import com.azure.json.JsonWriter;
 /** The StringWrapper model. */
 @Fluent
 public final class StringWrapper implements JsonSerializable<StringWrapper> {
+    /*
+     * The field property.
+     */
     private String field;
 
+    /*
+     * The empty property.
+     */
     private String empty;
 
+    /*
+     * The null property.
+     */
     private String nullProperty;
 
     /**
@@ -96,9 +104,15 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of StringWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of StringWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static StringWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     String field = null;
                     String empty = null;
@@ -118,9 +132,9 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
                         }
                     }
                     StringWrapper deserializedValue = new StringWrapper();
-                    deserializedValue.setField(field);
-                    deserializedValue.setEmpty(empty);
-                    deserializedValue.setNullProperty(nullProperty);
+                    deserializedValue.field = field;
+                    deserializedValue.empty = empty;
+                    deserializedValue.nullProperty = nullProperty;
 
                     return deserializedValue;
                 });

@@ -6,22 +6,29 @@ package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /** The Goblinshark model. */
 @Fluent
 public final class Goblinshark extends Shark {
+    /*
+     * The fishtype property.
+     */
     private String fishtype = "goblin";
 
+    /*
+     * The jawsize property.
+     */
     private Integer jawsize;
 
+    /*
+     * Colors possible
+     */
     private GoblinSharkColor color;
 
     /**
@@ -112,20 +119,26 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
         jsonWriter.writeStringField("species", getSpecies(), false);
-        JsonUtils.writeArray(
-                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("siblings", getSiblings(), false, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeIntegerField("age", getAge(), false);
         jsonWriter.writeIntegerField("jawsize", this.jawsize, false);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString(), false);
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Goblinshark from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     */
     public static Goblinshark fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
-                    boolean fishtypeFound = false;
-                    String fishtype = null;
+                    String fishtype = "goblin";
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
@@ -140,26 +153,21 @@ public final class Goblinshark extends Shark {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            fishtypeFound = true;
                             fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
                             lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
-                            birthday =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> OffsetDateTime.parse(reader.getStringValue()));
+                            birthday = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
                             birthdayFound = true;
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
-                            siblings =
-                                    JsonUtils.readArray(
-                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
+                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                         } else if ("age".equals(fieldName)) {
-                            age = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            age = reader.getIntegerNullableValue();
                         } else if ("jawsize".equals(fieldName)) {
-                            jawsize = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            jawsize = reader.getIntegerNullableValue();
                         } else if ("color".equals(fieldName)) {
                             color = GoblinSharkColor.fromString(reader.getStringValue());
                         } else {
@@ -167,7 +175,7 @@ public final class Goblinshark extends Shark {
                         }
                     }
 
-                    if (!fishtypeFound || !Objects.equals(fishtype, "goblin")) {
+                    if (!"goblin".equals(fishtype)) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
                                         + fishtype
@@ -187,11 +195,12 @@ public final class Goblinshark extends Shark {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     Goblinshark deserializedValue = new Goblinshark(length, birthday);
+                    deserializedValue.fishtype = fishtype;
                     deserializedValue.setSpecies(species);
                     deserializedValue.setSiblings(siblings);
                     deserializedValue.setAge(age);
-                    deserializedValue.setJawsize(jawsize);
-                    deserializedValue.setColor(color);
+                    deserializedValue.jawsize = jawsize;
+                    deserializedValue.color = color;
 
                     return deserializedValue;
                 });

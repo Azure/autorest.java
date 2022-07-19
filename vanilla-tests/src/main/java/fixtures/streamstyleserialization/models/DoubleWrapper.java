@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The DoubleWrapper model. */
 @Fluent
 public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
+    /*
+     * The field1 property.
+     */
     private Double field1;
 
+    /*
+     * The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     */
     private Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
     /**
@@ -81,9 +86,15 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DoubleWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DoubleWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DoubleWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Double field1 = null;
                     Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = null;
@@ -92,20 +103,19 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getDoubleValue());
+                            field1 = reader.getDoubleNullableValue();
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
                             field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
-                                    JsonUtils.getNullableProperty(reader, r -> reader.getDoubleValue());
+                                    reader.getDoubleNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DoubleWrapper deserializedValue = new DoubleWrapper();
-                    deserializedValue.setField1(field1);
-                    deserializedValue
-                            .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
-                                    field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
+                    deserializedValue.field1 = field1;
+                    deserializedValue.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
+                            field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
                     return deserializedValue;
                 });

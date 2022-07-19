@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The Error model. */
 @Fluent
 public final class Error implements JsonSerializable<Error> {
+    /*
+     * The status property.
+     */
     private Integer status;
 
+    /*
+     * The message property.
+     */
     private String message;
 
     /**
@@ -73,9 +78,15 @@ public final class Error implements JsonSerializable<Error> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Error from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Error if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     */
     public static Error fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer status = null;
                     String message = null;
@@ -84,7 +95,7 @@ public final class Error implements JsonSerializable<Error> {
                         reader.nextToken();
 
                         if ("status".equals(fieldName)) {
-                            status = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            status = reader.getIntegerNullableValue();
                         } else if ("message".equals(fieldName)) {
                             message = reader.getStringValue();
                         } else {
@@ -92,8 +103,8 @@ public final class Error implements JsonSerializable<Error> {
                         }
                     }
                     Error deserializedValue = new Error();
-                    deserializedValue.setStatus(status);
-                    deserializedValue.setMessage(message);
+                    deserializedValue.status = status;
+                    deserializedValue.message = message;
 
                     return deserializedValue;
                 });

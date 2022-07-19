@@ -7,7 +7,6 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.PageDetails;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
@@ -49,7 +48,6 @@ public class PageTemplate implements IJavaTemplate<PageDetails, JavaFile> {
             imports.add(JsonSerializable.class.getName());
             imports.add(JsonWriter.class.getName());
             imports.add(JsonReader.class.getName());
-            imports.add(JsonUtils.class.getName());
         }
 
         javaFile.declareImport(imports);
@@ -130,8 +128,7 @@ public class PageTemplate implements IJavaTemplate<PageDetails, JavaFile> {
                     function.line();
 
                     // TODO (alzimmer): Introspect the item type to determine how it should be serialized.
-                    function.line("JsonUtils.writeArray(jsonWriter, \"%s\", items, String::valueOf);",
-                        pageClass.getItemName());
+                    function.line("jsonWriter.writeArray(\"%s\", items, String::valueOf);", pageClass.getItemName());
 
                     function.line();
                     function.methodReturn("jsonWriter.writeEndObject().flush()");

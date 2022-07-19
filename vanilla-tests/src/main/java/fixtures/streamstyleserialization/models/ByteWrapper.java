@@ -6,7 +6,6 @@ package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -16,6 +15,9 @@ import java.util.Base64;
 /** The ByteWrapper model. */
 @Fluent
 public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
+    /*
+     * The field property.
+     */
     private byte[] field;
 
     /**
@@ -52,9 +54,15 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of ByteWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ByteWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static ByteWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     byte[] field = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -62,15 +70,13 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> Base64.getDecoder().decode(reader.getStringValue()));
+                            field = reader.getNullableValue(r -> Base64.getDecoder().decode(reader.getStringValue()));
                         } else {
                             reader.skipChildren();
                         }
                     }
                     ByteWrapper deserializedValue = new ByteWrapper();
-                    deserializedValue.setField(field);
+                    deserializedValue.field = field;
 
                     return deserializedValue;
                 });

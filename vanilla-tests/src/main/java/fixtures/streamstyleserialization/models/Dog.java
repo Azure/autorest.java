@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -13,6 +12,9 @@ import com.azure.json.JsonWriter;
 /** The Dog model. */
 @Fluent
 public final class Dog extends Pet {
+    /*
+     * The food property.
+     */
     private String food;
 
     /**
@@ -68,9 +70,15 @@ public final class Dog extends Pet {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Dog from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     */
     public static Dog fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
                     String name = null;
@@ -80,7 +88,7 @@ public final class Dog extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            id = reader.getIntegerNullableValue();
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else if ("food".equals(fieldName)) {
@@ -92,7 +100,7 @@ public final class Dog extends Pet {
                     Dog deserializedValue = new Dog();
                     deserializedValue.setId(id);
                     deserializedValue.setName(name);
-                    deserializedValue.setFood(food);
+                    deserializedValue.food = food;
 
                     return deserializedValue;
                 });

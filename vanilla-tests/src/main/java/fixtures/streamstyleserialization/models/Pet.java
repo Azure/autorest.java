@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The Pet model. */
 @Fluent
 public class Pet implements JsonSerializable<Pet> {
+    /*
+     * The id property.
+     */
     private Integer id;
 
+    /*
+     * The name property.
+     */
     private String name;
 
     /**
@@ -73,9 +78,15 @@ public class Pet implements JsonSerializable<Pet> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Pet from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Pet if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     */
     public static Pet fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
                     String name = null;
@@ -84,7 +95,7 @@ public class Pet implements JsonSerializable<Pet> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            id = reader.getIntegerNullableValue();
                         } else if ("name".equals(fieldName)) {
                             name = reader.getStringValue();
                         } else {
@@ -92,8 +103,8 @@ public class Pet implements JsonSerializable<Pet> {
                         }
                     }
                     Pet deserializedValue = new Pet();
-                    deserializedValue.setId(id);
-                    deserializedValue.setName(name);
+                    deserializedValue.id = id;
+                    deserializedValue.name = name;
 
                     return deserializedValue;
                 });

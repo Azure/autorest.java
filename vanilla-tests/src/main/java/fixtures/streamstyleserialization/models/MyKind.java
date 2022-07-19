@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Defines values for MyKind. */
@@ -19,7 +18,6 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      * @param name a name to look for.
      * @return the corresponding MyKind.
      */
-    @JsonCreator
     public static MyKind fromString(String name) {
         return fromString(name, MyKind.class);
     }

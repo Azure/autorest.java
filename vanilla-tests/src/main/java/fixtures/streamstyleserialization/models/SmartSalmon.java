@@ -6,7 +6,6 @@ package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -14,15 +13,23 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /** The SmartSalmon model. */
 @Fluent
 public final class SmartSalmon extends Salmon {
+    /*
+     * The fishtype property.
+     */
     private String fishtype = "smart_salmon";
 
+    /*
+     * The college_degree property.
+     */
     private String collegeDegree;
 
+    /*
+     * Dictionary of <any>
+     */
     private Map<String, Object> additionalProperties;
 
     /**
@@ -118,27 +125,29 @@ public final class SmartSalmon extends Salmon {
         jsonWriter.writeStringField("fishtype", fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies(), false);
-        JsonUtils.writeArray(
-                jsonWriter, "siblings", getSiblings(), (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("siblings", getSiblings(), false, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", getLocation(), false);
         jsonWriter.writeBooleanField("iswild", iswild(), false);
         jsonWriter.writeStringField("college_degree", this.collegeDegree, false);
         if (additionalProperties != null) {
-            additionalProperties.forEach(
-                    (key, value) -> {
-                        jsonWriter.writeFieldName(key);
-                        JsonUtils.writeUntypedField(jsonWriter, value);
-                    });
+            additionalProperties.forEach(jsonWriter::writeUntypedField);
         }
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of SmartSalmon from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of SmartSalmon if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     */
     public static SmartSalmon fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
-                    boolean fishtypeFound = false;
-                    String fishtype = null;
+                    String fishtype = "smart_salmon";
                     boolean lengthFound = false;
                     float length = 0.0f;
                     String species = null;
@@ -152,7 +161,6 @@ public final class SmartSalmon extends Salmon {
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            fishtypeFound = true;
                             fishtype = reader.getStringValue();
                         } else if ("length".equals(fieldName)) {
                             length = reader.getFloatValue();
@@ -160,13 +168,11 @@ public final class SmartSalmon extends Salmon {
                         } else if ("species".equals(fieldName)) {
                             species = reader.getStringValue();
                         } else if ("siblings".equals(fieldName)) {
-                            siblings =
-                                    JsonUtils.readArray(
-                                            reader, r -> JsonUtils.getNullableProperty(r, r1 -> Fish.fromJson(reader)));
+                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                         } else if ("location".equals(fieldName)) {
                             location = reader.getStringValue();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
+                            iswild = reader.getBooleanNullableValue();
                         } else if ("college_degree".equals(fieldName)) {
                             collegeDegree = reader.getStringValue();
                         } else {
@@ -174,11 +180,11 @@ public final class SmartSalmon extends Salmon {
                                 additionalProperties = new LinkedHashMap<>();
                             }
 
-                            additionalProperties.put(fieldName, JsonUtils.readUntypedField(reader));
+                            additionalProperties.put(fieldName, reader.readUntyped());
                         }
                     }
 
-                    if (!fishtypeFound || !Objects.equals(fishtype, "smart_salmon")) {
+                    if (!"smart_salmon".equals(fishtype)) {
                         throw new IllegalStateException(
                                 "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
                                         + fishtype
@@ -195,11 +201,13 @@ public final class SmartSalmon extends Salmon {
                                 "Missing required property/properties: " + String.join(", ", missingProperties));
                     }
                     SmartSalmon deserializedValue = new SmartSalmon(length);
+                    deserializedValue.fishtype = fishtype;
                     deserializedValue.setSpecies(species);
                     deserializedValue.setSiblings(siblings);
                     deserializedValue.setLocation(location);
                     deserializedValue.setIswild(iswild);
-                    deserializedValue.setCollegeDegree(collegeDegree);
+                    deserializedValue.collegeDegree = collegeDegree;
+                    deserializedValue.additionalProperties = additionalProperties;
 
                     return deserializedValue;
                 });

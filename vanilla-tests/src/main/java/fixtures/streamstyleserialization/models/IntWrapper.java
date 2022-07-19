@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The IntWrapper model. */
 @Fluent
 public final class IntWrapper implements JsonSerializable<IntWrapper> {
+    /*
+     * The field1 property.
+     */
     private Integer field1;
 
+    /*
+     * The field2 property.
+     */
     private Integer field2;
 
     /**
@@ -73,9 +78,15 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of IntWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of IntWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     */
     public static IntWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Integer field1 = null;
                     Integer field2 = null;
@@ -84,16 +95,16 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            field1 = reader.getIntegerNullableValue();
                         } else if ("field2".equals(fieldName)) {
-                            field2 = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            field2 = reader.getIntegerNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
                     IntWrapper deserializedValue = new IntWrapper();
-                    deserializedValue.setField1(field1);
-                    deserializedValue.setField2(field2);
+                    deserializedValue.field1 = field1;
+                    deserializedValue.field2 = field2;
 
                     return deserializedValue;
                 });

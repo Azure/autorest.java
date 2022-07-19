@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The ReadonlyObj model. */
 @Fluent
 public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
+    /*
+     * The id property.
+     */
     private String id;
 
+    /*
+     * The size property.
+     */
     private Integer size;
 
     /**
@@ -62,9 +67,15 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of ReadonlyObj from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ReadonlyObj if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static ReadonlyObj fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     String id = null;
                     Integer size = null;
@@ -75,14 +86,14 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
                         if ("id".equals(fieldName)) {
                             id = reader.getStringValue();
                         } else if ("size".equals(fieldName)) {
-                            size = JsonUtils.getNullableProperty(reader, r -> reader.getIntValue());
+                            size = reader.getIntegerNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
                     ReadonlyObj deserializedValue = new ReadonlyObj();
                     deserializedValue.id = id;
-                    deserializedValue.setSize(size);
+                    deserializedValue.size = size;
 
                     return deserializedValue;
                 });

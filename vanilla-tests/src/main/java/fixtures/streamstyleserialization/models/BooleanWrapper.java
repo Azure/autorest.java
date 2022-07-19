@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,8 +13,14 @@ import com.azure.json.JsonWriter;
 /** The BooleanWrapper model. */
 @Fluent
 public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
+    /*
+     * The field_true property.
+     */
     private Boolean fieldTrue;
 
+    /*
+     * The field_false property.
+     */
     private Boolean fieldFalse;
 
     /**
@@ -73,9 +78,15 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of BooleanWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of BooleanWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static BooleanWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Boolean fieldTrue = null;
                     Boolean fieldFalse = null;
@@ -84,16 +95,16 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
                         reader.nextToken();
 
                         if ("field_true".equals(fieldName)) {
-                            fieldTrue = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
+                            fieldTrue = reader.getBooleanNullableValue();
                         } else if ("field_false".equals(fieldName)) {
-                            fieldFalse = JsonUtils.getNullableProperty(reader, r -> reader.getBooleanValue());
+                            fieldFalse = reader.getBooleanNullableValue();
                         } else {
                             reader.skipChildren();
                         }
                     }
                     BooleanWrapper deserializedValue = new BooleanWrapper();
-                    deserializedValue.setFieldTrue(fieldTrue);
-                    deserializedValue.setFieldFalse(fieldFalse);
+                    deserializedValue.fieldTrue = fieldTrue;
+                    deserializedValue.fieldFalse = fieldFalse;
 
                     return deserializedValue;
                 });

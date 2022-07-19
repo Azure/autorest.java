@@ -19,15 +19,14 @@ public final class Sku {
     private SkuFamily family = SkuFamily.A;
 
     /*
-     * SKU name to specify whether the key vault is a standard vault or a
-     * premium vault.
+     * SKU name to specify whether the key vault is a standard vault or a premium vault.
      */
     @JsonProperty(value = "name", required = true)
     private SkuName name = SkuName.STANDARD;
 
     /*
-     * Property to specify whether Azure Virtual Machines are permitted to
-     * retrieve certificates stored as secrets from the key vault.
+     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from
+     * the key vault.
      */
     @JsonProperty(value = "enabledForDeployment")
     private Boolean enabledForDeployment = true;

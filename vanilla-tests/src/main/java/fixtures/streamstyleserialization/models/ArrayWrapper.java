@@ -5,7 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,6 +14,9 @@ import java.util.List;
 /** The ArrayWrapper model. */
 @Fluent
 public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
+    /*
+     * The array property.
+     */
     private List<String> array;
 
     /**
@@ -47,13 +49,19 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        JsonUtils.writeArray(jsonWriter, "array", this.array, (writer, element) -> writer.writeString(element, false));
+        jsonWriter.writeArrayField("array", this.array, false, (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of ArrayWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ArrayWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static ArrayWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     List<String> array = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -61,13 +69,13 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array = JsonUtils.readArray(reader, r -> reader.getStringValue());
+                            array = reader.readArray(reader1 -> reader1.getStringValue());
                         } else {
                             reader.skipChildren();
                         }
                     }
                     ArrayWrapper deserializedValue = new ArrayWrapper();
-                    deserializedValue.setArray(array);
+                    deserializedValue.array = array;
 
                     return deserializedValue;
                 });

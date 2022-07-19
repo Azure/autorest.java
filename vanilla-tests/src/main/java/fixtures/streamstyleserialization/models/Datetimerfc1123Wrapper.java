@@ -6,7 +6,6 @@ package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.DateTimeRfc1123;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -16,8 +15,14 @@ import java.time.OffsetDateTime;
 /** The Datetimerfc1123Wrapper model. */
 @Fluent
 public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerfc1123Wrapper> {
+    /*
+     * The field property.
+     */
     private DateTimeRfc1123 field;
 
+    /*
+     * The now property.
+     */
     private DateTimeRfc1123 now;
 
     /**
@@ -89,9 +94,15 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Datetimerfc1123Wrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Datetimerfc1123Wrapper if the JsonReader was pointing to an instance of it, or null if it
+     *     was pointing to JSON null.
+     */
     public static Datetimerfc1123Wrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     OffsetDateTime field = null;
                     OffsetDateTime now = null;
@@ -101,19 +112,19 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
                         if ("field".equals(fieldName)) {
                             field =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
+                                    reader.getNullableValue(
+                                            r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
                         } else if ("now".equals(fieldName)) {
                             now =
-                                    JsonUtils.getNullableProperty(
-                                            reader, r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
+                                    reader.getNullableValue(
+                                            r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
                         } else {
                             reader.skipChildren();
                         }
                     }
                     Datetimerfc1123Wrapper deserializedValue = new Datetimerfc1123Wrapper();
-                    deserializedValue.setField(field);
-                    deserializedValue.setNow(now);
+                    deserializedValue.field = field;
+                    deserializedValue.now = now;
 
                     return deserializedValue;
                 });

@@ -20,8 +20,6 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.time.LocalDate;
@@ -1441,8 +1439,7 @@ public final class Paths {
             return Mono.error(new IllegalArgumentException("Parameter arrayPath is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = (arrayPath == null) ? null : String.join(",", arrayPath);
         return FluxUtil.withContext(
                 context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context));
     }

@@ -5,8 +5,6 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
-import com.azure.json.DefaultJsonReader;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -16,10 +14,19 @@ import java.util.List;
 /** The Fish model. */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
+    /*
+     * The species property.
+     */
     private String species;
 
-    private float length;
+    /*
+     * The length property.
+     */
+    private final float length;
 
+    /*
+     * The siblings property.
+     */
     private List<Fish> siblings;
 
     /**
@@ -96,14 +103,21 @@ public class Fish implements JsonSerializable<Fish> {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("species", this.species, false);
-        JsonUtils.writeArray(
-                jsonWriter, "siblings", this.siblings, (writer, element) -> writer.writeJson(element, false));
+        jsonWriter.writeArrayField("siblings", this.siblings, false, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of Fish from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     */
     public static Fish fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
                     JsonReader readerToUse = null;
@@ -115,10 +129,10 @@ public class Fish implements JsonSerializable<Fish> {
                         discriminatorValue = reader.getStringValue();
                         readerToUse = reader;
                     } else {
-                        // If it isn't the discriminator field buffer the JSON structure to make it
-                        // replayable and find the discriminator field value.
-                        String json = JsonUtils.bufferJsonObject(reader);
-                        JsonReader replayReader = DefaultJsonReader.fromString(json);
+                        // If it isn't the discriminator field buffer the JSON to make it replayable and find the
+                        // discriminator field value.
+                        JsonReader replayReader = reader.bufferObject();
+                        replayReader.nextToken(); // Prepare for reading
                         while (replayReader.nextToken() != JsonToken.END_OBJECT) {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
@@ -129,8 +143,9 @@ public class Fish implements JsonSerializable<Fish> {
                                 replayReader.skipChildren();
                             }
                         }
+
                         if (discriminatorValue != null) {
-                            readerToUse = DefaultJsonReader.fromString(json);
+                            readerToUse = replayReader.reset();
                         }
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.

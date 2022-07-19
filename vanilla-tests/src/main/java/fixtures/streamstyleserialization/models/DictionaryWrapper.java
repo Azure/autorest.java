@@ -5,17 +5,18 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.serializer.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** The DictionaryWrapper model. */
 @Fluent
 public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapper> {
+    /*
+     * Dictionary of <string>
+     */
     private Map<String, String> defaultProgram;
 
     /**
@@ -48,17 +49,20 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        JsonUtils.writeMap(
-                jsonWriter,
-                "defaultProgram",
-                this.defaultProgram,
-                (writer, element) -> writer.writeString(element, false));
+        jsonWriter.writeMapField(
+                "defaultProgram", this.defaultProgram, false, (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject().flush();
     }
 
+    /**
+     * Reads an instance of DictionaryWrapper from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DictionaryWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     */
     public static DictionaryWrapper fromJson(JsonReader jsonReader) {
-        return JsonUtils.readObject(
-                jsonReader,
+        return jsonReader.readObject(
                 reader -> {
                     Map<String, String> defaultProgram = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -66,22 +70,13 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
-                            if (defaultProgram == null) {
-                                defaultProgram = new LinkedHashMap<>();
-                            }
-
-                            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                                fieldName = reader.getFieldName();
-                                reader.nextToken();
-
-                                defaultProgram.put(fieldName, reader.getStringValue());
-                            }
+                            defaultProgram = reader.readMap(reader1 -> reader1.getStringValue());
                         } else {
                             reader.skipChildren();
                         }
                     }
                     DictionaryWrapper deserializedValue = new DictionaryWrapper();
-                    deserializedValue.setDefaultProgram(defaultProgram);
+                    deserializedValue.defaultProgram = defaultProgram;
 
                     return deserializedValue;
                 });

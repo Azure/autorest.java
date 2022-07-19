@@ -33,6 +33,9 @@ public enum FooEnum {
      */
     @JsonCreator
     public static FooEnum fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         FooEnum[] items = FooEnum.values();
         for (FooEnum item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
