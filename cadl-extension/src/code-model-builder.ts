@@ -178,7 +178,22 @@ export class CodeModelBuilder {
         })));
       });
     } else {
-      this.hostParameters.push(this.codeModel.addGlobalParameter(this.hostParameter));
+      this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter("endpoint", "Server parameter", this.stringSchema, {
+        implementation: ImplementationLocation.Client,
+        origin: "modelerfour:synthesized/host",
+        required: true,
+        protocol: {
+          http: new HttpParameter(ParameterLocation.Uri),
+        },
+        language: {
+          default: {
+            serializedName: "endpoint"
+          }
+        },
+        extensions: {
+          "x-ms-skip-url-encoding": true
+        }
+      })));
     }
   }
 
@@ -912,30 +927,6 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   public get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
-  }
-
-  private _hostParameter?: Parameter;
-  get hostParameter(): Parameter {
-    return (
-      this._hostParameter ||
-      (this._hostParameter = new Parameter("endpoint", "Server parameter", this.stringSchema, {
-        implementation: ImplementationLocation.Client,
-        origin: "modelerfour:synthesized/host",
-        required: true,
-        protocol: {
-          http: new HttpParameter(ParameterLocation.Uri),
-        },
-        clientDefaultValue: "",
-        language: {
-          default: {
-            serializedName: "endpoint"
-          }
-        },
-        extensions: {
-          "x-ms-skip-url-encoding": true
-        }
-      }))
-    );
   }
 
   private _apiVersionParameter?: Parameter;
