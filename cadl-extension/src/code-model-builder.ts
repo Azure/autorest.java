@@ -75,8 +75,10 @@ import {
   Request,
   Response,
   Schema,
+  SchemaContext,
   SchemaResponse,
   SchemaType,
+  SchemaUsage,
   SealedChoiceSchema,
   StringSchema,
   TimeSchema,
@@ -154,6 +156,8 @@ export class CodeModelBuilder {
 
   public build(): CodeModel {
     ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
+
+    this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
 
     return this.codeModel;
   }
@@ -284,6 +288,8 @@ export class CodeModelBuilder {
         }
       });
       op.addParameter(parameter);
+
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
     }
   }
 
@@ -330,6 +336,8 @@ export class CodeModelBuilder {
       clientDefaultValue: this.getDefaultValue(body.default),
     });
     op.addParameter(parameter);
+
+    this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
   }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
@@ -395,8 +403,16 @@ export class CodeModelBuilder {
     if (resp.statusCode === "*") {
       // TODO: x-ms-error-response
       op.addException(response);
+      
+      if (response instanceof SchemaResponse) {
+        this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Exception] });
+      }
     } else {
       op.addResponse(response);
+      
+      if (response instanceof SchemaResponse) {
+        this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
+      }
     }
   }
 
@@ -951,6 +967,60 @@ export class CodeModelBuilder {
         }
       }))
     );
+  }
+
+  private propagateSchemaUsage(schema: Schema): void {
+    const processedSchemas = new Set<Schema>();
+
+    const innerApplySchemaUsage = (schema: Schema, schemaUsage: SchemaUsage) => {
+      this.trackSchemaUsage(schema, schemaUsage);
+      innerPropagateSchemaUsage(schema, schemaUsage);
+    };
+
+    const innerPropagateSchemaUsage = (schema: Schema, schemaUsage: SchemaUsage) => {
+      if (processedSchemas.has(schema)) {
+        return;
+      }
+
+      processedSchemas.add(schema);
+      if (schema instanceof ObjectSchema) {
+        if (schemaUsage.usage || schemaUsage.serializationFormats) {
+          schema.properties?.forEach((p) => innerApplySchemaUsage(p.schema, schemaUsage));
+
+          schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+          schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+
+          schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+          schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+
+          // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
+          //   innerApplySchemaUsage(d, schemaUsage);
+          // });
+          // Object.values(schema.discriminator?.immediate ?? {}).forEach((d) => {
+          //   innerApplySchemaUsage(d, schemaUsage);
+          // });
+        }
+      } else if (schema instanceof DictionarySchema) {
+        innerApplySchemaUsage(schema.elementType, schemaUsage);
+      } else if (schema instanceof ArraySchema) {
+        innerApplySchemaUsage(schema.elementType, schemaUsage);
+      }
+    };
+
+    // Propagate the usage of the initial schema itself
+    innerPropagateSchemaUsage(schema, schema as SchemaUsage);
+  }
+
+  private trackSchemaUsage(schema: Schema, schemaUsage: SchemaUsage): void {
+    if (schema instanceof ObjectSchema) {
+      if (schemaUsage.usage) {
+        pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
+      }
+    } else if (schema instanceof DictionarySchema) {
+      this.trackSchemaUsage(schema.elementType, schemaUsage);
+    } else if (schema instanceof ArraySchema) {
+      this.trackSchemaUsage(schema.elementType, schemaUsage);
+    }
   }
 }
 
