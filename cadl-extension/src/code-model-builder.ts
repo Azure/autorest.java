@@ -832,6 +832,7 @@ export class CodeModelBuilder {
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
+      clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.name
     });
   }
