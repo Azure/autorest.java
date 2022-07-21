@@ -203,18 +203,13 @@ public final class AutoRestPagingTestServiceClientBuilder
      */
     @Generated
     private AutoRestPagingTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serviceVersion == null) {
-            this.serviceVersion = AutoRestPagingTestServiceVersion.getLatest();
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestPagingTestServiceVersion buildServiceVersion =
+                (serviceVersion != null) ? serviceVersion : AutoRestPagingTestServiceVersion.getLatest();
         AutoRestPagingTestServiceClientImpl client =
                 new AutoRestPagingTestServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost, buildServiceVersion);
         return client;
     }
 

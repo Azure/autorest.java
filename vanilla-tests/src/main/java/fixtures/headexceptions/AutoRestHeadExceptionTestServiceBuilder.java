@@ -203,17 +203,12 @@ public final class AutoRestHeadExceptionTestServiceBuilder
      */
     @Generated
     public AutoRestHeadExceptionTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter buildSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestHeadExceptionTestService client =
-                new AutoRestHeadExceptionTestService(pipeline, serializerAdapter, host);
+                new AutoRestHeadExceptionTestService(buildPipeline, buildSerializerAdapter, buildHost);
         return client;
     }
 

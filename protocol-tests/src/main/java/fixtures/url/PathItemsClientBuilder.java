@@ -218,19 +218,15 @@ public final class PathItemsClientBuilder
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlTestServiceClientImpl client =
                 new AutoRestUrlTestServiceClientImpl(
-                        pipeline,
+                        buildPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         globalStringPath,
                         globalStringQuery,
-                        host);
+                        buildHost);
         return client;
     }
 

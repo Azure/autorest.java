@@ -201,18 +201,13 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serviceVersion == null) {
-            this.serviceVersion = AutoRestComplexTestServiceVersion.getLatest();
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestComplexTestServiceVersion buildServiceVersion =
+                (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
         AutoRestComplexTestServiceClientImpl client =
                 new AutoRestComplexTestServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost, buildServiceVersion);
         return client;
     }
 

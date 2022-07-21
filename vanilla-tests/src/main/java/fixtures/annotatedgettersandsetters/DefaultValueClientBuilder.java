@@ -185,13 +185,10 @@ public final class DefaultValueClientBuilder
      */
     @Generated
     public DefaultValueClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        DefaultValueClient client = new DefaultValueClient(pipeline, serializerAdapter);
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        SerializerAdapter buildSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        DefaultValueClient client = new DefaultValueClient(buildPipeline, buildSerializerAdapter);
         return client;
     }
 

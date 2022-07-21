@@ -203,16 +203,12 @@ public final class AutoRestDateTimeTestServiceBuilder
      */
     @Generated
     public AutoRestDateTimeTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestDateTimeTestService client = new AutoRestDateTimeTestService(pipeline, serializerAdapter, host);
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter buildSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutoRestDateTimeTestService client =
+                new AutoRestDateTimeTestService(buildPipeline, buildSerializerAdapter, buildHost);
         return client;
     }
 

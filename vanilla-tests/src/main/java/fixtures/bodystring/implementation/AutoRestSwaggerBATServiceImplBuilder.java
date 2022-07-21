@@ -204,16 +204,12 @@ public final class AutoRestSwaggerBATServiceImplBuilder
      */
     @Generated
     public AutoRestSwaggerBATService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestSwaggerBATServiceImpl client = new AutoRestSwaggerBATServiceImpl(pipeline, serializerAdapter, host);
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter buildSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutoRestSwaggerBATServiceImpl client =
+                new AutoRestSwaggerBATServiceImpl(buildPipeline, buildSerializerAdapter, buildHost);
         return client;
     }
 

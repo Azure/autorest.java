@@ -243,23 +243,17 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerConstantServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (pathConstant == null) {
-            this.pathConstant = "path";
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildPathConstant = (pathConstant != null) ? pathConstant : "path";
+        String buildHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerConstantServiceClientImpl client =
                 new AutoRestSwaggerConstantServiceClientImpl(
-                        pipeline,
+                        buildPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         headerConstant,
                         queryConstant,
-                        pathConstant,
-                        host);
+                        buildPathConstant,
+                        buildHost);
         return client;
     }
 

@@ -186,15 +186,11 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerBatFileServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatFileServiceClientImpl client =
                 new AutoRestSwaggerBatFileServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
         return client;
     }
 

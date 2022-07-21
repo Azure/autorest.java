@@ -255,16 +255,19 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null
                             && !(serviceClientProperty.getType() instanceof PrimitiveType)) {
-                        function.ifBlock(String.format("%1$s == null", serviceClientProperty.getName()), ifBlock -> {
-                            function.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
-                        });
+                        function.line(String.format("%1$s build%2$s = (%3$s != null) ? %4$s : %5$s;",
+                                serviceClientProperty.getType(),
+                                CodeNamer.toPascalCase(serviceClientProperty.getName()),
+                                serviceClientProperty.getName(),
+                                serviceClientProperty.getName(),
+                                serviceClientProperty.getDefaultValueExpression()));
                     }
                 }
 
                 // additional service client properties in constructor arguments
                 String constructorArgs = serviceClient.getProperties().stream()
                         .filter(p -> !p.isReadOnly())
-                        .map(ServiceClientProperty::getName)
+                        .map(this::getClientConstructorArgName)
                         .collect(Collectors.joining(", "));
                 if (!constructorArgs.isEmpty()) {
                     constructorArgs = ", " + constructorArgs;
@@ -274,17 +277,17 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 if (settings.isDataPlaneClient()) {
                     serializerExpression = JACKSON_SERIALIZER;
                 } else {
-                    serializerExpression = getSerializerMemberName();
+                    serializerExpression = "build" + CodeNamer.toPascalCase(getSerializerMemberName());
                 }
 
                 if (settings.isFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, %3$s, defaultPollInterval, environment%4$s);",
+                    function.line(String.format("%1$s client = new %2$s(buildPipeline, %3$s, defaultPollInterval, environment%4$s);",
                             serviceClient.getClassName(),
                             serviceClient.getClassName(),
                             serializerExpression,
                             constructorArgs));
                 } else {
-                    function.line(String.format("%1$s client = new %2$s(pipeline, %3$s%4$s);",
+                    function.line(String.format("%1$s client = new %2$s(buildPipeline, %3$s%4$s);",
                             serviceClient.getClassName(), serviceClient.getClassName(), serializerExpression, constructorArgs));
                 }
                 function.line("return client;");
@@ -340,6 +343,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 }
             }
         });
+    }
+
+    private String getClientConstructorArgName(ServiceClientProperty property) {
+        if (property.getDefaultValueExpression() != null
+                && !(property.getType() instanceof PrimitiveType)) {
+            return "build" + CodeNamer.toPascalCase(property.getName());
+        }
+        return property.getName();
     }
 
     private void addTraitMethods(ClientBuilder clientBuilder, JavaSettings settings, String serviceClientBuilderName, JavaClass classBlock) {

@@ -185,14 +185,11 @@ public final class DpgMultiMediaTypesClientBuilder
      */
     @Generated
     private DpgMultiMediaTypesClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String buildHost = (host != null) ? host : "http://localhost:3000";
         DpgMultiMediaTypesClientImpl client =
-                new DpgMultiMediaTypesClientImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+                new DpgMultiMediaTypesClientImpl(
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
         return client;
     }
 

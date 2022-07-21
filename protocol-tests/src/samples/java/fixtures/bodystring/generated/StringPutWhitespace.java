@@ -19,7 +19,7 @@ public class StringPutWhitespace {
                 new RequestOptions()
                         .setBody(
                                 BinaryData.fromString(
-                                        "\"<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>\""));
+                                        "\"    Now is the time for all good men to come to the aid of their country    \""));
         Response<Void> response = stringOperationClient.putWhitespaceWithResponse(requestOptions);
         // END:fixtures.bodystring.generated.stringputwhitespace.stringputwhitespace
     }
