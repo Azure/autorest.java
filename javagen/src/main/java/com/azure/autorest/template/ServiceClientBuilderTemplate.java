@@ -51,6 +51,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
+    private static final String LOCAL_VARIABLE_PREFIX = "local";
     private static final ServiceClientBuilderTemplate INSTANCE = new ServiceClientBuilderTemplate();
 
     private static final String JACKSON_SERIALIZER = "JacksonAdapter.createDefaultSerializerAdapter()";
@@ -255,12 +256,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null
                             && !(serviceClientProperty.getType() instanceof PrimitiveType)) {
-                        function.line(String.format("%1$s build%2$s = (%3$s != null) ? %4$s : %5$s;",
+                        function.line(String.format("%1$s %2$s = (%3$s != null) ? %4$s : %5$s;",
                                 serviceClientProperty.getType(),
-                                CodeNamer.toPascalCase(serviceClientProperty.getName()),
+                                getLocalBuildVariableName(serviceClientProperty.getName()),
                                 serviceClientProperty.getName(),
                                 serviceClientProperty.getName(),
                                 serviceClientProperty.getDefaultValueExpression()));
+
                     }
                 }
 
@@ -277,14 +279,17 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 if (settings.isDataPlaneClient()) {
                     serializerExpression = JACKSON_SERIALIZER;
                 } else {
-                    serializerExpression = "build" + CodeNamer.toPascalCase(getSerializerMemberName());
+                    serializerExpression = getLocalBuildVariableName(getSerializerMemberName());
                 }
 
                 if (settings.isFluent()) {
-                    function.line(String.format("%1$s client = new %2$s(buildPipeline, %3$s, defaultPollInterval, environment%4$s);",
+                    function.line(String.format("%1$s client = new %2$s(%3$s, %4$s, %5$s, %6$s%7$s);",
                             serviceClient.getClassName(),
                             serviceClient.getClassName(),
+                            getLocalBuildVariableName("pipeline"),
                             serializerExpression,
+                            getLocalBuildVariableName("defaultPollInterval"),
+                            getLocalBuildVariableName("environment"),
                             constructorArgs));
                 } else {
                     function.line(String.format("%1$s client = new %2$s(buildPipeline, %3$s%4$s);",
@@ -345,10 +350,19 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         });
     }
 
+    /**
+     * Renames the provided variable name to localize it to the method
+     * @param baseName The base variable name.
+     * @return The name of the local variable.
+     */
+    private String getLocalBuildVariableName(String baseName) {
+        return LOCAL_VARIABLE_PREFIX + CodeNamer.toPascalCase(baseName);
+    }
+
     private String getClientConstructorArgName(ServiceClientProperty property) {
         if (property.getDefaultValueExpression() != null
                 && !(property.getType() instanceof PrimitiveType)) {
-            return "build" + CodeNamer.toPascalCase(property.getName());
+            return getLocalBuildVariableName((property.getName()));
         }
         return property.getName();
     }
