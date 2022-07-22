@@ -203,17 +203,12 @@ public final class AutoRestLongRunningOperationTestServiceBuilder
      */
     @Generated
     public AutoRestLongRunningOperationTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestLongRunningOperationTestService client =
-                new AutoRestLongRunningOperationTestService(pipeline, serializerAdapter, host);
+                new AutoRestLongRunningOperationTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

@@ -203,17 +203,12 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
      */
     @Generated
     public AutoRestRFC1123DateTimeTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestRFC1123DateTimeTestService client =
-                new AutoRestRFC1123DateTimeTestService(pipeline, serializerAdapter, host);
+                new AutoRestRFC1123DateTimeTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

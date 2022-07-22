@@ -203,17 +203,12 @@ public final class MultipleInheritanceServiceClientBuilder
      */
     @Generated
     public MultipleInheritanceServiceClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MultipleInheritanceServiceClient client =
-                new MultipleInheritanceServiceClient(pipeline, serializerAdapter, host);
+                new MultipleInheritanceServiceClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 
