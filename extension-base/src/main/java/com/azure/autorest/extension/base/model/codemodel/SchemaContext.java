@@ -12,7 +12,9 @@ public enum SchemaContext {
 
     OUTPUT("output"),
 
-    EXCEPTION("exception");
+    EXCEPTION("exception"),
+
+    CONVENIENCE_METHOD("convenience-method");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();

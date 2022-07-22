@@ -47,12 +47,14 @@ import {
   getVersion 
 } from "@cadl-lang/versioning";
 import {
+  fail
+} from "assert";
+import {
   AnySchema,
   ArraySchema,
   BinarySchema,
   BooleanSchema,
   ByteArraySchema,
-  ChoiceSchema,
   ChoiceValue,
   CodeModel,
   ConstantSchema,
@@ -75,17 +77,19 @@ import {
   Request,
   Response,
   Schema,
-  SchemaContext,
   SchemaResponse,
   SchemaType,
-  SchemaUsage,
-  SealedChoiceSchema,
   StringSchema,
   TimeSchema,
 } from "@autorest/codemodel";
 import {
-  fail
-} from "assert";
+  SchemaContext,
+  SchemaUsage,
+} from "./schemas/usage.js";
+import {
+  ChoiceSchema,
+  SealedChoiceSchema,
+} from "./schemas/choice.js"
 
 export class CodeModelBuilder {
   private program: Program;
@@ -205,6 +209,8 @@ export class CodeModelBuilder {
     const operationGroup = this.codeModel.getOperationGroup(op.groupName);
     const opId = `${op.groupName}_${op.operation.name}`
 
+    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod");
+
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
       language: {
@@ -214,7 +220,10 @@ export class CodeModelBuilder {
       },
       apiVersions: [{
         version: this.version
-      }]
+      }],
+      extensions: {
+        convenienceMethod: requireConvenienceMethod
+      }
     });
 
     operation.addRequest(new Request({
@@ -290,6 +299,10 @@ export class CodeModelBuilder {
       op.addParameter(parameter);
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
+
+      if (op.extensions?.convenienceMethod) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+      }
     }
   }
 
@@ -338,7 +351,11 @@ export class CodeModelBuilder {
     op.addParameter(parameter);
 
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
-  }
+
+    if (op.extensions?.convenienceMethod) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+    }
+}
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
     // TODO: what to do if more than 1 response?
@@ -412,6 +429,10 @@ export class CodeModelBuilder {
       
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
+
+        if (op.extensions?.convenienceMethod) {
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceMethod] });
+        }
       }
     }
   }
