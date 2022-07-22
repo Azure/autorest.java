@@ -208,7 +208,7 @@ public final class AutoRestReportServiceForAzureBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestReportServiceForAzure client =
-                new AutoRestReportServiceForAzure(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestReportServiceForAzure(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

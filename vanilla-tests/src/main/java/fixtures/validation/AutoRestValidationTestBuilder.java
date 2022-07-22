@@ -243,7 +243,7 @@ public final class AutoRestValidationTestBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestValidationTest client =
                 new AutoRestValidationTest(
-                        buildPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
+                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
         return client;
     }
 

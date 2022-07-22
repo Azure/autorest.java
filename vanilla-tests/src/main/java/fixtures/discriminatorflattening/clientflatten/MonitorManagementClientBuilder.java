@@ -206,7 +206,7 @@ public final class MonitorManagementClientBuilder
         String localHost = (host != null) ? host : "https://management.azure.com";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        MonitorManagementClient client = new MonitorManagementClient(buildPipeline, localSerializerAdapter, localHost);
+        MonitorManagementClient client = new MonitorManagementClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

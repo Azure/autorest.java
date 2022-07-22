@@ -206,7 +206,7 @@ public final class AutoRestBoolTestServiceBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestBoolTestService client = new AutoRestBoolTestService(buildPipeline, localSerializerAdapter, localHost);
+        AutoRestBoolTestService client = new AutoRestBoolTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

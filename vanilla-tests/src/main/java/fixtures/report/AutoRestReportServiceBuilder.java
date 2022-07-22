@@ -206,7 +206,7 @@ public final class AutoRestReportServiceBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestReportService client = new AutoRestReportService(buildPipeline, localSerializerAdapter, localHost);
+        AutoRestReportService client = new AutoRestReportService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

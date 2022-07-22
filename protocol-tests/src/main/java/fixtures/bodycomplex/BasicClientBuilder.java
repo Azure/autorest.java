@@ -207,7 +207,7 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
                 (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
         AutoRestComplexTestServiceClientImpl client =
                 new AutoRestComplexTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

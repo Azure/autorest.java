@@ -189,7 +189,7 @@ public final class RequiredOptionalBodyClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         RequiredOptionalBodyClientImpl client =
                 new RequiredOptionalBodyClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

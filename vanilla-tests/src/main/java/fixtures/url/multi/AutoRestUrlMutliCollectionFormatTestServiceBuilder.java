@@ -208,7 +208,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestUrlMutliCollectionFormatTestService client =
-                new AutoRestUrlMutliCollectionFormatTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestUrlMutliCollectionFormatTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

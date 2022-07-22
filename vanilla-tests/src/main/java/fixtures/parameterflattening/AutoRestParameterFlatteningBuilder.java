@@ -208,7 +208,7 @@ public final class AutoRestParameterFlatteningBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterFlattening client =
-                new AutoRestParameterFlattening(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestParameterFlattening(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

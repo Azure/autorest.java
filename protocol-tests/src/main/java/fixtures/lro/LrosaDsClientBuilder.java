@@ -188,7 +188,7 @@ public final class LrosaDsClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestLongRunningOperationTestServiceClientImpl client =
                 new AutoRestLongRunningOperationTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

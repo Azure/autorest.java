@@ -207,7 +207,7 @@ public final class AutoRestIntegerTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestIntegerTestService client =
-                new AutoRestIntegerTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestIntegerTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

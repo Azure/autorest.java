@@ -190,7 +190,7 @@ public final class DpgRequiredHeaderQueryClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         DpgRequiredHeaderQueryClientImpl client =
                 new DpgRequiredHeaderQueryClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

@@ -222,7 +222,7 @@ public final class PathItemsClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlTestServiceClientImpl client =
                 new AutoRestUrlTestServiceClientImpl(
-                        buildPipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         globalStringPath,
                         globalStringQuery,

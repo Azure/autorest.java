@@ -248,7 +248,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerConstantServiceClientImpl client =
                 new AutoRestSwaggerConstantServiceClientImpl(
-                        buildPipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         headerConstant,
                         queryConstant,

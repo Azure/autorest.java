@@ -187,7 +187,7 @@ public final class MediaTypesClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         MediaTypesClientImpl client =
-                new MediaTypesClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                new MediaTypesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

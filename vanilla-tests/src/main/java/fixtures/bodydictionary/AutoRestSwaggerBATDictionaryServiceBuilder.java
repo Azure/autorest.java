@@ -213,7 +213,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestSwaggerBATDictionaryServiceImpl client =
-                new AutoRestSwaggerBATDictionaryServiceImpl(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestSwaggerBATDictionaryServiceImpl(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

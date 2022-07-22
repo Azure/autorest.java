@@ -208,7 +208,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestLongRunningOperationTestService client =
-                new AutoRestLongRunningOperationTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestLongRunningOperationTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

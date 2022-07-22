@@ -207,7 +207,7 @@ public final class AdditionalPropertiesClientBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AdditionalPropertiesClient client =
-                new AdditionalPropertiesClient(buildPipeline, localSerializerAdapter, localHost);
+                new AdditionalPropertiesClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

@@ -260,7 +260,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestRequiredOptionalTestService client =
                 new AutoRestRequiredOptionalTestService(
-                        buildPipeline,
+                        localPipeline,
                         localSerializerAdapter,
                         requiredGlobalPath,
                         requiredGlobalQuery,

@@ -206,7 +206,7 @@ public final class SpecialHeaderBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        SpecialHeader client = new SpecialHeader(buildPipeline, localSerializerAdapter, localHost);
+        SpecialHeader client = new SpecialHeader(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

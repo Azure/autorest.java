@@ -190,7 +190,7 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatFileServiceClientImpl client =
                 new AutoRestSwaggerBatFileServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

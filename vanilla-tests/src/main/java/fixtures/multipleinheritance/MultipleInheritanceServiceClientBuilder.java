@@ -208,7 +208,7 @@ public final class MultipleInheritanceServiceClientBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MultipleInheritanceServiceClient client =
-                new MultipleInheritanceServiceClient(buildPipeline, localSerializerAdapter, localHost);
+                new MultipleInheritanceServiceClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

@@ -206,7 +206,7 @@ public final class MediaTypesClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        MediaTypesClient client = new MediaTypesClient(buildPipeline, localSerializerAdapter, localHost);
+        MediaTypesClient client = new MediaTypesClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

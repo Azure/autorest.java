@@ -208,7 +208,7 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestHttpInfrastructureTestService client =
-                new AutoRestHttpInfrastructureTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestHttpInfrastructureTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

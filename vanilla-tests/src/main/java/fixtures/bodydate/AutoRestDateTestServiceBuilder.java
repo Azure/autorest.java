@@ -206,7 +206,7 @@ public final class AutoRestDateTestServiceBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestDateTestService client = new AutoRestDateTestService(buildPipeline, localSerializerAdapter, localHost);
+        AutoRestDateTestService client = new AutoRestDateTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

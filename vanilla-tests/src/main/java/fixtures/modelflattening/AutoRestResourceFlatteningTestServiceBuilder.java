@@ -208,7 +208,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestResourceFlatteningTestService client =
-                new AutoRestResourceFlatteningTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestResourceFlatteningTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

@@ -188,7 +188,7 @@ public final class DefaultValueClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        DefaultValueClient client = new DefaultValueClient(buildPipeline, localSerializerAdapter);
+        DefaultValueClient client = new DefaultValueClient(localPipeline, localSerializerAdapter);
         return client;
     }
 

@@ -246,7 +246,7 @@ public final class AutoRestComplexTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(buildPipeline, localSerializerAdapter, localHost, localApiVersion);
+                new AutoRestComplexTestServiceImpl(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 

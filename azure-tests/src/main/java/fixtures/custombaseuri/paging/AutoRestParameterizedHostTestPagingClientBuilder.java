@@ -208,7 +208,7 @@ public final class AutoRestParameterizedHostTestPagingClientBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedHostTestPagingClient client =
-                new AutoRestParameterizedHostTestPagingClient(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestParameterizedHostTestPagingClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

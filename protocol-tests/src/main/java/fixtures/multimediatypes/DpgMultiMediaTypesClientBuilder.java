@@ -189,7 +189,7 @@ public final class DpgMultiMediaTypesClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         DpgMultiMediaTypesClientImpl client =
                 new DpgMultiMediaTypesClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

@@ -209,7 +209,7 @@ public final class AutoRestPagingTestServiceClientBuilder
                 (serviceVersion != null) ? serviceVersion : AutoRestPagingTestServiceVersion.getLatest();
         AutoRestPagingTestServiceClientImpl client =
                 new AutoRestPagingTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

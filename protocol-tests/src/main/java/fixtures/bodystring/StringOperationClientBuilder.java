@@ -188,7 +188,7 @@ public final class StringOperationClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatServiceClientImpl client =
                 new AutoRestSwaggerBatServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

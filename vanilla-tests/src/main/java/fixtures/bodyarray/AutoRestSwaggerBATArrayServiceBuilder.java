@@ -208,7 +208,7 @@ public final class AutoRestSwaggerBATArrayServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestSwaggerBATArrayService client =
-                new AutoRestSwaggerBATArrayService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestSwaggerBATArrayService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

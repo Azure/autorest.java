@@ -206,7 +206,7 @@ public final class BodyFormsDataURLEncodedBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        BodyFormsDataURLEncoded client = new BodyFormsDataURLEncoded(buildPipeline, localSerializerAdapter, localHost);
+        BodyFormsDataURLEncoded client = new BodyFormsDataURLEncoded(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

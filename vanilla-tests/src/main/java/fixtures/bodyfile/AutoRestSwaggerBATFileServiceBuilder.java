@@ -208,7 +208,7 @@ public final class AutoRestSwaggerBATFileServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestSwaggerBATFileService client =
-                new AutoRestSwaggerBATFileService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestSwaggerBATFileService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

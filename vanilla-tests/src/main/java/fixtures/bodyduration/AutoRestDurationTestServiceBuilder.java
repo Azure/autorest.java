@@ -208,7 +208,7 @@ public final class AutoRestDurationTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestDurationTestService client =
-                new AutoRestDurationTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestDurationTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

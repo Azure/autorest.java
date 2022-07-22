@@ -267,7 +267,7 @@ public final class AutoRestSwaggerConstantServiceBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestSwaggerConstantService client =
                 new AutoRestSwaggerConstantService(
-                        buildPipeline,
+                        localPipeline,
                         localSerializerAdapter,
                         headerConstant,
                         queryConstant,

@@ -247,7 +247,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceClientImpl client =
                 new ConstantAndClientParameterServiceClientImpl(
-                        buildPipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         queryRequiredClientParam,
                         queryRequiredDefaultValueClientParam,

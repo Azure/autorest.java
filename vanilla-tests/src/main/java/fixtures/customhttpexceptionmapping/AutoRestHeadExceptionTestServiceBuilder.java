@@ -208,7 +208,7 @@ public final class AutoRestHeadExceptionTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestHeadExceptionTestService client =
-                new AutoRestHeadExceptionTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestHeadExceptionTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

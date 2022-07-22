@@ -189,7 +189,7 @@ public final class HttpClientFailureClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestHttpInfrastructureTestServiceClientImpl client =
                 new AutoRestHttpInfrastructureTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

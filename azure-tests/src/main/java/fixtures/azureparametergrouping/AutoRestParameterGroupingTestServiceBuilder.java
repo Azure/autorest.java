@@ -208,7 +208,7 @@ public final class AutoRestParameterGroupingTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterGroupingTestService client =
-                new AutoRestParameterGroupingTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestParameterGroupingTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

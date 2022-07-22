@@ -225,7 +225,7 @@ public final class AutoRestPagingTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestPagingTestService client =
-                new AutoRestPagingTestService(buildPipeline, localSerializerAdapter, localHost, localApiVersion);
+                new AutoRestPagingTestService(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 

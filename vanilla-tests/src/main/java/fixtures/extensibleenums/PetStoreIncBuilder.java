@@ -205,7 +205,7 @@ public final class PetStoreIncBuilder implements HttpTrait<PetStoreIncBuilder>, 
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        PetStoreInc client = new PetStoreInc(buildPipeline, localSerializerAdapter, localHost);
+        PetStoreInc client = new PetStoreInc(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

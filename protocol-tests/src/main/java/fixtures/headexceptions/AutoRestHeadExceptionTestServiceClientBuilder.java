@@ -194,7 +194,7 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestHeadExceptionTestServiceClientImpl client =
                 new AutoRestHeadExceptionTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

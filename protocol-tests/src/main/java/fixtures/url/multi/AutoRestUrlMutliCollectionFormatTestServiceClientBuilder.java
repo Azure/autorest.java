@@ -193,7 +193,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlMutliCollectionFormatTestServiceClientImpl client =
                 new AutoRestUrlMutliCollectionFormatTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

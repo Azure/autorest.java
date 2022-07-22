@@ -242,7 +242,7 @@ public final class AutoRestUrlTestServiceBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestUrlTestService client =
                 new AutoRestUrlTestService(
-                        buildPipeline, localSerializerAdapter, globalStringPath, globalStringQuery, localHost);
+                        localPipeline, localSerializerAdapter, globalStringPath, globalStringQuery, localHost);
         return client;
     }
 

@@ -208,7 +208,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestRFC1123DateTimeTestService client =
-                new AutoRestRFC1123DateTimeTestService(buildPipeline, localSerializerAdapter, localHost);
+                new AutoRestRFC1123DateTimeTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

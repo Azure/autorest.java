@@ -225,7 +225,7 @@ public final class AutorestSecurityInfoBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutorestSecurityInfo client = new AutorestSecurityInfo(buildPipeline, localSerializerAdapter);
+        AutorestSecurityInfo client = new AutorestSecurityInfo(localPipeline, localSerializerAdapter);
         return client;
     }
 
