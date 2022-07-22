@@ -292,8 +292,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             getLocalBuildVariableName("environment"),
                             constructorArgs));
                 } else {
-                    function.line(String.format("%1$s client = new %2$s(buildPipeline, %3$s%4$s);",
-                            serviceClient.getClassName(), serviceClient.getClassName(), serializerExpression, constructorArgs));
+                    function.line(String.format("%1$s client = new %2$s(%3$s, %4$s%5$s);",
+                            serviceClient.getClassName(), serviceClient.getClassName(),
+                            getLocalBuildVariableName("pipeline"), serializerExpression, constructorArgs));
                 }
                 function.line("return client;");
             });
