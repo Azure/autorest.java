@@ -203,12 +203,12 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder
      */
     @Generated
     public AutoRestUrlMutliCollectionFormatTestService buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestUrlMutliCollectionFormatTestService client =
-                new AutoRestUrlMutliCollectionFormatTestService(buildPipeline, buildSerializerAdapter, buildHost);
+                new AutoRestUrlMutliCollectionFormatTestService(buildPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

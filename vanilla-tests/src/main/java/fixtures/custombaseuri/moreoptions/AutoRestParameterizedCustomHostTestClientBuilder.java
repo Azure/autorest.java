@@ -221,13 +221,13 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedCustomHostTestClient buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildDnsSuffix = (dnsSuffix != null) ? dnsSuffix : "host";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localDnsSuffix = (dnsSuffix != null) ? dnsSuffix : "host";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedCustomHostTestClient client =
                 new AutoRestParameterizedCustomHostTestClient(
-                        buildPipeline, buildSerializerAdapter, subscriptionId, buildDnsSuffix);
+                        buildPipeline, localSerializerAdapter, subscriptionId, localDnsSuffix);
         return client;
     }
 

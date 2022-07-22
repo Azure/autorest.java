@@ -202,11 +202,11 @@ public final class AutoRestReportServiceBuilder
      */
     @Generated
     public AutoRestReportService buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestReportService client = new AutoRestReportService(buildPipeline, buildSerializerAdapter, buildHost);
+        AutoRestReportService client = new AutoRestReportService(buildPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

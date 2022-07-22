@@ -202,11 +202,11 @@ public final class MediaTypesClientBuilder
      */
     @Generated
     public MediaTypesClient buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        MediaTypesClient client = new MediaTypesClient(buildPipeline, buildSerializerAdapter, buildHost);
+        MediaTypesClient client = new MediaTypesClient(buildPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

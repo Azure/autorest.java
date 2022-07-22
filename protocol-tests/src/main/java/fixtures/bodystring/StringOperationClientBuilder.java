@@ -184,11 +184,11 @@ public final class StringOperationClientBuilder
      */
     @Generated
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatServiceClientImpl client =
                 new AutoRestSwaggerBatServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

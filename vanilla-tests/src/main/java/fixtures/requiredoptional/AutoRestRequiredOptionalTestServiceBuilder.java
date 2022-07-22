@@ -254,18 +254,18 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
      */
     @Generated
     public AutoRestRequiredOptionalTestService buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestRequiredOptionalTestService client =
                 new AutoRestRequiredOptionalTestService(
                         buildPipeline,
-                        buildSerializerAdapter,
+                        localSerializerAdapter,
                         requiredGlobalPath,
                         requiredGlobalQuery,
                         optionalGlobalQuery,
-                        buildHost);
+                        localHost);
         return client;
     }
 

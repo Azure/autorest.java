@@ -184,10 +184,10 @@ public final class MediaTypesClientBuilder
      */
     @Generated
     private MediaTypesClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         MediaTypesClientImpl client =
-                new MediaTypesClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                new MediaTypesClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

@@ -240,13 +240,13 @@ public final class AutoRestComplexTestServiceBuilder
      */
     @Generated
     private AutoRestComplexTestServiceImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        String buildApiVersion = (apiVersion != null) ? apiVersion : "2016-02-29";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "2016-02-29";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(buildPipeline, buildSerializerAdapter, buildHost, buildApiVersion);
+                new AutoRestComplexTestServiceImpl(buildPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 

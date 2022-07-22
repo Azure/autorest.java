@@ -203,12 +203,12 @@ public final class AutoRestParameterizedHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedHostTestClient buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "host";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "host";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedHostTestClient client =
-                new AutoRestParameterizedHostTestClient(buildPipeline, buildSerializerAdapter, buildHost);
+                new AutoRestParameterizedHostTestClient(buildPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

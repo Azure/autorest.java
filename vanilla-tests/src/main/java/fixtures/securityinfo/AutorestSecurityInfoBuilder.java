@@ -222,10 +222,10 @@ public final class AutorestSecurityInfoBuilder
      */
     @Generated
     public AutorestSecurityInfo buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutorestSecurityInfo client = new AutorestSecurityInfo(buildPipeline, buildSerializerAdapter);
+        AutorestSecurityInfo client = new AutorestSecurityInfo(buildPipeline, localSerializerAdapter);
         return client;
     }
 

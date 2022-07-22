@@ -185,11 +185,11 @@ public final class RequiredOptionalBodyClientBuilder
      */
     @Generated
     private RequiredOptionalBodyClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         RequiredOptionalBodyClientImpl client =
                 new RequiredOptionalBodyClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

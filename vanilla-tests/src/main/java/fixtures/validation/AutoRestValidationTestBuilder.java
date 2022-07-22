@@ -236,14 +236,14 @@ public final class AutoRestValidationTestBuilder
      */
     @Generated
     public AutoRestValidationTest buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        String buildApiVersion = (apiVersion != null) ? apiVersion : "1.0.0";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "1.0.0";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestValidationTest client =
                 new AutoRestValidationTest(
-                        buildPipeline, buildSerializerAdapter, subscriptionId, buildHost, buildApiVersion);
+                        buildPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
         return client;
     }
 

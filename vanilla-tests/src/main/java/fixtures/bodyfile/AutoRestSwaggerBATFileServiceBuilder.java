@@ -203,12 +203,12 @@ public final class AutoRestSwaggerBATFileServiceBuilder
      */
     @Generated
     public AutoRestSwaggerBATFileService buildClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter buildSerializerAdapter =
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestSwaggerBATFileService client =
-                new AutoRestSwaggerBATFileService(buildPipeline, buildSerializerAdapter, buildHost);
+                new AutoRestSwaggerBATFileService(buildPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

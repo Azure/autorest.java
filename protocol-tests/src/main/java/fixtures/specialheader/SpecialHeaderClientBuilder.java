@@ -185,10 +185,10 @@ public final class SpecialHeaderClientBuilder
      */
     @Generated
     private SpecialHeaderClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         SpecialHeaderClientImpl client =
-                new SpecialHeaderClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                new SpecialHeaderClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

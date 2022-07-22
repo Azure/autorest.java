@@ -243,8 +243,8 @@ public final class ConstantAndClientParameterServiceClientBuilder
      */
     @Generated
     private ConstantAndClientParameterServiceClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceClientImpl client =
                 new ConstantAndClientParameterServiceClientImpl(
                         buildPipeline,
@@ -252,7 +252,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
                         queryRequiredClientParam,
                         queryRequiredDefaultValueClientParam,
                         queryNonRequiredClientParam,
-                        buildHost);
+                        localHost);
         return client;
     }
 

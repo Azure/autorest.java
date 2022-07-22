@@ -184,10 +184,10 @@ public final class EnumServiceClientBuilder
      */
     @Generated
     private EnumServiceClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         EnumServiceClientImpl client =
-                new EnumServiceClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                new EnumServiceClientImpl(buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

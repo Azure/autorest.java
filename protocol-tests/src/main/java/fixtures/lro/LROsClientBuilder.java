@@ -183,11 +183,11 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
      */
     @Generated
     private AutoRestLongRunningOperationTestServiceClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestLongRunningOperationTestServiceClientImpl client =
                 new AutoRestLongRunningOperationTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

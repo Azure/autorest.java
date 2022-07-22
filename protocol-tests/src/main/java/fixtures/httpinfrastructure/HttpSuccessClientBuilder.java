@@ -185,11 +185,11 @@ public final class HttpSuccessClientBuilder
      */
     @Generated
     private AutoRestHttpInfrastructureTestServiceClientImpl buildInnerClient() {
-        HttpPipeline buildPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String buildHost = (host != null) ? host : "http://localhost:3000";
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestHttpInfrastructureTestServiceClientImpl client =
                 new AutoRestHttpInfrastructureTestServiceClientImpl(
-                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), buildHost);
+                        buildPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 
