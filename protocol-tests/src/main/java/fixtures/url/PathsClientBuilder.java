@@ -217,19 +217,15 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlTestServiceClientImpl client =
                 new AutoRestUrlTestServiceClientImpl(
-                        pipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         globalStringPath,
                         globalStringQuery,
-                        host);
+                        localHost);
         return client;
     }
 

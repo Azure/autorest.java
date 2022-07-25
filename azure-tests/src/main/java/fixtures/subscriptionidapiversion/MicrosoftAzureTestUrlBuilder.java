@@ -236,20 +236,14 @@ public final class MicrosoftAzureTestUrlBuilder
      */
     @Generated
     public MicrosoftAzureTestUrl buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (apiVersion == null) {
-            this.apiVersion = "2014-04-01-preview";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "2014-04-01-preview";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MicrosoftAzureTestUrl client =
-                new MicrosoftAzureTestUrl(pipeline, serializerAdapter, subscriptionId, host, apiVersion);
+                new MicrosoftAzureTestUrl(
+                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
         return client;
     }
 
