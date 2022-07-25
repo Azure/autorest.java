@@ -12,8 +12,13 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CadlPlugin extends Javagen {
@@ -23,6 +28,17 @@ public class CadlPlugin extends Javagen {
     @Override
     public JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
         return super.writeToTemplates(settings, codeModel, client);
+    }
+
+    @Override
+    public void writeFile(String fileName, String content, List<Object> sourceMap) {
+        new File(fileName).getParentFile().mkdirs();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(content);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+        LOGGER.info("Write file: {}", fileName);
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();

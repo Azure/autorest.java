@@ -15,6 +15,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -25,10 +26,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -92,24 +90,22 @@ public class Main {
                 LOGGER.error("Failed to format file: {}", outputFolder + javaFile.getFilePath(), e);
                 continue;
             }
-            writeFile(outputFolder + javaFile.getFilePath(), content);
+            cadlPlugin.writeFile(outputFolder + javaFile.getFilePath(), content, null);
         }
         for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
             String content = xmlFile.getContents().toString();
-            writeFile(outputFolder + xmlFile.getFilePath(), content);
+            cadlPlugin.writeFile(outputFolder + xmlFile.getFilePath(), content, null);
         }
         for (TextFile testFile : javaPackage.getTextFiles()) {
             String content = testFile.getContents();
-            writeFile(outputFolder + testFile.getFilePath(), content);
+            cadlPlugin.writeFile(outputFolder + testFile.getFilePath(), content, null);
         }
-    }
-
-    private static void writeFile(String path, String content) throws IOException {
-        new File(path).getParentFile().mkdirs();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            writer.write(content);
+        // resources
+        String artifactId = ClientModelUtil.getArtifactId();
+        if (!CoreUtils.isNullOrEmpty(artifactId)) {
+            cadlPlugin.writeFile(outputFolder + "src/main/resources/" + artifactId + ".properties",
+                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
-        LOGGER.info("Write file: {}", path);
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
