@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -18,6 +19,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -64,7 +66,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     .name(modelName)
                     .packageName(modelType.getPackage())
                     .type(modelType)
-                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader());
+                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+                    .implementationDetails(new ImplementationDetails.Builder()
+                            .usages(mapSchemaContext(compositeType.getUsage()))
+                            .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.isPolymorphic(isPolymorphic);
@@ -553,5 +558,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ret = propertyName + CodeNamer.toPascalCase(originalFlattenedPropertyName) + CodeNamer.toPascalCase(propertyName);
         }
         return ret;
+    }
+
+    private static Set<ImplementationDetails.Usage> mapSchemaContext(Set<SchemaContext> schemaContexts) {
+        return schemaContexts.stream()
+                .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
+                .collect(Collectors.toSet());
     }
 }

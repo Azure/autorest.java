@@ -24,6 +24,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ExternalDocumentation;
@@ -488,7 +489,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             parameters, proxyMethod, syncReturnType, methodPollingDetails, settings);
 
                     if (dpgMethodPollingDetailsWithModel != null) {
-                        builder = builder.implementationOnly(true);
+                        builder = builder.implementationDetails(
+                                new ImplementationDetails.Builder()
+                                        .implementationOnly(true)
+                                        .build());
 
                         String modelSuffix = "WithModel";
                         addLroMethods(operation, builder, methods,
@@ -496,7 +500,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
                                 parameters, proxyMethod, syncReturnType, dpgMethodPollingDetailsWithModel, settings);
 
-                        builder = builder.implementationOnly(false);
+                        builder = builder.implementationDetails(
+                                new ImplementationDetails.Builder()
+                                        .implementationOnly(false)
+                                        .build());
                     }
 
                     if (settings.isFluent()) {

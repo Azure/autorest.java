@@ -78,6 +78,8 @@ public class ClientModel {
      */
     private final boolean stronglyTypedHeader;
 
+    private final ImplementationDetails implementationDetails;
+
     /**
      * Create a new ServiceModel with the provided properties.
      * @param name The name of this model.
@@ -99,7 +101,7 @@ public class ClientModel {
             boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
             String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
             List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-            IType modelType, boolean stronglyTypedHeader) {
+            IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails) {
         packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
@@ -116,6 +118,7 @@ public class ClientModel {
         this.propertyReferences = propertyReferences;
         this.modelType = modelType;
         this.stronglyTypedHeader = stronglyTypedHeader;
+        this.implementationDetails = implementationDetails;
     }
 
     public final String getPackage() {
@@ -192,6 +195,10 @@ public class ClientModel {
      */
     public boolean isStronglyTypedHeader() {
         return stronglyTypedHeader;
+    }
+
+    public ImplementationDetails getImplementationDetails() {
+        return implementationDetails;
     }
 
     /**
@@ -275,6 +282,7 @@ public class ClientModel {
         protected List<ClientModelPropertyReference> propertyReferences;
         protected IType modelType;
         protected boolean stronglyTypedHeader;
+        protected ImplementationDetails implementationDetails;
 
         /**
          * Sets the package that this model class belongs to.
@@ -438,6 +446,16 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets the implementation details for the model.
+         * @param implementationDetails the implementation details.
+         * @return the Builder itself
+         */
+        public Builder implementationDetails(ImplementationDetails implementationDetails) {
+            this.implementationDetails = implementationDetails;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                     name,
@@ -454,7 +472,8 @@ public class ClientModel {
                     properties,
                     propertyReferences,
                     modelType,
-                    stronglyTypedHeader);
+                    stronglyTypedHeader,
+                    implementationDetails);
         }
     }
 }

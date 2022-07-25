@@ -62,7 +62,7 @@ public class AndroidClientMethod extends ClientMethod {
                 methodPageDetails,
                 methodTransformationDetails,
                 methodVisibility,
-                false,
+                null,
                 methodPollingDetails,
                 externalDocumentation);
     }

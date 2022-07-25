@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -222,20 +223,25 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
+        boolean isCadl = "CadlPlugin".equals(this.getClass().getSimpleName());  // temporary hack
         if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-            }
-
             // Client model
             for (ClientModel model : client.getModels()) {
-                javaPackage.addModel(model.getPackage(), model.getName(), model);
+                if (!isCadl
+                        // CADL models for convenience method
+                        || (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.CONVENIENCE_METHOD))) {
+                    javaPackage.addModel(model.getPackage(), model.getName(), model);
+                }
             }
 
             // Enum
             for (EnumType enumType : client.getEnums()) {
                 javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
+
+            // Response
+            for (ClientResponse response : client.getResponseModels()) {
+                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
             }
 
             // Exception
@@ -246,7 +252,7 @@ public class Javagen extends NewPlugin {
             // XML sequence wrapper
             for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
                 javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
             }
         }
 
