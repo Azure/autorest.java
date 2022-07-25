@@ -1034,7 +1034,7 @@ export class CodeModelBuilder {
   }
 
   private trackSchemaUsage(schema: Schema, schemaUsage: SchemaUsage): void {
-    if (schema instanceof ObjectSchema) {
+    if (schema instanceof ObjectSchema || schema instanceof ChoiceSchema || schema instanceof SealedChoiceSchema) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
       }
