@@ -236,21 +236,14 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
      */
     @Generated
     public AutoRestAzureSpecialParametersTestClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (apiVersion == null) {
-            this.apiVersion = "2015-07-01-preview";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "2015-07-01-preview";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestAzureSpecialParametersTestClient client =
                 new AutoRestAzureSpecialParametersTestClient(
-                        pipeline, serializerAdapter, subscriptionId, host, apiVersion);
+                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
         return client;
     }
 

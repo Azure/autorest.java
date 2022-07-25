@@ -181,13 +181,10 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
      */
     @Generated
     private DpgClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        DpgClientImpl client = new DpgClientImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        DpgClientImpl client =
+                new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

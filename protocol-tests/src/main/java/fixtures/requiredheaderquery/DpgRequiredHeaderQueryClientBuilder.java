@@ -183,14 +183,11 @@ public final class DpgRequiredHeaderQueryClientBuilder
      */
     @Generated
     private DpgRequiredHeaderQueryClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         DpgRequiredHeaderQueryClientImpl client =
-                new DpgRequiredHeaderQueryClientImpl(pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+                new DpgRequiredHeaderQueryClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

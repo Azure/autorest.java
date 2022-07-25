@@ -51,13 +51,14 @@ public class Project {
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureJsonVersion = "1.0.0-beta.1";
-        private String azureCoreVersion = "1.30.0-beta.1";
-        private String azureCoreManagementVersion = "1.6.2";
-        private String azureCoreHttpNettyVersion = "1.12.2";
-        private String azureCoreTestVersion = "1.9.1";
-        private String azureIdentityVersion = "1.5.2";
+        private String azureCoreVersion = "1.30.0";
+        private String azureCoreManagementVersion = "1.7.0";
+        private String azureCoreHttpNettyVersion = "1.12.3";
+        private String azureCoreTestVersion = "1.10.0";
+        private String azureIdentityVersion = "1.5.3";
         private String junitVersion = "5.8.2";
-        private String slf4jSimple = "1.7.36";
+        private String mockitoVersion = "4.5.1";
+        private String slf4jSimpleVersion = "1.7.36";
 
         public String getAzureClientSdkParentVersion() {
             return azureClientSdkParentVersion;
@@ -91,8 +92,12 @@ public class Project {
             return junitVersion;
         }
 
-        public String getSlf4jSimple() {
-            return slf4jSimple;
+        public String getMockitoVersion() {
+            return mockitoVersion;
+        }
+
+        public String getSlf4jSimpleVersion() {
+            return slf4jSimpleVersion;
         }
     }
 
@@ -218,6 +223,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 checkArtifact(line, "org.junit.jupiter:junit-jupiter-engine").ifPresent(v -> packageVersions.junitVersion = v);
+                checkArtifact(line, "org.mockito:mockito-core").ifPresent(v -> packageVersions.mockitoVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-json").ifPresent(v -> packageVersions.azureJsonVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
@@ -225,7 +231,7 @@ public class Project {
                 checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
                 checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
                 checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
-                checkArtifact(line, "org.slf4j:slf4j-simple").ifPresent(v -> packageVersions.slf4jSimple = v);
+                checkArtifact(line, "org.slf4j:slf4j-simple").ifPresent(v -> packageVersions.slf4jSimpleVersion = v);
             });
         }
     }

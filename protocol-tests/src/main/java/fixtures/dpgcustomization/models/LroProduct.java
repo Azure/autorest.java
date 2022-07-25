@@ -5,6 +5,7 @@
 package fixtures.dpgcustomization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LroProduct model. */
@@ -17,29 +18,25 @@ public final class LroProduct extends Product {
     private String provisioningState;
 
     /**
+     * Creates an instance of LroProduct class.
+     *
+     * @param received the received value to set.
+     * @param provisioningState the provisioningState value to set.
+     */
+    @JsonCreator
+    public LroProduct(
+            @JsonProperty(value = "received", required = true) ProductReceived received,
+            @JsonProperty(value = "provisioningState", required = true) String provisioningState) {
+        super(received);
+        this.provisioningState = provisioningState;
+    }
+
+    /**
      * Get the provisioningState property: The provisioningState property.
      *
      * @return the provisioningState value.
      */
     public String getProvisioningState() {
         return this.provisioningState;
-    }
-
-    /**
-     * Set the provisioningState property: The provisioningState property.
-     *
-     * @param provisioningState the provisioningState value to set.
-     * @return the LroProduct object itself.
-     */
-    public LroProduct setProvisioningState(String provisioningState) {
-        this.provisioningState = provisioningState;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public LroProduct setReceived(ProductReceived received) {
-        super.setReceived(received);
-        return this;
     }
 }

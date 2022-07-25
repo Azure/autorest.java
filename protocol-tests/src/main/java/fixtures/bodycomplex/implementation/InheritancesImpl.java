@@ -98,17 +98,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *
@@ -133,17 +133,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *
@@ -168,17 +168,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *
@@ -201,17 +201,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *
@@ -239,17 +239,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *
@@ -278,17 +278,17 @@ public final class InheritancesImpl {
      *
      * <pre>{@code
      * {
-     *     id: Integer
-     *     name: String
-     *     color: String
-     *     hates: [
-     *         {
-     *             id: Integer
-     *             name: String
-     *             food: String
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      *         }
      *     ]
-     *     breed: String
+     *     breed: String (Optional)
      * }
      * }</pre>
      *

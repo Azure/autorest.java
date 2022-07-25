@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "RequiredOptionalBodyClient",
+    "description": "DPG required optional body client"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/body/required/object": {
+      "put": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Creates or updates a deployment.",
+        "operationId": "CreateOrUpdateDeployment",
+        "externalDocs": {
+          "description": "Rest API Documentation",
+          "url": "https://docs.microsoft.com/azure/developer/java/sdk/overview"
+        },
+        "parameters": [
+          {
+            "name": "deployment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "The deployment properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment properties.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        }
+      }
+    },
+    "/body/optional/object": {
+      "put": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "optional object",
+        "operationId": "OptionalObject",
+        "parameters": [
+          {
+            "name": "deployment",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "The deployment properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment properties.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Deployment": {
+      "type": "object",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "The deployment identifier."
+        },
+        "startDateTime": {
+          "type": "string",
+          "description": "The deployment start datetime.",
+          "format": "date-time"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group identity"
+        },
+        "deviceClassSubgroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The device class subgroups for the deployment."
+        },
+        "isCanceled": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the deployment was canceled."
+        },
+        "isRetried": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the deployment has been retried."
+        },
+        "OperationFilterStatus": {
+          "type": "string",
+          "enum": [
+            "Running",
+            "NotStarted"
+          ],
+          "x-ms-enum": {
+            "name": "OperationFilterStatus",
+            "modelAsString": true
+          },
+          "description": "Operation status filter."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "deploymentId",
+        "startDateTime",
+        "groupId",
+        "OperationFilterStatus"
+      ],
+      "description": "Deployment metadata."
+    }
+  }
+}
+

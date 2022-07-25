@@ -39,7 +39,7 @@ public final class MediaTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Flux<ByteBuffer>
+     * BinaryData
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -48,7 +48,7 @@ public final class MediaTypesAsyncClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -68,10 +68,10 @@ public final class MediaTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Flux<ByteBuffer>
+     * BinaryData
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,6 +88,16 @@ public final class MediaTypesAsyncClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "text/plain; charset=UTF-8".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -121,7 +131,7 @@ public final class MediaTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Flux<ByteBuffer>
+     * BinaryData
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -130,7 +140,7 @@ public final class MediaTypesAsyncClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -153,7 +163,7 @@ public final class MediaTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Flux<ByteBuffer>
+     * BinaryData
      * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
@@ -162,7 +172,8 @@ public final class MediaTypesAsyncClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream",
+     *     "text/plain".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -194,7 +205,7 @@ public final class MediaTypesAsyncClient {
      * String
      * }</pre>
      *
-     * @param contentType Upload file type.
+     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

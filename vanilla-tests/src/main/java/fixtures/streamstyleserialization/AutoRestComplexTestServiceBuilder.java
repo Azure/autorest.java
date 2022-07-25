@@ -216,20 +216,13 @@ public final class AutoRestComplexTestServiceBuilder
      */
     @Generated
     public AutoRestComplexTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (apiVersion == null) {
-            this.apiVersion = "2016-02-29";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "2016-02-29";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestComplexTestService client =
-                new AutoRestComplexTestService(pipeline, serializerAdapter, host, apiVersion);
+                new AutoRestComplexTestService(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 

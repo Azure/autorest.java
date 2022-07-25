@@ -219,13 +219,10 @@ public final class AutorestSecurityInfoBuilder
      */
     @Generated
     public AutorestSecurityInfo buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutorestSecurityInfo client = new AutorestSecurityInfo(pipeline, serializerAdapter);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutorestSecurityInfo client = new AutorestSecurityInfo(localPipeline, localSerializerAdapter);
         return client;
     }
 

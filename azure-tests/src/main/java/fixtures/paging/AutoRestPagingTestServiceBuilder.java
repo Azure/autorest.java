@@ -199,16 +199,12 @@ public final class AutoRestPagingTestServiceBuilder
      */
     @Generated
     public AutoRestPagingTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline, serializerAdapter, host);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutoRestPagingTestService client =
+                new AutoRestPagingTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

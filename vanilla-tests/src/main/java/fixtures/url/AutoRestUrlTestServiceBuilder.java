@@ -233,17 +233,13 @@ public final class AutoRestUrlTestServiceBuilder
      */
     @Generated
     public AutoRestUrlTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestUrlTestService client =
-                new AutoRestUrlTestService(pipeline, serializerAdapter, globalStringPath, globalStringQuery, host);
+                new AutoRestUrlTestService(
+                        localPipeline, localSerializerAdapter, globalStringPath, globalStringQuery, localHost);
         return client;
     }
 

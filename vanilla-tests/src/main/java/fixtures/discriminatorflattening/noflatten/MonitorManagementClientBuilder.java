@@ -199,16 +199,11 @@ public final class MonitorManagementClientBuilder
      */
     @Generated
     public MonitorManagementClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "https://management.azure.com";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        MonitorManagementClient client = new MonitorManagementClient(pipeline, serializerAdapter, host);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "https://management.azure.com";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        MonitorManagementClient client = new MonitorManagementClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

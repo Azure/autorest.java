@@ -17,6 +17,7 @@
       "get": {
         "operationId": "params_getRequiredQueryParam",
         "description": "Get Required Query Parameters",
+        "summary": "Test Case for Required Query Parameters",
         "parameters": [
           {
             "name": "parameter_int",
@@ -208,6 +209,8 @@
   },
   "definitions": {
     "RequestObject": {
+      "title": "Request Object",
+      "description": "a request object",
       "type": "object",
       "properties": {
         "status": {

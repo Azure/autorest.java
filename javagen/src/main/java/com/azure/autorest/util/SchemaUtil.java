@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -77,7 +78,13 @@ public class SchemaUtil {
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
     }
 
-    public static IType getOperationResponseType(Operation operation) {
+    /*
+     * Returns raw response type.
+     * In case of binary response:
+     *   For DPG, returns BinaryData
+     *   For vanilla/mgmt, returns InputStream
+     */
+    public static IType getOperationResponseType(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
@@ -87,6 +94,12 @@ public class SchemaUtil {
                     && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
+            } else if (containsBinaryResponse(operation)) {
+                if (settings.isDataPlaneClient()) {
+                    responseBodyType = ClassType.BinaryData;
+                } else {
+                    responseBodyType = ClassType.InputStream;
+                }
             } else {
                 responseBodyType = PrimitiveType.Void;
             }
@@ -135,17 +148,30 @@ public class SchemaUtil {
     }
 
     /**
+     * Whether response contains header schemas.
+     * Long-Running-Operation headers will be omitted and won't count as header schemas.
      * @param operation the operation
+     * @param settings the JavaSetting object
      * @return whether response of the operation contains headers
      */
-    public static boolean responseContainsHeaderSchemas(Operation operation) {
+    public static boolean responseContainsHeaderSchemas(Operation operation, JavaSettings settings) {
         return operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
-                .anyMatch(Objects::nonNull);
+                .anyMatch(Objects::nonNull)
+                && notFluentLRO(operation, settings);
     }
 
-    public static String mergeDescription(String summary, String description) {
+    /**
+     * Merge summary and description.
+     *
+     * If summary exists, it will take 1st line, and description will be moved to 2nd line in Javadoc.
+     *
+     * @param summary the summary text.
+     * @param description the description text.
+     * @return the merged text for Javadoc.
+     */
+    public static String mergeSummaryWithDescription(String summary, String description) {
         if (Objects.equals(summary, description)) {
             summary = null;
         }
@@ -157,7 +183,7 @@ public class SchemaUtil {
         if (!CoreUtils.isNullOrEmpty(description)) {
             parts.add(description);
         }
-        return String.join(" ", parts);
+        return String.join("\n\n", parts);
     }
 
     public static IType removeModelFromParameter(RequestParameterLocation parameterRequestLocation, IType type) {
@@ -176,5 +202,14 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    private static boolean containsBinaryResponse(Operation operation) {
+        return operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()));
+    }
+
+    // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
+    private static boolean notFluentLRO(Operation operation, JavaSettings settings) {
+        return !(settings.isFluent() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
     }
 }

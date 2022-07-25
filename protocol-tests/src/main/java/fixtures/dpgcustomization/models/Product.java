@@ -5,6 +5,7 @@
 package fixtures.dpgcustomization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Product model. */
@@ -17,22 +18,21 @@ public class Product {
     private ProductReceived received;
 
     /**
+     * Creates an instance of Product class.
+     *
+     * @param received the received value to set.
+     */
+    @JsonCreator
+    public Product(@JsonProperty(value = "received", required = true) ProductReceived received) {
+        this.received = received;
+    }
+
+    /**
      * Get the received property: The received property.
      *
      * @return the received value.
      */
     public ProductReceived getReceived() {
         return this.received;
-    }
-
-    /**
-     * Set the received property: The received property.
-     *
-     * @param received the received value to set.
-     * @return the Product object itself.
-     */
-    public Product setReceived(ProductReceived received) {
-        this.received = received;
-        return this;
     }
 }

@@ -174,7 +174,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
-                builder.description(SchemaUtil.mergeDescription(summary, description));
+                builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();

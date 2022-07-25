@@ -200,17 +200,12 @@ public final class AutoRestResourceFlatteningTestServiceBuilder
      */
     @Generated
     public AutoRestResourceFlatteningTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestResourceFlatteningTestService client =
-                new AutoRestResourceFlatteningTestService(pipeline, serializerAdapter, host);
+                new AutoRestResourceFlatteningTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

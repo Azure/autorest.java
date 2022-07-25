@@ -345,8 +345,8 @@ public class ArrayTests {
         List<OffsetDateTime> result = client.getArrays().getDateTimeValid();
         OffsetDateTime[] expected = new OffsetDateTime[] {
                 OffsetDateTime.of(2000, 12, 1, 0, 0, 1, 0, ZoneOffset.UTC),
-                OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.UTC),
-                OffsetDateTime.of(1492, 10, 12, 10, 15, 1, 0, ZoneOffset.UTC)
+                OffsetDateTime.of(1980, 1, 2, 0, 11, 35, 0, ZoneOffset.ofHours(1)),
+                OffsetDateTime.of(1492, 10, 12, 10, 15, 1, 0, ZoneOffset.ofHours(-8))
         };
 
         assertEquals(result.size(), expected.length);

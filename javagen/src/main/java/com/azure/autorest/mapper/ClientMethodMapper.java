@@ -26,6 +26,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -90,10 +91,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
-
         ClientMethod.Builder builder = getClientMethodBuilder()
-                .description(operation.getLanguage().getJava().getDescription())
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
+
+        // merge summary and description
+        String summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
+        String description = operation.getLanguage().getJava() == null ? null : operation.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));
+        } else {
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
+        }
 
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
@@ -127,9 +135,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createPagedAsyncReturnType(elementType);
                 syncReturnType = createPagedSyncReturnType(elementType);
             }
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         } else {
             asyncRestResponseReturnType = null;
-            IType responseBodyType = SchemaUtil.getOperationResponseType(operation);
+            IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
             if (settings.isDataPlaneClient()) {
                 if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
@@ -138,20 +147,28 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
-            if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient()) {
+            if (responseBodyType.equals(ClassType.InputStream)) {
                 asyncReturnType = createAsyncBinaryReturnType();
-            } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
-                asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
-            } else {
-                asyncReturnType = createAsyncVoidReturnType();
-            }
-            if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))
-                    && !settings.isDataPlaneClient()) {
                 syncReturnType = ClassType.InputStream;
+                syncReturnWithResponse = ClassType.StreamResponse;
             } else {
+                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+                    asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
+                } else {
+                    asyncReturnType = createAsyncVoidReturnType();
+                }
                 syncReturnType = responseBodyType.getClientType();
+                syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
             }
+        }
+
+        // map externalDocs property
+        if (operation.getExternalDocs() != null) {
+            ExternalDocumentation externalDocumentation = new ExternalDocumentation.Builder()
+                    .description(operation.getExternalDocs().getDescription())
+                    .url(operation.getExternalDocs().getUrl())
+                    .build();
+            builder.methodDocumentation(externalDocumentation);
         }
 
         if (syncReturnType == ClassType.InputStream) {
@@ -311,7 +328,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         IType lroIntermediateType = null;
                         if (operation.getExtensions().isXmsLongRunningOperation() && !isNextMethod) {
-                            lroIntermediateType = SchemaUtil.getOperationResponseType(operation);
+                            lroIntermediateType = SchemaUtil.getOperationResponseType(operation, settings);
                         }
 
                         List<ClientMethod> nextMethods = (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation());
@@ -678,7 +695,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
-        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation);
+        boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation, settings);
 
         // If DPG is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>

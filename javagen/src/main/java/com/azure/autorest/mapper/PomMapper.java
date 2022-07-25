@@ -21,6 +21,7 @@ public class PomMapper implements IMapper<Project, Pom> {
     protected static final String CORE_TEST_PREFIX = "com.azure:azure-core-test:";
     protected static final String IDENTITY_PREFIX = "com.azure:azure-identity:";
     protected static final String JUNIT_JUPITER_ENGINE_PREFIX = "org.junit.jupiter:junit-jupiter-engine:";
+    protected static final String MOCKITO_CORE_PREFIX = "org.mockito:mockito-core:";
     protected static final String SLF4J_SIMPLE_PREFIX = "org.slf4j:slf4j-simple:";
 
     protected static final String TEST_SUFFIX = ":test";
@@ -50,9 +51,10 @@ public class PomMapper implements IMapper<Project, Pom> {
         dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
         dependencyIdentifiers.add(CORE_HTTP_NETTY_PREFIX + project.getPackageVersions().getAzureCoreHttpNettyVersion());
         dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
+        dependencyIdentifiers.add(MOCKITO_CORE_PREFIX + project.getPackageVersions().getMockitoVersion() + TEST_SUFFIX);
         dependencyIdentifiers.add(CORE_TEST_PREFIX + project.getPackageVersions().getAzureCoreTestVersion() + TEST_SUFFIX);
         dependencyIdentifiers.add(IDENTITY_PREFIX + project.getPackageVersions().getAzureIdentityVersion() + TEST_SUFFIX);
-        dependencyIdentifiers.add(SLF4J_SIMPLE_PREFIX + project.getPackageVersions().getSlf4jSimple() + TEST_SUFFIX);
+        dependencyIdentifiers.add(SLF4J_SIMPLE_PREFIX + project.getPackageVersions().getSlf4jSimpleVersion() + TEST_SUFFIX);
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> KNOWN_DEPENDENCY_PREFIXES.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));

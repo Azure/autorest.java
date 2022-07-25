@@ -40,9 +40,9 @@ public final class PolymorphicrecursiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }
@@ -69,9 +69,9 @@ public final class PolymorphicrecursiveAsyncClient {
      *
      * <pre>{@code
      * {
-     *     species: String
-     *     length: float
-     *     siblings: [
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
      *         (recursive schema, see above)
      *     ]
      * }

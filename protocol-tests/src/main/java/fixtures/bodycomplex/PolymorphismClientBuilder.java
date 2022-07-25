@@ -199,18 +199,13 @@ public final class PolymorphismClientBuilder
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serviceVersion == null) {
-            this.serviceVersion = AutoRestComplexTestServiceVersion.getLatest();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestComplexTestServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
         AutoRestComplexTestServiceClientImpl client =
                 new AutoRestComplexTestServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

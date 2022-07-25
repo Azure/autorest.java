@@ -34,13 +34,15 @@ public final class FlattencomplexAsyncClient {
     }
 
     /**
-     * <strong>Response Body Schema</strong>
+     * The getValid operation.
+     *
+     * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     propB1: String
-     *     helper: {
-     *         propBH1: String
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      *     }
      * }
      * }</pre>

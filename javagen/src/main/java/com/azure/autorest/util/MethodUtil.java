@@ -17,6 +17,11 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientEnumValue;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
@@ -76,7 +81,6 @@ public class MethodUtil {
      * If the selected binary request does not have content-type parameter, we will add one for it
      * @param requests a list of requests
      * @return the first request consumes binary type, if no binary request, return the first request in requests
-     *
      */
     public static Request tryMergeBinaryRequests(List<Request> requests, Operation operation) {
         Request selectedRequest = requests.get(0);
@@ -84,7 +88,7 @@ public class MethodUtil {
             if (request.getProtocol().getHttp().getKnownMediaType() != null
                     && request.getProtocol().getHttp().getKnownMediaType().equals(KnownMediaType.BINARY)) {
                 // add contentType parameter
-                if (haveDifferentContentTypes(requests) && !hasContentTypeParameter(request)) {
+                if (getContentTypeCount(requests) > 1 && !hasContentTypeParameter(request)) {
                     Parameter contentTypeParameter = createContentTypeParameter(request, operation);
                     request.getParameters().add(findIndexForContentTypeParam(request.getParameters()), contentTypeParameter);
                     if (contentTypeParameter.isRequired()) {
@@ -99,46 +103,11 @@ public class MethodUtil {
     }
 
     /**
-     *
-     * @param request the input request
-     * @return true if there is parameter in the request named "contentType", otherwise, return false
-     */
-    private static boolean hasContentTypeParameter(Request request) {
-        for (Parameter parameter : request.getParameters()) {
-            if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
-                    && RequestParameterLocation.HEADER == parameter.getProtocol().getHttp().getIn()
-                    && parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
-                    && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @param requests a list of requests
-     * @return true if the requests have different content types, otherwise return false
-     */
-    private static boolean haveDifferentContentTypes(List<Request> requests) {
-        Set<String> mediaTypes = new HashSet<>();
-        for (Request request : requests) {
-            if (request.getProtocol().getHttp().getMediaTypes() != null
-                    && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
-                mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
-            }
-        }
-        return mediaTypes.size() > 1;
-
-    }
-
-    /**
-     *
-     * @param request the request to put contentType on
+     * @param request   the request to put contentType on
      * @param operation
      * @return the created content type parameter
      */
-    private static Parameter createContentTypeParameter(Request request, Operation operation) {
+    public static Parameter createContentTypeParameter(Request request, Operation operation) {
         List<Request> requests = operation.getRequests();
         Parameter contentType = new Parameter();
         contentType.setOperation(operation);
@@ -177,7 +146,69 @@ public class MethodUtil {
     }
 
     /**
+     * @param requests a list of requests
+     * @return true if the requests have different content types, otherwise return false
+     */
+    public static int getContentTypeCount(List<Request> requests) {
+        Set<String> mediaTypes = new HashSet<>();
+        for (Request request : requests) {
+            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
+                mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
+            }
+        }
+        return mediaTypes.size();
+    }
+
+    /**
+     * If the parameter is not enum type, return the description directly, otherwise append the string of allowed values to the description
+     * @param parameter a parameter
+     * @param description parameter description
+     * @return the description that appends the string of allowed values for enum type parameter
+     */
+    public static String appendAllowedEnumValuesForEnumType(Parameter parameter, String description) {
+        IType type = Mappers.getSchemaMapper().map(parameter.getSchema());
+        if (parameter.getSchema() == null || !(type instanceof EnumType)) {
+            return description;
+        }
+        String res = description;
+        if (description.endsWith(".")) {
+            res += " Allowed values: ";
+        } else {
+            res += ". Allowed values: ";
+        }
+        EnumType enumType = (EnumType) type;
+        List<ClientEnumValue> choices = enumType.getValues();
+        if (choices != null && !choices.isEmpty()) {
+            res += choices.stream().map(choice -> {
+                if (enumType.getElementType() == ClassType.String) {
+                    return "\"" + choice.getValue() + "\"";
+                } else {
+                    return choice.getValue();
+                }
+            }).collect(Collectors.joining(", "));
+        }
+        res += ".";
+        return res;
+    }
+
+    /**
      *
+     * @param request the input request
+     * @return true if there is parameter in the request named "contentType", otherwise, return false
+     */
+    private static boolean hasContentTypeParameter(Request request) {
+        for (Parameter parameter : request.getParameters()) {
+            if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
+                    && RequestParameterLocation.HEADER == parameter.getProtocol().getHttp().getIn()
+                    && parameter.getLanguage() != null && parameter.getLanguage().getJava() != null
+                    && "Content-Type".equalsIgnoreCase(parameter.getLanguage().getJava().getSerializedName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param parameters a list of parameters
      * @return return the index of the BinarySchema parameter, if not found, return -1
      */
@@ -205,13 +236,15 @@ public class MethodUtil {
     private static List<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
         List<ChoiceValue> choiceValues = new ArrayList<>();
         for (Request request : requests) {
-            for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
-                ChoiceValue choiceValue = new ChoiceValue();
-                choiceValue.setValue(mediaType);
-                Language language = new Language();
-                language.setName(mediaType.toUpperCase(Locale.ROOT));
-                language.setDescription("Content Type " + mediaType);
-                choiceValues.add(choiceValue);
+            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
+                for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
+                    ChoiceValue choiceValue = new ChoiceValue();
+                    choiceValue.setValue(mediaType);
+                    Language language = new Language();
+                    language.setName(mediaType.toUpperCase(Locale.ROOT));
+                    language.setDescription("Content Type " + mediaType);
+                    choiceValues.add(choiceValue);
+                }
             }
         }
         return choiceValues;

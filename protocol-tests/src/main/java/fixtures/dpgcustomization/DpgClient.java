@@ -40,7 +40,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -68,7 +68,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     hello: String
+     *     hello: String (Required)
      * }
      * }</pre>
      *
@@ -76,7 +76,7 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -103,12 +103,12 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     values: [
-     *         {
-     *             received: String(raw/model)
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
      *         }
      *     ]
-     *     nextLink: String
+     *     nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -136,8 +136,8 @@ public final class DpgClient {
      *
      * <pre>{@code
      * {
-     *     received: String(raw/model)
-     *     provisioningState: String
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      *

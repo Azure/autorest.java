@@ -199,16 +199,11 @@ public final class AutoRestBoolTestServiceBuilder
      */
     @Generated
     public AutoRestBoolTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        AutoRestBoolTestService client = new AutoRestBoolTestService(pipeline, serializerAdapter, host);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutoRestBoolTestService client = new AutoRestBoolTestService(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

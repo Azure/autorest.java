@@ -50,7 +50,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (CoreUtils.isNullOrEmpty(summaryInProperty) && CoreUtils.isNullOrEmpty(descriptionInProperty)) {
             description = String.format("The %s property.", property.getSerializedName());
         } else {
-            description = SchemaUtil.mergeDescription(summaryInProperty, descriptionInProperty);
+            description = SchemaUtil.mergeSummaryWithDescription(summaryInProperty, descriptionInProperty);
         }
         builder.description(description);
 

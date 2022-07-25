@@ -38,7 +38,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -62,7 +62,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -86,7 +86,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -110,7 +110,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -134,7 +134,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -158,7 +158,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -182,7 +182,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -206,7 +206,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -430,7 +430,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -454,7 +454,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -575,7 +575,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -599,7 +599,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -623,7 +623,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -647,7 +647,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -671,7 +671,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -695,7 +695,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *
@@ -719,7 +719,7 @@ public final class MultipleResponsesClient {
      *
      * <pre>{@code
      * {
-     *     statusCode: String
+     *     statusCode: String (Optional)
      * }
      * }</pre>
      *

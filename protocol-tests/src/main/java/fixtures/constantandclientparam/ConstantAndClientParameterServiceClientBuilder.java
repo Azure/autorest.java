@@ -240,20 +240,16 @@ public final class ConstantAndClientParameterServiceClientBuilder
      */
     @Generated
     private ConstantAndClientParameterServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceClientImpl client =
                 new ConstantAndClientParameterServiceClientImpl(
-                        pipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         queryRequiredClientParam,
                         queryRequiredDefaultValueClientParam,
                         queryNonRequiredClientParam,
-                        host);
+                        localHost);
         return client;
     }
 

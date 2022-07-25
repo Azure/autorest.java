@@ -10,7 +10,9 @@ import com.azure.autorest.mapper.PomMapper;
 import com.azure.autorest.model.clientmodel.Pom;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentPomMapper extends PomMapper {
@@ -26,19 +28,28 @@ public class FluentPomMapper extends PomMapper {
         pom.setServiceName(project.getServiceName() + " Management");
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
+        Set<String> addedDependencyPrefixes = new HashSet<>();
         List<String> dependencyIdentifiers = new ArrayList<>();
-        dependencyIdentifiers.add(JSON_PREFIX + project.getPackageVersions().getAzureJsonVersion());
-        dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
-        dependencyIdentifiers.add(CORE_MANAGEMENT_PREFIX + project.getPackageVersions().getAzureCoreManagementVersion());
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                JSON_PREFIX, project.getPackageVersions().getAzureJsonVersion(), false);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                CORE_PREFIX, project.getPackageVersions().getAzureCoreVersion(), false);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                CORE_MANAGEMENT_PREFIX, project.getPackageVersions().getAzureCoreManagementVersion(), false);
         if (JavaSettings.getInstance().isGenerateTests()) {
-            dependencyIdentifiers.add(CORE_TEST_PREFIX + project.getPackageVersions().getAzureCoreTestVersion() + TEST_SUFFIX);
-            dependencyIdentifiers.add(IDENTITY_PREFIX + project.getPackageVersions().getAzureIdentityVersion() + TEST_SUFFIX);
-            dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
-            dependencyIdentifiers.add(SLF4J_SIMPLE_PREFIX + project.getPackageVersions().getSlf4jSimple() + TEST_SUFFIX);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    CORE_TEST_PREFIX, project.getPackageVersions().getAzureCoreTestVersion(), true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    IDENTITY_PREFIX, project.getPackageVersions().getAzureIdentityVersion(), true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    JUNIT_JUPITER_ENGINE_PREFIX, project.getPackageVersions().getJunitVersion(), true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    MOCKITO_CORE_PREFIX, project.getPackageVersions().getMockitoVersion(), true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    SLF4J_SIMPLE_PREFIX, project.getPackageVersions().getSlf4jSimpleVersion(), true);
         }
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
-                .filter(dependencyIdentifier -> !dependencyIdentifier.startsWith(CORE_PREFIX)
-                        && !dependencyIdentifier.startsWith(CORE_MANAGEMENT_PREFIX))
+                .filter(dependencyIdentifier -> addedDependencyPrefixes.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
@@ -48,5 +59,11 @@ public class FluentPomMapper extends PomMapper {
         }
 
         return pom;
+    }
+
+    private static void addDependencyIdentifier(List<String> dependencyIdentifiers, Set<String> prefixes,
+                                                String prefix, String version, boolean isTestScope) {
+        prefixes.add(prefix);
+        dependencyIdentifiers.add(prefix + version + (isTestScope ? TEST_SUFFIX : ""));
     }
 }
