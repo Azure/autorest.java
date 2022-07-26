@@ -40,8 +40,8 @@ public class CadlPlugin extends Javagen {
     protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
         if (settings.isGenerateModels()) {
             // Client model
-            client.getModels().stream().
-                    filter(CadlPlugin::isGeneratingModel)
+            client.getModels().stream()
+                    .filter(CadlPlugin::isGeneratingModel)
                     .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
 
             // Enum
