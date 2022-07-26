@@ -25,6 +25,7 @@ import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -245,6 +246,9 @@ public class SchemaUtil {
      * @return the set of ImplementationDetails.Usage.
      */
     public static Set<ImplementationDetails.Usage> mapSchemaContext(Set<SchemaContext> schemaContexts) {
+        if (schemaContexts == null) {
+            return Collections.emptySet();
+        }
         return schemaContexts.stream()
                 .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
                 .collect(Collectors.toSet());

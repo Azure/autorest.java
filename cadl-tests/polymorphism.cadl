@@ -1,5 +1,4 @@
 import "@cadl-lang/rest";
-import "./decorators.js";
 
 using Cadl.Http;
 using Cadl.Rest;
@@ -20,7 +19,6 @@ model Dog extends Pet {
 
 @route("/Pets")
 namespace root {
-  @convenienceMethod
   op read(): {
     @body body: Pet;
   };

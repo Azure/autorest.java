@@ -1,6 +1,7 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
 import "./core.cadl";
+import "./decorators.js";
 
 using Cadl.Rest;
 using Cadl.Versioning;
@@ -801,6 +802,7 @@ interface Datasets extends LifetimeNoPatchOperations<Dataset, ListFilters> {
 
 @Cadl.Http.route("/multivariate/models")
 interface Models extends LifetimeNoPatchOperations<Model, ModelFilters> {
+  @convenienceMethod
   @Cadl.Http.route("{modelName}/detect")
   @summary("Detect Multivariate Anomaly - Sync")
   @doc("Detect anomalies with a trained model and multivariate time-series data points specified in the request body. This API is recommended to be embedded in an inference schedule set up for continuous real-time inference. Please refer to the official documentation for the detailed quota and limits.")
