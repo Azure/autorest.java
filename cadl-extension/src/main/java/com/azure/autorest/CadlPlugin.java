@@ -7,8 +7,14 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.util.ClientModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +32,28 @@ public class CadlPlugin extends Javagen {
     private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
 
     @Override
-    public JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
-        return super.writeToTemplates(settings, codeModel, client);
+    public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
+        return super.writeToTemplates(codeModel, client, settings);
+    }
+
+    @Override
+    protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        if (settings.isGenerateModels()) {
+            // Client model
+            client.getModels().stream().
+                    filter(CadlPlugin::isGeneratingModel)
+                    .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
+
+            // Enum
+            client.getEnums().stream()
+                    .filter(CadlPlugin::isGeneratingModel)
+                    .forEach(model -> javaPackage.addEnum(model.getPackage(), model.getName(), model));
+
+            // Response
+            client.getResponseModels().stream()
+                    .filter(CadlPlugin::isGeneratingModel)
+                    .forEach(model -> javaPackage.addClientResponse(model.getPackage(), model.getName(), model));
+        }
     }
 
     @Override
@@ -39,6 +65,27 @@ public class CadlPlugin extends Javagen {
             throw new IllegalStateException(e);
         }
         LOGGER.info("Write file: {}", fileName);
+    }
+
+    private static boolean isGeneratingModel(ClientModel model) {
+        return model.getImplementationDetails() != null && model.getImplementationDetails().isConvenienceMethod();
+    }
+
+    private static boolean isGeneratingModel(EnumType enumType) {
+        return true;
+    }
+
+    private static boolean isGeneratingModel(ClientResponse response) {
+        IType bodyType = response.getBodyType();
+        boolean ret = ClientModelUtil.isClientModel(bodyType);
+        if (ret) {
+            ClassType classType = (ClassType) bodyType;
+            ClientModel model = ClientModelUtil.getClientModel(classType.getName());
+            if (model != null) {
+                ret = isGeneratingModel(model);
+            }
+        }
+        return ret;
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();

@@ -3,8 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

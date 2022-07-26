@@ -489,10 +489,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             parameters, proxyMethod, syncReturnType, methodPollingDetails, settings);
 
                     if (dpgMethodPollingDetailsWithModel != null) {
-                        builder = builder.implementationDetails(
-                                new ImplementationDetails.Builder()
-                                        .implementationOnly(true)
-                                        .build());
+                        ImplementationDetails.Builder implDetailsBuilder = new ImplementationDetails.Builder().implementationOnly(true);
+
+                        builder = builder.implementationDetails(implDetailsBuilder.build());
 
                         String modelSuffix = "WithModel";
                         addLroMethods(operation, builder, methods,
@@ -500,10 +499,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
                                 parameters, proxyMethod, syncReturnType, dpgMethodPollingDetailsWithModel, settings);
 
-                        builder = builder.implementationDetails(
-                                new ImplementationDetails.Builder()
-                                        .implementationOnly(false)
-                                        .build());
+                        builder = builder.implementationDetails(implDetailsBuilder.implementationOnly(false).build());
                     }
 
                     if (settings.isFluent()) {

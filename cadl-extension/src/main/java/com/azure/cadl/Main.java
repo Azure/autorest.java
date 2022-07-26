@@ -74,7 +74,7 @@ public class Main {
         Client client = Mappers.getClientMapper().map(codeModel);
 
         // template
-        JavaPackage javaPackage = cadlPlugin.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
+        JavaPackage javaPackage = cadlPlugin.writeToTemplates(codeModel, client, JavaSettings.getInstance());
 
         LOGGER.info("Count of Java files: {}", javaPackage.getJavaFiles().size());
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
@@ -88,7 +88,7 @@ public class Main {
                 content = formatter.formatSourceAndFixImports(content);
             } catch (Exception e) {
                 LOGGER.error("Failed to format file: {}", outputFolder + javaFile.getFilePath(), e);
-                continue;
+//                continue;
             }
             cadlPlugin.writeFile(outputFolder + javaFile.getFilePath(), content, null);
         }
