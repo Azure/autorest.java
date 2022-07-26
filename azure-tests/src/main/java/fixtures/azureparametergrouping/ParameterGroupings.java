@@ -11,6 +11,7 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -22,6 +23,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
+import fixtures.azureparametergrouping.models.Grouper;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
@@ -106,6 +108,16 @@ public final class ParameterGroupings {
                 @HostParam("$host") String host,
                 @HeaderParam("header-one") String headerOne,
                 @QueryParam("query-one") Integer queryOne,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/parameterGrouping/groupWithConstant")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> groupWithConstant(
+                @HostParam("$host") String host,
+                @HeaderParam("groupedConstant") String groupedConstant,
+                @HeaderParam("groupedParameter") String groupedParameter,
                 @HeaderParam("Accept") String accept,
                 Context context);
     }
@@ -554,5 +566,88 @@ public final class ParameterGroupings {
     public void postSharedParameterGroupObject() {
         final FirstParameterGroup firstParameterGroup = null;
         postSharedParameterGroupObjectAsync(firstParameterGroup).block();
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> groupWithConstantWithResponseAsync(Grouper grouper) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (grouper != null) {
+            grouper.validate();
+        }
+        final String groupedConstant = "foo";
+        final String accept = "application/json";
+        String groupedParameterInternal = null;
+        if (grouper != null) {
+            groupedParameterInternal = grouper.getGroupedParameter();
+        }
+        String groupedParameter = groupedParameterInternal;
+        return FluxUtil.withContext(
+                context ->
+                        service.groupWithConstant(
+                                this.client.getHost(), groupedConstant, groupedParameter, accept, context));
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> groupWithConstantAsync(Grouper grouper) {
+        return groupWithConstantWithResponseAsync(grouper).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> groupWithConstantAsync() {
+        final Grouper grouper = null;
+        return groupWithConstantWithResponseAsync(grouper).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void groupWithConstant(Grouper grouper) {
+        groupWithConstantAsync(grouper).block();
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void groupWithConstant() {
+        final Grouper grouper = null;
+        groupWithConstantAsync(grouper).block();
     }
 }

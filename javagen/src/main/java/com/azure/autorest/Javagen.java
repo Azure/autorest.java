@@ -25,7 +25,6 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
-import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -43,12 +42,9 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -91,29 +87,24 @@ public class Javagen extends NewPlugin {
 
             //Step 4: Print to files
             Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-            List<CompletableFuture<Void>> formattingTasks = new ArrayList<>();
-
             Formatter formatter = new Formatter();
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                // Formatting Java source files can be expensive but can be run in parallel.
-                // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-                // complete.
-                formattingTasks.add(CompletableFuture.runAsync(() -> {
-                    String formattedSource = javaFile.getContents().toString();
-                    if (!settings.isSkipFormatting()) {
-                        try {
-                            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-                        } catch (Exception e) {
-                            logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                            throw new CompletionException(e);
-                        }
+
+            // Formatting Java source files can be expensive but can be run in parallel.
+            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+            // complete.
+            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+                String formattedSource = javaFile.getContents().toString();
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                    } catch (Exception e) {
+                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        throw new RuntimeException(e);
                     }
+                }
 
-                    formattedFiles.put(javaFile.getFilePath(), formattedSource);
-                }));
-            }
-
-            CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).join();
+                formattedFiles.put(javaFile.getFilePath(), formattedSource);
+            });
 
             // Then for each formatted file write the file. This is done synchronously as there is potential race
             // conditions that can lead to deadlocking.

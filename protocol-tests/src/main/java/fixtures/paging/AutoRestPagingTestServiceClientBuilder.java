@@ -160,6 +160,23 @@ public final class AutoRestPagingTestServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated private AutoRestPagingTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestPagingTestServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestPagingTestServiceClientBuilder serviceVersion(AutoRestPagingTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -185,9 +202,11 @@ public final class AutoRestPagingTestServiceClientBuilder
     private AutoRestPagingTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestPagingTestServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : AutoRestPagingTestServiceVersion.getLatest();
         AutoRestPagingTestServiceClientImpl client =
                 new AutoRestPagingTestServiceClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

@@ -191,6 +191,40 @@ public final class MediaTypesAsyncClient {
     }
 
     /**
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain",
+     *     "application/json".
+     * @param message The payload body.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> bodyThreeTypesWithResponse(
+            String contentType, BinaryData message, RequestOptions requestOptions) {
+        return this.serviceClient.bodyThreeTypesWithResponseAsync(contentType, message, requestOptions);
+    }
+
+    /**
      * Body that's either text/plain or application/json.
      *
      * <p><strong>Request Body Schema</strong>

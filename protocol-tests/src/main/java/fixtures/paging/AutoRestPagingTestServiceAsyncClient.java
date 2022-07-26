@@ -240,6 +240,81 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>OData filter options. Pass in 'foo'</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values (Optional): [
+     *          (Optional){
+     *             properties (Optional): {
+     *                 id: Integer (Optional)
+     *                 name: String (Optional)
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> duplicateParams(RequestOptions requestOptions) {
+        return this.serviceClient.duplicateParamsAsync(requestOptions);
+    }
+
+    /**
+     * Paging with max page size. We don't want to.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values (Optional): [
+     *          (Optional){
+     *             properties (Optional): {
+     *                 id: Integer (Optional)
+     *                 name: String (Optional)
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> pageWithMaxPageSize(RequestOptions requestOptions) {
+        return this.serviceClient.pageWithMaxPageSizeAsync(requestOptions);
+    }
+
+    /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * <p><strong>Header Parameters</strong>
@@ -602,6 +677,72 @@ public final class AutoRestPagingTestServiceAsyncClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
         return this.serviceClient.getMultiplePagesLroAsync(requestOptions);
+    }
+
+    /**
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to
+     * the next link.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values (Optional): [
+     *          (Optional){
+     *             properties (Optional): {
+     *                 id: Integer (Optional)
+     *                 name: String (Optional)
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> appendApiVersion(RequestOptions requestOptions) {
+        return this.serviceClient.appendApiVersionAsync(requestOptions);
+    }
+
+    /**
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the
+     * returned api version with your client's api version.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values (Optional): [
+     *          (Optional){
+     *             properties (Optional): {
+     *                 id: Integer (Optional)
+     *                 name: String (Optional)
+     *             }
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> replaceApiVersion(RequestOptions requestOptions) {
+        return this.serviceClient.replaceApiVersionAsync(requestOptions);
     }
 
     /**
