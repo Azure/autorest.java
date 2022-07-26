@@ -16,11 +16,6 @@ model Cat extends Pet {
 model Dog extends Pet {
   kind: "dog";
   bark: string;
-  type: Type;
-}
-enum Type {
-  typ1;
-  typ2;
 }
 
 @route("/Pets")
