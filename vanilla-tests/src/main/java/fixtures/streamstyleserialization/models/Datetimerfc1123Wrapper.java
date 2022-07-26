@@ -123,8 +123,8 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
                         }
                     }
                     Datetimerfc1123Wrapper deserializedValue = new Datetimerfc1123Wrapper();
-                    deserializedValue.field = field;
-                    deserializedValue.now = now;
+                    deserializedValue.setField(field);
+                    deserializedValue.setNow(now);
 
                     return deserializedValue;
                 });

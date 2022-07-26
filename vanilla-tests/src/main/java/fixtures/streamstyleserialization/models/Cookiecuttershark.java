@@ -65,7 +65,7 @@ public final class Cookiecuttershark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", fishtype);
+        jsonWriter.writeStringField("fishtype", this.fishtype, false);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
         jsonWriter.writeStringField("species", getSpecies(), false);

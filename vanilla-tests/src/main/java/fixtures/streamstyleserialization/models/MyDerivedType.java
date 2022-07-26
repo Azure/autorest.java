@@ -69,7 +69,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", kind);
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString(), false);
         jsonWriter.writeStringField("propB1", getPropB1(), false);
         jsonWriter.writeStringField("propD1", this.propD1, false);
         if (getPropBH1() != null) {
@@ -91,7 +91,7 @@ public final class MyDerivedType extends MyBaseType {
     public static MyDerivedType fromJson(JsonReader jsonReader) {
         return jsonReader.readObject(
                 reader -> {
-                    MyKind kind = "Kind1";
+                    MyKind kind = MyKind.KIND1;
                     String propB1 = null;
                     String propBH1 = null;
                     String propD1 = null;
@@ -100,7 +100,7 @@ public final class MyDerivedType extends MyBaseType {
                         reader.nextToken();
 
                         if ("kind".equals(fieldName)) {
-                            kind = reader.getStringValue();
+                            kind = MyKind.fromString(reader.getStringValue());
                         } else if ("propB1".equals(fieldName)) {
                             propB1 = reader.getStringValue();
                         } else if ("propD1".equals(fieldName)) {
@@ -121,7 +121,7 @@ public final class MyDerivedType extends MyBaseType {
                         }
                     }
 
-                    if (!"Kind1".equals(kind)) {
+                    if (!MyKind.KIND1.equals(kind)) {
                         throw new IllegalStateException(
                                 "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
                                         + kind

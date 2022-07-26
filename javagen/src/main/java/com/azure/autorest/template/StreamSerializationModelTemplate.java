@@ -125,8 +125,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (propertiesManager.discriminatorProperty != null
                 && !CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty.getDefaultValue())) {
                 ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
-                methodBlock.line("jsonWriter.writeStringField(\"" + discriminatorProperty.getSerializedName()
-                    + "\", " + discriminatorProperty.getName() + ");");
+                serializeProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(), false,
+                    true);
             }
 
             propertiesManager.superRequiredProperties.forEach(property ->
@@ -413,6 +413,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model,
         PropertiesManager propertiesManager, JavaSettings settings) {
+        // Handling polymorphic fields while determining which subclass, or the class itself, to deserialize handles the
+        // discriminator type always as a String. This is permissible as the found discriminator is never being used in
+        // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
+        // type as the field.
         String fieldNameVariableName = propertiesManager.readerFieldNameVariableName;
         ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
         readObject(classBlock, propertiesManager, false, methodBlock -> {
@@ -536,8 +540,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 JavaIfBlock ifBlock = null;
 
                 if (propertiesManager.discriminatorProperty != null) {
-                    ifBlock = methodBlock.ifBlock("\"" + propertiesManager.discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")",
-                        ifAction -> ifAction.line(propertiesManager.discriminatorProperty.getName() + " = reader.getStringValue();"));
+                    ifBlock = handlePropertyDeserialization(propertiesManager.discriminatorProperty, methodBlock,
+                        null, fieldNameVariableName);
                 }
 
                 // Loop over all properties and generate their deserialization handling.
@@ -718,8 +722,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Last add a potential additional properties Map.
         if (propertiesManager.discriminatorProperty != null) {
             ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
-            methodBlock.line(discriminatorProperty.getClientType() + " " + discriminatorProperty.getName()
-                + " = \"" + propertiesManager.expectedDiscriminator + "\";");
+            methodBlock.line("%s %s = %s;", discriminatorProperty.getClientType(), discriminatorProperty.getName(),
+                discriminatorProperty.getDefaultValue());
         }
 
         propertiesManager.superRequiredProperties.forEach(property -> initializeLocalVariable(methodBlock, property));
@@ -1016,7 +1020,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (propertiesManager.discriminatorProperty != null) {
             ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
             methodBlock.line();
-            methodBlock.ifBlock("!\"" + propertiesManager.expectedDiscriminator + "\".equals(" + discriminatorProperty.getName() + ")",
+            methodBlock.ifBlock("!" + discriminatorProperty.getDefaultValue() + ".equals(" + discriminatorProperty.getName() + ")",
                 ifAction -> ifAction.line("throw new IllegalStateException(\"'" + discriminatorProperty.getSerializedName()
                     + "' was expected to be non-null and equal to '" + propertiesManager.expectedDiscriminator + "'. "
                     + "The found " + "'" + discriminatorProperty.getSerializedName() + "' was '\" + " + discriminatorProperty.getName() + " + \"'.\");"));
@@ -1076,9 +1080,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void handleSettingDeserializedValue(JavaBlock methodBlock, ClientModelProperty property,
         JavaSettings settings, boolean fromSuper) {
-        // If the property has a setter use it.
-        // Otherwise, set the property directly.
-        if (fromSuper) {
+        // If the property is defined in a super class or doesn't match the wire type use the setter as this will
+        // be able to set the value in the super class definition or handle converting the wire type.
+        if (fromSuper || property.getWireType() != property.getClientType()) {
             methodBlock.line("deserializedValue." + property.getSetterName() + "(" + property.getName() + ");");
         } else {
             methodBlock.line("deserializedValue." + property.getName() + " = " + property.getName() + ";");
