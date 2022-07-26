@@ -417,7 +417,7 @@ export class CodeModelBuilder {
         }
       });
     }
-    if (resp.statusCode === "*") {
+    if (resp.statusCode === "*" || (Number(resp.statusCode) / 100 > 3)) {
       // TODO: x-ms-error-response
       op.addException(response);
       
