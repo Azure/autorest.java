@@ -924,7 +924,7 @@ export class CodeModelBuilder {
   private isReadOnly(target: Type): boolean {
     const visibility = getVisibility(this.program, target);
     if (visibility) {
-      return visibility.includes("write");
+      return !visibility.includes("write");
     } else {
       return false;
     }
