@@ -8,7 +8,7 @@ npm run lint
 npm pack
 
 # re-install
-cd ../cadl-project/
+cd ../cadl-tests/
 rm -rf node_modules
 rm package-lock.json
 npm install

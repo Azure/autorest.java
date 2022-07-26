@@ -1,5 +1,5 @@
 {
-  "name": "cadl-project",
+  "name": "cadl-tests",
   "type": "module",
   "dependencies": {
     "@cadl-lang/compiler": "latest",
