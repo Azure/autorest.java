@@ -24,6 +24,8 @@ import fixtures.url.models.UriColor;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -1926,7 +1928,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2004,7 +2011,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2078,7 +2090,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2152,7 +2169,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(",", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.arrayStringNoCollectionFormatEmpty(
@@ -2233,7 +2255,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join(" ", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(" "));
         return FluxUtil.withContext(
                 context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2312,7 +2339,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join("	", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining("	"));
         return FluxUtil.withContext(
                 context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2392,7 +2424,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted = (arrayQuery == null) ? null : String.join("|", arrayQuery);
+        String arrayQueryConverted =
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining("|"));
         return FluxUtil.withContext(
                 context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }

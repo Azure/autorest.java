@@ -27,6 +27,8 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Paths. */
@@ -1930,7 +1932,8 @@ public final class PathsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String arrayPathConverted = (arrayPath == null) ? null : String.join(",", arrayPath);
+        String arrayPathConverted =
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.arrayCsvInPath(
@@ -1955,7 +1958,8 @@ public final class PathsImpl {
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(
             List<String> arrayPath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        String arrayPathConverted = (arrayPath == null) ? null : String.join(",", arrayPath);
+        String arrayPathConverted =
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
     }
 

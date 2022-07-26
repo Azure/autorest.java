@@ -27,12 +27,13 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import reactor.core.publisher.Mono;
+
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Params. */
 public final class ParamsImpl {
@@ -163,10 +164,12 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         List<String> parameterMultiStringArrayConverted =
                 parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         List<String> parameterMultiIntArrayConverted =
@@ -242,10 +245,12 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         List<String> parameterMultiStringArrayConverted =
                 parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         List<String> parameterMultiIntArrayConverted =
@@ -361,10 +366,12 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return FluxUtil.withContext(
                 context ->
@@ -416,10 +423,12 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                (parameterCsvStringArray == null) ? null : String.join(",", parameterCsvStringArray);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return service.getRequiredHeader(
                 this.client.getHost(),

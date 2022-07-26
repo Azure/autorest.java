@@ -32,6 +32,8 @@ import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -1825,7 +1827,8 @@ public final class Explicits {
                     new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
         }
         final String accept = "application/json";
-        String headerParameterConverted = (headerParameter == null) ? null : String.join(",", headerParameter);
+        String headerParameterConverted =
+                headerParameter.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.postRequiredArrayHeader(
@@ -1877,7 +1880,12 @@ public final class Explicits {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String headerParameterConverted = (headerParameter == null) ? null : String.join(",", headerParameter);
+        String headerParameterConverted =
+                (headerParameter == null)
+                        ? null
+                        : headerParameter.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.postOptionalArrayHeader(

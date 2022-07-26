@@ -848,6 +848,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             EnumType enumType = (EnumType) wireType;
             setter = String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
+            // TODO (alzimmer): Check if the wire type is a Swagger type that could use stream-style serialization.
             setter = String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
                 property.getSerializedName(), getWireTypeJavaType(wireType));
         }
