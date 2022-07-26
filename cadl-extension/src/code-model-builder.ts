@@ -511,7 +511,8 @@ export class CodeModelBuilder {
 
           if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
             // integer
-            return this.processIntegerSchema(type, name);
+            return this.processIntegerSchema(type, name, 
+              (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
           } else if (intrinsicModelName.startsWith("float")) {
             // float point
             return this.processNumberSchema(type, name);
@@ -542,9 +543,9 @@ export class CodeModelBuilder {
     );
   }
 
-  private processIntegerSchema(type: ModelType, name: string): NumberSchema {
+  private processIntegerSchema(type: ModelType, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), SchemaType.Integer, 64, {
+      new NumberSchema(name, this.getDoc(type), SchemaType.Integer, precision, {
         summary: this.getSummary(type),
       })
     );
