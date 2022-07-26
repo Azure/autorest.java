@@ -289,7 +289,7 @@ export class CodeModelBuilder {
         protocol: {
           http: new HttpParameter(param.type)
         },
-        clientDefaultValue: this.getDefaultValue(param.param.default),
+        // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
           default: {
             serializedName: param.name
@@ -346,7 +346,7 @@ export class CodeModelBuilder {
       protocol: {
         http: new HttpParameter(ParameterLocation.Body)
       },
-      clientDefaultValue: this.getDefaultValue(body.default),
+      // clientDefaultValue: this.getDefaultValue(body.default),
     });
     op.addParameter(parameter);
 
@@ -853,7 +853,7 @@ export class CodeModelBuilder {
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
-      clientDefaultValue: this.getDefaultValue(prop.default),
+      // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.name
     });
   }
