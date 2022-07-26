@@ -31,13 +31,16 @@ public class EnumType implements IType {
 
     private IType elementType;
 
+    private static ImplementationDetails implementationDetails;
+
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
      * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType) {
+    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType,
+                     ImplementationDetails implementationDetails) {
         this.name = name;
         packageName = packageKeyword;
         this.expandable = expandable;
@@ -140,6 +143,10 @@ public class EnumType implements IType {
         return null;
     }
 
+    public ImplementationDetails getImplementationDetails() {
+        return implementationDetails;
+    }
+
     @Override
     public String toString() {
         return getName();
@@ -151,6 +158,8 @@ public class EnumType implements IType {
         private boolean expandable;
         private List<ClientEnumValue> values;
         private IType elementType = ClassType.String;
+
+        private ImplementationDetails implementationDetails;
 
         /**
          * Sets the name of the Enum.
@@ -205,6 +214,16 @@ public class EnumType implements IType {
         }
 
         /**
+         * Sets the implementation details for the model.
+         * @param implementationDetails the implementation details.
+         * @return the Builder itself
+         */
+        public Builder implementationDetails(ImplementationDetails implementationDetails) {
+            this.implementationDetails = implementationDetails;
+            return this;
+        }
+
+        /**
          * @return an immutable EnumType instance with the configurations on this builder.
          */
         public EnumType build() {
@@ -213,7 +232,8 @@ public class EnumType implements IType {
                     name,
                     expandable,
                     values,
-                    elementType
+                    elementType,
+                    implementationDetails
             );
         }
     }

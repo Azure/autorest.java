@@ -10,7 +10,6 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -68,7 +67,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     .type(modelType)
                     .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
                     .implementationDetails(new ImplementationDetails.Builder()
-                            .usages(mapSchemaContext(compositeType.getUsage()))
+                            .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
                             .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
@@ -558,11 +557,5 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ret = propertyName + CodeNamer.toPascalCase(originalFlattenedPropertyName) + CodeNamer.toPascalCase(propertyName);
         }
         return ret;
-    }
-
-    private static Set<ImplementationDetails.Usage> mapSchemaContext(Set<SchemaContext> schemaContexts) {
-        return schemaContexts.stream()
-                .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
-                .collect(Collectors.toSet());
     }
 }

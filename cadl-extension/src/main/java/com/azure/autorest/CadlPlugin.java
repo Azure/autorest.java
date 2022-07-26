@@ -71,8 +71,8 @@ public class CadlPlugin extends Javagen {
         return model.getImplementationDetails() != null && model.getImplementationDetails().isConvenienceMethod();
     }
 
-    private static boolean isGeneratingModel(EnumType enumType) {
-        return true;
+    private static boolean isGeneratingModel(EnumType model) {
+        return model.getImplementationDetails() != null && model.getImplementationDetails().isConvenienceMethod();
     }
 
     private static boolean isGeneratingModel(ClientResponse response) {

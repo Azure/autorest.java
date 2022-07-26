@@ -11,11 +11,13 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -27,6 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -233,6 +236,18 @@ public class SchemaUtil {
             }
         }
         return Optional.ofNullable(classType);
+    }
+
+    /**
+     * Maps set of SchemaContext to set of ImplementationDetails.Usage.
+     *
+     * @param schemaContexts the set of SchemaContext.
+     * @return the set of ImplementationDetails.Usage.
+     */
+    public static Set<ImplementationDetails.Usage> mapSchemaContext(Set<SchemaContext> schemaContexts) {
+        return schemaContexts.stream()
+                .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
+                .collect(Collectors.toSet());
     }
 
     private static boolean containsBinaryResponse(Operation operation) {
