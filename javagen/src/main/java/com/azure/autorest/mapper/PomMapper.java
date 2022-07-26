@@ -47,7 +47,9 @@ public class PomMapper implements IMapper<Project, Pom> {
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         List<String> dependencyIdentifiers = new ArrayList<>();
-        dependencyIdentifiers.add(JSON_PREFIX + project.getPackageVersions().getAzureJsonVersion());
+        if (JavaSettings.getInstance().isStreamStyleSerialization()) {
+            dependencyIdentifiers.add(JSON_PREFIX + project.getPackageVersions().getAzureJsonVersion());
+        }
         dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
         dependencyIdentifiers.add(CORE_HTTP_NETTY_PREFIX + project.getPackageVersions().getAzureCoreHttpNettyVersion());
         dependencyIdentifiers.add(JUNIT_JUPITER_ENGINE_PREFIX + project.getPackageVersions().getJunitVersion() + TEST_SUFFIX);
