@@ -38,22 +38,20 @@ public class CadlPlugin extends Javagen {
 
     @Override
     protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
-        if (settings.isGenerateModels()) {
-            // Client model
-            client.getModels().stream()
-                    .filter(CadlPlugin::isGeneratingModel)
-                    .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
+        // Client model
+        client.getModels().stream()
+                .filter(CadlPlugin::isGeneratingModel)
+                .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
 
-            // Enum
-            client.getEnums().stream()
-                    .filter(CadlPlugin::isGeneratingModel)
-                    .forEach(model -> javaPackage.addEnum(model.getPackage(), model.getName(), model));
+        // Enum
+        client.getEnums().stream()
+                .filter(CadlPlugin::isGeneratingModel)
+                .forEach(model -> javaPackage.addEnum(model.getPackage(), model.getName(), model));
 
-            // Response
-            client.getResponseModels().stream()
-                    .filter(CadlPlugin::isGeneratingModel)
-                    .forEach(model -> javaPackage.addClientResponse(model.getPackage(), model.getName(), model));
-        }
+        // Response
+        client.getResponseModels().stream()
+                .filter(CadlPlugin::isGeneratingModel)
+                .forEach(model -> javaPackage.addClientResponse(model.getPackage(), model.getName(), model));
     }
 
     @Override
@@ -68,11 +66,15 @@ public class CadlPlugin extends Javagen {
     }
 
     private static boolean isGeneratingModel(ClientModel model) {
-        return model.getImplementationDetails() != null && model.getImplementationDetails().isConvenienceMethod();
+        return model.getImplementationDetails() != null
+                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
+                && !model.getImplementationDetails().isException();
     }
 
     private static boolean isGeneratingModel(EnumType model) {
-        return model.getImplementationDetails() != null && model.getImplementationDetails().isConvenienceMethod();
+        return model.getImplementationDetails() != null
+                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
+                && !model.getImplementationDetails().isException();
     }
 
     private static boolean isGeneratingModel(ClientResponse response) {

@@ -61,6 +61,18 @@ public class ImplementationDetails {
         return usages.contains(Usage.CONVENIENCE_METHOD);
     }
 
+    public boolean isInput() {
+        return usages.contains(Usage.INPUT);
+    }
+
+    public boolean isOutput() {
+        return usages.contains(Usage.OUTPUT);
+    }
+
+    public boolean isException() {
+        return usages.contains(Usage.EXCEPTION);
+    }
+
     protected ImplementationDetails(boolean implementationOnly, Set<Usage> usages) {
         this.implementationOnly = implementationOnly;
         this.usages = usages;
