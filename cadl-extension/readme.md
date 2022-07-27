@@ -1,8 +1,16 @@
 # Java Client Emitter for CADL
 
+## Install CADL
+
+Install Node.js and [CADL](https://github.com/microsoft/cadl/).
+
+```shell
+npm install -g @cadl-lang/compiler
+```
+
 ## Build JAR
 
-`mvn package -P local,cadl -DskipTests` in project root.
+`mvn package -P local,cadl` in project root.
 
 This will build `./cadl-extension`, which is basically `preprocessor` and `javagen` combined.
 
@@ -12,7 +20,7 @@ This will build `./cadl-extension`, which is basically `preprocessor` and `javag
 
 It makes the npm package in `./cadl-extension`, then install it to `./cadl-tests` folder.
 
-## Generate code
+## Generate Code
 
 `cadl compile <target.cadl>` in `./cadl-tests` folder.
 
