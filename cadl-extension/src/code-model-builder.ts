@@ -511,8 +511,8 @@ export class CodeModelBuilder {
 
           if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
             // integer
-            return this.processIntegerSchema(type, name, 
-              (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
+            return this.processIntegerSchema(type, name, 64);
+              // (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
           } else if (intrinsicModelName.startsWith("float")) {
             // float point
             return this.processNumberSchema(type, name);
