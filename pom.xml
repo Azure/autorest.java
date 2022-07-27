@@ -365,24 +365,25 @@
         <module>./cadl-extension</module>
       </modules>
     </profile>
-
     <profile>
-      <id>autorest</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
+      <id>testCadl</id>
       <modules>
-        <module>./javagen</module>
-        <module>./preprocessor</module>
-        <module>./postprocessor</module>
-        <module>./customization-base</module>
-        <module>./customization-tests</module>
-        <module>./extension-base</module>
-        <module>./fluentgen</module>
-        <module>./fluentnamer</module>
-        <module>./androidgen</module>
+        <module>./cadl-tests</module>
       </modules>
     </profile>
+
   </profiles>
+
+  <modules>
+    <module>./javagen</module>
+    <module>./preprocessor</module>
+    <module>./postprocessor</module>
+    <module>./customization-base</module>
+    <module>./customization-tests</module>
+    <module>./extension-base</module>
+    <module>./fluentgen</module>
+    <module>./fluentnamer</module>
+    <module>./androidgen</module>
+  </modules>
 
 </project>
