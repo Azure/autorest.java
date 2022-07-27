@@ -36,6 +36,13 @@ public final class B extends MyException {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public B setStatusCode(String statusCode) {
+        super.setStatusCode(statusCode);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

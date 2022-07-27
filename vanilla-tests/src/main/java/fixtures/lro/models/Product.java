@@ -7,6 +7,7 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /** The Product model. */
 @JsonFlatten
@@ -51,6 +52,20 @@ public class Product extends Resource {
      */
     public ProductPropertiesProvisioningStateValues getProvisioningStateValues() {
         return this.provisioningStateValues;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Product setTags(Map<String, String> tags) {
+        super.setTags(tags);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Product setLocation(String location) {
+        super.setLocation(location);
+        return this;
     }
 
     /**

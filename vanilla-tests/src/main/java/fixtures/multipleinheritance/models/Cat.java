@@ -88,6 +88,13 @@ public class Cat extends Pet {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public Cat setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

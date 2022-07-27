@@ -12,11 +12,9 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.Manager;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
-import com.azure.autorest.model.clientmodel.PageDetails;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -76,12 +74,6 @@ public class JavaPackage {
 
     public List<TextFile> getTextFiles() {
         return textFiles;
-    }
-
-    public final void addManager(String packageKeyword, String name, Manager model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
-        Templates.getManagerTemplate().write(model, javaFile);
-        addJavaFile(javaFile);
     }
 
     public final void addServiceClient(String packageKeyword, String name, ServiceClient model) {
@@ -177,12 +169,6 @@ public class JavaPackage {
     public final void addEnum(String packageKeyword, String name, EnumType model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getEnumTemplate().write(model, javaFile);
-        addJavaFile(javaFile);
-    }
-
-    public final void addPage(String packageKeyword, String name, PageDetails model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
-        Templates.getPageTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 

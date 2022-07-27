@@ -3,7 +3,6 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -34,8 +33,8 @@ public class FluentModelTemplate extends ModelTemplate {
     @Override
     protected boolean validateOnParentModel(String parentModelName) {
         return parentModelName != null
-                && FluentType.nonResourceType(parentModelName)
-                && FluentType.nonManagementError(parentModelName);
+            && FluentType.nonResourceType(parentModelName)
+            && FluentType.nonManagementError(parentModelName);
     }
 
     @Override
@@ -55,34 +54,34 @@ public class FluentModelTemplate extends ModelTemplate {
     @Override
     protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
         List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
-        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
-            String lastParentName = model.getName();
-            String parentModelName = model.getParentModelName();
-            while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-                ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
-                if (parentModel == null) {
-                    parentModel = getPredefinedModel(parentModelName).orElse(null);
-                }
-                if (parentModel != null) {
-                    if (parentModel.getProperties() != null) {
-                        propertyReferences.addAll(parentModel.getProperties().stream()
-                                .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
-                                .map(ClientModelPropertyReference::ofParentProperty)
-                                .collect(Collectors.toList()));
-                    }
 
-                    if (parentModel.getPropertyReferences() != null) {
-                        propertyReferences.addAll(parentModel.getPropertyReferences().stream()
-                                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                                .map(ClientModelPropertyReference::ofParentProperty)
-                                .collect(Collectors.toList()));
-                    }
-                }
-
-                lastParentName = parentModelName;
-                parentModelName = parentModel == null ? null : parentModel.getParentModelName();
+        String lastParentName = model.getName();
+        String parentModelName = model.getParentModelName();
+        while (parentModelName != null && !lastParentName.equals(parentModelName)) {
+            ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
+            if (parentModel == null) {
+                parentModel = getPredefinedModel(parentModelName).orElse(null);
             }
+            if (parentModel != null) {
+                if (parentModel.getProperties() != null) {
+                    propertyReferences.addAll(parentModel.getProperties().stream()
+                        .filter(p -> !p.getClientFlatten() && !p.isAdditionalProperties())
+                        .map(ClientModelPropertyReference::ofParentProperty)
+                        .collect(Collectors.toList()));
+                }
+
+                if (parentModel.getPropertyReferences() != null) {
+                    propertyReferences.addAll(parentModel.getPropertyReferences().stream()
+                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                        .map(ClientModelPropertyReference::ofParentProperty)
+                        .collect(Collectors.toList()));
+                }
+            }
+
+            lastParentName = parentModelName;
+            parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
+
         return propertyReferences;
     }
 

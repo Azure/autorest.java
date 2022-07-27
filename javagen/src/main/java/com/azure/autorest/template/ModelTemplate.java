@@ -71,9 +71,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addImports(imports, model, settings);
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
-        if (settings.isOverrideSetterFromSuperclass()) {
-            propertyReferences.forEach(p -> p.addImportsTo(imports, false));
-        }
+        propertyReferences.forEach(p -> p.addImportsTo(imports, false));
 
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
@@ -185,23 +183,21 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            if (settings.isOverrideSetterFromSuperclass()) {
-                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
-                    propertyReferences);
-                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
-                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                    classBlock.annotation("Override");
-                    classBlock.publicMethod(String.format("%s %s(%s %s)",
-                            model.getName(),
-                            parentProperty.getSetterName(),
-                            parentProperty.getClientType(),
-                            parentProperty.getName()),
-                        methodBlock -> {
-                            methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
-                                parentProperty.getName()));
-                            methodBlock.methodReturn("this");
-                        });
-                }
+            List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+                propertyReferences);
+            for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                classBlock.annotation("Override");
+                classBlock.publicMethod(String.format("%s %s(%s %s)",
+                        model.getName(),
+                        parentProperty.getSetterName(),
+                        parentProperty.getClientType(),
+                        parentProperty.getName()),
+                    methodBlock -> {
+                        methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
+                            parentProperty.getName()));
+                        methodBlock.methodReturn("this");
+                    });
             }
 
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
@@ -987,8 +983,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Writes stream-style serialization logic for serializing to and deserializing from the serialization format
-     * that the model uses.
+     * Writes stream-style serialization logic for serializing to and deserializing from the serialization format that
+     * the model uses.
      *
      * @param classBlock The class block where serialization methods will be written.
      * @param model The model.
