@@ -23,19 +23,20 @@ public final class StorageServiceProperties {
     private Logging logging;
 
     /*
-     * A summary of request statistics grouped by API in hourly aggregates for
-     * blobs
+     * A summary of request statistics grouped by API in hourly aggregates for blobs
      */
     @JsonProperty(value = "HourMetrics")
     private Metrics hourMetrics;
 
     /*
-     * a summary of request statistics grouped by API in minute aggregates for
-     * blobs
+     * a summary of request statistics grouped by API in minute aggregates for blobs
      */
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
 
+    /*
+     * The set of CORS rules.
+     */
     private static final class CorsWrapper {
         @JacksonXmlProperty(localName = "CorsRule")
         private final List<CorsRule> items;
@@ -46,16 +47,12 @@ public final class StorageServiceProperties {
         }
     }
 
-    /*
-     * The set of CORS rules.
-     */
     @JsonProperty(value = "Cors")
     private CorsWrapper cors;
 
     /*
-     * The default version to use for requests to the Blob service if an
-     * incoming request's version is not specified. Possible values include
-     * version 2008-10-27 and all more recent versions
+     * The default version to use for requests to the Blob service if an incoming request's version is not specified.
+     * Possible values include version 2008-10-27 and all more recent versions
      */
     @JsonProperty(value = "DefaultServiceVersion")
     private String defaultServiceVersion;

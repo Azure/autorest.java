@@ -20,13 +20,13 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Paths. */
@@ -1448,7 +1448,7 @@ public final class Paths {
         }
         final String accept = "application/json";
         String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context));
     }

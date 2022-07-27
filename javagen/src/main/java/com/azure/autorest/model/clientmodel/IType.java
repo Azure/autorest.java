@@ -28,23 +28,32 @@ public interface IType {
     String convertFromClientType(String expression);
 
     /**
+     * Indicates whether the type is nullable.
+     *
+     * @return Whether the type is nullable.
+     */
+    default boolean isNullable() {
+        return true;
+    }
+
+    /**
      * Convert this IType to an IType that is nullable.
      * @return A version of this IType that is nullable.
      */
     IType asNullable();
 
     /**
-     * Get whether or not this IType contains (or is) the provided type.
+     * Get whether this IType contains (or is) the provided type.
      * @param type The type to search for.
      *
-     * @return Whether or not this IType contains (or is) the provided type.
+     * @return Whether this IType contains (or is) the provided type.
      */
     boolean contains(IType type);
 
     /**
      * Add this type's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
      */
     void addImportsTo(Set<String> imports, boolean includeImplementationImports);
 
@@ -69,4 +78,42 @@ public interface IType {
     String defaultValueExpression();
 
     String validate(String expression);
+
+    /**
+     * Indicates whether the type needs null guarding in deserialization.
+     *
+     * @return Whether the type needs null guarding in deserialization.
+     */
+    default boolean deserializationNeedsNullGuarding() {
+        return true;
+    }
+
+    /**
+     * Gets the method that handles field serialization for the type.
+     * <p>
+     * The field serialization method handles writing both the JSON field name and value.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a field
+     * serialization method and support needs to be added.
+     *
+     * @return The field serialization method, or null if it isn't supported directly.
+     */
+    default String streamStyleJsonFieldSerializationMethod() {
+        return null;
+    }
+
+    /**
+     * Gets the method that handles value serialization for the type.
+     * <p>
+     * The value serialization method only handles writing the JSON value. The enables it to be used in situations such
+     * as writing an array or writing to the root of the JSON string.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a value
+     * serialization method and support needs to be added.
+     *
+     * @return The value serialization method, or null if it isn't supported directly.
+     */
+    default String streamStyleJsonValueSerializationMethod() {
+        return null;
+    }
 }

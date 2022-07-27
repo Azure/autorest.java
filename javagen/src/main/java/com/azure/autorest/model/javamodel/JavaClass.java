@@ -4,7 +4,9 @@
 package com.azure.autorest.model.javamodel;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class JavaClass implements JavaType {
@@ -29,6 +31,12 @@ public class JavaClass implements JavaType {
     public final void privateMemberVariable(String variableDeclaration) {
         addExpectedNewLine();
         contents.line(String.format("private %1$s;", variableDeclaration));
+        addNewLine = true;
+    }
+
+    public final void privateFinalMemberVariable(String variableDeclaration) {
+        addExpectedNewLine();
+        contents.line("private final " + variableDeclaration + ";");
         addNewLine = true;
     }
 
@@ -99,7 +107,19 @@ public class JavaClass implements JavaType {
     }
 
     public final void publicStaticMethod(String methodSignature, Consumer<JavaBlock> method) {
-        method(JavaVisibility.Public, Arrays.asList(JavaModifier.Static), methodSignature, method);
+        staticMethod(JavaVisibility.Public, methodSignature, method);
+    }
+
+    /**
+     * Adds a static method with a declared visibility to the class.
+     *
+     * @param visibility The visibility of the method.
+     * @param methodSignature The method signature.
+     * @param method The logic to generate the method.
+     */
+    public final void staticMethod(JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
+        Objects.requireNonNull(visibility, "'visibility' cannot be null.");
+        method(visibility, Collections.singletonList(JavaModifier.Static), methodSignature, method);
     }
 
     public final void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceBlock) {

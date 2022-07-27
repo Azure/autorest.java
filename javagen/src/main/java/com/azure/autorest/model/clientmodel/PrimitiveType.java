@@ -11,15 +11,33 @@ import java.util.function.Function;
  */
 public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
-    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase, "false");
-    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0");
-    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0");
-    public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L', "0");
-    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> defaultValueExpression + "f", "0.0");
-    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)), "0.0");
-    public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character, (String defaultValueExpression) -> java.lang.Integer.toString(defaultValueExpression.charAt(0)), "\u0000");
 
-    public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong);
+    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase,
+        "false", "writeBooleanField", "writeBoolean");
+
+    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0",
+        "writeIntField", "writeInt");
+
+    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0",
+        "writeIntField", "writeInt");
+
+    public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long,
+        defaultValueExpression -> defaultValueExpression + 'L', "0", "writeLongField", "writeLong");
+
+    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float,
+        defaultValueExpression -> defaultValueExpression + "f", "0.0", "writeFloatField", "writeFloat");
+
+    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double,
+        defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)),
+        "0.0", "writeDoubleField", "writeDouble");
+
+    public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character,
+        defaultValueExpression -> java.lang.Integer.toString(defaultValueExpression.charAt(0)), "\u0000",
+        "writeStringField", "writeString");
+
+    public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, null, null,
+        "writeLongField", "writeLong");
+
     /**
      * The name of this type.
      */
@@ -28,22 +46,27 @@ public class PrimitiveType implements IType {
      * The nullable version of this primitive type.
      */
     private final ClassType nullableType;
-    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final Function<String, String> defaultValueExpressionConverter;
     private final String defaultValue;
+    private final String fieldSerializationMethod;
+    private final String valueSerializationMethod;
 
     /**
      * Create a new PrimitiveType from the provided properties.
      * @param name The name of this type.
      */
     private PrimitiveType(String name, ClassType nullableType) {
-        this(name, nullableType, null, null);
+        this(name, nullableType, null, null, null, null);
     }
 
-    private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String, String> defaultValueExpressionConverter, String defaultValue) {
+    private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
+        String defaultValue, String fieldSerializationMethod, String valueSerializationMethod) {
         this.name = name;
         this.nullableType = nullableType;
-        this.defaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+        this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.defaultValue = defaultValue;
+        this.fieldSerializationMethod = fieldSerializationMethod;
+        this.valueSerializationMethod = valueSerializationMethod;
     }
 
     public static PrimitiveType fromNullableType(ClassType nullableType) {
@@ -59,6 +82,8 @@ public class PrimitiveType implements IType {
             return PrimitiveType.Long;
         } else if (nullableType == ClassType.Double) {
             return PrimitiveType.Double;
+        } else if (nullableType == ClassType.Float) {
+            return PrimitiveType.Float;
         } else {
             throw new IllegalArgumentException("Class type " + nullableType + " is not a boxed type");
         }
@@ -72,13 +97,26 @@ public class PrimitiveType implements IType {
         return nullableType;
     }
 
+    @Override
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
     }
 
+    @Override
+    public final boolean deserializationNeedsNullGuarding() {
+        return false;
+    }
+
+    @Override
+    public final boolean isNullable() {
+        return false;
+    }
+
+    @Override
     public final IType asNullable() {
         return getNullableType();
     }
 
+    @Override
     public final boolean contains(IType type) {
         return this == type;
     }
@@ -87,6 +125,7 @@ public class PrimitiveType implements IType {
         return defaultValueExpressionConverter;
     }
 
+    @Override
     public final String defaultValueExpression(String sourceExpression) {
         String result = sourceExpression;
         if (result != null && getDefaultValueExpressionConverter() != null) {
@@ -95,6 +134,7 @@ public class PrimitiveType implements IType {
         return result;
     }
 
+    @Override
     public final String defaultValueExpression() {
         String result = defaultValue;
         if (result != null && getDefaultValueExpressionConverter() != null) {
@@ -103,6 +143,7 @@ public class PrimitiveType implements IType {
         return result;
     }
 
+    @Override
     public final IType getClientType() {
         IType clientType = this;
         if (this == PrimitiveType.UnixTimeLong) {
@@ -111,6 +152,7 @@ public class PrimitiveType implements IType {
         return clientType;
     }
 
+    @Override
     public final String convertToClientType(String expression) {
         if (getClientType() == this) {
             return expression;
@@ -122,6 +164,7 @@ public class PrimitiveType implements IType {
         return expression;
     }
 
+    @Override
     public final String convertFromClientType(String expression) {
         if (getClientType() == this) {
             return expression;
@@ -133,8 +176,19 @@ public class PrimitiveType implements IType {
         return expression;
     }
 
+    @Override
     public final String validate(String expression) {
         return null;
+    }
+
+    @Override
+    public String streamStyleJsonFieldSerializationMethod() {
+        return fieldSerializationMethod;
+    }
+
+    @Override
+    public String streamStyleJsonValueSerializationMethod() {
+        return valueSerializationMethod;
     }
 
     @Override

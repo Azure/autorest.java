@@ -25,6 +25,8 @@ public interface TemplateFactory {
 
     ModelTemplate getModelTemplate();
 
+    StreamSerializationModelTemplate getStreamStyleModelTemplate();
+
     ExceptionTemplate getExceptionTemplate();
 
     EnumTemplate getEnumTemplate();

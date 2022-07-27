@@ -33,6 +33,9 @@ public enum UriColor {
      */
     @JsonCreator
     public static UriColor fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         UriColor[] items = UriColor.values();
         for (UriColor item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

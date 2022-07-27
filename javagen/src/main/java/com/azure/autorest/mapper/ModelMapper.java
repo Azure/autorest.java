@@ -228,7 +228,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 builder.polymorphicDiscriminator(polymorphicDiscriminator);
 
                 ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
-                    settings.isDiscriminatorPassedToChildDeserialization(), hasChildren, compositeType,
+                    settings, hasChildren, compositeType,
                     annotationArgs -> annotationArgs.replace(discriminatorSerializedName, polymorphicDiscriminator),
                     polymorphicDiscriminator);
 
@@ -361,8 +361,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      * <p>
      * This method serves as an extension point for Fluent generator.
      *
-     * @param isDiscriminatorPassedToChildDeserialization Flag indicating whether the generator should pass the
-     * discriminator property to child classes.
+     * @param settings The Autorest generation settings, used to determine whether a discriminator property should be
+     * created.
      * @param hasChildren Flag indicating whether the Swagger model has children models.
      * @param compositeType The Swagger schema of the model.
      * @param annotationArgumentsMapper Function that maps the {@link ClientModelProperty#getAnnotationArguments()} of
@@ -371,10 +371,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      * @return A {@link ClientModelProperty} that is the discriminator field property, or null if either the
      * discriminator shouldn't be made into a property or if the model isn't a terminal, or leaf, type.
      */
-    protected ClientModelProperty createDiscriminatorProperty(boolean isDiscriminatorPassedToChildDeserialization,
-        boolean hasChildren, ObjectSchema compositeType, Function<String, String> annotationArgumentsMapper,
-        String serializedName) {
-        if (!isDiscriminatorPassedToChildDeserialization || hasChildren) {
+    protected ClientModelProperty createDiscriminatorProperty(JavaSettings settings, boolean hasChildren,
+        ObjectSchema compositeType, Function<String, String> annotationArgumentsMapper, String serializedName) {
+        // Don't create a discriminator property for the model if the discriminator shouldn't be passed to subtype
+        // deserialization or the model type has children and stream-style serialization isn't being used.
+        if ((!settings.isDiscriminatorPassedToChildDeserialization() || hasChildren)
+            && !settings.isStreamStyleSerialization()) {
             return null;
         }
         ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()

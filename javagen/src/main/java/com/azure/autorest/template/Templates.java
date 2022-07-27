@@ -54,6 +54,10 @@ public class Templates {
         return factory.getModelTemplate();
     }
 
+    public static StreamSerializationModelTemplate getStreamStyleModelTemplate() {
+        return factory.getStreamStyleModelTemplate();
+    }
+
     public static ExceptionTemplate getExceptionTemplate() {
         return factory.getExceptionTemplate();
     }

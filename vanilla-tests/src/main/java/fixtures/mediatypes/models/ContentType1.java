@@ -30,6 +30,9 @@ public enum ContentType1 {
      */
     @JsonCreator
     public static ContentType1 fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         ContentType1[] items = ContentType1.values();
         for (ContentType1 item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

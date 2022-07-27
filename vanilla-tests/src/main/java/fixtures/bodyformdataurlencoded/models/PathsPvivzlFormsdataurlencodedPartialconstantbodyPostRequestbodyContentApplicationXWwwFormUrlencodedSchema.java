@@ -26,8 +26,7 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
     private String service;
 
     /*
-     * AAD access token, mandatory when grant_type is
-     * access_token_refresh_token or access_token.
+     * AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      */
     @JsonProperty(value = "access_token", required = true)
     private String aadAccessToken;

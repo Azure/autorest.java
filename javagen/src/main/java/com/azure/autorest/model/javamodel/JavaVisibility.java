@@ -7,11 +7,23 @@ package com.azure.autorest.model.javamodel;
  * The visibility of a Java type or member.
  */
 public enum JavaVisibility {
-    Public,
+    Public("public"),
 
-    Protected,
+    Protected("protected"),
 
-    Private,
+    Private("private"),
 
-    PackagePrivate;
+    PackagePrivate("");
+
+    private final String keyword;
+
+    JavaVisibility(String keyword) {
+        this.keyword = keyword;
+    }
+
+
+    @Override
+    public String toString() {
+        return keyword;
+    }
 }

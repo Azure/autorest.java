@@ -55,6 +55,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
+    public StreamSerializationModelTemplate getStreamStyleModelTemplate() {
+        return StreamSerializationModelTemplate.getInstance();
+    }
+
+    @Override
     public ExceptionTemplate getExceptionTemplate() {
         return ExceptionTemplate.getInstance();
     }

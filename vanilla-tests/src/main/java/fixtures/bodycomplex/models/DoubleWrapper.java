@@ -17,9 +17,7 @@ public final class DoubleWrapper {
     private Double field1;
 
     /*
-     * The
-     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
-     * property.
+     * The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
      */
     @JsonProperty(
             value =

@@ -11,26 +11,28 @@ import java.util.function.Function;
  * The details of an array type that is used by a client.
  */
 public class ArrayType implements IType {
-    public static final ArrayType ByteArray = new ArrayType(PrimitiveType.Byte, (String defaultValueExpression) -> defaultValueExpression == null ? "new byte[0]" : String.format("\"%1$s\".getBytes()", defaultValueExpression));
-    private IType elementType;
-    private Function<String, String> defaultValueExpressionConverter;
+    public static final ArrayType ByteArray = new ArrayType(PrimitiveType.Byte,
+        defaultValueExpression -> defaultValueExpression == null
+            ? "new byte[0]" // TODO (alzimmer): Should this be new byte[0] or null?
+            : String.format("\"%1$s\".getBytes()", defaultValueExpression));
+
+    private final String toStringValue;
+    private final IType elementType;
+    private final Function<String, String> defaultValueExpressionConverter;
 
     private ArrayType(IType elementType, Function<String, String> defaultValueExpressionConverter) {
+        this.toStringValue = elementType + "[]";
         this.elementType = elementType;
-        this.defaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+        this.defaultValueExpressionConverter = defaultValueExpressionConverter;
     }
 
     public final IType getElementType() {
         return elementType;
     }
 
-    private Function<String, String> getDefaultValueExpressionConverter() {
-        return defaultValueExpressionConverter;
-    }
-
     @Override
     public String toString() {
-        return String.format("%1$s[]", getElementType());
+        return toStringValue;
     }
 
     public final IType asNullable() {
@@ -71,5 +73,15 @@ public class ArrayType implements IType {
 
     public String validate(String expression) {
         return null;
+    }
+
+    @Override
+    public String streamStyleJsonFieldSerializationMethod() {
+        return "writeBinaryField";
+    }
+
+    @Override
+    public String streamStyleJsonValueSerializationMethod() {
+        return "writeBinary";
     }
 }

@@ -14,15 +14,15 @@ public final class FloatWrapperTests {
     public void testDeserialize() {
         FloatWrapper model =
                 BinaryData.fromString("{\"field1\":32.06033,\"field2\":54.94055}").toObject(FloatWrapper.class);
-        Assertions.assertEquals(32.06033f, model.getField1());
-        Assertions.assertEquals(54.94055f, model.getField2());
+        Assertions.assertEquals(32.06033F, model.getField1());
+        Assertions.assertEquals(54.94055F, model.getField2());
     }
 
     @Test
     public void testSerialize() {
-        FloatWrapper model = new FloatWrapper().setField1(32.06033f).setField2(54.94055f);
+        FloatWrapper model = new FloatWrapper().setField1(32.06033F).setField2(54.94055F);
         model = BinaryData.fromObject(model).toObject(FloatWrapper.class);
-        Assertions.assertEquals(32.06033f, model.getField1());
-        Assertions.assertEquals(54.94055f, model.getField2());
+        Assertions.assertEquals(32.06033F, model.getField1());
+        Assertions.assertEquals(54.94055F, model.getField2());
     }
 }

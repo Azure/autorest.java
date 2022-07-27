@@ -5,6 +5,7 @@ package com.azure.autorest.model.javamodel;
 
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.Objects;
 
 public class JavaImportComparer implements Comparator<String> {
     private static String[] getImportParts(String importKeyword) {
@@ -18,7 +19,7 @@ public class JavaImportComparer implements Comparator<String> {
     public final int compare(String lhsImport, String rhsImport) {
         int result;
 
-        if (lhsImport.equals(rhsImport)) {
+        if (Objects.equals(lhsImport, rhsImport)) {
             result = 0;
         } else if (lhsImport == null) {
             result = -1;
