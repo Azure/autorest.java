@@ -174,7 +174,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -193,7 +193,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -233,7 +233,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -252,7 +252,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -291,7 +291,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -310,7 +310,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -357,7 +357,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -376,7 +376,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -421,7 +421,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -440,7 +440,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -486,7 +486,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
@@ -505,7 +505,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     ]
      *     isCanceled: Boolean (Optional)
      *     isRetried: Boolean (Optional)
-     *     operationFilterStatus: String(Running/NotStarted) (Required)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
      *         String: String (Optional)
      *     }
