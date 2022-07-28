@@ -38,27 +38,27 @@ jobs:
           publishJUnitResults: false
 
       - task: Npm@1
-        displayName: 'Install Dependencies for CADL Emitter'
+        displayName: 'Install Dependencies for CADL Java'
         inputs:
           command: install
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Build CADL Emitter'
+        displayName: 'Build CADL Java'
         inputs:
           command: custom
           customCommand: run build
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Lint CADL Emitter'
+        displayName: 'Lint CADL Java'
         inputs:
           command: custom
           customCommand: run lint
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Pack CADL Emitter'
+        displayName: 'Pack CADL Java'
         inputs:
           command: custom
           customCommand: pack
