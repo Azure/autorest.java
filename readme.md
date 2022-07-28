@@ -67,7 +67,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
-|`--model-override-setter-from-superclass`|Indicates whether to override the superclass setter method in model. Default is false.|
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
@@ -123,7 +122,7 @@ Following settings only works when `fluent` option is specified.
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods`, `model-override-setter-from-superclass` option is by default `true`.
+For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods` option is by default `true`.
 
 The code formatter would require Java 11+ runtime.
 
@@ -364,9 +363,6 @@ help-content:
       - key: client-type-prefix
         type: string
         description: The prefix that will be added to each generated client type.
-      - key: model-override-setter-from-superclass
-        type: bool
-        description: Indicates whether to override the superclass setter method in model. Default is false.
       - key: data-plane
         type: bool
         description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.

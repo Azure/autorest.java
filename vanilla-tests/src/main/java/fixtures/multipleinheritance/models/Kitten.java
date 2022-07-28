@@ -36,6 +36,34 @@ public final class Kitten extends Cat {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public Kitten setLikesMilk(Boolean likesMilk) {
+        super.setLikesMilk(likesMilk);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Kitten setMeows(Boolean meows) {
+        super.setMeows(meows);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Kitten setHisses(Boolean hisses) {
+        super.setHisses(hisses);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Kitten setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

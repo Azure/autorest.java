@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.List;
 
 /** The Salmon model. */
 @JsonTypeInfo(
@@ -69,6 +70,27 @@ public class Salmon extends Fish {
      */
     public Salmon setIswild(Boolean iswild) {
         this.iswild = iswild;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Salmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Salmon setLength(float length) {
+        super.setLength(length);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Salmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
         return this;
     }
 }
