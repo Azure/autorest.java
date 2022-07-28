@@ -3,6 +3,10 @@ import "@cadl-lang/rest";
 using Cadl.Http;
 using Cadl.Rest;
 
+@serviceTitle("Polymorphism")
+@serviceVersion("1.0.0")
+namespace Cadl.Polymorphism;
+
 @discriminator("kind")
 model Pet {
   name: string;
@@ -17,9 +21,19 @@ model Dog extends Pet {
   bark: string;
 }
 
+model BaseType {
+  name: string;
+}
+model DerivedType extends BaseType {
+  description: string;
+}
+
 @route("/Pets")
-namespace root {
+interface Polymorphism {
   op read(): {
     @body body: Pet;
   };
+
+  @put
+  op write(@body body: BaseType): OkResponse<BaseType>;
 }
