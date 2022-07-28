@@ -25,31 +25,32 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Builtins. */
-public final class BuiltinsImpl {
+/** An instance of this class provides access to all the operations defined in BuiltinOps. */
+public final class BuiltinOpsImpl {
     /** The proxy service used to perform REST calls. */
-    private final BuiltinsService service;
+    private final BuiltinOpsService service;
 
     /** The service client containing this operation class. */
     private final BuiltinClientImpl client;
 
     /**
-     * Initializes an instance of BuiltinsImpl.
+     * Initializes an instance of BuiltinOpsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    BuiltinsImpl(BuiltinClientImpl client) {
-        this.service = RestProxy.create(BuiltinsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    BuiltinOpsImpl(BuiltinClientImpl client) {
+        this.service =
+                RestProxy.create(BuiltinOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for BuiltinBuiltins to be used by the proxy service to perform REST
+     * The interface defining all the services for BuiltinBuiltinOps to be used by the proxy service to perform REST
      * calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "BuiltinBuiltins")
-    private interface BuiltinsService {
+    @ServiceInterface(name = "BuiltinBuiltinOps")
+    private interface BuiltinOpsService {
         @Get("/builtin")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

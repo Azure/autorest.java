@@ -4,7 +4,7 @@ using Cadl.Http;
 
 @serviceTitle("Builtin")
 @serviceVersion("1.0.0")
-namespace cadl.builtin;
+namespace Cadl.Builtin;
 
 model Builtin {
   boolean: boolean;
@@ -22,7 +22,7 @@ model Builtin {
 }
 
 @route("/builtin")
-interface builtin {
+interface BuiltinOp {
   op read(): {
     @body body: Builtin;
   };

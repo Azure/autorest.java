@@ -32,3 +32,4 @@ rm -rf cadl-output/
 generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
 
 generate ./cadl/builtin.cadl
+generate ./cadl/polymorphism.cadl
