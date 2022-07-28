@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DerivedType model. */
 @Fluent
-public final class DerivedType extends BaseType {
+public class DerivedType extends BaseType {
     /*
      * The description property.
      */

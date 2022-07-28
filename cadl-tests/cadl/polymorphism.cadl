@@ -27,6 +27,12 @@ model BaseType {
 model DerivedType extends BaseType {
   description: string;
 }
+model DerivedTypeData extends BaseType {
+  data: bytes;
+}
+model DerivedTypeList extends DerivedType {
+  items: BaseType[];
+}
 
 @route("/Pets")
 interface Polymorphism {

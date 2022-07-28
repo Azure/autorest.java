@@ -1,4 +1,4 @@
-#bash ./setup.sh
+bash ./setup.sh
 
 function generate_remote {
     curl $1 --output tmp.cadl
