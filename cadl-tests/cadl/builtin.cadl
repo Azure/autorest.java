@@ -1,0 +1,29 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@serviceTitle("Builtin")
+@serviceVersion("1.0.0")
+namespace cadl.builtin;
+
+model Builtin {
+  boolean: boolean;
+  string: string;
+  bytes: bytes;
+  int: int32;
+  long: int64;
+  float: float32;
+  double: float64;
+  duration: duration;
+  dateTime: zonedDateTime;
+
+  stringList: string[];
+  bytesDict: Map<string, bytes>;
+}
+
+@route("/builtin")
+interface builtin {
+  op read(): {
+    @body body: Builtin;
+  };
+}
