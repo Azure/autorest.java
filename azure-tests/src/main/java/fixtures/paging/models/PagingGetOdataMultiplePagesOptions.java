@@ -17,8 +17,7 @@ public final class PagingGetOdataMultiplePagesOptions {
     private Integer maxresults;
 
     /*
-     * Sets the maximum time that the server can spend processing the request,
-     * in seconds. The default is 30 seconds.
+     * Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      */
     @JsonProperty(value = "timeout")
     private Integer timeout;

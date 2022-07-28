@@ -15,23 +15,23 @@ public class EnumType implements IType {
     /**
      * The name of the new Enum.
      */
-    private String name;
+    private final String name;
     /**
      * The package that this enumeration belongs to.
      */
-    private String packageName;
+    private final String packageName;
     /**
      * Whether this will be an ExpandableStringEnum type.
      */
-    private boolean expandable;
+    private final boolean expandable;
     /**
      * The values of the Enum.
      */
-    private List<ClientEnumValue> values;
+    private final List<ClientEnumValue> values;
 
-    private IType elementType;
+    private final IType elementType;
 
-    private static ImplementationDetails implementationDetails;
+    private final ImplementationDetails implementationDetails;
 
     /**
      * Create a new Enum with the provided properties.
@@ -39,13 +39,15 @@ public class EnumType implements IType {
      * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values, IType elementType,
+    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values,
+                     IType elementType,
                      ImplementationDetails implementationDetails) {
         this.name = name;
-        packageName = packageKeyword;
+        this.packageName = packageKeyword;
         this.expandable = expandable;
         this.values = values;
         this.elementType = elementType;
+        this.implementationDetails = implementationDetails;
     }
 
     public final String getName() {
@@ -75,6 +77,10 @@ public class EnumType implements IType {
         imports.add("java.util.stream.Collectors");
     }
 
+    public final boolean isNullable() {
+        return true;
+    }
+
     public final IType asNullable() {
         return this;
     }
@@ -93,7 +99,9 @@ public class EnumType implements IType {
                     return String.format("%1$s.%2$s", getName(), enumValue.getName());
                 }
             }
-            return String.format("%1$s.from%2$s(%3$s)", getName(), CodeNamer.toPascalCase(this.getElementType().toString()), this.getElementType().defaultValueExpression(sourceExpression));
+            return String.format("%1$s.from%2$s(%3$s)", getName(),
+                CodeNamer.toPascalCase(this.getElementType().toString()),
+                this.getElementType().defaultValueExpression(sourceExpression));
         } else {
             for (ClientEnumValue enumValue : this.getValues()) {
                 if (sourceExpression.equals(enumValue.getValue())) {
@@ -145,6 +153,20 @@ public class EnumType implements IType {
 
     public ImplementationDetails getImplementationDetails() {
         return implementationDetails;
+    }
+
+    public final boolean deserializationNeedsNullGuarding() {
+        return false;
+    }
+
+    @Override
+    public String streamStyleJsonFieldSerializationMethod() {
+        return "writeStringField";
+    }
+
+    @Override
+    public String streamStyleJsonValueSerializationMethod() {
+        return "writeString";
     }
 
     @Override

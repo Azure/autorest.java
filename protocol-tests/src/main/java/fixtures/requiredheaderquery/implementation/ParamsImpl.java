@@ -163,11 +163,12 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         List<String> parameterMultiStringArrayConverted =
                 parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         List<String> parameterMultiIntArrayConverted =
@@ -243,11 +244,12 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         List<String> parameterMultiStringArrayConverted =
                 parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         List<String> parameterMultiIntArrayConverted =
@@ -363,11 +365,12 @@ public final class ParamsImpl {
             RequestOptions requestOptions) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return FluxUtil.withContext(
                 context ->
@@ -419,11 +422,12 @@ public final class ParamsImpl {
             Context context) {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvStringArray, CollectionFormat.CSV);
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeList(parameterCsvIntArray, CollectionFormat.CSV);
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
         DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
         return service.getRequiredHeader(
                 this.client.getHost(),

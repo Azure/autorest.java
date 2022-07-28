@@ -13,6 +13,7 @@ import com.azure.autorest.customization.implementation.ls.models.TextEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
 import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
 
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -135,6 +136,30 @@ public final class PropertyCustomization extends CodeCustomization {
         }
 
         return this;
+    }
+
+    /**
+     * Replace the modifier for this property.
+     * <p>
+     * For compound modifiers such as {@code public final} use bitwise OR ({@code |}) of multiple Modifiers, {@code
+     * Modifier.PUBLIC | Modifier.FINAL}.
+     * <p>
+     * Pass {@code 0} for {@code modifiers} to indicate that the property has no modifiers.
+     *
+     * @param modifiers The {@link Modifier Modifiers} for the property.
+     * @return The updated PropertyCustomization object.
+     * @throws IllegalArgumentException If the {@code modifier} is less than {@code 0} or any {@link Modifier} included
+     * in the bitwise OR isn't a valid property {@link Modifier}.
+     */
+    public PropertyCustomization setModifier(int modifiers) {
+        String target = " *(?:(?:public|protected|private|static|final|transient|volatile) ?)*(.* )";
+        languageClient.listDocumentSymbols(symbol.getLocation().getUri())
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .findFirst()
+            .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
+                target + propertyName, "$1" + propertyName, Modifier.fieldModifiers(), modifiers));
+
+        return refreshCustomization(propertyName);
     }
 
     private PropertyCustomization refreshCustomization(String propertyName) {

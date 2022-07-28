@@ -24,9 +24,7 @@ public final class HeadersResponseDoubleHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDoubleHeaders(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("value") != null) {
-            this.value = Double.parseDouble(rawHeaders.getValue("value"));
-        }
+        this.value = Double.parseDouble(rawHeaders.getValue("value"));
     }
 
     /**

@@ -20,8 +20,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -34,6 +32,8 @@ import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -1828,7 +1828,7 @@ public final class Explicits {
         }
         final String accept = "application/json";
         String headerParameterConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+                headerParameter.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.postRequiredArrayHeader(
@@ -1881,7 +1881,11 @@ public final class Explicits {
         }
         final String accept = "application/json";
         String headerParameterConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+                (headerParameter == null)
+                        ? null
+                        : headerParameter.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.postOptionalArrayHeader(

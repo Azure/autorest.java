@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /** The rule criteria that defines the conditions of the alert rule. */
 @JsonTypeInfo(
@@ -31,6 +32,8 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class MetricAlertCriteria {
+    private static final Pattern KEY_ESCAPER = Pattern.compile("\\.");;
+
     /*
      * The rule criteria that defines the conditions of the alert rule.
      */
@@ -62,7 +65,7 @@ public class MetricAlertCriteria {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
-        additionalProperties.put(key.replace("\\.", "."), value);
+        additionalProperties.put(KEY_ESCAPER.matcher(key).replaceAll("."), value);
     }
 
     /**

@@ -25,7 +25,6 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
-import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -45,6 +44,8 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 
@@ -85,19 +86,30 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = writeToTemplates(codeModel, client, settings);
 
             //Step 4: Print to files
+            Map<String, String> formattedFiles = new ConcurrentHashMap<>();
             Formatter formatter = new Formatter();
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String content = javaFile.getContents().toString();
+
+            // Formatting Java source files can be expensive but can be run in parallel.
+            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+            // complete.
+            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+                String formattedSource = javaFile.getContents().toString();
                 if (!settings.isSkipFormatting()) {
                     try {
-                        content = formatter.formatSourceAndFixImports(content);
+                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
                     } catch (Exception e) {
                         logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        return false;
+                        throw new RuntimeException(e);
                     }
                 }
-                writeFile(javaFile.getFilePath(), content, null);
-            }
+
+                formattedFiles.put(javaFile.getFilePath(), formattedSource);
+            });
+
+            // Then for each formatted file write the file. This is done synchronously as there is potential race
+            // conditions that can lead to deadlocking.
+            formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
+
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
             }
@@ -108,7 +120,7 @@ public class Javagen extends NewPlugin {
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
-                        "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
             }
         } catch (Exception ex) {
             logger.error("Failed to generate code.", ex);
@@ -126,8 +138,7 @@ public class Javagen extends NewPlugin {
                 // if value of property is null, ignore it.
                 if (propertyValue == null) {
                     return null;
-                }
-                else {
+                } else {
                     return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
                 }
             }
@@ -136,8 +147,7 @@ public class Javagen extends NewPlugin {
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
-        return codeModel;
+        return newYaml.loadAs(file, CodeModel.class);
     }
 
     JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
@@ -158,10 +168,10 @@ public class Javagen extends NewPlugin {
         }
         for (AsyncSyncClient syncClient : client.getSyncClients()) {
             boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
-                    // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
-                    && settings.isDataPlaneClient()
-                    // 1-1 match of SyncClient and AsyncClient
-                    && client.getAsyncClients().size() == client.getSyncClients().size();
+                // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
+                && settings.isDataPlaneClient()
+                // 1-1 match of SyncClient and AsyncClient
+                && client.getAsyncClients().size() == client.getSyncClients().size();
             javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
         }
 

@@ -33,6 +33,9 @@ public enum GreyscaleColors {
      */
     @JsonCreator
     public static GreyscaleColors fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         GreyscaleColors[] items = GreyscaleColors.values();
         for (GreyscaleColors item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

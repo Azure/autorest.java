@@ -16,9 +16,9 @@ public final class DoubleWrapperTests {
                 BinaryData.fromString(
                                 "{\"field1\":37.616192183070176,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":69.0779419799508}")
                         .toObject(DoubleWrapper.class);
-        Assertions.assertEquals(37.616192183070176, model.getField1());
+        Assertions.assertEquals(37.616192183070176D, model.getField1());
         Assertions.assertEquals(
-                69.0779419799508,
+                69.0779419799508D,
                 model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 
@@ -26,13 +26,13 @@ public final class DoubleWrapperTests {
     public void testSerialize() {
         DoubleWrapper model =
                 new DoubleWrapper()
-                        .setField1(37.616192183070176)
+                        .setField1(37.616192183070176D)
                         .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
-                                69.0779419799508);
+                                69.0779419799508D);
         model = BinaryData.fromObject(model).toObject(DoubleWrapper.class);
-        Assertions.assertEquals(37.616192183070176, model.getField1());
+        Assertions.assertEquals(37.616192183070176D, model.getField1());
         Assertions.assertEquals(
-                69.0779419799508,
+                69.0779419799508D,
                 model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 }

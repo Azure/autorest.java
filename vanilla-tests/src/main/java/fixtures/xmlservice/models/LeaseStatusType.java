@@ -30,6 +30,9 @@ public enum LeaseStatusType {
      */
     @JsonCreator
     public static LeaseStatusType fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         LeaseStatusType[] items = LeaseStatusType.values();
         for (LeaseStatusType item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

@@ -96,8 +96,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -179,8 +177,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 

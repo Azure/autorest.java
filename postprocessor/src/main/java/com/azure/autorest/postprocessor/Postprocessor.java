@@ -29,11 +29,9 @@ import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -140,42 +138,38 @@ public class Postprocessor extends NewPlugin {
         return true;
     }
 
-    private void writeToFiles(Map<String, String> fileContents) throws Exception {
+    private void writeToFiles(Map<String, String> fileContents) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isHandlePartialUpdate()) {
             handlePartialUpdate(fileContents);
         }
 
+        //Step 4: Print to files
         Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        List<CompletableFuture<Void>> formattingTasks = new ArrayList<>();
-
         Formatter formatter = new Formatter();
-        for (Map.Entry<String, String> javaFile : fileContents.entrySet()) {
-            // Formatting Java source files can be expensive but can be run in parallel.
-            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-            // complete.
-            formattingTasks.add(CompletableFuture.runAsync(() -> {
-                String formattedSource = javaFile.getValue();
-                if (javaFile.getKey().endsWith(".java")) {
-                    if (!settings.isSkipFormatting()) {
-                        try {
-                            formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-                        } catch (Exception e) {
-                            logger.error("Unable to format output file " + javaFile.getKey(), e);
-                            throw new CompletionException(e);
-                        }
+
+        // Formatting Java source files can be expensive but can be run in parallel.
+        // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+        // complete.
+        fileContents.entrySet().parallelStream().forEach(javaFile -> {
+            String formattedSource = javaFile.getValue();
+            if (javaFile.getKey().endsWith(".java")) {
+                if (!settings.isSkipFormatting()) {
+                    try {
+                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                    } catch (Exception e) {
+                        logger.error("Unable to format output file " + javaFile.getKey(), e);
+                        throw new CompletionException(e);
                     }
                 }
+            }
 
-                formattedFiles.put(javaFile.getKey(), formattedSource);
-            }));
-        }
-
-        CompletableFuture.allOf(formattingTasks.toArray(new CompletableFuture[0])).get();
+            formattedFiles.put(javaFile.getKey(), formattedSource);
+        });
 
         // Then for each formatted file write the file. This is done synchronously as there is potential race
         // conditions that can lead to deadlocking.
-        formattedFiles.forEach((fileName, formattedSource) -> writeFile(fileName, formattedSource, null));
+        formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
     }
 
     private String getReadme() {

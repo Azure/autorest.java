@@ -25,8 +25,7 @@ public final class Metrics {
     private boolean enabled;
 
     /*
-     * Indicates whether metrics should generate summary statistics for called
-     * API operations.
+     * Indicates whether metrics should generate summary statistics for called API operations.
      */
     @JsonProperty(value = "IncludeAPIs")
     private Boolean includeAPIs;

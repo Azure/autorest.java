@@ -15,6 +15,9 @@ public class IterableType extends GenericType {
         super("java.lang", "Iterable", elementType);
     }
 
+    IterableType(String packageName, String className, IType elementType) {
+        super(packageName, className, elementType);
+    }
 
     /**
      * The type of elements that are stored in this iterable.
@@ -24,20 +27,20 @@ public class IterableType extends GenericType {
     }
 
     @Override
-    public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         super.addImportsTo(imports, includeImplementationImports);
     }
 
     @Override
-    public String validate(String expression) {
+    public final String validate(String expression) {
         return validate(expression, 0);
     }
 
     @Override
-    public String validate(String expression, int depth) {
+    public final String validate(String expression, int depth) {
         String var = depth == 0 ? "e" : "e" + depth;
         String elementValidation = getElementType() instanceof GenericType
-                ? ((GenericType) getElementType()).validate(var, ++depth)
+                ? ((GenericType) getElementType()).validate(var, depth + 1)
                 : getElementType().validate(var);
         if (elementValidation != null) {
             return String.format("%s.forEach(%s -> %s)", expression, var, elementValidation);

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -28,109 +29,127 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     }
 
     public final void write(EnumType enumType, JavaFile javaFile) {
-        String enumTypeComment = String.format("Defines values for %1$s.", enumType.getName());
+        JavaSettings settings = JavaSettings.getInstance();
+        String enumTypeComment = "Defines values for " + enumType.getName() + ".";
         if (enumType.getExpandable()) {
-            javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", getStringEnumImport());
-            javaFile.javadocComment(comment ->
-            {
-                comment.description(enumTypeComment);
-            });
-            javaFile.publicFinalClass(String.format("%1$s extends ExpandableStringEnum<%2$s>", enumType.getName(), enumType.getName()), (classBlock) ->
-            {
-                String typeName = enumType.getElementType().getClientType().toString();
-                for (ClientEnumValue enumValue : enumType.getValues()) {
-                    classBlock.javadocComment(String.format("Static value %1$s for %2$s.", enumValue.getValue(), enumType.getName()));
-                    classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)",enumType.getName(), enumValue.getName(),
-                            CodeNamer.toPascalCase(typeName), enumType.getElementType().defaultValueExpression(enumValue.getValue())));
-                }
-
-                classBlock.javadocComment((comment) ->
-                {
-                    comment.description(String.format("Creates or finds a %1$s from its string representation.", enumType.getName()));
-                    comment.param("name", "a name to look for");
-                    comment.methodReturns(String.format("the corresponding %1$s", enumType.getName()));
-                });
-                classBlock.annotation("JsonCreator");
-                classBlock.publicStaticMethod(String.format("%1$s from%2$s(%3$s name)", enumType.getName(), CodeNamer.toPascalCase(typeName), typeName), (function) ->
-                {
-                    String stringValue;
-                    if (ClassType.String.equals(enumType.getElementType())) {
-                        stringValue = "name";
-                    } else {
-                        stringValue = "String.valueOf(name)";
-                    }
-                    function.methodReturn(String.format("fromString(%1$s, %2$s.class)", stringValue, enumType.getName()));
-                });
-
-                classBlock.javadocComment((comment) ->
-                {
-                    comment.description(String.format("Gets known %1$s values.", enumType.getName()));
-                    comment.methodReturns(String.format("known %1$s values", enumType.getName()));
-                });
-                classBlock.publicStaticMethod(String.format("Collection<%1$s> values()", enumType.getName()), (function) ->
-                {
-                    function.methodReturn(String.format("values(%1$s.class)", enumType.getName()));
-                });
-            });
+            writeExpandableStringEnum(enumType, javaFile, enumTypeComment, settings);
         } else {
-            Set<String> imports = new HashSet<>();
+            writeEnum(enumType, javaFile, enumTypeComment, settings);
+        }
+    }
+
+    private void writeExpandableStringEnum(EnumType enumType, JavaFile javaFile, String enumTypeComment,
+        JavaSettings settings) {
+        Set<String> imports = new HashSet<>();
+        imports.add("java.util.Collection");
+        imports.add(getStringEnumImport());
+        if (!settings.isStreamStyleSerialization()) {
+            imports.add("com.fasterxml.jackson.annotation.JsonCreator");
+        }
+
+        javaFile.declareImport(imports);
+        javaFile.javadocComment(comment -> comment.description(enumTypeComment));
+
+        String enumName = enumType.getName();
+        javaFile.publicFinalClass(enumName + " extends ExpandableStringEnum<" + enumName + ">", classBlock -> {
+            IType elementType = enumType.getElementType();
+            String typeName = elementType.getClientType().toString();
+            String pascalTypeName = CodeNamer.toPascalCase(typeName);
+            for (ClientEnumValue enumValue : enumType.getValues()) {
+                String value = enumValue.getValue();
+                classBlock.javadocComment("Static value " + value + " for " + enumName + ".");
+                classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)", enumName,
+                    enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
+            }
+
+            classBlock.javadocComment(comment -> {
+                comment.description("Creates or finds a " + enumName + " from its string representation.");
+                comment.param("name", "a name to look for");
+                comment.methodReturns("the corresponding " + enumName);
+            });
+
+            if (!settings.isStreamStyleSerialization()) {
+                classBlock.annotation("JsonCreator");
+            }
+
+            classBlock.publicStaticMethod(String.format("%1$s from%2$s(%3$s name)", enumName, pascalTypeName, typeName),
+                function -> {
+                    String stringValue = (ClassType.String.equals(elementType)) ? "name" : "String.valueOf(name)";
+                    function.methodReturn("fromString(" + stringValue + ", " + enumName + ".class)");
+                });
+
+            classBlock.javadocComment(comment -> {
+                comment.description("Gets known " + enumName + " values.");
+                comment.methodReturns("known " + enumName + " values");
+            });
+            classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
+                function -> function.methodReturn("values(" + enumName + ".class)"));
+        });
+    }
+
+    private void writeEnum(EnumType enumType, JavaFile javaFile, String enumTypeComment, JavaSettings settings) {
+        Set<String> imports = new HashSet<>();
+        if (!settings.isStreamStyleSerialization()) {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
             imports.add("com.fasterxml.jackson.annotation.JsonValue");
-            enumType.getElementType().getClientType().addImportsTo(imports, false);
+        }
+        IType elementType = enumType.getElementType();
+        elementType.getClientType().addImportsTo(imports, false);
 
-            javaFile.declareImport(imports);
-            javaFile.javadocComment(comment ->
-            {
-                comment.description(enumTypeComment);
+        javaFile.declareImport(imports);
+        javaFile.javadocComment(comment -> comment.description(enumTypeComment));
+        javaFile.publicEnum(enumType.getName(), enumBlock -> {
+            for (ClientEnumValue value : enumType.getValues()) {
+                enumBlock.value(value.getName(), value.getValue(), elementType);
+            }
+
+            String enumName = enumType.getName();
+            String typeName = elementType.getClientType().toString();
+
+            // This will be 'from*'.
+            String converterName = enumType.getFromJsonMethodName();
+
+            enumBlock.javadocComment("The actual serialized value for a " + enumName + " instance.");
+            enumBlock.privateFinalMemberVariable(typeName, "value");
+
+            enumBlock.constructor(enumName + "(" +typeName + " value)", constructor -> constructor.line("this.value = value;"));
+
+            enumBlock.javadocComment((comment) -> {
+                comment.description("Parses a serialized value to a " + enumName + " instance.");
+                comment.param("value", "the serialized value to parse.");
+                comment.methodReturns("the parsed " + enumName + " object, or null if unable to parse.");
             });
-            javaFile.publicEnum(enumType.getName(), enumBlock ->
-            {
-                for (ClientEnumValue value : enumType.getValues()) {
-                    enumBlock.value(value.getName(), value.getValue(), enumType.getElementType());
-                }
 
-                String typeName = enumType.getElementType().getClientType().toString();
-
-                // This will be 'from*'.
-                String converterName = enumType.getFromJsonMethodName();
-
-                enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
-                enumBlock.privateFinalMemberVariable(typeName, "value");
-
-                enumBlock.constructor(String.format("%1$s(%2$s value)", enumType.getName(), typeName), (constructor) ->
-                {
-                    constructor.line("this.value = value;");
-                });
-
-                enumBlock.javadocComment((comment) ->
-                {
-                    comment.description(String.format("Parses a serialized value to a %1$s instance.", enumType.getName()));
-                    comment.param("value", "the serialized value to parse.");
-                    comment.methodReturns(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
-                });
+            if (!settings.isStreamStyleSerialization()) {
                 enumBlock.annotation("JsonCreator");
-                enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumType.getName(), converterName, typeName), (function) ->
-                {
-                    function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
-                    function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
-                        foreachBlock.ifBlock(createEnumJsonCreatorIfCheck(enumType), ifBlock -> ifBlock.methodReturn("item")));
-                    function.methodReturn("null");
-                });
+            }
 
-                if (enumType.getElementType() == ClassType.String) {
-                    enumBlock.annotation("JsonValue", "Override");
-                } else {
-                    enumBlock.javadocComment(comment ->
-                    {
-                        comment.description(String.format("De-serializes the instance to %1$s value.", enumType.getElementType().toString()));
-                        comment.methodReturns(String.format("the %1$s value", enumType.getElementType().toString()));
-                    });
+            enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumName, converterName, typeName), function -> {
+                function.ifBlock("value == null", ifAction -> ifAction.methodReturn("null"));
+                function.line(enumName + "[] items = " + enumName + ".values();");
+                function.block("for (" + enumName + " item : items)", foreachBlock ->
+                    foreachBlock.ifBlock(createEnumJsonCreatorIfCheck(enumType), ifBlock -> ifBlock.methodReturn("item")));
+                function.methodReturn("null");
+            });
+
+            if (elementType == ClassType.String) {
+                if (!settings.isStreamStyleSerialization()) {
                     enumBlock.annotation("JsonValue");
                 }
-                enumBlock.publicMethod(String.format("%1$s %2$s()", typeName, enumType.getToJsonMethodName()),
-                    function -> function.methodReturn("this.value"));
-            });
-        }
+                enumBlock.annotation("Override");
+            } else {
+                enumBlock.javadocComment(comment -> {
+                    comment.description("De-serializes the instance to " + elementType + " value.");
+                    comment.methodReturns("the " + elementType + " value");
+                });
+
+                if (!settings.isStreamStyleSerialization()) {
+                    enumBlock.annotation("JsonValue");
+                }
+            }
+            enumBlock.publicMethod(typeName + " " + enumType.getToJsonMethodName() + "()",
+                function -> function.methodReturn("this.value"));
+        });
     }
 
     protected String getStringEnumImport() {

@@ -11,9 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public class BaseProduct {
     /*
-     * Unique identifier representing a specific product for a given latitude &
-     * longitude. For example, uberX in San Francisco will have a different
-     * product_id than uberX in Los Angeles.
+     * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
+     * Francisco will have a different product_id than uberX in Los Angeles.
      */
     @JsonProperty(value = "base_product_id", required = true)
     private String productId;

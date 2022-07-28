@@ -33,6 +33,9 @@ public enum PetType {
      */
     @JsonCreator
     public static PetType fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         PetType[] items = PetType.values();
         for (PetType item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

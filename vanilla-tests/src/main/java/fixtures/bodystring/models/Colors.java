@@ -33,6 +33,9 @@ public enum Colors {
      */
     @JsonCreator
     public static Colors fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         Colors[] items = Colors.values();
         for (Colors item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
