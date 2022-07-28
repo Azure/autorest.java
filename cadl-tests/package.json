@@ -7,7 +7,7 @@
     "@cadl-lang/openapi3": "latest",
     "@azure-tools/cadl-autorest": "latest",
     "@azure-tools/cadl-azure-core": "latest",
-    "@azure-tools/java-client-emitter": "file:/../cadl-extension/azure-tools-cadl-java-0.1.0-dev.1.tgz"
+    "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.1.0-dev.1.tgz"
   },
   "private": true
 }

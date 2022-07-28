@@ -36,7 +36,7 @@ export async function $onEmit(program: Program) {
 
   const output = await promisify(execFile)("java", [
     "-jar",
-    "node_modules/@azure-tools/java-client-emitter/target/azure-cadl-extension-jar-with-dependencies.jar",
+    "node_modules/@azure-tools/cadl-java/target/azure-cadl-extension-jar-with-dependencies.jar",
     codeModelFileName,
     resolvePath(outputPath, "java")
   ]);
