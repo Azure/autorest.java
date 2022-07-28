@@ -1,8 +1,6 @@
 bash ./setup.sh
 
-function cadl_compile {
-    rm -rf cadl-output/java/src/
-
+function generate_remote {
     curl $1 --output tmp.cadl
     cadl compile tmp.cadl
     if [ $? -ne 0 ]; then
@@ -16,6 +14,19 @@ function cadl_compile {
     rm tmp.cadl
 }
 
-rm -rf src/main/
+function generate {
+    cadl compile $1
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
 
-cadl_compile https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
+    cp -rf cadl-output/java/src/ .
+    rm src/main/java/module-info.java
+
+    rm -rf cadl-output/
+}
+
+rm -rf src/main/
+rm -rf cadl-output/
+
+generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
