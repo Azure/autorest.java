@@ -937,7 +937,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -964,7 +964,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -991,7 +991,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -1015,7 +1015,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -1042,7 +1042,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -1070,7 +1070,7 @@ public final class PrimitivesImpl {
      * <pre>{@code
      * {
      *     field1: Double (Optional)
-     *     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: Double (Optional)
+     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
      * }
      * }</pre>
      *
@@ -1094,8 +1094,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1119,8 +1119,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1145,8 +1145,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1169,8 +1169,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1196,8 +1196,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1224,8 +1224,8 @@ public final class PrimitivesImpl {
      *
      * <pre>{@code
      * {
-     *     fieldTrue: Boolean (Optional)
-     *     fieldFalse: Boolean (Optional)
+     *     field_true: Boolean (Optional)
+     *     field_false: Boolean (Optional)
      * }
      * }</pre>
      *
@@ -1251,7 +1251,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *
@@ -1279,7 +1279,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *
@@ -1307,7 +1307,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *
@@ -1332,7 +1332,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *
@@ -1360,7 +1360,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *
@@ -1389,7 +1389,7 @@ public final class PrimitivesImpl {
      * {
      *     field: String (Optional)
      *     empty: String (Optional)
-     *     nullProperty: String (Optional)
+     *     null: String (Optional)
      * }
      * }</pre>
      *

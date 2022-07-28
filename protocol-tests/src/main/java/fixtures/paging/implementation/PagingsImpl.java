@@ -2628,7 +2628,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -2683,7 +2683,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -2738,7 +2738,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -2788,7 +2788,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -2839,7 +2839,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4119,7 +4119,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4166,7 +4166,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4212,7 +4212,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4253,7 +4253,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4296,7 +4296,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4330,7 +4330,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4377,7 +4377,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4423,7 +4423,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4466,7 +4466,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -4512,7 +4512,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -5218,7 +5218,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -5272,7 +5272,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -5319,7 +5319,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -5373,7 +5373,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -5412,7 +5412,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -5457,7 +5457,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -5501,7 +5501,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -5541,7 +5541,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -5583,7 +5583,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -6198,7 +6198,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -6256,7 +6256,7 @@ public final class PagingsImpl {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -7150,7 +7150,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
@@ -7196,7 +7196,7 @@ public final class PagingsImpl {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)

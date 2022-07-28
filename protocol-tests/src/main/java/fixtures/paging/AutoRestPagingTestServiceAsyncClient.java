@@ -341,7 +341,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -580,7 +580,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -615,7 +615,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *             }
      *         }
      *     ]
-     *     odataNextLink: String (Optional)
+     *     odata.nextLink: String (Optional)
      * }
      * }</pre>
      *
@@ -752,7 +752,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      *
      * <pre>{@code
      * {
-     *     indexes (Optional): [
+     *     values (Optional): [
      *          (Optional){
      *             properties (Optional): {
      *                 id: Integer (Optional)
