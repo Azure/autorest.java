@@ -180,7 +180,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             List<ClientModelProperty> properties = new ArrayList<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties) {
-                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getName(), typesInJavadoc, property.isRequired(), false);
+                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {
