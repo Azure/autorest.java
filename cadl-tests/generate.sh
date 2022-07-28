@@ -29,7 +29,12 @@ function generate {
 rm -rf src/main/
 rm -rf cadl-output/
 
+# testserver
 generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
 
+# server
+generate ./cadl/server.cadl
+
+# model
 generate ./cadl/builtin.cadl
 generate ./cadl/polymorphism.cadl
