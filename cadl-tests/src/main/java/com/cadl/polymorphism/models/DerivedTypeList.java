@@ -22,15 +22,13 @@ public final class DerivedTypeList extends DerivedType {
      * Creates an instance of DerivedTypeList class.
      *
      * @param name the name value to set.
-     * @param description the description value to set.
      * @param items the items value to set.
      */
     @JsonCreator
     public DerivedTypeList(
             @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "description", required = true) String description,
             @JsonProperty(value = "items", required = true) List<BaseType> items) {
-        super(name, description);
+        super(name);
         this.items = items;
     }
 
@@ -41,5 +39,12 @@ public final class DerivedTypeList extends DerivedType {
      */
     public List<BaseType> getItems() {
         return this.items;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DerivedTypeList setDescription(String description) {
+        super.setDescription(description);
+        return this;
     }
 }

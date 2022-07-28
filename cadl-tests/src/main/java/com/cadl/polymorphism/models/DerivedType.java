@@ -14,21 +14,17 @@ public class DerivedType extends BaseType {
     /*
      * The description property.
      */
-    @JsonProperty(value = "description", required = true)
+    @JsonProperty(value = "description")
     private String description;
 
     /**
      * Creates an instance of DerivedType class.
      *
      * @param name the name value to set.
-     * @param description the description value to set.
      */
     @JsonCreator
-    public DerivedType(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "description", required = true) String description) {
+    public DerivedType(@JsonProperty(value = "name", required = true) String name) {
         super(name);
-        this.description = description;
     }
 
     /**
@@ -38,5 +34,16 @@ public class DerivedType extends BaseType {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     *
+     * @param description the description value to set.
+     * @return the DerivedType object itself.
+     */
+    public DerivedType setDescription(String description) {
+        this.description = description;
+        return this;
     }
 }

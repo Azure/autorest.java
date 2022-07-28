@@ -25,7 +25,7 @@ model BaseType {
   name: string;
 }
 model DerivedType extends BaseType {
-  description: string;
+  description?: string;
 }
 model DerivedTypeData extends BaseType {
   data: bytes;
