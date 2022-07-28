@@ -1,6 +1,8 @@
 bash ./setup.sh
 
 function generate_remote {
+    echo "cadl compile $1"
+
     curl $1 --output tmp.cadl
     cadl compile tmp.cadl
     if [ $? -ne 0 ]; then
@@ -15,6 +17,8 @@ function generate_remote {
 }
 
 function generate {
+    echo "cadl compile $1"
+
     cadl compile $1
     if [ $? -ne 0 ]; then
         exit 1
@@ -32,9 +36,7 @@ rm -rf cadl-output/
 # testserver
 generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
 
-# server
-generate ./cadl/server.cadl
-
-# model
-generate ./cadl/builtin.cadl
-generate ./cadl/polymorphism.cadl
+for f in $(ls -1 ./cadl/*)
+do
+    generate $f
+done
