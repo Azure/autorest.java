@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core.Operations;
+
+@serviceTitle("Paged")
+@serviceVersion("1.0.0")
+namespace Cadl.Paged;
+
+model Resource {
+  id: string;
+  name: string;
+  type: string;
+}
+
+@route("/paged")
+interface PagedOp {
+  op list is ResourceList<Resource>;
+}
