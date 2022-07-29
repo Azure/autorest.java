@@ -34,8 +34,15 @@ public class MockPreprocessor extends Preprocessor {
         SETTINGS_MAP.put("namespace", "com.azure.mock");
     }
 
-    public MockPreprocessor(Connection connection, String plugin, String sessionId) {
-        super(connection, plugin, sessionId);
+    public static class MockConnection extends Connection {
+
+        public MockConnection() {
+            super(null, null);
+        }
+    }
+
+    public MockPreprocessor() {
+        super(new MockConnection(), "dummy", "dummy");
 
         JavaSettingsAccessor.setHost(this);
     }

@@ -116,6 +116,20 @@ public class SimpleProduct extends BaseProduct {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public SimpleProduct setProductId(String productId) {
+        super.setProductId(productId);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SimpleProduct setDescription(String description) {
+        super.setDescription(description);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

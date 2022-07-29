@@ -36,6 +36,13 @@ public final class ProductUrl extends GenericUrl {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public ProductUrl setGenericValue(String genericValue) {
+        super.setGenericValue(genericValue);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

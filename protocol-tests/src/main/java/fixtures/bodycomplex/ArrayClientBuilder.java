@@ -94,8 +94,7 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -129,8 +128,7 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -177,8 +175,7 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -201,18 +198,13 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serviceVersion == null) {
-            this.serviceVersion = AutoRestComplexTestServiceVersion.getLatest();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestComplexTestServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
         AutoRestComplexTestServiceClientImpl client =
                 new AutoRestComplexTestServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

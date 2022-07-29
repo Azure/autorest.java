@@ -95,8 +95,7 @@ public final class MonitorManagementClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -130,8 +129,7 @@ public final class MonitorManagementClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -178,8 +176,7 @@ public final class MonitorManagementClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -202,16 +199,11 @@ public final class MonitorManagementClientBuilder
      */
     @Generated
     public MonitorManagementClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "https://management.azure.com";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
-        MonitorManagementClient client = new MonitorManagementClient(pipeline, serializerAdapter, host);
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "https://management.azure.com";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        MonitorManagementClient client = new MonitorManagementClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

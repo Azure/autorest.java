@@ -14,7 +14,7 @@ public class EnumPutReferencedConstant {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.enumputreferencedconstant.enumputreferencedconstant
-        BinaryData enumStringBody = BinaryData.fromString("\"green-color\"");
+        BinaryData enumStringBody = BinaryData.fromString("{\"ColorConstant\":\"green-color\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = enumClient.putReferencedConstantWithResponse(enumStringBody, requestOptions);
         // END:fixtures.bodystring.generated.enumputreferencedconstant.enumputreferencedconstant

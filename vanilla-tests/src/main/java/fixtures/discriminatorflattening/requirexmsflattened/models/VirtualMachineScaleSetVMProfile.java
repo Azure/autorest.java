@@ -11,8 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class VirtualMachineScaleSetVMProfile {
     /*
-     * Specifies properties of the network interfaces of the virtual machines
-     * in the scale set.
+     * Specifies properties of the network interfaces of the virtual machines in the scale set.
      */
     @JsonProperty(value = "networkProfile")
     private VirtualMachineScaleSetNetworkProfile networkProfile;

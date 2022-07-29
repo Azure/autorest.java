@@ -17,14 +17,12 @@ public final class MyBaseTypeTests {
                                 "{\"kind\":\"MyBaseType\",\"propB1\":\"jlxofpdvhpfxxyp\",\"helper\":{\"propBH1\":\"i\"}}")
                         .toObject(MyBaseType.class);
         Assertions.assertEquals("jlxofpdvhpfxxyp", model.getPropB1());
-        Assertions.assertEquals("i", model.getPropBH1());
     }
 
     @Test
     public void testSerialize() {
-        MyBaseType model = new MyBaseType().setPropB1("jlxofpdvhpfxxyp").setPropBH1("i");
+        MyBaseType model = new MyBaseType().setPropB1("jlxofpdvhpfxxyp");
         model = BinaryData.fromObject(model).toObject(MyBaseType.class);
         Assertions.assertEquals("jlxofpdvhpfxxyp", model.getPropB1());
-        Assertions.assertEquals("i", model.getPropBH1());
     }
 }

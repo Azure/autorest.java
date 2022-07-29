@@ -17,8 +17,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     private String name;
 
     /*
-     * Describes a virtual machine scale set network profile's IP
-     * configuration.
+     * Describes a virtual machine scale set network profile's IP configuration.
      */
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetNetworkConfigurationProperties innerProperties;

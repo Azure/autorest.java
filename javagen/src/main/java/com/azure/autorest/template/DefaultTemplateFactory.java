@@ -25,11 +25,6 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public ManagerTemplate getManagerTemplate() {
-        return ManagerTemplate.getInstance();
-    }
-
-    @Override
     public MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate() {
         return MethodGroupInterfaceTemplate.getInstance();
     }
@@ -55,6 +50,11 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
+    public StreamSerializationModelTemplate getStreamStyleModelTemplate() {
+        return StreamSerializationModelTemplate.getInstance();
+    }
+
+    @Override
     public ExceptionTemplate getExceptionTemplate() {
         return ExceptionTemplate.getInstance();
     }
@@ -62,11 +62,6 @@ public class DefaultTemplateFactory implements TemplateFactory {
     @Override
     public EnumTemplate getEnumTemplate() {
         return EnumTemplate.getInstance();
-    }
-
-    @Override
-    public PageTemplate getPageTemplate() {
-        return PageTemplate.getInstance();
     }
 
     @Override

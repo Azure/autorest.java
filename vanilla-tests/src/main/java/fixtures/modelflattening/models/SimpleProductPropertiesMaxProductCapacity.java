@@ -27,6 +27,9 @@ public enum SimpleProductPropertiesMaxProductCapacity {
      */
     @JsonCreator
     public static SimpleProductPropertiesMaxProductCapacity fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         SimpleProductPropertiesMaxProductCapacity[] items = SimpleProductPropertiesMaxProductCapacity.values();
         for (SimpleProductPropertiesMaxProductCapacity item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

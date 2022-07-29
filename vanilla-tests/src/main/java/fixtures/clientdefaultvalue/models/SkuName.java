@@ -30,6 +30,9 @@ public enum SkuName {
      */
     @JsonCreator
     public static SkuName fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         SkuName[] items = SkuName.values();
         for (SkuName item : items) {
             if (item.toString().equalsIgnoreCase(value)) {

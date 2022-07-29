@@ -96,8 +96,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -162,8 +160,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
     }
 
     /*
-     * A string value that is used as a global part of the parameterized host.
-     * Default value 'host'.
+     * A string value that is used as a global part of the parameterized host. Default value 'host'.
      */
     @Generated private String dnsSuffix;
 
@@ -197,8 +194,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -221,17 +217,13 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedCustomHostTestClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (dnsSuffix == null) {
-            this.dnsSuffix = "host";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localDnsSuffix = (dnsSuffix != null) ? dnsSuffix : "host";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedCustomHostTestClient client =
-                new AutoRestParameterizedCustomHostTestClient(pipeline, serializerAdapter, subscriptionId, dnsSuffix);
+                new AutoRestParameterizedCustomHostTestClient(
+                        localPipeline, localSerializerAdapter, subscriptionId, localDnsSuffix);
         return client;
     }
 

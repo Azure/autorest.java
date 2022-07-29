@@ -18,6 +18,6 @@ polling: {}
 
 models-subpackage: implementation.models
 client-logger: true
-model-override-setter-from-superclass: true
 custom-strongly-typed-header-deserialization: true
+required-fields-as-ctor-args: true
 ```

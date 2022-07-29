@@ -11,6 +11,7 @@
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,22 +46,8 @@ public class JavaFileContents {
         }
     }
 
-    private static String toString(JavaVisibility visiblity) {
-        String result;
-        switch (visiblity) {
-            case PackagePrivate:
-                result = "";
-                break;
-
-            default:
-                result = visiblity.toString().toLowerCase() + ' ';
-                break;
-        }
-        return result;
-    }
-
     private static String toString(List<JavaModifier> modifiers) {
-        return modifiers == null ? "" : modifiers.stream().map(modifier -> modifier.toString().toLowerCase() + ' ').collect(Collectors.joining(""));
+        return modifiers == null ? "" : modifiers.stream().map(JavaModifier::toString).collect(Collectors.joining(" "));
     }
 
     @Override
@@ -317,8 +304,12 @@ public class JavaFileContents {
         }
     }
 
-    public void classBlock(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration, Consumer<JavaClass> classAction) {
-        block(String.format("%s%sclass %s", toString(visibility), toString(modifiers), classDeclaration), blockAction -> {
+    public void classBlock(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration,
+        Consumer<JavaClass> classAction) {
+        String text = CoreUtils.isNullOrEmpty(modifiers)
+            ? visibility + " class " + classDeclaration
+            : visibility + " " + toString(modifiers) + " class " + classDeclaration;
+        block(text, blockAction -> {
             if (classAction != null) {
                 JavaClass javaClass = new JavaClass(this);
                 classAction.accept(javaClass);
@@ -326,16 +317,21 @@ public class JavaFileContents {
         });
     }
 
-    public void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method) {
-        block(String.format("%s%s%s", toString(visibility), toString(modifiers), methodSignature), method);
+    public void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature,
+        Consumer<JavaBlock> method) {
+        String text = CoreUtils.isNullOrEmpty(modifiers)
+            ? visibility + " " + methodSignature
+            : visibility + " " + toString(modifiers) + " " + methodSignature;
+
+        block(text, method);
     }
 
     public void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
-        block(String.format("%s%s", toString(visibility), constructorSignature), constructor);
+        block(String.format("%s %s", visibility, constructorSignature), constructor);
     }
 
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction) {
-        block(String.format("%senum %s", toString(visibility), enumName), block -> {
+        block(String.format("%s enum %s", visibility, enumName), block -> {
             if (enumAction != null) {
                 JavaEnum javaEnum = new JavaEnum(this);
                 enumAction.accept(javaEnum);
@@ -345,27 +341,21 @@ public class JavaFileContents {
     }
 
     public void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction) {
-        line("%sinterface %s {", toString(visibility), interfaceSignature);
+        line("%s interface %s {", visibility, interfaceSignature);
         indent(() -> interfaceAction.accept(new JavaInterface(this)));
         line("}");
     }
 
     public void ifBlock(String condition, Consumer<JavaBlock> ifAction) {
         line("if (%s) {", condition);
-        indent(() ->
-        {
-            ifAction.accept(new JavaBlock(this));
-        });
+        indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void elseIfBlock(String condition, Consumer<JavaBlock> ifAction) {
         line(String.format(" else if (%s) {", condition), false);
-        indent(() ->
-        {
-            ifAction.accept(new JavaBlock(this));
-        });
+        indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
@@ -378,20 +368,14 @@ public class JavaFileContents {
 
     public void tryBlock(Consumer<JavaBlock> tryAction) {
         line("try {");
-        indent(() ->
-        {
-            tryAction.accept(new JavaBlock(this));
-        });
+        indent(() -> tryAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void tryBlock(String resource, Consumer<JavaBlock> tryAction) {
         line("try (%s) {", resource);
-        indent(() ->
-        {
-            tryAction.accept(new JavaBlock(this));
-        });
+        indent(() -> tryAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }

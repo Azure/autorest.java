@@ -30,6 +30,9 @@ public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum {
      */
     @JsonCreator
     public static NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum fromString(String value) {
+        if (value == null) {
+            return null;
+        }
         NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum[] items =
                 NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum.values();
         for (NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum item : items) {

@@ -17,17 +17,14 @@ public final class MyDerivedTypeTests {
                                 "{\"kind\":\"Kind1\",\"propD1\":\"gphuticndvka\",\"propB1\":\"wyiftyhxhur\",\"helper\":{\"propBH1\":\"ftyxolniw\"}}")
                         .toObject(MyDerivedType.class);
         Assertions.assertEquals("wyiftyhxhur", model.getPropB1());
-        Assertions.assertEquals("ftyxolniw", model.getPropBH1());
         Assertions.assertEquals("gphuticndvka", model.getPropD1());
     }
 
     @Test
     public void testSerialize() {
-        MyDerivedType model =
-                new MyDerivedType().setPropB1("wyiftyhxhur").setPropBH1("ftyxolniw").setPropD1("gphuticndvka");
+        MyDerivedType model = new MyDerivedType().setPropB1("wyiftyhxhur").setPropD1("gphuticndvka");
         model = BinaryData.fromObject(model).toObject(MyDerivedType.class);
         Assertions.assertEquals("wyiftyhxhur", model.getPropB1());
-        Assertions.assertEquals("ftyxolniw", model.getPropBH1());
         Assertions.assertEquals("gphuticndvka", model.getPropD1());
     }
 }

@@ -96,8 +96,7 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -162,8 +160,7 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -186,15 +183,11 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerBatFileServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatFileServiceClientImpl client =
                 new AutoRestSwaggerBatFileServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 

@@ -31,7 +31,7 @@ public class ClientModel {
      */
     private String description;
     /**
-     * Get whether or not this model has model types that derive from it.
+     * Get whether this model has model types that derive from it.
      */
     private boolean isPolymorphic;
     /**
@@ -43,7 +43,7 @@ public class ClientModel {
      */
     private String serializedName;
     /**
-     * Get whether or not this model needs serialization flattening.
+     * Get whether this model needs serialization flattening.
      */
     private boolean needsFlatten;
     /**
@@ -83,10 +83,10 @@ public class ClientModel {
      * @param name The name of this model.
      * @param imports The imports for this model.
      * @param description The description of this model.
-     * @param isPolymorphic Whether or not this model has model types that derive from it.
+     * @param isPolymorphic Whether this model has model types that derive from it.
      * @param polymorphicDiscriminator The name of the property that determines which polymorphic model type to create.
      * @param serializedName The name that is used for this model when it is serialized.
-     * @param needsFlatten Whether or not this model needs serialization flattening.
+     * @param needsFlatten Whether this model needs serialization flattening.
      * @param parentModelName The parent model of this model.
      * @param derivedModels The models that derive from this model.
      * @param xmlName The name that will be used for this model's XML element representation.
@@ -317,8 +317,8 @@ public class ClientModel {
         }
 
         /**
-         * Sets whether or not this model has model types that derive from it.
-         * @param isPolymorphic whether or not this model has model types that derive from it
+         * Sets whether this model has model types that derive from it.
+         * @param isPolymorphic whether this model has model types that derive from it
          * @return the Builder itself
          */
         public Builder isPolymorphic(boolean isPolymorphic) {
@@ -347,8 +347,8 @@ public class ClientModel {
         }
 
         /**
-         * Sets whether or not this model needs serialization flattening.
-         * @param needsFlatten whether or not this model needs serialization flattening
+         * Sets whether this model needs serialization flattening.
+         * @param needsFlatten whether this model needs serialization flattening
          * @return the Builder itself
          */
         public Builder needsFlatten(boolean needsFlatten) {

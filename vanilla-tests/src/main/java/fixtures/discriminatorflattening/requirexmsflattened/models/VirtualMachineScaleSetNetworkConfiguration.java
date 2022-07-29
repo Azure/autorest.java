@@ -19,8 +19,7 @@ public class VirtualMachineScaleSetNetworkConfiguration {
     private String name;
 
     /*
-     * Specifies the primary network interface in case the virtual machine has
-     * more than 1 network interface.
+     * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      */
     @JsonProperty(value = "properties.primary")
     private Boolean primary;

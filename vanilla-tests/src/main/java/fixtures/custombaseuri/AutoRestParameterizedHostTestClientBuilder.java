@@ -96,8 +96,7 @@ public final class AutoRestParameterizedHostTestClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestParameterizedHostTestClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -179,8 +177,7 @@ public final class AutoRestParameterizedHostTestClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -203,17 +200,12 @@ public final class AutoRestParameterizedHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedHostTestClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "host";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "host";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedHostTestClient client =
-                new AutoRestParameterizedHostTestClient(pipeline, serializerAdapter, host);
+                new AutoRestParameterizedHostTestClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 

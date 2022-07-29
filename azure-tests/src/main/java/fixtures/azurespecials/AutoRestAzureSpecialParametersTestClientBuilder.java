@@ -96,8 +96,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -145,8 +143,8 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The subscription id, which appears in the path, always modeled in
-     * credentials. The value is always '1234-5678-9012-3456'
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always
+     * '1234-5678-9012-3456'
      */
     @Generated private String subscriptionId;
 
@@ -215,8 +213,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -239,21 +236,14 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
      */
     @Generated
     public AutoRestAzureSpecialParametersTestClient buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (apiVersion == null) {
-            this.apiVersion = "2015-07-01-preview";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        String localApiVersion = (apiVersion != null) ? apiVersion : "2015-07-01-preview";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestAzureSpecialParametersTestClient client =
                 new AutoRestAzureSpecialParametersTestClient(
-                        pipeline, serializerAdapter, subscriptionId, host, apiVersion);
+                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
         return client;
     }
 

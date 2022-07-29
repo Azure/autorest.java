@@ -7,6 +7,7 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /** Flattened product. */
 @JsonFlatten
@@ -102,6 +103,20 @@ public class FlattenedProduct extends Resource {
      */
     public FlattenedProduct setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlattenedProduct setTags(Map<String, String> tags) {
+        super.setTags(tags);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlattenedProduct setLocation(String location) {
+        super.setLocation(location);
         return this;
     }
 

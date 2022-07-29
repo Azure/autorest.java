@@ -96,8 +96,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -145,8 +143,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * Constant header property on the client that is a required parameter for
-     * operation 'constants_putClientConstants'
+     * Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'
      */
     @Generated private boolean headerConstant = true;
 
@@ -164,8 +161,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * Constant query property on the client that is a required parameter for
-     * operation 'constants_putClientConstants'
+     * Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'
      */
     @Generated private int queryConstant = 100;
 
@@ -183,8 +179,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * Constant path property on the client that is a required parameter for
-     * operation 'constants_putClientConstants'
+     * Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'
      */
     @Generated private String pathConstant;
 
@@ -219,8 +214,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -243,23 +237,17 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerConstantServiceClientImpl buildInnerClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (pathConstant == null) {
-            this.pathConstant = "path";
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localPathConstant = (pathConstant != null) ? pathConstant : "path";
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerConstantServiceClientImpl client =
                 new AutoRestSwaggerConstantServiceClientImpl(
-                        pipeline,
+                        localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
                         headerConstant,
                         queryConstant,
-                        pathConstant,
-                        host);
+                        localPathConstant,
+                        localHost);
         return client;
     }
 

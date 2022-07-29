@@ -104,7 +104,7 @@ public class JavaSettings {
                 getStringValue(host, "fluent"),
                 getBooleanValue(host, "regenerate-pom", false),
                     header,
-                80,
+                120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "").toLowerCase(),
                 getBooleanValue(host, "enable-xml", false),
@@ -132,7 +132,6 @@ public class JavaSettings {
                 getStringValue(host, "credential-scopes"),
                 getStringValue(host, "customization-jar-path"),
                 getStringValue(host, "customization-class"),
-                getBooleanValue(host, "model-override-setter-from-superclass", false),
                 getBooleanValue(host, "optional-constant-as-enum", false),
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
@@ -156,7 +155,8 @@ public class JavaSettings {
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "custom-strongly-typed-header-deserialization", false),
-                getBooleanValue(host, "generic-response-type", false)
+                getBooleanValue(host, "generic-response-type", false),
+                getBooleanValue(host, "stream-style-serialization", false)
             );
         }
         return instance;
@@ -165,13 +165,6 @@ public class JavaSettings {
     /**
      * Create a new JavaSettings object with the provided properties.
      *
-     * @param azure
-     * @param fluent
-     * @param regeneratePom
-     * @param fileHeaderText
-     * @param maximumJavadocCommentWidth
-     * @param serviceName
-     * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
@@ -200,6 +193,8 @@ public class JavaSettings {
      * performance benefits.
      * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
      * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
+     * @param streamStyleSerialization If set to true, models will handle serialization themselves using stream-style
+     * serialization instead of relying on Jackson Databind.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -236,7 +231,6 @@ public class JavaSettings {
         String credentialScopes,
         String customizationJarPath,
         String customizationClass,
-        boolean overrideSetterFromSuperclass,
         boolean optionalConstantAsEnum,
         boolean dataPlaneClient,
         boolean useIterable,
@@ -258,7 +252,8 @@ public class JavaSettings {
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
         boolean customStronglyTypedHeaderDeserialization,
-        boolean genericResponseTypes) {
+        boolean genericResponseTypes,
+        boolean streamStyleSerialization) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -291,7 +286,6 @@ public class JavaSettings {
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
         this.serviceInterfaceAsPublic = serviceInterfaceAsPublic;
         this.artifactId = artifactId;
-        this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
         this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
@@ -347,6 +341,8 @@ public class JavaSettings {
 
         this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
         this.genericResponseTypes = genericResponseTypes;
+
+        this.streamStyleSerialization = streamStyleSerialization;
     }
 
     private String keyCredentialHeaderName;
@@ -735,15 +731,7 @@ public class JavaSettings {
         return customizationClass;
     }
 
-    boolean overrideSetterFromParent;
     boolean skipFormatting;
-
-    /**
-     * @return whether to override superclass setter method in model.
-     */
-    public boolean isOverrideSetterFromSuperclass() {
-        return overrideSetterFromParent;
-    }
 
     /**
      * @return whether to skip formatting java files.
@@ -950,6 +938,18 @@ public class JavaSettings {
      */
     public boolean isGenericResponseTypes() {
         return genericResponseTypes;
+    }
+
+    private final boolean streamStyleSerialization;
+
+    /**
+     * Whether models will handle serialization themselves using stream-style serialization instead of relying on
+     * Jackson Databind.
+     *
+     * @return Whether models will handle serialization themselves.
+     */
+    public boolean isStreamStyleSerialization() {
+        return streamStyleSerialization;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",

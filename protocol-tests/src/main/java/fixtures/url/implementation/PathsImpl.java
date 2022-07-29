@@ -25,10 +25,10 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Paths. */
@@ -1202,7 +1202,9 @@ public final class PathsImpl {
     }
 
     /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * Get 'begin!*'();:@&amp;=+$,end
+     *
+     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1222,7 +1224,9 @@ public final class PathsImpl {
     }
 
     /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * Get 'begin!*'();:@&amp;=+$,end
+     *
+     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
@@ -1240,7 +1244,9 @@ public final class PathsImpl {
     }
 
     /**
-     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * Get 'begin!*'();:@&amp;=+$,end
+     *
+     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1927,7 +1933,7 @@ public final class PathsImpl {
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.arrayCsvInPath(
@@ -1953,7 +1959,7 @@ public final class PathsImpl {
             List<String> arrayPath, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
         String arrayPathConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
     }
 

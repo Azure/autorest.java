@@ -96,8 +96,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
     }
 
     /*
-     * The client options such as application ID and custom headers to set on a
-     * request.
+     * The client options such as application ID and custom headers to set on a request.
      */
     @Generated private ClientOptions clientOptions;
 
@@ -131,8 +130,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
     }
 
     /*
-     * The configuration store that is used during construction of the service
-     * client.
+     * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
 
@@ -230,8 +228,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
     }
 
     /*
-     * The retry policy that will attempt to retry failed requests, if
-     * applicable.
+     * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
 
@@ -254,23 +251,18 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
      */
     @Generated
     public AutoRestRequiredOptionalTestService buildClient() {
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = JacksonAdapter.createDefaultSerializerAdapter();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
+        SerializerAdapter localSerializerAdapter =
+                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestRequiredOptionalTestService client =
                 new AutoRestRequiredOptionalTestService(
-                        pipeline,
-                        serializerAdapter,
+                        localPipeline,
+                        localSerializerAdapter,
                         requiredGlobalPath,
                         requiredGlobalQuery,
                         optionalGlobalQuery,
-                        host);
+                        localHost);
         return client;
     }
 

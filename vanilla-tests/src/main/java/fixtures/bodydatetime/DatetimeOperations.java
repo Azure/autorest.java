@@ -435,7 +435,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -458,7 +460,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -472,7 +476,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -571,7 +577,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -589,7 +597,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -601,7 +611,9 @@ public final class DatetimeOperations {
     }
 
     /**
-     * This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

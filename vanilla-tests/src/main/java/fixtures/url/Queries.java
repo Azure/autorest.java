@@ -19,13 +19,13 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -1929,7 +1929,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2008,7 +2012,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2083,7 +2091,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2158,7 +2170,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.arrayStringNoCollectionFormatEmpty(
@@ -2240,7 +2256,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(" "));
         return FluxUtil.withContext(
                 context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2320,7 +2340,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining("	"));
         return FluxUtil.withContext(
                 context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -2401,7 +2425,11 @@ public final class Queries {
         }
         final String accept = "application/json";
         String arrayQueryConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+                (arrayQuery == null)
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining("|"));
         return FluxUtil.withContext(
                 context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }

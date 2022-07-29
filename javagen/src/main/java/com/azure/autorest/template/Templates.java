@@ -30,10 +30,6 @@ public class Templates {
         return factory.getServiceVersionTemplate();
     }
 
-    public static ManagerTemplate getManagerTemplate() {
-        return factory.getManagerTemplate();
-    }
-
     public static MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate() {
         return factory.getMethodGroupInterfaceTemplate();
     }
@@ -54,16 +50,16 @@ public class Templates {
         return factory.getModelTemplate();
     }
 
+    public static StreamSerializationModelTemplate getStreamStyleModelTemplate() {
+        return factory.getStreamStyleModelTemplate();
+    }
+
     public static ExceptionTemplate getExceptionTemplate() {
         return factory.getExceptionTemplate();
     }
 
     public static EnumTemplate getEnumTemplate() {
         return factory.getEnumTemplate();
-    }
-
-    public static PageTemplate getPageTemplate() {
-        return factory.getPageTemplate();
     }
 
     public static ResponseTemplate getResponseTemplate() {

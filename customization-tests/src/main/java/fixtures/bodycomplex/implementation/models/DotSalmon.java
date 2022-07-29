@@ -67,6 +67,13 @@ public class DotSalmon extends DotFish {
         this.isWild = iswild;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public DotSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
     /**
      * Return if the salmon is a domestic species.
      *
