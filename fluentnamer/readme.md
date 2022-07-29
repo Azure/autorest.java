@@ -63,6 +63,5 @@ client-side-validations: true
 client-logger: true
 generate-client-interfaces: true
 required-parameter-client-methods: true
-model-override-setter-from-superclass: true
 client-flattened-annotation-target: none
 ```

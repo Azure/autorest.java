@@ -69,4 +69,18 @@ public class Cat extends Pet {
         this.hates = hates;
         return this;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cat setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cat setName(String name) {
+        super.setName(name);
+        return this;
+    }
 }

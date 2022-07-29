@@ -13,8 +13,6 @@ public interface TemplateFactory {
 
     ServiceVersionTemplate getServiceVersionTemplate();
 
-    ManagerTemplate getManagerTemplate();
-
     MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate();
 
     MethodGroupTemplate getMethodGroupTemplate();
@@ -30,8 +28,6 @@ public interface TemplateFactory {
     ExceptionTemplate getExceptionTemplate();
 
     EnumTemplate getEnumTemplate();
-
-    PageTemplate getPageTemplate();
 
     ResponseTemplate getResponseTemplate();
 

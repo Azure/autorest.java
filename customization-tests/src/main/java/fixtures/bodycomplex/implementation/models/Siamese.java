@@ -6,6 +6,7 @@ package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /** The Siamese model. */
 @Fluent
@@ -33,6 +34,34 @@ public final class Siamese extends Cat {
      */
     public Siamese setBreed(String breed) {
         this.breed = breed;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Siamese setColor(String color) {
+        super.setColor(color);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Siamese setHates(List<Dog> hates) {
+        super.setHates(hates);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Siamese setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Siamese setName(String name) {
+        super.setName(name);
         return this;
     }
 }
