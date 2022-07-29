@@ -3,20 +3,43 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * An instance on implementation details of method or model.
+ */
 public class ImplementationDetails {
 
+    /**
+     * Usage of the model or method. See {@link SchemaContext}.
+     */
     public enum Usage {
+        /**
+         * Model used in input of operation.
+         */
         INPUT("input"),
 
+        /**
+         * Model used in output of operation.
+         */
         OUTPUT("output"),
 
+        /**
+         * Model used in error output of operation.
+         */
         EXCEPTION("exception"),
 
+        /**
+         * Model used in input or output of methods marked as convenience method.
+         *
+         * In DPG, it means the model need to be written to Java class.
+         * Else, it may only exist in memory for Javadoc purpose.
+         */
         CONVENIENCE_METHOD("convenience-method");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
@@ -49,14 +72,26 @@ public class ImplementationDetails {
 
     private final Set<Usage> usages;
 
+    /**
+     * Usually on a method, that it is only required in implementation class (FooClientImpl),
+     * but not in public class (FooClient).
+     *
+     * @return whether only required in implementation class.
+     */
     public boolean isImplementationOnly() {
         return implementationOnly;
     }
 
+    /**
+     * @return the usage of the model or method.
+     */
     public Set<Usage> getUsages() {
         return usages;
     }
 
+    /**
+     * @return whether the model used for convenience method, or the method requires a convenience method.
+     */
     public boolean isConvenienceMethod() {
         return usages.contains(Usage.CONVENIENCE_METHOD);
     }
