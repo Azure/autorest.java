@@ -1,0 +1,19 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core.Operations;
+
+@serviceTitle("Paged")
+@serviceVersion("1.0.0")
+namespace Cadl.ErrorModel;
+
+model Diagnostic {
+  name: string;
+  error: Error;
+}
+
+@route("/error")
+interface ErrorOp {
+  op read(): OkResponse<Diagnostic> | ErrorResponse;
+}
