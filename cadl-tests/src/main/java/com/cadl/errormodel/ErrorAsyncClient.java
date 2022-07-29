@@ -18,18 +18,18 @@ import com.azure.core.util.BinaryData;
 import com.cadl.errormodel.implementation.ErrorOpsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous PagedClient type. */
-@ServiceClient(builder = PagedClientBuilder.class, isAsync = true)
-public final class PagedAsyncClient {
+/** Initializes a new instance of the asynchronous ErrorClient type. */
+@ServiceClient(builder = ErrorClientBuilder.class, isAsync = true)
+public final class ErrorAsyncClient {
     @Generated private final ErrorOpsImpl serviceClient;
 
     /**
-     * Initializes an instance of PagedAsyncClient class.
+     * Initializes an instance of ErrorAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PagedAsyncClient(ErrorOpsImpl serviceClient) {
+    ErrorAsyncClient(ErrorOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

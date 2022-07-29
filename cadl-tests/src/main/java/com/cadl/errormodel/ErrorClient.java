@@ -16,18 +16,18 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous PagedClient type. */
-@ServiceClient(builder = PagedClientBuilder.class)
-public final class PagedClient {
-    @Generated private final PagedAsyncClient client;
+/** Initializes a new instance of the synchronous ErrorClient type. */
+@ServiceClient(builder = ErrorClientBuilder.class)
+public final class ErrorClient {
+    @Generated private final ErrorAsyncClient client;
 
     /**
-     * Initializes an instance of PagedClient class.
+     * Initializes an instance of ErrorClient class.
      *
      * @param client the async client.
      */
     @Generated
-    PagedClient(PagedAsyncClient client) {
+    ErrorClient(ErrorAsyncClient client) {
         this.client = client;
     }
 

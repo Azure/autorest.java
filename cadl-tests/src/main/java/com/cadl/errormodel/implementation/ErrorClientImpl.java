@@ -12,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the PagedClient type. */
-public final class PagedClientImpl {
+/** Initializes a new instance of the ErrorClient type. */
+public final class ErrorClientImpl {
     /** Server parameter. */
     private final String endpoint;
 
@@ -63,11 +63,11 @@ public final class PagedClientImpl {
     }
 
     /**
-     * Initializes an instance of PagedClient client.
+     * Initializes an instance of ErrorClient client.
      *
      * @param endpoint Server parameter.
      */
-    public PagedClientImpl(String endpoint) {
+    public ErrorClientImpl(String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -77,23 +77,23 @@ public final class PagedClientImpl {
     }
 
     /**
-     * Initializes an instance of PagedClient client.
+     * Initializes an instance of ErrorClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      */
-    public PagedClientImpl(HttpPipeline httpPipeline, String endpoint) {
+    public ErrorClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
-     * Initializes an instance of PagedClient client.
+     * Initializes an instance of ErrorClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      */
-    public PagedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public ErrorClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;

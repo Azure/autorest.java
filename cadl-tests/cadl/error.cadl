@@ -4,7 +4,7 @@ import "@azure-tools/cadl-azure-core";
 using Cadl.Http;
 using Azure.Core.Operations;
 
-@serviceTitle("Paged")
+@serviceTitle("Error")
 @serviceVersion("1.0.0")
 namespace Cadl.ErrorModel;
 

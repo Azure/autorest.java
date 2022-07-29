@@ -31,23 +31,23 @@ public final class ErrorOpsImpl {
     private final ErrorOpsService service;
 
     /** The service client containing this operation class. */
-    private final PagedClientImpl client;
+    private final ErrorClientImpl client;
 
     /**
      * Initializes an instance of ErrorOpsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ErrorOpsImpl(PagedClientImpl client) {
+    ErrorOpsImpl(ErrorClientImpl client) {
         this.service = RestProxy.create(ErrorOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for PagedErrorOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ErrorErrorOps to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "PagedErrorOps")
+    @ServiceInterface(name = "ErrorErrorOps")
     private interface ErrorOpsService {
         @Get("/error")
         @ExpectedResponses({200})

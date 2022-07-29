@@ -6,14 +6,14 @@ package com.cadl.errormodel;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of PagedClient. */
-public enum PagedServiceVersion implements ServiceVersion {
+/** Service version of ErrorClient. */
+public enum ErrorServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
     private final String version;
 
-    PagedServiceVersion(String version) {
+    ErrorServiceVersion(String version) {
         this.version = version;
     }
 
@@ -25,9 +25,9 @@ public enum PagedServiceVersion implements ServiceVersion {
     /**
      * Gets the latest service version supported by this client library.
      *
-     * @return The latest {@link PagedServiceVersion}.
+     * @return The latest {@link ErrorServiceVersion}.
      */
-    public static PagedServiceVersion getLatest() {
+    public static ErrorServiceVersion getLatest() {
         return V1_0_0;
     }
 }

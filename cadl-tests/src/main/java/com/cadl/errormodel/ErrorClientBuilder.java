@@ -31,18 +31,18 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.cadl.errormodel.implementation.PagedClientImpl;
+import com.cadl.errormodel.implementation.ErrorClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the PagedClient type. */
-@ServiceClientBuilder(serviceClients = {PagedClient.class, PagedAsyncClient.class})
-public final class PagedClientBuilder
-        implements HttpTrait<PagedClientBuilder>,
-                ConfigurationTrait<PagedClientBuilder>,
-                EndpointTrait<PagedClientBuilder> {
+/** A builder for creating a new instance of the ErrorClient type. */
+@ServiceClientBuilder(serviceClients = {ErrorClient.class, ErrorAsyncClient.class})
+public final class ErrorClientBuilder
+        implements HttpTrait<ErrorClientBuilder>,
+                ConfigurationTrait<ErrorClientBuilder>,
+                EndpointTrait<ErrorClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -51,9 +51,9 @@ public final class PagedClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the PagedClientBuilder. */
+    /** Create an instance of the ErrorClientBuilder. */
     @Generated
-    public PagedClientBuilder() {
+    public ErrorClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -65,7 +65,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder pipeline(HttpPipeline pipeline) {
+    public ErrorClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -78,7 +78,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder httpClient(HttpClient httpClient) {
+    public ErrorClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -91,7 +91,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public ErrorClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -104,7 +104,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder clientOptions(ClientOptions clientOptions) {
+    public ErrorClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -117,7 +117,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder retryOptions(RetryOptions retryOptions) {
+    public ErrorClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public ErrorClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -138,7 +138,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder configuration(Configuration configuration) {
+    public ErrorClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -151,7 +151,7 @@ public final class PagedClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public PagedClientBuilder endpoint(String endpoint) {
+    public ErrorClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -165,24 +165,24 @@ public final class PagedClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the PagedClientBuilder.
+     * @return the ErrorClientBuilder.
      */
     @Generated
-    public PagedClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public ErrorClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of PagedClientImpl with the provided parameters.
+     * Builds an instance of ErrorClientImpl with the provided parameters.
      *
-     * @return an instance of PagedClientImpl.
+     * @return an instance of ErrorClientImpl.
      */
     @Generated
-    private PagedClientImpl buildInnerClient() {
+    private ErrorClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        PagedClientImpl client =
-                new PagedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+        ErrorClientImpl client =
+                new ErrorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
         return client;
     }
 
@@ -232,22 +232,22 @@ public final class PagedClientBuilder
     }
 
     /**
-     * Builds an instance of PagedAsyncClient class.
+     * Builds an instance of ErrorAsyncClient class.
      *
-     * @return an instance of PagedAsyncClient.
+     * @return an instance of ErrorAsyncClient.
      */
     @Generated
-    public PagedAsyncClient buildAsyncClient() {
-        return new PagedAsyncClient(buildInnerClient().getErrorOps());
+    public ErrorAsyncClient buildAsyncClient() {
+        return new ErrorAsyncClient(buildInnerClient().getErrorOps());
     }
 
     /**
-     * Builds an instance of PagedClient class.
+     * Builds an instance of ErrorClient class.
      *
-     * @return an instance of PagedClient.
+     * @return an instance of ErrorClient.
      */
     @Generated
-    public PagedClient buildClient() {
-        return new PagedClient(new PagedAsyncClient(buildInnerClient().getErrorOps()));
+    public ErrorClient buildClient() {
+        return new ErrorClient(new ErrorAsyncClient(buildInnerClient().getErrorOps()));
     }
 }
