@@ -110,7 +110,6 @@ public class CadlPlugin extends Javagen {
 
         SETTINGS_MAP.put("models-subpackage", "models");
         SETTINGS_MAP.put("client-logger", true);
-        SETTINGS_MAP.put("model-override-setter-from-superclass", true);
         SETTINGS_MAP.put("custom-strongly-typed-header-deserialization", true);
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
 
