@@ -3,18 +3,21 @@ package fixtures.header;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.*;
+import com.azure.core.http.policy.AddHeadersPolicy;
+import com.azure.core.http.policy.FixedDelay;
+import com.azure.core.http.policy.PortPolicy;
+import com.azure.core.http.policy.ProtocolPolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Base64Util;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeadersResponseBoolResponse;
-import fixtures.header.models.HeadersResponseDatetimeResponse;
-import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import reactor.test.StepVerifier;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -72,7 +75,6 @@ public class HeaderOperationsTests {
             // OkHttp can actually overwrite header "Content-Type"
         }
     }
-
     @Test
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
@@ -214,18 +216,22 @@ public class HeaderOperationsTests {
     }
 
     @Test
-    public void responseBool() throws Exception {
-        HeadersResponseBoolResponse response = client.getHeaders().responseBoolWithResponseAsync("true").block();
-        Map<String, String> headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("true", headers.get("value"));
-        }
+    public void responseBool() {
+        StepVerifier.create(client.getHeaders().responseBoolWithResponseAsync("true"))
+            .assertNext(response -> {
+                    if (response.getHeaders().getValue("value") != null) {
+                        Assert.assertEquals("true", response.getHeaders().getValue("value"));
+                    }
+                })
+            .verifyComplete();
 
-        response = client.getHeaders().responseBoolWithResponseAsync("false").block();
-        headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("false", headers.get("value"));
-        }
+        StepVerifier.create(client.getHeaders().responseBoolWithResponseAsync("false"))
+            .assertNext(response -> {
+                if (response.getHeaders().getValue("value") != null) {
+                    Assert.assertEquals("false", response.getHeaders().getValue("value"));
+                }
+            })
+            .verifyComplete();
     }
 
     @Test
@@ -325,18 +331,22 @@ public class HeaderOperationsTests {
     }
 
     @Test
-    public void responseDatetimeRfc1123() throws Exception {
-        HeadersResponseDatetimeRfc1123Response response = client.getHeaders().responseDatetimeRfc1123WithResponseAsync("valid").block();
-        Map<String, String> headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
-        }
+    public void responseDatetimeRfc1123() {
+        StepVerifier.create(client.getHeaders().responseDatetimeRfc1123WithResponseAsync("valid"))
+            .assertNext(response -> {
+                if (response.getHeaders().getValue("value") != null) {
+                    Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", response.getHeaders().getValue("value"));
+                }
+            })
+            .verifyComplete();
 
-        response = client.getHeaders().responseDatetimeRfc1123WithResponseAsync("min").block();
-        headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
-        }
+        StepVerifier.create(client.getHeaders().responseDatetimeRfc1123WithResponseAsync("min"))
+            .assertNext(response -> {
+                if (response.getHeaders().getValue("value") != null) {
+                    Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", response.getHeaders().getValue("value"));
+                }
+            })
+            .verifyComplete();
     }
 
     @Test
@@ -347,21 +357,26 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetime() throws Exception {
-        HeadersResponseDatetimeResponse response = client.getHeaders().responseDatetimeWithResponseAsync("valid").block();
-        Map<String, String> headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
-        }
-        response = client.getHeaders().responseDatetimeWithResponseAsync("min").block();
-        headers = response.getHeaders().toMap();
-        if (headers.get("value") != null) {
-            Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
-        }
+        StepVerifier.create(client.getHeaders().responseDatetimeWithResponseAsync("valid"))
+            .assertNext(response -> {
+                if (response.getHeaders().getValue("value") != null) {
+                    Assert.assertEquals("2010-01-01T12:34:56Z", response.getHeaders().getValue("value"));
+                }
+            })
+            .verifyComplete();
+
+        StepVerifier.create(client.getHeaders().responseDatetimeWithResponseAsync("min"))
+            .assertNext(response -> {
+                if (response.getHeaders().getValue("value") != null) {
+                    Assert.assertEquals("0001-01-01T00:00:00Z", response.getHeaders().getValue("value"));
+                }
+            })
+            .verifyComplete();
     }
 
     @Test
     public void paramByte() {
-        client.getHeaders().paramByteWithResponseAsync("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(Charset.forName("UTF-8"))).block();
+        client.getHeaders().paramByteWithResponseAsync("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8)).block();
     }
 
     @Test
@@ -372,7 +387,7 @@ public class HeaderOperationsTests {
                     Map<String, String> headers = response.getHeaders().toMap();
                     if (headers.get("value") != null) {
                         byte[] value = Base64Util.decodeString(headers.get("value"));
-                        String actual = new String(value, Charset.forName("UTF-8"));
+                        String actual = new String(value, StandardCharsets.UTF_8);
                         Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
                         lock.countDown();
                     }

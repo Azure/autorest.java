@@ -34,7 +34,7 @@ public class ModelTemplateTests {
     /**
      * Issue: https://github.com/Azure/autorest.java/issues/1320
      * Remove duplicate setter methods from child schema when parent schema contains same property
-     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
+     * mainly to test {@code com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
      */
     @Test
     public void deduplicateTest(){
