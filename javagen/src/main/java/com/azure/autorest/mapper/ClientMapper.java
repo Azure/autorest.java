@@ -27,7 +27,6 @@ import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
@@ -126,16 +125,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
         builder.models(clientModels);
 
-        // response model (subclass of Response with headers)
-        final List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .distinct()
-                .map(m -> parseResponse(m, settings))
-                .filter(Objects::nonNull)
-                .distinct()
-                .collect(Collectors.toList());
-        builder.responseModels(responseModels);
-
         // service client
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
@@ -197,7 +186,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
                     && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
                     // add package-info models package only if the models package is not empty
-                    && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
+                    && !(clientModels.isEmpty() && enumTypes.isEmpty())) {
 
                 String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
                 if (!packageInfos.containsKey(modelsPackage)) {
@@ -417,22 +406,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return headerSchema;
     }
 
-    private ClientResponse parseResponse(Operation method, JavaSettings settings) {
-        ClientResponse.Builder builder = new ClientResponse.Builder();
-        ObjectSchema headerSchema = parseHeader(method, settings);
-        if (headerSchema == null || settings.isGenericResponseTypes()) {
-            return null;
-        }
-
-        ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
-        return builder.name(classType.getName())
-            .packageName(classType.getPackage())
-            .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
-            .headersType(Mappers.getSchemaMapper().map(headerSchema))
-            .bodyType(SchemaUtil.getOperationResponseType(method, settings))
-            .build();
-    }
-
     private static ModuleInfo moduleInfo() {
         // WARNING: Only tested for low level clients
         JavaSettings settings = JavaSettings.getInstance();
@@ -454,7 +427,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getCustomTypesSubpackage())));
             }
 
-            // open models package to azure-core and jaskson
+            // open models package to azure-core and jackson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
             openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
@@ -466,15 +439,5 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         return moduleInfo;
-    }
-
-    static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
-        String name = CodeNamer.getPlural(method.getOperationGroup().getLanguage().getJava().getName())
-                + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
-        String packageName = settings.getPackage(settings.getModelsSubpackage());
-        if (settings.isCustomType(name)) {
-            packageName = settings.getPackage(settings.getCustomTypesSubpackage());
-        }
-        return new ClassType.Builder().packageName(packageName).name(name).build();
     }
 }

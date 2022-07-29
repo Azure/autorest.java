@@ -31,10 +31,6 @@ public class Client {
      */
     private List<XmlSequenceWrapper> xmlSequenceWrappers;
     /**
-     * Get the response models which contain the response status code, headers and body for each service method.
-     */
-    private List<ClientResponse> responseModels;
-    /**
      * Get the model types that are used by this service.
      */
     private List<ClientModel> models;
@@ -68,7 +64,6 @@ public class Client {
      * @param enums The enum types that are used by the client.
      * @param exceptions The exception types that are used by the client.
      * @param xmlSequenceWrappers the xml wrapper types that are used by the client.
-     * @param responseModels the models for response.
      * @param models the client models that are used by the client.
      * @param packageInfos the package-info classes that are used by the client.
      * @param manager the manager class that is used by the client.
@@ -80,19 +75,15 @@ public class Client {
      * @param protocolExamples examples for DPG.
      */
     private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions,
-                   List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels,
-                   List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager,
-                   ServiceClient serviceClient, ModuleInfo moduleInfo,
-                   List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
-                   List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests
-    ) {
+        List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientModel> models, List<PackageInfo> packageInfos,
+        Manager manager, ServiceClient serviceClient, ModuleInfo moduleInfo, List<AsyncSyncClient> syncClients,
+        List<AsyncSyncClient> asyncClients, List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
+        List<LiveTests> liveTests) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
         this.enums = enums;
         this.exceptions = exceptions;
         this.xmlSequenceWrappers = xmlSequenceWrappers;
-        this.responseModels = responseModels;
         this.models = models;
         this.packageInfos = packageInfos;
         this.manager = manager;
@@ -123,10 +114,6 @@ public class Client {
 
     public final List<XmlSequenceWrapper> getXmlSequenceWrappers() {
         return xmlSequenceWrappers;
-    }
-
-    public final List<ClientResponse> getResponseModels() {
-        return responseModels;
     }
 
     public final List<ClientModel> getModels() {
@@ -180,7 +167,6 @@ public class Client {
         private List<EnumType> enums;
         private List<ClientException> exceptions;
         private List<XmlSequenceWrapper> xmlSequenceWrappers;
-        private List<ClientResponse> responseModels;
         private List<ClientModel> models;
         private List<PackageInfo> packageInfos;
         private Manager manager;
@@ -239,16 +225,6 @@ public class Client {
          */
         public Builder xmlSequenceWrappers(List<XmlSequenceWrapper> xmlSequenceWrappers) {
             this.xmlSequenceWrappers = xmlSequenceWrappers;
-            return this;
-        }
-
-        /**
-         * Sets the response models which contain the response status code, headers and body for each service method.
-         * @param responseModels the response models which contain the response status code, headers and body for each service method
-         * @return the Builder itself
-         */
-        public Builder responseModels(List<ClientResponse> responseModels) {
-            this.responseModels = responseModels;
             return this;
         }
 
@@ -358,7 +334,6 @@ public class Client {
                     enums,
                     exceptions,
                     xmlSequenceWrappers,
-                    responseModels,
                     models,
                     packageInfos,
                     manager,

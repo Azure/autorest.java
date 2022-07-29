@@ -12,18 +12,17 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
@@ -325,13 +324,6 @@ public class FluentUtils {
             if (Response.class.getSimpleName().equals(type.getName())) {
                 ret = true;
             }
-        } else if (clientType instanceof ClassType) {
-            // ClientResponse is type of a subclass of Response<>
-            ClassType type = (ClassType) clientType;
-            Optional<ClientResponse> clientResponse = FluentStatic.getClient().getResponseModels().stream()
-                    .filter(r -> r.getName().equals(type.getName()))
-                    .findAny();
-            ret = clientResponse.isPresent();
         }
         return ret;
     }
@@ -343,14 +335,6 @@ public class FluentUtils {
             if (Response.class.getSimpleName().equals(type.getName())) {
                 bodyType = type.getTypeArguments()[0];
             }
-        } else if (clientType instanceof ClassType) {
-            ClassType type = (ClassType) clientType;
-            Optional<ClientResponse> clientResponse = FluentStatic.getClient().getResponseModels().stream()
-                    .filter(r -> r.getName().equals(type.getName()))
-                    .findFirst();
-            if (clientResponse.isPresent()) {
-                bodyType = clientResponse.get().getBodyType();
-            };
         }
         return bodyType;
     }

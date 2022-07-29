@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -233,11 +232,6 @@ public class Javagen extends NewPlugin {
         }
 
         if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-            }
-
             // Client model
             for (ClientModel model : client.getModels()) {
                 javaPackage.addModel(model.getPackage(), model.getName(), model);
@@ -263,7 +257,7 @@ public class Javagen extends NewPlugin {
         // Unit tests on client model
         if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
             for (ClientModel model : client.getModels()) {
-                if (!(settings.isCustomStronglyTypedHeaderDeserializationUsed() && model.isStronglyTypedHeader())) {
+                if (!model.isStronglyTypedHeader()) {
                     javaPackage.addModelUnitTest(model);
                 }
             }

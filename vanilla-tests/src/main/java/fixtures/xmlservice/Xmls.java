@@ -18,6 +18,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -38,7 +39,7 @@ import fixtures.xmlservice.models.RootWithRefAndNoMeta;
 import fixtures.xmlservice.models.SignedIdentifier;
 import fixtures.xmlservice.models.Slideshow;
 import fixtures.xmlservice.models.StorageServiceProperties;
-import fixtures.xmlservice.models.XmlsGetHeadersResponse;
+import fixtures.xmlservice.models.XmlsGetHeadersHeaders;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -128,7 +129,7 @@ public final class Xmls {
         @Get("/xml/headers")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<XmlsGetHeadersResponse> getHeaders(@HostParam("$host") String host, Context context);
+        Mono<ResponseBase<XmlsGetHeadersHeaders, Void>> getHeaders(@HostParam("$host") String host, Context context);
 
         @Get("/xml/empty-list")
         @ExpectedResponses({200})
@@ -690,10 +691,10 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return strongly-typed response headers on successful completion of {@link Mono}.
+     * @return strongly-typed response headers along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<XmlsGetHeadersResponse> getHeadersWithResponseAsync() {
+    public Mono<ResponseBase<XmlsGetHeadersHeaders, Void>> getHeadersWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));

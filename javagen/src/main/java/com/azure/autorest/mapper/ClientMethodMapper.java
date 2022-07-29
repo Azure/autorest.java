@@ -702,11 +702,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Else named response types are being used and return that.
         if (settings.isDataPlaneClient() || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
-        } else if (settings.isGenericResponseTypes()) {
-            return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                    syncReturnType);
         } else {
-            return ClientMapper.getClientResponseClassType(operation, settings);
+            return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
+                syncReturnType);
         }
     }
 

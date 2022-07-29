@@ -18,6 +18,7 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
@@ -30,33 +31,33 @@ import com.azure.core.util.polling.StatusCheckPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
 import fixtures.lro.models.CloudErrorException;
-import fixtures.lro.models.LROsDelete202NoRetry204Response;
-import fixtures.lro.models.LROsDelete202Retry200Response;
-import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
-import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
-import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
-import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
-import fixtures.lro.models.LROsPatch200SucceededIgnoreHeadersResponse;
-import fixtures.lro.models.LROsPatch201RetryWithAsyncHeaderResponse;
-import fixtures.lro.models.LROsPatch202RetryWithAsyncAndLocationHeaderResponse;
-import fixtures.lro.models.LROsPost202ListResponse;
-import fixtures.lro.models.LROsPost202NoRetry204Response;
-import fixtures.lro.models.LROsPost202Retry200Response;
-import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
-import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
-import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDelete202NoRetry204Headers;
+import fixtures.lro.models.LROsDelete202Retry200Headers;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Headers;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Headers;
+import fixtures.lro.models.LROsPatch200SucceededIgnoreHeadersHeaders;
+import fixtures.lro.models.LROsPatch201RetryWithAsyncHeaderHeaders;
+import fixtures.lro.models.LROsPatch202RetryWithAsyncAndLocationHeaderHeaders;
+import fixtures.lro.models.LROsPost202ListHeaders;
+import fixtures.lro.models.LROsPost202NoRetry204Headers;
+import fixtures.lro.models.LROsPost202Retry200Headers;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPostAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledHeaders;
+import fixtures.lro.models.LROsPutAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -101,7 +102,7 @@ public final class LROs {
         @Patch("/lro/patch/200/succeeded/ignoreheaders")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch200SucceededIgnoreHeadersResponse> patch200SucceededIgnoreHeaders(
+        Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>> patch200SucceededIgnoreHeaders(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -110,7 +111,7 @@ public final class LROs {
         @Patch("/lro/patch/201/retry/onlyAsyncHeader")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeader(
+        Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>> patch201RetryWithAsyncHeader(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -119,11 +120,12 @@ public final class LROs {
         @Patch("/lro/patch/202/retry/asyncAndLocationHeader")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse> patch202RetryWithAsyncAndLocationHeader(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Product product,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
+                patch202RetryWithAsyncAndLocationHeader(
+                        @HostParam("$host") String host,
+                        @BodyParam("application/json") Product product,
+                        @HeaderParam("Accept") String accept,
+                        Context context);
 
         @Put("/lro/put/201/succeeded")
         @ExpectedResponses({201})
@@ -137,7 +139,7 @@ public final class LROs {
         @Post("/lro/list")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202ListResponse> post202List(
+        Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202List(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/put/200/succeeded/nostate")
@@ -197,7 +199,7 @@ public final class LROs {
         @Put("/lro/put/noheader/202/200")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetry(
+        Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetry(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -206,7 +208,7 @@ public final class LROs {
         @Put("/lro/putasync/retry/succeeded")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(
+        Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -215,7 +217,7 @@ public final class LROs {
         @Put("/lro/putasync/noretry/succeeded")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceeded(
+        Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceeded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -224,7 +226,7 @@ public final class LROs {
         @Put("/lro/putasync/retry/failed")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailed(
+        Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailed(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -233,7 +235,7 @@ public final class LROs {
         @Put("/lro/putasync/noretry/canceled")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceled(
+        Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceled(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -242,7 +244,7 @@ public final class LROs {
         @Put("/lro/putasync/noheader/201/200")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetry(
+        Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetry(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -287,20 +289,23 @@ public final class LROs {
         @Delete("/lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
+                deleteProvisioning202Accepted200Succeeded(
+                        @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
+                deleteProvisioning202DeletingFailed200(
+                        @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
+                deleteProvisioning202Deletingcanceled200(
+                        @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/204/succeeded")
         @ExpectedResponses({204})
@@ -311,49 +316,49 @@ public final class LROs {
         @Delete("/lro/delete/202/retry/200")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDelete202Retry200Response> delete202Retry200(
+        Mono<ResponseBase<LROsDelete202Retry200Headers, Product>> delete202Retry200(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDelete202NoRetry204Response> delete202NoRetry204(
+        Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/noheader")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetry(
+        Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetry(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/noheader/202/204")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetry(
+        Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetry(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/succeeded")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceeded(
+        Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceeded(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceeded(
+        Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceeded(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/failed")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailed(
+        Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailed(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/canceled")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceled(
+        Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceled(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/post/payload/200")
@@ -365,7 +370,7 @@ public final class LROs {
         @Post("/lro/post/202/retry/200")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202Retry200Response> post202Retry200(
+        Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -374,7 +379,7 @@ public final class LROs {
         @Post("/lro/post/202/noretry/204")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202NoRetry204Response> post202NoRetry204(
+        Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>> post202NoRetry204(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -401,7 +406,7 @@ public final class LROs {
         @Post("/lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(
+        Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceeded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -410,7 +415,7 @@ public final class LROs {
         @Post("/lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceeded(
+        Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceeded(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -419,7 +424,7 @@ public final class LROs {
         @Post("/lro/postasync/retry/failed")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailed(
+        Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailed(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -428,7 +433,7 @@ public final class LROs {
         @Post("/lro/postasync/retry/canceled")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceled(
+        Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceled(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Product product,
                 @HeaderParam("Accept") String accept,
@@ -573,11 +578,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch200SucceededIgnoreHeadersResponse> patch200SucceededIgnoreHeadersWithResponseAsync(
-            Product product) {
+    public Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>>
+            patch200SucceededIgnoreHeadersWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -599,11 +604,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch200SucceededIgnoreHeadersResponse> patch200SucceededIgnoreHeadersWithResponseAsync(
-            Product product, Context context) {
+    public Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>>
+            patch200SucceededIgnoreHeadersWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -704,11 +709,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeaderWithResponseAsync(
-            Product product) {
+    public Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>>
+            patch201RetryWithAsyncHeaderWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -729,11 +734,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeaderWithResponseAsync(
-            Product product, Context context) {
+    public Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>>
+            patch201RetryWithAsyncHeaderWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -830,10 +835,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
+    public Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
             patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -857,10 +862,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
+    public Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
             patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -1088,10 +1093,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of Product on successful completion of {@link Mono}.
+     * @return array of Product along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202ListResponse> post202ListWithResponseAsync() {
+    public Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202ListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1108,10 +1113,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of Product on successful completion of {@link Mono}.
+     * @return array of Product along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202ListResponse> post202ListWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202ListWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2015,10 +2020,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2040,10 +2046,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithResponseAsync(
+            Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2146,10 +2153,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2172,10 +2180,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(
+    public Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -2283,10 +2291,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2309,10 +2318,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(
+    public Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -2420,10 +2429,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2446,10 +2456,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(
+    public Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -2557,10 +2567,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2583,10 +2594,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(
+    public Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -2693,10 +2704,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2718,10 +2730,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(
+    public Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3317,10 +3329,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Accepted200SucceededResponse>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
             deleteProvisioning202Accepted200SucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3340,10 +3352,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Accepted200SucceededResponse>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
             deleteProvisioning202Accepted200SucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3440,10 +3452,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202DeletingFailed200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
             deleteProvisioning202DeletingFailed200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3463,10 +3475,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202DeletingFailed200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
             deleteProvisioning202DeletingFailed200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3563,10 +3575,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Deletingcanceled200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
             deleteProvisioning202Deletingcanceled200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3586,10 +3598,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Deletingcanceled200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
             deleteProvisioning202Deletingcanceled200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -3793,10 +3805,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync() {
+    public Mono<ResponseBase<LROsDelete202Retry200Headers, Product>> delete202Retry200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3813,10 +3825,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDelete202Retry200Headers, Product>> delete202Retry200WithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3907,10 +3920,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync() {
+    public Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3927,10 +3940,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4021,10 +4035,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4041,10 +4055,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4135,10 +4150,11 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>>
+            deleteAsyncNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4156,10 +4172,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetryWithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4250,10 +4267,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4271,10 +4288,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4365,10 +4383,11 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>>
+            deleteAsyncNoRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4386,10 +4405,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>>
+            deleteAsyncNoRetrySucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4480,10 +4500,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4500,10 +4520,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4594,10 +4615,10 @@ public final class LROs {
      *
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4615,10 +4636,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithResponseAsync(
+            Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4825,10 +4847,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4850,10 +4872,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200WithResponseAsync(
+            Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4955,10 +4978,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4980,10 +5004,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithResponseAsync(
+            Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5437,10 +5462,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5463,10 +5489,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(
+    public Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -5574,10 +5600,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5600,10 +5627,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(
+    public Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -5711,10 +5738,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5737,10 +5765,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(
+    public Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
@@ -5848,10 +5876,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithResponseAsync(
+            Product product) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5874,10 +5903,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(
+    public Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithResponseAsync(
             Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(

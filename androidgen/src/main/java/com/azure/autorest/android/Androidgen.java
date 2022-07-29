@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -123,11 +122,6 @@ public class Androidgen extends Javagen {
                 if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
-            }
-
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
             }
 
             // Client model

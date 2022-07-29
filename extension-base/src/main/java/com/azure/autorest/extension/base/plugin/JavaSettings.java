@@ -154,8 +154,6 @@ public class JavaSettings {
                 host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
-                getBooleanValue(host, "custom-strongly-typed-header-deserialization", false),
-                getBooleanValue(host, "generic-response-type", false),
                 getBooleanValue(host, "stream-style-serialization", false)
             );
         }
@@ -188,11 +186,6 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
-     * @param customStronglyTypedHeaderDeserialization If set to true, strongly-typed HTTP header objects will use
-     * custom deserialization logic instead of using Jackson Databind's convertValue method, offering substantial
-     * performance benefits.
-     * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
-     * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
      * @param streamStyleSerialization If set to true, models will handle serialization themselves using stream-style
      * serialization instead of relying on Jackson Databind.
      */
@@ -251,8 +244,6 @@ public class JavaSettings {
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
-        boolean customStronglyTypedHeaderDeserialization,
-        boolean genericResponseTypes,
         boolean streamStyleSerialization) {
 
         this.autorestSettings = autorestSettings;
@@ -338,9 +329,6 @@ public class JavaSettings {
         this.httpStatusCodeToExceptionTypeMapping = httpStatusCodeToExceptionTypeMapping;
 
         this.handlePartialUpdate = handlePartialUpdate;
-
-        this.customStronglyTypedHeaderDeserialization = customStronglyTypedHeaderDeserialization;
-        this.genericResponseTypes = genericResponseTypes;
 
         this.streamStyleSerialization = streamStyleSerialization;
     }
@@ -914,30 +902,6 @@ public class JavaSettings {
 
     public boolean isHandlePartialUpdate() {
         return handlePartialUpdate;
-    }
-
-    private final boolean customStronglyTypedHeaderDeserialization;
-
-    /**
-     * Whether strongly-typed header objects should use custom deserialization logic instead of using Jackson Databind's
-     * convertValue method, offering substantial performance benefits.
-     *
-     * @return Whether strongly-typed header objects should use custom deserialization logic.
-     */
-    public boolean isCustomStronglyTypedHeaderDeserializationUsed() {
-        return customStronglyTypedHeaderDeserialization;
-    }
-
-    private final boolean genericResponseTypes;
-
-    /**
-     * Whether Response, ResponseBase, PagedResponse, or PagedResponseBase will be used directly with generics instead
-     * of creating a named type that extends one of those type.
-     *
-     * @return Whether generic response types are used instead of named types that extend the generic type.
-     */
-    public boolean isGenericResponseTypes() {
-        return genericResponseTypes;
     }
 
     private final boolean streamStyleSerialization;

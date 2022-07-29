@@ -4,7 +4,6 @@
 package com.azure.autorest.template;
 
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -28,8 +27,6 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
     }
 
     public final void write(ClientResponse response, JavaFile javaFile) {
-        JavaSettings settings = JavaSettings.getInstance();
-
         Set<String> imports = new HashSet<>();
         addRequestAndHeaderImports(imports);
         IType restResponseType = getRestResponseType(response);
@@ -49,10 +46,8 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
         if (isStreamResponse) {
             classSignature = String.format("%1$s extends %2$s implements Closeable", response.getName(),
                 restResponseType);
-        } else if (settings.isGenericResponseTypes()) {
-            classSignature = restResponseType.toString();
         } else {
-            classSignature = String.format("%1$s extends %2$s", response.getName(), restResponseType);
+            classSignature = restResponseType.toString();
         }
 
         javaFile.javadocComment(javadoc -> javadoc.description(response.getDescription()));

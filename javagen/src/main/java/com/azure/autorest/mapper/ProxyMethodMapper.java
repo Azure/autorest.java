@@ -124,14 +124,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
-            IType clientResponseClassType;
-            if (settings.isGenericResponseTypes()) {
-                clientResponseClassType = GenericType.RestResponse(
-                    Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                    responseBodyType);
-            } else {
-                clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-            }
+            IType clientResponseClassType = GenericType.RestResponse(Mappers.getSchemaMapper()
+                    .map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
             builder.returnType(GenericType.Mono(clientResponseClassType));
         } else {
             IType singleValueType;

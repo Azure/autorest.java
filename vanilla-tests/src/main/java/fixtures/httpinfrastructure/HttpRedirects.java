@@ -20,26 +20,27 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
-import fixtures.httpinfrastructure.models.HttpRedirectsDelete307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsGet300Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsGet301Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsGet302Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsGet307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsHead300Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsHead301Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsHead302Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsHead307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsOptions307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPatch302Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPatch307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPost303Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPost307Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPut301Response;
-import fixtures.httpinfrastructure.models.HttpRedirectsPut307Response;
+import fixtures.httpinfrastructure.models.HttpRedirectsDelete307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsGet300Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsGet301Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsGet302Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsGet307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsHead300Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsHead301Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsHead302Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsHead307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsOptions307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPatch302Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPatch307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPost303Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPost307Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPut301Headers;
+import fixtures.httpinfrastructure.models.HttpRedirectsPut307Headers;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -72,31 +73,31 @@ public final class HttpRedirects {
         @Head("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead300Response> head300(
+        Mono<ResponseBase<HttpRedirectsHead300Headers, Void>> head300(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet300Response> get300(
+        Mono<ResponseBase<HttpRedirectsGet300Headers, List<String>>> get300(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead301Response> head301(
+        Mono<ResponseBase<HttpRedirectsHead301Headers, Void>> head301(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet301Response> get301(
+        Mono<ResponseBase<HttpRedirectsGet301Headers, Void>> get301(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut301Response> put301(
+        Mono<ResponseBase<HttpRedirectsPut301Headers, Void>> put301(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -105,19 +106,19 @@ public final class HttpRedirects {
         @Head("/http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead302Response> head302(
+        Mono<ResponseBase<HttpRedirectsHead302Headers, Void>> head302(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet302Response> get302(
+        Mono<ResponseBase<HttpRedirectsGet302Headers, Void>> get302(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch302Response> patch302(
+        Mono<ResponseBase<HttpRedirectsPatch302Headers, Void>> patch302(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -126,7 +127,7 @@ public final class HttpRedirects {
         @Post("/http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost303Response> post303(
+        Mono<ResponseBase<HttpRedirectsPost303Headers, Void>> post303(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -135,25 +136,25 @@ public final class HttpRedirects {
         @Head("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead307Response> head307(
+        Mono<ResponseBase<HttpRedirectsHead307Headers, Void>> head307(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet307Response> get307(
+        Mono<ResponseBase<HttpRedirectsGet307Headers, Void>> get307(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Options("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsOptions307Response> options307(
+        Mono<ResponseBase<HttpRedirectsOptions307Headers, Void>> options307(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut307Response> put307(
+        Mono<ResponseBase<HttpRedirectsPut307Headers, Void>> put307(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -162,7 +163,7 @@ public final class HttpRedirects {
         @Patch("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch307Response> patch307(
+        Mono<ResponseBase<HttpRedirectsPatch307Headers, Void>> patch307(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -171,7 +172,7 @@ public final class HttpRedirects {
         @Post("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost307Response> post307(
+        Mono<ResponseBase<HttpRedirectsPost307Headers, Void>> post307(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -180,7 +181,7 @@ public final class HttpRedirects {
         @Delete("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsDelete307Response> delete307(
+        Mono<ResponseBase<HttpRedirectsDelete307Headers, Void>> delete307(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Boolean booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -192,10 +193,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsHead300Headers, Void>> head300WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -232,10 +233,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsGet300Headers, List<String>>> get300WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -273,10 +274,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsHead301Headers, Void>> head301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -313,10 +314,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsGet301Headers, Void>> get301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -354,10 +355,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPut301Headers, Void>> put301WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -397,10 +398,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsHead302Headers, Void>> head302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -437,10 +438,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsGet302Headers, Void>> get302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -478,10 +479,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPatch302Headers, Void>> patch302WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -522,10 +523,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPost303Headers, Void>> post303WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -565,10 +566,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsHead307Headers, Void>> head307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -605,10 +606,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsGet307Headers, Void>> get307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -645,10 +646,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsOptions307Headers, Void>> options307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -685,10 +686,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPut307Headers, Void>> put307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -726,10 +727,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPatch307Headers, Void>> patch307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -767,10 +768,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsPost307Headers, Void>> post307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -808,10 +809,10 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
+    public Mono<ResponseBase<HttpRedirectsDelete307Headers, Void>> delete307WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
