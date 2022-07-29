@@ -38,13 +38,13 @@ public final class BuiltinClient {
      *
      * <pre>{@code
      * {
-     *     booleanProperty: boolean (Required)
+     *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
-     *     intProperty: long (Required)
-     *     longProperty: long (Required)
-     *     floatProperty: double (Required)
-     *     doubleProperty: double (Required)
+     *     int: long (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
      *     duration: Duration (Required)
      *     dateTime: OffsetDateTime (Required)
      *     stringList (Required): [
