@@ -240,7 +240,7 @@ export class CodeModelBuilder {
     op.parameters.parameters.map(it => this.processParameter(operation, it));
     this.addAcceptHeaderParameter(operation, op.responses);
     if (op.parameters.body) {
-      this.processBody(operation, op.parameters.body);
+      this.processParameterBody(operation, op.parameters.body);
     }
     op.responses.map(it => this.processResponse(operation, it));
 
@@ -338,7 +338,7 @@ export class CodeModelBuilder {
     }));
   }
 
-  private processBody(op: Operation, body: ModelTypeProperty) {
+  private processParameterBody(op: Operation, body: ModelTypeProperty) {
     const schema = this.processSchema(body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       implementation: ImplementationLocation.Method,
@@ -471,7 +471,8 @@ export class CodeModelBuilder {
         return this.processUnionSchema(type, name);
 
       case "ModelProperty":
-        return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
+        return this.processSchema(type.type, name);
+        // return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
