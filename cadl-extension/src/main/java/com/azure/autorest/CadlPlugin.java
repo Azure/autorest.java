@@ -18,7 +18,6 @@ import com.azure.autorest.util.ClientModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -56,8 +55,11 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        new File(fileName).getParentFile().mkdirs();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        File parentFile = new File(fileName).getParentFile();
+        if (!parentFile.exists()) {
+            parentFile.mkdirs();
+        }
+        try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(content);
         } catch (IOException e) {
             throw new IllegalStateException(e);
@@ -127,8 +129,7 @@ public class CadlPlugin extends Javagen {
         super(new MockConnection(), "dummy", "dummy");
         SETTINGS_MAP.put("namespace", namespace);
         JavaSettingsAccessor.setHost(this);
-        JavaSettings.getInstance();
-    }
+   }
 
     @SuppressWarnings("unchecked")
     @Override

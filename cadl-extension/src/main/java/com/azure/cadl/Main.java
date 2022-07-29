@@ -10,10 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstruc
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.model.projectmodel.TextFile;
-import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
@@ -26,11 +23,11 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
 
@@ -52,9 +49,10 @@ public class Main {
                 outputFolder += "/";
             }
         }
+        final String outputFolderFinal = outputFolder;
 
         LOGGER.info("Code model file: {}", inputYamlFileName);
-        LOGGER.info("Output folder: {}", outputFolder);
+        LOGGER.info("Output folder: {}", outputFolderFinal);
 
         // load code-model.yaml
         CodeModel codeModel = loadCodeModel(inputYamlFileName);
@@ -82,28 +80,29 @@ public class Main {
 
         // write output
         Formatter formatter = new Formatter();
-        for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-            String content = javaFile.getContents().toString();
+
+        // Java
+        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
+        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+            String formattedSource = javaFile.getContents().toString();
             try {
-                content = formatter.formatSourceAndFixImports(content);
+                formattedSource = formatter.formatSourceAndFixImports(formattedSource);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", outputFolder + javaFile.getFilePath(), e);
-//                continue;
+                LOGGER.error("Failed to format file: {}", outputFolderFinal + javaFile.getFilePath(), e);
+                // but we continue so user can still check the file and see why format fails
             }
-            cadlPlugin.writeFile(outputFolder + javaFile.getFilePath(), content, null);
-        }
-        for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
-            String content = xmlFile.getContents().toString();
-            cadlPlugin.writeFile(outputFolder + xmlFile.getFilePath(), content, null);
-        }
-        for (TextFile testFile : javaPackage.getTextFiles()) {
-            String content = testFile.getContents();
-            cadlPlugin.writeFile(outputFolder + testFile.getFilePath(), content, null);
-        }
+            formattedFiles.put(javaFile.getFilePath(), formattedSource);
+        });
+        formattedFiles.forEach((filePath, formattedSource) -> cadlPlugin.writeFile(outputFolderFinal + filePath, formattedSource, null));
+
+        // XML include POM
+        javaPackage.getXmlFiles().forEach(xmlFile -> cadlPlugin.writeFile(outputFolderFinal + xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        // Others
+        javaPackage.getTextFiles().forEach(textFile -> cadlPlugin.writeFile(outputFolderFinal + textFile.getFilePath(), textFile.getContents(), null));
         // resources
         String artifactId = ClientModelUtil.getArtifactId();
         if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            cadlPlugin.writeFile(outputFolder + "src/main/resources/" + artifactId + ".properties",
+            cadlPlugin.writeFile(outputFolderFinal + "src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
     }
@@ -123,18 +122,6 @@ public class Main {
     }
 
     private static String readFile(String path) throws IOException {
-        try (InputStream fis = new FileInputStream(path)) {
-            StringBuilder sb = new StringBuilder();
-            char[] buffer = new char[1024];
-            try (InputStreamReader reader = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
-                int charsRead;
-                while ((charsRead = reader.read(buffer, 0, buffer.length)) > 0) {
-                    sb.append(buffer, 0, charsRead);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return sb.toString();
-        }
+        return new String(Files.readAllBytes(Paths.get(path)));
     }
 }
