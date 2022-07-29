@@ -69,15 +69,15 @@ public class EclipseLanguageClient implements AutoCloseable {
     private final URI workspaceDir;
     private ServerCapabilities serverCapabilities;
 
-    public EclipseLanguageClient(String workspaceDir) {
+    public EclipseLanguageClient(String workspaceDir) throws IOException {
         this(null, workspaceDir);
     }
 
-    public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir) {
+    public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir) throws IOException {
         this.workspaceDir = new File(workspaceDir).toURI();
+        serverSocket = new ServerSocket(0);
+        int port = serverSocket.getLocalPort();
         try {
-            serverSocket = new ServerSocket(0);
-            int port = serverSocket.getLocalPort();
             Thread thread = new Thread(() -> {
                 try {
                     clientSocket.set(serverSocket.accept());
