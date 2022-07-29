@@ -125,7 +125,9 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             }
 
             enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumName, converterName, typeName), function -> {
-                function.ifBlock("value == null", ifAction -> ifAction.methodReturn("null"));
+                if (elementType.isNullable()) {
+                    function.ifBlock("value == null", ifAction -> ifAction.methodReturn("null"));
+                }
                 function.line(enumName + "[] items = " + enumName + ".values();");
                 function.block("for (" + enumName + " item : items)", foreachBlock ->
                     foreachBlock.ifBlock(createEnumJsonCreatorIfCheck(enumType), ifBlock -> ifBlock.methodReturn("item")));
