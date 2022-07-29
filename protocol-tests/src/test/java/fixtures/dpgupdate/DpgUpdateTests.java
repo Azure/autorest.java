@@ -58,7 +58,6 @@ public class DpgUpdateTests {
     }
 
     @Test
-    @Disabled("not implemented in testserver")
     public void putRequiredOptional() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("optionalParam", "optionalParam");
@@ -82,7 +81,6 @@ public class DpgUpdateTests {
     }
 
     @Test
-    @Disabled("not implemented in testserver")
     public void getOptional() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("optionalParam", "optionalParam");
