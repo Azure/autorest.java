@@ -77,6 +77,7 @@ log_and_call_autorest autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swa
 log_and_call_autorest autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
 log_and_call_autorest autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
 log_and_call_autorest autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
+log_and_call_autorest autorest $VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true
 
 # Azure
 log_and_call_autorest autorest $AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1

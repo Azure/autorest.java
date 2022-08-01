@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-08-01",
+    "title": "RequiredFieldsAsCtorArgsTransformation",
+    "description": "required-fields-as-ctor-args transformation client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+  },
+  "definitions": {
+    "TransformationAsRequiredFields": {
+      "type": "object",
+      "properties": {
+        "rfc1123NonRequired": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "rfc1123Required": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "nameRequired": {
+          "type": "string"
+        },
+        "urlBase64EncodedRequired": {
+          "type": "string",
+          "format": "base64url"
+        },
+        "unixTimeLongRequired": {
+          "type": "integer",
+          "format": "unixtime"
+        },
+        "unixTimeDateTimeRequired": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "rfc1123Required",
+        "nameRequired",
+        "urlBase64EncodedRequired",
+        "unixTimeDateTimeRequired",
+        "unixTimeLongRequired"
+      ]
+    },
+    "TransformationAsParentRequiredFields": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TransformationAsRequiredFields"
+        }
+      ],
+      "properties": {
+        "rfc1123RequiredChild": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "rfc1123NonRequiredChild": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        }
+      },
+      "required": ["rfc1123RequiredChild"]
+    }
+  }
+}

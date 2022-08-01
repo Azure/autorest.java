@@ -669,7 +669,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // Finally, add all required properties.
             if (settings.isRequiredFieldsAsConstructorArgs()) {
                 for (ClientModelProperty property : requiredProperties) {
-                    constructor.line("this." + property.getName() + " = " + property.getName() + ";");
+                    constructor.line("this." + property.getName() + " = " + property.getWireType().convertFromClientType(property.getName()) + ";");
                 }
             }
         });
