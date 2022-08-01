@@ -5,7 +5,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -66,27 +65,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.isConstant(isConstant).defaultValue(defaultValue);
 
-        String description = null;
-        // parameter description
-        if (parameter.getLanguage() != null) {
-            description = parameter.getLanguage().getDefault().getDescription();
-        }
-        // fallback to parameter schema description
-        if (description == null || description.isEmpty()) {
-            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-                description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            }
-        }
-        // fallback to dummy description
-        if (description == null || description.isEmpty()) {
-            description = String.format("The %s parameter", name);
-        }
-        // add allowed enum values
-        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
-            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
-        }
-
-        builder.description(description);
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, settings.isDataPlaneClient()));
         return builder.build();
     }
 }

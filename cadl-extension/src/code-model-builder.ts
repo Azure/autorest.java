@@ -213,11 +213,7 @@ export class CodeModelBuilder {
 
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
-      language: {
-        default: {
-          summary: this.getSummary(op.operation)
-        }
-      },
+      summary: this.getSummary(op.operation),
       apiVersions: [{
         version: this.version
       }],
@@ -283,6 +279,7 @@ export class CodeModelBuilder {
       const schema = this.processSchema(param.param.type, param.param.name);
       const nullable = this.isNullableType(param.param.type);
       const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
+        summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,
         nullable: nullable,
@@ -341,6 +338,7 @@ export class CodeModelBuilder {
   private processParameterBody(op: Operation, body: ModelTypeProperty) {
     const schema = this.processSchema(body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+      summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: !body.optional,
       protocol: {
@@ -852,6 +850,7 @@ export class CodeModelBuilder {
     const nullable = this.isNullableType(prop.type);
 
     return new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
+      summary: this.getSummary(prop),
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
