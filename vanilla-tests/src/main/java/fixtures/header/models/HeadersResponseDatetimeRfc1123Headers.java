@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -17,6 +18,18 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      */
     @JsonProperty(value = "value")
     private DateTimeRfc1123 value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseDatetimeRfc1123Headers class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseDatetimeRfc1123Headers(HttpHeaders rawHeaders) {
+        if (rawHeaders.getValue("value") != null) {
+            this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+        }
+    }
 
     /**
      * Get the value property: The value property.

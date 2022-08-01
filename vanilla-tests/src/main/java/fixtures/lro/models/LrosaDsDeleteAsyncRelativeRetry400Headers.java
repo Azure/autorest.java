@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LrosaDsDeleteAsyncRelativeRetry400Headers model. */
@@ -27,6 +28,18 @@ public final class LrosaDsDeleteAsyncRelativeRetry400Headers {
      */
     @JsonProperty(value = "Location")
     private String location;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of LrosaDsDeleteAsyncRelativeRetry400Headers class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public LrosaDsDeleteAsyncRelativeRetry400Headers(HttpHeaders rawHeaders) {
+        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        this.azureAsyncOperation = rawHeaders.getValue("Azure-AsyncOperation");
+        this.location = rawHeaders.getValue("Location");
+    }
 
     /**
      * Get the retryAfter property: The Retry-After property.

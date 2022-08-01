@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HttpRedirectsHead300Headers model. */
@@ -15,6 +16,16 @@ public final class HttpRedirectsHead300Headers {
      */
     @JsonProperty(value = "Location")
     private String location = "/http/success/head/200";
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HttpRedirectsHead300Headers class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HttpRedirectsHead300Headers(HttpHeaders rawHeaders) {
+        this.location = rawHeaders.getValue("Location");
+    }
 
     /**
      * Get the location property: The Location property.

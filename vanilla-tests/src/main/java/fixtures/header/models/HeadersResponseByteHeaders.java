@@ -5,8 +5,10 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Base64;
 
 /** The HeadersResponseByteHeaders model. */
 @Fluent
@@ -16,6 +18,18 @@ public final class HeadersResponseByteHeaders {
      */
     @JsonProperty(value = "value")
     private byte[] value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseByteHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
+        if (rawHeaders.getValue("value") != null) {
+            this.value = Base64.getDecoder().decode(rawHeaders.getValue("value"));
+        }
+    }
 
     /**
      * Get the value property: The value property.

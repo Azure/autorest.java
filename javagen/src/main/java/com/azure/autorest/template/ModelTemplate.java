@@ -262,8 +262,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         addSerializationImports(imports, settings);
 
-        // Add HttpHeaders as an import when strongly-typed HTTP header objects are using custom deserialization.
-        if (settings.isCustomStronglyTypedHeaderDeserializationUsed() && model.isStronglyTypedHeader()) {
+        // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
+        if (model.isStronglyTypedHeader()) {
             ClassType.HttpHeaders.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
@@ -567,7 +567,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock) {
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
-        if (model.isStronglyTypedHeader() && settings.isCustomStronglyTypedHeaderDeserializationUsed()) {
+        if (model.isStronglyTypedHeader()) {
             addCustomStronglyTypedHeadersConstructor(classBlock, model, settings);
             return;
         }
