@@ -45,6 +45,8 @@ public class Property extends Value {
 
     private String clientDefaultValue;
 
+    private String summary;
+
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
@@ -139,5 +141,15 @@ public class Property extends Value {
 
     public void setClientDefaultValue(String clientDefaultValue) {
         this.clientDefaultValue = clientDefaultValue;
+    }
+
+    @Override
+    public String getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

@@ -96,7 +96,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
 
         // merge summary and description
-        String summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
+        String summary = operation.getSummary();
+        if (summary == null) {
+            // summary from m4 is under language
+            summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
+        }
         String description = operation.getLanguage().getJava() == null ? null : operation.getLanguage().getJava().getDescription();
         if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
             builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));

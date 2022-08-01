@@ -20,6 +20,7 @@ public class Parameter extends Value {
     private Parameter groupedBy;
     private Property targetProperty;
     private String origin;
+    private String summary;
 
     public String getClientDefaultValue() {
         return clientDefaultValue;
@@ -83,6 +84,16 @@ public class Parameter extends Value {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    @Override
+    public String getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public enum ImplementationLocation {

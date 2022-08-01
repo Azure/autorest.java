@@ -94,26 +94,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.wireType(wireType);
 
-        String description = null;
-        // parameter description
-        if (parameter.getLanguage() != null) {
-            description = parameter.getLanguage().getDefault().getDescription();
-        }
-        // fallback to parameter schema description
-        if (description == null || description.isEmpty()) {
-            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-                description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            }
-        }
-        // fallback to dummy description
-        if (description == null || description.isEmpty()) {
-            description = String.format("The %s parameter", name);
-        }
-        // add allowed enum values
-        if (settings.isDataPlaneClient() && parameterRequestLocation != RequestParameterLocation.BODY) {
-            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
-        }
-        builder.description(description);
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, settings.isDataPlaneClient()));
 
         if (parameter.getExtensions() != null) {
             builder.alreadyEncoded(parameter.getExtensions().isXmsSkipUrlEncoding());
