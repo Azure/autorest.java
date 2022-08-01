@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for FloatEnum. */
+/** List of float enums. */
 public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
     /** Static value 200.4 for FloatEnum. */
     public static final FloatEnum TWO_HUNDRED4 = fromFloat(200.4f);

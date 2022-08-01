@@ -48,6 +48,7 @@ public enum CopyStatusType {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

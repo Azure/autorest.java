@@ -7,7 +7,7 @@ package fixtures.bodyformdataurlencoded.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for PetType. */
+/** Can take a value of dog, or cat, or fish. */
 public enum PetType {
     /** Enum value dog. */
     DOG("dog"),
@@ -45,6 +45,7 @@ public enum PetType {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

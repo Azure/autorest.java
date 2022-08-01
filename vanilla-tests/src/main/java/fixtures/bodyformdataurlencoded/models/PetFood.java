@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for PetFood. */
+/** Can take a value of meat, or fish, or plant. */
 public final class PetFood extends ExpandableStringEnum<PetFood> {
     /** Static value meat for PetFood. */
     public static final PetFood MEAT = fromString("meat");

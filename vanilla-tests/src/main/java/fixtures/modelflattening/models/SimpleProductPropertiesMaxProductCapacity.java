@@ -7,7 +7,7 @@ package fixtures.modelflattening.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for SimpleProductPropertiesMaxProductCapacity. */
+/** Capacity of product. For example, 4 people. */
 public enum SimpleProductPropertiesMaxProductCapacity {
     /** Enum value Large. */
     LARGE("Large");
@@ -39,6 +39,7 @@ public enum SimpleProductPropertiesMaxProductCapacity {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

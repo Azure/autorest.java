@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for IntEnum. */
+/** List of integer enums. */
 public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     /** Static value 200 for IntEnum. */
     public static final IntEnum TWO_HUNDRED = fromInt(200);

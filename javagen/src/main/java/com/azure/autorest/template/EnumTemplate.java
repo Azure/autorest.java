@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashSet;
@@ -134,6 +135,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             });
 
             if (elementType == ClassType.String) {
+                enumBlock.javadocComment(JavaJavadocComment::inheritDoc);
                 if (!settings.isStreamStyleSerialization()) {
                     enumBlock.annotation("JsonValue");
                 }

@@ -7,7 +7,7 @@ package fixtures.mediatypes.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for ContentType. */
+/** Content type for upload. */
 public enum ContentType {
     /** Enum value application/pdf. */
     APPLICATION_PDF("application/pdf"),
@@ -48,6 +48,7 @@ public enum ContentType {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {
