@@ -79,6 +79,8 @@ protocol-tests/src/main/java/module-info.java
 protocol-sdk-integration-tests/sdk
 !protocol-sdk-integration-tests/sdk/parents
 
+cadl-tests/cadl-output
+
 # Coverage report
 /coverage/
 

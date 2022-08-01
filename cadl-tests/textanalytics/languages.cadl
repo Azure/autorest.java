@@ -1,0 +1,34 @@
+import "./lib.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+model AnalyzeTextLanguageDetectionInput extends Task<"LanguageDetection", LanguageDetectionTaskParameters, LanguageDetectionAnalysisInput> {}
+model LanguageDetectionTaskResult extends TaskResult<"LanguageDetectionResults", LanguageDetectionResult> {}
+
+model LanguageDetectionTaskParameters is PreBuiltTaskParameters {}
+
+model LanguageDetectionResult is PreBuiltResult<LanguageDetectionDocumentResult> {}
+model LanguageDetectionDocumentResult is DocumentResult {
+  @doc("Detected Language.")
+  detectedLanguage: DetectedLanguage[];
+}
+
+model LanguageDetectionAnalysisInput is LanguageAnalysisInput<LanguageInput> {}
+
+model DetectedLanguage {
+  @doc("Long name of a detected language (e.g. English, French).")
+  name: string;
+
+  @doc("""
+    A two letter representation of the detected language according to the ISO 639-1 
+    standard (e.g. en, fr).
+    """)
+  iso6391Name: string;
+
+  @doc("""
+    A confidence score between 0 and 1. 
+
+    Scores close to 1 indicate 100% certainty that the identified language is true.
+    """)
+  confidenceScore: float64;
+}

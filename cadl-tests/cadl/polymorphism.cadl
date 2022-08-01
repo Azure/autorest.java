@@ -1,0 +1,45 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+using Cadl.Rest;
+
+@serviceTitle("Polymorphism")
+@serviceVersion("1.0.0")
+namespace Cadl.Polymorphism;
+
+@discriminator("kind")
+model Pet {
+  name: string;
+  weight?: float32;
+}
+model Cat extends Pet {
+  kind: "cat";
+  meow: int32;
+}
+model Dog extends Pet {
+  kind: "dog";
+  bark: string;
+}
+
+model BaseType {
+  name: string;
+}
+model DerivedType extends BaseType {
+  description?: string;
+}
+model DerivedTypeData extends BaseType {
+  data: bytes;
+}
+model DerivedTypeList extends DerivedType {
+  items: BaseType[];
+}
+
+@route("/Pets")
+interface Polymorphism {
+  op read(): {
+    @body body: Pet;
+  };
+
+  @put
+  op write(@body body: BaseType): OkResponse<BaseType>;
+}

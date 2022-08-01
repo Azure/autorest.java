@@ -1,0 +1,17 @@
+import "./lib.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+model AnalyzeTextKeyPhraseExtractionInput extends Task<"KeyPhraseExtraction", KeyPhraseTaskParameters> {}
+model KeyPhraseTaskResult extends TaskResult<"KeyPhraseExtractionResults", KeyPhraseResult> {}
+
+model KeyPhraseLROTask extends LROTask<"KeyPhraseExtraction", KeyPhraseTaskParameters> {}
+model KeyPhraseExtractionLROResult extends LROTaskResult<"KeyPhraseExtractionLROResults", KeyPhraseResult> {}
+
+model KeyPhraseTaskParameters is PreBuiltTaskParameters {}
+
+model KeyPhraseResult is PreBuiltResult<KeyPhrasesDocumentResult> {}
+model KeyPhrasesDocumentResult is DocumentResult {
+  @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
+  keyPhrases: string[];
+}

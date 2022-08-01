@@ -10,7 +10,9 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +89,9 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                 .expandable(true)
                 .values(enumValues)
                 .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
+                .implementationDetails(new ImplementationDetails.Builder()
+                    .usages(SchemaUtil.mapSchemaContext(enumType.getUsage()))
+                    .build())
                 .build();
         }
     }

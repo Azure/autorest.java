@@ -31,7 +31,8 @@ public class AndroidClientModel extends ClientModel {
                 properties,
                 propertyReferences,
                 modelType,
-                stronglyTypedHeader);
+                stronglyTypedHeader,
+                null);
     }
 
     @Override

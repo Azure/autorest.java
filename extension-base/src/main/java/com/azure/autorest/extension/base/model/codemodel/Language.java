@@ -34,6 +34,8 @@ public class Language {
 
     private String summary;
 
+    private String namespace;
+
     /**
      * name used in actual implementation
      * (Required)
@@ -84,5 +86,13 @@ public class Language {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

@@ -1,0 +1,50 @@
+using Cadl.Http;
+using Cadl.Rest.Resource;
+
+model Page<T> {
+    value: T[];
+    "nextLink"?: string
+}
+
+@error
+model Error {
+    error: {
+        code: string;
+        message: string;
+    }
+}
+
+model LocationOf<TResource> {
+    @header("Location") location: string;
+}
+
+@withVisibility("read")
+model OkCreatedResponse<T> is Http.Response<"200" | "201"> {
+    @body __body__: T;
+}
+
+@withVisibility("write")
+model Request<T> {
+    ... T;
+}
+
+@withVisibility("write")
+model Updatable<T> {
+    @visibility("write") @header("content-type") contentType: "application/merge-patch+json";
+    @Cadl.Http.body properties: OptionalProperties<Cadl.UpdateableProperties<T>>;
+}
+
+interface LifetimeOperations<TResource, TFilter={}> {
+    @put op create(... KeysOf<TResource>, properties: TResource): OkCreatedResponse<TResource> | Error;
+    @get op read(... KeysOf<TResource>): Http.OkResponse<TResource> | Error;
+    @get op list (... ParentKeysOf<TResource>, ... TFilter): Page<TResource> | Error;
+    @delete op delete (... KeysOf<TResource>): void | Error;
+    @patch op update(... KeysOf<TResource>, ... Updatable<TResource>): TResource | Error;    
+}
+
+interface LifetimeNoPatchOperations<TResource, TFilter={}> {
+    @put op create(... KeysOf<TResource>, properties: Request<TResource>): OkCreatedResponse<TResource> | Error;
+    @get op read(... KeysOf<TResource>): Http.OkResponse<TResource> | Error;
+    @get op list (... ParentKeysOf<TResource>, ... TFilter): Page<TResource> | Error;
+    @delete op delete (... KeysOf<TResource>): void | Error;
+}

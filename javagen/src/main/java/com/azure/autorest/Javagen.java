@@ -17,7 +17,7 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.EnumType;;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -83,7 +83,7 @@ public class Javagen extends NewPlugin {
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
-            JavaPackage javaPackage = writeToTemplates(settings, codeModel, client);
+            JavaPackage javaPackage = writeToTemplates(codeModel, client, settings);
 
             //Step 4: Print to files
             Map<String, String> formattedFiles = new ConcurrentHashMap<>();
@@ -150,7 +150,7 @@ public class Javagen extends NewPlugin {
         return newYaml.loadAs(file, CodeModel.class);
     }
 
-    JavaPackage writeToTemplates(JavaSettings settings, CodeModel codeModel, Client client) {
+    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         javaPackage
@@ -232,33 +232,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
-        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
-            // Response
-            for (ClientResponse response : client.getResponseModels()) {
-                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-            }
-
-            // Client model
-            for (ClientModel model : client.getModels()) {
-                javaPackage.addModel(model.getPackage(), model.getName(), model);
-            }
-
-            // Enum
-            for (EnumType enumType : client.getEnums()) {
-                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-            }
-
-            // Exception
-            for (ClientException exception : client.getExceptions()) {
-                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-            }
-
-            // XML sequence wrapper
-            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
-                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
-            }
-        }
+        writeClientModels(client, javaPackage, settings);
 
         // Unit tests on client model
         if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
@@ -300,6 +274,36 @@ public class Javagen extends NewPlugin {
             }
         }
         return javaPackage;
+    }
+
+    protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
+            // Client model
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModel(model.getPackage(), model.getName(), model);
+            }
+
+            // Enum
+            for (EnumType enumType : client.getEnums()) {
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
+
+            // Response
+            for (ClientResponse response : client.getResponseModels()) {
+                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+            }
+
+            // Exception
+            for (ClientException exception : client.getExceptions()) {
+                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+            }
+
+            // XML sequence wrapper
+            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+            }
+        }
     }
 
     private void clear() {

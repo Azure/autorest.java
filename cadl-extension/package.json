@@ -1,0 +1,60 @@
+{
+  "name": "@azure-tools/cadl-java",
+  "version": "0.1.0-dev.1",
+  "description": "Java client emitter for CADL compiler",
+  "keywords": [
+    "cadl"
+  ],
+  "author": "weidxu",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/src/emitter.js",
+  "exports": {
+    ".": "./dist/src/emitter.js",
+    "./testing": "./dist/src/testing/index.js"
+  },
+  "cadlMain": "dist/src/emitter.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist ./temp",
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "test": "mocha",
+    "test-official": "c8 mocha --forbid-only",
+    "lint": "eslint . --ext .ts --max-warnings=0",
+    "lint:fix": "eslint . --fix --ext .ts"
+  },
+  "files": [
+    "lib/*.cadl",
+    "dist/**",
+    "!dist/test/**",
+    "target/azure-cadl-extension-jar-with-dependencies.jar"
+  ],
+  "peerDependencies": {
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/versioning": "latest"
+  },
+  "dependencies": {
+    "@autorest/codemodel": "~4.18.2",
+    "js-yaml": "~4.1.0"
+  },
+  "devDependencies": {
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/versioning": "latest",
+    "@types/js-yaml": "~4.0.1",
+    "@types/mocha": "~9.1.0",
+    "@types/node": "~14.0.27",
+    "@types/prettier": "^2.6.3",
+    "c8": "~7.11.0",
+    "eslint": "^8.12.0",
+    "mocha": "~9.2.0",
+    "rimraf": "~3.0.2",
+    "typescript": "~4.7.2",
+    "@typescript-eslint/parser": "^5.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.16.0"
+  }
+}
