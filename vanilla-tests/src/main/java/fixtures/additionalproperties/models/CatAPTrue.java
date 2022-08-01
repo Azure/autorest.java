@@ -36,6 +36,20 @@ public final class CatAPTrue extends PetAPTrue {
         return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public CatAPTrue setId(int id) {
+        super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public CatAPTrue setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
     /**
      * Validates the instance.
      *

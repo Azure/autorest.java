@@ -132,7 +132,6 @@ public class JavaSettings {
                 getStringValue(host, "credential-scopes"),
                 getStringValue(host, "customization-jar-path"),
                 getStringValue(host, "customization-class"),
-                getBooleanValue(host, "model-override-setter-from-superclass", false),
                 getBooleanValue(host, "optional-constant-as-enum", false),
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
@@ -232,7 +231,6 @@ public class JavaSettings {
         String credentialScopes,
         String customizationJarPath,
         String customizationClass,
-        boolean overrideSetterFromSuperclass,
         boolean optionalConstantAsEnum,
         boolean dataPlaneClient,
         boolean useIterable,
@@ -288,7 +286,6 @@ public class JavaSettings {
         this.requiredFieldsAsConstructorArgs = requiredFieldsAsConstructorArgs;
         this.serviceInterfaceAsPublic = serviceInterfaceAsPublic;
         this.artifactId = artifactId;
-        this.overrideSetterFromParent = overrideSetterFromSuperclass;
         this.optionalConstantAsEnum = optionalConstantAsEnum;
         this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
@@ -734,15 +731,7 @@ public class JavaSettings {
         return customizationClass;
     }
 
-    boolean overrideSetterFromParent;
     boolean skipFormatting;
-
-    /**
-     * @return whether to override superclass setter method in model.
-     */
-    public boolean isOverrideSetterFromSuperclass() {
-        return overrideSetterFromParent;
-    }
 
     /**
      * @return whether to skip formatting java files.

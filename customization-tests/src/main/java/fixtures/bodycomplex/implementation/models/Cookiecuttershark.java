@@ -7,9 +7,46 @@ package fixtures.bodycomplex.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /** The Cookiecuttershark model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("cookiecuttershark")
 @Fluent
-public final class Cookiecuttershark extends Shark {}
+public final class Cookiecuttershark extends Shark {
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setBirthday(OffsetDateTime birthday) {
+        super.setBirthday(birthday);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setLength(float length) {
+        super.setLength(length);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Cookiecuttershark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+}

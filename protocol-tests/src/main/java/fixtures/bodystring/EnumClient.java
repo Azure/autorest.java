@@ -130,7 +130,7 @@ public final class EnumClient {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String (Required)
+     *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>
@@ -155,7 +155,7 @@ public final class EnumClient {
      *
      * <pre>{@code
      * {
-     *     colorConstant: String (Required)
+     *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>

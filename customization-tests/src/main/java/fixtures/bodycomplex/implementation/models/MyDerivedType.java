@@ -39,4 +39,18 @@ public final class MyDerivedType extends MyBaseType {
         this.propD1 = propD1;
         return this;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public MyDerivedType setPropB1(String propB1) {
+        super.setPropB1(propB1);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MyDerivedType setPropBH1(String propBH1) {
+        super.setPropBH1(propBH1);
+        return this;
+    }
 }

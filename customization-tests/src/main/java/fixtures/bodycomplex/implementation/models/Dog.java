@@ -35,4 +35,18 @@ public final class Dog extends Pet {
         this.food = food;
         return this;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public Dog setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Dog setName(String name) {
+        super.setName(name);
+        return this;
+    }
 }
