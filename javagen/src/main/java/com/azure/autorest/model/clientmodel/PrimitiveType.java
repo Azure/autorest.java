@@ -3,6 +3,9 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import java.time.Instant;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -36,7 +39,7 @@ public class PrimitiveType implements IType {
         "writeStringField", "writeString");
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, null, null,
-        "writeLongField", "writeLong");
+        "writeLongField", "writeLong", Instant.class.getName());
 
     /**
      * The name of this type.
@@ -50,6 +53,10 @@ public class PrimitiveType implements IType {
     private final String defaultValue;
     private final String fieldSerializationMethod;
     private final String valueSerializationMethod;
+    /**
+     * Imports to add to.
+     */
+    private final Set<String> importsToAdd = new HashSet<>();
 
     /**
      * Create a new PrimitiveType from the provided properties.
@@ -60,13 +67,16 @@ public class PrimitiveType implements IType {
     }
 
     private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
-        String defaultValue, String fieldSerializationMethod, String valueSerializationMethod) {
+        String defaultValue, String fieldSerializationMethod, String valueSerializationMethod, String... importsToAdd) {
         this.name = name;
         this.nullableType = nullableType;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.defaultValue = defaultValue;
         this.fieldSerializationMethod = fieldSerializationMethod;
         this.valueSerializationMethod = valueSerializationMethod;
+        if (importsToAdd != null) {
+            this.importsToAdd.addAll(Arrays.asList(importsToAdd));
+        }
     }
 
     public static PrimitiveType fromNullableType(ClassType nullableType) {
@@ -99,6 +109,7 @@ public class PrimitiveType implements IType {
 
     @Override
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        imports.addAll(this.importsToAdd);
     }
 
     @Override
@@ -159,7 +170,7 @@ public class PrimitiveType implements IType {
         }
 
         if (this == PrimitiveType.UnixTimeLong) {
-            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s));", expression);
+            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
         }
         return expression;
     }
