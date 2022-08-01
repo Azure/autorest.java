@@ -17,6 +17,7 @@ public enum AutoRestSwaggerConstantServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getVersion() {
         return this.version;

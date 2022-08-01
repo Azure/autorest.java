@@ -7,7 +7,7 @@ package fixtures.clientdefaultvalue.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for SkuName. */
+/** SKU name to specify whether the key vault is a standard vault or a premium vault. */
 public enum SkuName {
     /** Enum value standard. */
     STANDARD("standard"),
@@ -42,6 +42,7 @@ public enum SkuName {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

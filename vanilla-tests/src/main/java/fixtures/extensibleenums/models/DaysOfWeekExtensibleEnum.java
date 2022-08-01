@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for DaysOfWeekExtensibleEnum. */
+/** Type of Pet. */
 public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum> {
     /** Static value Monday for DaysOfWeekExtensibleEnum. */
     public static final DaysOfWeekExtensibleEnum MONDAY = fromString("Monday");

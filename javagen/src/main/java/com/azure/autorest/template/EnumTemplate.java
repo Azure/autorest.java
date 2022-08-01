@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashSet;
@@ -30,16 +31,15 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
     public final void write(EnumType enumType, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        String enumTypeComment = "Defines values for " + enumType.getName() + ".";
+
         if (enumType.getExpandable()) {
-            writeExpandableStringEnum(enumType, javaFile, enumTypeComment, settings);
+            writeExpandableStringEnum(enumType, javaFile, settings);
         } else {
-            writeEnum(enumType, javaFile, enumTypeComment, settings);
+            writeEnum(enumType, javaFile, settings);
         }
     }
 
-    private void writeExpandableStringEnum(EnumType enumType, JavaFile javaFile, String enumTypeComment,
-        JavaSettings settings) {
+    private void writeExpandableStringEnum(EnumType enumType, JavaFile javaFile, JavaSettings settings) {
         Set<String> imports = new HashSet<>();
         imports.add("java.util.Collection");
         imports.add(getStringEnumImport());
@@ -48,7 +48,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         }
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment -> comment.description(enumTypeComment));
+        javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
 
         String enumName = enumType.getName();
         javaFile.publicFinalClass(enumName + " extends ExpandableStringEnum<" + enumName + ">", classBlock -> {
@@ -87,7 +87,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         });
     }
 
-    private void writeEnum(EnumType enumType, JavaFile javaFile, String enumTypeComment, JavaSettings settings) {
+    private void writeEnum(EnumType enumType, JavaFile javaFile, JavaSettings settings) {
         Set<String> imports = new HashSet<>();
         if (!settings.isStreamStyleSerialization()) {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
@@ -97,7 +97,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         elementType.getClientType().addImportsTo(imports, false);
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment -> comment.description(enumTypeComment));
+        javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
         javaFile.publicEnum(enumType.getName(), enumBlock -> {
             for (ClientEnumValue value : enumType.getValues()) {
                 enumBlock.value(value.getName(), value.getValue(), elementType);
@@ -135,6 +135,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             });
 
             if (elementType == ClassType.String) {
+                enumBlock.javadocComment(JavaJavadocComment::inheritDoc);
                 if (!settings.isStreamStyleSerialization()) {
                     enumBlock.annotation("JsonValue");
                 }

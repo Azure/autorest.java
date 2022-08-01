@@ -194,6 +194,7 @@ public class Preprocessor extends NewPlugin {
     sealedChoiceSchema.setChoiceType(constantSchema.getValueType());
     sealedChoiceSchema.setDefaultValue(constantSchema.getDefaultValue());
     sealedChoiceSchema.setLanguage(constantSchema.getLanguage());
+    sealedChoiceSchema.setSummary(constantSchema.getSummary());
 
     ChoiceValue choice = new ChoiceValue();
     choice.setValue(constantSchema.getValue().getValue().toString());

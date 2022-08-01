@@ -51,6 +51,7 @@ public enum LeaseStateType {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

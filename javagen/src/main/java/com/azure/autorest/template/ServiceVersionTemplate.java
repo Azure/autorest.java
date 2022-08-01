@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +44,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
                     javaBlock -> javaBlock.line("this.version = version;")
             );
 
+            classBlock.javadocComment(JavaJavadocComment::inheritDoc);
             classBlock.annotation("Override");
             classBlock.publicMethod(
                     "String getVersion()",

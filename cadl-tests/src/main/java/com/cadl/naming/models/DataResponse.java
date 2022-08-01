@@ -5,7 +5,6 @@
 package com.cadl.naming.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,20 +29,42 @@ public final class DataResponse {
      * description of data property
      */
     @JsonProperty(value = "data", required = true)
-    private byte[] data;
+    private BinaryData data;
+
+    /*
+     * summary of type property
+     *
+     * description of type property
+     */
+    @JsonProperty(value = "type", required = true)
+    private TypesModel type;
+
+    /*
+     * summary of status property
+     *
+     * description of status property
+     */
+    @JsonProperty(value = "status", required = true)
+    private DataStatus status;
 
     /**
      * Creates an instance of DataResponse class.
      *
      * @param name the name value to set.
      * @param data the data value to set.
+     * @param type the type value to set.
+     * @param status the status value to set.
      */
     @JsonCreator
     public DataResponse(
             @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "data", required = true) byte[] data) {
+            @JsonProperty(value = "data", required = true) BinaryData data,
+            @JsonProperty(value = "type", required = true) TypesModel type,
+            @JsonProperty(value = "status", required = true) DataStatus status) {
         this.name = name;
         this.data = data;
+        this.type = type;
+        this.status = status;
     }
 
     /**
@@ -64,7 +85,29 @@ public final class DataResponse {
      *
      * @return the data value.
      */
-    public byte[] getData() {
-        return CoreUtils.clone(this.data);
+    public BinaryData getData() {
+        return this.data;
+    }
+
+    /**
+     * Get the type property: summary of type property
+     *
+     * <p>description of type property.
+     *
+     * @return the type value.
+     */
+    public TypesModel getType() {
+        return this.type;
+    }
+
+    /**
+     * Get the status property: summary of status property
+     *
+     * <p>description of status property.
+     *
+     * @return the status value.
+     */
+    public DataStatus getStatus() {
+        return this.status;
     }
 }
