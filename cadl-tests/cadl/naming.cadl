@@ -20,7 +20,46 @@ model Response {
 
   @summary("summary of data property")
   @doc("description of data property")
+  data: DataModel;
+
+  @summary("summary of type property")
+  @doc("description of type property")
+  type: TypesModel;
+
+  @summary("summary of status property")
+  @doc("description of status property")
+  status: StatusModel;
+}
+
+@summary("summary of Data")
+@doc("description of Data")
+@friendlyName("BinaryData")
+model DataModel {
+  @summary("summary of data property")
+  @doc("description of data property")
   data: bytes;
+}
+
+@summary("summary of Types")
+@doc("description of Types")
+enum TypesModel {
+  Blob,
+  File,
+}
+
+@summary("summary of Statuses")
+@doc("description of Statuses")
+@knownValues(StatusValues)
+@friendlyName("DataStatus")
+model StatusModel is string {
+}
+
+@summary("summary of StatusValues")
+@doc("description of StatusValues")
+enum StatusValues {
+  Running,
+  Completed,
+  Failed,
 }
 
 @summary("summary of Request")

@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,13 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
             }
             String enumPackage = settings.getPackage(enumSubpackage);
 
+            String summary = enumType.getSummary();
+            String description = enumType.getLanguage().getJava() == null ? null : enumType.getLanguage().getJava().getDescription();
+            description = SchemaUtil.mergeSummaryWithDescription(summary, description);
+            if (CoreUtils.isNullOrEmpty(description)) {
+                description = "Defines values for " + enumTypeName + ".";
+            }
+
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
                 String enumName = enumValue.getValue();
@@ -86,6 +94,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
             return new EnumType.Builder()
                 .packageName(enumPackage)
                 .name(enumTypeName)
+                .description(description)
                 .expandable(true)
                 .values(enumValues)
                 .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))

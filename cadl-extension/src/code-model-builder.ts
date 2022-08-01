@@ -463,7 +463,7 @@ export class CodeModelBuilder {
         return this.processArraySchema(type, name);
 
       case "Enum":
-        return this.processChoiceSchema(type, name, true);
+        return this.processChoiceSchema(type, this.getName(type, type.name), true);
 
       case "Union":
         return this.processUnionSchema(type, name);
@@ -480,7 +480,7 @@ export class CodeModelBuilder {
               {
                 const enumType = getKnownValues(this.program, type);
                 if (enumType) {
-                  return this.processChoiceSchema(enumType, name, false);
+                  return this.processChoiceSchema(enumType, this.getName(type, type.name), false);
                 } else {
                   return this.processStringSchema(type, name);
                 }

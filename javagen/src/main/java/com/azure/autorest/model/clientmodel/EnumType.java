@@ -16,6 +16,7 @@ public class EnumType implements IType {
      * The name of the new Enum.
      */
     private final String name;
+    private final String description;
     /**
      * The package that this enumeration belongs to.
      */
@@ -36,14 +37,17 @@ public class EnumType implements IType {
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
+     * @param description The description of the Enum.
      * @param expandable Whether this will be an ExpandableStringEnum type.
      * @param values The values of the Enum.
      */
-    private EnumType(String packageKeyword, String name, boolean expandable, List<ClientEnumValue> values,
+    private EnumType(String packageKeyword, String name, String description,
+                     boolean expandable, List<ClientEnumValue> values,
                      IType elementType,
                      ImplementationDetails implementationDetails) {
         this.name = name;
         this.packageName = packageKeyword;
+        this.description = description;
         this.expandable = expandable;
         this.values = values;
         this.elementType = elementType;
@@ -56,6 +60,10 @@ public class EnumType implements IType {
 
     public final String getPackage() {
         return packageName;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public final boolean getExpandable() {
@@ -176,6 +184,7 @@ public class EnumType implements IType {
 
     public static class Builder {
         private String name;
+        private String description;
         private String packageName;
         private boolean expandable;
         private List<ClientEnumValue> values;
@@ -200,6 +209,16 @@ public class EnumType implements IType {
          */
         public Builder packageName(String packageName) {
             this.packageName = packageName;
+            return this;
+        }
+
+        /**
+         * Sets the description of the Enum.
+         * @param description the description of the Enum
+         * @return the Builder
+         */
+        public Builder description(String description) {
+            this.description = description;
             return this;
         }
 
@@ -252,6 +271,7 @@ public class EnumType implements IType {
             return new EnumType(
                     packageName,
                     name,
+                    description,
                     expandable,
                     values,
                     elementType,

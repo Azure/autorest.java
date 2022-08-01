@@ -94,7 +94,11 @@ public final class NamingOpsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     data: byte[] (Required)
+     *     data (Required): {
+     *         data: byte[] (Required)
+     *     }
+     *     type: String(Blob/File) (Required)
+     *     status: String(Running/Completed/Failed) (Required)
      * }
      * }</pre>
      *
@@ -136,7 +140,11 @@ public final class NamingOpsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     data: byte[] (Required)
+     *     data (Required): {
+     *         data: byte[] (Required)
+     *     }
+     *     type: String(Blob/File) (Required)
+     *     status: String(Running/Completed/Failed) (Required)
      * }
      * }</pre>
      *
@@ -179,7 +187,11 @@ public final class NamingOpsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     data: byte[] (Required)
+     *     data (Required): {
+     *         data: byte[] (Required)
+     *     }
+     *     type: String(Blob/File) (Required)
+     *     status: String(Running/Completed/Failed) (Required)
      * }
      * }</pre>
      *

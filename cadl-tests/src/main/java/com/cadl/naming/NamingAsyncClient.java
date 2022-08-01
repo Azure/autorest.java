@@ -55,7 +55,11 @@ public final class NamingAsyncClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     data: byte[] (Required)
+     *     data (Required): {
+     *         data: byte[] (Required)
+     *     }
+     *     type: String(Blob/File) (Required)
+     *     status: String(Running/Completed/Failed) (Required)
      * }
      * }</pre>
      *

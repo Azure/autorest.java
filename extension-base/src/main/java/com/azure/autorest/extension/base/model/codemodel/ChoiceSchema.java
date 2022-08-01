@@ -26,6 +26,7 @@ public class ChoiceSchema extends ValueSchema {
      * 
      */
     private List<ChoiceValue> choices = new ArrayList<ChoiceValue>();
+    private String summary;
 
     /**
      * a Schema that represents a string value
@@ -63,6 +64,16 @@ public class ChoiceSchema extends ValueSchema {
         this.choices = choices;
     }
 
+    @Override
+    public String getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
