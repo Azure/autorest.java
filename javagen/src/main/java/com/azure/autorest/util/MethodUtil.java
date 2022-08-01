@@ -76,6 +76,14 @@ public class MethodUtil {
         return REPEATABILITY_REQUEST_HTTP_METHODS.contains(httpMethod);
     }
 
+    /**
+     * Gets Javadoc description for method parameter.
+     *
+     * @param parameter the method parameter.
+     * @param name the name of method parameter, used when no description found.
+     * @param isDPG whether the description is used for DPG.
+     * @return the Javadoc description for method parameter.
+     */
     public static String getMethodParameterDescription(Parameter parameter, String name, boolean isDPG) {
         String summary = parameter.getSummary();
         String description = null;
