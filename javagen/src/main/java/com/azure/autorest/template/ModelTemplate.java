@@ -747,8 +747,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             // If the wire type was null, return null as the returned conversion could, and most likely would, result
             // in a NullPointerException.
-            methodBlock.ifBlock(expression + " == null",
-                ifBlock -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+            if (propertyWireType.isNullable()) {
+                methodBlock.ifBlock(expression + " == null",
+                        ifBlock -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+            }
 
             // Return the conversion of the wire type to the client type. An example would be a wire type of
             // DateTimeRfc1123 and a client type of OffsetDateTime (type a consumer would use), this makes the return
