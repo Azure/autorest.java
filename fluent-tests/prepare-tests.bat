@@ -36,7 +36,7 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM flatten payload
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM error response that not conform to ARM
