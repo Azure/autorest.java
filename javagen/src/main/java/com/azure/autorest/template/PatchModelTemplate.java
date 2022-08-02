@@ -171,25 +171,30 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                                 } else {
                                     expression = property.getName();
                                 }
-                                methodBlock.ifBlock(String.format("%s == null", property.getName()),
-                                                (ifBlock) -> ifBlock.line("this.%s = Option.empty();", property.getName()))
-                                        .elseBlock((elseBlock) -> {
-                                            String propertyConversion = propertyType.convertFromClientType(expression);
-                                            elseBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
-                                        });
+                                if (setterPropertyType.isNullable()) {
+                                    methodBlock.ifBlock(String.format("%s == null", property.getName()),
+                                                    (ifBlock) -> ifBlock.line("this.%s = Option.empty();", property.getName()))
+                                            .elseBlock((elseBlock) -> {
+                                                String propertyConversion = propertyType.convertFromClientType(expression);
+                                                elseBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
+                                            });
+                                } else { // primitive type, skip null check
+                                    String propertyConversion = propertyType.convertFromClientType(expression);
+                                    methodBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
+                                }
                                 methodBlock.methodReturn("this");
                             });
                 }
 
-                if (property.isAdditionalProperties()) {
-                    classBlock.annotation("JsonAnySetter");
-                    MapType mapType = (MapType) property.getClientType();
-                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
-                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock ->
-                                ifBlock.line("%s = new HashMap<>();", property.getName()));
-                        methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
-                    });
-                }
+//                if (property.isAdditionalProperties()) {
+//                    classBlock.annotation("JsonAnySetter");
+//                    MapType mapType = (MapType) property.getClientType();
+//                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
+//                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock ->
+//                                ifBlock.line("%s = new HashMap<>();", property.getName()));
+//                        methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
+//                    });
+//                }
             }
         });
     }
@@ -219,9 +224,7 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
 //                classBlock.annotation("JsonTypeId");
 //            }
 
-            if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty()) {
-                classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-            } else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
+            if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty()) {
                 classBlock.annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
             }
 
