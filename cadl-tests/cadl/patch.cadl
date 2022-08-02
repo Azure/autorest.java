@@ -12,7 +12,7 @@ model Resource {
   @visibility("read")
   name: string;
 
-  description: string;
+  description?: string;
 }
 
 @route("/patch")

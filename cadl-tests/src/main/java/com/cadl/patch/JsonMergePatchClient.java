@@ -39,7 +39,7 @@ public final class JsonMergePatchClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -48,7 +48,7 @@ public final class JsonMergePatchClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -75,7 +75,7 @@ public final class JsonMergePatchClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -84,7 +84,7 @@ public final class JsonMergePatchClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *

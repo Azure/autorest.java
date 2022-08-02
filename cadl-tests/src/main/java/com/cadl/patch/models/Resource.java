@@ -20,21 +20,18 @@ public final class Resource {
     /*
      * The description property.
      */
-    @JsonProperty(value = "description", required = true)
+    @JsonProperty(value = "description")
     private String description;
 
     /**
      * Creates an instance of Resource class.
      *
      * @param name the name value to set.
-     * @param description the description value to set.
      */
     @JsonCreator
     public Resource(
-            @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY) String name,
-            @JsonProperty(value = "description", required = true) String description) {
+            @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY) String name) {
         this.name = name;
-        this.description = description;
     }
 
     /**
@@ -53,5 +50,16 @@ public final class Resource {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     *
+     * @param description the description value to set.
+     * @return the Resource object itself.
+     */
+    public Resource setDescription(String description) {
+        this.description = description;
+        return this;
     }
 }

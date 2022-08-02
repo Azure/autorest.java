@@ -103,7 +103,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -112,7 +112,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -141,7 +141,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -150,7 +150,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -179,7 +179,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -188,7 +188,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -214,7 +214,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -223,7 +223,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -255,7 +255,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -264,7 +264,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -294,7 +294,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
@@ -303,7 +303,7 @@ public final class PatchesImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     description: String (Required)
+     *     description: String (Optional)
      * }
      * }</pre>
      *
