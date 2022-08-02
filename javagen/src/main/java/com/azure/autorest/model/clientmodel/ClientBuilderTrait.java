@@ -37,7 +37,7 @@ public class ClientBuilderTrait {
 
     public static final ClientBuilderTrait TOKEN_CREDENTIAL_TRAIT = createTokenCredentialTrait();
 
-    private static ClientBuilderTrait ENDPOINT_TRAIT;
+    private static ClientBuilderTrait endpointTrait;
 
     private String traitInterfaceName;
     private List<String> importPackages;
@@ -212,7 +212,7 @@ public class ClientBuilderTrait {
     }
 
     public static ClientBuilderTrait getEndpointTrait(ServiceClientProperty property) {
-        ClientBuilderTrait endpointTrait = ENDPOINT_TRAIT;
+        ClientBuilderTrait endpointTrait = ClientBuilderTrait.endpointTrait;
         if (endpointTrait == null) {
             endpointTrait = new ClientBuilderTrait();
             endpointTrait.setTraitInterfaceName(EndpointTrait.class.getSimpleName());
@@ -243,7 +243,7 @@ public class ClientBuilderTrait {
                     endpointProperty, "{@inheritDoc}", endpointMethodImpl);
 
             endpointClientBuilderTraitMethods.add(endpointMethod);
-            ENDPOINT_TRAIT = endpointTrait;
+            ClientBuilderTrait.endpointTrait = endpointTrait;
         }
         return endpointTrait;
     }
