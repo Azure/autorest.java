@@ -19,16 +19,12 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.JacksonAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -155,16 +151,6 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                                 methodBlock.methodReturn("this");
                             });
                 }
-
-//                if (property.isAdditionalProperties()) {
-//                    classBlock.annotation("JsonAnySetter");
-//                    MapType mapType = (MapType) property.getClientType();
-//                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
-//                        methodBlock.ifBlock(String.format("%s == null", property.getName()), ifBlock ->
-//                                ifBlock.line("%s = new HashMap<>();", property.getName()));
-//                        methodBlock.line("%s.put(%s, value);", property.getName(), model.getNeedsFlatten() ? "key.replace(\"\\\\.\", \".\")" : "key");
-//                    });
-//                }
             }
         });
     }
