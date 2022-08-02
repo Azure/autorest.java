@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import java.time.Instant;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -60,7 +61,7 @@ public class PrimitiveType implements IType {
     }
 
     private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
-        String defaultValue, String fieldSerializationMethod, String valueSerializationMethod) {
+        String defaultValue, String fieldSerializationMethod, String valueSerializationMethod, String... importsToAdd) {
         this.name = name;
         this.nullableType = nullableType;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
@@ -99,6 +100,9 @@ public class PrimitiveType implements IType {
 
     @Override
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        if (this == PrimitiveType.UnixTimeLong) {
+            imports.add(Instant.class.getName());
+        }
     }
 
     @Override
@@ -159,7 +163,7 @@ public class PrimitiveType implements IType {
         }
 
         if (this == PrimitiveType.UnixTimeLong) {
-            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s));", expression);
+            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
         }
         return expression;
     }
