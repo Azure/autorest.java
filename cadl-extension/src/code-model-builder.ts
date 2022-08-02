@@ -304,7 +304,7 @@ export class CodeModelBuilder {
       if (param.name.toLowerCase() === "content-type") {
         let mediaTypes = ["application/json"];
         if (schema instanceof ConstantSchema) {
-          mediaTypes = [schema.value.value];
+          mediaTypes = [schema.value.value.toString()];
         } else if (schema instanceof SealedChoiceSchema) {
           mediaTypes = schema.choices.map(it => it.value.toString());
         }
