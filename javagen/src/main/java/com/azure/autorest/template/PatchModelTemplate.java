@@ -59,37 +59,11 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<>();
 
-        // If there is client side validation and the model will generate a ClientLogger to log the validation
-        // exceptions add an import of 'com.azure.core.util.logging.ClientLogger' and
-        // 'com.fasterxml.jackson.annotation.JsonIgnore'.
-        //
-        // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
-        // included in serialization.
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
-        }
-
         imports.add(JsonCreator.class.getName());
 
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
             imports.add(JsonGetter.class.getName());
             imports.add(JsonSetter.class.getName());
-        }
-
-        // Add HttpHeaders as an import when strongly-typed HTTP header objects are using custom deserialization.
-        if (settings.isCustomStronglyTypedHeaderDeserializationUsed() && model.isStronglyTypedHeader()) {
-            ClassType.HttpHeaders.addImportsTo(imports, false);
-
-            // Also add any potential imports needed to convert the header to the strong type.
-            // If the import isn't used it will be removed later on.
-            imports.add(Base64.class.getName());
-            imports.add(HashMap.class.getName());
-            imports.add(HttpHeader.class.getName());
-
-            // JacksonAdapter will be removed in the future once model types are converted to using stream-style
-            // serialization. For now, it's needed to handle the rare scenario where the strong type is a non-Java
-            // base type.
-            imports.add(JacksonAdapter.class.getName());
         }
 
         String lastParentName = model.getName();
@@ -101,9 +75,8 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
         }
 
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
-        if (JavaSettings.getInstance().isOverrideSetterFromSuperclass()) {
-            propertyReferences.forEach(p -> p.addImportsTo(imports, false));
-        }
+
+        propertyReferences.forEach(p -> p.addImportsTo(imports, false));
 
         if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
@@ -130,9 +103,7 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
 
         ArrayList<JavaModifier> classModifiers = new ArrayList<>();
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
-            if (!settings.isFluent() || !model.getName().endsWith("Identity")) {    // bug https://github.com/Azure/azure-sdk-for-java/issues/8372
-                classModifiers.add(JavaModifier.Final);
-            }
+            classModifiers.add(JavaModifier.Final);
         }
 
         String classNameWithBaseType = model.getName();
@@ -144,9 +115,8 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
         if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
                 || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
             javaFile.annotation("Fluent");
-        } else {
-            javaFile.annotation("Immutable");
         }
+
         javaFile.publicClass(classModifiers, patchClassNameWithBaseType, (classBlock) ->
         {
             addProperties(model, classBlock, settings);
@@ -232,13 +202,8 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                 classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
             }
 
-            // handle x-ms-client-default
-            if (property.getDefaultValue() != null) {
-                classBlock.privateMemberVariable(String.format("%1$s %2$s = Option.of(%3$s)", new GenericType("com.azure.core.implementation", "Option", property.getWireType()), property.getName(), property.getDefaultValue()));
-            } else {
-                IType propertyType = ClientModelUtil.isClientModel(property.getWireType()) ? new ClassType.Builder().packageName(((ClassType) property.getWireType()).getPackage()).name(((ClassType) property.getWireType()).getName() + "Patch").build() : property.getWireType();
-                classBlock.privateMemberVariable(String.format("%1$s %2$s", new GenericType("com.azure.core.implementation", "Option", propertyType), property.getName()));
-            }
+            IType propertyType = ClientModelUtil.isClientModel(property.getWireType()) ? new ClassType.Builder().packageName(((ClassType) property.getWireType()).getPackage()).name(((ClassType) property.getWireType()).getName() + "Patch").build() : property.getWireType();
+            classBlock.privateMemberVariable(String.format("%1$s %2$s", new GenericType("com.azure.core.implementation", "Option", propertyType), property.getName()));
         }
     }
 
