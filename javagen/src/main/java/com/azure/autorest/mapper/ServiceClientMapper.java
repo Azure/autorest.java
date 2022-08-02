@@ -24,6 +24,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,9 +65,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .packageName(packageName);
 
         // assume all operations share the same base url
-        builder.baseUrl(
-                codeModel.getOperationGroups().get(0).getOperations().get(0).getRequests().get(0)
-                        .getProtocol().getHttp().getUri());
+        if (!CoreUtils.isNullOrEmpty(codeModel.getOperationGroups())) {
+            builder.baseUrl(
+                    codeModel.getOperationGroups().get(0).getOperations().get(0).getRequests().get(0)
+                            .getProtocol().getHttp().getUri());
+        }
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
                 .filter(og -> og.getLanguage().getJava().getName() == null ||
