@@ -32,7 +32,8 @@ public class AndroidServiceClient extends ServiceClient {
                                    ClientMethodParameter defaultPollIntervalParameter,
                                    String defaultCredentialScopes,
                                    boolean builderDisabled,
-                                   SecurityInfo securityInfo) {
+                                   SecurityInfo securityInfo,
+                                   String baseUrl) {
         super(packageName,
                 className,
                 interfaceName,
@@ -48,7 +49,8 @@ public class AndroidServiceClient extends ServiceClient {
                 defaultPollIntervalParameter,
                 defaultCredentialScopes,
                 builderDisabled,
-                securityInfo);
+                securityInfo,
+                baseUrl);
     }
 
     @Override
@@ -86,7 +88,8 @@ public class AndroidServiceClient extends ServiceClient {
                     defaultPollIntervalParameter,
                     defaultCredentialScopes,
                     builderDisabled,
-                    securityInfo);
+                    securityInfo,
+                    baseUrl);
         }
     }
 }

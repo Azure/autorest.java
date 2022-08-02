@@ -323,9 +323,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
         }
-        if (serviceClient.getProperties().stream().anyMatch(property -> property.getName().equals("endpoint"))) {
-            clientBuilder.addBuilderTrait(ClientBuilderTrait.ENDPOINT_TRAIT);
-        }
+        serviceClient.getProperties().stream()
+            .filter(property -> property.getName().equals("endpoint"))
+            .findFirst()
+            .ifPresent(property -> clientBuilder.addBuilderTrait(ClientBuilderTrait.getEndpointTrait(property)));
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {

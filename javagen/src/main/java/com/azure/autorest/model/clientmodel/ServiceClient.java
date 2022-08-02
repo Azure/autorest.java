@@ -74,6 +74,8 @@ public class ServiceClient {
      */
     private SecurityInfo securityInfo;
 
+    private String baseUrl;
+
     /**
      * Create a new ServiceClient with the provided properties.
      * @param packageName The package that this service client belongs to.
@@ -92,7 +94,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled, SecurityInfo securityInfo) {
+                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -110,6 +112,7 @@ public class ServiceClient {
         this.defaultCredentialScopes = defaultCredentialScopes;
         this.builderDisabled = builderDisabled;
         this.securityInfo = securityInfo;
+        this.baseUrl = baseUrl;
     }
 
     public final String getPackage() {
@@ -178,6 +181,13 @@ public class ServiceClient {
 
     public SecurityInfo getSecurityInfo() {
         return securityInfo;
+    }
+
+    /**
+     * @return the base URL, includes scheme, host (and maybe basePath)
+     */
+    public String getBaseUrl() {
+        return baseUrl;
     }
 
     /**
@@ -274,6 +284,7 @@ public class ServiceClient {
         protected String defaultCredentialScopes;
         protected boolean builderDisabled;
         protected SecurityInfo securityInfo;
+        protected String baseUrl;
 
         /**
          * Sets the package that this service client belongs to.
@@ -435,6 +446,16 @@ public class ServiceClient {
             return this;
         }
 
+        /**
+         * Sets the base URL.
+         * @param baseUrl the base URL
+         * @return the Builder itself
+         */
+        public Builder baseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+            return this;
+        }
+
         public ServiceClient build() {
             return new ServiceClient(packageName,
                     className,
@@ -451,7 +472,8 @@ public class ServiceClient {
                     defaultPollIntervalParameter,
                     defaultCredentialScopes,
                     builderDisabled,
-                    securityInfo);
+                    securityInfo,
+                    baseUrl);
         }
     }
 }

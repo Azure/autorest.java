@@ -137,7 +137,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
           });
     }
 
-    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), this.clientReference());
+    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), serviceClient, this.clientReference());
   }
 
   /**

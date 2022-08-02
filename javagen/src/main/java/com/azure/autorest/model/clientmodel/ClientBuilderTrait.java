@@ -37,7 +37,7 @@ public class ClientBuilderTrait {
 
     public static final ClientBuilderTrait TOKEN_CREDENTIAL_TRAIT = createTokenCredentialTrait();
 
-    public static final ClientBuilderTrait ENDPOINT_TRAIT = createEndpointTrait();
+    private static ClientBuilderTrait ENDPOINT_TRAIT;
 
     private String traitInterfaceName;
     private List<String> importPackages;
@@ -211,29 +211,40 @@ public class ClientBuilderTrait {
         return configurationTrait;
     }
 
-    private static ClientBuilderTrait createEndpointTrait() {
-        ClientBuilderTrait endpointTrait = new ClientBuilderTrait();
-        endpointTrait.setTraitInterfaceName(EndpointTrait.class.getSimpleName());
+    public static ClientBuilderTrait getEndpointTrait(ServiceClientProperty property) {
+        ClientBuilderTrait endpointTrait = ENDPOINT_TRAIT;
+        if (endpointTrait == null) {
+            endpointTrait = new ClientBuilderTrait();
+            endpointTrait.setTraitInterfaceName(EndpointTrait.class.getSimpleName());
 
-        List<String> importPackages = new ArrayList<>();
-        endpointTrait.setImportPackages(importPackages);
-        importPackages.add(EndpointTrait.class.getName());
+            List<String> importPackages = new ArrayList<>();
+            endpointTrait.setImportPackages(importPackages);
+            importPackages.add(EndpointTrait.class.getName());
 
-        List<ClientBuilderTraitMethod> endpointClientBuilderTraitMethods = new ArrayList<>();
-        endpointTrait.setTraitMethods(endpointClientBuilderTraitMethods);
+            List<ClientBuilderTraitMethod> endpointClientBuilderTraitMethods = new ArrayList<>();
+            endpointTrait.setTraitMethods(endpointClientBuilderTraitMethods);
 
-        String propertyName = "endpoint";
-        ServiceClientProperty endpointProperty = new ServiceClientProperty("The service endpoint",
-                ClassType.String, propertyName, false, null);
+            String propertyName = "endpoint";
+            ServiceClientProperty endpointProperty = new ServiceClientProperty.Builder()
+                    .name(propertyName)
+                    .type(ClassType.String)
+                    .description("The service endpoint")
+                    .readOnly(false)
+                    .required(property.isRequired())
+                    .defaultValueExpression(property.getDefaultValueExpression())
+                    .requestParameterName(property.getRequestParameterName())
+                    .build();
 
-        Consumer<JavaBlock> endpointMethodImpl = function -> {
-            function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
-            function.methodReturn("this");
-        };
-        ClientBuilderTraitMethod endpointMethod = createTraitMethod(propertyName, propertyName, ClassType.String,
-                endpointProperty, "{@inheritDoc}", endpointMethodImpl);
+            Consumer<JavaBlock> endpointMethodImpl = function -> {
+                function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
+                function.methodReturn("this");
+            };
+            ClientBuilderTraitMethod endpointMethod = createTraitMethod(propertyName, propertyName, ClassType.String,
+                    endpointProperty, "{@inheritDoc}", endpointMethodImpl);
 
-        endpointClientBuilderTraitMethods.add(endpointMethod);
+            endpointClientBuilderTraitMethods.add(endpointMethod);
+            ENDPOINT_TRAIT = endpointTrait;
+        }
         return endpointTrait;
     }
 
@@ -288,8 +299,6 @@ public class ClientBuilderTrait {
         clientBuilderTraitMethods.add(clientMethod);
         return azureKeyCredentialTrait;
     }
-
-
 
     private static ClientBuilderTraitMethod createTraitMethod(String methodName, String methodParamName, ClassType paramType,
                                                               ServiceClientProperty property,
