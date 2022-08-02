@@ -5,6 +5,7 @@
 package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HeadersCustomNamedRequestIdParamGroupingHeaders model. */
@@ -15,6 +16,16 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
      */
     @JsonProperty(value = "foo-request-id")
     private String fooRequestId;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersCustomNamedRequestIdParamGroupingHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersCustomNamedRequestIdParamGroupingHeaders(HttpHeaders rawHeaders) {
+        this.fooRequestId = rawHeaders.getValue("foo-request-id");
+    }
 
     /**
      * Get the fooRequestId property: The foo-request-id property.

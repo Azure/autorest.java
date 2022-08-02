@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HeadersResponseLongHeaders model. */
@@ -15,6 +16,16 @@ public final class HeadersResponseLongHeaders {
      */
     @JsonProperty(value = "value")
     private Long value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseLongHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseLongHeaders(HttpHeaders rawHeaders) {
+        this.value = Long.parseLong(rawHeaders.getValue("value"));
+    }
 
     /**
      * Get the value property: The value property.

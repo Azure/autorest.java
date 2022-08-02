@@ -26,7 +26,6 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_P
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head.json --namespace=fixtures.head
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/head-exceptions.json --namespace=fixtures.headexceptions
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.header --context-client-method-parameter
-call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.customheaderdeserialization --context-client-method-parameter --custom-strongly-typed-header-deserialization
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/header.json --namespace=fixtures.nonamedresponsetypes --context-client-method-parameter --generic-response-type
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-duration.json --namespace=fixtures.bodyduration
