@@ -1,11 +1,10 @@
 import "@cadl-lang/rest";
 
 using Cadl.Http;
-using Cadl;
 
-@serviceTitle("Enum")
+@serviceTitle("EnumService")
 @serviceVersion("1.0.0")
-namespace Cadl.EnumTest;
+namespace Cadl.EnumService;
 
 enum Color {
   Red,
