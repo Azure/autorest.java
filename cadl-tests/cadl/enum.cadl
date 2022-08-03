@@ -1,0 +1,47 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+using Cadl;
+
+@serviceTitle("Enum")
+@serviceVersion("1.0.0")
+namespace Cadl.EnumTest;
+
+enum Color {
+  Red,
+  Blue,
+  Green,
+}
+
+@knownValues(Color)
+model ColorModel is string {
+}
+
+enum Priority {
+  High: 100,
+  Low: 0,
+}
+
+model Operation {
+    name: "Read" | "Write";
+    best: true;
+}
+
+@route("/enum")
+interface EnumOp {
+  @get
+  @route("/color")
+  op getColor(): Color;
+
+  @get
+  @route("/colormodel")
+  op getColorModel(): ColorModel;
+
+  @get
+  @route("/priority")
+  op getPriority(): Priority;
+
+  @get
+  @route("/state")
+  op getOperationState(@query state: "Running"): Operation;
+}
