@@ -272,7 +272,7 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
-    if (param.name === 'api-version') {
+    if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
     } else {
@@ -299,6 +299,16 @@ export class CodeModelBuilder {
 
       if (op.extensions?.convenienceMethod) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+      }
+
+      if (param.name.toLowerCase() === "content-type") {
+        let mediaTypes = ["application/json"];
+        if (schema instanceof ConstantSchema) {
+          mediaTypes = [schema.value.value.toString()];
+        } else if (schema instanceof SealedChoiceSchema) {
+          mediaTypes = schema.choices.map(it => it.value.toString());
+        }
+        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
       }
     }
   }
