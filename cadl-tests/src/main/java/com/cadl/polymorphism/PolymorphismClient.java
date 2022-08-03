@@ -88,4 +88,35 @@ public final class PolymorphismClient {
     public Response<BinaryData> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.client.writeWithResponse(body, requestOptions).block();
     }
+
+    /**
+     * The task operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.client.taskWithResponse(body, requestOptions).block();
+    }
 }

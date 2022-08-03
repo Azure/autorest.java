@@ -26,6 +26,7 @@ import {
   OperationType,
   Program,
   StringLiteralType,
+  TemplateDeclarationNode,
   Type,
   UnionType,
   UnionTypeVariant,
@@ -816,7 +817,7 @@ export class CodeModelBuilder {
     }
 
     // process all children
-    type.derivedModels?.forEach(it => this.processSchema(it, this.getName(it)));
+    type.derivedModels?.filter(includeDerivedModel).forEach(it => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
   }
@@ -934,7 +935,16 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
-        return target.name + target.templateArguments.map(it => it.kind === "Model" ? it.name : "").join("");
+        return target.name + target.templateArguments.map(it => {
+          switch (it.kind) {
+            case "Model":
+              return it.name;
+            case "String":
+              return it.value;
+            default:
+              return "";
+          }
+        }).join("");
       } else {
         return target.name;
       }
@@ -1119,4 +1129,25 @@ function getNamespace(type: ModelType | EnumType | UnionType | OperationType): s
 
 function getJavaNamespace(namespace: string | undefined): string | undefined {
   return namespace ? "com." + namespace.toLowerCase() : undefined;
+}
+
+function includeDerivedModel(model: ModelType): boolean {
+  return (
+    !isTemplateDeclaration(model) &&
+    !(isTemplateInstance(model) && model.derivedModels.length === 0)
+  );
+}
+// TODO: use method from cadl-compiler after version upgrade
+function isTemplateDeclaration(type: ModelType): boolean {
+  if (type.node === undefined) {
+    return false;
+  }
+  const node = type.node as TemplateDeclarationNode;
+  return node.templateParameters.length > 0 && !isTemplateInstance(type);
+}
+function isTemplateInstance(type: ModelType): boolean {
+  return (
+    type.templateArguments !== undefined &&
+    type.templateArguments.length > 0
+  );
 }

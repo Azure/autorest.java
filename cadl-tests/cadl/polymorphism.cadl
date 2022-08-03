@@ -7,6 +7,7 @@ using Cadl.Rest;
 @serviceVersion("1.0.0")
 namespace Cadl.Polymorphism;
 
+// discriminator
 @discriminator("kind")
 model Pet {
   name: string;
@@ -21,6 +22,26 @@ model Dog extends Pet {
   bark: string;
 }
 
+// discriminator with templated model
+@discriminator("kind")
+model Task {
+}
+model TemplatedTask<TDiscriminator, TParameters> extends Task {
+  kind: TDiscriminator;
+  name: string;
+  parameters?: TParameters;
+}
+model Parameter {
+}
+model EntitiesTaskParameters extends Parameter {
+  entity?: string;
+}
+model EntityTask is TemplatedTask<"EntityRecognition", EntitiesTaskParameters>;
+// NOTE: avoid extends from templated model
+// model EntityTask extends TemplatedTask<"EntityRecognition", EntitiesTaskParameters> {
+// }
+
+// extends
 model BaseType {
   name: string;
 }
@@ -42,4 +63,7 @@ interface Polymorphism {
 
   @put
   op write(@body body: BaseType): OkResponse<BaseType>;
+
+  @post
+  op task(@body body: Task): OkResponse<Task>;
 }
