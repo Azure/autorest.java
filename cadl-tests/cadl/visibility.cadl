@@ -1,0 +1,43 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@serviceTitle("Visibility")
+@serviceVersion("1.0.0")
+namespace Cadl.Visibility;
+
+model Dog {
+  @visibility("read") id: int32;
+  @visibility("write") secretName: string;
+  // no flags are like specifying all flags at once, so in this case
+  // equivalent to @visibility("read", "write")
+  name: string;
+}
+
+// The spread operator will copy all the properties of Dog into ReadDog,
+// and withVisibility will remove any that don't match the current
+// visibility setting
+@withVisibility("read")
+model ReadDog {
+  ...Dog;
+}
+
+@withVisibility("write")
+model WriteDog {
+  ...Dog;
+}
+
+@route("/visibility")
+interface VisibilityOp {
+  @get
+  @route("/read")
+  op getReadDog(): ReadDog;
+
+  @get
+  @route("/write")
+  op getWriteDog(): WriteDog;
+
+  @get
+  @route("/readwrite")
+  op getDog(): Dog;
+}
