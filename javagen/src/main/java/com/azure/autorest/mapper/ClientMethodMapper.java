@@ -79,13 +79,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return clientMethods;
         }
 
-        clientMethods = createClientMethods(operation);
+        clientMethods = createClientMethods(operation, JavaSettings.getInstance().isDataPlaneClient());
         parsed.put(operation, clientMethods);
 
         return clientMethods;
     }
 
-    private List<ClientMethod> createClientMethods(Operation operation) {
+    /**
+     * Creates the client methods for the operation.
+     *
+     * @param operation the operation.
+     * @param isSimpleMethod whether the client method to be simplified for resilience to API changes.
+     * @return the client methods created.
+     */
+    private List<ClientMethod> createClientMethods(Operation operation, boolean isSimpleMethod) {
         JavaSettings settings = JavaSettings.getInstance();
 
         Map<Request, List<ProxyMethod>> proxyMethodsMap = Mappers.getProxyMethodMapper().map(operation);
@@ -131,7 +138,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             IType listType = itemPropertyOpt.get().getWireType();
             IType elementType = ((ListType) listType).getElementType();
-            if (settings.isDataPlaneClient()) {
+            if (isSimpleMethod) {
                 asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
                 asyncReturnType = createProtocolPagedAsyncReturnType();
                 syncReturnType = createProtocolPagedSyncReturnType();
@@ -140,11 +147,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 asyncReturnType = createPagedAsyncReturnType(elementType);
                 syncReturnType = createPagedSyncReturnType(elementType);
             }
-            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
         } else {
             asyncRestResponseReturnType = null;
             IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
-            if (settings.isDataPlaneClient()) {
+            if (isSimpleMethod) {
                 if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
                     responseBodyType = ClassType.BinaryData;
                 } else if (responseBodyType instanceof EnumType) {
@@ -155,7 +161,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (responseBodyType.equals(ClassType.InputStream)) {
                 asyncReturnType = createAsyncBinaryReturnType();
                 syncReturnType = ClassType.InputStream;
-                syncReturnWithResponse = ClassType.StreamResponse;
             } else {
                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                     asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
@@ -163,7 +168,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     asyncReturnType = createAsyncVoidReturnType();
                 }
                 syncReturnType = responseBodyType.getClientType();
-                syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
             }
         }
 
@@ -179,10 +183,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (syncReturnType == ClassType.InputStream) {
             syncReturnWithResponse = ClassType.StreamResponse;
         } else {
-            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, settings);
+            syncReturnWithResponse = createSyncReturnWithResponseType(syncReturnType, operation, isSimpleMethod, settings);
         }
 
-        // Low-level client only requires one request per operation
+        // DPG client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
             Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
@@ -199,7 +203,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
                 List<Parameter> codeModelParameters;
-                if (settings.isDataPlaneClient()) {
+                if (isSimpleMethod) {
                     // Required path, body, header and query parameters are allowed
                     codeModelParameters = request.getParameters().stream().filter(p -> p.isRequired() &&
                                     (p.getProtocol().getHttp().getIn() == RequestParameterLocation.PATH ||
@@ -260,7 +264,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     // Transformations
                     if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
-                            && !(parameter.getSchema() instanceof ConstantSchema) && !settings.isDataPlaneClient()) {
+                            && !(parameter.getSchema() instanceof ConstantSchema) && !isSimpleMethod) {
                         ClientMethodParameter outParameter;
                         if (parameter.getOriginalParameter() != null) {
                             originalParameters.add(parameter.getOriginalParameter());
@@ -302,7 +306,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     methodTransformationDetails.add(new MethodTransformationDetail(outParameter, new ArrayList<>()));
                 }
 
-                if (settings.isDataPlaneClient()) {
+                if (isSimpleMethod) {
                     ClientMethodParameter requestOptions = new ClientMethodParameter.Builder()
                             .description("The options to configure the HTTP request before HTTP client sends it")
                             .wireType(ClassType.RequestOptions)
@@ -473,7 +477,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 getPollingFinalType(pollingDetails, syncReturnType),
                                 pollingDetails.getPollIntervalInSeconds());
 
-                        if (settings.isDataPlaneClient() &&
+                        if (isSimpleMethod &&
                                 !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
                                         && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
                             // a new method to be added as implementation only (not exposed to client) for developer
@@ -629,7 +633,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             } else { // In high level client, method with schema in headers would require a ClientResponse, which is not generic
                                 builder.returnValue(createSimpleSyncRestResponseReturnValue(operation, syncReturnWithResponse, syncReturnWithResponse));
                             }
-                            if (settings.isDataPlaneClient()) {
+                            if (isSimpleMethod) {
                                 // SimpleSyncRestResponse with RequestOptions but without Context
                                 methods.add(builder.build());
                             }
@@ -701,13 +705,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return ClassType.Context;
     }
 
-    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, boolean isSimpleMethod, JavaSettings settings) {
         boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation, settings);
 
         // If DPG is being generated or the response doesn't contain headers return Response<T>
         // If no named response types are being used return ResponseBase<H, T>
         // Else named response types are being used and return that.
-        if (settings.isDataPlaneClient() || !responseContainsHeaders) {
+        if (isSimpleMethod || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
