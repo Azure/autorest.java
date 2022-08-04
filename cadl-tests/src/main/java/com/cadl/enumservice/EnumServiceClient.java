@@ -76,14 +76,26 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The getPriority operation.
+     * The setPriority operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(100/0)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String(100/Low)
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
      * }</pre>
      *
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -93,12 +105,12 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getPriorityWithResponse(RequestOptions requestOptions) {
-        return this.client.getPriorityWithResponse(requestOptions).block();
+    public Response<BinaryData> setPriorityWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.client.setPriorityWithResponse(body, requestOptions).block();
     }
 
     /**
-     * The getOperationState operation.
+     * The getRunningOperation operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -106,6 +118,8 @@ public final class EnumServiceClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
      * }
      * }</pre>
      *
@@ -118,7 +132,41 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getOperationStateWithResponse(RequestOptions requestOptions) {
-        return this.client.getOperationStateWithResponse(requestOptions).block();
+    public Response<BinaryData> getRunningOperationWithResponse(RequestOptions requestOptions) {
+        return this.client.getRunningOperationWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The getOperation operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Running/Completed/Failed)
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
+     * }</pre>
+     *
+     * @param state The state parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getOperationWithResponse(BinaryData state, RequestOptions requestOptions) {
+        return this.client.getOperationWithResponse(state, requestOptions).block();
     }
 }

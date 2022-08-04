@@ -12,8 +12,8 @@ public enum Priority {
     /** Enum value 100. */
     HIGH(100L),
 
-    /** Enum value Low. */
-    LOW(LowL);
+    /** Enum value 0. */
+    LOW(0L);
 
     /** The actual serialized value for a Priority instance. */
     private final long value;

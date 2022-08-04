@@ -4,11 +4,13 @@
 
 package com.cadl.enumservice.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -87,7 +89,7 @@ public final class EnumOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/enum/priority")
+        @Post("/enum/priority")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -99,8 +101,28 @@ public final class EnumOpsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getPriority(
+        Mono<Response<BinaryData>> setPriority(
                 @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/enum/state/running")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getRunningOperation(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("state") String state,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -117,10 +139,10 @@ public final class EnumOpsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getOperationState(
+        Mono<Response<BinaryData>> getOperation(
                 @HostParam("endpoint") String endpoint,
-                @QueryParam("state") String state,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData state,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -260,14 +282,26 @@ public final class EnumOpsImpl {
     }
 
     /**
-     * The getPriority operation.
+     * The setPriority operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(100/0)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String(100/Low)
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
      * }</pre>
      *
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -276,21 +310,33 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getPriorityWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setPriorityWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getPriority(this.client.getEndpoint(), accept, requestOptions, context));
+                context -> service.setPriority(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
-     * The getPriority operation.
+     * The setPriority operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(100/0)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String(100/Low)
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
      * }</pre>
      *
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -300,20 +346,33 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getPriorityWithResponseAsync(RequestOptions requestOptions, Context context) {
+    public Mono<Response<BinaryData>> setPriorityWithResponseAsync(
+            BinaryData body, RequestOptions requestOptions, Context context) {
         final String accept = "application/json";
-        return service.getPriority(this.client.getEndpoint(), accept, requestOptions, context);
+        return service.setPriority(this.client.getEndpoint(), accept, body, requestOptions, context);
     }
 
     /**
-     * The getPriority operation.
+     * The setPriority operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(100/0)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String(100/Low)
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
      * }</pre>
      *
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -322,12 +381,12 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getPriorityWithResponse(RequestOptions requestOptions) {
-        return getPriorityWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> setPriorityWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return setPriorityWithResponseAsync(body, requestOptions).block();
     }
 
     /**
-     * The getOperationState operation.
+     * The getRunningOperation operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -335,6 +394,8 @@ public final class EnumOpsImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
      * }
      * }</pre>
      *
@@ -346,16 +407,16 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOperationStateWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getRunningOperationWithResponseAsync(RequestOptions requestOptions) {
         final String state = "Running";
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.getOperationState(this.client.getEndpoint(), state, accept, requestOptions, context));
+                        service.getRunningOperation(this.client.getEndpoint(), state, accept, requestOptions, context));
     }
 
     /**
-     * The getOperationState operation.
+     * The getRunningOperation operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -363,6 +424,8 @@ public final class EnumOpsImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
      * }
      * }</pre>
      *
@@ -375,15 +438,15 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOperationStateWithResponseAsync(
+    public Mono<Response<BinaryData>> getRunningOperationWithResponseAsync(
             RequestOptions requestOptions, Context context) {
         final String state = "Running";
         final String accept = "application/json";
-        return service.getOperationState(this.client.getEndpoint(), state, accept, requestOptions, context);
+        return service.getRunningOperation(this.client.getEndpoint(), state, accept, requestOptions, context);
     }
 
     /**
-     * The getOperationState operation.
+     * The getRunningOperation operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -391,6 +454,8 @@ public final class EnumOpsImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
      * }
      * }</pre>
      *
@@ -402,7 +467,111 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getOperationStateWithResponse(RequestOptions requestOptions) {
-        return getOperationStateWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> getRunningOperationWithResponse(RequestOptions requestOptions) {
+        return getRunningOperationWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * The getOperation operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Running/Completed/Failed)
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
+     * }</pre>
+     *
+     * @param state The state parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getOperationWithResponseAsync(BinaryData state, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getOperation(this.client.getEndpoint(), accept, state, requestOptions, context));
+    }
+
+    /**
+     * The getOperation operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Running/Completed/Failed)
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
+     * }</pre>
+     *
+     * @param state The state parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param context The context to associate with this operation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getOperationWithResponseAsync(
+            BinaryData state, RequestOptions requestOptions, Context context) {
+        final String accept = "application/json";
+        return service.getOperation(this.client.getEndpoint(), accept, state, requestOptions, context);
+    }
+
+    /**
+     * The getOperation operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Running/Completed/Failed)
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     * }
+     * }</pre>
+     *
+     * @param state The state parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getOperationWithResponse(BinaryData state, RequestOptions requestOptions) {
+        return getOperationWithResponseAsync(state, requestOptions).block();
     }
 }

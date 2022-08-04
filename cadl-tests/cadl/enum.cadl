@@ -1,6 +1,8 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Azure.Core.Operations;
 
 @serviceTitle("EnumService")
 @serviceVersion("1.0.0")
@@ -13,17 +15,24 @@ enum Color {
 }
 
 @knownValues(Color)
-model ColorModel is string {
-}
+model ColorModel is string;
 
 enum Priority {
   High: 100,
   Low: 0,
 }
 
+enum OperationStateValues {
+  Running,
+  Completed,
+  Failed
+}
+
 model Operation {
-    name: "Read" | "Write";
-    best: true;
+  name: "Read" | "Write";
+  best: true;
+  age: 50;
+  priority: Priority;
 }
 
 @route("/enum")
@@ -36,11 +45,15 @@ interface EnumOp {
   @route("/colormodel")
   op getColorModel(): ColorModel;
 
-  @get
+  @post
   @route("/priority")
-  op getPriority(): Priority;
+  op setPriority(@body body: Priority) : OkResponse<Operation> | ErrorResponse;
+
+  @get
+  @route("/state/running")
+  op getRunningOperation(@query state: "Running"): Operation;
 
   @get
   @route("/state")
-  op getOperationState(@query state: "Running"): Operation;
+  op getOperation(@body state: OperationStateValues): Operation;
 }
