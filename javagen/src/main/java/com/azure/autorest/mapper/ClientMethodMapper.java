@@ -79,7 +79,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return clientMethods;
         }
 
-        clientMethods = createClientMethods(operation, JavaSettings.getInstance().isDataPlaneClient());
+        clientMethods = createClientMethods(operation, false);
         parsed.put(operation, clientMethods);
 
         return clientMethods;
@@ -217,7 +217,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {
-                    ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+                    ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter, isSimpleMethod);
 
                     if (request.getProtocol() != null
                             && request.getProtocol().getHttp() != null
