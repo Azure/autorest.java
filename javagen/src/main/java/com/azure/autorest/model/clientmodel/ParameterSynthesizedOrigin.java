@@ -37,13 +37,13 @@ public enum ParameterSynthesizedOrigin {
         this.origin = origin;
     }
 
-    public String getOrigin() {
+    public String value() {
         return this.origin;
     }
 
     @Override
     public String toString() {
-        return this.getOrigin();
+        return this.value();
     }
 
     public static ParameterSynthesizedOrigin fromValue(String value) {
@@ -52,7 +52,7 @@ public enum ParameterSynthesizedOrigin {
         }
 
         for (ParameterSynthesizedOrigin v : values()) {
-            if (v.getOrigin().equalsIgnoreCase(value)) {
+            if (v.value().equalsIgnoreCase(value)) {
                 return v;
             }
         }
