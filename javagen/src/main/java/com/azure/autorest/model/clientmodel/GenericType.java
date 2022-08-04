@@ -122,7 +122,28 @@ public class GenericType implements IType {
 
     @Override
     public String toString() {
-        return String.format("%1$s<%2$s>", getName(), Arrays.stream(getTypeArguments()).map((IType typeArgument) -> typeArgument.asNullable().toString()).collect(Collectors.joining(", ")));
+        return String.format("%1$s<%2$s>", getName(), Arrays.stream(getTypeArguments()).map(typeArgument -> typeArgument.asNullable().toString()).collect(Collectors.joining(", ")));
+    }
+
+    /**
+     * Creates a String based on the generic type that can be used as a Java property name.
+     * <p>
+     * For example {@code Map<String, Object>} would become {@code MapStringObject}.
+     *
+     * @return A String representation of the generic type that can be used as a Java property name.
+     */
+    public String toJavaPropertyString() {
+        StringBuilder javaPropertyString = new StringBuilder(getName());
+
+        for (IType typeArgument : typeArguments) {
+            if (typeArgument instanceof GenericType) {
+                javaPropertyString.append(((GenericType) typeArgument).toJavaPropertyString());
+            } else {
+                javaPropertyString.append(typeArgument.asNullable());
+            }
+        }
+
+        return javaPropertyString.toString();
     }
 
     @Override
