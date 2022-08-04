@@ -157,7 +157,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            asyncRestResponseReturnType = Mappers.getProxyMethodMapper().getAsyncRestResponseReturnType(operation, responseBodyType, isProtocolMethod, settings);
+            asyncRestResponseReturnType = Mappers.getProxyMethodMapper().getAsyncRestResponseReturnType(operation, responseBodyType, isProtocolMethod, settings).getClientType();
 
             IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             if (responseBodyType.equals(ClassType.InputStream)) {
