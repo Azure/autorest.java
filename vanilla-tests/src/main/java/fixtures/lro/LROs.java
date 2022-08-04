@@ -1139,8 +1139,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceListProduct(),
-                new TypeReferenceListProduct());
+                TYPE_REFERENCE_LIST_PRODUCT,
+                TYPE_REFERENCE_LIST_PRODUCT);
     }
 
     /**
@@ -1164,8 +1164,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceListProduct(),
-                new TypeReferenceListProduct());
+                TYPE_REFERENCE_LIST_PRODUCT,
+                TYPE_REFERENCE_LIST_PRODUCT);
     }
 
     /**
@@ -5968,7 +5968,7 @@ public final class LROs {
         return this.beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
     }
 
-    private static final class TypeReferenceListProduct extends TypeReference<List<Product>> {
-        // empty
-    }
+    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT = new TypeReference<List<Product>>() {
+                // empty
+            };
 }

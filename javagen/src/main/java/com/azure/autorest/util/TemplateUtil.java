@@ -144,15 +144,14 @@ public class TemplateUtil {
         // Generic types must use a custom instance that supports complex generic parameters.
         return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
             ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
-            : String.format("new TypeReference%s()", ((GenericType) type).toJavaPropertyString());
+            : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
     }
 
-    private static void writeTypeReferenceStaticClass(JavaClass classBlock, GenericType typeReferenceStaticClass) {
+    private static void writeTypeReferenceStaticClass(JavaClass classBlock, GenericType type) {
         // see writeLongRunningOperationTypeReference
 
-        classBlock.privateStaticFinalClass(String.format("TypeReference%s extends TypeReference<%s>",
-                typeReferenceStaticClass.toJavaPropertyString(), typeReferenceStaticClass),
-            classBlock1 -> classBlock1.lineComment("empty"));
+        classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {%n//empty%n}",
+            type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
     }
 
     /**
