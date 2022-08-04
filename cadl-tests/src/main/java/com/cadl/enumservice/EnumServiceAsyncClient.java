@@ -78,13 +78,7 @@ public final class EnumServiceAsyncClient {
     }
 
     /**
-     * The setPriority operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(100/0)
-     * }</pre>
+     * The setColorModel operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -94,10 +88,11 @@ public final class EnumServiceAsyncClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -107,8 +102,37 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setPriorityWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.setPriorityWithResponseAsync(body, requestOptions);
+    public Mono<Response<BinaryData>> setColorModelWithResponse(String color, RequestOptions requestOptions) {
+        return this.serviceClient.setColorModelWithResponseAsync(color, requestOptions);
+    }
+
+    /**
+     * The setPriority operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
+     * }
+     * }</pre>
+     *
+     * @param priority The priority parameter. Allowed values: 100, 0.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> setPriorityWithResponse(String priority, RequestOptions requestOptions) {
+        return this.serviceClient.setPriorityWithResponseAsync(priority, requestOptions);
     }
 
     /**
@@ -122,6 +146,7 @@ public final class EnumServiceAsyncClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -141,12 +166,6 @@ public final class EnumServiceAsyncClient {
     /**
      * The getOperation operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(Running/Completed/Failed)
-     * }</pre>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -155,10 +174,11 @@ public final class EnumServiceAsyncClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
-     * @param state The state parameter.
+     * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -168,7 +188,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOperationWithResponse(BinaryData state, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getOperationWithResponse(String state, RequestOptions requestOptions) {
         return this.serviceClient.getOperationWithResponseAsync(state, requestOptions);
     }
 }

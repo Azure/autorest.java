@@ -76,13 +76,7 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The setPriority operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(100/0)
-     * }</pre>
+     * The setColorModel operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -92,10 +86,11 @@ public final class EnumServiceClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -105,8 +100,37 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> setPriorityWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.setPriorityWithResponse(body, requestOptions).block();
+    public Response<BinaryData> setColorModelWithResponse(String color, RequestOptions requestOptions) {
+        return this.client.setColorModelWithResponse(color, requestOptions).block();
+    }
+
+    /**
+     * The setPriority operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String(Read/Write) (Required)
+     *     best: boolean (Required)
+     *     age: long (Required)
+     *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
+     * }
+     * }</pre>
+     *
+     * @param priority The priority parameter. Allowed values: 100, 0.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setPriorityWithResponse(String priority, RequestOptions requestOptions) {
+        return this.client.setPriorityWithResponse(priority, requestOptions).block();
     }
 
     /**
@@ -120,6 +144,7 @@ public final class EnumServiceClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -139,12 +164,6 @@ public final class EnumServiceClient {
     /**
      * The getOperation operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(Running/Completed/Failed)
-     * }</pre>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -153,10 +172,11 @@ public final class EnumServiceClient {
      *     best: boolean (Required)
      *     age: long (Required)
      *     priority: String(100/0) (Required)
+     *     color: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
-     * @param state The state parameter.
+     * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -166,7 +186,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getOperationWithResponse(BinaryData state, RequestOptions requestOptions) {
+    public Response<BinaryData> getOperationWithResponse(String state, RequestOptions requestOptions) {
         return this.client.getOperationWithResponse(state, requestOptions).block();
     }
 }

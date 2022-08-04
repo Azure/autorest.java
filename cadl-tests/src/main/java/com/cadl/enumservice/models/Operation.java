@@ -35,20 +35,29 @@ public final class Operation {
     @JsonProperty(value = "priority", required = true)
     private Priority priority;
 
+    /*
+     * The color property.
+     */
+    @JsonProperty(value = "color", required = true)
+    private ColorModel color;
+
     /**
      * Creates an instance of Operation class.
      *
      * @param name the name value to set.
      * @param priority the priority value to set.
+     * @param color the color value to set.
      */
     @JsonCreator
     public Operation(
             @JsonProperty(value = "name", required = true) Name name,
-            @JsonProperty(value = "priority", required = true) Priority priority) {
+            @JsonProperty(value = "priority", required = true) Priority priority,
+            @JsonProperty(value = "color", required = true) ColorModel color) {
         best = true;
         age = 50L;
         this.name = name;
         this.priority = priority;
+        this.color = color;
     }
 
     /**
@@ -85,5 +94,14 @@ public final class Operation {
      */
     public Priority getPriority() {
         return this.priority;
+    }
+
+    /**
+     * Get the color property: The color property.
+     *
+     * @return the color value.
+     */
+    public ColorModel getColor() {
+        return this.color;
     }
 }
