@@ -109,42 +109,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             }
         }
         builder.responseBodyType(responseBodyType);
-
-        if (settings.isDataPlaneClient()) {
-            IType singleValueType;
-            if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
-            } else {
-                singleValueType = GenericType.Response(responseBodyType);
-            }
-            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
-        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
-                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
-                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
-            builder.returnType(createBinaryContentAsyncReturnType());
-        } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
-            // SchemaResponse
-            // method with schema in headers would require a ClientResponse
-            if (settings.isGenericResponseTypes()) {
-                IType genericResponseType = GenericType.RestResponse(
-                    Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                    responseBodyType);
-                builder.returnType(createSingleValueAsyncReturnType(genericResponseType));
-            } else {
-                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-                builder.returnType(createClientResponseAsyncReturnType(clientResponseClassType));
-            }
-        } else {
-            if (responseBodyType.equals(ClassType.InputStream)) {
-                builder.returnType(createStreamContentAsyncReturnType());
-            } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                IType singleValueType = GenericType.Response(ClassType.Void);
-                builder.returnType(createSingleValueAsyncReturnType(singleValueType));
-            } else {
-                IType singleValueType = GenericType.Response(responseBodyType);
-                builder.returnType(createSingleValueAsyncReturnType(singleValueType));
-            }
-        }
+        builder.returnType(
+                getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings));
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
@@ -338,6 +304,54 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
+    }
+
+    /**
+     * Gets the type for AsyncRestResponse.
+     *
+     * @param operation the operation.
+     * @param responseBodyType the type of the response body.
+     * @param isSimpleMethod whether the client method to be simplified for resilience to API changes.
+     * @param settings the JavaSettings.
+     * @return the type for AsyncRestResponse.
+     */
+    private IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
+                                                 boolean isSimpleMethod, JavaSettings settings) {
+        if (isSimpleMethod) {
+            IType singleValueType;
+            if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.Response(responseBodyType);
+            }
+            return createSingleValueAsyncReturnType(singleValueType);
+        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
+                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
+            return createBinaryContentAsyncReturnType();
+        } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
+            // SchemaResponse
+            // method with schema in headers would require a ClientResponse
+            if (settings.isGenericResponseTypes()) {
+                IType genericResponseType = GenericType.RestResponse(
+                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
+                        responseBodyType);
+                return createSingleValueAsyncReturnType(genericResponseType);
+            } else {
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                return createClientResponseAsyncReturnType(clientResponseClassType);
+            }
+        } else {
+            if (responseBodyType.equals(ClassType.InputStream)) {
+                return createStreamContentAsyncReturnType();
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+                IType singleValueType = GenericType.Response(ClassType.Void);
+                return createSingleValueAsyncReturnType(singleValueType);
+            } else {
+                IType singleValueType = GenericType.Response(responseBodyType);
+                return createSingleValueAsyncReturnType(singleValueType);
+            }
+        }
     }
 
     protected IType createSingleValueAsyncReturnType(IType singleValueType) {
