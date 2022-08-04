@@ -79,7 +79,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return clientMethods;
         }
 
-        clientMethods = createClientMethods(operation, false);
+        clientMethods = createClientMethods(operation, JavaSettings.getInstance().isDataPlaneClient());
         parsed.put(operation, clientMethods);
 
         return clientMethods;

@@ -124,26 +124,25 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
-            IType clientResponseClassType;
             if (settings.isGenericResponseTypes()) {
-                clientResponseClassType = GenericType.RestResponse(
+                IType genericResponseType = GenericType.RestResponse(
                     Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                     responseBodyType);
+                builder.returnType(createSingleValueAsyncReturnType(genericResponseType));
             } else {
-                clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                builder.returnType(createClientResponseAsyncReturnType(clientResponseClassType));
             }
-            builder.returnType(GenericType.Mono(clientResponseClassType));
         } else {
-            IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)
-                    || responseBodyType.equals(ClassType.InputStream)) {
-                singleValueType = ClassType.StreamResponse;
+            if (responseBodyType.equals(ClassType.InputStream)) {
+                builder.returnType(createStreamContentAsyncReturnType());
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
+                IType singleValueType = GenericType.Response(ClassType.Void);
+                builder.returnType(createSingleValueAsyncReturnType(singleValueType));
             } else {
-                singleValueType = GenericType.Response(responseBodyType);
+                IType singleValueType = GenericType.Response(responseBodyType);
+                builder.returnType(createSingleValueAsyncReturnType(singleValueType));
             }
-            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
         }
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
@@ -165,7 +164,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
         builder.responseContentTypes(responseContentTypes);
 
-        // Low-level client only requires one request per operation
+        // DPG client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
             Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
@@ -175,7 +174,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         // Used to deduplicate method with same signature.
         // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
         Set<List<String>> methodSignatures = new HashSet<>();
-
 
         for (Request request : requests) {
             if (parsed.containsKey(request)) {
@@ -345,7 +343,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         return GenericType.Mono(singleValueType);
     }
 
-    protected IType createAsyncResponseReturnType(ClassType clientResponseClassType) {
+    protected IType createClientResponseAsyncReturnType(ClassType clientResponseClassType) {
         return GenericType.Mono(clientResponseClassType);
     }
 
