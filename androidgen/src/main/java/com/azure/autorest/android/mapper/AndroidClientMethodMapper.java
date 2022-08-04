@@ -83,7 +83,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, boolean isSimpleMethod, JavaSettings settings) {
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, boolean isProtocolMethod, JavaSettings settings) {
         return GenericType.AndroidResponse(syncReturnType);
     }
 

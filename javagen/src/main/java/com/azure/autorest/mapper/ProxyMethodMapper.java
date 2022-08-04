@@ -311,13 +311,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      *
      * @param operation the operation.
      * @param responseBodyType the type of the response body.
-     * @param isSimpleMethod whether the client method to be simplified for resilience to API changes.
+     * @param isProtocolMethod whether the client method to be simplified for resilience to API changes.
      * @param settings the JavaSettings.
      * @return the type for AsyncRestResponse.
      */
-    private IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
-                                                 boolean isSimpleMethod, JavaSettings settings) {
-        if (isSimpleMethod) {
+    protected IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
+                                                   boolean isProtocolMethod, JavaSettings settings) {
+        if (isProtocolMethod) {
             IType singleValueType;
             if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);
