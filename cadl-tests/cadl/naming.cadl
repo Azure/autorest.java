@@ -51,8 +51,7 @@ enum TypesModel {
 @doc("description of Statuses")
 @knownValues(StatusValues)
 @friendlyName("DataStatus")
-model StatusModel is string {
-}
+model StatusModel is string;
 
 @summary("summary of StatusValues")
 @doc("description of StatusValues")
