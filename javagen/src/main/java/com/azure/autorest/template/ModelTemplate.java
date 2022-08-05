@@ -449,7 +449,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (settings.shouldGenerateXmlSerialization()) {
                 if (property.getIsXmlWrapper()) {
                     String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-                    addXmlWrapperClass(classBlock, property, xmlWrapperClassName, settings);
+
+                    String wrapperClassDefinition = xmlWrapperClassName;
+                    if (settings.isStreamStyleSerialization()) {
+                        wrapperClassDefinition = wrapperClassDefinition + " implements XmlSerializable<" + wrapperClassDefinition + ">";
+                    }
+
+                    classBlock.privateStaticFinalClass(wrapperClassDefinition, innerClass ->
+                        addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
@@ -495,22 +503,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // the element name but this breaks down in cases where the same element name is used in two different
         // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
         // block lists.
-        classBlock.privateStaticFinalClass(wrapperClassName, innerClass -> {
-            IType propertyClientType = property.getWireType().getClientType();
+        IType propertyClientType = property.getWireType().getClientType();
 
-            String listElementName = property.getXmlListElementName();
-            String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
-                ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
-                : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
+        String listElementName = property.getXmlListElementName();
+        String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
+            ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
+            : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
 
-            innerClass.annotation(jacksonAnnotation);
-            innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+        classBlock.annotation(jacksonAnnotation);
+        classBlock.privateFinalMemberVariable(propertyClientType.toString(), "items");
 
-            innerClass.annotation("JsonCreator");
-            innerClass.privateConstructor(
-                wrapperClassName + "(@" + jacksonAnnotation + " " + propertyClientType + " items)",
-                constructor -> constructor.line("this.items = items;"));
-        });
+        classBlock.annotation("JsonCreator");
+        classBlock.privateConstructor(
+            wrapperClassName + "(@" + jacksonAnnotation + " " + propertyClientType + " items)",
+            constructor -> constructor.line("this.items = items;"));
     }
 
     /**

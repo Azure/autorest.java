@@ -248,7 +248,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
         xmlWriter.writeStringElement("Marker", this.marker);
         xmlWriter.writeIntElement("MaxResults", this.maxResults);
         xmlWriter.writeStringElement("Delimiter", this.delimiter);
-        xmlWriter.writeXml("Blobs", this.blobs);
+        xmlWriter.writeXml(this.blobs);
         xmlWriter.writeStringElement("NextMarker", this.nextMarker);
         return xmlWriter.writeEndElement();
     }

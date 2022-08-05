@@ -4,17 +4,16 @@
 
 package fixtures.streamstylexmlserialization.implementation;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.Banana;
+import java.util.ArrayList;
 import java.util.List;
 
 /** A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization. */
-@JacksonXmlRootElement(localName = "bananas")
-public final class BananasWrapper {
-    @JacksonXmlProperty(localName = "banana")
+public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
     private final List<Banana> bananas;
 
     /**
@@ -22,8 +21,7 @@ public final class BananasWrapper {
      *
      * @param bananas the list.
      */
-    @JsonCreator
-    public BananasWrapper(@JsonProperty("banana") List<Banana> bananas) {
+    public BananasWrapper(List<Banana> bananas) {
         this.bananas = bananas;
     }
 
@@ -34,5 +32,36 @@ public final class BananasWrapper {
      */
     public List<Banana> items() {
         return bananas;
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) {
+        xmlWriter.writeStartElement("bananas");
+        if (bananas != null) {
+            bananas.forEach(xmlWriter::writeXml);
+        }
+        return xmlWriter.writeEndElement();
+    }
+
+    public static BananasWrapper fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "bananas",
+                reader -> {
+                    List<Banana> items = null;
+
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        String elementName = reader.getElementName().getLocalPart();
+
+                        if ("banana".equals(elementName)) {
+                            if (items == null) {
+                                items = new ArrayList<>();
+                            }
+
+                        } else {
+                            reader.nextElement();
+                        }
+                    }
+                    return new BananasWrapper(items);
+                });
     }
 }

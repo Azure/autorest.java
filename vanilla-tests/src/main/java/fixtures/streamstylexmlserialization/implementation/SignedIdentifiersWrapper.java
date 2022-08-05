@@ -4,17 +4,16 @@
 
 package fixtures.streamstylexmlserialization.implementation;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.SignedIdentifier;
+import java.util.ArrayList;
 import java.util.List;
 
 /** A wrapper around List&lt;SignedIdentifier&gt; which provides top-level metadata for serialization. */
-@JacksonXmlRootElement(localName = "SignedIdentifiers")
-public final class SignedIdentifiersWrapper {
-    @JacksonXmlProperty(localName = "SignedIdentifier")
+public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIdentifiersWrapper> {
     private final List<SignedIdentifier> signedIdentifiers;
 
     /**
@@ -22,8 +21,7 @@ public final class SignedIdentifiersWrapper {
      *
      * @param signedIdentifiers the list.
      */
-    @JsonCreator
-    public SignedIdentifiersWrapper(@JsonProperty("SignedIdentifier") List<SignedIdentifier> signedIdentifiers) {
+    public SignedIdentifiersWrapper(List<SignedIdentifier> signedIdentifiers) {
         this.signedIdentifiers = signedIdentifiers;
     }
 
@@ -34,5 +32,36 @@ public final class SignedIdentifiersWrapper {
      */
     public List<SignedIdentifier> items() {
         return signedIdentifiers;
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) {
+        xmlWriter.writeStartElement("SignedIdentifiers");
+        if (signedIdentifiers != null) {
+            signedIdentifiers.forEach(xmlWriter::writeXml);
+        }
+        return xmlWriter.writeEndElement();
+    }
+
+    public static SignedIdentifiersWrapper fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "SignedIdentifiers",
+                reader -> {
+                    List<SignedIdentifier> items = null;
+
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        String elementName = reader.getElementName().getLocalPart();
+
+                        if ("SignedIdentifier".equals(elementName)) {
+                            if (items == null) {
+                                items = new ArrayList<>();
+                            }
+
+                        } else {
+                            reader.nextElement();
+                        }
+                    }
+                    return new SignedIdentifiersWrapper(items);
+                });
     }
 }

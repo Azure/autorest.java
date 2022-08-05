@@ -75,7 +75,7 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("RootWithRefAndMeta");
-        xmlWriter.writeXml("XMLComplexTypeWithMeta", this.refToModel);
+        xmlWriter.writeXml(this.refToModel);
         xmlWriter.writeStringElement("Something", this.something);
         return xmlWriter.writeEndElement();
     }

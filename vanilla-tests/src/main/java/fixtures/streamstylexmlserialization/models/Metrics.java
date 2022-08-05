@@ -130,7 +130,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
         xmlWriter.writeStringElement("Version", this.version);
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
         xmlWriter.writeBooleanElement("IncludeAPIs", this.includeAPIs);
-        xmlWriter.writeXml("RetentionPolicy", this.retentionPolicy);
+        xmlWriter.writeXml(this.retentionPolicy);
         return xmlWriter.writeEndElement();
     }
 }

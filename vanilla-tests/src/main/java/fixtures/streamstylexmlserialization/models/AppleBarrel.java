@@ -35,7 +35,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         public static GoodApplesWrapper fromXml(XmlReader xmlReader) {
-            xmlReader.readObject(
+            return xmlReader.readObject(
                     "GoodApples",
                     reader -> {
                         List<String> items = null;
@@ -79,7 +79,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         public static BadApplesWrapper fromXml(XmlReader xmlReader) {
-            xmlReader.readObject(
+            return xmlReader.readObject(
                     "BadApples",
                     reader -> {
                         List<String> items = null;

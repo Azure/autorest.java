@@ -81,7 +81,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("SignedIdentifier");
         xmlWriter.writeStringElement("Id", this.id);
-        xmlWriter.writeXml("AccessPolicy", this.accessPolicy);
+        xmlWriter.writeXml(this.accessPolicy);
         return xmlWriter.writeEndElement();
     }
 }

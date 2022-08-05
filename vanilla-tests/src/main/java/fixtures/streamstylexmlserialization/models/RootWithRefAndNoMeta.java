@@ -75,7 +75,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("RootWithRefAndNoMeta");
-        xmlWriter.writeXml("RefToModel", this.refToModel);
+        xmlWriter.writeXml(this.refToModel);
         xmlWriter.writeStringElement("Something", this.something);
         return xmlWriter.writeEndElement();
     }

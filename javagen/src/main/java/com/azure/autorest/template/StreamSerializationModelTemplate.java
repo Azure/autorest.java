@@ -136,63 +136,67 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // the element name but this breaks down in cases where the same element name is used in two different
         // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
         // block lists.
-        classBlock.privateStaticFinalClass(wrapperClassName + " implements XmlSerializable<" + wrapperClassName + ">", innerClass -> {
-            IType propertyClientType = property.getWireType().getClientType();
-            String xmlNamespace = property.getXmlNamespace();
+        IType propertyClientType = property.getWireType().getClientType();
 
-            innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+        classBlock.privateFinalMemberVariable(propertyClientType.toString(), "items");
 
-            innerClass.privateConstructor(wrapperClassName + "(" + propertyClientType + " items)",
-                constructor -> constructor.line("this.items = items;"));
+        classBlock.privateConstructor(wrapperClassName + "(" + propertyClientType + " items)",
+            constructor -> constructor.line("this.items = items;"));
 
-            innerClass.annotation("Override");
-            innerClass.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", writerMethod -> {
-                IType elementType = ((IterableType) propertyClientType).getElementType();
-                String writeStartElement = (xmlNamespace != null)
-                    ? "xmlWriter.writeStartElement(null, \"" + xmlNamespace + "\", \"" + property.getXmlName() + "\");"
-                    : "xmlWriter.writeStartElement(\"" + property.getXmlName() + "\");";
-                writerMethod.line(writeStartElement);
+        xmlWrapperClassXmlSerializableImplementation(classBlock, wrapperClassName, propertyClientType,
+            property.getXmlName(), property.getXmlListElementName(), "items", property.getXmlNamespace());
+    }
 
-                writerMethod.ifBlock("items != null", ifAction -> {
-                    if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
-                        ifAction.line("items.forEach(xmlWriter::writeXml);");
-                    } else {
-                        String xmlWrite = createXmlWrite(property.getXmlListElementName(), xmlNamespace,
-                            elementType.streamStyleXmlElementSerializationMethod(), "element");
-                        ifAction.line("items.forEach(element -> " + xmlWrite + ");");
-                    }
-                });
+    static void xmlWrapperClassXmlSerializableImplementation(JavaClass classBlock, String wrapperClassName,
+        IType iterableType, String xmlRootElementName, String xmlListElementName, String xmlElementNameCamelCase,
+        String xmlNamespace) {
+        classBlock.annotation("Override");
+        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", writerMethod -> {
+            IType elementType = ((IterableType) iterableType).getElementType();
+            String writeStartElement = (xmlNamespace != null)
+                ? "xmlWriter.writeStartElement(null, \"" + xmlNamespace + "\", \"" + xmlRootElementName + "\");"
+                : "xmlWriter.writeStartElement(\"" + xmlRootElementName + "\");";
+            writerMethod.line(writeStartElement);
 
-                writerMethod.methodReturn("xmlWriter.writeEndElement()");
+            writerMethod.ifBlock(xmlElementNameCamelCase + " != null", ifAction -> {
+                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                    ifAction.line(xmlElementNameCamelCase + ".forEach(xmlWriter::writeXml);");
+                } else {
+                    String xmlWrite = createXmlWrite(xmlListElementName, xmlNamespace,
+                        elementType.streamStyleXmlElementSerializationMethod(), "element");
+                    ifAction.line(xmlElementNameCamelCase + ".forEach(element -> " + xmlWrite + ");");
+                }
             });
 
-            innerClass.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader)", readerMethod -> {
-                String readObject = (xmlNamespace != null)
-                    ? "xmlReader.readObject(\"" + xmlNamespace + "\", \"" + property.getXmlName() + "\", reader -> {"
-                    : "xmlReader.readObject(\"" + property.getXmlName() + "\", reader -> {";
+            writerMethod.methodReturn("xmlWriter.writeEndElement()");
+        });
 
-                readerMethod.line(readObject);
+        classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader)", readerMethod -> {
+            String readObject = (xmlNamespace != null)
+                ? "return xmlReader.readObject(\"" + xmlNamespace + "\", \"" + xmlRootElementName + "\", reader -> {"
+                : "return xmlReader.readObject(\"" + xmlRootElementName + "\", reader -> {";
+
+            readerMethod.line(readObject);
+            readerMethod.indent(() -> {
+                readerMethod.line(iterableType + " items = null;");
+                readerMethod.line();
+                readerMethod.line("while (reader.nextElement() != XmlToken.END_ELEMENT) {");
                 readerMethod.indent(() -> {
-                    readerMethod.line(propertyClientType + " items = null;");
+                    // TODO (alzimmer): Support namespace validation.
+                    readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
                     readerMethod.line();
-                    readerMethod.line("while (reader.nextElement() != XmlToken.END_ELEMENT) {");
-                    readerMethod.indent(() -> {
-                        // TODO (alzimmer): Support namespace validation.
-                        readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
-                        readerMethod.line();
-                        readerMethod.ifBlock("\"" + property.getXmlListElementName() + "\".equals(elementName)", ifBlock -> {
-                            ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
-                            ifBlock.line();
+                    readerMethod.ifBlock("\"" + xmlListElementName + "\".equals(elementName)", ifBlock -> {
+                        ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
+                        ifBlock.line();
 
-                            // TODO (alzimmer): Insert XML object reading logic.
-                        }).elseBlock(elseBlock -> elseBlock.line("reader.nextElement();"));
-                    });
-                    readerMethod.line("}");
-
-                    readerMethod.methodReturn("new " + wrapperClassName + "(items)");
+                        // TODO (alzimmer): Insert XML object reading logic.
+                    }).elseBlock(elseBlock -> elseBlock.line("reader.nextElement();"));
                 });
-                readerMethod.line("});");
+                readerMethod.line("}");
+
+                readerMethod.methodReturn("new " + wrapperClassName + "(items)");
             });
+            readerMethod.line("});");
         });
     }
 
@@ -1278,6 +1282,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else {
                 methodBlock.line(createXmlWrite(element.getXmlName(), element.getXmlNamespace(), xmlElementSerializationMethod, value) + ";");
             }
+        } else if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
+            methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
 

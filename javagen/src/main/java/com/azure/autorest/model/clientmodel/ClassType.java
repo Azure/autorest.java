@@ -631,8 +631,7 @@ public class ClassType implements IType {
 
         public ClassType build() {
             // Types that are based on Swagger will use writeJsonField and writeJson as they should extend
-            // JsonSerializable or writeXml as they should extend XmlSerializable.
-            // XML only sets the default for element writing as attribute writing is stricter.
+            // JsonSerializable.
             String jsonFieldSerializationMethod =
                 (this.jsonFieldSerializationMethod == null && isSwaggerType)
                     ? "writeJsonField"
@@ -641,10 +640,12 @@ public class ClassType implements IType {
                 (this.jsonValueSerializationMethod == null && isSwaggerType)
                     ? "writeJson"
                     : this.jsonValueSerializationMethod;
-            String xmlElementSerializationMethod =
-                (this.xmlElementSerializationMethod == null && isSwaggerType)
-                    ? "writeXml"
-                    : this.xmlElementSerializationMethod;
+
+            // Types that are based on Swagger won't have any XML serialization methods as they're handled differently
+            // than JSON. In JSON the containing class determines the JSON property name that'll be written but in XML
+            // the class itself handles writing the wrapping XML element.
+            String xmlAttributeSerializationMethod = isSwaggerType ? null : this.xmlAttributeSerializationMethod;
+            String xmlElementSerializationMethod = isSwaggerType ? null : this.xmlElementSerializationMethod;
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
                 isSwaggerType, serializationNeedsNullGuarding && !isSwaggerType,

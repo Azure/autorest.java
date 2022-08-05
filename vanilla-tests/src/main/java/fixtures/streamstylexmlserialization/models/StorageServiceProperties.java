@@ -50,7 +50,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
         }
 
         public static CorsWrapper fromXml(XmlReader xmlReader) {
-            xmlReader.readObject(
+            return xmlReader.readObject(
                     "Cors",
                     reader -> {
                         List<CorsRule> items = null;
@@ -238,12 +238,12 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("StorageServiceProperties");
-        xmlWriter.writeXml("Logging", this.logging);
-        xmlWriter.writeXml("HourMetrics", this.hourMetrics);
-        xmlWriter.writeXml("MinuteMetrics", this.minuteMetrics);
+        xmlWriter.writeXml(this.logging);
+        xmlWriter.writeXml(this.hourMetrics);
+        xmlWriter.writeXml(this.minuteMetrics);
         xmlWriter.writeXml(this.cors);
         xmlWriter.writeStringElement("DefaultServiceVersion", this.defaultServiceVersion);
-        xmlWriter.writeXml("DeleteRetentionPolicy", this.deleteRetentionPolicy);
+        xmlWriter.writeXml(this.deleteRetentionPolicy);
         return xmlWriter.writeEndElement();
     }
 }

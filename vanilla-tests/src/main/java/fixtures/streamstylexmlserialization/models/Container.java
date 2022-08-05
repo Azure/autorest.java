@@ -107,7 +107,7 @@ public final class Container implements XmlSerializable<Container> {
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("Container");
         xmlWriter.writeStringElement("Name", this.name);
-        xmlWriter.writeXml("Properties", this.properties);
+        xmlWriter.writeXml(this.properties);
         if (this.metadata != null) {
             xmlWriter.writeStartElement("Metadata");
             this.metadata.forEach(xmlWriter::writeStringElement);

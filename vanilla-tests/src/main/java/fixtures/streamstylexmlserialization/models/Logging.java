@@ -159,7 +159,7 @@ public final class Logging implements XmlSerializable<Logging> {
         xmlWriter.writeBooleanElement("Delete", this.delete);
         xmlWriter.writeBooleanElement("Read", this.read);
         xmlWriter.writeBooleanElement("Write", this.write);
-        xmlWriter.writeXml("RetentionPolicy", this.retentionPolicy);
+        xmlWriter.writeXml(this.retentionPolicy);
         return xmlWriter.writeEndElement();
     }
 }

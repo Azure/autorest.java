@@ -55,7 +55,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         }
 
         public static ContainersWrapper fromXml(XmlReader xmlReader) {
-            xmlReader.readObject(
+            return xmlReader.readObject(
                     "Containers",
                     reader -> {
                         List<Container> items = null;
