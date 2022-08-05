@@ -9,10 +9,10 @@ pr:
     - main
   paths:
     include:
-      - *
+      - '*'
     exclude:
-      - fluent*
-      - cadl*
+      - 'fluent*'
+      - 'cadl*'
 
 jobs:
   - job: Build

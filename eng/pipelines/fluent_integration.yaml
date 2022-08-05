@@ -9,9 +9,9 @@ pr:
     - main
   paths:
     include:
-      - *
+      - '*'
     exclude:
-      - cadl*
+      - 'cadl*'
 
 jobs:
 - job: 'Build'

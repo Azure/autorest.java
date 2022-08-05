@@ -9,9 +9,9 @@ pr:
       - main
   paths:
     include:
-      - *
+      - '*'
     exclude:
-      - fluent*
+      - 'fluent*'
 
 jobs:
   - job: Build
