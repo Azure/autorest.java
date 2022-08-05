@@ -84,4 +84,14 @@ public class ArrayType implements IType {
     public String streamStyleJsonValueSerializationMethod() {
         return "writeBinary";
     }
+
+    @Override
+    public String streamStyleXmlAttributeSerializationMethod() {
+        return "writeBinaryAttribute";
+    }
+
+    @Override
+    public String streamStyleXmlElementSerializationMethod() {
+        return "writeBinaryElement";
+    }
 }

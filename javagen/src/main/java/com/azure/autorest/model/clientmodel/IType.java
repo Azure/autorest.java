@@ -116,4 +116,32 @@ public interface IType {
     default String streamStyleJsonValueSerializationMethod() {
         return null;
     }
+
+    /**
+     * Gets the method that handles XML attribute serialization for the type.
+     * <p>
+     * The attribute serialization method handles writing both the XML attribute and value.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an attribute
+     * serialization method and support needs to be added.
+     *
+     * @return The attribute serialization method, or null if it isn't supported directly.
+     */
+    default String streamStyleXmlAttributeSerializationMethod() {
+        return null;
+    }
+
+    /**
+     * Gets the method that handles XML element serialization for the type.
+     * <p>
+     * The element serialization method handles writing both the XML element tag and value.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an element
+     * serialization method and support needs to be added.
+     *
+     * @return The element serialization method, or null if it isn't supported directly.
+     */
+    default String streamStyleXmlElementSerializationMethod() {
+        return null;
+    }
 }

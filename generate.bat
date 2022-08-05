@@ -41,6 +41,7 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_P
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/extensible-enums-swagger.json --namespace=fixtures.extensibleenums
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/required-optional.json --namespace=fixtures.requiredoptional
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/xml-service.json --namespace=fixtures.xmlservice --enable-xml
+call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/xml-service.json --namespace=fixtures.streamstylexmlserialization --stream-style-serialization --enable-xml
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/parameter-flattening.json --namespace=fixtures.parameterflattening --payload-flattening-threshold=1
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/model-flattening.json --namespace=fixtures.modelflattening --payload-flattening-threshold=1 --optional-constant-as-enum=true
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/media_types.json --namespace=fixtures.mediatypes --payload-flattening-threshold=1 --modelerfour.lenient-model-deduplication
@@ -64,6 +65,7 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-te
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/discriminator-flattening.json --namespace=fixtures.inheritance.passdiscriminator --pass-discriminator-to-child-deserialization=true
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/client-default-value.json --namespace=fixtures.annotatedgettersandsetters --annotate-getters-and-setters-for-serialization=true
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexxmltag --enable-xml
+call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexstreamstylexmlserialization --stream-style-serialization --enable-xml
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
 call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true

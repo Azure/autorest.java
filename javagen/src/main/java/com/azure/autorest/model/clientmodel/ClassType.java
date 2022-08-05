@@ -8,7 +8,9 @@ import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,11 +25,15 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeBooleanField")
         .streamStyleJsonValueSerializationMethod("writeBoolean")
+        .streamStyleXmlAttributeSerializationMethod("writeBooleanAttribute")
+        .streamStyleXmlElementSerializationMethod("writeBooleanElement")
         .build();
 
     public static final ClassType Byte = new ClassType.Builder(false).knownClass(Byte.class)
         .streamStyleJsonFieldSerializationMethod("writeIntegerField")
         .streamStyleJsonValueSerializationMethod("writeInteger")
+        .streamStyleXmlAttributeSerializationMethod("writeNumberAttribute")
+        .streamStyleXmlElementSerializationMethod("writeNumberElement")
         .build();
 
     public static final ClassType Integer = new ClassType.Builder(false).knownClass(Integer.class)
@@ -35,6 +41,8 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeIntegerField")
         .streamStyleJsonValueSerializationMethod("writeInteger")
+        .streamStyleXmlAttributeSerializationMethod("writeNumberAttribute")
+        .streamStyleXmlElementSerializationMethod("writeNumberElement")
         .build();
 
     public static final ClassType Long = new ClassType.Builder(false).knownClass(Long.class)
@@ -42,6 +50,8 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeLongField")
         .streamStyleJsonValueSerializationMethod("writeLong")
+        .streamStyleXmlAttributeSerializationMethod("writeNumberAttribute")
+        .streamStyleXmlElementSerializationMethod("writeNumberElement")
         .build();
 
     public static final ClassType Float = new ClassType.Builder(false).knownClass(Float.class)
@@ -49,6 +59,8 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeFloatField")
         .streamStyleJsonValueSerializationMethod("writeFloat")
+        .streamStyleXmlAttributeSerializationMethod("writeNumberAttribute")
+        .streamStyleXmlElementSerializationMethod("writeNumberElement")
         .build();
 
     public static final ClassType Double = new ClassType.Builder(false).knownClass(Double.class)
@@ -56,12 +68,16 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeDoubleField")
         .streamStyleJsonValueSerializationMethod("writeDouble")
+        .streamStyleXmlAttributeSerializationMethod("writeNumberAttribute")
+        .streamStyleXmlElementSerializationMethod("writeNumberElement")
         .build();
 
     public static final ClassType Character = new ClassType.Builder(false).knownClass(Character.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf((defaultValueExpression.charAt(0))))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType String = new ClassType.Builder(false).knownClass(String.class)
@@ -69,6 +85,8 @@ public class ClassType implements IType {
         .serializationNeedsNullGuarding(false)
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType Base64Url = new ClassType.Builder(false)
@@ -83,6 +101,8 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType AndroidLocalDate = new ClassType.Builder(false)
@@ -93,12 +113,16 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType Duration = new ClassType.Builder(false).knownClass(java.time.Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType AndroidDuration = new ClassType.Builder(false)
@@ -110,6 +134,8 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder(false)
@@ -124,6 +150,8 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression))
         .streamStyleJsonFieldSerializationMethod("writeStringField")
         .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
         .build();
 
     public static final ClassType Object = new ClassType.Builder(false)
@@ -180,7 +208,13 @@ public class ClassType implements IType {
         .knownClass(java.nio.ByteBuffer.class)
         .build();
 
-    public static final ClassType URL = new ClassType.Builder(false).knownClass(java.net.URL.class).build();
+    public static final ClassType URL = new ClassType.Builder(false)
+        .knownClass(java.net.URL.class)
+        .streamStyleJsonFieldSerializationMethod("writeStringField")
+        .streamStyleJsonValueSerializationMethod("writeString")
+        .streamStyleXmlAttributeSerializationMethod("writeStringAttribute")
+        .streamStyleXmlElementSerializationMethod("writeStringElement")
+        .build();
 
     public static final ClassType NonNull = new ClassType.Builder(false)
         .knownClass(reactor.util.annotation.NonNull.class)
@@ -310,11 +344,11 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType ResponseError = new Builder()
-            .knownClass(com.azure.core.models.ResponseError.class)
-            .build();
+        .knownClass(com.azure.core.models.ResponseError.class)
+        .build();
     public static final ClassType ResponseInnerError = new Builder()
-            .packageName("com.azure.core.models").name("ResponseInnerError")
-            .build();
+        .packageName("com.azure.core.models").name("ResponseInnerError")
+        .build();
 
     private final String fullName;
     private final String packageName;
@@ -324,13 +358,16 @@ public class ClassType implements IType {
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
     private final boolean isSwaggerType;
     private final boolean serializationNeedsNullGuarding;
-    private final String streamStyleJsonFieldSerializationMethod;
-    private final String streamStyleJsonValueSerializationMethod;
+    private final String jsonFieldSerializationMethod;
+    private final String jsonValueSerializationMethod;
+    private final String xmlAttributeSerializationMethod;
+    private final String xmlElementSerializationMethod;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
-        boolean serializationNeedsNullGuarding, String streamStyleJsonFieldSerializationMethod,
-        String streamStyleJsonValueSerializationMethod) {
+        boolean serializationNeedsNullGuarding, String jsonFieldSerializationMethod,
+        String jsonValueSerializationMethod, String xmlAttributeSerializationMethod,
+        String xmlElementSerializationMethod) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -339,8 +376,10 @@ public class ClassType implements IType {
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.isSwaggerType = isSwaggerType;
         this.serializationNeedsNullGuarding = serializationNeedsNullGuarding;
-        this.streamStyleJsonFieldSerializationMethod = streamStyleJsonFieldSerializationMethod;
-        this.streamStyleJsonValueSerializationMethod = streamStyleJsonValueSerializationMethod;
+        this.jsonFieldSerializationMethod = jsonFieldSerializationMethod;
+        this.jsonValueSerializationMethod = jsonValueSerializationMethod;
+        this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
+        this.xmlElementSerializationMethod = xmlElementSerializationMethod;
     }
 
     public final String getPackage() {
@@ -366,12 +405,12 @@ public class ClassType implements IType {
     public final boolean isBoxedType() {
         // TODO (alzimmer): This should be a property on the ClassType
         return this.equals(ClassType.Void)
-                || this.equals(ClassType.Boolean)
-                || this.equals(ClassType.Byte)
-                || this.equals(ClassType.Integer)
-                || this.equals(ClassType.Long)
-                || this.equals(ClassType.Float)
-                || this.equals(ClassType.Double);
+            || this.equals(ClassType.Boolean)
+            || this.equals(ClassType.Byte)
+            || this.equals(ClassType.Integer)
+            || this.equals(ClassType.Long)
+            || this.equals(ClassType.Float)
+            || this.equals(ClassType.Double);
     }
 
     @Override
@@ -452,7 +491,7 @@ public class ClassType implements IType {
 
     public String convertToClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123
-                || this == ClassType.AndroidDateTimeRfc1123) {
+            || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
@@ -465,7 +504,7 @@ public class ClassType implements IType {
 
     public String convertFromClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123
-                || this == ClassType.AndroidDateTimeRfc1123) {
+            || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
@@ -490,12 +529,22 @@ public class ClassType implements IType {
 
     @Override
     public String streamStyleJsonFieldSerializationMethod() {
-        return streamStyleJsonFieldSerializationMethod;
+        return jsonFieldSerializationMethod;
     }
 
     @Override
     public String streamStyleJsonValueSerializationMethod() {
-        return streamStyleJsonValueSerializationMethod;
+        return jsonValueSerializationMethod;
+    }
+
+    @Override
+    public java.lang.String streamStyleXmlAttributeSerializationMethod() {
+        return xmlAttributeSerializationMethod;
+    }
+
+    @Override
+    public java.lang.String streamStyleXmlElementSerializationMethod() {
+        return xmlElementSerializationMethod;
     }
 
     public static class Builder {
@@ -512,8 +561,10 @@ public class ClassType implements IType {
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
         // By default, class types need null guarding in serialization.
         private boolean serializationNeedsNullGuarding = true;
-        private String streamStyleJsonFieldSerializationMethod;
-        private String streamStyleJsonValueSerializationMethod;
+        private String jsonFieldSerializationMethod;
+        private String jsonValueSerializationMethod;
+        private String xmlAttributeSerializationMethod;
+        private String xmlElementSerializationMethod;
 
         public Builder() {
             this(true);
@@ -535,7 +586,7 @@ public class ClassType implements IType {
 
         public Builder knownClass(Class<?> clazz) {
             return packageName(clazz.getPackage().getName())
-                    .name(clazz.getSimpleName());
+                .name(clazz.getSimpleName());
         }
 
         public Builder implementationImports(String... implementationImports) {
@@ -558,41 +609,88 @@ public class ClassType implements IType {
             return this;
         }
 
-        public Builder streamStyleJsonFieldSerializationMethod(String streamStyleJsonFieldSerializationMethod) {
-            this.streamStyleJsonFieldSerializationMethod = streamStyleJsonFieldSerializationMethod;
+        public Builder streamStyleJsonFieldSerializationMethod(String jsonFieldSerializationMethod) {
+            this.jsonFieldSerializationMethod = jsonFieldSerializationMethod;
             return this;
         }
 
-        public Builder streamStyleJsonValueSerializationMethod(String streamStyleJsonValueSerializationMethod) {
-            this.streamStyleJsonValueSerializationMethod = streamStyleJsonValueSerializationMethod;
+        public Builder streamStyleJsonValueSerializationMethod(String jsonValueSerializationMethod) {
+            this.jsonValueSerializationMethod = jsonValueSerializationMethod;
+            return this;
+        }
+
+        public Builder streamStyleXmlAttributeSerializationMethod(String xmlAttributeSerializationMethod) {
+            this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
+            return this;
+        }
+
+        public Builder streamStyleXmlElementSerializationMethod(String xmlElementSerializationMethod) {
+            this.xmlElementSerializationMethod = xmlElementSerializationMethod;
             return this;
         }
 
         public ClassType build() {
             // Types that are based on Swagger will use writeJsonField and writeJson as they should extend
-            // JsonSerializable.
-            String streamStyleJsonFieldSerializationMethod =
-                (this.streamStyleJsonFieldSerializationMethod == null && isSwaggerType)
+            // JsonSerializable or writeXml as they should extend XmlSerializable.
+            // XML only sets the default for element writing as attribute writing is stricter.
+            String jsonFieldSerializationMethod =
+                (this.jsonFieldSerializationMethod == null && isSwaggerType)
                     ? "writeJsonField"
-                    : this.streamStyleJsonFieldSerializationMethod;
-                String streamStyleJsonValueSerializationMethod =
-                    (this.streamStyleJsonValueSerializationMethod == null && isSwaggerType)
-                        ? "writeJson"
-                        : this.streamStyleJsonValueSerializationMethod;
+                    : this.jsonFieldSerializationMethod;
+            String jsonValueSerializationMethod =
+                (this.jsonValueSerializationMethod == null && isSwaggerType)
+                    ? "writeJson"
+                    : this.jsonValueSerializationMethod;
+            String xmlElementSerializationMethod =
+                (this.xmlElementSerializationMethod == null && isSwaggerType)
+                    ? "writeXml"
+                    : this.xmlElementSerializationMethod;
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
                 isSwaggerType, serializationNeedsNullGuarding && !isSwaggerType,
-                streamStyleJsonFieldSerializationMethod, streamStyleJsonValueSerializationMethod);
+                jsonFieldSerializationMethod, jsonValueSerializationMethod, xmlAttributeSerializationMethod,
+                xmlElementSerializationMethod);
         }
     }
 
+    private static final Map<Character, String> ESCAPE_REPLACEMENT = new HashMap<Character, String>() {{
+        put('\\', "\\\\");
+        put('\t', "\\t");
+        put('\b', "\\b");
+        put('\n', "\\n");
+        put('\r', "\\r");
+        put('\f', "\\f");
+        put('\"', "\\\"");
+    }};
+
     private static String escapeString(String str) {
-        return str.replace("\\", "\\\\")
-                .replace("\t", "\\t")
-                .replace("\b", "\\b")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\f", "\\f")
-                .replace("\"", "\\\"");
+        StringBuilder builder = null;
+
+        int last = 0;
+        for (int i = 0; i < str.length(); i++) {
+            String replacement = ESCAPE_REPLACEMENT.get(str.charAt(i));
+
+            if (replacement == null) {
+                continue;
+            }
+
+            if (builder == null) {
+                builder = new StringBuilder(str.length() * 2);
+            }
+
+            if (last != i) {
+                builder.append(str, last, i);
+            }
+
+            builder.append(replacement);
+            last = i + 1;
+        }
+
+        if (builder == null) {
+            return str;
+        }
+
+        builder.append(str, last, str.length());
+        return builder.toString();
     }
 }

@@ -178,6 +178,16 @@ public class EnumType implements IType {
     }
 
     @Override
+    public String streamStyleXmlAttributeSerializationMethod() {
+        return "writeStringAttribute";
+    }
+
+    @Override
+    public String streamStyleXmlElementSerializationMethod() {
+        return "writeStringElement";
+    }
+
+    @Override
     public String toString() {
         return getName();
     }

@@ -25,6 +25,11 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.azure.xml.DefaultXmlReader;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,12 +64,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected void addSerializationImports(Set<String> imports, JavaSettings settings) {
-        imports.add(JsonSerializable.class.getName());
-        imports.add(JsonWriter.class.getName());
-        imports.add(JsonReader.class.getName());
-        imports.add(DefaultJsonReader.class.getName());
-        imports.add(JsonToken.class.getName());
+    protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
+        if (model.getXmlName() == null) {
+            imports.add(JsonSerializable.class.getName());
+            imports.add(JsonWriter.class.getName());
+            imports.add(JsonReader.class.getName());
+            imports.add(DefaultJsonReader.class.getName());
+            imports.add(JsonToken.class.getName());
+        } else {
+            imports.add(XmlSerializable.class.getName());
+            imports.add(XmlWriter.class.getName());
+            imports.add(XmlReader.class.getName());
+            imports.add(DefaultXmlReader.class.getName());
+            imports.add(XmlToken.class.getName());
+        }
 
         imports.add(CoreUtils.class.getName());
 
@@ -90,17 +103,97 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     protected String addSerializationImplementations(String classSignature, ClientModel model, JavaSettings settings) {
         // TODO (alzimmer): Once XML stream-style serialization is supported this will need to determine whether
         //  JsonCapable and/or XmlCapable need to be added as an implemented interface.
-        if (settings.isStreamStyleSerialization()) {
-            classSignature += " implements " + JsonSerializable.class.getSimpleName() + "<" + model.getName() + ">";
+        if (!settings.isStreamStyleSerialization()) {
+            return classSignature;
         }
 
-        return classSignature;
+        String interfaceName = (model.getXmlName() != null)
+            ? XmlSerializable.class.getSimpleName()
+            : JsonSerializable.class.getSimpleName();
+
+        return classSignature + " implements " + interfaceName + "<" + model.getName() + ">";
     }
 
     @Override
     protected void addModelConstructorParameter(ClientModelProperty property,
         StringBuilder constructorSignatureBuilder) {
         constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
+    }
+
+    @Override
+    protected void addXmlWrapperClass(JavaClass classBlock, ClientModelProperty property, String wrapperClassName,
+        JavaSettings settings) {
+        // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
+        // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
+        // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
+        // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
+        // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
+        // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
+        // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
+        // XML node name if the class doesn't have a root name annotation which results in an addition XML level
+        // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
+        // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
+        // the element name but this breaks down in cases where the same element name is used in two different
+        // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
+        // block lists.
+        classBlock.privateStaticFinalClass(wrapperClassName + " implements XmlSerializable<" + wrapperClassName + ">", innerClass -> {
+            IType propertyClientType = property.getWireType().getClientType();
+            String xmlNamespace = property.getXmlNamespace();
+
+            innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+
+            innerClass.privateConstructor(wrapperClassName + "(" + propertyClientType + " items)",
+                constructor -> constructor.line("this.items = items;"));
+
+            innerClass.annotation("Override");
+            innerClass.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", writerMethod -> {
+                IType elementType = ((IterableType) propertyClientType).getElementType();
+                String writeStartElement = (xmlNamespace != null)
+                    ? "xmlWriter.writeStartElement(null, \"" + xmlNamespace + "\", \"" + property.getXmlName() + "\");"
+                    : "xmlWriter.writeStartElement(\"" + property.getXmlName() + "\");";
+                writerMethod.line(writeStartElement);
+
+                writerMethod.ifBlock("items != null", ifAction -> {
+                    if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                        ifAction.line("items.forEach(xmlWriter::writeXml);");
+                    } else {
+                        String xmlWrite = createXmlWrite(property.getXmlListElementName(), xmlNamespace,
+                            elementType.streamStyleXmlElementSerializationMethod(), "element");
+                        ifAction.line("items.forEach(element -> " + xmlWrite + ");");
+                    }
+                });
+
+                writerMethod.methodReturn("xmlWriter.writeEndElement()");
+            });
+
+            innerClass.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader)", readerMethod -> {
+                String readObject = (xmlNamespace != null)
+                    ? "xmlReader.readObject(\"" + xmlNamespace + "\", \"" + property.getXmlName() + "\", reader -> {"
+                    : "xmlReader.readObject(\"" + property.getXmlName() + "\", reader -> {";
+
+                readerMethod.line(readObject);
+                readerMethod.indent(() -> {
+                    readerMethod.line(propertyClientType + " items = null;");
+                    readerMethod.line();
+                    readerMethod.line("while (reader.nextElement() != XmlToken.END_ELEMENT) {");
+                    readerMethod.indent(() -> {
+                        // TODO (alzimmer): Support namespace validation.
+                        readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
+                        readerMethod.line();
+                        readerMethod.ifBlock("\"" + property.getXmlListElementName() + "\".equals(elementName)", ifBlock -> {
+                            ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
+                            ifBlock.line();
+
+                            // TODO (alzimmer): Insert XML object reading logic.
+                        }).elseBlock(elseBlock -> elseBlock.line("reader.nextElement();"));
+                    });
+                    readerMethod.line("}");
+
+                    readerMethod.methodReturn("new " + wrapperClassName + "(items)");
+                });
+                readerMethod.line("});");
+            });
+        });
     }
 
     @Override
@@ -112,8 +205,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         PropertiesManager propertiesManager = new PropertiesManager(model);
 
-        writeToJson(classBlock, propertiesManager);
-        writeFromJson(classBlock, model, propertiesManager, settings);
+        if (model.getXmlName() == null) {
+            writeToJson(classBlock, propertiesManager);
+            writeFromJson(classBlock, model, propertiesManager, settings);
+        } else {
+            writeToXml(classBlock, propertiesManager);
+            writeFromXml(classBlock, model, propertiesManager, settings);
+        }
     }
 
     private static void writeToJson(JavaClass classBlock, PropertiesManager propertiesManager) {
@@ -125,18 +223,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (propertiesManager.discriminatorProperty != null
                 && !CoreUtils.isNullOrEmpty(propertiesManager.discriminatorProperty.getDefaultValue())) {
                 ClientModelProperty discriminatorProperty = propertiesManager.discriminatorProperty;
-                serializeProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(), false,
+                serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(), false,
                     true);
             }
 
             propertiesManager.superRequiredProperties.forEach(property ->
-                serializeProperty(methodBlock, property, property.getSerializedName(), true, true));
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), true, true));
             propertiesManager.superSetterProperties.forEach(property ->
-                serializeProperty(methodBlock, property, property.getSerializedName(), true, true));
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), true, true));
             propertiesManager.requiredProperties.forEach(property ->
-                serializeProperty(methodBlock, property, property.getSerializedName(), false, true));
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), false, true));
             propertiesManager.setterProperties.forEach(property ->
-                serializeProperty(methodBlock, property, property.getSerializedName(), false, true));
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), false, true));
 
             handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.flattenedPropertiesStructure);
 
@@ -151,14 +249,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     /**
-     * Serializes a non-flattened, non-additional properties property.
+     * Serializes a non-flattened, non-additional properties JSON property.
      * <p>
-     * If the property needs to be flattened or is additional properties this is a no-op as those require special
+     * If the JSON property needs to be flattened or is additional properties this is a no-op as those require special
      * handling that will occur later.
      *
      * @param methodBlock The method handling serialization.
      * @param property The property being serialized.
-     * @param serializedName The serialized property name. Generally, this is just the {@code property property's}
+     * @param serializedName The serialized JSON property name. Generally, this is just the {@code property property's}
      * serialized name but if a flattened property is being serialized it'll be the last segment of the flattened JSON
      * name.
      * @param fromSuperType Whether the property is defined by a super type of the model. If the property is declared by
@@ -166,8 +264,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param ignoreFlattening Whether flattened properties should be skipped. Will only be false when handling the
      * terminal location of a flattened structure.
      */
-    private static void serializeProperty(JavaBlock methodBlock, ClientModelProperty property, String serializedName,
-        boolean fromSuperType, boolean ignoreFlattening) {
+    private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
+        String serializedName, boolean fromSuperType, boolean ignoreFlattening) {
         if ((ignoreFlattening && property.getNeedsFlatten()) || property.isAdditionalProperties()) {
             // Property will be handled later by flattened or additional properties serialization.
             return;
@@ -192,12 +290,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else if (wireType == ClassType.Object) {
             methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
-            serializeContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
+            serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
-            serializeContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
+            serializeJsonContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
                 serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
@@ -206,7 +304,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     /**
-     * Helper method to serialize a container property (such as {@link List} and {@link Map}).
+     * Helper method to serialize a JSON container property (such as {@link List} and {@link Map}).
      *
      * @param methodBlock The method handling serialization.
      * @param utilityMethod The method aiding in the serialization of the container.
@@ -218,8 +316,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param depth Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
      * {@code Map} is being handled and then 1 when {@code List} is being handled.
      */
-    private static void serializeContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
-        IType elementType, String serializedName, String propertyValueGetter, int depth) {
+    private static void serializeJsonContainerProperty(JavaBlock methodBlock, String utilityMethod,
+        IType containerType, IType elementType, String serializedName, String propertyValueGetter, int depth) {
         String valueSerializationMethod = elementType.streamStyleJsonValueSerializationMethod();
         String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
@@ -231,10 +329,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // not write the property name as that would be invalid, ex "myList":["myList":["innerListElement"]].
         if (depth == 0) {
             // Container property shouldn't be written if it's null.
-            methodBlock.line("%s.%s(\"%s\", %s, false, (%s, %s) -> ", callingWriterName, utilityMethod, serializedName, serializeValue, lambdaWriterName, elementName);
+            methodBlock.line("%s.%s(\"%s\", %s, false, (%s, %s) -> ", callingWriterName, utilityMethod, serializedName,
+                serializeValue, lambdaWriterName, elementName);
         } else {
             // But the inner container should be written if it's null.
-            methodBlock.line("%s.%s(%s, (%s, %s) -> ", callingWriterName, utilityMethod, serializeValue, lambdaWriterName, elementName);
+            methodBlock.line("%s.%s(%s, (%s, %s) -> ", callingWriterName, utilityMethod, serializeValue,
+                lambdaWriterName, elementName);
         }
 
         methodBlock.indent(() -> {
@@ -247,12 +347,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else if (elementType == ClassType.Object) {
                 methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
             } else if (elementType instanceof IterableType) {
-                serializeContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
+                serializeJsonContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
                     serializedName, propertyValueGetter, depth + 1);
             } else if (elementType instanceof MapType) {
                 // Assumption is that the key type for the Map is a String. This may not always hold true and when that
                 // becomes reality this will need to be reworked to handle that case.
-                serializeContainerProperty(methodBlock, "writeMap", elementType, ((MapType) elementType).getValueType(),
+                serializeJsonContainerProperty(methodBlock, "writeMap", elementType, ((MapType) elementType).getValueType(),
                     serializedName, propertyValueGetter, depth + 1);
             } else {
                 throw new RuntimeException("Unknown value type " + elementType + " in " + containerType
@@ -305,7 +405,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         ClientModelPropertyWithMetadata flattenedProperty = flattenedProperties.property;
         if (flattenedProperty != null) {
             // This is a terminal location, only need to add property serialization.
-            serializeProperty(methodBlock, flattenedProperty.property, flattenedProperties.nodeName,
+            serializeJsonProperty(methodBlock, flattenedProperty.property, flattenedProperties.nodeName,
                 flattenedProperty.fromSuperClass, false);
         } else {
             // Otherwise this is an intermediate location.
@@ -348,9 +448,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /**
      * Adds a potential null check to the serialized value.
      * <p>
-     * This will only modify the serialization value if the {@code type} {@link IType#deserializationNeedsNullGuarding() is nullable} and
-     * isn't a boxed type and the {@code serializationMethod} is either {@code writeString} or {@code writeStringField}.
-     * In this case the property will be stringified before being written so it needs to be null checked to prevent a
+     * This will only modify the serialization value if the {@code type}
+     * {@link IType#deserializationNeedsNullGuarding() is nullable} and isn't a boxed type and the
+     * {@code serializationMethod} is either {@code writeString} or {@code writeStringField}. In this case the property
+     * will be stringified before being written so it needs to be null checked to prevent a
      * {@link NullPointerException}.
      *
      * @param type The type being serialized.
@@ -565,7 +666,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleJsonReadReturn(methodBlock, propertiesManager.modelName, propertiesManager, settings);
+        handleJsonReadReturn(methodBlock, propertiesManager.model.getName(), propertiesManager, settings);
     }
 
     /**
@@ -665,7 +766,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
         String methodName = superTypeReading ? "fromJsonKnownDiscriminator" : "fromJson";
 
-        String modelName = propertiesManager.modelName;
+        String modelName = propertiesManager.model.getName();
         boolean hasRequiredProperties = !CoreUtils.isNullOrEmpty(propertiesManager.superRequiredProperties)
             || !CoreUtils.isNullOrEmpty(propertiesManager.requiredProperties);
         boolean isPolymorphic = propertiesManager.discriminatorProperty != null;
@@ -1108,6 +1209,145 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         return (ifBlock == null) ? baseBlock.ifBlock(condition, action) : ifBlock.elseIfBlock(condition, action);
     }
 
+    private static void writeToXml(JavaClass classBlock, PropertiesManager propertiesManager) {
+        classBlock.annotation("Override");
+        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", methodBlock -> {
+            String modelXmlName = propertiesManager.model.getXmlName();
+            methodBlock.line("xmlWriter.writeStartElement(\"" + modelXmlName + "\");");
+
+            String modelXmlNamespace = propertiesManager.model.getXmlNamespace();
+            if (modelXmlNamespace != null) {
+                methodBlock.line("xmlWriter.writeNamespace(\"" + modelXmlNamespace + "\");");
+            }
+
+            propertiesManager.xmlAttributes.forEach(property -> serializeXmlAttribute(methodBlock, property));
+            propertiesManager.xmlElements.forEach(property -> serializeXmlProperty(methodBlock, property));
+
+            methodBlock.methodReturn("xmlWriter.writeEndElement()");
+        });
+    }
+
+    /**
+     * Serializes an XML attribute.
+     *
+     * @param methodBlock the method handling serialization.
+     * @param attribute The XML attribute being serialized.
+     */
+    private static void serializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute) {
+        // At this time there is an assumption being made that XML attributes won't be any more complex that just
+        // a primitive or simple class type.
+        IType wireType = attribute.getWireType();
+        String propertyValueGetter = "this." + attribute.getName();
+
+        String attributeSerializationMethod = wireType.streamStyleXmlAttributeSerializationMethod();
+        if (attributeSerializationMethod == null) {
+            // TODO (alzimmer): Resolve this as serialization logic generation needs to handle all cases.
+            throw new RuntimeException("Unknown wire type " + wireType + " in XML attribute serialization. "
+                + "Need to add support for it.");
+        }
+
+        String value = getXmlWriteValue(wireType, propertyValueGetter, attributeSerializationMethod);
+        methodBlock.line(createXmlWrite(attribute.getXmlName(), attribute.getXmlNamespace(), attributeSerializationMethod, value) + ";");
+    }
+
+    /**
+     * Serializes an XML element.
+     *
+     * @param methodBlock The method handling serialization.
+     * @param element The XML element being serialized.
+     */
+    private static void serializeXmlProperty(JavaBlock methodBlock, ClientModelProperty element) {
+        IType wireType = element.getWireType();
+        String propertyValueGetter = "this." + element.getName();
+
+        // XML wrappers implement XmlSerializable and always use writeXml, check for this first as it's an early out.
+        if (element.getIsXmlWrapper()) {
+            methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
+            return;
+        }
+
+        // Attempt to determine whether the wire type is simple serialization.
+        // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
+        String xmlElementSerializationMethod = wireType.streamStyleXmlElementSerializationMethod();
+        if (xmlElementSerializationMethod != null) {
+            String value = getXmlWriteValue(wireType, propertyValueGetter, xmlElementSerializationMethod);
+
+            // XML text has special handling.
+            if (element.isXmlText()) {
+                methodBlock.line("xmlWriter.writeString(" + value + ");");
+            } else {
+                methodBlock.line(createXmlWrite(element.getXmlName(), element.getXmlNamespace(), xmlElementSerializationMethod, value) + ";");
+            }
+        } else if (wireType instanceof IterableType) {
+            IType elementType = ((IterableType) wireType).getElementType();
+
+            methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
+                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                    ifAction.line(propertyValueGetter + ".forEach(xmlWriter::writeXml);");
+                } else {
+                    String xmlWrite = createXmlWrite(element.getXmlName(), element.getXmlNamespace(),
+                        elementType.streamStyleXmlElementSerializationMethod(), "element");
+                    ifAction.line(propertyValueGetter + ".forEach(element -> " + xmlWrite + ");");
+                }
+            });
+        } else if (wireType instanceof MapType) {
+            // Assumption is that the key type for the Map is a String. This may not always hold true and when that
+            // becomes reality this will need to be reworked to handle that case.
+            IType valueType = ((MapType) wireType).getValueType();
+
+            methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
+                ifAction.line("xmlWriter.writeStartElement(\"" + element.getXmlName() + "\");");
+
+                if (valueType instanceof ClassType && ((ClassType) valueType).isSwaggerType()) {
+                    String writeStartElement = (element.getXmlNamespace() != null)
+                        ? "xmlWriter.writeStartElement(null, \"" + element.getXmlNamespace() + "\", key);"
+                        : "xmlWriter.writeStartElement(key);";
+
+                    ifAction.line(propertyValueGetter + ".forEach((key, value) -> {\n"
+                        + "%s"
+                        + "xmlWriter.writeXml(value);\n"
+                        + "xmlWriter.writeEndElement();\n"
+                        + "});", writeStartElement);
+                } else {
+                    if (element.getXmlNamespace() != null) {
+                        ifAction.line(propertyValueGetter + ".forEach((key, value) -> xmlWriter.%s(null, key, %s, value));",
+                            valueType.streamStyleXmlElementSerializationMethod(), element.getXmlNamespace());
+                    } else {
+                        ifAction.line(propertyValueGetter + ".forEach(xmlWriter::%s);",
+                            valueType.streamStyleXmlElementSerializationMethod());
+                    }
+                }
+
+                ifAction.line("xmlWriter.writeEndElement();");
+            });
+        } else {
+            // TODO (alzimmer): Resolve this as serialization logic generation needs to handle all cases.
+            throw new RuntimeException("Unknown wire type " + wireType + " in XML element serialization. "
+                + "Need to add support for it.");
+        }
+    }
+
+    private static String getXmlWriteValue(IType wireType, String propertyValueGetter, String serializationMethod) {
+        if (wireType instanceof EnumType) {
+            return propertyValueGetter + " == null ? null : " + propertyValueGetter + ".toString()";
+        } else if (wireType.isNullable()) {
+            return addPotentialSerializationNullCheck(wireType, serializationMethod, propertyValueGetter);
+        } else {
+            return propertyValueGetter;
+        }
+    }
+
+    private static String createXmlWrite(String xmlName, String xmlNamespace, String serializationMethod, String value) {
+        return xmlNamespace != null
+            ? String.format("xmlWriter.%s(null, \"%s\", \"%s\", %s)", serializationMethod, xmlNamespace, xmlName, value)
+            : String.format("xmlWriter." + serializationMethod + "(\"" + xmlName + "\", " + value + ")");
+    }
+
+    private static void writeFromXml(JavaClass classBlock, ClientModel model, PropertiesManager propertiesManager,
+        JavaSettings settings) {
+
+    }
+
     /**
      * Helper class to manage properties in the model and how they correlate with serialization and deserialization.
      * <p>
@@ -1118,7 +1358,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * This will also handle getting the discriminator property and the expected value for the field.
      */
     private static final class PropertiesManager {
-        private final String modelName;
+        private final ClientModel model;
         private final List<ClientModelProperty> superRequiredProperties;
         private final List<ClientModelProperty> superSetterProperties;
         private final List<ClientModelProperty> requiredProperties;
@@ -1129,11 +1369,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         private final FlattenedPropertiesStructure flattenedPropertiesStructure;
         private final String readerFieldNameVariableName;
 
+        private final List<ClientModelProperty> xmlAttributes;
+        private final List<ClientModelProperty> xmlElements;
+
         PropertiesManager(ClientModel model) {
             // The reader JSON field name variable needs to be mutable as it may match a JSON property name in the class.
             Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
                 "fieldName", "jsonFieldName", "deserializationFieldName"));
-            this.modelName = model.getName();
+            this.model = model;
             this.expectedDiscriminator = model.getSerializedName();
 
             Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
@@ -1160,6 +1403,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             List<ClientModelProperty> setterProperties = new ArrayList<>();
             ClientModelProperty discriminatorProperty = null;
             ClientModelProperty additionalProperties = null;
+
+            List<ClientModelProperty> xmlAttributes = new ArrayList<>();
+            List<ClientModelProperty> xmlElements = new ArrayList<>();
             for (ClientModelProperty property : model.getProperties()) {
                 if (property.isRequired()) {
                     requiredProperties.add(property);
@@ -1178,6 +1424,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
 
                 possibleReaderFieldNameVariableNames.remove(property.getName());
+
+                if (property.getIsXmlAttribute()) {
+                    xmlAttributes.add(property);
+                } else {
+                    xmlElements.add(property);
+                }
             }
 
             this.discriminatorProperty = discriminatorProperty;
@@ -1189,6 +1441,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             this.flattenedPropertiesStructure = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
                 flattenedProperties);
             this.readerFieldNameVariableName = possibleReaderFieldNameVariableNames.iterator().next();
+
+            this.xmlAttributes = xmlAttributes;
+            this.xmlElements = xmlElements;
         }
     }
 
