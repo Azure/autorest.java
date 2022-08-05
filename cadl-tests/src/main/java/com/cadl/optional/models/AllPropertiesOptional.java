@@ -12,9 +12,9 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-/** The WithOptional model. */
+/** The AllPropertiesOptional model. */
 @Fluent
-public final class WithOptional {
+public final class AllPropertiesOptional {
     /*
      * The boolean property.
      */
@@ -44,6 +44,24 @@ public final class WithOptional {
      */
     @JsonProperty(value = "string")
     private String string;
+
+    /*
+     * The stringNullable property.
+     */
+    @JsonProperty(value = "stringNullable")
+    private String stringNullable;
+
+    /*
+     * The stringRequired property.
+     */
+    @JsonProperty(value = "stringRequired")
+    private String stringRequired;
+
+    /*
+     * The stringRequiredNullable property.
+     */
+    @JsonProperty(value = "stringRequiredNullable")
+    private String stringRequiredNullable;
 
     /*
      * The bytes property.
@@ -112,9 +130,9 @@ public final class WithOptional {
      * Set the booleanProperty property: The boolean property.
      *
      * @param booleanProperty the booleanProperty value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBooleanProperty(Boolean booleanProperty) {
+    public AllPropertiesOptional setBooleanProperty(Boolean booleanProperty) {
         this.booleanProperty = booleanProperty;
         return this;
     }
@@ -132,9 +150,9 @@ public final class WithOptional {
      * Set the booleanNullable property: The booleanNullable property.
      *
      * @param booleanNullable the booleanNullable value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBooleanNullable(Boolean booleanNullable) {
+    public AllPropertiesOptional setBooleanNullable(Boolean booleanNullable) {
         this.booleanNullable = booleanNullable;
         return this;
     }
@@ -152,9 +170,9 @@ public final class WithOptional {
      * Set the booleanRequired property: The booleanRequired property.
      *
      * @param booleanRequired the booleanRequired value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBooleanRequired(Boolean booleanRequired) {
+    public AllPropertiesOptional setBooleanRequired(Boolean booleanRequired) {
         this.booleanRequired = booleanRequired;
         return this;
     }
@@ -172,9 +190,9 @@ public final class WithOptional {
      * Set the booleanRequiredNullable property: The booleanRequiredNullable property.
      *
      * @param booleanRequiredNullable the booleanRequiredNullable value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBooleanRequiredNullable(Boolean booleanRequiredNullable) {
+    public AllPropertiesOptional setBooleanRequiredNullable(Boolean booleanRequiredNullable) {
         this.booleanRequiredNullable = booleanRequiredNullable;
         return this;
     }
@@ -192,10 +210,70 @@ public final class WithOptional {
      * Set the string property: The string property.
      *
      * @param string the string value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setString(String string) {
+    public AllPropertiesOptional setString(String string) {
         this.string = string;
+        return this;
+    }
+
+    /**
+     * Get the stringNullable property: The stringNullable property.
+     *
+     * @return the stringNullable value.
+     */
+    public String getStringNullable() {
+        return this.stringNullable;
+    }
+
+    /**
+     * Set the stringNullable property: The stringNullable property.
+     *
+     * @param stringNullable the stringNullable value to set.
+     * @return the AllPropertiesOptional object itself.
+     */
+    public AllPropertiesOptional setStringNullable(String stringNullable) {
+        this.stringNullable = stringNullable;
+        return this;
+    }
+
+    /**
+     * Get the stringRequired property: The stringRequired property.
+     *
+     * @return the stringRequired value.
+     */
+    public String getStringRequired() {
+        return this.stringRequired;
+    }
+
+    /**
+     * Set the stringRequired property: The stringRequired property.
+     *
+     * @param stringRequired the stringRequired value to set.
+     * @return the AllPropertiesOptional object itself.
+     */
+    public AllPropertiesOptional setStringRequired(String stringRequired) {
+        this.stringRequired = stringRequired;
+        return this;
+    }
+
+    /**
+     * Get the stringRequiredNullable property: The stringRequiredNullable property.
+     *
+     * @return the stringRequiredNullable value.
+     */
+    public String getStringRequiredNullable() {
+        return this.stringRequiredNullable;
+    }
+
+    /**
+     * Set the stringRequiredNullable property: The stringRequiredNullable property.
+     *
+     * @param stringRequiredNullable the stringRequiredNullable value to set.
+     * @return the AllPropertiesOptional object itself.
+     */
+    public AllPropertiesOptional setStringRequiredNullable(String stringRequiredNullable) {
+        this.stringRequiredNullable = stringRequiredNullable;
         return this;
     }
 
@@ -212,9 +290,9 @@ public final class WithOptional {
      * Set the bytes property: The bytes property.
      *
      * @param bytes the bytes value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBytes(byte[] bytes) {
+    public AllPropertiesOptional setBytes(byte[] bytes) {
         this.bytes = CoreUtils.clone(bytes);
         return this;
     }
@@ -232,9 +310,9 @@ public final class WithOptional {
      * Set the intProperty property: The int property.
      *
      * @param intProperty the intProperty value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setIntProperty(Long intProperty) {
+    public AllPropertiesOptional setIntProperty(Long intProperty) {
         this.intProperty = intProperty;
         return this;
     }
@@ -252,9 +330,9 @@ public final class WithOptional {
      * Set the longProperty property: The long property.
      *
      * @param longProperty the longProperty value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setLongProperty(Long longProperty) {
+    public AllPropertiesOptional setLongProperty(Long longProperty) {
         this.longProperty = longProperty;
         return this;
     }
@@ -272,9 +350,9 @@ public final class WithOptional {
      * Set the floatProperty property: The float property.
      *
      * @param floatProperty the floatProperty value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setFloatProperty(Double floatProperty) {
+    public AllPropertiesOptional setFloatProperty(Double floatProperty) {
         this.floatProperty = floatProperty;
         return this;
     }
@@ -292,9 +370,9 @@ public final class WithOptional {
      * Set the doubleProperty property: The double property.
      *
      * @param doubleProperty the doubleProperty value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setDoubleProperty(Double doubleProperty) {
+    public AllPropertiesOptional setDoubleProperty(Double doubleProperty) {
         this.doubleProperty = doubleProperty;
         return this;
     }
@@ -312,9 +390,9 @@ public final class WithOptional {
      * Set the duration property: The duration property.
      *
      * @param duration the duration value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setDuration(Duration duration) {
+    public AllPropertiesOptional setDuration(Duration duration) {
         this.duration = duration;
         return this;
     }
@@ -332,9 +410,9 @@ public final class WithOptional {
      * Set the dateTime property: The dateTime property.
      *
      * @param dateTime the dateTime value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setDateTime(OffsetDateTime dateTime) {
+    public AllPropertiesOptional setDateTime(OffsetDateTime dateTime) {
         this.dateTime = dateTime;
         return this;
     }
@@ -352,9 +430,9 @@ public final class WithOptional {
      * Set the stringList property: The stringList property.
      *
      * @param stringList the stringList value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setStringList(List<String> stringList) {
+    public AllPropertiesOptional setStringList(List<String> stringList) {
         this.stringList = stringList;
         return this;
     }
@@ -372,9 +450,9 @@ public final class WithOptional {
      * Set the bytesDict property: The bytesDict property.
      *
      * @param bytesDict the bytesDict value to set.
-     * @return the WithOptional object itself.
+     * @return the AllPropertiesOptional object itself.
      */
-    public WithOptional setBytesDict(Map<String, byte[]> bytesDict) {
+    public AllPropertiesOptional setBytesDict(Map<String, byte[]> bytesDict) {
         this.bytesDict = bytesDict;
         return this;
     }

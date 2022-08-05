@@ -8,9 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The OptionalOpsReadHeaders model. */
+/** The OptionalOpsPutHeaders model. */
 @Fluent
-public final class OptionalOpsReadHeaders {
+public final class OptionalOpsPutHeaders {
     /*
      * The header-required property.
      */
@@ -25,11 +25,11 @@ public final class OptionalOpsReadHeaders {
 
     // HttpHeaders containing the raw property values.
     /**
-     * Creates an instance of OptionalOpsReadHeaders class.
+     * Creates an instance of OptionalOpsPutHeaders class.
      *
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
-    public OptionalOpsReadHeaders(HttpHeaders rawHeaders) {
+    public OptionalOpsPutHeaders(HttpHeaders rawHeaders) {
         this.headerRequired = rawHeaders.getValue("header-required");
         this.headerOptional = rawHeaders.getValue("header-optional");
     }
@@ -47,9 +47,9 @@ public final class OptionalOpsReadHeaders {
      * Set the headerRequired property: The header-required property.
      *
      * @param headerRequired the headerRequired value to set.
-     * @return the OptionalOpsReadHeaders object itself.
+     * @return the OptionalOpsPutHeaders object itself.
      */
-    public OptionalOpsReadHeaders setHeaderRequired(String headerRequired) {
+    public OptionalOpsPutHeaders setHeaderRequired(String headerRequired) {
         this.headerRequired = headerRequired;
         return this;
     }
@@ -67,9 +67,9 @@ public final class OptionalOpsReadHeaders {
      * Set the headerOptional property: The header-optional property.
      *
      * @param headerOptional the headerOptional value to set.
-     * @return the OptionalOpsReadHeaders object itself.
+     * @return the OptionalOpsPutHeaders object itself.
      */
-    public OptionalOpsReadHeaders setHeaderOptional(String headerOptional) {
+    public OptionalOpsPutHeaders setHeaderOptional(String headerOptional) {
         this.headerOptional = headerOptional;
         return this;
     }

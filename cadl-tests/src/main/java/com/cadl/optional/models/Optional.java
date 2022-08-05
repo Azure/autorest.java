@@ -47,6 +47,24 @@ public final class Optional {
     private String string;
 
     /*
+     * The stringNullable property.
+     */
+    @JsonProperty(value = "stringNullable")
+    private String stringNullable;
+
+    /*
+     * The stringRequired property.
+     */
+    @JsonProperty(value = "stringRequired", required = true)
+    private String stringRequired;
+
+    /*
+     * The stringRequiredNullable property.
+     */
+    @JsonProperty(value = "stringRequiredNullable", required = true)
+    private String stringRequiredNullable;
+
+    /*
      * The bytes property.
      */
     @JsonProperty(value = "bytes")
@@ -105,13 +123,19 @@ public final class Optional {
      *
      * @param booleanRequired the booleanRequired value to set.
      * @param booleanRequiredNullable the booleanRequiredNullable value to set.
+     * @param stringRequired the stringRequired value to set.
+     * @param stringRequiredNullable the stringRequiredNullable value to set.
      */
     @JsonCreator
     public Optional(
             @JsonProperty(value = "booleanRequired", required = true) boolean booleanRequired,
-            @JsonProperty(value = "booleanRequiredNullable", required = true) Boolean booleanRequiredNullable) {
+            @JsonProperty(value = "booleanRequiredNullable", required = true) Boolean booleanRequiredNullable,
+            @JsonProperty(value = "stringRequired", required = true) String stringRequired,
+            @JsonProperty(value = "stringRequiredNullable", required = true) String stringRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
+        this.stringRequired = stringRequired;
+        this.stringRequiredNullable = stringRequiredNullable;
     }
 
     /**
@@ -190,6 +214,44 @@ public final class Optional {
     public Optional setString(String string) {
         this.string = string;
         return this;
+    }
+
+    /**
+     * Get the stringNullable property: The stringNullable property.
+     *
+     * @return the stringNullable value.
+     */
+    public String getStringNullable() {
+        return this.stringNullable;
+    }
+
+    /**
+     * Set the stringNullable property: The stringNullable property.
+     *
+     * @param stringNullable the stringNullable value to set.
+     * @return the Optional object itself.
+     */
+    public Optional setStringNullable(String stringNullable) {
+        this.stringNullable = stringNullable;
+        return this;
+    }
+
+    /**
+     * Get the stringRequired property: The stringRequired property.
+     *
+     * @return the stringRequired value.
+     */
+    public String getStringRequired() {
+        return this.stringRequired;
+    }
+
+    /**
+     * Get the stringRequiredNullable property: The stringRequiredNullable property.
+     *
+     * @return the stringRequiredNullable value.
+     */
+    public String getStringRequiredNullable() {
+        return this.stringRequiredNullable;
     }
 
     /**

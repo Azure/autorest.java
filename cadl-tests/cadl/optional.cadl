@@ -8,10 +8,13 @@ namespace Cadl.Optional;
 
 model Optional {
   boolean?: boolean = true;
-  booleanNullable?: boolean;
+  booleanNullable?: boolean | null;
   booleanRequired: boolean;
   booleanRequiredNullable: boolean | null;
   string?: string;
+  stringNullable?: string | null;
+  stringRequired: string;
+  stringRequiredNullable: string | null;
   bytes?: bytes;
   int?: int32;
   long?: int64;
@@ -25,27 +28,27 @@ model Optional {
 }
 
 @withOptionalProperties
-model WithOptional {
+model AllPropertiesOptional {
   ...Optional
 }
 
 @route("/optional")
 interface OptionalOp {
-  @route("/read")
-  op read(
+  @put
+  @route("/put")
+  op put(
           @header requestHeaderRequired: string,
           @header requestHeaderOptional?: string = "test-header",
           @query booleanRequired: boolean,
           @query booleanNullable?: boolean | null,
           @query booleanRequiredNullable: boolean | null,
-          @query string?: string): {
+          @query string?: string,
+          @query stringNullable?: string | null;
+          @query stringRequired: string;
+          @query stringRequiredNullable: string | null;
+          @body Optional?: Optional): {
     @header headerRequired: string;
     @header headerOptional? : string;
-    @body body?: Optional;
-  };
-
-  @route("list")
-  op list(): {
-    @body body?: WithOptional[]; 
+    @body body?: AllPropertiesOptional;
   };
 }

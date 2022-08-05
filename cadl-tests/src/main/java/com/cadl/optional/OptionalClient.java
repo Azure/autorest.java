@@ -32,7 +32,7 @@ public final class OptionalClient {
     }
 
     /**
-     * The read operation.
+     * The put operation.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -41,6 +41,7 @@ public final class OptionalClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>The booleanNullable parameter</td></tr>
      *     <tr><td>string</td><td>String</td><td>No</td><td>The string parameter</td></tr>
+     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>The stringNullable parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -55,7 +56,7 @@ public final class OptionalClient {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
-     * <p><strong>Response Body Schema</strong>
+     * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
      * {
@@ -64,6 +65,37 @@ public final class OptionalClient {
      *     booleanRequired: boolean (Required)
      *     booleanRequiredNullable: Boolean (Required)
      *     string: String (Optional)
+     *     stringNullable: String (Optional)
+     *     stringRequired: String (Required)
+     *     stringRequiredNullable: String (Required)
+     *     bytes: byte[] (Optional)
+     *     int: Long (Optional)
+     *     long: Long (Optional)
+     *     float: Double (Optional)
+     *     double: Double (Optional)
+     *     duration: Duration (Optional)
+     *     dateTime: OffsetDateTime (Optional)
+     *     stringList (Optional): [
+     *         String (Optional)
+     *     ]
+     *     bytesDict (Optional): {
+     *         String: byte[] (Optional)
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     boolean: Boolean (Optional)
+     *     booleanNullable: Boolean (Optional)
+     *     booleanRequired: Boolean (Optional)
+     *     booleanRequiredNullable: Boolean (Optional)
+     *     string: String (Optional)
+     *     stringNullable: String (Optional)
+     *     stringRequired: String (Optional)
+     *     stringRequiredNullable: String (Optional)
      *     bytes: byte[] (Optional)
      *     int: Long (Optional)
      *     long: Long (Optional)
@@ -83,6 +115,8 @@ public final class OptionalClient {
      * @param requestHeaderRequired The requestHeaderRequired parameter.
      * @param booleanRequired The booleanRequired parameter.
      * @param booleanRequiredNullable The booleanRequiredNullable parameter.
+     * @param stringRequired The stringRequired parameter.
+     * @param stringRequiredNullable The stringRequiredNullable parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -92,56 +126,21 @@ public final class OptionalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(
+    public Response<BinaryData> putWithResponse(
             String requestHeaderRequired,
             boolean booleanRequired,
             Boolean booleanRequiredNullable,
+            String stringRequired,
+            String stringRequiredNullable,
             RequestOptions requestOptions) {
         return this.client
-                .readWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, requestOptions)
+                .putWithResponse(
+                        requestHeaderRequired,
+                        booleanRequired,
+                        booleanRequiredNullable,
+                        stringRequired,
+                        stringRequiredNullable,
+                        requestOptions)
                 .block();
-    }
-
-    /**
-     * The list operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * [
-     *      (Required){
-     *         boolean: Boolean (Optional)
-     *         booleanNullable: Boolean (Optional)
-     *         booleanRequired: Boolean (Optional)
-     *         booleanRequiredNullable: Boolean (Optional)
-     *         string: String (Optional)
-     *         bytes: byte[] (Optional)
-     *         int: Long (Optional)
-     *         long: Long (Optional)
-     *         float: Double (Optional)
-     *         double: Double (Optional)
-     *         duration: Duration (Optional)
-     *         dateTime: OffsetDateTime (Optional)
-     *         stringList (Optional): [
-     *             String (Optional)
-     *         ]
-     *         bytesDict (Optional): {
-     *             String: byte[] (Optional)
-     *         }
-     *     }
-     * ]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> listWithResponse(RequestOptions requestOptions) {
-        return this.client.listWithResponse(requestOptions).block();
     }
 }

@@ -8,23 +8,23 @@ import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
 
-/** Contains all response data for the read operation. */
-public final class OptionalOpsReadResponse extends ResponseBase<OptionalOpsReadHeaders, Optional> {
+/** Contains all response data for the put operation. */
+public final class OptionalOpsPutResponse extends ResponseBase<OptionalOpsPutHeaders, AllPropertiesOptional> {
     /**
-     * Creates an instance of OptionalOpsReadResponse.
+     * Creates an instance of OptionalOpsPutResponse.
      *
-     * @param request the request which resulted in this OptionalOpsReadResponse.
+     * @param request the request which resulted in this OptionalOpsPutResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param value the deserialized value of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      */
-    public OptionalOpsReadResponse(
+    public OptionalOpsPutResponse(
             HttpRequest request,
             int statusCode,
             HttpHeaders rawHeaders,
-            Optional value,
-            OptionalOpsReadHeaders headers) {
+            AllPropertiesOptional value,
+            OptionalOpsPutHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
@@ -34,7 +34,7 @@ public final class OptionalOpsReadResponse extends ResponseBase<OptionalOpsReadH
      * @return the deserialized response body.
      */
     @Override
-    public Optional getValue() {
+    public AllPropertiesOptional getValue() {
         return super.getValue();
     }
 }
