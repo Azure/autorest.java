@@ -9,10 +9,10 @@ function generate_remote {
         exit 1
     fi
 
-    cp -rf cadl-output/java/src/ .
+    cp -rf cadl-output/java/src .
     rm src/main/java/module-info.java
 
-    rm -rf cadl-output/java/src/
+    rm -rf cadl-output/java/src
     rm tmp.cadl
 }
 
@@ -24,7 +24,7 @@ function generate {
         exit 1
     fi
 
-    cp -rf cadl-output/java/src/ .
+    cp -rf cadl-output/java/src .
     rm src/main/java/module-info.java
 
     rm -rf cadl-output/
