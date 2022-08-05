@@ -28,6 +28,10 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
 
     @Override
     public ClientMethodParameter map(Parameter parameter) {
+        return map(parameter, JavaSettings.getInstance().isDataPlaneClient());
+    }
+
+    public ClientMethodParameter map(Parameter parameter, boolean isProtocolMethod) {
         String name = parameter.getOriginalParameter() != null && parameter.getLanguage().getJava().getName().equals(parameter.getOriginalParameter().getLanguage().getJava().getName())
                 ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())
                 : parameter.getLanguage().getJava().getName();
@@ -48,7 +52,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.rawType(wireType);
 
-        if (settings.isDataPlaneClient()) {
+        if (isProtocolMethod) {
             wireType = SchemaUtil.removeModelFromParameter(parameter.getProtocol().getHttp().getIn(), wireType);
         }
         builder.wireType(wireType);
@@ -65,7 +69,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.isConstant(isConstant).defaultValue(defaultValue);
 
-        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, settings.isDataPlaneClient()));
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
         return builder.build();
     }
 }
