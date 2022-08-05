@@ -225,6 +225,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .isNullable(false)
                         .fromClient(false)
                         .parameterReference("requestOptions")
+                        .origin(ParameterSynthesizedOrigin.REQUEST_OPTIONS)
                         .build();
                 allParameters.add(requestOptions);
                 parameters.add(requestOptions);
@@ -245,6 +246,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .isNullable(false)
                         .fromClient(false)
                         .parameterReference("context")
+                        .origin(ParameterSynthesizedOrigin.CONTEXT)
                         .build();
                 allParameters.add(contextParameter);
                 parameters.add(contextParameter);

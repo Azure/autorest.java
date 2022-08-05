@@ -227,7 +227,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         if (settings.shouldGenerateSyncAsyncClients()) {
-            ClientModelUtil.getAsyncSyncClients(serviceClient, asyncClients, syncClients);
+            ClientModelUtil.getAsyncSyncClients(codeModel, serviceClient, asyncClients, syncClients);
         }
         builder.syncClients(syncClients);
         builder.asyncClients(asyncClients);

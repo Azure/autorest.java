@@ -62,7 +62,30 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
 
-    private final Map<Operation, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private final Map<CacheKey, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private static class CacheKey {
+        private final Operation operation;
+        private final boolean isProtocolMethod;
+
+        public CacheKey(Operation operation, boolean isProtocolMethod) {
+            this.operation = operation;
+            this.isProtocolMethod = isProtocolMethod;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            CacheKey cacheKey = (CacheKey) o;
+            return isProtocolMethod == cacheKey.isProtocolMethod && operation.equals(cacheKey.operation);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(operation, isProtocolMethod);
+        }
+    }
+
     private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     protected ClientMethodMapper() {
@@ -74,13 +97,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     @Override
     public List<ClientMethod> map(Operation operation) {
-        List<ClientMethod> clientMethods = parsed.get(operation);
+        return map(operation, JavaSettings.getInstance().isDataPlaneClient());
+    }
+
+    public List<ClientMethod> map(Operation operation, boolean isProtocolMethod) {
+        CacheKey cacheKey = new CacheKey(operation, isProtocolMethod);
+        List<ClientMethod> clientMethods = parsed.get(cacheKey);
         if (clientMethods != null) {
             return clientMethods;
         }
 
-        clientMethods = createClientMethods(operation, JavaSettings.getInstance().isDataPlaneClient());
-        parsed.put(operation, clientMethods);
+        clientMethods = createClientMethods(operation, isProtocolMethod);
+        parsed.put(cacheKey, clientMethods);
 
         return clientMethods;
     }

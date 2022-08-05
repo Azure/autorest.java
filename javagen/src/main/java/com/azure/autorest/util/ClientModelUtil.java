@@ -8,11 +8,14 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -43,8 +46,10 @@ public class ClientModelUtil {
      * @param asyncClients output, the async clients.
      * @param syncClients output, the sync client.
      */
-    public static void getAsyncSyncClients(ServiceClient serviceClient,
+    public static void getAsyncSyncClients(CodeModel codeModel, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
+        boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient() && JavaSettings.getInstance().isGenerateModels();
+
         String packageName = getAsyncSyncClientPackageName(serviceClient);
         boolean generateSyncMethods = JavaSettings.SyncMethodsGeneration.ALL
             .equals(JavaSettings.getInstance().getSyncMethods());
@@ -72,6 +77,29 @@ public class ClientModelUtil {
                     .packageName(packageName)
                     .serviceClient(serviceClient)
                     .methodGroupClient(methodGroupClient);
+
+            if (generateConvenienceMethods) {
+                final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
+                codeModel.getOperationGroups().stream()
+                        .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
+                        .findAny()
+                        .ifPresent(og -> {
+                            // TODO: filter for the methods that requests convenience method
+                            og.getOperations().forEach(o -> {
+                                List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
+                                if (!cMethods.isEmpty()) {
+                                    String methodName = cMethods.iterator().next().getProxyMethod().getName();
+                                    methodGroupClient.getClientMethods().stream()
+                                            .filter(m -> methodName.equals(m.getProxyMethod().getName()))
+                                            .findFirst()
+                                            .ifPresent(m -> {
+                                                convenienceMethods.add(new ConvenienceMethod(m, cMethods));
+                                            });
+                                }
+                            });
+                        });
+                builder.convenienceMethods(convenienceMethods);
+            }
 
             if (count == 1) {
                 // if it is the only method group, use service client name as base.
