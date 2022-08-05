@@ -156,7 +156,7 @@ export class CodeModelBuilder {
       this.baseUri = servers[0].url;
     }
     this.hostParameters = [];
-    this.processHost(servers?.length === 1 ? servers[0] : undefined);
+    this.processHost(servers?.length === 1 ? servers[0] :  undefined);
   }
 
   public build(): CodeModel {
