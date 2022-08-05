@@ -616,7 +616,7 @@ export class CodeModelBuilder {
       );
     } else {
       const choices: ChoiceValue[] = [];
-      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value !== undefined && it.value != null ? it.value : it.name)));
+      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
       if (sealed) {
         return this.codeModel.schemas.add(
