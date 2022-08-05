@@ -504,8 +504,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -530,8 +530,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -636,8 +636,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -662,8 +662,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -765,8 +765,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -790,8 +790,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -893,8 +893,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -919,8 +919,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1021,8 +1021,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1047,8 +1047,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1139,12 +1139,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<List<Product>>() {
-                    // empty
-                },
-                new TypeReference<List<Product>>() {
-                    // empty
-                });
+                TYPE_REFERENCE_LIST_PRODUCT,
+                TYPE_REFERENCE_LIST_PRODUCT);
     }
 
     /**
@@ -1168,12 +1164,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReference<List<Product>>() {
-                    // empty
-                },
-                new TypeReference<List<Product>>() {
-                    // empty
-                });
+                TYPE_REFERENCE_LIST_PRODUCT,
+                TYPE_REFERENCE_LIST_PRODUCT);
     }
 
     /**
@@ -1273,8 +1265,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1299,8 +1291,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1402,8 +1394,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1428,8 +1420,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1535,8 +1527,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1562,8 +1554,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1671,8 +1663,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1698,8 +1690,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1807,8 +1799,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1834,8 +1826,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1943,8 +1935,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -1970,8 +1962,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2076,8 +2068,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2102,8 +2094,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2210,8 +2202,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2237,8 +2229,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2347,8 +2339,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2374,8 +2366,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2484,8 +2476,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2511,8 +2503,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2621,8 +2613,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2648,8 +2640,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2755,8 +2747,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2781,8 +2773,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -2881,8 +2873,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -2906,8 +2898,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -3005,8 +2997,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -3030,8 +3022,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -3128,8 +3120,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSubProduct(),
-                new TypeReferenceSubProduct());
+                TypeReference.createInstance(SubProduct.class),
+                TypeReference.createInstance(SubProduct.class));
     }
 
     /**
@@ -3153,8 +3145,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSubProduct(),
-                new TypeReferenceSubProduct());
+                TypeReference.createInstance(SubProduct.class),
+                TypeReference.createInstance(SubProduct.class));
     }
 
     /**
@@ -3252,8 +3244,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSubProduct(),
-                new TypeReferenceSubProduct());
+                TypeReference.createInstance(SubProduct.class),
+                TypeReference.createInstance(SubProduct.class));
     }
 
     /**
@@ -3277,8 +3269,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSubProduct(),
-                new TypeReferenceSubProduct());
+                TypeReference.createInstance(SubProduct.class),
+                TypeReference.createInstance(SubProduct.class));
     }
 
     /**
@@ -3373,8 +3365,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3399,8 +3391,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3496,8 +3488,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3522,8 +3514,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3619,8 +3611,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3645,8 +3637,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3733,8 +3725,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -3757,8 +3749,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -3844,8 +3836,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3869,8 +3861,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3958,8 +3950,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -3983,8 +3975,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -4072,8 +4064,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4097,8 +4089,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4187,8 +4179,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4212,8 +4204,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4302,8 +4294,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4327,8 +4319,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4417,8 +4409,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4442,8 +4434,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4531,8 +4523,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4556,8 +4548,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4646,8 +4638,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4671,8 +4663,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4760,8 +4752,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -4785,8 +4777,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceSku(),
-                new TypeReferenceSku());
+                TypeReference.createInstance(Sku.class),
+                TypeReference.createInstance(Sku.class));
     }
 
     /**
@@ -4886,8 +4878,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -4912,8 +4904,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -5016,8 +5008,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5042,8 +5034,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5135,8 +5127,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5160,8 +5152,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5250,8 +5242,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5275,8 +5267,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5368,8 +5360,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5394,8 +5386,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5501,8 +5493,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5528,8 +5520,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5638,8 +5630,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5665,8 +5657,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -5775,8 +5767,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -5802,8 +5794,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -5912,8 +5904,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -5939,8 +5931,8 @@ public final class LROs {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -5976,19 +5968,7 @@ public final class LROs {
         return this.beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
     }
 
-    private static final class TypeReferenceSubProduct extends TypeReference<SubProduct> {
-        // empty
-    }
-
-    private static final class TypeReferenceProduct extends TypeReference<Product> {
-        // empty
-    }
-
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
-        // empty
-    }
-
-    private static final class TypeReferenceSku extends TypeReference<Sku> {
-        // empty
-    }
+    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT = new TypeReference<List<Product>>() {
+                // empty
+            };
 }

@@ -705,8 +705,8 @@ public final class DpgClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -744,8 +744,8 @@ public final class DpgClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -808,8 +808,8 @@ public final class DpgClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceLroProduct(),
-                new TypeReferenceLroProduct());
+                TypeReference.createInstance(LroProduct.class),
+                TypeReference.createInstance(LroProduct.class));
     }
 
     /**
@@ -847,8 +847,8 @@ public final class DpgClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceLroProduct(),
-                new TypeReferenceLroProduct());
+                TypeReference.createInstance(LroProduct.class),
+                TypeReference.createInstance(LroProduct.class));
     }
 
     /**
@@ -959,14 +959,6 @@ public final class DpgClientImpl {
                                         getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
-    }
-
-    private static final class TypeReferenceLroProduct extends TypeReference<LroProduct> {
-        // empty
-    }
-
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
-        // empty
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {
