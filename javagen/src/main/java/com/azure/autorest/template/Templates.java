@@ -101,4 +101,8 @@ public class Templates {
     public static ProtocolSampleTemplate getProtocolSampleTemplate() {
         return factory.getProtocolSampleTemplate();
     }
+
+    public static ConvenienceMethodTemplate getConvenienceMethodTemplate() {
+        return factory.getConvenienceMethodTemplate();
+    }
 }

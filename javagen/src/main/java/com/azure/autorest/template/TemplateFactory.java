@@ -48,4 +48,6 @@ public interface TemplateFactory {
     ModuleInfoTemplate getModuleInfoTemplate();
 
     ProtocolSampleTemplate getProtocolSampleTemplate();
+
+    ConvenienceMethodTemplate getConvenienceMethodTemplate();
 }

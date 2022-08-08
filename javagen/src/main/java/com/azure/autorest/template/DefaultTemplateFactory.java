@@ -113,4 +113,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public ProtocolSampleTemplate getProtocolSampleTemplate() {
         return ProtocolSampleTemplate.getInstance();
     }
+
+    @Override
+    public ConvenienceMethodTemplate getConvenienceMethodTemplate() {
+        return ConvenienceMethodTemplate.getInstance();
+    }
 }
