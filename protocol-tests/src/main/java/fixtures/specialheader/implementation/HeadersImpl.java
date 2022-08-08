@@ -585,8 +585,8 @@ public final class HeadersImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -629,8 +629,8 @@ public final class HeadersImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -983,10 +983,6 @@ public final class HeadersImpl {
                                         getValues(res.getValue(), "value"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
-    }
-
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
-        // empty
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

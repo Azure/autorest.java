@@ -385,8 +385,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -460,8 +460,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -728,8 +728,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -803,8 +803,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -991,8 +991,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1038,8 +1038,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1136,8 +1136,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1164,8 +1164,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1246,8 +1246,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1274,8 +1274,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1436,8 +1436,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1492,8 +1492,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1688,8 +1688,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1745,8 +1745,8 @@ public final class LroRetrysImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1792,9 +1792,5 @@ public final class LroRetrysImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
         return this.beginPostAsyncRelativeRetrySucceededAsync(requestOptions).getSyncPoller();
-    }
-
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
-        // empty
     }
 }
