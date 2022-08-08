@@ -72,6 +72,9 @@ public final class BuiltinAsyncClient {
         return this.serviceClient.readWithResponseAsync(requestOptions);
     }
 
+    /*
+     * Generated convenience method for readWithResponse
+     */
     /**
      * The read operation.
      *
@@ -82,7 +85,7 @@ public final class BuiltinAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Builtin> readAsync() {
+    public Mono<Builtin> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Builtin.class));
     }

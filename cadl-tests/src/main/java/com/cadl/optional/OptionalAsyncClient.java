@@ -146,6 +146,9 @@ public final class OptionalAsyncClient {
                 requestOptions);
     }
 
+    /*
+     * Generated convenience method for putWithResponse
+     */
     /**
      * The put operation.
      *
@@ -167,7 +170,7 @@ public final class OptionalAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<AllPropertiesOptional> putAsync(
+    public Mono<AllPropertiesOptional> put(
             String requestHeaderRequired,
             boolean booleanRequired,
             Boolean booleanRequiredNullable,
@@ -205,6 +208,9 @@ public final class OptionalAsyncClient {
                 .map(r -> r.toObject(AllPropertiesOptional.class));
     }
 
+    /*
+     * Generated convenience method for putWithResponse
+     */
     /**
      * The put operation.
      *
@@ -221,7 +227,7 @@ public final class OptionalAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<AllPropertiesOptional> putAsync(
+    public Mono<AllPropertiesOptional> put(
             String requestHeaderRequired,
             boolean booleanRequired,
             Boolean booleanRequiredNullable,

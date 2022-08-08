@@ -112,6 +112,9 @@ public final class VisibilityAsyncClient {
         return this.serviceClient.getDogWithResponseAsync(requestOptions);
     }
 
+    /*
+     * Generated convenience method for getReadDogWithResponse
+     */
     /**
      * The getReadDog operation.
      *
@@ -122,11 +125,14 @@ public final class VisibilityAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<ReadDog> getReadDogAsync() {
+    public Mono<ReadDog> getReadDog() {
         RequestOptions requestOptions = new RequestOptions();
         return getReadDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(ReadDog.class));
     }
 
+    /*
+     * Generated convenience method for getWriteDogWithResponse
+     */
     /**
      * The getWriteDog operation.
      *
@@ -137,11 +143,14 @@ public final class VisibilityAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<WriteDog> getWriteDogAsync() {
+    public Mono<WriteDog> getWriteDog() {
         RequestOptions requestOptions = new RequestOptions();
         return getWriteDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(WriteDog.class));
     }
 
+    /*
+     * Generated convenience method for getDogWithResponse
+     */
     /**
      * The getDog operation.
      *
@@ -152,7 +161,7 @@ public final class VisibilityAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Dog> getDogAsync() {
+    public Mono<Dog> getDog() {
         RequestOptions requestOptions = new RequestOptions();
         return getDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
     }

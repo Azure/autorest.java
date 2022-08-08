@@ -249,6 +249,9 @@ public final class DPGAsyncClient {
         return this.serviceClient.getNewOperationWithResponseAsync(requestOptions);
     }
 
+    /*
+     * Generated convenience method for headNoParamsWithResponse
+     */
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
@@ -262,7 +265,7 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
-    public Mono<Void> headNoParamsAsync(String newParameter) {
+    public Mono<Void> headNoParams(String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -270,6 +273,9 @@ public final class DPGAsyncClient {
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
 
+    /*
+     * Generated convenience method for headNoParamsWithResponse
+     */
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
@@ -281,11 +287,14 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
-    public Mono<Void> headNoParamsAsync() {
+    public Mono<Void> headNoParams() {
         RequestOptions requestOptions = new RequestOptions();
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
 
+    /*
+     * Generated convenience method for getRequiredWithResponse
+     */
     /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
@@ -301,7 +310,7 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
      *     {@link Mono}.
      */
-    public Mono<Message> getRequiredAsync(String parameter, String newParameter) {
+    public Mono<Message> getRequired(String parameter, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -311,6 +320,9 @@ public final class DPGAsyncClient {
                 .map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for getRequiredWithResponse
+     */
     /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
@@ -325,13 +337,16 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
      *     {@link Mono}.
      */
-    public Mono<Message> getRequiredAsync(String parameter) {
+    public Mono<Message> getRequired(String parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for putRequiredOptionalWithResponse
+     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -347,7 +362,7 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Message> putRequiredOptionalAsync(String requiredParam, String optionalParam, String newParameter) {
+    public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -360,6 +375,9 @@ public final class DPGAsyncClient {
                 .map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for putRequiredOptionalWithResponse
+     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -373,13 +391,16 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Message> putRequiredOptionalAsync(String requiredParam) {
+    public Mono<Message> putRequiredOptional(String requiredParam) {
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for postParametersWithResponse
+     */
     /**
      * POST a JSON or a JPEG.
      *
@@ -392,13 +413,16 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Message> postParametersAsync(PostInput parameter) {
+    public Mono<Message> postParameters(PostInput parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for deleteParametersWithResponse
+     */
     /**
      * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
      * in a known path.
@@ -410,11 +434,14 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
-    public Mono<Void> deleteParametersAsync() {
+    public Mono<Void> deleteParameters() {
         RequestOptions requestOptions = new RequestOptions();
         return deleteParametersWithResponse(requestOptions).map(Response::getValue);
     }
 
+    /*
+     * Generated convenience method for getOptionalWithResponse
+     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -430,7 +457,7 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
      *     Mono}.
      */
-    public Mono<Message> getOptionalAsync(String optionalParam, String newParameter) {
+    public Mono<Message> getOptional(String optionalParam, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -441,6 +468,9 @@ public final class DPGAsyncClient {
         return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for getOptionalWithResponse
+     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -453,11 +483,14 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
      *     Mono}.
      */
-    public Mono<Message> getOptionalAsync() {
+    public Mono<Message> getOptional() {
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }
 
+    /*
+     * Generated convenience method for getNewOperationWithResponse
+     */
     /**
      * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
@@ -469,7 +502,7 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Message> getNewOperationAsync() {
+    public Mono<Message> getNewOperation() {
         RequestOptions requestOptions = new RequestOptions();
         return getNewOperationWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }

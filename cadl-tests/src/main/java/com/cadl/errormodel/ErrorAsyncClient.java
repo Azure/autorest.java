@@ -59,6 +59,9 @@ public final class ErrorAsyncClient {
         return this.serviceClient.readWithResponseAsync(requestOptions);
     }
 
+    /*
+     * Generated convenience method for readWithResponse
+     */
     /**
      * The read operation.
      *
@@ -69,7 +72,7 @@ public final class ErrorAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Diagnostic> readAsync() {
+    public Mono<Diagnostic> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Diagnostic.class));
     }

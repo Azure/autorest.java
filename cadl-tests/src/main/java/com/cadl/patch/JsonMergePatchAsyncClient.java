@@ -106,6 +106,9 @@ public final class JsonMergePatchAsyncClient {
         return this.serviceClient.updateWithResponseAsync(name, body, requestOptions);
     }
 
+    /*
+     * Generated convenience method for createWithResponse
+     */
     /**
      * The create operation.
      *
@@ -119,13 +122,16 @@ public final class JsonMergePatchAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Resource> createAsync(String name, Resource body) {
+    public Mono<Resource> create(String name, Resource body) {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Resource.class));
     }
 
+    /*
+     * Generated convenience method for updateWithResponse
+     */
     /**
      * The update operation.
      *
@@ -139,7 +145,7 @@ public final class JsonMergePatchAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Resource> updateAsync(String name, Resource body) {
+    public Mono<Resource> update(String name, Resource body) {
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)

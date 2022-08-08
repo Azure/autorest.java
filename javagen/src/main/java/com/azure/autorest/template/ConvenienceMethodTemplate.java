@@ -39,14 +39,18 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
 
     public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
         ClientMethod clientMethod = convenienceMethodObj.getClientMethod();
+        String clientMethodName = getMethodName(clientMethod);
         convenienceMethodObj.getConvenienceMethods().stream()
                 .filter(m -> m.getType().name().contains("Async"))
                 .forEach(convenienceMethod -> {
+                    classBlock.blockComment("Generated convenience method for " + clientMethodName);
+
                     classBlock.javadocComment(comment -> {
                         ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
                     });
 
-                    classBlock.publicMethod(convenienceMethod.getDeclaration(), methodBlock -> {
+                    String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
+                    classBlock.publicMethod(methodDeclaration, methodBlock -> {
                         // RequestOptions
                         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
@@ -114,9 +118,6 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                         }
 
                         IType baseReturnType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
-                        String methodName = clientMethod.getName().endsWith("Async")
-                                ? clientMethod.getName().substring(0, clientMethod.getName().length() - "Async".length())
-                                : clientMethod.getName();
                         String invocationExpression = clientMethod.getMethodInputParameters().stream()
                                 .map(p -> {
                                     String expression = parameterExpressionsMap.get(p.getName());
@@ -130,11 +131,21 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
 
                         methodBlock.methodReturn(
                                 String.format("%1$s(%2$s).map(Response::getValue)%3$s",
-                                        methodName,
+                                        clientMethodName,
                                         invocationExpression,
                                         returnTypeConversionExpression));
                     });
                 });
+    }
+
+    private static String getMethodName(ClientMethod method) {
+        if (method.getType().name().contains("Async")) {
+            return method.getName().endsWith("Async")
+                    ? method.getName().substring(0, method.getName().length() - "Async".length())
+                    : method.getName();
+        } else {
+            return method.getName();
+        }
     }
 
     private static String expressionConvertFromBinaryData(IType baseReturnType) {

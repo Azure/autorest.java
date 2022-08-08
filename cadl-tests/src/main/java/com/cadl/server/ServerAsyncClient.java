@@ -56,6 +56,9 @@ public final class ServerAsyncClient {
         return this.serviceClient.statusWithResponseAsync(code, requestOptions);
     }
 
+    /*
+     * Generated convenience method for statusWithResponse
+     */
     /**
      * The status operation.
      *
@@ -68,7 +71,7 @@ public final class ServerAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Object> statusAsync(long code) {
+    public Mono<Object> status(long code) {
         RequestOptions requestOptions = new RequestOptions();
         return statusWithResponse(code, requestOptions).map(Response::getValue);
     }

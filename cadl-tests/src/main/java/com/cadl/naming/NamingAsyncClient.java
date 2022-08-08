@@ -79,6 +79,9 @@ public final class NamingAsyncClient {
         return this.serviceClient.postWithResponseAsync(name, requestOptions);
     }
 
+    /*
+     * Generated convenience method for postWithResponse
+     */
     /**
      * summary of POST op
      *
@@ -96,7 +99,7 @@ public final class NamingAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response on successful completion of {@link Mono}.
      */
-    public Mono<DataResponse> postAsync(String name, String etag) {
+    public Mono<DataResponse> post(String name, String etag) {
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader("etag", etag);
@@ -104,6 +107,9 @@ public final class NamingAsyncClient {
         return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
     }
 
+    /*
+     * Generated convenience method for postWithResponse
+     */
     /**
      * summary of POST op
      *
@@ -119,7 +125,7 @@ public final class NamingAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response on successful completion of {@link Mono}.
      */
-    public Mono<DataResponse> postAsync(String name) {
+    public Mono<DataResponse> post(String name) {
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
     }

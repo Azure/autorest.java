@@ -197,6 +197,9 @@ public final class EnumServiceAsyncClient {
         return this.serviceClient.getOperationWithResponseAsync(state, requestOptions);
     }
 
+    /*
+     * Generated convenience method for getColorWithResponse
+     */
     /**
      * The getColor operation.
      *
@@ -207,11 +210,14 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Color> getColorAsync() {
+    public Mono<Color> getColor() {
         RequestOptions requestOptions = new RequestOptions();
         return getColorWithResponse(requestOptions).map(Response::getValue).map(Color::fromString);
     }
 
+    /*
+     * Generated convenience method for getColorModelWithResponse
+     */
     /**
      * The getColorModel operation.
      *
@@ -222,11 +228,14 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<ColorModel> getColorModelAsync() {
+    public Mono<ColorModel> getColorModel() {
         RequestOptions requestOptions = new RequestOptions();
         return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
     }
 
+    /*
+     * Generated convenience method for setColorModelWithResponse
+     */
     /**
      * The setColorModel operation.
      *
@@ -239,13 +248,16 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setColorModelAsync(ColorModel color) {
+    public Mono<Operation> setColorModel(ColorModel color) {
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));
     }
 
+    /*
+     * Generated convenience method for setPriorityWithResponse
+     */
     /**
      * The setPriority operation.
      *
@@ -258,13 +270,16 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setPriorityAsync(Priority priority) {
+    public Mono<Operation> setPriority(Priority priority) {
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));
     }
 
+    /*
+     * Generated convenience method for getRunningOperationWithResponse
+     */
     /**
      * The getRunningOperation operation.
      *
@@ -275,13 +290,16 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> getRunningOperationAsync() {
+    public Mono<Operation> getRunningOperation() {
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));
     }
 
+    /*
+     * Generated convenience method for getOperationWithResponse
+     */
     /**
      * The getOperation operation.
      *
@@ -294,7 +312,7 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> getOperationAsync(OperationStateValues state) {
+    public Mono<Operation> getOperation(OperationStateValues state) {
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions)
                 .map(Response::getValue)

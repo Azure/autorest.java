@@ -125,6 +125,9 @@ public final class PolymorphismAsyncClient {
         return this.serviceClient.taskWithResponseAsync(body, requestOptions);
     }
 
+    /*
+     * Generated convenience method for readWithResponse
+     */
     /**
      * The read operation.
      *
@@ -135,11 +138,14 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Pet> readAsync() {
+    public Mono<Pet> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Pet.class));
     }
 
+    /*
+     * Generated convenience method for writeWithResponse
+     */
     /**
      * The write operation.
      *
@@ -152,13 +158,16 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<BaseType> writeAsync(BaseType body) {
+    public Mono<BaseType> write(BaseType body) {
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(BaseType.class));
     }
 
+    /*
+     * Generated convenience method for taskWithResponse
+     */
     /**
      * The task operation.
      *
@@ -171,7 +180,7 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Task> taskAsync(Task body) {
+    public Mono<Task> task(Task body) {
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
