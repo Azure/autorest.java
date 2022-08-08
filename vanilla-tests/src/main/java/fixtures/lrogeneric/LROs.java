@@ -122,7 +122,6 @@ public final class LROs {
         return this.beginPut200SucceededAsync(product).getSyncPoller();
     }
 
-    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT = new TypeReference<List<Product>>() {
-                // empty
-            };
+    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT =
+            new TypeReference<List<Product>>() {};
 }
