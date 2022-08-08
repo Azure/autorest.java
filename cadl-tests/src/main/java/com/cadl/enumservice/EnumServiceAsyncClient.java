@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.cadl.enumservice.implementation.EnumOpsImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
@@ -214,24 +213,6 @@ public final class EnumServiceAsyncClient {
     }
 
     /**
-     * The getColor operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Color> getColorAsync(Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        return getColorWithResponse(requestOptions).map(Response::getValue).map(Color::fromString);
-    }
-
-    /**
      * The getColorModel operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -243,24 +224,6 @@ public final class EnumServiceAsyncClient {
      */
     public Mono<ColorModel> getColorModelAsync() {
         RequestOptions requestOptions = new RequestOptions();
-        return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
-    }
-
-    /**
-     * The getColorModel operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<ColorModel> getColorModelAsync(Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
         return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
     }
 
@@ -278,27 +241,6 @@ public final class EnumServiceAsyncClient {
      */
     public Mono<Operation> setColorModelAsync(ColorModel color) {
         RequestOptions requestOptions = new RequestOptions();
-        return setColorModelWithResponse(color.toString(), requestOptions)
-                .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
-    }
-
-    /**
-     * The setColorModel operation.
-     *
-     * @param color The color parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Operation> setColorModelAsync(ColorModel color, Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
         return setColorModelWithResponse(color.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));
@@ -324,27 +266,6 @@ public final class EnumServiceAsyncClient {
     }
 
     /**
-     * The setPriority operation.
-     *
-     * @param priority The priority parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Operation> setPriorityAsync(Priority priority, Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
-                .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
-    }
-
-    /**
      * The getRunningOperation operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -356,26 +277,6 @@ public final class EnumServiceAsyncClient {
      */
     public Mono<Operation> getRunningOperationAsync() {
         RequestOptions requestOptions = new RequestOptions();
-        return getRunningOperationWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
-    }
-
-    /**
-     * The getRunningOperation operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Operation> getRunningOperationAsync(Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
         return getRunningOperationWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));
@@ -395,27 +296,6 @@ public final class EnumServiceAsyncClient {
      */
     public Mono<Operation> getOperationAsync(OperationStateValues state) {
         RequestOptions requestOptions = new RequestOptions();
-        return getOperationWithResponse(state.toString(), requestOptions)
-                .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
-    }
-
-    /**
-     * The getOperation operation.
-     *
-     * @param state The state parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Operation> getOperationAsync(OperationStateValues state, Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
         return getOperationWithResponse(state.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Operation.class));

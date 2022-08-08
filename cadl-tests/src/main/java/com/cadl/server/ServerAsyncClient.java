@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.cadl.server.implementation.ServerOpsImpl;
 import reactor.core.publisher.Mono;
 
@@ -71,25 +70,6 @@ public final class ServerAsyncClient {
      */
     public Mono<Object> statusAsync(long code) {
         RequestOptions requestOptions = new RequestOptions();
-        return statusWithResponse(code, requestOptions).map(Response::getValue);
-    }
-
-    /**
-     * The status operation.
-     *
-     * @param code The code parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    public Mono<Object> statusAsync(long code, Context context) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
         return statusWithResponse(code, requestOptions).map(Response::getValue);
     }
 }
