@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -63,26 +65,50 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                                 parameterExpressionsMap.put(clientParameter.getName(), expression);
                             } else {
                                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
-                                    case HEADER:
-                                        methodBlock.line(
+                                    case HEADER: {
+                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                                                 String.format("requestOptions.setHeader(%1$s, %2$s);",
                                                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
                                                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        break;
+                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
+                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                                                writeLine.accept(ifBlock);
+                                            });
+                                        } else {
+                                            writeLine.accept(methodBlock);
+                                        }
+                                    }
+                                    break;
 
-                                    case QUERY:
+                                    case QUERY: {
                                         // TODO: array
-                                        methodBlock.line(
+                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                                                 String.format("requestOptions.addQueryParam(%1$s, %2$s);",
                                                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
                                                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        break;
+                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
+                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                                                writeLine.accept(ifBlock);
+                                            });
+                                        } else {
+                                            writeLine.accept(methodBlock);
+                                        }
+                                    }
+                                    break;
 
-                                    case BODY:
-                                        methodBlock.line(
+                                    case BODY: {
+                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                                                 String.format("requestOptions.setBody(%s);",
                                                         expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        break;
+                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
+                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                                                writeLine.accept(ifBlock);
+                                            });
+                                        } else {
+                                            writeLine.accept(methodBlock);
+                                        }
+                                    }
+                                    break;
                                 }
                             }
                         }

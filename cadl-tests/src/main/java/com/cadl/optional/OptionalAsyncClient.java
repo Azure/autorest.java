@@ -180,11 +180,21 @@ public final class OptionalAsyncClient {
             String stringNullable,
             Optional optional) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setHeader("request-header-optional", requestHeaderOptional);
-        requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
-        requestOptions.addQueryParam("string", string);
-        requestOptions.addQueryParam("stringNullable", stringNullable);
-        requestOptions.setBody(BinaryData.fromObject(optional));
+        if (requestHeaderOptional != null) {
+            requestOptions.setHeader("request-header-optional", requestHeaderOptional);
+        }
+        if (booleanNullable != null) {
+            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
+        }
+        if (string != null) {
+            requestOptions.addQueryParam("string", string);
+        }
+        if (stringNullable != null) {
+            requestOptions.addQueryParam("stringNullable", stringNullable);
+        }
+        if (optional != null) {
+            requestOptions.setBody(BinaryData.fromObject(optional));
+        }
         return putWithResponse(
                         requestHeaderRequired,
                         booleanRequired,
@@ -231,11 +241,21 @@ public final class OptionalAsyncClient {
             Optional optional,
             Context context) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setHeader("request-header-optional", requestHeaderOptional);
-        requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
-        requestOptions.addQueryParam("string", string);
-        requestOptions.addQueryParam("stringNullable", stringNullable);
-        requestOptions.setBody(BinaryData.fromObject(optional));
+        if (requestHeaderOptional != null) {
+            requestOptions.setHeader("request-header-optional", requestHeaderOptional);
+        }
+        if (booleanNullable != null) {
+            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
+        }
+        if (string != null) {
+            requestOptions.addQueryParam("string", string);
+        }
+        if (stringNullable != null) {
+            requestOptions.addQueryParam("stringNullable", stringNullable);
+        }
+        if (optional != null) {
+            requestOptions.setBody(BinaryData.fromObject(optional));
+        }
         requestOptions.setContext(context);
         return putWithResponse(
                         requestHeaderRequired,

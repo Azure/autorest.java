@@ -265,7 +265,9 @@ public final class DPGAsyncClient {
      */
     public Mono<Void> headNoParamsAsync(String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
 
@@ -285,7 +287,9 @@ public final class DPGAsyncClient {
      */
     public Mono<Void> headNoParamsAsync(String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         requestOptions.setContext(context);
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
@@ -307,7 +311,9 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getRequiredAsync(String parameter, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
@@ -331,7 +337,9 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getRequiredAsync(String parameter, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         requestOptions.setContext(context);
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
@@ -355,8 +363,12 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> putRequiredOptionalAsync(String requiredParam, String optionalParam, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("optionalParam", optionalParam);
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
@@ -381,8 +393,12 @@ public final class DPGAsyncClient {
     public Mono<Message> putRequiredOptionalAsync(
             String requiredParam, String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("optionalParam", optionalParam);
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         requestOptions.setContext(context);
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
@@ -481,8 +497,12 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getOptionalAsync(String optionalParam, String newParameter) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("optionalParam", optionalParam);
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }
 
@@ -504,8 +524,12 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getOptionalAsync(String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.addQueryParam("optionalParam", optionalParam);
-        requestOptions.addQueryParam("new_parameter", newParameter);
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
         requestOptions.setContext(context);
         return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }
