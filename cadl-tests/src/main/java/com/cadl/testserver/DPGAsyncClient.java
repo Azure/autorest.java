@@ -271,6 +271,22 @@ public final class DPGAsyncClient {
     }
 
     /**
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
+     * added.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    public Mono<Void> headNoParamsAsync() {
+        RequestOptions requestOptions = new RequestOptions();
+        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
      *
@@ -290,6 +306,27 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
+        return getRequiredWithResponse(parameter, requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Message.class));
+    }
+
+    /**
+     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
+     * query parameter is added.
+     *
+     * @param parameter I am a required parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
+     *     {@link Mono}.
+     */
+    public Mono<Message> getRequiredAsync(String parameter) {
+        RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
@@ -318,6 +355,26 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
+        return putRequiredOptionalWithResponse(requiredParam, requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Message.class));
+    }
+
+    /**
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
+     * query parameter is added.
+     *
+     * @param requiredParam I am a required parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Message> putRequiredOptionalAsync(String requiredParam) {
+        RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
                 .map(r -> r.toObject(Message.class));
@@ -381,6 +438,23 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
+        return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
+    }
+
+    /**
+     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
+     * parameter is added.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
+     *     Mono}.
+     */
+    public Mono<Message> getOptionalAsync() {
+        RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
     }
 

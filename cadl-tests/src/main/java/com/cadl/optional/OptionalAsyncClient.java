@@ -204,4 +204,38 @@ public final class OptionalAsyncClient {
                 .map(Response::getValue)
                 .map(r -> r.toObject(AllPropertiesOptional.class));
     }
+
+    /**
+     * The put operation.
+     *
+     * @param requestHeaderRequired The requestHeaderRequired parameter.
+     * @param booleanRequired The booleanRequired parameter.
+     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
+     * @param stringRequired The stringRequired parameter.
+     * @param stringRequiredNullable The stringRequiredNullable parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<AllPropertiesOptional> putAsync(
+            String requestHeaderRequired,
+            boolean booleanRequired,
+            Boolean booleanRequiredNullable,
+            String stringRequired,
+            String stringRequiredNullable) {
+        RequestOptions requestOptions = new RequestOptions();
+        return putWithResponse(
+                        requestHeaderRequired,
+                        booleanRequired,
+                        booleanRequiredNullable,
+                        stringRequired,
+                        stringRequiredNullable,
+                        requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(AllPropertiesOptional.class));
+    }
 }

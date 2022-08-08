@@ -204,7 +204,7 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
         List<ProxyMethodParameter> proxyMethodParameters = useAllParameters ? clientMethod.getProxyMethod().getAllParameters() : clientMethod.getProxyMethod().getParameters();
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = proxyMethodParameters.stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
-        return clientMethod.getMethodParameters().stream()
+        return clientMethod.getMethodInputParameters().stream()
                 .filter(p -> !p.getIsConstant() && !p.getFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
