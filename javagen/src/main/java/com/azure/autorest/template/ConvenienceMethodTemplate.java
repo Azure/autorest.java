@@ -59,10 +59,7 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                                 // Context
                                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
                             } else if (clientParameter != null) {
-                                String expression = parameter.getName();
-                                if (parameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
-                                    expression = expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType());
-                                }
+                                String expression = expressionConvertToType(parameter.getName(), parameter, clientParameter);
                                 parameterExpressionsMap.put(clientParameter.getName(), expression);
                             } else {
                                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
@@ -74,6 +71,7 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                                         break;
 
                                     case QUERY:
+                                        // TODO: array
                                         methodBlock.line(
                                                 String.format("requestOptions.addQueryParam(%1$s, %2$s);",
                                                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
@@ -102,9 +100,7 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                                     return expression;
                                 })
                                 .collect(Collectors.joining(", "));
-                        String returnTypeConversionExpression = ClientModelUtil.isClientModel(baseReturnType)
-                                ? String.format(".map(r -> r.toObject(%s.class))", baseReturnType)
-                                : "";
+                        String returnTypeConversionExpression = expressionConvertFromBinaryData(baseReturnType);
 
                         methodBlock.methodReturn(
                                 String.format("%1$s(%2$s).map(Response::getValue)%3$s",
@@ -115,6 +111,17 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                 });
     }
 
+    private static String expressionConvertFromBinaryData(IType baseReturnType) {
+        if (baseReturnType instanceof EnumType) {
+            // enum
+            return String.format(".map(%s::fromString)", baseReturnType);
+        } else if (ClientModelUtil.isClientModel(baseReturnType)) {
+            // class
+            return String.format(".map(r -> r.toObject(%s.class))", baseReturnType);
+        } else {
+            return "";
+        }
+    }
 
     private static String expressionConvertToBinaryData(String name, IType type) {
         if (type == ClassType.BinaryData) {
@@ -128,9 +135,29 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
         if (type == ClassType.String) {
             return name;
         } else if (type instanceof EnumType) {
-            return String.format("%s.toString()", name);
+            // enum
+            EnumType enumType = (EnumType) type;
+            if (enumType.getElementType() == ClassType.String) {
+                return String.format("%s.toString()", name);
+            } else {
+                return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
+            }
         } else {
+            // primitive
             return String.format("String.valueOf(%s)", name);
+        }
+    }
+
+    private static String expressionConvertToType(String name, MethodParameter convenienceParameter, MethodParameter clientParameter) {
+        if (convenienceParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
+            return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getClientType());
+        } else {
+            // TODO: array of enum to array of string
+            if (convenienceParameter.getClientMethodParameter().getClientType() instanceof EnumType) {
+                return expressionConvertToString(name, convenienceParameter.getClientMethodParameter().getClientType());
+            } else {
+                return name;
+            }
         }
     }
 

@@ -15,7 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.cadl.patch.implementation.PatchesImpl;
+import com.cadl.patch.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous JsonMergePatchClient type. */
@@ -103,5 +105,89 @@ public final class JsonMergePatchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> updateWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.updateWithResponseAsync(name, body, requestOptions);
+    }
+
+    /**
+     * The create operation.
+     *
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Resource> createAsync(String name, Resource body) {
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Resource.class));
+    }
+
+    /**
+     * The create operation.
+     *
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Resource> createAsync(String name, Resource body, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Resource.class));
+    }
+
+    /**
+     * The update operation.
+     *
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Resource> updateAsync(String name, Resource body) {
+        RequestOptions requestOptions = new RequestOptions();
+        return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Resource.class));
+    }
+
+    /**
+     * The update operation.
+     *
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Resource> updateAsync(String name, Resource body, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Resource.class));
     }
 }

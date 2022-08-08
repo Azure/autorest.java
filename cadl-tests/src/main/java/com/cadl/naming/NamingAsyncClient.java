@@ -15,7 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.cadl.naming.implementation.NamingOpsImpl;
+import com.cadl.naming.models.DataResponse;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous NamingClient type. */
@@ -76,5 +78,53 @@ public final class NamingAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.postWithResponseAsync(name, requestOptions);
+    }
+
+    /**
+     * summary of POST op
+     *
+     * <p>description of POST op.
+     *
+     * @param name summary of name query parameter
+     *     <p>description of name query parameter.
+     * @param etag summary of etag header parameter
+     *     <p>description of etag header parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return summary of Response on successful completion of {@link Mono}.
+     */
+    public Mono<DataResponse> postAsync(String name, String etag) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setHeader("etag", etag);
+        return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
+    }
+
+    /**
+     * summary of POST op
+     *
+     * <p>description of POST op.
+     *
+     * @param name summary of name query parameter
+     *     <p>description of name query parameter.
+     * @param etag summary of etag header parameter
+     *     <p>description of etag header parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return summary of Response on successful completion of {@link Mono}.
+     */
+    public Mono<DataResponse> postAsync(String name, String etag, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setHeader("etag", etag);
+        requestOptions.setContext(context);
+        return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
     }
 }

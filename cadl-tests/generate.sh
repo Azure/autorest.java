@@ -33,6 +33,8 @@ function generate {
 rm -rf src/main/
 rm -rf cadl-output/
 
+export GENERATE_CONVENIENCE_METHODS=true
+
 # testserver
 generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
 

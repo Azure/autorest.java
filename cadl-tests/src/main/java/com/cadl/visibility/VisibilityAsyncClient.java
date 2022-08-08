@@ -15,7 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.cadl.visibility.implementation.VisibilityOpsImpl;
+import com.cadl.visibility.models.Dog;
+import com.cadl.visibility.models.ReadDog;
+import com.cadl.visibility.models.WriteDog;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous VisibilityClient type. */
@@ -107,5 +111,104 @@ public final class VisibilityAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDogWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getDogWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The getReadDog operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<ReadDog> getReadDogAsync() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getReadDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(ReadDog.class));
+    }
+
+    /**
+     * The getReadDog operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<ReadDog> getReadDogAsync(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return getReadDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(ReadDog.class));
+    }
+
+    /**
+     * The getWriteDog operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<WriteDog> getWriteDogAsync() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getWriteDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(WriteDog.class));
+    }
+
+    /**
+     * The getWriteDog operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<WriteDog> getWriteDogAsync(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return getWriteDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(WriteDog.class));
+    }
+
+    /**
+     * The getDog operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Dog> getDogAsync() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
+    }
+
+    /**
+     * The getDog operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Dog> getDogAsync(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return getDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
     }
 }

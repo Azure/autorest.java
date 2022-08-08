@@ -357,6 +357,9 @@
     <profile>
       <id>cadl</id>
       <activation>
+        <property>
+          <name>cadl</name>
+        </property>
       </activation>
       <modules>
         <module>./javagen</module>
@@ -365,8 +368,14 @@
         <module>./cadl-extension</module>
       </modules>
     </profile>
+
     <profile>
       <id>testCadl</id>
+      <activation>
+        <property>
+          <name>testCadl</name>
+        </property>
+      </activation>
       <modules>
         <module>./cadl-tests</module>
       </modules>

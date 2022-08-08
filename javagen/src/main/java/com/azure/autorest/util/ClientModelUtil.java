@@ -19,6 +19,7 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -48,7 +49,9 @@ public class ClientModelUtil {
      */
     public static void getAsyncSyncClients(CodeModel codeModel, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
-        boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient() && JavaSettings.getInstance().isGenerateModels();
+        boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient()
+                // TODO: switch to CADL side-car
+                && Configuration.getGlobalConfiguration().get("GENERATE_CONVENIENCE_METHODS" , false);
 
         String packageName = getAsyncSyncClientPackageName(serviceClient);
         boolean generateSyncMethods = JavaSettings.SyncMethodsGeneration.ALL
