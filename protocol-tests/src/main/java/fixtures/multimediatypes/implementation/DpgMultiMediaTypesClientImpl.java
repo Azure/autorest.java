@@ -428,38 +428,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndBinaryTypesJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndBinaryTypesJsonFirst(this.getHost(), contentType, input, accept, requestOptions, context);
-    }
-
-    /**
-     * json and binary types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -504,39 +472,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndBinaryTypesBinaryFirst(
                                 this.getHost(), contentType, input, accept, requestOptions, context));
-    }
-
-    /**
-     * json and binary types with binary type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndBinaryTypesBinaryFirst(
-                this.getHost(), contentType, input, accept, requestOptions, context);
     }
 
     /**
@@ -621,39 +556,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndOctectWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndOctectWithJsonFirst(
-                this.getHost(), contentType, message, accept, requestOptions, context);
-    }
-
-    /**
-     * json and octet media types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -698,39 +600,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndOctectWithOctetFirst(
                                 this.getHost(), contentType, message, accept, requestOptions, context));
-    }
-
-    /**
-     * json and octet media types with octet type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndOctectWithOctetFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndOctectWithOctetFirst(
-                this.getHost(), contentType, message, accept, requestOptions, context);
     }
 
     /**
@@ -815,39 +684,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndEncodingWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndEncodingWithJsonFirst(
-                this.getHost(), contentType, message, accept, requestOptions, context);
-    }
-
-    /**
-     * json and encoding types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -892,39 +728,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndEncodingWithEncodingFirst(
                                 this.getHost(), contentType, input, accept, requestOptions, context));
-    }
-
-    /**
-     * json and encoding types with encoding type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndEncodingWithEncodingFirst(
-                this.getHost(), contentType, input, accept, requestOptions, context);
     }
 
     /**
@@ -1009,38 +812,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndTextWithTextFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndTextWithTextFirst(this.getHost(), contentType, input, accept, requestOptions, context);
-    }
-
-    /**
-     * json and text types with text type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1085,38 +856,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndTextWithJsonFirst(
                                 this.getHost(), contentType, input, accept, requestOptions, context));
-    }
-
-    /**
-     * json and text types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndTextWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndTextWithJsonFirst(this.getHost(), contentType, input, accept, requestOptions, context);
     }
 
     /**
@@ -1201,38 +940,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndImageWithJsonFirst(this.getHost(), contentType, input, accept, requestOptions, context);
-    }
-
-    /**
-     * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1277,39 +984,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndImageObjectTypeWithJsonFirst(
                                 this.getHost(), contentType, input, accept, requestOptions, context));
-    }
-
-    /**
-     * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
-     * @param input Input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndImageObjectTypeWithJsonFirst(
-                this.getHost(), contentType, input, accept, requestOptions, context);
     }
 
     /**
@@ -1407,46 +1081,6 @@ public final class DpgMultiMediaTypesClientImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> imageTypeWithNonRequiredBodyWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.imageTypeWithNonRequiredBody(this.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * image type with non-required body.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "image/jpeg".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1489,38 +1123,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(
                                 this.getHost(), contentType, accept, requestOptions, context));
-    }
-
-    /**
-     * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponseAsync(
-            String contentType, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(
-                this.getHost(), contentType, accept, requestOptions, context);
     }
 
     /**
@@ -1592,47 +1194,6 @@ public final class DpgMultiMediaTypesClientImpl {
                 context ->
                         service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
                                 this.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json", "image/jpeg".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
-                this.getHost(), accept, requestOptions, context);
     }
 
     /**

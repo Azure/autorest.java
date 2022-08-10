@@ -374,23 +374,6 @@ public final class HttpRedirectsImpl {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head300WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head300(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Return 300 status code and redirect to /http/success/200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -438,31 +421,6 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get300WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get300(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Return 300 status code and redirect to /http/success/200.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * [
-     *     String (Required)
-     * ]
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -494,23 +452,6 @@ public final class HttpRedirectsImpl {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head301WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head301(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Return 301 status code and redirect to /http/success/200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -536,23 +477,6 @@ public final class HttpRedirectsImpl {
     public Mono<Response<Void>> get301WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get301(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Return 301 status code and redirect to /http/success/200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get301WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get301(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -626,41 +550,6 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> put301WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put301(this.client.getHost(), booleanValue, accept, requestOptions, context);
-    }
-
-    /**
-     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
-     * return the received 301 to the caller for evaluation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -692,23 +581,6 @@ public final class HttpRedirectsImpl {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head302WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head302(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Return 302 status code and redirect to /http/success/200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -734,23 +606,6 @@ public final class HttpRedirectsImpl {
     public Mono<Response<Void>> get302WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get302(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Return 302 status code and redirect to /http/success/200.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get302WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get302(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -801,41 +656,6 @@ public final class HttpRedirectsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.patch302(this.client.getHost(), booleanValue, accept, requestOptions, context));
-    }
-
-    /**
-     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
-     * return the received 302 to the caller for evaluation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> patch302WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch302(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -926,41 +746,6 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post303WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post303(this.client.getHost(), booleanValue, accept, requestOptions, context);
-    }
-
-    /**
-     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
-     * ultimately returning a 200 status code.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -986,23 +771,6 @@ public final class HttpRedirectsImpl {
     public Mono<Response<Void>> head307WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head307(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Redirect with 307, resulting in a 200 success.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.head307(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1040,23 +808,6 @@ public final class HttpRedirectsImpl {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get307(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Redirect get with 307, resulting in a 200 success.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1083,23 +834,6 @@ public final class HttpRedirectsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.options307(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * options redirected with 307, resulting in a 200 after redirect.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> options307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.options307(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1149,40 +883,6 @@ public final class HttpRedirectsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.put307(this.client.getHost(), booleanValue, accept, requestOptions, context));
-    }
-
-    /**
-     * Put redirected with 307, resulting in a 200 after redirect.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> put307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.put307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**
@@ -1270,40 +970,6 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> patch307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.patch307(this.client.getHost(), booleanValue, accept, requestOptions, context);
-    }
-
-    /**
-     * Patch redirected with 307, resulting in a 200 after redirect.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1369,40 +1035,6 @@ public final class HttpRedirectsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> post307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.post307(this.client.getHost(), booleanValue, accept, requestOptions, context);
-    }
-
-    /**
-     * Post redirected with 307, resulting in a 200 after redirect.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1446,40 +1078,6 @@ public final class HttpRedirectsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.delete307(this.client.getHost(), booleanValue, accept, requestOptions, context));
-    }
-
-    /**
-     * Delete redirected with 307, resulting in a 200 after redirect.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Boolean
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> delete307WithResponseAsync(RequestOptions requestOptions, Context context) {
-        final BinaryData booleanValue = BinaryData.fromObject("true");
-        final String accept = "application/json";
-        return service.delete307(this.client.getHost(), booleanValue, accept, requestOptions, context);
     }
 
     /**

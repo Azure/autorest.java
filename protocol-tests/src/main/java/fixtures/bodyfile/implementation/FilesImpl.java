@@ -137,29 +137,6 @@ public final class FilesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return file along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getFileWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "image/png, application/json";
-        return service.getFile(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -204,29 +181,6 @@ public final class FilesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a large file along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getFileLargeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "image/png, application/json";
-        return service.getFileLarge(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get a large file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -259,29 +213,6 @@ public final class FilesImpl {
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(
                 context -> service.getEmptyFile(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get empty file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return empty file along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getEmptyFileWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "image/png, application/json";
-        return service.getEmptyFile(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

@@ -669,33 +669,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model204NoModelDefaultError200ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model204NoModelDefaultError200Valid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -733,33 +706,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get200Model204NoModelDefaultError204Valid(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model204NoModelDefaultError204ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model204NoModelDefaultError204Valid(
-                this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -825,33 +771,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model204NoModelDefaultError201InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model204NoModelDefaultError201Invalid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -889,32 +808,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get200Model204NoModelDefaultError202None(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 202 response with no payload:.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model204NoModelDefaultError202NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model204NoModelDefaultError202None(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -980,33 +873,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model204NoModelDefaultError400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model204NoModelDefaultError400Valid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1044,32 +910,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get200Model201ModelDefaultError200Valid(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model201ModelDefaultError200ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model201ModelDefaultError200Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1135,32 +975,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model201ModelDefaultError201ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model201ModelDefaultError201Valid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1198,32 +1012,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get200Model201ModelDefaultError400Valid(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200Model201ModelDefaultError400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200Model201ModelDefaultError400Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1284,30 +1072,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA201ModelC404ModelDDefaultError200Valid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1342,30 +1106,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get200ModelA201ModelC404ModelDDefaultError201Valid(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA201ModelC404ModelDDefaultError201Valid(
-                this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1424,30 +1164,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA201ModelC404ModelDDefaultError404Valid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1494,30 +1210,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA201ModelC404ModelDDefaultError400Valid(
-                this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1546,24 +1238,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get202None204NoneDefaultError202None(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 202 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get202None204NoneDefaultError202None(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1604,24 +1278,6 @@ public final class MultipleResponsesImpl {
      * Send a 204 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get202None204NoneDefaultError204None(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1650,24 +1306,6 @@ public final class MultipleResponsesImpl {
                 context ->
                         service.get202None204NoneDefaultError400Valid(
                                 this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get202None204NoneDefaultError400Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1706,23 +1344,6 @@ public final class MultipleResponsesImpl {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.get202None204NoneDefaultNone202Invalid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1748,23 +1369,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.get202None204NoneDefaultNone204None(this.client.getHost(), requestOptions, context));
-    }
-
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.get202None204NoneDefaultNone204None(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1802,23 +1406,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.get202None204NoneDefaultNone400None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1845,23 +1432,6 @@ public final class MultipleResponsesImpl {
         return FluxUtil.withContext(
                 context ->
                         service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), requestOptions, context));
-    }
-
-    /**
-     * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -1902,32 +1472,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getDefaultModelA200Valid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getDefaultModelA200ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getDefaultModelA200Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1990,32 +1534,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getDefaultModelA200NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getDefaultModelA200None(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2042,24 +1560,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getDefaultModelA400Valid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getDefaultModelA400Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2098,24 +1598,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getDefaultModelA400None(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2141,23 +1623,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.getDefaultNone200Invalid(this.client.getHost(), requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.getDefaultNone200Invalid(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2195,22 +1660,6 @@ public final class MultipleResponsesImpl {
      * Send a 200 response with no payload.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDefaultNone200None(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2242,23 +1691,6 @@ public final class MultipleResponsesImpl {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.getDefaultNone400Invalid(this.client.getHost(), requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2284,22 +1716,6 @@ public final class MultipleResponsesImpl {
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.getDefaultNone400None(this.client.getHost(), requestOptions, context));
-    }
-
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync(RequestOptions requestOptions, Context context) {
-        return service.getDefaultNone400None(this.client.getHost(), requestOptions, context);
     }
 
     /**
@@ -2341,33 +1757,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.get200ModelA200None(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA200NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA200None(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2431,32 +1820,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA200ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA200Valid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2491,32 +1854,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.get200ModelA200Invalid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA200InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA200Invalid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2579,32 +1916,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA400NoneWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA400None(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2639,32 +1950,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.get200ModelA400Valid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 200 response with payload {'statusCode': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA400ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA400Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2727,32 +2012,6 @@ public final class MultipleResponsesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA400InvalidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA400Invalid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2787,32 +2046,6 @@ public final class MultipleResponsesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.get200ModelA202Valid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send a 202 response with payload {'statusCode': '202'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     statusCode: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA202ValidWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.get200ModelA202Valid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
