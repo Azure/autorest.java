@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.cadl.optional.models.AllPropertiesOptional;
@@ -249,6 +248,11 @@ public final class OptionalClient {
                         stringRequired,
                         stringRequiredNullable,
                         requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue());
+        return new ResponseBase<>(
+                protocolMethodResponse.getRequest(),
+                protocolMethodResponse.getStatusCode(),
+                protocolMethodResponse.getHeaders(),
+                protocolMethodResponse.getValue().toObject(AllPropertiesOptional.class),
+                new OptionalOpsPutHeaders(protocolMethodResponse.getHeaders()));
     }
 }

@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 
 public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
@@ -57,8 +58,15 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     "%1$s protocolMethodResponse = %2$s;",
                     clientMethod.getReturnValue().getType(), statement));
             String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()");
-            methodBlock.methodReturn(String.format(
-                    "new SimpleResponse<>(protocolMethodResponse, %s)", expressConversion));
+
+            if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
+                IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
+                methodBlock.methodReturn(String.format(
+                        "new ResponseBase<>(protocolMethodResponse.getRequest(), protocolMethodResponse.getStatusCode(), protocolMethodResponse.getHeaders(), %1$s, new %2$s(protocolMethodResponse.getHeaders()))", expressConversion, headerType));
+            } else {
+                methodBlock.methodReturn(String.format(
+                        "new SimpleResponse<>(protocolMethodResponse, %s)", expressConversion));
+            }
         } else {
             String statement = String.format("%1$s(%2$s)%3$s",
                     getMethodName(clientMethod),
@@ -77,8 +85,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         IType type =  method.getReturnValue().getType();
         if (type instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) type).getName())) {
             type = ((GenericType) type).getTypeArguments()[0];
+        } else if (isResponseBase(type)) {
+            type = ((GenericType) type).getTypeArguments()[1];
         }
         return type;
+    }
+
+    private boolean isResponseBase(IType type) {
+        return type instanceof GenericType && ResponseBase.class.getSimpleName().equals(((GenericType) type).getName());
     }
 
     protected String expressionConvertFromBinaryData(IType responseBodyType, String invocationExpression) {
