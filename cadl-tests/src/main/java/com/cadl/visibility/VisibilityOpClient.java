@@ -15,76 +15,24 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.visibility.implementation.VisibilityOpsImpl;
-import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
-public final class VisibilityAsyncClient {
-    @Generated private final VisibilityOpsImpl serviceClient;
+/** Initializes a new instance of the synchronous VisibilityClient type. */
+@ServiceClient(builder = VisibilityOpClientBuilder.class)
+public final class VisibilityOpClient {
+    @Generated private final VisibilityOpAsyncClient client;
 
     /**
-     * Initializes an instance of VisibilityAsyncClient class.
+     * Initializes an instance of VisibilityOpClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param client the async client.
      */
     @Generated
-    VisibilityAsyncClient(VisibilityOpsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    VisibilityOpClient(VisibilityOpAsyncClient client) {
+        this.client = client;
     }
 
     /**
-     * The getReadDog operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: long (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getReadDogWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getReadDogWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The getWriteDog operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     secretName: String (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getWriteDogWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getWriteDogWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The getDog operation.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -101,11 +49,83 @@ public final class VisibilityAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getDogWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getDogWithResponseAsync(requestOptions);
+    public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
+        return this.client.getWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The create operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param dog The dog parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.client.createWithResponse(dog, requestOptions).block();
+    }
+
+    /**
+     * The query operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param dog The dog parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.client.queryWithResponse(dog, requestOptions).block();
     }
 }
