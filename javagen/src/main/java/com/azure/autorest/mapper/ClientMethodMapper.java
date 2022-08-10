@@ -123,6 +123,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private List<ClientMethod> createClientMethods(Operation operation, boolean isProtocolMethod) {
         JavaSettings settings = JavaSettings.getInstance();
 
+        // protocol method will always generate full parameters
+        final boolean generateMethodOnlyRequiredParameter = settings.getRequiredParameterClientMethods() && !isProtocolMethod;
+
         Map<Request, List<ProxyMethod>> proxyMethodsMap = Mappers.getProxyMethodMapper().map(operation);
 
         List<ClientMethod> methods = new ArrayList<>();
@@ -350,7 +353,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     parameters.add(requestOptions);
                 }
 
-                final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
+                final boolean generateClientMethodWithOnlyRequiredParameters = generateMethodOnlyRequiredParameter && hasNonRequiredParameters(parameters);
 
                 builder.parameters(parameters)
                         .requiredNullableParameterExpressions(requiredParameterExpressions)
@@ -381,7 +384,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 operation.getExtensions().getXmsPageable().getItemName());
                         builder.methodPageDetails(details);
 
-                        if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                        if (!(!generateMethodOnlyRequiredParameter && settings.isContextClientMethodParameter()
                                 && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
                             methods.add(builder
                                     .returnValue(createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType))
@@ -420,15 +423,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 if (settings.isContextClientMethodParameter()) {
                                     MethodPageDetails detailsWithContext = details;
                                     if (nextMethods != null) {
-                                        detailsWithContext = new MethodPageDetails(
-                                                CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                                                pageableItemName,
-                                                nextMethods.stream()
-                                                        .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
-                                                        .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
-                                                lroIntermediateType,
-                                                operation.getExtensions().getXmsPageable().getNextLinkName(),
-                                                operation.getExtensions().getXmsPageable().getItemName());
+                                        ClientMethod nextMethod = nextMethods.stream()
+                                                .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
+                                                .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst()
+                                                .orElse(null);
+
+                                        if (nextMethod != null) {
+                                            detailsWithContext = new MethodPageDetails(
+                                                    CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                                                    pageableItemName,
+                                                    nextMethod,
+                                                    lroIntermediateType,
+                                                    operation.getExtensions().getXmsPageable().getNextLinkName(),
+                                                    operation.getExtensions().getXmsPageable().getItemName());
+                                        }
                                     }
 
                                     addClientMethodWithContext(methods,
@@ -587,7 +595,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 } else {
                     // WithResponseAsync, with required and optional parameters
-                    if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
+                    if (!(!generateMethodOnlyRequiredParameter && settings.isContextClientMethodParameter()
                             && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
 
                         methods.add(builder
@@ -885,10 +893,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 3. For async method, Context is not included in method (this rule is valid for all clients).
                  */
 
-                return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
-                        || (methodType == ClientMethodType.PagingSync && hasContextParameter)
-                        || (methodType == ClientMethodType.LongRunningBeginSync && hasContextParameter)
-                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
+                return (methodType == ClientMethodType.SimpleAsync
+                        || methodType == ClientMethodType.SimpleSync
+                        || hasContextParameter)
                         ? NOT_GENERATE
                         : VISIBLE;
             } else {
