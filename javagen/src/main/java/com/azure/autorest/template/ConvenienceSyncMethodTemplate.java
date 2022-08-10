@@ -32,8 +32,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     @Override
     protected boolean isConvenienceMethod(ConvenienceMethod method) {
-        return !isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod())
-                && method.getClientMethod().getMethodInputParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
+        return !isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod());
     }
 
     @Override

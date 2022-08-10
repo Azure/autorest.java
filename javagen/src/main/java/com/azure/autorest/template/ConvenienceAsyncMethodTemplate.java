@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -29,7 +30,8 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     @Override
     protected boolean isConvenienceMethod(ConvenienceMethod method) {
-        return isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod());
+        return isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod())
+                && method.getClientMethod().getMethodParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
     }
 
     protected void writeInvocationAndConversion(
