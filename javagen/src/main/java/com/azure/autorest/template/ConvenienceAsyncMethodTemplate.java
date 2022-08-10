@@ -4,8 +4,11 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.ClientModelUtil;
 
 public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBase {
@@ -21,28 +24,42 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     @Override
     protected boolean isConvenienceMethod(ClientMethod method) {
-        return method.getType().name().contains("Async");
+        return isMethodAsync(method) && isMethodVisible(method);
     }
 
     @Override
-    protected String getMethodName(ClientMethod method) {
-        if (method.getType().name().contains("Async")) {
-            return method.getName().endsWith("Async")
-                    ? method.getName().substring(0, method.getName().length() - "Async".length())
-                    : method.getName();
-        } else {
-            return method.getName();
-        }
+    protected boolean isConvenienceMethod(ConvenienceMethod method) {
+        return isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod());
     }
 
-    @Override
-    protected String expressionConvertFromBinaryData(IType baseReturnType) {
-        if (baseReturnType instanceof EnumType) {
+    protected void writeInvocationAndConversion(
+            ClientMethod convenienceMethod, ClientMethod clientMethod,
+            String invocationExpression,
+            JavaBlock methodBlock) {
+
+        IType responseBodyType = getResponseBodyType(convenienceMethod);
+
+        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType);
+
+        methodBlock.methodReturn(
+                String.format("%1$s(%2$s).map(Response::getValue)%3$s",
+                        getMethodName(clientMethod),
+                        invocationExpression,
+                        returnTypeConversionExpression));
+    }
+
+    private IType getResponseBodyType(ClientMethod method) {
+        // Mono<T>
+        return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
+    }
+
+    private String expressionConvertFromBinaryData(IType responseBodyType) {
+        if (responseBodyType instanceof EnumType) {
             // enum
-            return String.format(".map(%s::fromString)", baseReturnType);
-        } else if (ClientModelUtil.isClientModel(baseReturnType)) {
+            return String.format(".map(%1$s::from%2$s)", responseBodyType, ((EnumType) responseBodyType).getElementType());
+        } else if (ClientModelUtil.isClientModel(responseBodyType)) {
             // class
-            return String.format(".map(r -> r.toObject(%s.class))", baseReturnType);
+            return String.format(".map(r -> r.toObject(%s.class))", responseBodyType);
         } else {
             return "";
         }

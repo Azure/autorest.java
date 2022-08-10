@@ -105,4 +105,8 @@ public class Templates {
     public static ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate() {
         return factory.getConvenienceAsyncMethodTemplate();
     }
+
+    public static ConvenienceSyncMethodTemplate getConvenienceSyncMethodTemplate() {
+        return factory.getConvenienceSyncMethodTemplate();
+    }
 }

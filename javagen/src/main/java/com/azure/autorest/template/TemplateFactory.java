@@ -50,4 +50,6 @@ public interface TemplateFactory {
     ProtocolSampleTemplate getProtocolSampleTemplate();
 
     ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate();
+
+    ConvenienceSyncMethodTemplate getConvenienceSyncMethodTemplate();
 }

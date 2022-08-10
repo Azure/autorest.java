@@ -9,13 +9,12 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashMap;
@@ -32,12 +31,15 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     }
 
     public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
+        if (!isConvenienceMethod(convenienceMethodObj)) {
+            return;
+        }
+
         ClientMethod clientMethod = convenienceMethodObj.getClientMethod();
-        String clientMethodName = getMethodName(clientMethod);
         convenienceMethodObj.getConvenienceMethods().stream()
                 .filter(this::isConvenienceMethod)
                 .forEach(convenienceMethod -> {
-                    classBlock.blockComment("Generated convenience method for " + clientMethodName);
+                    classBlock.blockComment("Generated convenience method for " + getMethodName(clientMethod));
 
                     classBlock.javadocComment(comment -> {
                         ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
@@ -111,7 +113,6 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                             }
                         }
 
-                        IType baseReturnType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
                         String invocationExpression = clientMethod.getMethodInputParameters().stream()
                                 .map(p -> {
                                     String expression = parameterExpressionsMap.get(p.getName());
@@ -121,22 +122,59 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                                     return expression;
                                 })
                                 .collect(Collectors.joining(", "));
-                        String returnTypeConversionExpression = expressionConvertFromBinaryData(baseReturnType);
 
-                        methodBlock.methodReturn(
-                                String.format("%1$s(%2$s).map(Response::getValue)%3$s",
-                                        clientMethodName,
-                                        invocationExpression,
-                                        returnTypeConversionExpression));
+                        writeInvocationAndConversion(convenienceMethod, clientMethod, invocationExpression, methodBlock);
                     });
                 });
     }
 
+    /**
+     * Whether the convenience method should be included.
+     *
+     * @param method the convenience method.
+     * @return Whether include the convenience method.
+     */
     protected abstract boolean isConvenienceMethod(ClientMethod method);
 
-    protected abstract String getMethodName(ClientMethod method);
+    /**
+     * Whether the convenience method should be included.
+     *
+     * @param method the client method.
+     * @return Whether include the convenience method.
+     */
+    protected abstract boolean isConvenienceMethod(ConvenienceMethod method);
 
-    protected abstract String expressionConvertFromBinaryData(IType baseReturnType);
+    protected boolean isMethodAsync(ClientMethod method) {
+        return method.getType().name().contains("Async");
+    }
+
+    protected boolean isMethodVisible(ClientMethod method) {
+        return method.getMethodVisibility() == JavaVisibility.Public
+                && !method.isImplementationOnly();
+    }
+
+    protected String getMethodName(ClientMethod method) {
+        if (isMethodAsync(method)) {
+            return method.getName().endsWith("Async")
+                    ? method.getName().substring(0, method.getName().length() - "Async".length())
+                    : method.getName();
+        } else {
+            return method.getName();
+        }
+    }
+
+    /**
+     * Write the code of the method invocation of client method, and the conversion of parameters and return value.
+     *
+     * @param convenienceMethod the convenience method.
+     * @param clientMethod the client method.
+     * @param invocationExpression the prepared expression of invocation on client method.
+     * @param methodBlock the code block.
+     */
+    protected abstract void writeInvocationAndConversion(
+            ClientMethod convenienceMethod, ClientMethod clientMethod,
+            String invocationExpression,
+            JavaBlock methodBlock);
 
     private static String expressionConvertToBinaryData(String name, IType type) {
         if (type == ClassType.BinaryData) {

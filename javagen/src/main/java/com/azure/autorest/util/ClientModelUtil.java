@@ -94,10 +94,7 @@ public class ClientModelUtil {
                                     String methodName = cMethods.iterator().next().getProxyMethod().getName();
                                     methodGroupClient.getClientMethods().stream()
                                             .filter(m -> methodName.equals(m.getProxyMethod().getName()))
-                                            .findFirst()
-                                            .ifPresent(m -> {
-                                                convenienceMethods.add(new ConvenienceMethod(m, cMethods));
-                                            });
+                                            .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
                                 }
                             });
                         });

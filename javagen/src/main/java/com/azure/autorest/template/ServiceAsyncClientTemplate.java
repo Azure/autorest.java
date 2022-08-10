@@ -120,9 +120,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
-
-        asyncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
       }
+
+      asyncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
 
       ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), "this.serviceClient");
     });
@@ -175,7 +175,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     ClassType.RequestOptions.addImportsTo(imports, false);
   }
 
-  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
-    Templates.getConvenienceAsyncMethodTemplate().write(convenienceMethodObj, classBlock);
+  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
+    Templates.getConvenienceAsyncMethodTemplate().write(convenienceMethod, classBlock);
   }
 }
