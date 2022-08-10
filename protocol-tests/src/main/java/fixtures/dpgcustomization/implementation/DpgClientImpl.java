@@ -509,36 +509,6 @@ public final class DpgClientImpl {
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> lroWithResponseAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.lro(this.getHost(), mode, accept, requestOptions, context);
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
