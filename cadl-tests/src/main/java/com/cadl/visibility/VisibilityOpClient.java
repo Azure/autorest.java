@@ -17,72 +17,22 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityClientBuilder.class)
-public final class VisibilityClient {
-    @Generated private final VisibilityAsyncClient client;
+@ServiceClient(builder = VisibilityOpClientBuilder.class)
+public final class VisibilityOpClient {
+    @Generated private final VisibilityOpAsyncClient client;
 
     /**
-     * Initializes an instance of VisibilityClient class.
+     * Initializes an instance of VisibilityOpClient class.
      *
      * @param client the async client.
      */
     @Generated
-    VisibilityClient(VisibilityAsyncClient client) {
+    VisibilityOpClient(VisibilityOpAsyncClient client) {
         this.client = client;
     }
 
     /**
-     * The getReadDog operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: long (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getReadDogWithResponse(RequestOptions requestOptions) {
-        return this.client.getReadDogWithResponse(requestOptions).block();
-    }
-
-    /**
-     * The getWriteDog operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     secretName: String (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getWriteDogWithResponse(RequestOptions requestOptions) {
-        return this.client.getWriteDogWithResponse(requestOptions).block();
-    }
-
-    /**
-     * The getDog operation.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -103,7 +53,79 @@ public final class VisibilityClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDogWithResponse(RequestOptions requestOptions) {
-        return this.client.getDogWithResponse(requestOptions).block();
+    public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
+        return this.client.getWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The create operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param dog The dog parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.client.createWithResponse(dog, requestOptions).block();
+    }
+
+    /**
+     * The query operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param dog The dog parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.client.queryWithResponse(dog, requestOptions).block();
     }
 }

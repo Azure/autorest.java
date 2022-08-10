@@ -15,7 +15,6 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.template.Templates;
@@ -130,15 +129,17 @@ public class TemplateUtil {
         }
     }
 
-    public static void writeLongRunningOperationTypeReference(JavaBlock javaBlock, ClientMethod clientMethod) {
+    public static String getLongRunningOperationTypeReferenceExpression(MethodPollingDetails details) {
         // see writeTypeReferenceStaticClass
 
-        MethodPollingDetails details = clientMethod.getMethodPollingDetails();
-        javaBlock.line("%s, %s);", getTypeReferenceCreation(details.getIntermediateType()),
+        return String.format("%s, %s",
+            getTypeReferenceCreation(details.getIntermediateType()),
             getTypeReferenceCreation(details.getFinalType()));
     }
 
     private static String getTypeReferenceCreation(IType type) {
+        // see writeTypeReferenceStaticClass
+
         // Array, class, enum, and primitive types are all able to use TypeReference.createInstance which will create
         // or use a singleton instance.
         // Generic types must use a custom instance that supports complex generic parameters.
@@ -150,7 +151,7 @@ public class TemplateUtil {
     private static void writeTypeReferenceStaticClass(JavaClass classBlock, GenericType type) {
         // see writeLongRunningOperationTypeReference
 
-        classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {%n//empty%n}",
+        classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
             type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
     }
 

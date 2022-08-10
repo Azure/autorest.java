@@ -37,12 +37,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the VisibilityClient type. */
-@ServiceClientBuilder(serviceClients = {VisibilityClient.class, VisibilityAsyncClient.class})
-public final class VisibilityClientBuilder
-        implements HttpTrait<VisibilityClientBuilder>,
-                ConfigurationTrait<VisibilityClientBuilder>,
-                EndpointTrait<VisibilityClientBuilder> {
+/** A builder for creating a new instance of the VisibilityReadClient type. */
+@ServiceClientBuilder(serviceClients = {VisibilityReadClient.class, VisibilityReadAsyncClient.class})
+public final class VisibilityReadClientBuilder
+        implements HttpTrait<VisibilityReadClientBuilder>,
+                ConfigurationTrait<VisibilityReadClientBuilder>,
+                EndpointTrait<VisibilityReadClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -51,9 +51,9 @@ public final class VisibilityClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the VisibilityClientBuilder. */
+    /** Create an instance of the VisibilityReadClientBuilder. */
     @Generated
-    public VisibilityClientBuilder() {
+    public VisibilityReadClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -65,7 +65,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder pipeline(HttpPipeline pipeline) {
+    public VisibilityReadClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -78,7 +78,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder httpClient(HttpClient httpClient) {
+    public VisibilityReadClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -91,7 +91,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public VisibilityReadClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -104,7 +104,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder clientOptions(ClientOptions clientOptions) {
+    public VisibilityReadClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -117,7 +117,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder retryOptions(RetryOptions retryOptions) {
+    public VisibilityReadClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public VisibilityReadClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -138,7 +138,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder configuration(Configuration configuration) {
+    public VisibilityReadClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -151,7 +151,7 @@ public final class VisibilityClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public VisibilityClientBuilder endpoint(String endpoint) {
+    public VisibilityReadClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -165,10 +165,10 @@ public final class VisibilityClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the VisibilityClientBuilder.
+     * @return the VisibilityReadClientBuilder.
      */
     @Generated
-    public VisibilityClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public VisibilityReadClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -232,22 +232,22 @@ public final class VisibilityClientBuilder
     }
 
     /**
-     * Builds an instance of VisibilityAsyncClient class.
+     * Builds an instance of VisibilityReadAsyncClient class.
      *
-     * @return an instance of VisibilityAsyncClient.
+     * @return an instance of VisibilityReadAsyncClient.
      */
     @Generated
-    public VisibilityAsyncClient buildAsyncClient() {
-        return new VisibilityAsyncClient(buildInnerClient().getVisibilityOps());
+    public VisibilityReadAsyncClient buildAsyncClient() {
+        return new VisibilityReadAsyncClient(buildInnerClient().getVisibilityReads());
     }
 
     /**
-     * Builds an instance of VisibilityClient class.
+     * Builds an instance of VisibilityReadClient class.
      *
-     * @return an instance of VisibilityClient.
+     * @return an instance of VisibilityReadClient.
      */
     @Generated
-    public VisibilityClient buildClient() {
-        return new VisibilityClient(new VisibilityAsyncClient(buildInnerClient().getVisibilityOps()));
+    public VisibilityReadClient buildClient() {
+        return new VisibilityReadClient(new VisibilityReadAsyncClient(buildInnerClient().getVisibilityReads()));
     }
 }

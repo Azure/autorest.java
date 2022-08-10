@@ -50,6 +50,30 @@ public final class VisibilityClientImpl {
         return this.serializerAdapter;
     }
 
+    /** The VisibilityReadsImpl object to access its operations. */
+    private final VisibilityReadsImpl visibilityReads;
+
+    /**
+     * Gets the VisibilityReadsImpl object to access its operations.
+     *
+     * @return the VisibilityReadsImpl object.
+     */
+    public VisibilityReadsImpl getVisibilityReads() {
+        return this.visibilityReads;
+    }
+
+    /** The VisibilityWritesImpl object to access its operations. */
+    private final VisibilityWritesImpl visibilityWrites;
+
+    /**
+     * Gets the VisibilityWritesImpl object to access its operations.
+     *
+     * @return the VisibilityWritesImpl object.
+     */
+    public VisibilityWritesImpl getVisibilityWrites() {
+        return this.visibilityWrites;
+    }
+
     /** The VisibilityOpsImpl object to access its operations. */
     private final VisibilityOpsImpl visibilityOps;
 
@@ -97,6 +121,8 @@ public final class VisibilityClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
+        this.visibilityReads = new VisibilityReadsImpl(this);
+        this.visibilityWrites = new VisibilityWritesImpl(this);
         this.visibilityOps = new VisibilityOpsImpl(this);
     }
 }
