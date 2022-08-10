@@ -135,10 +135,10 @@ public final class VisibilityOpAsyncClient {
     }
 
     /*
-     * Generated convenience method for getReadDogWithResponse
+     * Generated convenience method for getWithResponse
      */
     /**
-     * The getReadDog operation.
+     * The get operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -147,17 +147,19 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<ReadDog> getReadDog() {
+    public Mono<Dog> get() {
         RequestOptions requestOptions = new RequestOptions();
-        return getReadDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(ReadDog.class));
+        return getWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
     }
 
     /*
-     * Generated convenience method for getWriteDogWithResponse
+     * Generated convenience method for createWithResponse
      */
     /**
-     * The getWriteDog operation.
+     * The create operation.
      *
+     * @param dog The dog parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -165,17 +167,21 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<WriteDog> getWriteDog() {
+    public Mono<Dog> create(WriteDog dog) {
         RequestOptions requestOptions = new RequestOptions();
-        return getWriteDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(WriteDog.class));
+        return createWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Dog.class));
     }
 
     /*
-     * Generated convenience method for getDogWithResponse
+     * Generated convenience method for queryWithResponse
      */
     /**
-     * The getDog operation.
+     * The query operation.
      *
+     * @param dog The dog parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -183,8 +189,10 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Dog> getDog() {
+    public Mono<Dog> query(ReadDog dog) {
         RequestOptions requestOptions = new RequestOptions();
-        return getDogWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
+        return queryWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(r -> r.toObject(Dog.class));
     }
 }
