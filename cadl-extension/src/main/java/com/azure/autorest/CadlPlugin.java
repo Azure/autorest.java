@@ -104,7 +104,6 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("add-context-parameter", true);
         SETTINGS_MAP.put("context-client-method-parameter", true);
         SETTINGS_MAP.put("sync-methods", "all");
-        SETTINGS_MAP.put("required-parameter-client-methods", true);
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());
@@ -112,6 +111,8 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("models-subpackage", "models");
         SETTINGS_MAP.put("client-logger", true);
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
+        SETTINGS_MAP.put("required-parameter-client-methods", true);
+        SETTINGS_MAP.put("generic-response-type", true);
 
         SETTINGS_MAP.put("regenerate-pom", true);
         SETTINGS_MAP.put("generate-models", true);

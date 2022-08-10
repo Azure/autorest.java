@@ -14,12 +14,13 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
-import com.cadl.optional.models.OptionalOpsPutResponse;
+import com.cadl.optional.models.OptionalOpsPutHeaders;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
@@ -209,9 +210,9 @@ public final class OptionalClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body along with {@link ResponseBase}.
      */
-    public OptionalOpsPutResponse putWithResponse(
+    public ResponseBase<OptionalOpsPutHeaders, AllPropertiesOptional> putWithResponse(
             String requestHeaderRequired,
             boolean booleanRequired,
             Boolean booleanRequiredNullable,
