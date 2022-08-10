@@ -484,8 +484,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     JavaVisibility simpleAsyncMethodVisibilityWithContext =
                             methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true, isProtocolMethod);
                     if (settings.isDataPlaneClient()) {
-                        simpleAsyncMethodVisibility = JavaVisibility.Private;
-                        simpleAsyncMethodVisibilityWithContext = JavaVisibility.Private;
+                        simpleAsyncMethodVisibility = NOT_VISIBLE;
+                        simpleAsyncMethodVisibilityWithContext = NOT_GENERATE;
                     }
 
                     // WithResponseAsync, with required and optional parameters
