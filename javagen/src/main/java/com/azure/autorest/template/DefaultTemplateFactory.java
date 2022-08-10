@@ -115,7 +115,7 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public ConvenienceMethodTemplate getConvenienceMethodTemplate() {
-        return ConvenienceMethodTemplate.getInstance();
+    public ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate() {
+        return ConvenienceAsyncMethodTemplate.getInstance();
     }
 }

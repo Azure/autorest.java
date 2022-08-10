@@ -102,7 +102,7 @@ public class Templates {
         return factory.getProtocolSampleTemplate();
     }
 
-    public static ConvenienceMethodTemplate getConvenienceMethodTemplate() {
-        return factory.getConvenienceMethodTemplate();
+    public static ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate() {
+        return factory.getConvenienceAsyncMethodTemplate();
     }
 }

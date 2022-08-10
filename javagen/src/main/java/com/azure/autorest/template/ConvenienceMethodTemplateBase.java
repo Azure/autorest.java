@@ -26,22 +26,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMethod, JavaClass> {
+abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<ConvenienceMethod, JavaClass> {
 
-    private static final ConvenienceMethodTemplate INSTANCE = new ConvenienceMethodTemplate();
-
-    protected ConvenienceMethodTemplate() {
-    }
-
-    public static ConvenienceMethodTemplate getInstance() {
-        return INSTANCE;
+    protected ConvenienceMethodTemplateBase() {
     }
 
     public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
         ClientMethod clientMethod = convenienceMethodObj.getClientMethod();
         String clientMethodName = getMethodName(clientMethod);
         convenienceMethodObj.getConvenienceMethods().stream()
-                .filter(m -> m.getType().name().contains("Async"))
+                .filter(this::isConvenienceMethod)
                 .forEach(convenienceMethod -> {
                     classBlock.blockComment("Generated convenience method for " + clientMethodName);
 
@@ -138,27 +132,11 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                 });
     }
 
-    private static String getMethodName(ClientMethod method) {
-        if (method.getType().name().contains("Async")) {
-            return method.getName().endsWith("Async")
-                    ? method.getName().substring(0, method.getName().length() - "Async".length())
-                    : method.getName();
-        } else {
-            return method.getName();
-        }
-    }
+    protected abstract boolean isConvenienceMethod(ClientMethod method);
 
-    private static String expressionConvertFromBinaryData(IType baseReturnType) {
-        if (baseReturnType instanceof EnumType) {
-            // enum
-            return String.format(".map(%s::fromString)", baseReturnType);
-        } else if (ClientModelUtil.isClientModel(baseReturnType)) {
-            // class
-            return String.format(".map(r -> r.toObject(%s.class))", baseReturnType);
-        } else {
-            return "";
-        }
-    }
+    protected abstract String getMethodName(ClientMethod method);
+
+    protected abstract String expressionConvertFromBinaryData(IType baseReturnType);
 
     private static String expressionConvertToBinaryData(String name, IType type) {
         if (type == ClassType.BinaryData) {
@@ -221,7 +199,7 @@ public class ConvenienceMethodTemplate implements IJavaTemplate<ConvenienceMetho
                 .collect(Collectors.toList());
     }
 
-    private static class MethodParameter {
+    protected static class MethodParameter {
 
         private final ProxyMethodParameter proxyMethodParameter;
         private final ClientMethodParameter clientMethodParameter;

@@ -176,6 +176,6 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
-    Templates.getConvenienceMethodTemplate().write(convenienceMethodObj, classBlock);
+    Templates.getConvenienceAsyncMethodTemplate().write(convenienceMethodObj, classBlock);
   }
 }

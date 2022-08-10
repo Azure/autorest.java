@@ -49,5 +49,5 @@ public interface TemplateFactory {
 
     ProtocolSampleTemplate getProtocolSampleTemplate();
 
-    ConvenienceMethodTemplate getConvenienceMethodTemplate();
+    ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate();
 }
