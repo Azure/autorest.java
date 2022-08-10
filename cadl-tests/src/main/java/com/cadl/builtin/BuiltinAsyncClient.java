@@ -87,6 +87,8 @@ public final class BuiltinAsyncClient {
      */
     public Mono<Builtin> read() {
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Builtin.class));
+        return readWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
     }
 }

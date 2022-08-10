@@ -104,7 +104,9 @@ public final class NamingAsyncClient {
         if (etag != null) {
             requestOptions.setHeader("etag", etag);
         }
-        return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
+        return postWithResponse(name, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 
     /*
@@ -127,6 +129,8 @@ public final class NamingAsyncClient {
      */
     public Mono<DataResponse> post(String name) {
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, requestOptions).map(Response::getValue).map(r -> r.toObject(DataResponse.class));
+        return postWithResponse(name, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 }

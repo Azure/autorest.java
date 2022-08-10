@@ -126,7 +126,7 @@ public final class JsonMergePatchAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Resource.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /*
@@ -149,6 +149,6 @@ public final class JsonMergePatchAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Resource.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

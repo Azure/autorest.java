@@ -140,7 +140,9 @@ public final class PolymorphismAsyncClient {
      */
     public Mono<Pet> read() {
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Pet.class));
+        return readWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Pet.class));
     }
 
     /*
@@ -162,7 +164,7 @@ public final class PolymorphismAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(BaseType.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(BaseType.class));
     }
 
     /*
@@ -184,6 +186,6 @@ public final class PolymorphismAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Task.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Task.class));
     }
 }

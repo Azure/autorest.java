@@ -75,6 +75,8 @@ public final class VisibilityReadAsyncClient {
      */
     public Mono<Dog> get() {
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
+        return getWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

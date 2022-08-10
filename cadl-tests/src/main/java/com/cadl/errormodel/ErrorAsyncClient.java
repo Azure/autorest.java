@@ -74,6 +74,8 @@ public final class ErrorAsyncClient {
      */
     public Mono<Diagnostic> read() {
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Diagnostic.class));
+        return readWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
     }
 }

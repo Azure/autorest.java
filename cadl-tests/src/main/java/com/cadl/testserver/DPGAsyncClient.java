@@ -317,7 +317,7 @@ public final class DPGAsyncClient {
         }
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Message.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -341,7 +341,7 @@ public final class DPGAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Message.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -372,7 +372,7 @@ public final class DPGAsyncClient {
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Message.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -395,7 +395,7 @@ public final class DPGAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Message.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -417,7 +417,7 @@ public final class DPGAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Message.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -465,7 +465,9 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
+        return getOptionalWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -485,7 +487,9 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getOptional() {
         RequestOptions requestOptions = new RequestOptions();
-        return getOptionalWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
+        return getOptionalWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
     /*
@@ -504,6 +508,8 @@ public final class DPGAsyncClient {
      */
     public Mono<Message> getNewOperation() {
         RequestOptions requestOptions = new RequestOptions();
-        return getNewOperationWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Message.class));
+        return getNewOperationWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 }

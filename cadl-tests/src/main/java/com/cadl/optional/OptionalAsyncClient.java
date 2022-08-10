@@ -205,7 +205,7 @@ public final class OptionalAsyncClient {
                         stringRequiredNullable,
                         requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(AllPropertiesOptional.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 
     /*
@@ -242,6 +242,6 @@ public final class OptionalAsyncClient {
                         stringRequiredNullable,
                         requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(AllPropertiesOptional.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 }

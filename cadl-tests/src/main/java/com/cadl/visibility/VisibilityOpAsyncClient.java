@@ -149,7 +149,9 @@ public final class VisibilityOpAsyncClient {
      */
     public Mono<Dog> get() {
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).map(Response::getValue).map(r -> r.toObject(Dog.class));
+        return getWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /*
@@ -171,7 +173,7 @@ public final class VisibilityOpAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Dog.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /*
@@ -193,6 +195,6 @@ public final class VisibilityOpAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return queryWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Dog.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

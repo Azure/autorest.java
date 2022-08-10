@@ -90,6 +90,6 @@ public final class VisibilityWriteAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Dog.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

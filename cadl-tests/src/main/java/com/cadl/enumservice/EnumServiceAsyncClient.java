@@ -252,7 +252,7 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
     /*
@@ -274,7 +274,7 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
     /*
@@ -294,7 +294,7 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
     /*
@@ -316,6 +316,6 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions)
                 .map(Response::getValue)
-                .map(r -> r.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 }
