@@ -447,15 +447,27 @@ public class Transformer {
     }
   }
 
+  private final static Map<String, String> ODATA_PARAMETER_NAME_CONVERSION = new HashMap<>(2);
+  static {
+    ODATA_PARAMETER_NAME_CONVERSION.put("maxpagesize", "maxPageSize");
+    ODATA_PARAMETER_NAME_CONVERSION.put("orderby", "orderBy");
+  }
+
   private static void renameOdataParameterNames(Request request) {
     List<Parameter> parameters = request.getParameters();
     ListIterator<Parameter> iter = parameters.listIterator();
     while (iter.hasNext()) {
       Parameter parameter = iter.next();
-      if ("maxpagesize".equals(parameter.getLanguage().getDefault().getSerializedName())) {
-        parameter.getLanguage().getJava().setName("maxPageSize");
-      } else if ("orderby".equals(parameter.getLanguage().getDefault().getSerializedName())) {
-        parameter.getLanguage().getJava().setName("orderBy");
+      if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
+          && (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
+          || parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER)) {
+        String serializedName = parameter.getLanguage().getDefault().getSerializedName();
+        String convertedName = ODATA_PARAMETER_NAME_CONVERSION.get(serializedName);
+        if (convertedName != null
+            // no x-ms-client-name
+            && serializedName.equals(parameter.getLanguage().getJava().getName())) {
+          parameter.getLanguage().getJava().setName(convertedName);
+        }
       }
     }
   }
