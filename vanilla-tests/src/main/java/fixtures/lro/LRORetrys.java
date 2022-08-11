@@ -192,8 +192,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -219,8 +219,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -330,8 +330,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -357,8 +357,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -457,8 +457,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -483,8 +483,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceProduct(),
-                new TypeReferenceProduct());
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -574,8 +574,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -599,8 +599,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -691,8 +691,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -716,8 +716,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -817,8 +817,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -843,8 +843,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -952,8 +952,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -980,8 +980,8 @@ public final class LRORetrys {
                                         this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
-                new TypeReferenceBinaryData(),
-                new TypeReferenceBinaryData());
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -1015,13 +1015,5 @@ public final class LRORetrys {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(Product product, Context context) {
         return this.beginPostAsyncRelativeRetrySucceededAsync(product, context).getSyncPoller();
-    }
-
-    private static final class TypeReferenceProduct extends TypeReference<Product> {
-        // empty
-    }
-
-    private static final class TypeReferenceBinaryData extends TypeReference<BinaryData> {
-        // empty
     }
 }

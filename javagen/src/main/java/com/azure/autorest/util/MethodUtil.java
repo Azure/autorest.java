@@ -81,10 +81,10 @@ public class MethodUtil {
      *
      * @param parameter the method parameter.
      * @param name the name of method parameter, used when no description found.
-     * @param isDPG whether the description is used for DPG.
+     * @param isProtocolMethod whether the description is used for simplified method.
      * @return the Javadoc description for method parameter.
      */
-    public static String getMethodParameterDescription(Parameter parameter, String name, boolean isDPG) {
+    public static String getMethodParameterDescription(Parameter parameter, String name, boolean isProtocolMethod) {
         String summary = parameter.getSummary();
         String description = null;
         // parameter description
@@ -102,7 +102,7 @@ public class MethodUtil {
             description = String.format("The %s parameter", name);
         }
         // add allowed enum values
-        if (isDPG && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
+        if (isProtocolMethod && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
             description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
         }
 

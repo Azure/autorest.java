@@ -633,25 +633,6 @@ public final class HeadersImpl {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(
-            String userAgent, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramExistingKey(this.client.getHost(), userAgent, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header value "User-Agent": "overwrite".
-     *
-     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -679,24 +660,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseExistingKey(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "User-Agent": "overwrite".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "User-Agent": "overwrite" along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseExistingKey(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -738,25 +701,6 @@ public final class HeadersImpl {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(
-            String contentType, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramProtectedKey(this.client.getHost(), contentType, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header value "Content-Type": "text/html".
-     *
-     * @param contentType Send a post request with header value "Content-Type": "text/html".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -784,24 +728,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "Content-Type": "text/html".
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "Content-Type": "text/html" along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -846,26 +772,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramIntegerWithResponseAsync(
-            String scenario, int value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramInteger(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 1 or -2.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -894,26 +800,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "value": 1 or -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "value": 1 or -2 along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseIntegerWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -959,27 +845,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramLongWithResponseAsync(
-            String scenario, long value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramLong(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
-     * -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 105 or -2.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1008,26 +873,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "value": 105 or -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "value": 105 or -2 along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseLongWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1074,27 +919,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramFloatWithResponseAsync(
-            String scenario, float value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramFloat(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
-     * -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 0.07 or -3.0.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1123,26 +947,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "value": 0.07 or -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "value": 0.07 or -3.0 along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseFloatWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1190,27 +994,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDoubleWithResponseAsync(
-            String scenario, double value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDouble(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
-     * -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 7e120 or -3.0.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1239,26 +1022,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "value": 7e120 or -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "value": 7e120 or -3.0 along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDoubleWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1303,26 +1066,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramBoolWithResponseAsync(
-            String scenario, boolean value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramBool(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
-     * @param scenario Send a post request with header values "scenario": "true" or "false".
-     * @param value Send a post request with header values true or false.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1351,26 +1094,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header value "value": true or false.
-     *
-     * @param scenario Send a post request with header values "scenario": "true" or "false".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header value "value": true or false along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseBoolWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1434,36 +1157,6 @@ public final class HeadersImpl {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramStringWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramString(this.client.getHost(), scenario, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
-     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1492,26 +1185,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseString(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
-     *     {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseStringWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseString(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1559,27 +1232,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDateWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDate(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
-     * "0001-01-01".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1608,26 +1260,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDateWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1675,27 +1307,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeWithResponseAsync(
-            String scenario, OffsetDateTime value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
-     * "value": "0001-01-01T00:00:00Z".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1725,26 +1336,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
-     *     Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1810,36 +1401,6 @@ public final class HeadersImpl {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
-     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1871,26 +1432,6 @@ public final class HeadersImpl {
                 context ->
                         service.responseDatetimeRfc1123(
                                 this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
-     *     with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -1937,26 +1478,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDurationWithResponseAsync(
-            String scenario, Duration value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param value Send a post request with header values "P123DT22H14M12.011S".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1985,26 +1506,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "P123DT22H14M12.011S".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "P123DT22H14M12.011S" along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDurationWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -2052,27 +1553,6 @@ public final class HeadersImpl {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponseAsync(
-            String scenario, byte[] value, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        String valueConverted = Base64Util.encodeToString(value);
-        return service.paramByte(this.client.getHost(), scenario, valueConverted, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2101,26 +1581,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context));
-    }
-
-    /**
-     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseByteWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context);
     }
 
     /**
@@ -2182,35 +1642,6 @@ public final class HeadersImpl {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramEnumWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.paramEnum(this.client.getHost(), scenario, accept, requestOptions, context);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2246,26 +1677,6 @@ public final class HeadersImpl {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "GREY" or null along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseEnumWithResponseAsync(
-            String scenario, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.responseEnum(this.client.getHost(), scenario, accept, requestOptions, context);
-    }
-
-    /**
-     * Get a response with header values "GREY" or null.
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2292,23 +1703,6 @@ public final class HeadersImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.customRequestId(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.customRequestId(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

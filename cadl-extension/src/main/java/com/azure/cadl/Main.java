@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -60,6 +61,7 @@ public class Main {
         if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
             namespace = codeModel.getLanguage().getJava().getNamespace();
         }
+        namespace = Configuration.getGlobalConfiguration().get("NAMESPACE", namespace);
         LOGGER.info("Namespace: {}", namespace);
 
         // initialize plugin

@@ -7,6 +7,11 @@ pr:
   branches:
     include:
       - main
+  paths:
+    include:
+      - '*'
+    exclude:
+      - 'fluent*'
 
 jobs:
   - job: Build
@@ -88,8 +93,9 @@ jobs:
           command: install
 
       - script: |
-          npm run testserver-run &
-        displayName: 'Start Testserver'
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ &
+        displayName: 'Start Cadl Ranch Test Server'
+        workingDirectory: ./cadl-tests
 
       - task: Maven@3
         displayName: 'Run CADL Tests'
@@ -102,6 +108,3 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - script: |
-          npm run testserver-stop
-        displayName: 'Stop Testserver'

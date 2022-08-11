@@ -43,7 +43,7 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
     }
 
     @Override
-    protected IType createAsyncResponseReturnType(ClassType clientResponseClassType) {
+    protected IType createClientResponseAsyncReturnType(ClassType clientResponseClassType) {
         return PrimitiveType.Void; // return GenericType.CompletableFuture(clientResponseClassType);
     }
 

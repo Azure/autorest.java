@@ -7,6 +7,12 @@ pr:
   branches:
     include:
     - main
+  paths:
+    include:
+      - '*'
+    exclude:
+      - 'fluent*'
+      - 'cadl*'
 
 jobs:
   - job: Build

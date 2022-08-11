@@ -10,6 +10,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -89,6 +90,25 @@ public final class PolymorphismsImpl {
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Post("/Pets")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> task(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -115,32 +135,6 @@ public final class PolymorphismsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.read(this.client.getEndpoint(), accept, requestOptions, context));
-    }
-
-    /**
-     * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     weight: Double (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.read(this.client.getEndpoint(), accept, requestOptions, context);
     }
 
     /**
@@ -222,28 +216,24 @@ public final class PolymorphismsImpl {
      *
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> writeWithResponseAsync(
-            BinaryData body, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.write(this.client.getEndpoint(), accept, body, requestOptions, context);
+    public Response<BinaryData> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return writeWithResponseAsync(body, requestOptions).block();
     }
 
     /**
-     * The write operation.
+     * The task operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
      * }
      * }</pre>
      *
@@ -251,7 +241,38 @@ public final class PolymorphismsImpl {
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> taskWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.task(this.client.getEndpoint(), accept, body, requestOptions, context));
+    }
+
+    /**
+     * The task operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
      * }
      * }</pre>
      *
@@ -264,7 +285,7 @@ public final class PolymorphismsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return writeWithResponseAsync(body, requestOptions).block();
+    public Response<BinaryData> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return taskWithResponseAsync(body, requestOptions).block();
     }
 }

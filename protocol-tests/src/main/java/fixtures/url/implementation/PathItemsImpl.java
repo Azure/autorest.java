@@ -206,47 +206,6 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getAllWithValuesWithResponseAsync(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getAllWithValues(
-                this.client.getHost(),
-                pathItemStringPath,
-                this.client.getGlobalStringPath(),
-                this.client.getGlobalStringQuery(),
-                localStringPath,
-                accept,
-                requestOptions,
-                context);
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -299,47 +258,6 @@ public final class PathItemsImpl {
                                 accept,
                                 requestOptions,
                                 context));
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getGlobalQueryNull(
-                this.client.getHost(),
-                pathItemStringPath,
-                this.client.getGlobalStringPath(),
-                this.client.getGlobalStringQuery(),
-                localStringPath,
-                accept,
-                requestOptions,
-                context);
     }
 
     /**
@@ -434,47 +352,6 @@ public final class PathItemsImpl {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getGlobalAndLocalQueryNull(
-                this.client.getHost(),
-                pathItemStringPath,
-                this.client.getGlobalStringPath(),
-                this.client.getGlobalStringQuery(),
-                localStringPath,
-                accept,
-                requestOptions,
-                context);
-    }
-
-    /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -527,47 +404,6 @@ public final class PathItemsImpl {
                                 accept,
                                 requestOptions,
                                 context));
-    }
-
-    /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
-     * @param localStringPath should contain value 'localStringPath'.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getLocalPathItemQueryNull(
-                this.client.getHost(),
-                pathItemStringPath,
-                this.client.getGlobalStringPath(),
-                this.client.getGlobalStringQuery(),
-                localStringPath,
-                accept,
-                requestOptions,
-                context);
     }
 
     /**

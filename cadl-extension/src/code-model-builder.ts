@@ -26,6 +26,7 @@ import {
   OperationType,
   Program,
   StringLiteralType,
+  TemplateDeclarationNode,
   Type,
   UnionType,
   UnionTypeVariant,
@@ -209,7 +210,7 @@ export class CodeModelBuilder {
     const operationGroup = this.codeModel.getOperationGroup(op.groupName);
     const opId = `${op.groupName}_${op.operation.name}`
 
-    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod");
+    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
 
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
@@ -272,7 +273,7 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
-    if (param.name === 'api-version') {
+    if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
     } else {
@@ -299,6 +300,16 @@ export class CodeModelBuilder {
 
       if (op.extensions?.convenienceMethod) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+      }
+
+      if (param.name.toLowerCase() === "content-type") {
+        let mediaTypes = ["application/json"];
+        if (schema instanceof ConstantSchema) {
+          mediaTypes = [schema.value.value.toString()];
+        } else if (schema instanceof SealedChoiceSchema) {
+          mediaTypes = schema.choices.map(it => it.value.toString());
+        }
+        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
       }
     }
   }
@@ -443,33 +454,33 @@ export class CodeModelBuilder {
     return resp.description || (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) || "";
   }
 
-  private processSchema(type: Type, name: string): Schema {
-    return this.schemaCache.process(type, name) || fail("Unable to process schema.");
+  private processSchema(type: Type, nameHint: string): Schema {
+    return this.schemaCache.process(type, nameHint) || fail("Unable to process schema.");
   }
 
-  private processSchemaImpl(type: Type, name: string): Schema {
+  private processSchemaImpl(type: Type, nameHint: string): Schema {
     switch (type.kind) {
       case "String":
-        return this.processChoiceSchemaForLiteral(type, name);
+        return this.processChoiceSchemaForLiteral(type, nameHint);
         
       case "Number":
         // TODO: float
-        return this.processChoiceSchemaForLiteral(type, name);
+        return this.processChoiceSchemaForLiteral(type, nameHint);
 
       case "Boolean":
-        return this.processChoiceSchemaForLiteral(type, name);
+        return this.processChoiceSchemaForLiteral(type, nameHint);
 
       case "Array":
-        return this.processArraySchema(type, name);
+        return this.processArraySchema(type, nameHint);
 
       case "Enum":
-        return this.processChoiceSchema(type, this.getName(type, type.name), true);
+        return this.processChoiceSchema(type, this.getName(type), true);
 
       case "Union":
-        return this.processUnionSchema(type, name);
+        return this.processUnionSchema(type, nameHint);
 
       case "ModelProperty":
-        return this.processSchema(type.type, name);
+        return this.processSchema(type.type, nameHint);
         // return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
 
       case "Model":
@@ -480,46 +491,46 @@ export class CodeModelBuilder {
               {
                 const enumType = getKnownValues(this.program, type);
                 if (enumType) {
-                  return this.processChoiceSchema(enumType, this.getName(type, type.name), false);
+                  return this.processChoiceSchema(enumType, this.getName(type), false);
                 } else {
-                  return this.processStringSchema(type, name);
+                  return this.processStringSchema(type, nameHint);
                 }
               }
 
             case "bytes":
-              return this.processByteArraySchema(type, name);
+              return this.processByteArraySchema(type, nameHint);
 
             case "boolean":
-              return this.processBooleanSchema(type, name);
+              return this.processBooleanSchema(type, nameHint);
               
             case "Map":
-              return this.processMapSchema(type, name);
+              return this.processMapSchema(type, nameHint);
 
             case "plainTime":
-              return this.processTimeSchema(type, name);
+              return this.processTimeSchema(type, nameHint);
 
             case "plainDate":
-              return this.processDateSchema(type, name);
+              return this.processDateSchema(type, nameHint);
 
             case "zonedDateTime":
-              return this.processDateTimeSchema(type, name, false);
+              return this.processDateTimeSchema(type, nameHint, false);
 
             case "duration":
-              return this.processDurationSchema(type, name);
+              return this.processDurationSchema(type, nameHint);
           }
 
           if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
             // integer
-            return this.processIntegerSchema(type, name, 64);
+            return this.processIntegerSchema(type, nameHint, 64);
               // (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
           } else if (intrinsicModelName.startsWith("float")) {
             // float point
-            return this.processNumberSchema(type, name);
+            return this.processNumberSchema(type, nameHint);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
         } else {
-          return this.processObjectSchema(type, this.getName(type, type.name));
+          return this.processObjectSchema(type, this.getName(type));
         }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
@@ -605,7 +616,7 @@ export class CodeModelBuilder {
       );
     } else {
       const choices: ChoiceValue[] = [];
-      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value || it.name)));
+      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
       if (sealed) {
         return this.codeModel.schemas.add(
@@ -755,7 +766,7 @@ export class CodeModelBuilder {
 
     // parent
     if (type.baseModel) {
-      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel, type.baseModel.name));
+      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
 
@@ -806,7 +817,7 @@ export class CodeModelBuilder {
     }
 
     // process all children
-    type.derivedModels?.forEach(it => this.processSchema(it, this.getName(it, it.name)));
+    type.derivedModels?.filter(includeDerivedModel).forEach(it => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
   }
@@ -849,7 +860,7 @@ export class CodeModelBuilder {
     const schema = this.processSchema(prop, prop.name);
     const nullable = this.isNullableType(prop.type);
 
-    return new Property(this.getName(prop, prop.name), this.getDoc(prop), schema, {
+    return new Property(this.getName(prop), this.getDoc(prop), schema, {
       summary: this.getSummary(prop),
       required: !prop.optional,
       nullable: nullable,
@@ -918,8 +929,26 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Type, name: string): string {
-    return getFriendlyName(this.program, target) || name;
+  private getName(target: ModelType | EnumType | ModelTypeProperty): string {
+    const friendlyName = getFriendlyName(this.program, target);
+    if (friendlyName) {
+      return friendlyName;
+    } else {
+      if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
+        return target.name + target.templateArguments.map(it => {
+          switch (it.kind) {
+            case "Model":
+              return it.name;
+            case "String":
+              return it.value;
+            default:
+              return "";
+          }
+        }).join("");
+      } else {
+        return target.name;
+      }
+    }
   }
 
   private isReadOnly(target: Type): boolean {
@@ -1100,4 +1129,25 @@ function getNamespace(type: ModelType | EnumType | UnionType | OperationType): s
 
 function getJavaNamespace(namespace: string | undefined): string | undefined {
   return namespace ? "com." + namespace.toLowerCase() : undefined;
+}
+
+function includeDerivedModel(model: ModelType): boolean {
+  return (
+    !isTemplateDeclaration(model) &&
+    !(isTemplateInstance(model) && model.derivedModels.length === 0)
+  );
+}
+// TODO: use method from cadl-compiler after version upgrade
+function isTemplateDeclaration(type: ModelType): boolean {
+  if (type.node === undefined) {
+    return false;
+  }
+  const node = type.node as TemplateDeclarationNode;
+  return node.templateParameters.length > 0 && !isTemplateInstance(type);
+}
+function isTemplateInstance(type: ModelType): boolean {
+  return (
+    type.templateArguments !== undefined &&
+    type.templateArguments.length > 0
+  );
 }
