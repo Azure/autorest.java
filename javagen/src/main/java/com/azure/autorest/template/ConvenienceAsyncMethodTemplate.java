@@ -59,7 +59,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         if (responseBodyType instanceof EnumType) {
             // enum
             return String.format(".map(%1$s::from%2$s)", responseBodyType, ((EnumType) responseBodyType).getElementType());
-        } else if (ClientModelUtil.isClientModel(responseBodyType)) {
+        } else if (isModelOrBuiltin(responseBodyType)) {
             // class
             return String.format(".map(protocolMethodData -> protocolMethodData.toObject(%s.class))", responseBodyType);
         } else {

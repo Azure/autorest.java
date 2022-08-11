@@ -70,7 +70,7 @@ public final class AzureClient {
      */
     public String world() {
         RequestOptions requestOptions = new RequestOptions();
-        return worldWithResponse(requestOptions).getValue();
+        return worldWithResponse(requestOptions).getValue().toObject(String.class);
     }
 
     /*
@@ -92,6 +92,6 @@ public final class AzureClient {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = worldWithResponse(requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue());
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 }

@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.HashMap;
@@ -182,6 +183,11 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
             ClientMethod convenienceMethod, ClientMethod protocolMethod,
             String invocationExpression,
             JavaBlock methodBlock);
+
+    protected boolean isModelOrBuiltin(IType type) {
+        // TODO: other built-in types
+        return type == ClassType.String || ClientModelUtil.isClientModel(type);
+    }
 
     private static String expressionConvertToBinaryData(String name, IType type) {
         if (type == ClassType.BinaryData) {

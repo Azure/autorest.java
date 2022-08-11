@@ -99,7 +99,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         if (responseBodyType instanceof EnumType) {
             // enum
             return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
-        } else if (ClientModelUtil.isClientModel(responseBodyType)) {
+        } else if (isModelOrBuiltin(responseBodyType)) {
             // class
             return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);
         } else {

@@ -70,6 +70,8 @@ public final class AzureAsyncClient {
      */
     public Mono<String> world() {
         RequestOptions requestOptions = new RequestOptions();
-        return worldWithResponse(requestOptions).map(Response::getValue);
+        return worldWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }
