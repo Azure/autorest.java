@@ -14,7 +14,10 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.visibility.models.Dog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
 @ServiceClient(builder = VisibilityReadClientBuilder.class)
@@ -55,5 +58,45 @@ public final class VisibilityReadClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         return this.client.getWithResponse(requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for getWithResponse
+     */
+    /**
+     * The get operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Dog get() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(requestOptions).getValue().toObject(Dog.class);
+    }
+
+    /*
+     * Generated convenience method for getWithResponse
+     */
+    /**
+     * The get operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Dog> getWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Dog.class));
     }
 }

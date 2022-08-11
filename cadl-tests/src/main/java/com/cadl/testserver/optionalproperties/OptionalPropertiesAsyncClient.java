@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.testserver.optionalproperties.implementation.OptionalPropertiesImpl;
+import com.cadl.testserver.optionalproperties.models.InputModel;
+import com.cadl.testserver.optionalproperties.models.OutputModel;
+import com.cadl.testserver.optionalproperties.models.RoundTripModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous OptionalPropertiesClient type. */
@@ -144,5 +147,68 @@ public final class OptionalPropertiesAsyncClient {
     public Mono<Response<BinaryData>> setOptionalPropertyModelWithResponse(
             BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.setOptionalPropertyModelWithResponseAsync(input, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for sendOptionalPropertyModelWithResponse
+     */
+    /**
+     * The sendOptionalPropertyModel operation.
+     *
+     * @param input Input model with optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    public Mono<Void> sendOptionalPropertyModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue);
+    }
+
+    /*
+     * Generated convenience method for getOptionalPropertyModelWithResponse
+     */
+    /**
+     * The getOptionalPropertyModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with optional properties on successful completion of {@link Mono}.
+     */
+    public Mono<OutputModel> getOptionalPropertyModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getOptionalPropertyModelWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setOptionalPropertyModelWithResponse
+     */
+    /**
+     * The setOptionalPropertyModel operation.
+     *
+     * @param input Round-trip model with optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with optional properties on successful completion of {@link Mono}.
+     */
+    public Mono<RoundTripModel> setOptionalPropertyModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }

@@ -302,37 +302,6 @@ public final class MediaTypesClientImpl {
      *
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> analyzeBodyWithResponseAsync(
-            String contentType, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.analyzeBody(this.getHost(), contentType, accept, requestOptions, context);
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -366,30 +335,6 @@ public final class MediaTypesClientImpl {
             String contentType, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, requestOptions, context));
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
-            String contentType, RequestOptions requestOptions, Context context) {
-        return service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, requestOptions, context);
     }
 
     /**
@@ -451,46 +396,6 @@ public final class MediaTypesClientImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.contentTypeWithEncoding(this.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "text/plain; charset=UTF-8".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> contentTypeWithEncodingWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.contentTypeWithEncoding(this.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -584,40 +489,6 @@ public final class MediaTypesClientImpl {
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "text/plain";
-        return service.binaryBodyWithTwoContentTypes(
-                this.getHost(), contentType, message, accept, requestOptions, context);
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -664,41 +535,6 @@ public final class MediaTypesClientImpl {
                 context ->
                         service.binaryBodyWithThreeContentTypes(
                                 this.getHost(), contentType, message, accept, requestOptions, context));
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream",
-     *     "text/plain".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "text/plain";
-        return service.binaryBodyWithThreeContentTypes(
-                this.getHost(), contentType, message, accept, requestOptions, context);
     }
 
     /**
@@ -790,41 +626,6 @@ public final class MediaTypesClientImpl {
      *     "application/json".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bodyThreeTypesWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "text/plain";
-        return service.bodyThreeTypes(this.getHost(), contentType, message, accept, requestOptions, context);
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain",
-     *     "application/json".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -869,38 +670,6 @@ public final class MediaTypesClientImpl {
                 context ->
                         service.putTextAndJsonBody(
                                 this.getHost(), contentType, message, accept, requestOptions, context));
-    }
-
-    /**
-     * Body that's either text/plain or application/json.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
-     * @param message The payload body.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putTextAndJsonBodyWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions, Context context) {
-        final String accept = "text/plain";
-        return service.putTextAndJsonBody(this.getHost(), contentType, message, accept, requestOptions, context);
     }
 
     /**

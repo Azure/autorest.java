@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.polymorphism.implementation.PolymorphismsImpl;
+import com.cadl.polymorphism.models.BaseType;
+import com.cadl.polymorphism.models.Pet;
+import com.cadl.polymorphism.models.Task;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous PolymorphismClient type. */
@@ -120,5 +123,69 @@ public final class PolymorphismAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.taskWithResponseAsync(body, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for readWithResponse
+     */
+    /**
+     * The read operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Pet> read() {
+        RequestOptions requestOptions = new RequestOptions();
+        return readWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Pet.class));
+    }
+
+    /*
+     * Generated convenience method for writeWithResponse
+     */
+    /**
+     * The write operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<BaseType> write(BaseType body) {
+        RequestOptions requestOptions = new RequestOptions();
+        return writeWithResponse(BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(BaseType.class));
+    }
+
+    /*
+     * Generated convenience method for taskWithResponse
+     */
+    /**
+     * The task operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Task> task(Task body) {
+        RequestOptions requestOptions = new RequestOptions();
+        return taskWithResponse(BinaryData.fromObject(body), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Task.class));
     }
 }

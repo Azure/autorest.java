@@ -210,7 +210,7 @@ export class CodeModelBuilder {
     const operationGroup = this.codeModel.getOperationGroup(op.groupName);
     const opId = `${op.groupName}_${op.operation.name}`
 
-    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod");
+    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
 
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,

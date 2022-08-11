@@ -160,40 +160,6 @@ public final class OptionalPropertiesImpl {
      *
      * @param input Input model with optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendOptionalPropertyModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.sendOptionalPropertyModel(accept, input, requestOptions, context);
-    }
-
-    /**
-     * The sendOptionalPropertyModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     optionalString: String (Optional)
-     *     optionalInt: Long (Optional)
-     *     optionalStringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     optionalIntList (Optional): [
-     *         long (Optional)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param input Input model with optional properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -235,40 +201,6 @@ public final class OptionalPropertiesImpl {
     public Mono<Response<BinaryData>> getOptionalPropertyModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOptionalPropertyModel(accept, requestOptions, context));
-    }
-
-    /**
-     * The getOptionalPropertyModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     optionalString: String (Optional)
-     *     optionalInt: Long (Optional)
-     *     optionalStringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     optionalIntList (Optional): [
-     *         long (Optional)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with optional properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOptionalPropertyModelWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getOptionalPropertyModel(accept, requestOptions, context);
     }
 
     /**
@@ -349,56 +281,6 @@ public final class OptionalPropertiesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.setOptionalPropertyModel(accept, input, requestOptions, context));
-    }
-
-    /**
-     * The setOptionalPropertyModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     optionalString: String (Optional)
-     *     optionalInt: Long (Optional)
-     *     optionalStringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     optionalIntList (Optional): [
-     *         long (Optional)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     optionalString: String (Optional)
-     *     optionalInt: Long (Optional)
-     *     optionalStringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     optionalIntList (Optional): [
-     *         long (Optional)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param input Round-trip model with optional properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return round-trip model with optional properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setOptionalPropertyModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setOptionalPropertyModel(accept, input, requestOptions, context);
     }
 
     /**

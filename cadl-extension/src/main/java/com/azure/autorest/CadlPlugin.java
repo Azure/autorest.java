@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,9 +112,11 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("models-subpackage", "models");
         SETTINGS_MAP.put("client-logger", true);
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
+        SETTINGS_MAP.put("required-parameter-client-methods", true);
+        SETTINGS_MAP.put("generic-response-type", true);
 
         SETTINGS_MAP.put("regenerate-pom", true);
-        SETTINGS_MAP.put("generate-models", true);
+        SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
     }
 
     public static class MockConnection extends Connection {

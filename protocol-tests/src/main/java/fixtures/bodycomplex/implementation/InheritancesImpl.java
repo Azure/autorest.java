@@ -148,41 +148,6 @@ public final class InheritancesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that extend others along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get complex types that extend others.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String (Optional)
-     *     hates (Optional): [
-     *          (Optional){
-     *             id: Integer (Optional)
-     *             name: String (Optional)
-     *             food: String (Optional)
-     *         }
-     *     ]
-     *     breed: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -230,45 +195,6 @@ public final class InheritancesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
-    }
-
-    /**
-     * Put complex types that extend others.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String (Optional)
-     *     hates (Optional): [
-     *          (Optional){
-     *             id: Integer (Optional)
-     *             name: String (Optional)
-     *             food: String (Optional)
-     *         }
-     *     ]
-     *     breed: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**

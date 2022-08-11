@@ -62,7 +62,30 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static final Pattern ANYTHING_THEN_PERIOD = Pattern.compile(".*\\.");
 
-    private final Map<Operation, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private final Map<CacheKey, List<ClientMethod>> parsed = new ConcurrentHashMap<>();
+    private static class CacheKey {
+        private final Operation operation;
+        private final boolean isProtocolMethod;
+
+        public CacheKey(Operation operation, boolean isProtocolMethod) {
+            this.operation = operation;
+            this.isProtocolMethod = isProtocolMethod;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            CacheKey cacheKey = (CacheKey) o;
+            return isProtocolMethod == cacheKey.isProtocolMethod && operation.equals(cacheKey.operation);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(operation, isProtocolMethod);
+        }
+    }
+
     private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     protected ClientMethodMapper() {
@@ -74,13 +97,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     @Override
     public List<ClientMethod> map(Operation operation) {
-        List<ClientMethod> clientMethods = parsed.get(operation);
+        return map(operation, JavaSettings.getInstance().isDataPlaneClient());
+    }
+
+    public List<ClientMethod> map(Operation operation, boolean isProtocolMethod) {
+        CacheKey cacheKey = new CacheKey(operation, isProtocolMethod);
+        List<ClientMethod> clientMethods = parsed.get(cacheKey);
         if (clientMethods != null) {
             return clientMethods;
         }
 
-        clientMethods = createClientMethods(operation, JavaSettings.getInstance().isDataPlaneClient());
-        parsed.put(operation, clientMethods);
+        clientMethods = createClientMethods(operation, isProtocolMethod);
+        parsed.put(cacheKey, clientMethods);
 
         return clientMethods;
     }
@@ -315,7 +343,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .name("requestOptions")
                             .location(RequestParameterLocation.NONE)
                             .isConstant(false)
-                            .isRequired(false)
+                            .isRequired(true)
                             .fromClient(false)
                             .annotations(Collections.emptyList())
                             .build();
@@ -392,15 +420,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 if (settings.isContextClientMethodParameter()) {
                                     MethodPageDetails detailsWithContext = details;
                                     if (nextMethods != null) {
-                                        detailsWithContext = new MethodPageDetails(
-                                                CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                                                pageableItemName,
-                                                nextMethods.stream()
-                                                        .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
-                                                        .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst().get(),
-                                                lroIntermediateType,
-                                                operation.getExtensions().getXmsPageable().getNextLinkName(),
-                                                operation.getExtensions().getXmsPageable().getItemName());
+                                        ClientMethod nextMethod = nextMethods.stream()
+                                                .filter(m -> m.getType() == ClientMethodType.PagingAsyncSinglePage)
+                                                .filter(m -> m.getMethodParameters().stream().anyMatch(p -> getContextType().equals(p.getClientType()))).findFirst()
+                                                .orElse(null);
+
+                                        if (nextMethod != null) {
+                                            detailsWithContext = new MethodPageDetails(
+                                                    CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                                                    pageableItemName,
+                                                    nextMethod,
+                                                    lroIntermediateType,
+                                                    operation.getExtensions().getXmsPageable().getNextLinkName(),
+                                                    operation.getExtensions().getXmsPageable().getItemName());
+                                        }
                                     }
 
                                     addClientMethodWithContext(methods,
@@ -448,8 +481,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     JavaVisibility simpleAsyncMethodVisibilityWithContext =
                             methodVisibility(ClientMethodType.SimpleAsyncRestResponse, true, isProtocolMethod);
                     if (settings.isDataPlaneClient()) {
-                        simpleAsyncMethodVisibility = JavaVisibility.Private;
-                        simpleAsyncMethodVisibilityWithContext = JavaVisibility.Private;
+                        simpleAsyncMethodVisibility = NOT_VISIBLE;
+                        simpleAsyncMethodVisibilityWithContext = NOT_GENERATE;
                     }
 
                     // WithResponseAsync, with required and optional parameters
@@ -614,7 +647,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .isGroupedParameterRequired(false)
                                 .methodVisibility(methodVisibility(ClientMethodType.SimpleSync, false, isProtocolMethod));
 
-                        if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                        if (!(settings.isFluent() || settings.isDataPlaneClient()) || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                             // if context parameter is required, that method will do the overload with max parameters
                             methods.add(builder.build());
                         }
@@ -857,15 +890,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 3. For async method, Context is not included in method (this rule is valid for all clients).
                  */
 
-                return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync
-                        || (methodType == ClientMethodType.PagingSync && hasContextParameter)
-                        || (methodType == ClientMethodType.LongRunningBeginSync && hasContextParameter)
-                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
+                return (methodType == ClientMethodType.SimpleAsync
+                        || methodType == ClientMethodType.SimpleSync
+                        || hasContextParameter)
                         ? NOT_GENERATE
                         : VISIBLE;
             } else {
                 // at present, only generate convenience method for simple API (no pageable, no LRO)
-                return (methodType == ClientMethodType.SimpleAsync || methodType == ClientMethodType.SimpleSync)
+                return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
+                        || methodType == ClientMethodType.SimpleSync
+                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                         ? VISIBLE
                         : NOT_GENERATE;
             }

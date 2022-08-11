@@ -14,7 +14,9 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 
 /** Initializes a new instance of the synchronous AzureClient type. */
 @ServiceClient(builder = AzureClientBuilder.class)
@@ -51,5 +53,45 @@ public final class AzureClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> worldWithResponse(RequestOptions requestOptions) {
         return this.client.worldWithResponse(requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for worldWithResponse
+     */
+    /**
+     * The world operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public String world() {
+        RequestOptions requestOptions = new RequestOptions();
+        return worldWithResponse(requestOptions).getValue().toObject(String.class);
+    }
+
+    /*
+     * Generated convenience method for worldWithResponse
+     */
+    /**
+     * The world operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<String> worldWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = worldWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 }

@@ -14,7 +14,12 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.optionalproperties.models.InputModel;
+import com.cadl.testserver.optionalproperties.models.OutputModel;
+import com.cadl.testserver.optionalproperties.models.RoundTripModel;
 
 /** Initializes a new instance of the synchronous OptionalPropertiesClient type. */
 @ServiceClient(builder = OptionalPropertiesClientBuilder.class)
@@ -139,5 +144,134 @@ public final class OptionalPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setOptionalPropertyModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.setOptionalPropertyModelWithResponse(input, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for sendOptionalPropertyModelWithResponse
+     */
+    /**
+     * The sendOptionalPropertyModel operation.
+     *
+     * @param input Input model with optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void sendOptionalPropertyModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for sendOptionalPropertyModelWithResponse
+     */
+    /**
+     * The sendOptionalPropertyModel operation.
+     *
+     * @param input Input model with optional properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    public Response<Void> sendOptionalPropertyModelWithResponse(InputModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getOptionalPropertyModelWithResponse
+     */
+    /**
+     * The getOptionalPropertyModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with optional properties.
+     */
+    public OutputModel getOptionalPropertyModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getOptionalPropertyModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
+    }
+
+    /*
+     * Generated convenience method for getOptionalPropertyModelWithResponse
+     */
+    /**
+     * The getOptionalPropertyModel operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with optional properties along with {@link Response}.
+     */
+    public Response<OutputModel> getOptionalPropertyModelWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getOptionalPropertyModelWithResponse(requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setOptionalPropertyModelWithResponse
+     */
+    /**
+     * The setOptionalPropertyModel operation.
+     *
+     * @param input Round-trip model with optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with optional properties.
+     */
+    public RoundTripModel setOptionalPropertyModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .getValue()
+                .toObject(RoundTripModel.class);
+    }
+
+    /*
+     * Generated convenience method for setOptionalPropertyModelWithResponse
+     */
+    /**
+     * The setOptionalPropertyModel operation.
+     *
+     * @param input Round-trip model with optional properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with optional properties along with {@link Response}.
+     */
+    public Response<RoundTripModel> setOptionalPropertyModelWithResponse(RoundTripModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }

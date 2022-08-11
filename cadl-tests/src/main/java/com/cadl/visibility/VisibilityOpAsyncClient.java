@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.visibility.implementation.VisibilityOpsImpl;
+import com.cadl.visibility.models.Dog;
+import com.cadl.visibility.models.ReadDog;
+import com.cadl.visibility.models.WriteDog;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous VisibilityClient type. */
@@ -129,5 +132,69 @@ public final class VisibilityOpAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
         return this.serviceClient.queryWithResponseAsync(dog, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getWithResponse
+     */
+    /**
+     * The get operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Dog> get() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+    }
+
+    /*
+     * Generated convenience method for createWithResponse
+     */
+    /**
+     * The create operation.
+     *
+     * @param dog The dog parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Dog> create(WriteDog dog) {
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+    }
+
+    /*
+     * Generated convenience method for queryWithResponse
+     */
+    /**
+     * The query operation.
+     *
+     * @param dog The dog parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Dog> query(ReadDog dog) {
+        RequestOptions requestOptions = new RequestOptions();
+        return queryWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

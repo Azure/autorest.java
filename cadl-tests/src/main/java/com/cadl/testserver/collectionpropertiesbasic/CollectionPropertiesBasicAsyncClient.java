@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.testserver.collectionpropertiesbasic.implementation.CollectionPropertiesBasicsImpl;
+import com.cadl.testserver.collectionpropertiesbasic.models.InputModel;
+import com.cadl.testserver.collectionpropertiesbasic.models.OutputModel;
+import com.cadl.testserver.collectionpropertiesbasic.models.RoundTripModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous CollectionPropertiesBasicClient type. */
@@ -135,5 +138,67 @@ public final class CollectionPropertiesBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setCollectionModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.setCollectionModelWithResponseAsync(input, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for sendCollectionModelWithResponse
+     */
+    /**
+     * The sendCollectionModel operation.
+     *
+     * @param input Input model with collection properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    public Mono<Void> sendCollectionModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return sendCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+    }
+
+    /*
+     * Generated convenience method for getCollectionModelWithResponse
+     */
+    /**
+     * The getCollectionModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with collection properties on successful completion of {@link Mono}.
+     */
+    public Mono<OutputModel> getCollectionModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getCollectionModelWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setCollectionModelWithResponse
+     */
+    /**
+     * The setCollectionModel operation.
+     *
+     * @param input Round-trip model with collection properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with collection properties on successful completion of {@link Mono}.
+     */
+    public Mono<RoundTripModel> setCollectionModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }

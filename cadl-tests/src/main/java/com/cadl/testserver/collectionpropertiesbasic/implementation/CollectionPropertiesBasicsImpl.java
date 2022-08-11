@@ -156,38 +156,6 @@ public final class CollectionPropertiesBasicsImpl {
      *
      * @param input Input model with collection properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendCollectionModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.sendCollectionModel(accept, input, requestOptions, context);
-    }
-
-    /**
-     * The sendCollectionModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredStringList (Required): [
-     *         String (Required)
-     *     ]
-     *     requiredIntList (Required): [
-     *         long (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param input Input model with collection properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -227,38 +195,6 @@ public final class CollectionPropertiesBasicsImpl {
     public Mono<Response<BinaryData>> getCollectionModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getCollectionModel(accept, requestOptions, context));
-    }
-
-    /**
-     * The getCollectionModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredStringList (Required): [
-     *         String (Required)
-     *     ]
-     *     requiredIntList (Required): [
-     *         long (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with collection properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getCollectionModelWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getCollectionModel(accept, requestOptions, context);
     }
 
     /**
@@ -332,52 +268,6 @@ public final class CollectionPropertiesBasicsImpl {
             BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.setCollectionModel(accept, input, requestOptions, context));
-    }
-
-    /**
-     * The setCollectionModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredStringList (Required): [
-     *         String (Required)
-     *     ]
-     *     requiredIntList (Required): [
-     *         long (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredStringList (Required): [
-     *         String (Required)
-     *     ]
-     *     requiredIntList (Required): [
-     *         long (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param input Round-trip model with collection properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return round-trip model with collection properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setCollectionModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setCollectionModel(accept, input, requestOptions, context);
     }
 
     /**

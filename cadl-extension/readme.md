@@ -1,4 +1,4 @@
-# Java Client Emitter for CADL
+# CADL-Java
 
 ## Install CADL
 
@@ -14,7 +14,7 @@ npm install -g @cadl-lang/compiler
 
 This will build `./cadl-extension`, which is basically `preprocessor` and `javagen` combined.
 
-## Build and install Emitter
+## Build and Install CADL-Java
 
 `bash setup.sh` in `./cadl-tests` folder.
 
@@ -25,6 +25,24 @@ It makes the npm package in `./cadl-extension`, then install it to `./cadl-tests
 `cadl compile <target.cadl>` in `./cadl-tests` folder.
 
 Generated code will be at `./cadl-tests/cadl-ouput/java` folder.
+
+## Temporary Environment Variables for Testing
+
+`GENERATE_MODELS`: generate all models. Default is `false`.
+`GENERATE_CONVENIENCE_METHODS`: generate convenience methods for all operations. Default is `false`.
+`NAMESPACE`: the overriding namespace for the package.
+
+## Temporary Demonstration for Convenience Methods
+
+To enable generating convenience method for an operation or a group, add `convenienceMethod` decorator to the operation of the interface in CADL.
+
+E.g.
+```typescript
+@convenienceMethod
+@route("/alertConfigs")
+interface AlertConfigs extends LifetimeOperations<AlertConfig, ListFilters> {
+}
+```
 
 ## Troubleshooting
 

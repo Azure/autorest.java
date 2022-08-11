@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.testserver.outputbasic.implementation.OutputBasicsImpl;
+import com.cadl.testserver.outputbasic.models.OutputModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous OutputBasicClient type. */
@@ -56,5 +57,25 @@ public final class OutputBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getModelWithResponseAsync(requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output Model on successful completion of {@link Mono}.
+     */
+    public Mono<OutputModel> getModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getModelWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 }

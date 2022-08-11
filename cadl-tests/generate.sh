@@ -1,21 +1,5 @@
 bash ./setup.sh
 
-function generate_remote {
-    echo "cadl compile $1"
-
-    curl $1 --output tmp.cadl
-    cadl compile tmp.cadl
-    if [ $? -ne 0 ]; then
-        exit 1
-    fi
-
-    cp -rf cadl-output/java/src .
-    rm src/main/java/module-info.java
-
-    rm -rf cadl-output/java/src
-    rm tmp.cadl
-}
-
 function generate {
     echo "cadl compile $1"
 
@@ -32,6 +16,10 @@ function generate {
 
 rm -rf src/main/
 rm -rf cadl-output/
+
+# enable convenience methods for tests
+export GENERATE_MODELS=true
+export GENERATE_CONVENIENCE_METHODS=true
 
 # run local tests
 for f in $(find ./cadl/ -name "*.cadl")

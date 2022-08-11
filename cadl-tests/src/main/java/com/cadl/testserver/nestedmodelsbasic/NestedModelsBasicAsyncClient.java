@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.testserver.nestedmodelsbasic.implementation.NestedModelsBasicsImpl;
+import com.cadl.testserver.nestedmodelsbasic.models.InputModel;
+import com.cadl.testserver.nestedmodelsbasic.models.OutputModel;
+import com.cadl.testserver.nestedmodelsbasic.models.RoundTripModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous NestedModelsBasicClient type. */
@@ -191,5 +194,67 @@ public final class NestedModelsBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setNestedModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.setNestedModelWithResponseAsync(input, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for sendNestedModelWithResponse
+     */
+    /**
+     * The sendNestedModel operation.
+     *
+     * @param input Input model with nested model properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    public Mono<Void> sendNestedModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+    }
+
+    /*
+     * Generated convenience method for getNestedModelWithResponse
+     */
+    /**
+     * The getNestedModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with nested model properties on successful completion of {@link Mono}.
+     */
+    public Mono<OutputModel> getNestedModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getNestedModelWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setNestedModelWithResponse
+     */
+    /**
+     * The setNestedModel operation.
+     *
+     * @param input Round-trip model with nested model properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with nested model properties on successful completion of {@link Mono}.
+     */
+    public Mono<RoundTripModel> setNestedModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setNestedModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }
