@@ -27,12 +27,12 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     @Override
-    protected boolean isConvenienceMethod(ClientMethod method) {
+    protected boolean isMethodIncluded(ClientMethod method) {
         return !isMethodAsync(method) && isMethodVisible(method);
     }
 
     @Override
-    protected boolean isConvenienceMethod(ConvenienceMethod method) {
+    protected boolean isMethodIncluded(ConvenienceMethod method) {
         return !isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod());
     }
 

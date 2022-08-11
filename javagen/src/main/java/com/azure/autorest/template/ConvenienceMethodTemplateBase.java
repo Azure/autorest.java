@@ -31,13 +31,13 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     }
 
     public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
-        if (!isConvenienceMethod(convenienceMethodObj)) {
+        if (!isMethodIncluded(convenienceMethodObj)) {
             return;
         }
 
         ClientMethod protocolMethod = convenienceMethodObj.getProtocolMethod();
         convenienceMethodObj.getConvenienceMethods().stream()
-                .filter(this::isConvenienceMethod)
+                .filter(this::isMethodIncluded)
                 .forEach(convenienceMethod -> {
                     // comments and javadoc
                     classBlock.blockComment("Generated convenience method for " + getMethodName(protocolMethod));
@@ -141,7 +141,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
      * @param method the convenience method.
      * @return Whether include the convenience method.
      */
-    protected abstract boolean isConvenienceMethod(ClientMethod method);
+    protected abstract boolean isMethodIncluded(ClientMethod method);
 
     /**
      * Whether the convenience/protocol method should be included.
@@ -149,7 +149,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
      * @param method the convenience/protocol method.
      * @return Whether include the convenience/protocol method.
      */
-    protected abstract boolean isConvenienceMethod(ConvenienceMethod method);
+    protected abstract boolean isMethodIncluded(ConvenienceMethod method);
 
     protected boolean isMethodAsync(ClientMethod method) {
         return method.getType().name().contains("Async");

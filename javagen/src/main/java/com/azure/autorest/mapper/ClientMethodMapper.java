@@ -123,9 +123,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private List<ClientMethod> createClientMethods(Operation operation, boolean isProtocolMethod) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        // protocol method will always generate full parameters
-        final boolean generateMethodOnlyRequiredParameter = settings.getRequiredParameterClientMethods() && !isProtocolMethod;
-
         Map<Request, List<ProxyMethod>> proxyMethodsMap = Mappers.getProxyMethodMapper().map(operation);
 
         List<ClientMethod> methods = new ArrayList<>();
@@ -346,14 +343,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             .name("requestOptions")
                             .location(RequestParameterLocation.NONE)
                             .isConstant(false)
-                            .isRequired(false)
+                            .isRequired(true)
                             .fromClient(false)
                             .annotations(Collections.emptyList())
                             .build();
                     parameters.add(requestOptions);
                 }
 
-                final boolean generateClientMethodWithOnlyRequiredParameters = generateMethodOnlyRequiredParameter && hasNonRequiredParameters(parameters);
+                final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(parameters);
 
                 builder.parameters(parameters)
                         .requiredNullableParameterExpressions(requiredParameterExpressions)
@@ -384,7 +381,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 operation.getExtensions().getXmsPageable().getItemName());
                         builder.methodPageDetails(details);
 
-                        if (!(!generateMethodOnlyRequiredParameter && settings.isContextClientMethodParameter()
+                        if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
                                 && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
                             methods.add(builder
                                     .returnValue(createPagingAsyncSinglePageReturnValue(operation, asyncRestResponseReturnType, syncReturnType))
@@ -595,7 +592,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 } else {
                     // WithResponseAsync, with required and optional parameters
-                    if (!(!generateMethodOnlyRequiredParameter && settings.isContextClientMethodParameter()
+                    if (!(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
                             && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))) {
 
                         methods.add(builder
