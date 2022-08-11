@@ -33,6 +33,7 @@ function generate {
 rm -rf src/main/
 rm -rf cadl-output/
 
+export GENERATE_MODELS=true
 export GENERATE_CONVENIENCE_METHODS=true
 
 # testserver
