@@ -128,8 +128,9 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     IType setterPropertyType = ClientModelUtil.isClientModel(property.getWireType()) ? new ClassType.Builder().packageName(((ClassType) property.getWireType()).getPackage()).name(((ClassType) property.getWireType()).getName() + "Patch").build() : property.getWireType();
+                    IType setterPropertyOptionType = new GenericType("com.azure.core.implementation", "Option", setterPropertyType);
                     classBlock.method(methodVisibility, null, String.format("%s %s(%s %s)",
-                                    patchClassNameWithBaseType, property.getSetterName(), setterPropertyType, property.getName()),
+                                    patchClassNameWithBaseType, property.getSetterName(), setterPropertyOptionType, property.getName()),
                             (methodBlock) -> {
                                 String expression;
                                 if (propertyClientType.equals(ArrayType.ByteArray)) {
@@ -142,9 +143,9 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                                                     (ifBlock) -> ifBlock.line("this.%s = Option.empty();", property.getName()))
                                             .elseBlock((elseBlock) -> {
                                                 String propertyConversion = propertyType.convertFromClientType(expression);
-                                                elseBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
+                                                elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
                                             });
-                                } else { // primitive type, skip null check
+                                } else {
                                     String propertyConversion = propertyType.convertFromClientType(expression);
                                     methodBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
                                 }
