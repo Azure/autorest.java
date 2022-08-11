@@ -32,6 +32,18 @@ Generated code will be at `./cadl-tests/cadl-ouput/java` folder.
 `GENERATE_CONVENIENCE_METHODS`: generate convenience methods for all operations. Default is `false`.
 `NAMESPACE`: the overriding namespace for the package.
 
+## Temporary Demonstration for Convenience Methods
+
+To enable generating convenience method for an operation or a group, adding `convenienceMethod` decorator to the operation of the interface in CADL.
+
+E.g.
+```typescript
+@convenienceMethod
+@route("/alertConfigs")
+interface AlertConfigs extends LifetimeOperations<AlertConfig, ListFilters> {
+}
+```
+
 ## Troubleshooting
 
 ### New version of `@cadl-lang/compiler` etc.
