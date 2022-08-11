@@ -310,6 +310,9 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else {
+                                // handle properties that do not contain hyphen in name
+                                actualValues.add(new NodeTuple(keyNode, extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);

@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
@@ -193,35 +194,34 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
-            if (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
-                    && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
-                    // add package-info models package only if the models package is not empty
-                    && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty())) {
-
-                String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-                if (!packageInfos.containsKey(modelsPackage)) {
-                    packageInfos.put(modelsPackage, new PackageInfo(
-                            modelsPackage,
-                            String.format("Package containing the data models for %s.\n%s", serviceClientName,
-                                    serviceClientDescription)));
-                }
+        final boolean hasModelsPackage = hasModelsPackage(codeModel, settings)
+                // models package is not same as implementation package
+                && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
+                // has classes in models
+                && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty());
+        if (hasModelsPackage) {
+            String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
+            if (!packageInfos.containsKey(modelsPackage)) {
+                packageInfos.put(modelsPackage, new PackageInfo(
+                        modelsPackage,
+                        String.format("Package containing the data models for %s.\n%s", serviceClientName,
+                                serviceClientDescription)));
             }
-            if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
-                    && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
-                String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-                if (!packageInfos.containsKey(customTypesPackage)) {
-                    packageInfos.put(customTypesPackage, new PackageInfo(
-                            customTypesPackage,
-                            String.format("Package containing classes for %s.\n%s", serviceClientName,
-                                    serviceClientDescription)));
-                }
+        }
+        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
+                && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
+            String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+            if (!packageInfos.containsKey(customTypesPackage)) {
+                packageInfos.put(customTypesPackage, new PackageInfo(
+                        customTypesPackage,
+                        String.format("Package containing classes for %s.\n%s", serviceClientName,
+                                serviceClientDescription)));
             }
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
 
         // module info
-        builder.moduleInfo(moduleInfo());
+        builder.moduleInfo(moduleInfo(hasModelsPackage));
 
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -433,7 +433,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .build();
     }
 
-    private static ModuleInfo moduleInfo() {
+    private static ModuleInfo moduleInfo(boolean hasModulesPackage) {
         // WARNING: Only tested for low level clients
         JavaSettings settings = JavaSettings.getInstance();
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
@@ -444,7 +444,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
 
-        if (settings.isGenerateModels()) {
+        if (hasModulesPackage) {
             // export if models is not in implementation
             final String implementationSubpackagePrefix = "implementation.";
             if (!CoreUtils.isNullOrEmpty(settings.getModelsSubpackage()) && !settings.getModelsSubpackage().startsWith(implementationSubpackagePrefix)) {
@@ -466,6 +466,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         return moduleInfo;
+    }
+
+    private static boolean hasModelsPackage(CodeModel codeModel, JavaSettings settings) {
+        return (!settings.isDataPlaneClient() || settings.isGenerateModels()    // not DPG, or DPG requires all models
+                // models in convenience methods
+                || (codeModel.getSchemas().getObjects().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))
+                || codeModel.getSchemas().getSealedChoices().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))
+                || codeModel.getSchemas().getChoices().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))))
+                // defined models package (it is defined by default)
+                && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty());
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {

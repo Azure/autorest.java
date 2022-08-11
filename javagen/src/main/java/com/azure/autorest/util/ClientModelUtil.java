@@ -81,25 +81,24 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient)
                     .methodGroupClient(methodGroupClient);
 
-            if (generateConvenienceMethods) {
-                final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-                codeModel.getOperationGroups().stream()
-                        .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
-                        .findAny()
-                        .ifPresent(og -> {
-                            // TODO: filter for the methods that requests convenience method
-                            og.getOperations().forEach(o -> {
-                                List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
-                                if (!cMethods.isEmpty()) {
-                                    String methodName = cMethods.iterator().next().getProxyMethod().getName();
-                                    methodGroupClient.getClientMethods().stream()
-                                            .filter(m -> methodName.equals(m.getProxyMethod().getName()))
-                                            .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
-                                }
-                            });
-                        });
-                builder.convenienceMethods(convenienceMethods);
-            }
+            final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
+            codeModel.getOperationGroups().stream()
+                    .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
+                    .findAny()
+                    .ifPresent(og -> {
+                        og.getOperations().stream()
+                                .filter(o -> generateConvenienceMethods || (o.getExtensions() != null && o.getExtensions().isConvenienceMethod()))
+                                .forEach(o -> {
+                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
+                                    if (!cMethods.isEmpty()) {
+                                        String methodName = cMethods.iterator().next().getProxyMethod().getName();
+                                        methodGroupClient.getClientMethods().stream()
+                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()))
+                                                .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
+                                    }
+                                });
+                    });
+            builder.convenienceMethods(convenienceMethods);
 
             if (count == 1) {
                 // if it is the only method group, use service client name as base.
