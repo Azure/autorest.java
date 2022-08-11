@@ -10,7 +10,6 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.util.ClientModelUtil;
 
 public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBase {
 

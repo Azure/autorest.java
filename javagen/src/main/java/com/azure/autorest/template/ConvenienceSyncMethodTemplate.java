@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 
