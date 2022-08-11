@@ -33,10 +33,16 @@ function generate {
 rm -rf src/main/
 rm -rf cadl-output/
 
-# testserver
-generate_remote https://raw.githubusercontent.com/Azure/autorest.testserver/dpg_cadl/cadl/dpg-update1.cadl
-
-for f in $(ls -1 ./cadl/*)
+# run local tests
+for f in $(find ./cadl/ -name "*.cadl")
 do
     generate $f
+done
+
+# run cadl ranch tests sources
+for f in $(find ./node_modules/@azure-tools/cadl-ranch-specs/http -name "*.cadl")
+do
+  if [[ $(realpath $f) == *"models"* || $(realpath $f) == *"hello"* ]]; then
+    generate $f
+  fi
 done
