@@ -19,10 +19,12 @@ model ResourceCollection is Page<Resource>;
 @route("/odata")
 interface OdataOp {
   op list(
-    @query select?: string,
-    @query expand?: string,
     @query filter?: string,
     @query orderby?: string,
-    @header maxpagesize?: string,
+    @query skip?: int32,
+    @query top?: int32,
+    @query maxpagesize?: int32,
+    @query select?: string[],
+    @query expand?: string[],
   ): ResourceCollection;
 }
