@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.inputbasic.models.InputModel;
 
 /** Initializes a new instance of the synchronous InputBasicClient type. */
 @ServiceClient(builder = InputBasicClientBuilder.class)
@@ -55,5 +57,46 @@ public final class InputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.getModelWithResponse(input, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @param input Input Model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void getModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        getModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @param input Input Model.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    public Response<Void> getModelWithResponse(InputModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions);
     }
 }

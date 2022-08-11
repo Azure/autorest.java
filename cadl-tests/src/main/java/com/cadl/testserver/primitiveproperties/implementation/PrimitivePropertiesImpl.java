@@ -162,60 +162,6 @@ public final class PrimitivePropertiesImpl {
      *
      * @param input Round-trip model with primitive properties to show serialization and deserialization of each.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return round-trip model with primitive properties to show serialization and deserialization of each along with
-     *     {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getModel(accept, input, requestOptions, context);
-    }
-
-    /**
-     * The getModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredString: String (Required)
-     *     requiredBytes: byte[] (Required)
-     *     requiredInt: long (Required)
-     *     requiredLong: long (Required)
-     *     requiredSafeInt: long (Required)
-     *     requiredFloat: double (Required)
-     *     requiredDouble: double (Required)
-     *     requiredBodyDateTime: OffsetDateTime (Required)
-     *     requiredDuration: Duration (Required)
-     *     requiredBoolean: boolean (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     requiredString: String (Required)
-     *     requiredBytes: byte[] (Required)
-     *     requiredInt: long (Required)
-     *     requiredLong: long (Required)
-     *     requiredSafeInt: long (Required)
-     *     requiredFloat: double (Required)
-     *     requiredDouble: double (Required)
-     *     requiredBodyDateTime: OffsetDateTime (Required)
-     *     requiredDuration: Duration (Required)
-     *     requiredBoolean: boolean (Required)
-     * }
-     * }</pre>
-     *
-     * @param input Round-trip model with primitive properties to show serialization and deserialization of each.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

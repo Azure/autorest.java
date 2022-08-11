@@ -16,6 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.testserver.enumpropertiesbasic.implementation.EnumPropertiesBasicsImpl;
+import com.cadl.testserver.enumpropertiesbasic.models.InputModel;
+import com.cadl.testserver.enumpropertiesbasic.models.OutputModel;
+import com.cadl.testserver.enumpropertiesbasic.models.RoundTripModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous EnumPropertiesBasicClient type. */
@@ -118,5 +121,67 @@ public final class EnumPropertiesBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setEnumPropertModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.setEnumPropertModelWithResponseAsync(input, requestOptions);
+    }
+
+    /*
+     * Generated convenience method for sendEnumPropertyModelWithResponse
+     */
+    /**
+     * The sendEnumPropertyModel operation.
+     *
+     * @param input Input model with enum properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    public Mono<Void> sendEnumPropertyModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return sendEnumPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+    }
+
+    /*
+     * Generated convenience method for getEnumPropertModelWithResponse
+     */
+    /**
+     * The getEnumPropertModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with enum properties on successful completion of {@link Mono}.
+     */
+    public Mono<OutputModel> getEnumPropertModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getEnumPropertModelWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setEnumPropertModelWithResponse
+     */
+    /**
+     * The setEnumPropertModel operation.
+     *
+     * @param input Round-trip model with enum properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with enum properties on successful completion of {@link Mono}.
+     */
+    public Mono<RoundTripModel> setEnumPropertModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setEnumPropertModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }

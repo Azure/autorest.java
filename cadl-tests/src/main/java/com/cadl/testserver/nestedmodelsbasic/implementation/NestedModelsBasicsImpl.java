@@ -182,52 +182,6 @@ public final class NestedModelsBasicsImpl {
      *
      * @param input Input model with nested model properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendNestedModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.sendNestedModel(accept, input, requestOptions, context);
-    }
-
-    /**
-     * The sendNestedModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     NestedInputModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     *     NestedSharedModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param input Input model with nested model properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -281,51 +235,6 @@ public final class NestedModelsBasicsImpl {
     public Mono<Response<BinaryData>> getNestedModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNestedModel(accept, requestOptions, context));
-    }
-
-    /**
-     * The getNestedModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     NestedOutputModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     *     NestedSharedModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with nested model properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getNestedModelWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getNestedModel(accept, requestOptions, context);
     }
 
     /**
@@ -440,80 +349,6 @@ public final class NestedModelsBasicsImpl {
     public Mono<Response<BinaryData>> setNestedModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.setNestedModel(accept, input, requestOptions, context));
-    }
-
-    /**
-     * The setNestedModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     NestedRoundTripModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     *     NestedSharedModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     NestedRoundTripModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     *     NestedSharedModel (Required): {
-     *         requiredString: String (Required)
-     *         requiredInt: long (Required)
-     *         requiredStringList (Required): [
-     *             String (Required)
-     *         ]
-     *         requiredIntList (Required): [
-     *             long (Required)
-     *         ]
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param input Round-trip model with nested model properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return round-trip model with nested model properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setNestedModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setNestedModel(accept, input, requestOptions, context);
     }
 
     /**

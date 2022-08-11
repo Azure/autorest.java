@@ -14,7 +14,10 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.outputbasic.models.OutputModel;
 
 /** Initializes a new instance of the synchronous OutputBasicClient type. */
 @ServiceClient(builder = OutputBasicClientBuilder.class)
@@ -54,5 +57,46 @@ public final class OutputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(RequestOptions requestOptions) {
         return this.client.getModelWithResponse(requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output Model.
+     */
+    public OutputModel getModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output Model along with {@link Response}.
+     */
+    public Response<OutputModel> getModelWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getModelWithResponse(requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
     }
 }

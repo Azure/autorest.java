@@ -14,7 +14,10 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.primitiveproperties.models.PrimitivePropertyModel;
 
 /** Initializes a new instance of the synchronous PrimitivePropertyClient type. */
 @ServiceClient(builder = PrimitivePropertyClientBuilder.class)
@@ -81,5 +84,53 @@ public final class PrimitivePropertyClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.getModelWithResponse(input, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @param input Round-trip model with primitive properties to show serialization and deserialization of each.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with primitive properties to show serialization and deserialization of each.
+     */
+    public PrimitivePropertyModel getModel(PrimitivePropertyModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .getValue()
+                .toObject(PrimitivePropertyModel.class);
+    }
+
+    /*
+     * Generated convenience method for getModelWithResponse
+     */
+    /**
+     * The getModel operation.
+     *
+     * @param input Round-trip model with primitive properties to show serialization and deserialization of each.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with primitive properties to show serialization and deserialization of each along with
+     *     {@link Response}.
+     */
+    public Response<PrimitivePropertyModel> getModelWithResponse(PrimitivePropertyModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                getModelWithResponse(BinaryData.fromObject(input), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(PrimitivePropertyModel.class));
     }
 }

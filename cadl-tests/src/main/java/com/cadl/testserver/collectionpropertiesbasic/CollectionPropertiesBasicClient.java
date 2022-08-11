@@ -14,7 +14,12 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.collectionpropertiesbasic.models.InputModel;
+import com.cadl.testserver.collectionpropertiesbasic.models.OutputModel;
+import com.cadl.testserver.collectionpropertiesbasic.models.RoundTripModel;
 
 /** Initializes a new instance of the synchronous CollectionPropertiesBasicClient type. */
 @ServiceClient(builder = CollectionPropertiesBasicClientBuilder.class)
@@ -131,5 +136,134 @@ public final class CollectionPropertiesBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setCollectionModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.setCollectionModelWithResponse(input, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for sendCollectionModelWithResponse
+     */
+    /**
+     * The sendCollectionModel operation.
+     *
+     * @param input Input model with collection properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void sendCollectionModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        sendCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for sendCollectionModelWithResponse
+     */
+    /**
+     * The sendCollectionModel operation.
+     *
+     * @param input Input model with collection properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    public Response<Void> sendCollectionModelWithResponse(InputModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return sendCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getCollectionModelWithResponse
+     */
+    /**
+     * The getCollectionModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with collection properties.
+     */
+    public OutputModel getCollectionModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getCollectionModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
+    }
+
+    /*
+     * Generated convenience method for getCollectionModelWithResponse
+     */
+    /**
+     * The getCollectionModel operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with collection properties along with {@link Response}.
+     */
+    public Response<OutputModel> getCollectionModelWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getCollectionModelWithResponse(requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setCollectionModelWithResponse
+     */
+    /**
+     * The setCollectionModel operation.
+     *
+     * @param input Round-trip model with collection properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with collection properties.
+     */
+    public RoundTripModel setCollectionModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .getValue()
+                .toObject(RoundTripModel.class);
+    }
+
+    /*
+     * Generated convenience method for setCollectionModelWithResponse
+     */
+    /**
+     * The setCollectionModel operation.
+     *
+     * @param input Round-trip model with collection properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with collection properties along with {@link Response}.
+     */
+    public Response<RoundTripModel> setCollectionModelWithResponse(RoundTripModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setCollectionModelWithResponse(BinaryData.fromObject(input), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }

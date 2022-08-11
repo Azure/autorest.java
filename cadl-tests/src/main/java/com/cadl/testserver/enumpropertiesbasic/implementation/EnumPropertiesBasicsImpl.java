@@ -147,34 +147,6 @@ public final class EnumPropertiesBasicsImpl {
      *
      * @param input Input model with enum properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendEnumPropertyModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.sendEnumPropertyModel(accept, input, requestOptions, context);
-    }
-
-    /**
-     * The sendEnumPropertyModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     Day: String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday) (Required)
-     *     Language: String(English/Spanish/Mandarin/Undocumented) (Required)
-     * }
-     * }</pre>
-     *
-     * @param input Input model with enum properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -209,33 +181,6 @@ public final class EnumPropertiesBasicsImpl {
     public Mono<Response<BinaryData>> getEnumPropertModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEnumPropertModel(accept, requestOptions, context));
-    }
-
-    /**
-     * The getEnumPropertModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     Day: String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday) (Required)
-     *     Language: String(English/Spanish/Mandarin/Undocumented) (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with enum properties along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getEnumPropertModelWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getEnumPropertModel(accept, requestOptions, context);
     }
 
     /**
@@ -297,44 +242,6 @@ public final class EnumPropertiesBasicsImpl {
             BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.setEnumPropertModel(accept, input, requestOptions, context));
-    }
-
-    /**
-     * The setEnumPropertModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     Day: String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday) (Required)
-     *     Language: String(English/Spanish/Mandarin/Undocumented) (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     Day: String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday) (Required)
-     *     Language: String(English/Spanish/Mandarin/Undocumented) (Required)
-     * }
-     * }</pre>
-     *
-     * @param input Round-trip model with enum properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return round-trip model with enum properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setEnumPropertModelWithResponseAsync(
-            BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setEnumPropertModel(accept, input, requestOptions, context);
     }
 
     /**

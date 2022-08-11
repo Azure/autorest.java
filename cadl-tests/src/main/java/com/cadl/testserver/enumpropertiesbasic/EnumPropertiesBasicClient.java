@@ -14,7 +14,12 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.testserver.enumpropertiesbasic.models.InputModel;
+import com.cadl.testserver.enumpropertiesbasic.models.OutputModel;
+import com.cadl.testserver.enumpropertiesbasic.models.RoundTripModel;
 
 /** Initializes a new instance of the synchronous EnumPropertiesBasicClient type. */
 @ServiceClient(builder = EnumPropertiesBasicClientBuilder.class)
@@ -115,5 +120,134 @@ public final class EnumPropertiesBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setEnumPropertModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.setEnumPropertModelWithResponse(input, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for sendEnumPropertyModelWithResponse
+     */
+    /**
+     * The sendEnumPropertyModel operation.
+     *
+     * @param input Input model with enum properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    public void sendEnumPropertyModel(InputModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        sendEnumPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for sendEnumPropertyModelWithResponse
+     */
+    /**
+     * The sendEnumPropertyModel operation.
+     *
+     * @param input Input model with enum properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    public Response<Void> sendEnumPropertyModelWithResponse(InputModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return sendEnumPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getEnumPropertModelWithResponse
+     */
+    /**
+     * The getEnumPropertModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with enum properties.
+     */
+    public OutputModel getEnumPropertModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getEnumPropertModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
+    }
+
+    /*
+     * Generated convenience method for getEnumPropertModelWithResponse
+     */
+    /**
+     * The getEnumPropertModel operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return output model with enum properties along with {@link Response}.
+     */
+    public Response<OutputModel> getEnumPropertModelWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getEnumPropertModelWithResponse(requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
+    }
+
+    /*
+     * Generated convenience method for setEnumPropertModelWithResponse
+     */
+    /**
+     * The setEnumPropertModel operation.
+     *
+     * @param input Round-trip model with enum properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with enum properties.
+     */
+    public RoundTripModel setEnumPropertModel(RoundTripModel input) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setEnumPropertModelWithResponse(BinaryData.fromObject(input), requestOptions)
+                .getValue()
+                .toObject(RoundTripModel.class);
+    }
+
+    /*
+     * Generated convenience method for setEnumPropertModelWithResponse
+     */
+    /**
+     * The setEnumPropertModel operation.
+     *
+     * @param input Round-trip model with enum properties.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return round-trip model with enum properties along with {@link Response}.
+     */
+    public Response<RoundTripModel> setEnumPropertModelWithResponse(RoundTripModel input, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setEnumPropertModelWithResponse(BinaryData.fromObject(input), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }
