@@ -33,12 +33,12 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     @Override
     protected boolean isConvenienceMethod(ConvenienceMethod method) {
-        return !isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod());
+        return !isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod());
     }
 
     @Override
     protected void writeInvocationAndConversion(
-            ClientMethod convenienceMethod, ClientMethod clientMethod,
+            ClientMethod convenienceMethod, ClientMethod protocolMethod,
             String invocationExpression,
             JavaBlock methodBlock) {
 
@@ -51,12 +51,12 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                 && !(responseBodyType.asNullable() == ClassType.Void || responseBodyType == ClassType.BinaryData)) {
 
             String statement = String.format("%1$s(%2$s)",
-                    getMethodName(clientMethod),
+                    getMethodName(protocolMethod),
                     invocationExpression);
 
             methodBlock.line(String.format(
                     "%1$s protocolMethodResponse = %2$s;",
-                    clientMethod.getReturnValue().getType(), statement));
+                    protocolMethod.getReturnValue().getType(), statement));
             String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()");
 
             if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
@@ -69,7 +69,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             }
         } else {
             String statement = String.format("%1$s(%2$s)%3$s",
-                    getMethodName(clientMethod),
+                    getMethodName(protocolMethod),
                     invocationExpression,
                     convertFromResponse);
             statement = expressionConvertFromBinaryData(responseBodyType, statement);

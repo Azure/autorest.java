@@ -8,16 +8,16 @@ import java.util.Objects;
 
 public class ConvenienceMethod {
 
-    private final ClientMethod clientMethod;
+    private final ClientMethod protocolMethod;
     private final List<ClientMethod> convenienceMethods;
 
     public ConvenienceMethod(ClientMethod clientMethod, List<ClientMethod> convenienceMethods) {
-        this.clientMethod = clientMethod;
+        this.protocolMethod = clientMethod;
         this.convenienceMethods = convenienceMethods;
     }
 
-    public ClientMethod getClientMethod() {
-        return clientMethod;
+    public ClientMethod getProtocolMethod() {
+        return protocolMethod;
     }
 
     public List<ClientMethod> getConvenienceMethods() {
@@ -29,11 +29,11 @@ public class ConvenienceMethod {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ConvenienceMethod that = (ConvenienceMethod) o;
-        return clientMethod.equals(that.clientMethod);
+        return protocolMethod.equals(that.protocolMethod);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientMethod);
+        return Objects.hash(protocolMethod);
     }
 }

@@ -30,12 +30,12 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     @Override
     protected boolean isConvenienceMethod(ConvenienceMethod method) {
-        return isMethodAsync(method.getClientMethod()) && isMethodVisible(method.getClientMethod())
-                && method.getClientMethod().getMethodParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
+        return isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod())
+                && method.getProtocolMethod().getMethodParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
     }
 
     protected void writeInvocationAndConversion(
-            ClientMethod convenienceMethod, ClientMethod clientMethod,
+            ClientMethod convenienceMethod, ClientMethod protocolMethod,
             String invocationExpression,
             JavaBlock methodBlock) {
 
@@ -45,7 +45,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
         methodBlock.methodReturn(
                 String.format("%1$s(%2$s).map(Response::getValue)%3$s",
-                        getMethodName(clientMethod),
+                        getMethodName(protocolMethod),
                         invocationExpression,
                         returnTypeConversionExpression));
     }

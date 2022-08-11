@@ -35,35 +35,40 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
             return;
         }
 
-        ClientMethod clientMethod = convenienceMethodObj.getClientMethod();
+        ClientMethod protocolMethod = convenienceMethodObj.getProtocolMethod();
         convenienceMethodObj.getConvenienceMethods().stream()
                 .filter(this::isConvenienceMethod)
                 .forEach(convenienceMethod -> {
-                    classBlock.blockComment("Generated convenience method for " + getMethodName(clientMethod));
+                    // comments and javadoc
+                    classBlock.blockComment("Generated convenience method for " + getMethodName(protocolMethod));
 
                     classBlock.javadocComment(comment -> {
                         ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
                     });
 
+                    // convenience method
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
                     classBlock.publicMethod(methodDeclaration, methodBlock -> {
                         // RequestOptions
                         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
+                        // matched parameters from convenience method to protocol method
                         Map<MethodParameter, MethodParameter> parametersMap =
-                                findParametersForConvenienceMethod(convenienceMethod, clientMethod);
+                                findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
                         Map<String, String> parameterExpressionsMap = new HashMap<>();
                         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
                             MethodParameter parameter = entry.getKey();
-                            MethodParameter clientParameter = entry.getValue();
+                            MethodParameter protocolParameter = entry.getValue();
 
                             if (parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
                                 // Context
                                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
-                            } else if (clientParameter != null) {
-                                String expression = expressionConvertToType(parameter.getName(), parameter, clientParameter);
-                                parameterExpressionsMap.put(clientParameter.getName(), expression);
+                            } else if (protocolParameter != null) {
+                                // protocol method parameter exists
+                                String expression = expressionConvertToType(parameter.getName(), parameter, protocolParameter);
+                                parameterExpressionsMap.put(protocolParameter.getName(), expression);
                             } else {
+                                // protocol method parameter not exist, set the parameter via RequestOptions
                                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
                                     case HEADER: {
                                         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
@@ -113,7 +118,8 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                             }
                         }
 
-                        String invocationExpression = clientMethod.getMethodInputParameters().stream()
+                        // invocation with protocol method parameters and RequestOptions
+                        String invocationExpression = protocolMethod.getMethodInputParameters().stream()
                                 .map(p -> {
                                     String expression = parameterExpressionsMap.get(p.getName());
                                     if (expression == null) {
@@ -123,7 +129,8 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                                 })
                                 .collect(Collectors.joining(", "));
 
-                        writeInvocationAndConversion(convenienceMethod, clientMethod, invocationExpression, methodBlock);
+                        // write the invocation of protocol method, and related type conversion
+                        writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock);
                     });
                 });
     }
@@ -137,10 +144,10 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     protected abstract boolean isConvenienceMethod(ClientMethod method);
 
     /**
-     * Whether the convenience method should be included.
+     * Whether the convenience/protocol method should be included.
      *
-     * @param method the client method.
-     * @return Whether include the convenience method.
+     * @param method the convenience/protocol method.
+     * @return Whether include the convenience/protocol method.
      */
     protected abstract boolean isConvenienceMethod(ConvenienceMethod method);
 
@@ -167,12 +174,12 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
      * Write the code of the method invocation of client method, and the conversion of parameters and return value.
      *
      * @param convenienceMethod the convenience method.
-     * @param clientMethod the client method.
+     * @param protocolMethod the protocol method.
      * @param invocationExpression the prepared expression of invocation on client method.
      * @param methodBlock the code block.
      */
     protected abstract void writeInvocationAndConversion(
-            ClientMethod convenienceMethod, ClientMethod clientMethod,
+            ClientMethod convenienceMethod, ClientMethod protocolMethod,
             String invocationExpression,
             JavaBlock methodBlock);
 
@@ -215,10 +222,10 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     }
 
     private static Map<MethodParameter, MethodParameter> findParametersForConvenienceMethod(
-            ClientMethod convenienceMethod, ClientMethod clientMethod) {
+            ClientMethod convenienceMethod, ClientMethod protocolMethod) {
         Map<MethodParameter, MethodParameter> parameterMap = new LinkedHashMap<>();
         List<MethodParameter> convenienceParameters = getParameters(convenienceMethod, true);
-        Map<String, MethodParameter> clientParameters = getParameters(clientMethod, false).stream()
+        Map<String, MethodParameter> clientParameters = getParameters(protocolMethod, false).stream()
                 .collect(Collectors.toMap(MethodParameter::getSerializedName, Function.identity()));
         for (MethodParameter convenienceParameter : convenienceParameters) {
             String name = convenienceParameter.getSerializedName();
@@ -227,11 +234,11 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
         return parameterMap;
     }
 
-    private static List<MethodParameter> getParameters(ClientMethod clientMethod, boolean useAllParameters) {
-        List<ProxyMethodParameter> proxyMethodParameters = useAllParameters ? clientMethod.getProxyMethod().getAllParameters() : clientMethod.getProxyMethod().getParameters();
+    private static List<MethodParameter> getParameters(ClientMethod method, boolean useAllParameters) {
+        List<ProxyMethodParameter> proxyMethodParameters = useAllParameters ? method.getProxyMethod().getAllParameters() : method.getProxyMethod().getParameters();
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = proxyMethodParameters.stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
-        return clientMethod.getMethodInputParameters().stream()
+        return method.getMethodInputParameters().stream()
                 .filter(p -> !p.getIsConstant() && !p.getFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
