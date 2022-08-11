@@ -34,7 +34,7 @@ Generated code will be at `./cadl-tests/cadl-ouput/java` folder.
 
 ## Temporary Demonstration for Convenience Methods
 
-To enable generating convenience method for an operation or a group, adding `convenienceMethod` decorator to the operation of the interface in CADL.
+To enable generating convenience method for an operation or a group, add `convenienceMethod` decorator to the operation of the interface in CADL.
 
 E.g.
 ```typescript
