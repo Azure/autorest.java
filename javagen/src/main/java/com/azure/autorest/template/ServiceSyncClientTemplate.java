@@ -145,7 +145,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
 
     syncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
 
-    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), this.clientReference());
+    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), serviceClient, this.clientReference());
   }
 
   /**
@@ -179,7 +179,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   private static void addImportsToConvenienceMethods(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
     JavaSettings settings = JavaSettings.getInstance();
     convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
-            .forEach(m -> m.addImportsTo(imports, false, settings));
+        .forEach(m -> m.addImportsTo(imports, false, settings));
 
     ClassType.BinaryData.addImportsTo(imports, false);
     ClassType.RequestOptions.addImportsTo(imports, false);

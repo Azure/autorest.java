@@ -124,7 +124,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
 
       asyncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
 
-      ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), "this.serviceClient");
+      ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), serviceClient, "this.serviceClient");
     });
   }
 
@@ -146,7 +146,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
    * @param clientBuilder the client builder.
    * @param clientReference the code for client reference. E.g. "this.serviceClient" or "this.client".
    */
-  static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, String clientReference) {
+  static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, ServiceClient serviceClient, String clientReference) {
     // expose "getEndpoint" as public, as companion to "sendRequest" method
     if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
       clientBuilder.getBuilderTraits().stream()
@@ -160,7 +160,14 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
             classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
                 serviceClientProperty.getType(), methodName), function -> {
-              function.methodReturn(String.format("%1$s.%2$s()", clientReference, methodName));
+              String endpointInvocation = String.format("%1$s.%2$s()", clientReference, methodName);
+              String baseUrl = serviceClient.getBaseUrl();
+              function.methodReturn(
+                  // if we get endpoint from EndpointTrait, it likely has serialized name of either "endpoint" or "Endpoint"
+                  String.format("%1$s.replace(%2$s, %3$s)",
+                      ClassType.String.defaultValueExpression(baseUrl),
+                      ClassType.String.defaultValueExpression('{' + serviceClientProperty.getRequestParameterName() + '}'),
+                      endpointInvocation));
             });
           });
     }
