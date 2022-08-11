@@ -7,7 +7,7 @@ package fixtures.streamstyleserialization.models;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for GoblinSharkColor. */
+/** Colors possible. */
 public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColor> {
     /** Static value pink for GoblinSharkColor. */
     public static final GoblinSharkColor PINK = fromString("pink");

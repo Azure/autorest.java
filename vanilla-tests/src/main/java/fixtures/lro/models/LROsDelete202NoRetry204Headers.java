@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LROsDelete202NoRetry204Headers model. */
@@ -21,6 +22,17 @@ public final class LROsDelete202NoRetry204Headers {
      */
     @JsonProperty(value = "Location")
     private String location;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of LROsDelete202NoRetry204Headers class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public LROsDelete202NoRetry204Headers(HttpHeaders rawHeaders) {
+        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        this.location = rawHeaders.getValue("Location");
+    }
 
     /**
      * Get the retryAfter property: The Retry-After property.

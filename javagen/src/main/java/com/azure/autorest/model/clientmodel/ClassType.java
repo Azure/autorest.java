@@ -309,6 +309,13 @@ public class ClassType implements IType {
         .knownClass(com.azure.core.exception.TooManyRedirectsException.class)
         .build();
 
+    public static final ClassType ResponseError = new Builder()
+            .knownClass(com.azure.core.models.ResponseError.class)
+            .build();
+    public static final ClassType ResponseInnerError = new Builder()
+            .packageName("com.azure.core.models").name("ResponseInnerError")
+            .build();
+
     private final String fullName;
     private final String packageName;
     private final String name;

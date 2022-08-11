@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HeadersResponseExistingKeyHeaders model. */
@@ -15,6 +16,16 @@ public final class HeadersResponseExistingKeyHeaders {
      */
     @JsonProperty(value = "User-Agent")
     private String userAgent;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseExistingKeyHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseExistingKeyHeaders(HttpHeaders rawHeaders) {
+        this.userAgent = rawHeaders.getValue("User-Agent");
+    }
 
     /**
      * Get the userAgent property: The User-Agent property.

@@ -1,0 +1,112 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '*'
+    exclude:
+      - 'fluent*'
+
+jobs:
+  - job: Build
+
+    variables:
+      JavaVersion: 1.8
+      NodeVersion: '16.x'
+
+    pool:
+      name: "azsdk-pool-mms-ubuntu-2004-general"
+      vmImage: "MMSUbuntu20.04"
+
+    steps:
+      - task: NodeTool@0
+        displayName: 'Install Node.js $(NodeVersion)'
+        inputs:
+          versionSpec: '$(NodeVersion)'
+
+      - task: Maven@3
+        retryCountOnTaskFailure: 3
+        displayName: 'Build JAR'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean verify package install'
+          options: '-P local,cadl -T 1C --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: Npm@1
+        displayName: 'Install Dependencies for CADL Java'
+        inputs:
+          command: install
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Build CADL Java'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Lint CADL Java'
+        inputs:
+          command: custom
+          customCommand: run lint
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Pack CADL Java'
+        inputs:
+          command: custom
+          customCommand: pack
+          workingDir: ./cadl-extension
+
+      - script: |
+          npm install -g @cadl-lang/compiler
+        displayName: 'Install CADL'
+
+      - script: |
+          bash ./generate.sh
+        displayName: 'Generate Code'
+        workingDirectory: ./cadl-tests
+
+      - script: |
+          git status
+          git diff
+        displayName: 'Git Diff'
+
+      - script: |
+          [ -z "`git status --porcelain`" ]
+        displayName: 'Check no Diff'
+
+      - task: Npm@1
+        displayName: 'Install Testserver'
+        inputs:
+          command: install
+
+      - script: |
+          npm run testserver-run &
+        displayName: 'Start Testserver'
+
+      - task: Maven@3
+        displayName: 'Run CADL Tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-PtestCadl -pl cadl-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - script: |
+          npm run testserver-stop
+        displayName: 'Stop Testserver'

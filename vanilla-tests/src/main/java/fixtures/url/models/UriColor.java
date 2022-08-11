@@ -45,6 +45,7 @@ public enum UriColor {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

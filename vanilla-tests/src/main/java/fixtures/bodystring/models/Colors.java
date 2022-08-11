@@ -7,7 +7,7 @@ package fixtures.bodystring.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for Colors. */
+/** Referenced Color Enum Description. */
 public enum Colors {
     /** Enum value red color. */
     RED_COLOR("red color"),
@@ -45,6 +45,7 @@ public enum Colors {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

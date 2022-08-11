@@ -45,6 +45,7 @@ public enum FooEnum {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

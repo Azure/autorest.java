@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LrosaDsPost202NoLocationHeaders model. */
@@ -21,6 +22,17 @@ public final class LrosaDsPost202NoLocationHeaders {
      */
     @JsonProperty(value = "Location")
     private String location;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of LrosaDsPost202NoLocationHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public LrosaDsPost202NoLocationHeaders(HttpHeaders rawHeaders) {
+        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        this.location = rawHeaders.getValue("Location");
+    }
 
     /**
      * Get the retryAfter property: The Retry-After property.

@@ -11,11 +11,13 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -23,9 +25,12 @@ import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -202,6 +207,51 @@ public class SchemaUtil {
             }
         }
         return returnType;
+    }
+
+    /**
+     * Maps CADL model to model from external packages.
+     *
+     * @param compositeType the CADL model.
+     * @return the model from external packages, if available.
+     */
+    public static Optional<ClassType> mapExternalModel(ObjectSchema compositeType) {
+        // For now, the external packages is the azure-core
+
+        ClassType classType = null;
+        if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
+            String namespace = compositeType.getLanguage().getDefault().getNamespace();
+            String name = compositeType.getLanguage().getDefault().getName();
+
+            if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
+                if ("Azure.Core.Operations".equals(namespace)) {
+                    // https://github.com/Azure/cadl-azure/blob/main/packages/cadl-azure-core/lib/operations.cadl
+                    if ("Error".equals(name)) {
+                        classType = ClassType.ResponseError;
+                    } else if ("InnerError".equals(name)) {
+                        // InnerError is not public, but usually it is only referenced from Error
+                        classType = ClassType.ResponseInnerError;
+                    }
+                    // ErrorResponse is not available
+                }
+            }
+        }
+        return Optional.ofNullable(classType);
+    }
+
+    /**
+     * Maps set of SchemaContext to set of ImplementationDetails.Usage.
+     *
+     * @param schemaContexts the set of SchemaContext.
+     * @return the set of ImplementationDetails.Usage.
+     */
+    public static Set<ImplementationDetails.Usage> mapSchemaContext(Set<SchemaContext> schemaContexts) {
+        if (schemaContexts == null) {
+            return Collections.emptySet();
+        }
+        return schemaContexts.stream()
+                .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
+                .collect(Collectors.toSet());
     }
 
     private static boolean containsBinaryResponse(Operation operation) {

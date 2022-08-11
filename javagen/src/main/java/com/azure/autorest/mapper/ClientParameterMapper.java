@@ -5,7 +5,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -29,6 +28,10 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
 
     @Override
     public ClientMethodParameter map(Parameter parameter) {
+        return map(parameter, JavaSettings.getInstance().isDataPlaneClient());
+    }
+
+    public ClientMethodParameter map(Parameter parameter, boolean isProtocolMethod) {
         String name = parameter.getOriginalParameter() != null && parameter.getLanguage().getJava().getName().equals(parameter.getOriginalParameter().getLanguage().getJava().getName())
                 ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())
                 : parameter.getLanguage().getJava().getName();
@@ -49,7 +52,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.rawType(wireType);
 
-        if (settings.isDataPlaneClient()) {
+        if (isProtocolMethod) {
             wireType = SchemaUtil.removeModelFromParameter(parameter.getProtocol().getHttp().getIn(), wireType);
         }
         builder.wireType(wireType);
@@ -66,27 +69,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.isConstant(isConstant).defaultValue(defaultValue);
 
-        String description = null;
-        // parameter description
-        if (parameter.getLanguage() != null) {
-            description = parameter.getLanguage().getDefault().getDescription();
-        }
-        // fallback to parameter schema description
-        if (description == null || description.isEmpty()) {
-            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-                description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            }
-        }
-        // fallback to dummy description
-        if (description == null || description.isEmpty()) {
-            description = String.format("The %s parameter", name);
-        }
-        // add allowed enum values
-        if (settings.isDataPlaneClient() && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
-            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
-        }
-
-        builder.description(description);
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
         return builder.build();
     }
 }

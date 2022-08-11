@@ -924,7 +924,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
             function.decreaseIndent();
         });
     }
@@ -944,7 +944,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
             function.decreaseIndent();
         });
     }

@@ -1,0 +1,25 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core.Operations;
+
+@serviceTitle("JsonMergePatch")
+@serviceVersion("1.0.0")
+namespace Cadl.Patch;
+
+model Resource {
+  @visibility("read")
+  name: string;
+
+  description?: string;
+}
+
+@route("/patch")
+interface Patch {
+  @put
+  op create(@path name: string, @body body: Resource): OkResponse<Resource> | ErrorResponse;
+
+  @patch
+  op update(@header("content-type") contentType: "application/merge-patch+json", @path name: string, @body body: Resource): OkResponse<Resource> | ErrorResponse;
+}

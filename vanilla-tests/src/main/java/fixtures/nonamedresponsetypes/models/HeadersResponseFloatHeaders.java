@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HeadersResponseFloatHeaders model. */
@@ -15,6 +16,16 @@ public final class HeadersResponseFloatHeaders {
      */
     @JsonProperty(value = "value")
     private Float value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseFloatHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseFloatHeaders(HttpHeaders rawHeaders) {
+        this.value = Float.parseFloat(rawHeaders.getValue("value"));
+    }
 
     /**
      * Get the value property: The value property.

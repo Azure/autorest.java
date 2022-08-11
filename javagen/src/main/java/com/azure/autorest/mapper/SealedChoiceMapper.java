@@ -10,7 +10,10 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,13 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             }
             String enumPackage = settings.getPackage(enumSubpackage);
 
+            String summary = enumType.getSummary();
+            String description = enumType.getLanguage().getJava() == null ? null : enumType.getLanguage().getJava().getDescription();
+            description = SchemaUtil.mergeSummaryWithDescription(summary, description);
+            if (CoreUtils.isNullOrEmpty(description)) {
+                description = "Defines values for " + enumTypeName + ".";
+            }
+
             List<ClientEnumValue> enumValues = new ArrayList<>();
             for (ChoiceValue enumValue : enumType.getChoices()) {
                 String enumName = enumValue.getValue();
@@ -77,9 +87,13 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             return new EnumType.Builder()
                 .packageName(enumPackage)
                 .name(enumTypeName)
+                .description(description)
                 .expandable(false)
                 .values(enumValues)
                 .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
+                .implementationDetails(new ImplementationDetails.Builder()
+                    .usages(SchemaUtil.mapSchemaContext(enumType.getUsage()))
+                    .build())
                 .build();
         }
     }

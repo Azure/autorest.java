@@ -13,3 +13,7 @@
 
 # protocol
 /protocol*                  @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
+
+# cadl
+/cadl-extension             @srnagar @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
+/cadl-tests                 @weidongxu-microsoft @haolingdong-msft @XiaofeiCao

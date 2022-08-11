@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
                 constructorBlock.line("super(message, response, value);");
             });
 
+            classBlock.javadocComment(JavaJavadocComment::inheritDoc);
             classBlock.annotation("Override");
             classBlock.publicMethod(String.format("%1$s getValue()", exception.getErrorName()), (methodBlock) ->
             {

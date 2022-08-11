@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
@@ -16,6 +17,18 @@ public final class HeadersResponseDurationHeaders {
      */
     @JsonProperty(value = "value")
     private Duration value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseDurationHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseDurationHeaders(HttpHeaders rawHeaders) {
+        if (rawHeaders.getValue("value") != null) {
+            this.value = Duration.parse(rawHeaders.getValue("value"));
+        }
+    }
 
     /**
      * Get the value property: The value property.

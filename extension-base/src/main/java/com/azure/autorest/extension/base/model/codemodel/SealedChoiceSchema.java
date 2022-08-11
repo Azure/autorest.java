@@ -26,6 +26,7 @@ public class SealedChoiceSchema extends ValueSchema {
      * 
      */
     private List<ChoiceValue> choices = new ArrayList<ChoiceValue>();
+    private String summary;
 
     /**
      * a Schema that represents a string value
@@ -61,6 +62,16 @@ public class SealedChoiceSchema extends ValueSchema {
      */
     public void setChoices(List<ChoiceValue> choices) {
         this.choices = choices;
+    }
+
+    @Override
+    public String getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     @Override

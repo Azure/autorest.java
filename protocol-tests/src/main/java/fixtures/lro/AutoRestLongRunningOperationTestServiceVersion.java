@@ -17,6 +17,7 @@ public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVer
         this.version = version;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getVersion() {
         return this.version;

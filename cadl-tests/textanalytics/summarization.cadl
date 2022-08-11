@@ -1,0 +1,42 @@
+import "./lib.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+model ExtractiveSummarizationLROTask extends LROTask<"ExtractiveSummarization", ExtractiveSummarizationTaskParameters> {}
+model ExtractiveSummarizationLROResult extends LROTaskResult<"ExtractiveSummarizationLROResults", ExtractiveSummarizationResult> {}
+
+@doc("Supported parameters for an Extractive Summarization task.")
+model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+  sentenceCount?: int32 = 3;
+  sortBy?: ExtractiveSummarizationSortingCriteria;
+}
+
+model ExtractiveSummarizationResult is PreBuiltResult<ExtractiveSummaryDocumentResult> {}
+model ExtractiveSummaryDocumentResult is DocumentResult {
+  sentences: ExtractedSummarySentence[];
+}
+
+@knownValues(ExtractiveSummarizationSortingCriteriaKV)
+model ExtractiveSummarizationSortingCriteria is string {}
+enum ExtractiveSummarizationSortingCriteriaKV {
+  @doc("Indicates that results should be sorted in order of appearance in the text.")
+  Offset,
+
+  @doc("Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.")
+  Rank,
+}
+
+model ExtractedSummarySentence {
+  @doc("The extracted sentence text.")
+  text: string;
+
+  @doc("A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance.")
+  rankScore: float64;
+
+  @doc("The sentence offset from the start of the document, based on the value of the parameter StringIndexType.")
+  offset: int32;
+
+  @doc("The length of the sentence.")
+  length: int32;
+}

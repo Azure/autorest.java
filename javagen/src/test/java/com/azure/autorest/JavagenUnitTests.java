@@ -40,7 +40,7 @@ public class JavagenUnitTests {
 
         CodeModel codeModel = javagen.parseCodeModel(fileName);
         Client client = Mappers.getClientMapper().map(codeModel);
-        JavaPackage javaPackage = javagen.writeToTemplates(JavaSettings.getInstance(), codeModel, client);
+        JavaPackage javaPackage = javagen.writeToTemplates(codeModel, client, JavaSettings.getInstance());
 
         System.out.println(javaPackage.getJavaFiles().size());
     }

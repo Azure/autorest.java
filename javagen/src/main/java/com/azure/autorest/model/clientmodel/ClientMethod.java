@@ -93,7 +93,7 @@ public class ClientMethod {
 
     private JavaVisibility methodVisibility;
 
-    private boolean implementationOnly = false;
+    private final ImplementationDetails implementationDetails;
 
     private MethodPollingDetails methodPollingDetails;
 
@@ -124,7 +124,7 @@ public class ClientMethod {
                            boolean isGroupedParameterRequired, String groupedParameterTypeName,
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
-                           JavaVisibility methodVisibility, boolean implementationOnly,
+                           JavaVisibility methodVisibility, ImplementationDetails implementationDetails,
                            MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         this.description = description;
         this.returnValue = returnValue;
@@ -141,7 +141,7 @@ public class ClientMethod {
         this.methodPageDetails = methodPageDetails;
         this.methodTransformationDetails = methodTransformationDetails;
         this.methodVisibility = methodVisibility;
-        this.implementationOnly = implementationOnly;
+        this.implementationDetails = implementationDetails;
         this.methodPollingDetails = methodPollingDetails;
         this.externalDocumentation = externalDocumentation;
     }
@@ -153,7 +153,6 @@ public class ClientMethod {
         ClientMethod that = (ClientMethod) o;
         return onlyRequiredParameters == that.onlyRequiredParameters
                 && isGroupedParameterRequired == that.isGroupedParameterRequired
-                && implementationOnly == that.implementationOnly
                 && Objects.equals(returnValue.getType(), that.returnValue.getType())
                 && Objects.equals(name, that.name)
                 && Objects.equals(getParametersDeclaration(), that.getParametersDeclaration())
@@ -168,7 +167,7 @@ public class ClientMethod {
     public int hashCode() {
         return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
                 requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
-                methodTransformationDetails, methodVisibility, implementationOnly);
+                methodTransformationDetails, methodVisibility);
     }
 
     public final String getDescription() {
@@ -325,8 +324,12 @@ public class ClientMethod {
         return methodVisibility;
     }
 
+    public ImplementationDetails getImplementationDetails() {
+        return implementationDetails;
+    }
+
     public boolean isImplementationOnly() {
-        return implementationOnly;
+        return implementationDetails != null && implementationDetails.isImplementationOnly();
     }
 
     public MethodPollingDetails getMethodPollingDetails() {
@@ -479,7 +482,7 @@ public class ClientMethod {
         protected MethodPageDetails methodPageDetails;
         protected List<MethodTransformationDetail> methodTransformationDetails;
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
-        protected boolean implementationOnly = false;
+        protected ImplementationDetails implementationDetails;
         protected MethodPollingDetails methodPollingDetails;
         protected ExternalDocumentation externalDocumentation;
 
@@ -644,12 +647,12 @@ public class ClientMethod {
         }
 
         /**
-         * Sets whether the method is only in implementation.
-         * @param implementationOnly whether the method is only in implementation
+         * Sets the implementation details for the method.
+         * @param implementationDetails the implementation details.
          * @return the Builder itself
          */
-        public Builder implementationOnly(boolean implementationOnly) {
-            this.implementationOnly = implementationOnly;
+        public Builder implementationDetails(ImplementationDetails implementationDetails) {
+            this.implementationDetails = implementationDetails;
             return this;
         }
 
@@ -683,7 +686,7 @@ public class ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
-                    implementationOnly,
+                    implementationDetails,
                     methodPollingDetails,
                     externalDocumentation);
         }

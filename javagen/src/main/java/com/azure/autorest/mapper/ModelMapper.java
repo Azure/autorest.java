@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -59,12 +60,15 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || !isPredefinedModel(modelType))) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && !isPredefinedModel(modelType)) {
             ClientModel.Builder builder = createModelBuilder()
                     .name(modelName)
                     .packageName(modelType.getPackage())
                     .type(modelType)
-                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader());
+                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+                    .implementationDetails(new ImplementationDetails.Builder()
+                            .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                            .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.isPolymorphic(isPolymorphic);
@@ -533,13 +537,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     }
 
     /**
-     * Extension for Fluent predefined type.
+     * Extension for predefined types in azure-core.
      *
      * @param compositeType object type
      * @return Whether the type is predefined.
      */
     protected boolean isPredefinedModel(ClassType compositeType) {
-        return false;
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            // see ObjectMapper.mapPredefinedModel
+            // this might be too simplified, and Android might require a different implementation
+            return compositeType.getPackage().startsWith("com.azure.core.");
+        } else {
+            return false;
+        }
     }
 
     private static String disambiguatePropertyNameOfFlattenedSchema(Set<String> propertyNames, String originalFlattenedPropertyName, String propertyName) {

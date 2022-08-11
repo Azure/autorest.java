@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for Odatatype. */
+/** specifies the type of the alert criteria. */
 public final class Odatatype extends ExpandableStringEnum<Odatatype> {
     /** Static value Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria for Odatatype. */
     public static final Odatatype MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA =

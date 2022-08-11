@@ -77,6 +77,39 @@ public class MethodUtil {
     }
 
     /**
+     * Gets Javadoc description for method parameter.
+     *
+     * @param parameter the method parameter.
+     * @param name the name of method parameter, used when no description found.
+     * @param isProtocolMethod whether the description is used for simplified method.
+     * @return the Javadoc description for method parameter.
+     */
+    public static String getMethodParameterDescription(Parameter parameter, String name, boolean isProtocolMethod) {
+        String summary = parameter.getSummary();
+        String description = null;
+        // parameter description
+        if (parameter.getLanguage() != null) {
+            description = parameter.getLanguage().getDefault().getDescription();
+        }
+        // fallback to parameter schema description
+        if (description == null || description.isEmpty()) {
+            if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
+                description = parameter.getSchema().getLanguage().getDefault().getDescription();
+            }
+        }
+        // fallback to dummy description
+        if (description == null || description.isEmpty()) {
+            description = String.format("The %s parameter", name);
+        }
+        // add allowed enum values
+        if (isProtocolMethod && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
+            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
+        }
+
+        return SchemaUtil.mergeSummaryWithDescription(summary, description);
+    }
+
+    /**
      * Find the first request consumes binary type, if no binary request, return the first request in requests.
      * If the selected binary request does not have content-type parameter, we will add one for it
      * @param requests a list of requests

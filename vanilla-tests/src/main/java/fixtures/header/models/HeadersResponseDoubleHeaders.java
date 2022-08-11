@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The HeadersResponseDoubleHeaders model. */
@@ -15,6 +16,16 @@ public final class HeadersResponseDoubleHeaders {
      */
     @JsonProperty(value = "value")
     private Double value;
+
+    // HttpHeaders containing the raw property values.
+    /**
+     * Creates an instance of HeadersResponseDoubleHeaders class.
+     *
+     * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
+     */
+    public HeadersResponseDoubleHeaders(HttpHeaders rawHeaders) {
+        this.value = Double.parseDouble(rawHeaders.getValue("value"));
+    }
 
     /**
      * Get the value property: The value property.

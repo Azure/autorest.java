@@ -262,8 +262,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         addSerializationImports(imports, settings);
 
-        // Add HttpHeaders as an import when strongly-typed HTTP header objects are using custom deserialization.
-        if (settings.isCustomStronglyTypedHeaderDeserializationUsed() && model.isStronglyTypedHeader()) {
+        // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
+        if (model.isStronglyTypedHeader()) {
             ClassType.HttpHeaders.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
@@ -567,7 +567,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock) {
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
-        if (model.isStronglyTypedHeader() && settings.isCustomStronglyTypedHeaderDeserializationUsed()) {
+        if (model.isStronglyTypedHeader()) {
             addCustomStronglyTypedHeadersConstructor(classBlock, model, settings);
             return;
         }
@@ -669,7 +669,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // Finally, add all required properties.
             if (settings.isRequiredFieldsAsConstructorArgs()) {
                 for (ClientModelProperty property : requiredProperties) {
-                    constructor.line("this." + property.getName() + " = " + property.getName() + ";");
+                    constructor.line("this." + property.getName() + " = " + property.getWireType().convertFromClientType(property.getName()) + ";");
                 }
             }
         });
@@ -747,8 +747,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             // If the wire type was null, return null as the returned conversion could, and most likely would, result
             // in a NullPointerException.
-            methodBlock.ifBlock(expression + " == null",
-                ifBlock -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+            if (propertyWireType.isNullable()) {
+                methodBlock.ifBlock(expression + " == null",
+                        ifBlock -> ifBlock.methodReturn(propertyClientType.defaultValueExpression()));
+            }
 
             // Return the conversion of the wire type to the client type. An example would be a wire type of
             // DateTimeRfc1123 and a client type of OffsetDateTime (type a consumer would use), this makes the return

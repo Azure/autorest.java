@@ -43,6 +43,7 @@ public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
         return null;
     }
 
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     public String toString() {

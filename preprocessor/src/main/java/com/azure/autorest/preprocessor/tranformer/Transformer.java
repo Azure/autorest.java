@@ -335,7 +335,7 @@ public class Transformer {
 
   private void renameType(Metadata schema) {
     Language language = schema.getLanguage().getDefault();
-    Language java = new Language();
+    Language java = addJavaLanguage(schema);
     java.setName(CodeNamer.getTypeName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
@@ -344,7 +344,7 @@ public class Transformer {
 
   private void renameProperty(Property property) {
     Language language = property.getLanguage().getDefault();
-    Language java = new Language();
+    Language java = addJavaLanguage(property);
     java.setName(CodeNamer.getPropertyName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
@@ -361,7 +361,7 @@ public class Transformer {
 
   private void renameVariable(Metadata schema) {
     Language language = schema.getLanguage().getDefault();
-    Language java = new Language();
+    Language java = addJavaLanguage(schema);
     java.setName(CodeNamer.getParameterName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
@@ -370,7 +370,7 @@ public class Transformer {
 
   private void renameMethodGroup(Metadata schema) {
     Language language = schema.getLanguage().getDefault();
-    Language java = new Language();
+    Language java = addJavaLanguage(schema);
     java.setName(CodeNamer.getMethodGroupName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
@@ -379,11 +379,19 @@ public class Transformer {
 
   private void renameMethod(Metadata schema) {
     Language language = schema.getLanguage().getDefault();
-    Language java = new Language();
+    Language java = addJavaLanguage(schema);
     java.setName(CodeNamer.getMethodName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
-    schema.getLanguage().setJava(java);
+  }
+
+  private Language addJavaLanguage(Metadata schema) {
+    Language java = schema.getLanguage().getJava();
+    if (java == null) {
+      java = new Language();
+      schema.getLanguage().setJava(java);
+    }
+    return java;
   }
 
   private Parameter createContentLengthParameter(Operation operation, Parameter bodyParam) {

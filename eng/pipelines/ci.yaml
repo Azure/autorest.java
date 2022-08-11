@@ -7,6 +7,12 @@ pr:
   branches:
     include:
     - main
+  paths:
+    include:
+      - '*'
+    exclude:
+      - 'fluent*'
+      - 'cadl*'
 
 jobs:
   - job: Build
@@ -44,7 +50,7 @@ jobs:
 
       - script: |
           ./generate
-        displayName: 'Generate code'
+        displayName: 'Generate Code'
 
       - script: |
           git status
@@ -53,14 +59,14 @@ jobs:
 
       - script: |
           [ -z "`git status --porcelain`" ]
-        displayName: 'Check no diff in generated files'
+        displayName: 'Check no Diff'
 
       - script: |
           npm run testserver-run &
-        displayName: 'Start testserver'
+        displayName: 'Start Testserver'
 
       - task: Maven@3
-        displayName: 'Run vanilla tests'
+        displayName: 'Run Vanilla Tests'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
@@ -77,7 +83,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
 
       - task: Maven@3
-        displayName: 'Run azure tests'
+        displayName: 'Run Azure Tests'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
@@ -94,7 +100,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
 
       - task: Maven@3
-        displayName: 'Run protocol tests'
+        displayName: 'Run Protocol Tests'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
@@ -112,21 +118,21 @@ jobs:
 
       - script: |
           npm run testserver-stop
-        displayName: 'Stop testserver'
+        displayName: 'Stop Testserver'
 
       - script: |
           cat coverage/report-vanilla.json || true
           cat coverage/report-azure.json || true
           cat coverage/report-dpg.json || true
-        displayName: 'Display coverage data'
+        displayName: 'Display Coverage Data'
 
       - script: |
           npm run testserver-coverage-publish -- --repo=$(Build.Repository.Name) --ref=$(Build.SourceBranch) --githubToken=$(github-token) --azStorageAccount=$(storage-coverage-user) --azStorageAccessKey=$(storage-coverage-pass)
         condition: and(succeeded(), ne(variables['storage-coverage-pass'], ''))
-        displayName: 'Publish coverage report to storage account'
+        displayName: 'Publish Coverage Report'
 
       - task: Maven@3
-        displayName: 'Verify Javadoc of protocol'
+        displayName: 'Verify Javadoc of Protocol Tests'
         inputs:
           mavenPomFile: protocol-tests/pom.xml
           goals: 'javadoc:javadoc'
@@ -136,7 +142,7 @@ jobs:
           publishJUnitResults: false
 
       - task: Maven@3
-        displayName: 'Run protocol resilience tests'
+        displayName: 'Run Protocol Resilience Tests'
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml
           goals: 'package revapi:check'
@@ -147,4 +153,4 @@ jobs:
 
       - script: |
           ./protocol-sdk-integration-tests/test.py
-        displayName: 'Run protocol test on sdk integration'
+        displayName: 'Run Protocol Test on SDK Integration'

@@ -1,0 +1,87 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core.Operations;
+
+@summary("summary of Naming")
+@doc("description of Naming")
+@serviceTitle("Naming")
+@serviceVersion("1.0.0")
+namespace Cadl.Naming;
+
+@summary("summary of Response")
+@doc("description of Response")
+@friendlyName("DataResponse")
+model Response {
+  @summary("summary of name property")
+  @doc("description of name property")
+  name: string;
+
+  @summary("summary of data property")
+  @doc("description of data property")
+  data: DataModel;
+
+  @summary("summary of type property")
+  @doc("description of type property")
+  type: TypesModel;
+
+  @summary("summary of status property")
+  @doc("description of status property")
+  status: StatusModel;
+}
+
+@summary("summary of Data")
+@doc("description of Data")
+@friendlyName("BinaryData")
+model DataModel {
+  @summary("summary of data property")
+  @doc("description of data property")
+  data: bytes;
+}
+
+@summary("summary of Types")
+@doc("description of Types")
+enum TypesModel {
+  Blob,
+  File,
+}
+
+@summary("summary of Statuses")
+@doc("description of Statuses")
+@knownValues(StatusValues)
+@friendlyName("DataStatus")
+model StatusModel is string;
+
+@summary("summary of StatusValues")
+@doc("description of StatusValues")
+enum StatusValues {
+  Running,
+  Completed,
+  Failed,
+}
+
+@summary("summary of Request")
+@doc("description of Request")
+@friendlyName("DataRequest")
+model Request {
+  @summary("summary of name query parameter")
+  @doc("description of name query parameter")
+  @query
+  name: string;
+
+  @header
+  @summary("summary of etag header parameter")
+  @doc("description of etag header parameter")
+  etag?: string;
+}
+
+@summary("summary of naming route")
+@doc("description of naming route")
+@route("/naming")
+interface NamingOp {
+  @summary("summary of POST op")
+  @doc("description of POST op")
+  @post
+  op post(...Request): OkResponse<Response> | ErrorResponse;
+}
