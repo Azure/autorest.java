@@ -14,7 +14,14 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.cadl.enumservice.models.Color;
+import com.cadl.enumservice.models.ColorModel;
+import com.cadl.enumservice.models.Operation;
+import com.cadl.enumservice.models.OperationStateValues;
+import com.cadl.enumservice.models.Priority;
 
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
@@ -188,5 +195,261 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOperationWithResponse(String state, RequestOptions requestOptions) {
         return this.client.getOperationWithResponse(state, requestOptions).block();
+    }
+
+    /*
+     * Generated convenience method for getColorWithResponse
+     */
+    /**
+     * The getColor operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Color getColor() {
+        RequestOptions requestOptions = new RequestOptions();
+        return Color.fromString(getColorWithResponse(requestOptions).getValue());
+    }
+
+    /*
+     * Generated convenience method for getColorWithResponse
+     */
+    /**
+     * The getColor operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Color> getColorWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<String> protocolMethodResponse = getColorWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, Color.fromString(protocolMethodResponse.getValue()));
+    }
+
+    /*
+     * Generated convenience method for getColorModelWithResponse
+     */
+    /**
+     * The getColorModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public ColorModel getColorModel() {
+        RequestOptions requestOptions = new RequestOptions();
+        return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue());
+    }
+
+    /*
+     * Generated convenience method for getColorModelWithResponse
+     */
+    /**
+     * The getColorModel operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<ColorModel> getColorModelWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<String> protocolMethodResponse = getColorModelWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, ColorModel.fromString(protocolMethodResponse.getValue()));
+    }
+
+    /*
+     * Generated convenience method for setColorModelWithResponse
+     */
+    /**
+     * The setColorModel operation.
+     *
+     * @param color The color parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Operation setColorModel(ColorModel color) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setColorModelWithResponse(color.toString(), requestOptions).getValue().toObject(Operation.class);
+    }
+
+    /*
+     * Generated convenience method for setColorModelWithResponse
+     */
+    /**
+     * The setColorModel operation.
+     *
+     * @param color The color parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Operation> setColorModelWithResponse(ColorModel color, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = setColorModelWithResponse(color.toString(), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+    }
+
+    /*
+     * Generated convenience method for setPriorityWithResponse
+     */
+    /**
+     * The setPriority operation.
+     *
+     * @param priority The priority parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Operation setPriority(Priority priority) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
+                .getValue()
+                .toObject(Operation.class);
+    }
+
+    /*
+     * Generated convenience method for setPriorityWithResponse
+     */
+    /**
+     * The setPriority operation.
+     *
+     * @param priority The priority parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Operation> setPriorityWithResponse(Priority priority, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+    }
+
+    /*
+     * Generated convenience method for getRunningOperationWithResponse
+     */
+    /**
+     * The getRunningOperation operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Operation getRunningOperation() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getRunningOperationWithResponse(requestOptions).getValue().toObject(Operation.class);
+    }
+
+    /*
+     * Generated convenience method for getRunningOperationWithResponse
+     */
+    /**
+     * The getRunningOperation operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Operation> getRunningOperationWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getRunningOperationWithResponse(requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+    }
+
+    /*
+     * Generated convenience method for getOperationWithResponse
+     */
+    /**
+     * The getOperation operation.
+     *
+     * @param state The state parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public Operation getOperation(OperationStateValues state) {
+        RequestOptions requestOptions = new RequestOptions();
+        return getOperationWithResponse(state.toString(), requestOptions).getValue().toObject(Operation.class);
+    }
+
+    /*
+     * Generated convenience method for getOperationWithResponse
+     */
+    /**
+     * The getOperation operation.
+     *
+     * @param state The state parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<Operation> getOperationWithResponse(OperationStateValues state, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getOperationWithResponse(state.toString(), requestOptions);
+        return new SimpleResponse<>(
+                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
     }
 }

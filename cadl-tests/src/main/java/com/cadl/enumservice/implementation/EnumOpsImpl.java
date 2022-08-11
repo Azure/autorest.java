@@ -198,29 +198,6 @@ public final class EnumOpsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getColor(this.client.getEndpoint(), accept, requestOptions, context);
-    }
-
-    /**
-     * The getColor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(Red/Blue/Green)
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -253,29 +230,6 @@ public final class EnumOpsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getColorModel(this.client.getEndpoint(), accept, requestOptions, context));
-    }
-
-    /**
-     * The getColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(Red/Blue/Green)
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorModelWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getColorModel(this.client.getEndpoint(), accept, requestOptions, context);
     }
 
     /**
@@ -327,37 +281,6 @@ public final class EnumOpsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.setColorModel(this.client.getEndpoint(), color, accept, requestOptions, context));
-    }
-
-    /**
-     * The setColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
-     * }</pre>
-     *
-     * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setColorModelWithResponseAsync(
-            String color, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setColorModel(this.client.getEndpoint(), color, accept, requestOptions, context);
     }
 
     /**
@@ -435,37 +358,6 @@ public final class EnumOpsImpl {
      *
      * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setPriorityWithResponseAsync(
-            String priority, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.setPriority(this.client.getEndpoint(), priority, accept, requestOptions, context);
-    }
-
-    /**
-     * The setPriority operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
-     * }</pre>
-     *
-     * @param priority The priority parameter. Allowed values: 100, 0.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -524,37 +416,6 @@ public final class EnumOpsImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getRunningOperationWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String state = "Running";
-        final String accept = "application/json";
-        return service.getRunningOperation(this.client.getEndpoint(), state, accept, requestOptions, context);
-    }
-
-    /**
-     * The getRunningOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -594,37 +455,6 @@ public final class EnumOpsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getOperation(this.client.getEndpoint(), state, accept, requestOptions, context));
-    }
-
-    /**
-     * The getOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
-     * }</pre>
-     *
-     * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOperationWithResponseAsync(
-            String state, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getOperation(this.client.getEndpoint(), state, accept, requestOptions, context);
     }
 
     /**

@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -18,6 +19,7 @@ import com.azure.autorest.util.ModelNamer;
 import com.azure.core.client.traits.EndpointTrait;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -57,6 +59,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     }
     imports.add(builderPackageName + "." + builderClassName);
     addServiceClientAnnotationImports(imports);
+
+    addImportsToConvenienceMethods(imports, asyncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
@@ -118,6 +122,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
       }
 
+      asyncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
+
       ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), "this.serviceClient");
     });
   }
@@ -158,5 +164,18 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
           });
     }
+  }
+
+  private static void addImportsToConvenienceMethods(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+    JavaSettings settings = JavaSettings.getInstance();
+    convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+        .forEach(m -> m.addImportsTo(imports, false, settings));
+
+    ClassType.BinaryData.addImportsTo(imports, false);
+    ClassType.RequestOptions.addImportsTo(imports, false);
+  }
+
+  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
+    Templates.getConvenienceAsyncMethodTemplate().write(convenienceMethod, classBlock);
   }
 }

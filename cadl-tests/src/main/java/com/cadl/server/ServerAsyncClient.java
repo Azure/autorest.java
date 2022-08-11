@@ -55,4 +55,24 @@ public final class ServerAsyncClient {
     public Mono<Response<BinaryData>> statusWithResponse(long code, RequestOptions requestOptions) {
         return this.serviceClient.statusWithResponseAsync(code, requestOptions);
     }
+
+    /*
+     * Generated convenience method for statusWithResponse
+     */
+    /**
+     * The status operation.
+     *
+     * @param code The code parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<Object> status(long code) {
+        RequestOptions requestOptions = new RequestOptions();
+        return statusWithResponse(code, requestOptions).map(Response::getValue);
+    }
 }

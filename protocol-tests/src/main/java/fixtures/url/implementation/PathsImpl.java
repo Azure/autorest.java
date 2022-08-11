@@ -593,24 +593,6 @@ public final class PathsImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final boolean boolPath = true;
-        final String accept = "application/json";
-        return service.getBooleanTrue(this.client.getHost(), boolPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -644,24 +626,6 @@ public final class PathsImpl {
      * Get false Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return false Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final boolean boolPath = false;
-        final String accept = "application/json";
-        return service.getBooleanFalse(this.client.getHost(), boolPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -689,24 +653,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final int intPath = 1000000;
-        final String accept = "application/json";
-        return service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context);
     }
 
     /**
@@ -748,25 +694,6 @@ public final class PathsImpl {
      * Get '-1000000' integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final int intPath = -1000000;
-        final String accept = "application/json";
-        return service.getIntNegativeOneMillion(this.client.getHost(), intPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -794,24 +721,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final long longPath = 10000000000L;
-        final String accept = "application/json";
-        return service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context);
     }
 
     /**
@@ -853,24 +762,6 @@ public final class PathsImpl {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final long longPath = -10000000000L;
-        final String accept = "application/json";
-        return service.getNegativeTenBillion(this.client.getHost(), longPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -900,25 +791,6 @@ public final class PathsImpl {
                 context ->
                         service.floatScientificPositive(
                                 this.client.getHost(), floatPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '1.034E+20' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final float floatPath = 103400000000000000000f;
-        final String accept = "application/json";
-        return service.floatScientificPositive(this.client.getHost(), floatPath, accept, requestOptions, context);
     }
 
     /**
@@ -960,25 +832,6 @@ public final class PathsImpl {
      * Get '-1.034E-20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-1.034E-20' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final float floatPath = -1.034E-20f;
-        final String accept = "application/json";
-        return service.floatScientificNegative(this.client.getHost(), floatPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1008,24 +861,6 @@ public final class PathsImpl {
                 context ->
                         service.doubleDecimalPositive(
                                 this.client.getHost(), doublePath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final double doublePath = 9999999.999;
-        final String accept = "application/json";
-        return service.doubleDecimalPositive(this.client.getHost(), doublePath, accept, requestOptions, context);
     }
 
     /**
@@ -1067,24 +902,6 @@ public final class PathsImpl {
      * Get '-9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final double doublePath = -9999999.999;
-        final String accept = "application/json";
-        return service.doubleDecimalNegative(this.client.getHost(), doublePath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1119,25 +936,6 @@ public final class PathsImpl {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
-        final String accept = "application/json";
-        return service.stringUnicode(this.client.getHost(), stringPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1166,24 +964,6 @@ public final class PathsImpl {
         return FluxUtil.withContext(
                 context ->
                         service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
-        final String accept = "application/json";
-        return service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1229,26 +1009,6 @@ public final class PathsImpl {
      * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringPath = "begin!*'();:@&=+$,end";
-        final String accept = "application/json";
-        return service.stringUrlNonEncoded(this.client.getHost(), stringPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1282,24 +1042,6 @@ public final class PathsImpl {
      * Get ''.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '' along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringPath = "";
-        final String accept = "application/json";
-        return service.stringEmpty(this.client.getHost(), stringPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1327,25 +1069,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null (should throw) along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringNullWithResponseAsync(
-            String stringPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context);
     }
 
     /**
@@ -1388,26 +1111,6 @@ public final class PathsImpl {
      *
      * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> enumValidWithResponseAsync(
-            String enumPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.enumValid(this.client.getHost(), enumPath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1436,26 +1139,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw. Allowed values: "red color", "green color", "blue color".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
-     *     successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> enumNullWithResponseAsync(
-            String enumPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context);
     }
 
     /**
@@ -1501,27 +1184,6 @@ public final class PathsImpl {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponseAsync(
-            byte[] bytePath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteMultiByte(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1551,25 +1213,6 @@ public final class PathsImpl {
         return FluxUtil.withContext(
                 context ->
                         service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '' as byte array along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final byte[] bytePath = "".getBytes();
-        final String accept = "application/json";
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1611,26 +1254,6 @@ public final class PathsImpl {
      *
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as byte array (should throw) along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponseAsync(
-            byte[] bytePath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1658,24 +1281,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '2012-01-01' as date along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String datePath = "2012-01-01";
-        final String accept = "application/json";
-        return service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context);
     }
 
     /**
@@ -1717,26 +1322,6 @@ public final class PathsImpl {
      *
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateNullWithResponseAsync(
-            String datePath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.dateNull(this.client.getHost(), datePath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw).
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1765,24 +1350,6 @@ public final class PathsImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
-        final String accept = "application/json";
-        return service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context);
     }
 
     /**
@@ -1825,26 +1392,6 @@ public final class PathsImpl {
      *
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponseAsync(
-            OffsetDateTime dateTimePath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1877,27 +1424,6 @@ public final class PathsImpl {
                 context ->
                         service.base64Url(
                                 this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context));
-    }
-
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponseAsync(
-            byte[] base64UrlPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        return service.base64Url(this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context);
     }
 
     /**
@@ -1946,29 +1472,6 @@ public final class PathsImpl {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
      *     csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(
-            List<String> arrayPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        String arrayPathConverted =
-                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
-        return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, requestOptions, context);
-    }
-
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1999,26 +1502,6 @@ public final class PathsImpl {
         return FluxUtil.withContext(
                 context ->
                         service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context));
-    }
-
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> unixTimeUrlWithResponseAsync(
-            long unixTimeUrlPath, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context);
     }
 
     /**

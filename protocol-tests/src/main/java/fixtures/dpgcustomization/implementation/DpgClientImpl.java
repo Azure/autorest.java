@@ -270,35 +270,6 @@ public final class DpgClientImpl {
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up along
-     *     with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getModelWithResponseAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getModel(this.getHost(), mode, accept, requestOptions, context);
-    }
-
-    /**
-     * Get models that you will either return to end users as a raw body, or with a model added during grow up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -347,44 +318,6 @@ public final class DpgClientImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postModel(this.getHost(), mode, input, accept, requestOptions, context));
-    }
-
-    /**
-     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model
-     * instead, and put in 'model' as mode.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     hello: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param input Please put {'hello': 'world!'}.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postModelWithResponseAsync(
-            String mode, BinaryData input, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.postModel(this.getHost(), mode, input, accept, requestOptions, context);
     }
 
     /**
@@ -482,49 +415,6 @@ public final class DpgClientImpl {
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
-     *     along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getPages(this.getHost(), mode, accept, requestOptions, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "values"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -542,45 +432,6 @@ public final class DpgClientImpl {
         return new PagedFlux<>(
                 () -> getPagesSinglePageAsync(mode, requestOptions),
                 nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
-    }
-
-    /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
-     *     paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getPagesAsync(String mode, RequestOptions requestOptions, Context context) {
-        RequestOptions requestOptionsForNextPage = new RequestOptions();
-        requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                () -> getPagesSinglePageAsync(mode, requestOptions, context),
-                nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage, context));
     }
 
     /**
@@ -658,36 +509,6 @@ public final class DpgClientImpl {
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> lroWithResponseAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.lro(this.getHost(), mode, accept, requestOptions, context);
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -699,45 +520,6 @@ public final class DpgClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
-                new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.lroWithResponseAsync(mode, requestOptions, context),
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
                         null,
@@ -828,45 +610,6 @@ public final class DpgClientImpl {
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(
-            String mode, RequestOptions requestOptions, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.lroWithResponseAsync(mode, requestOptions, context),
-                new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
-                TypeReference.createInstance(LroProduct.class),
-                TypeReference.createInstance(LroProduct.class));
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -908,48 +651,6 @@ public final class DpgClientImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context -> service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "values"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
