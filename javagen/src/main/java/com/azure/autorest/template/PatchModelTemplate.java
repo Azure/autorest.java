@@ -139,12 +139,8 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                                     expression = property.getName();
                                 }
                                 if (setterPropertyType.isNullable()) {
-                                    methodBlock.ifBlock(String.format("%s == null", property.getName()),
-                                                    (ifBlock) -> ifBlock.line("this.%s = Option.empty();", property.getName()))
-                                            .elseBlock((elseBlock) -> {
-                                                String propertyConversion = propertyType.convertFromClientType(expression);
-                                                elseBlock.line("this.%s = %s;", property.getName(), propertyConversion);
-                                            });
+                                    String propertyConversion = propertyType.convertFromClientType(expression);
+                                    methodBlock.line("this.%s = %s;", property.getName(), propertyConversion);
                                 } else {
                                     String propertyConversion = propertyType.convertFromClientType(expression);
                                     methodBlock.line("this.%s = Option.of(%s);", property.getName(), propertyConversion);
