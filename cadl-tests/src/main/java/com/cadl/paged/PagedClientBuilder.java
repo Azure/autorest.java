@@ -157,23 +157,6 @@ public final class PagedClientBuilder
     }
 
     /*
-     * Service version
-     */
-    @Generated private PagedServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     *
-     * @param serviceVersion the serviceVersion value.
-     * @return the PagedClientBuilder.
-     */
-    @Generated
-    public PagedClientBuilder serviceVersion(PagedServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -198,11 +181,8 @@ public final class PagedClientBuilder
     @Generated
     private PagedClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        PagedServiceVersion localServiceVersion =
-                (serviceVersion != null) ? serviceVersion : PagedServiceVersion.getLatest();
         PagedClientImpl client =
-                new PagedClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                new PagedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
         return client;
     }
 

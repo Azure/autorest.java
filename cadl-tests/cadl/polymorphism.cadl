@@ -62,8 +62,8 @@ interface Polymorphism {
   };
 
   @put
-  op write(@body body: BaseType): OkResponse<BaseType>;
+  op write(@body body: BaseType): BaseType;
 
   @post
-  op task(@body body: Task): OkResponse<Task>;
+  op task(@body body: Task): Task;
 }

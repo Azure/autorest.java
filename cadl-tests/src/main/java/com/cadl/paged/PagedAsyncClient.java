@@ -33,7 +33,7 @@ public final class PagedAsyncClient {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -55,7 +55,7 @@ public final class PagedAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a collection of Resource instances as paginated response with {@link PagedFlux}.
+     * @return paged collection of Resource items as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)

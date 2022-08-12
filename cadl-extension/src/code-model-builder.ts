@@ -1,5 +1,5 @@
 import {
-  ArrayType,
+  ArrayModelType,
   BooleanLiteralType,
   DecoratedType,
   EnumType,
@@ -19,12 +19,15 @@ import {
   getSummary,
   getVisibility,
   ignoreDiagnostics,
+  isArrayModelType,
   isIntrinsic,
+  isRecordModelType,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
   OperationType,
   Program,
+  RecordModelType,
   StringLiteralType,
   TemplateDeclarationNode,
   Type,
@@ -207,8 +210,9 @@ export class CodeModelBuilder {
   }
 
   private processRoute(op: OperationDetails) {
-    const operationGroup = this.codeModel.getOperationGroup(op.groupName);
-    const opId = `${op.groupName}_${op.operation.name}`
+    const groupName = op.container.name;
+    const operationGroup = this.codeModel.getOperationGroup(groupName);
+    const opId = `${groupName}_${op.operation.name}`
 
     const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
 
@@ -236,8 +240,8 @@ export class CodeModelBuilder {
     this.hostParameters.forEach(it => operation.addParameter(it));
     op.parameters.parameters.map(it => this.processParameter(operation, it));
     this.addAcceptHeaderParameter(operation, op.responses);
-    if (op.parameters.body) {
-      this.processParameterBody(operation, op.parameters.body);
+    if (op.parameters.bodyParameter) {
+      this.processParameterBody(operation, op.parameters.bodyParameter);
     }
     op.responses.map(it => this.processResponse(operation, it));
 
@@ -470,9 +474,6 @@ export class CodeModelBuilder {
       case "Boolean":
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
-      case "Array":
-        return this.processArraySchema(type, nameHint);
-
       case "Enum":
         return this.processChoiceSchema(type, this.getName(type), true);
 
@@ -502,9 +503,6 @@ export class CodeModelBuilder {
 
             case "boolean":
               return this.processBooleanSchema(type, nameHint);
-              
-            case "Map":
-              return this.processMapSchema(type, nameHint);
 
             case "plainTime":
               return this.processTimeSchema(type, nameHint);
@@ -529,6 +527,10 @@ export class CodeModelBuilder {
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
+        } else if (isArrayModelType(this.program, type)) {
+          return this.processArraySchema(type, nameHint);
+        } else if (isRecordModelType(this.program, type)) {
+          return this.processMapSchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
@@ -577,15 +579,15 @@ export class CodeModelBuilder {
     );
   }
 
-  private processArraySchema(type: ArrayType, name: string): ArraySchema {
-    const elementSchema = this.processSchema(type.elementType, name);
+  private processArraySchema(type: ArrayModelType, name: string): ArraySchema {
+    const elementSchema = this.processSchema(type.indexer.value, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, this.getDoc(type), elementSchema, {
         summary: this.getSummary(type),
       }));
   }
 
-  private processMapSchema(type: ModelType, name: string): DictionarySchema {
+  private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
     const dictSchema = this.codeModel.schemas.add(
       new DictionarySchema<any>(name, this.getDoc(type), null, {
         summary: this.getSummary(type),
@@ -594,8 +596,7 @@ export class CodeModelBuilder {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
 
-    const elementType = type.properties.get("v")!;
-    const elementSchema = this.processSchema(elementType.type, elementType.name);
+    const elementSchema = this.processSchema(type.indexer.value, name);
     dictSchema.elementType = elementSchema;
 
     return this.codeModel.schemas.add(dictSchema);

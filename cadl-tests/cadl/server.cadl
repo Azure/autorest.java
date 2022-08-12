@@ -15,5 +15,5 @@ namespace Cadl.Server;
 
 @route("/status/{code}")
 interface ServerOp {
-  op status(@path code: int32): OkResponse<{}> | NoContentResponse;
+  op status(@path code: int32): OkResponse | NoContentResponse;
 }

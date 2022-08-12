@@ -10,7 +10,6 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -72,7 +71,6 @@ public final class PagedOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> list(
                 @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -98,7 +96,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -120,20 +118,13 @@ public final class PagedOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a collection of Resource instances along with {@link PagedResponse} on successful completion of {@link
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.list(
-                                        this.client.getEndpoint(),
-                                        this.client.getServiceVersion().getVersion(),
-                                        accept,
-                                        requestOptions,
-                                        context))
+        return FluxUtil.withContext(context -> service.list(this.client.getEndpoint(), accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -146,7 +137,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -168,7 +159,7 @@ public final class PagedOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a collection of Resource instances as paginated response with {@link PagedFlux}.
+     * @return paged collection of Resource items as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
@@ -183,7 +174,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -205,7 +196,7 @@ public final class PagedOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a collection of Resource instances as paginated response with {@link PagedIterable}.
+     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
@@ -237,7 +228,7 @@ public final class PagedOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a collection of Resource instances along with {@link PagedResponse} on successful completion of {@link
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
