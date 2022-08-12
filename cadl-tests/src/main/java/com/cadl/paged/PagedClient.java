@@ -32,7 +32,7 @@ public final class PagedClient {
     }
 
     /**
-     * The list operation.
+     * List Resource resources.
      *
      * <p><strong>Response Body Schema</strong>
      *
