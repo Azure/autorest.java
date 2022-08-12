@@ -123,6 +123,7 @@ public class Transformer {
               contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
             }
           }
+          renameOdataParameterNames(request);
           deduplicateParameterNames(request);
         }
 
@@ -427,7 +428,7 @@ public class Transformer {
     List<Parameter> deduplicatedParameters = parameters.stream()
         .distinct()
         .collect(Collectors.toList());
-    if (deduplicatedParameters.size() != parameters.size()) {
+    if (deduplicatedParameters.size() < parameters.size()) {
       parameters = deduplicatedParameters;
       request.setParameters(parameters);
     }
@@ -438,25 +439,36 @@ public class Transformer {
     while (iter.hasNext()) {
       Parameter parameter = iter.next();
       if (parameter.getOriginalParameter() == null // skip the parameters resulted from parameter-flattening as they are not in proxy method
-              && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
-        /*
-        // use a new Parameter, in case the original one is referenced by multiple requests
-        Parameter newParameter = new Parameter();
-        shallowCopy(parameter, newParameter, Parameter.class);
-        newParameter.setLanguage(new Languages());
-        shallowCopy(parameter.getLanguage(), newParameter.getLanguage(), Languages.class);
-        newParameter.getLanguage().setJava(new Language());
-        shallowCopy(parameter.getLanguage().getJava(), newParameter.getLanguage().getJava(), Language.class);
-        newParameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
-
-        iter.set(newParameter);
-        parameter = newParameter;
-        */
-
+          && parameterNames.contains(parameter.getLanguage().getJava().getName())) {
         parameter.getLanguage().getJava().setName(parameter.getLanguage().getJava().getName() + "Param");
       }
 
       parameterNames.add(parameter.getLanguage().getJava().getName());
+    }
+  }
+
+  private final static Map<String, String> ODATA_PARAMETER_NAME_CONVERSION = new HashMap<>(2);
+  static {
+    ODATA_PARAMETER_NAME_CONVERSION.put("maxpagesize", "maxPageSize");
+    ODATA_PARAMETER_NAME_CONVERSION.put("orderby", "orderBy");
+  }
+
+  private static void renameOdataParameterNames(Request request) {
+    List<Parameter> parameters = request.getParameters();
+    ListIterator<Parameter> iter = parameters.listIterator();
+    while (iter.hasNext()) {
+      Parameter parameter = iter.next();
+      if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
+          && (parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
+          || parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER)) {
+        String serializedName = parameter.getLanguage().getDefault().getSerializedName();
+        String convertedName = ODATA_PARAMETER_NAME_CONVERSION.get(serializedName);
+        if (convertedName != null
+            // no x-ms-client-name
+            && serializedName.equals(parameter.getLanguage().getJava().getName())) {
+          parameter.getLanguage().getJava().setName(convertedName);
+        }
+      }
     }
   }
 }

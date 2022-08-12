@@ -43,7 +43,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
                 .isRequired(parameter.isRequired())
                 .fromClient(parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT);
         if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null) {
-                builder.location(parameter.getProtocol().getHttp().getIn());
+            builder.location(parameter.getProtocol().getHttp().getIn());
         }
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());

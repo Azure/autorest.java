@@ -1,0 +1,30 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core;
+
+@serviceTitle("Odata")
+@serviceVersion("1.0.0")
+namespace Cadl.Odata;
+
+model Resource {
+  id: string;
+  name: string;
+  type: string;
+}
+
+model ResourceCollection is Page<Resource>;
+
+@route("/odata")
+interface OdataOp {
+  op list(
+    @query filter?: string,
+    @query orderby?: string,
+    @query skip?: int32,
+    @query top?: int32,
+    @query maxpagesize?: int32,
+    @query select?: string[],
+    @query expand?: string[],
+  ): ResourceCollection;
+}
