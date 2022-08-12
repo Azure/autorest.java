@@ -21,7 +21,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -64,7 +63,7 @@ public final class ServerOpsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> status(
+        Mono<Response<Void>> status(
                 @HostParam("domain") String domain,
                 @HostParam("tld") String tld,
                 @PathParam("code") long code,
@@ -76,22 +75,16 @@ public final class ServerOpsImpl {
     /**
      * The status operation.
      *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
      * @param code The code parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> statusWithResponseAsync(long code, RequestOptions requestOptions) {
+    public Mono<Response<Void>> statusWithResponseAsync(long code, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -102,22 +95,16 @@ public final class ServerOpsImpl {
     /**
      * The status operation.
      *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * Object
-     * }</pre>
-     *
      * @param code The code parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> statusWithResponse(long code, RequestOptions requestOptions) {
+    public Response<Void> statusWithResponse(long code, RequestOptions requestOptions) {
         return statusWithResponseAsync(code, requestOptions).block();
     }
 }

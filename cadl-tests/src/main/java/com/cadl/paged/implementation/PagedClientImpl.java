@@ -11,7 +11,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.cadl.paged.PagedServiceVersion;
 
 /** Initializes a new instance of the PagedClient type. */
 public final class PagedClientImpl {
@@ -25,18 +24,6 @@ public final class PagedClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /** Service version. */
-    private final PagedServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     *
-     * @return the serviceVersion value.
-     */
-    public PagedServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -79,16 +66,14 @@ public final class PagedClientImpl {
      * Initializes an instance of PagedClient client.
      *
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PagedClientImpl(String endpoint, PagedServiceVersion serviceVersion) {
+    public PagedClientImpl(String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                serviceVersion);
+                endpoint);
     }
 
     /**
@@ -96,10 +81,9 @@ public final class PagedClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PagedClientImpl(HttpPipeline httpPipeline, String endpoint, PagedServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public PagedClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -108,17 +92,11 @@ public final class PagedClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PagedClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            PagedServiceVersion serviceVersion) {
+    public PagedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.pagedOps = new PagedOpsImpl(this);
     }
 }

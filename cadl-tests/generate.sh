@@ -27,10 +27,12 @@ do
     generate $f
 done
 
-# run cadl ranch tests sources
-for f in $(find ./node_modules/@azure-tools/cadl-ranch-specs/http -name "*.cadl")
-do
-  if [[ $(realpath $f) == *"models"* || $(realpath $f) == *"hello"* ]]; then
-    generate $f
-  fi
-done
+## run cadl ranch tests sources
+#cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .
+#for f in $(find ./http -name "*.cadl")
+#do
+#  if [[ $(realpath $f) == *"models"* ]]; then
+#    generate $f
+#  fi
+#done
+#rm -rf http

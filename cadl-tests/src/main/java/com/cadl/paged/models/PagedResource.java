@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** A collection of Resource instances. */
+/** Paged collection of Resource items. */
 @Fluent
-public final class ResourceCollection {
+public final class PagedResource {
     /*
      * The Resource items on this page
      */
@@ -25,12 +25,12 @@ public final class ResourceCollection {
     private String nextLink;
 
     /**
-     * Creates an instance of ResourceCollection class.
+     * Creates an instance of PagedResource class.
      *
      * @param value the value value to set.
      */
     @JsonCreator
-    public ResourceCollection(@JsonProperty(value = "value", required = true) List<Resource> value) {
+    public PagedResource(@JsonProperty(value = "value", required = true) List<Resource> value) {
         this.value = value;
     }
 
@@ -56,9 +56,9 @@ public final class ResourceCollection {
      * Set the nextLink property: The link to the next page of items.
      *
      * @param nextLink the nextLink value to set.
-     * @return the ResourceCollection object itself.
+     * @return the PagedResource object itself.
      */
-    public ResourceCollection setNextLink(String nextLink) {
+    public PagedResource setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
     }

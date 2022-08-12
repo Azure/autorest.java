@@ -24,7 +24,7 @@ model Optional {
   dateTime?: zonedDateTime;
 
   stringList?: string[];
-  bytesDict?: Map<string, bytes>;
+  bytesDict?: Record<bytes>;
 }
 
 @withOptionalProperties
