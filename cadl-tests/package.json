@@ -7,7 +7,7 @@
     "@cadl-lang/openapi3": "latest",
     "@azure-tools/cadl-autorest": "latest",
     "@azure-tools/cadl-azure-core": "latest",
-    "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.1.0-dev.1.tgz",
+    "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.1.0-dev.2.tgz",
     "@azure-tools/cadl-ranch": "latest",
     "@azure-tools/cadl-ranch-expect": "latest",
     "@azure-tools/cadl-ranch-specs": "latest",
