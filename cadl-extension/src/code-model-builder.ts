@@ -257,7 +257,7 @@ export class CodeModelBuilder {
       if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
         const bodyType = this.findResponseBody(responseBody.type);
-        if (responseBody && bodyType.kind === "Model") {
+        if (bodyType.kind === "Model") {
           if (this.hasDecorator(bodyType, "$pagedResult")) {
             const itemsProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$items"));
             const nextLinkProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
