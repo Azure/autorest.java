@@ -57,6 +57,7 @@ import {
 import {
   AnySchema,
   ArraySchema,
+  BinaryResponse,
   BinarySchema,
   BooleanSchema,
   ByteArraySchema,
@@ -400,13 +401,18 @@ export class CodeModelBuilder {
       const bodyType = this.findResponseBody(responseBody.type);
       if (bodyType.kind === "Model" && bodyType.name === "bytes") {
         // binary
-        response = new BinarySchema(this.getResponseDescription(resp), {
+        response = new BinaryResponse({
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
               headers: headers,
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary"
+            }
+          },
+          language: {
+            default: {
+              description: this.getResponseDescription(resp)
             }
           }
         });
