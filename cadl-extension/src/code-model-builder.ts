@@ -44,6 +44,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
+  isStatusCode,
   OperationDetails,
   StatusCode,
 } from "@cadl-lang/rest/http";
@@ -252,12 +253,13 @@ export class CodeModelBuilder {
 
   private processRouteForPaged(op: Operation, responses: HttpOperationResponse[]) {
     for (const response of responses) {
-      if (response.responses && response.responses.length > 0) {
+      if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
-        if (responseBody && responseBody.type.kind === "Model") {
-          if (this.hasDecorator(responseBody.type, "$pagedResult")) {
-            const itemsProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$items"));
-            const nextLinkProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
+        const bodyType = this.findResponseBody(responseBody.type);
+        if (responseBody && bodyType.kind === "Model") {
+          if (this.hasDecorator(bodyType, "$pagedResult")) {
+            const itemsProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$items"));
+            const nextLinkProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
 
             op.extensions = op.extensions || {};
             op.extensions["x-ms-pageable"] = {
@@ -368,7 +370,18 @@ export class CodeModelBuilder {
     if (op.extensions?.convenienceMethod) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
     }
-}
+  }
+
+  private findResponseBody(bodyType: Type): Type {
+    // hack for ResourceOkResponse etc. in cadl-azure-core, which does not use @body on TResource
+    if (bodyType.kind === "Model" && bodyType.templateArguments?.length == 1 && bodyType.properties.has("statusCode")) {
+      const statusCodeProperty = bodyType.properties.get("statusCode");
+      if (statusCodeProperty && isStatusCode(this.program, statusCodeProperty)) {
+        bodyType = bodyType.templateArguments[0];
+      }
+    }
+    return bodyType;
+  }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
     // TODO: what to do if more than 1 response?
@@ -384,7 +397,8 @@ export class CodeModelBuilder {
     }
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      if (responseBody.type.kind === "Model" && responseBody.type.name === "bytes") {
+      const bodyType = this.findResponseBody(responseBody.type);
+      if (bodyType.kind === "Model" && bodyType.name === "bytes") {
         // binary
         response = new BinarySchema(this.getResponseDescription(resp), {
           protocol: {
@@ -398,7 +412,7 @@ export class CodeModelBuilder {
         });
       } else {
         // schema (usually JSON)
-        const schema = this.processSchema(responseBody.type, "response");
+        const schema = this.processSchema(bodyType, "response");
         response = new SchemaResponse(schema, {
           protocol: {
             http: {

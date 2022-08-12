@@ -50,7 +50,7 @@ public final class ErrorOpsImpl {
     @ServiceInterface(name = "ErrorErrorOps")
     private interface ErrorOpsService {
         @Get("/error")
-        @ExpectedResponses({200})
+        @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
