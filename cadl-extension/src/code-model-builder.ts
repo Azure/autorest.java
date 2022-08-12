@@ -39,6 +39,7 @@ import {
 } from "@cadl-lang/rest";
 import {
   getAllRoutes,
+  getAuthentication,
   getServers,
   getStatusCodeDescription,
   HttpOperationParameter,
@@ -46,6 +47,7 @@ import {
   HttpServer,
   isStatusCode,
   OperationDetails,
+  ServiceAuthentication,
   StatusCode,
 } from "@cadl-lang/rest/http";
 import {
@@ -85,8 +87,12 @@ import {
   Schema,
   SchemaResponse,
   SchemaType,
+  SecurityScheme,
   StringSchema,
   TimeSchema,
+  Security,
+  OAuth2SecurityScheme,
+  KeySecurityScheme,
 } from "@autorest/codemodel";
 import {
   SchemaContext,
@@ -162,12 +168,17 @@ export class CodeModelBuilder {
     }
     this.hostParameters = [];
     this.processHost(servers?.length === 1 ? servers[0] : undefined);
+
+    const auth = getAuthentication(this.program, serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
   }
 
   public build(): CodeModel {
     ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
 
-    this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
+    this.codeModel.schemas.objects?.forEach(it => this.propagateSchemaUsage(it));
 
     return this.codeModel;
   }
@@ -208,6 +219,37 @@ export class CodeModelBuilder {
           "x-ms-skip-url-encoding": true
         }
       })));
+    }
+  }
+
+  private processAuth(auth: ServiceAuthentication) {
+    const securitySchemes: SecurityScheme[] = [];
+    for (const option of auth.options) {
+      for (const scheme of option.schemes) {
+        switch (scheme.type) {
+          case "oauth2": {
+            const oauth2Scheme = new OAuth2SecurityScheme({
+              scopes: []
+            });
+            scheme.flows.forEach(it => oauth2Scheme.scopes.push(...it.scopes));
+            securitySchemes.push(oauth2Scheme);
+          }
+          break;
+
+          case "apiKey": {
+            const keyScheme = new KeySecurityScheme({
+              name: scheme.name
+            });
+            securitySchemes.push(keyScheme);
+          }
+          break;
+        }
+      }
+    }
+    if (securitySchemes.length > 0) {
+      this.codeModel.security = new Security(true, {
+        schemes: securitySchemes
+      });
     }
   }
 
