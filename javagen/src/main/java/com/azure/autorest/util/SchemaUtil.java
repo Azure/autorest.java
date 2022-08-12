@@ -224,7 +224,7 @@ public class SchemaUtil {
             String name = compositeType.getLanguage().getDefault().getName();
 
             if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
-                if ("Azure.Core.Operations".equals(namespace)) {
+                if ("Azure.Core.Foundations".equals(namespace)) {
                     // https://github.com/Azure/cadl-azure/blob/main/packages/cadl-azure-core/lib/operations.cadl
                     if ("Error".equals(name)) {
                         classType = ClassType.ResponseError;
