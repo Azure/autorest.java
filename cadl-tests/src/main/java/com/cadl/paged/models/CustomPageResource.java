@@ -11,7 +11,7 @@ import java.util.List;
 
 /** Paged collection of Resource items. */
 @Fluent
-public final class PagedResource {
+public final class CustomPageResource {
     /*
      * The Resource items on this page
      */
@@ -25,12 +25,12 @@ public final class PagedResource {
     private String nextLink;
 
     /**
-     * Creates an instance of PagedResource class.
+     * Creates an instance of CustomPageResource class.
      *
      * @param value the value value to set.
      */
     @JsonCreator
-    public PagedResource(@JsonProperty(value = "value", required = true) List<Resource> value) {
+    public CustomPageResource(@JsonProperty(value = "value", required = true) List<Resource> value) {
         this.value = value;
     }
 
@@ -56,9 +56,9 @@ public final class PagedResource {
      * Set the nextLink property: The link to the next page of items.
      *
      * @param nextLink the nextLink value to set.
-     * @return the PagedResource object itself.
+     * @return the CustomPageResource object itself.
      */
-    public PagedResource setNextLink(String nextLink) {
+    public CustomPageResource setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
     }

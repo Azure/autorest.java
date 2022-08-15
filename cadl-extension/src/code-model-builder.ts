@@ -22,6 +22,8 @@ import {
   isArrayModelType,
   isIntrinsic,
   isRecordModelType,
+  isTemplateDeclaration,
+  isTemplateInstance,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
@@ -29,7 +31,6 @@ import {
   Program,
   RecordModelType,
   StringLiteralType,
-  TemplateDeclarationNode,
   Type,
   UnionType,
   UnionTypeVariant,
@@ -39,12 +40,15 @@ import {
 } from "@cadl-lang/rest";
 import {
   getAllRoutes,
+  getAuthentication,
   getServers,
   getStatusCodeDescription,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
+  isStatusCode,
   OperationDetails,
+  ServiceAuthentication,
   StatusCode,
 } from "@cadl-lang/rest/http";
 import {
@@ -56,6 +60,7 @@ import {
 import {
   AnySchema,
   ArraySchema,
+  BinaryResponse,
   BinarySchema,
   BooleanSchema,
   ByteArraySchema,
@@ -83,8 +88,12 @@ import {
   Schema,
   SchemaResponse,
   SchemaType,
+  SecurityScheme,
   StringSchema,
   TimeSchema,
+  Security,
+  OAuth2SecurityScheme,
+  KeySecurityScheme,
 } from "@autorest/codemodel";
 import {
   SchemaContext,
@@ -160,12 +169,17 @@ export class CodeModelBuilder {
     }
     this.hostParameters = [];
     this.processHost(servers?.length === 1 ? servers[0] : undefined);
+
+    const auth = getAuthentication(this.program, serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
   }
 
   public build(): CodeModel {
     ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
 
-    this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
+    this.codeModel.schemas.objects?.forEach(it => this.propagateSchemaUsage(it));
 
     return this.codeModel;
   }
@@ -206,6 +220,37 @@ export class CodeModelBuilder {
           "x-ms-skip-url-encoding": true
         }
       })));
+    }
+  }
+
+  private processAuth(auth: ServiceAuthentication) {
+    const securitySchemes: SecurityScheme[] = [];
+    for (const option of auth.options) {
+      for (const scheme of option.schemes) {
+        switch (scheme.type) {
+          case "oauth2": {
+            const oauth2Scheme = new OAuth2SecurityScheme({
+              scopes: []
+            });
+            scheme.flows.forEach(it => oauth2Scheme.scopes.push(...it.scopes));
+            securitySchemes.push(oauth2Scheme);
+          }
+          break;
+
+          case "apiKey": {
+            const keyScheme = new KeySecurityScheme({
+              name: scheme.name
+            });
+            securitySchemes.push(keyScheme);
+          }
+          break;
+        }
+      }
+    }
+    if (securitySchemes.length > 0) {
+      this.codeModel.security = new Security(true, {
+        schemes: securitySchemes
+      });
     }
   }
 
@@ -252,12 +297,13 @@ export class CodeModelBuilder {
 
   private processRouteForPaged(op: Operation, responses: HttpOperationResponse[]) {
     for (const response of responses) {
-      if (response.responses && response.responses.length > 0) {
+      if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
-        if (responseBody && responseBody.type.kind === "Model") {
-          if (this.hasDecorator(responseBody.type, "$pagedResult")) {
-            const itemsProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$items"));
-            const nextLinkProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
+        const bodyType = this.findResponseBody(responseBody.type);
+        if (bodyType.kind === "Model") {
+          if (this.hasDecorator(bodyType, "$pagedResult")) {
+            const itemsProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$items"));
+            const nextLinkProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
 
             op.extensions = op.extensions || {};
             op.extensions["x-ms-pageable"] = {
@@ -368,7 +414,18 @@ export class CodeModelBuilder {
     if (op.extensions?.convenienceMethod) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
     }
-}
+  }
+
+  private findResponseBody(bodyType: Type): Type {
+    // hack for ResourceOkResponse etc. in cadl-azure-core, which does not use @body on TResource
+    if (bodyType.kind === "Model" && bodyType.templateArguments?.length == 1 && bodyType.properties.has("statusCode")) {
+      const statusCodeProperty = bodyType.properties.get("statusCode");
+      if (statusCodeProperty && isStatusCode(this.program, statusCodeProperty)) {
+        bodyType = bodyType.templateArguments[0];
+      }
+    }
+    return bodyType;
+  }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
     // TODO: what to do if more than 1 response?
@@ -384,9 +441,10 @@ export class CodeModelBuilder {
     }
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      if (responseBody.type.kind === "Model" && responseBody.type.name === "bytes") {
+      const bodyType = this.findResponseBody(responseBody.type);
+      if (bodyType.kind === "Model" && bodyType.name === "bytes") {
         // binary
-        response = new BinarySchema(this.getResponseDescription(resp), {
+        response = new BinaryResponse({
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
@@ -394,11 +452,16 @@ export class CodeModelBuilder {
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary"
             }
+          },
+          language: {
+            default: {
+              description: this.getResponseDescription(resp)
+            }
           }
         });
       } else {
         // schema (usually JSON)
-        const schema = this.processSchema(responseBody.type, "response");
+        const schema = this.processSchema(bodyType, "response");
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
@@ -1136,19 +1199,5 @@ function includeDerivedModel(model: ModelType): boolean {
   return (
     !isTemplateDeclaration(model) &&
     !(isTemplateInstance(model) && model.derivedModels.length === 0)
-  );
-}
-// TODO: use method from cadl-compiler after version upgrade
-function isTemplateDeclaration(type: ModelType): boolean {
-  if (type.node === undefined) {
-    return false;
-  }
-  const node = type.node as TemplateDeclarationNode;
-  return node.templateParameters.length > 0 && !isTemplateInstance(type);
-}
-function isTemplateInstance(type: ModelType): boolean {
-  return (
-    type.templateArguments !== undefined &&
-    type.templateArguments.length > 0
   );
 }

@@ -33,7 +33,7 @@ public final class PagedAsyncClient {
     }
 
     /**
-     * The list operation.
+     * List Resource resources.
      *
      * <p><strong>Response Body Schema</strong>
      *
