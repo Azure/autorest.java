@@ -31,7 +31,6 @@ import {
   Program,
   RecordModelType,
   StringLiteralType,
-  TemplateDeclarationNode,
   Type,
   UnionType,
   UnionTypeVariant,
