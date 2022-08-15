@@ -14,9 +14,7 @@ model Resource {
   type: string;
 }
 
-model ResourceCollection is Page<Resource>;
-
 @route("/paged")
 interface PagedOp {
-  op list(): ResourceCollection;
+  op list is ResourceList<Resource>;
 }
