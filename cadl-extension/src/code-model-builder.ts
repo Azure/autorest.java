@@ -22,6 +22,8 @@ import {
   isArrayModelType,
   isIntrinsic,
   isRecordModelType,
+  isTemplateDeclaration,
+  isTemplateInstance,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
@@ -1198,19 +1200,5 @@ function includeDerivedModel(model: ModelType): boolean {
   return (
     !isTemplateDeclaration(model) &&
     !(isTemplateInstance(model) && model.derivedModels.length === 0)
-  );
-}
-// TODO: use method from cadl-compiler after version upgrade
-function isTemplateDeclaration(type: ModelType): boolean {
-  if (type.node === undefined) {
-    return false;
-  }
-  const node = type.node as TemplateDeclarationNode;
-  return node.templateParameters.length > 0 && !isTemplateInstance(type);
-}
-function isTemplateInstance(type: ModelType): boolean {
-  return (
-    type.templateArguments !== undefined &&
-    type.templateArguments.length > 0
   );
 }
