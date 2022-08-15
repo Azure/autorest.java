@@ -20,6 +20,7 @@ import com.azure.core.http.rest.SimpleResponse;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Template to create a synchronous client.
@@ -184,6 +185,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     ClassType.BinaryData.addImportsTo(imports, false);
     ClassType.RequestOptions.addImportsTo(imports, false);
     imports.add(SimpleResponse.class.getName());
+    imports.add(Collectors.class.getName());
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {

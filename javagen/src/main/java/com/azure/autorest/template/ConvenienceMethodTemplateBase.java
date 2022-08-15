@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
@@ -66,41 +67,18 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
                             } else if (protocolParameter != null) {
                                 // protocol method parameter exists
-                                String expression = expressionConvertToType(parameter.getName(), parameter, protocolParameter);
+                                String expression = expressionConvertToType(parameter.getName(), parameter);
                                 parameterExpressionsMap.put(protocolParameter.getName(), expression);
                             } else {
                                 // protocol method parameter not exist, set the parameter via RequestOptions
                                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
-                                    case HEADER: {
-                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                                String.format("requestOptions.setHeader(%1$s, %2$s);",
-                                                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                                                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
-                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                                                writeLine.accept(ifBlock);
-                                            });
-                                        } else {
-                                            writeLine.accept(methodBlock);
-                                        }
-                                    }
-                                    break;
+                                    case HEADER:
+                                        writeHeader(parameter, methodBlock);
+                                        break;
 
-                                    case QUERY: {
-                                        // TODO: array
-                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                                String.format("requestOptions.addQueryParam(%1$s, %2$s);",
-                                                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                                                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
-                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                                                writeLine.accept(ifBlock);
-                                            });
-                                        } else {
-                                            writeLine.accept(methodBlock);
-                                        }
-                                    }
-                                    break;
+                                    case QUERY:
+                                        writeQueryParam(parameter, methodBlock);
+                                        break;
 
                                     case BODY: {
                                         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
@@ -197,7 +175,35 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
         }
     }
 
-    private static String expressionConvertToString(String name, IType type) {
+    private static void writeHeader(MethodParameter parameter, JavaBlock methodBlock) {
+        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
+                String.format("requestOptions.setHeader(%1$s, %2$s);",
+                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
+        if (!parameter.getClientMethodParameter().getIsRequired()) {
+            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                writeLine.accept(ifBlock);
+            });
+        } else {
+            writeLine.accept(methodBlock);
+        }
+    }
+
+    private static void writeQueryParam(MethodParameter parameter, JavaBlock methodBlock) {
+        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
+                String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
+        if (!parameter.getClientMethodParameter().getIsRequired()) {
+            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                writeLine.accept(ifBlock);
+            });
+        } else {
+            writeLine.accept(methodBlock);
+        }
+    }
+
+    private static String expressionConvertToString(String name, IType type, ProxyMethodParameter parameter) {
         if (type == ClassType.String) {
             return name;
         } else if (type instanceof EnumType) {
@@ -208,19 +214,56 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
             } else {
                 return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
             }
+        } else if (type instanceof IterableType) {
+            // TODO: explode
+            String delimiter = parameter.getCollectionFormat().getDelimiter();
+            IType elementType = ((IterableType) type).getElementType();
+            if (elementType == ClassType.String) {
+                return String.format(
+                        "String.join(\"%2$s\", %1$s)",
+                        name, delimiter);
+            } else if (elementType instanceof EnumType) {
+                IType enumValueType = ((EnumType) elementType).getElementType().asNullable();
+                if (enumValueType == ClassType.String) {
+                    return String.format(
+                            "%1$s.stream().map(%2$s::toString).collect(Collectors.joining(\"%3$s\"))",
+                            name, elementType, delimiter);
+                } else {
+                    return String.format(
+                            "%1$s.stream().map(%2$s::to%3$s).map(String::valueOf).collect(Collectors.joining(\"%4$s\"))",
+                            name, elementType, enumValueType, delimiter);
+                }
+            } else {
+                // primitive
+                return String.format(
+                        "%1$s.stream().map(String::valueOf).collect(Collectors.joining(\"%2$s\"))",
+                        name, delimiter);
+            }
         } else {
             // primitive
             return String.format("String.valueOf(%s)", name);
         }
     }
 
-    private static String expressionConvertToType(String name, MethodParameter convenienceParameter, MethodParameter clientParameter) {
+    private static String expressionConvertToType(String name, MethodParameter convenienceParameter) {
         if (convenienceParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
             return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getClientType());
         } else {
-            // TODO: array of enum to array of string
-            if (convenienceParameter.getClientMethodParameter().getClientType() instanceof EnumType) {
-                return expressionConvertToString(name, convenienceParameter.getClientMethodParameter().getClientType());
+            IType type = convenienceParameter.getClientMethodParameter().getClientType();
+            if (type instanceof EnumType) {
+                return expressionConvertToString(name, type, convenienceParameter.getProxyMethodParameter());
+            } else if (type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
+                IType enumType = ((IterableType) type).getElementType();
+                IType enumValueType = ((EnumType) enumType).getElementType().asNullable();
+                if (enumValueType == ClassType.String) {
+                    return String.format(
+                            "%1$s.stream().map(%2$s::toString).collect(Collectors.toList())",
+                            name, enumType);
+                } else {
+                    return String.format(
+                            "%1$s.stream().map(%2$s::to%3$s).map(String::valueOf).collect(Collectors.toList())",
+                            name, enumType, enumValueType);
+                }
             } else {
                 return name;
             }

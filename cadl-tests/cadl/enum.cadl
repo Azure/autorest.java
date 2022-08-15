@@ -60,4 +60,20 @@ interface EnumOp {
   @get
   @route("operation/state")
   op getOperation(@query state: OperationStateValues): Operation;
+
+  @post
+  @route("operation/stringenumarray")
+  op setStringEnumArray(@query colorArray: ColorModel[], @query colorArrayOpt?: ColorModel[]): Operation;
+
+  @post
+  @route("operation/intenumarray")
+  op setIntEnumArray(@query priorityArray: Priority[], @query priorityArrayOpt?: Priority[]): Operation;
+
+  @post
+  @route("operation/stringarray")
+  op setStringArray(@query stringArray: string[], @query stringArrayOpt?: string[]): Operation;
+
+  @post
+  @route("operation/intarray")
+  op setIntArray(@query intArray: int32[], @query intArrayOpt?: int32[]): Operation;
 }
