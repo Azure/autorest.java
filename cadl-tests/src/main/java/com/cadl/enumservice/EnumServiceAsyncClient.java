@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.implementation.EnumOpsImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
@@ -22,6 +24,7 @@ import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
@@ -476,10 +479,15 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "colorArrayOpt", colorArrayOpt.stream().map(ColorModel::toString).collect(Collectors.joining(",")));
+                    "colorArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
         }
         return setStringEnumArrayWithResponse(
-                        colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -502,7 +510,10 @@ public final class EnumServiceAsyncClient {
     public Mono<String> setStringEnumArray(List<ColorModel> colorArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
-                        colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -528,13 +539,15 @@ public final class EnumServiceAsyncClient {
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
                     "priorityArrayOpt",
-                    priorityArrayOpt.stream()
-                            .map(Priority::toLong)
-                            .map(String::valueOf)
-                            .collect(Collectors.joining(",")));
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
         }
         return setIntEnumArrayWithResponse(
-                        priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
                         requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
@@ -558,7 +571,11 @@ public final class EnumServiceAsyncClient {
     public Mono<String> setIntEnumArray(List<Priority> priorityArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
-                        priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
                         requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
@@ -583,7 +600,11 @@ public final class EnumServiceAsyncClient {
     public Mono<String> setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
-            requestOptions.addQueryParam("stringArrayOpt", String.join(",", stringArrayOpt));
+            requestOptions.addQueryParam(
+                    "stringArrayOpt",
+                    stringArrayOpt.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
         }
         return setStringArrayWithResponse(stringArray, requestOptions)
                 .map(Response::getValue)
@@ -632,7 +653,9 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "intArrayOpt", intArrayOpt.stream().map(String::valueOf).collect(Collectors.joining(",")));
+                    "intArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
         }
         return setIntArrayWithResponse(intArray, requestOptions)
                 .map(Response::getValue)

@@ -40,6 +40,8 @@ public class EnumTests {
                 .thenReturn(Mono.just(new SimpleResponse<>(null, 200, new HttpHeaders(), BinaryData.fromString("\"OK\""))));
 
         EnumServiceAsyncClient client = new EnumServiceAsyncClient(impl);
+
+        // normal case
         client.setStringEnumArray(Arrays.asList(ColorModel.BLUE, ColorModel.GREEN), Arrays.asList(ColorModel.GREEN, ColorModel.RED)).block();
 
         Assertions.assertEquals(
@@ -51,6 +53,19 @@ public class EnumTests {
         verifyQuery(request.getUrl().getQuery(),
                 "colorArrayOpt",
                 String.join(",", Arrays.asList(ColorModel.GREEN.toString(), ColorModel.RED.toString())));
+
+        // case: array contains null
+        client.setStringEnumArray(Arrays.asList(ColorModel.BLUE, null), Arrays.asList(null, ColorModel.RED)).block();
+
+        Assertions.assertEquals(
+                Arrays.asList(ColorModel.BLUE.toString(), ""),
+                enumArrayArgumentCaptor.getValue());
+
+        request = new HttpRequest(HttpMethod.POST, "http://endpoint/");
+        getRequestCallback(requestOptionsArgumentCaptor.getValue()).accept(request);
+        verifyQuery(request.getUrl().getQuery(),
+                "colorArrayOpt",
+                String.join(",", "", ColorModel.RED.toString()));
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +80,8 @@ public class EnumTests {
                 .thenReturn(Mono.just(new SimpleResponse<>(null, 200, new HttpHeaders(), BinaryData.fromString("\"OK\""))));
 
         EnumServiceAsyncClient client = new EnumServiceAsyncClient(impl);
+
+        // normal case
         client.setIntEnumArray(Arrays.asList(Priority.HIGH, Priority.LOW), Arrays.asList(Priority.LOW, Priority.HIGH)).block();
 
         Assertions.assertEquals(
@@ -76,6 +93,19 @@ public class EnumTests {
         verifyQuery(request.getUrl().getQuery(),
                 "priorityArrayOpt",
                 "0,100");
+
+        // case: array contains null
+        client.setIntEnumArray(Arrays.asList(Priority.HIGH, null), Arrays.asList(null, Priority.HIGH)).block();
+
+        Assertions.assertEquals(
+                Arrays.asList("100", ""),
+                enumArrayArgumentCaptor.getValue());
+
+        request = new HttpRequest(HttpMethod.POST, "http://endpoint/");
+        getRequestCallback(requestOptionsArgumentCaptor.getValue()).accept(request);
+        verifyQuery(request.getUrl().getQuery(),
+                "priorityArrayOpt",
+                ",100");
     }
 
     private static void verifyQuery(String query, String key, String value) throws UnsupportedEncodingException {

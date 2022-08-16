@@ -22,6 +22,7 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -220,24 +221,12 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
             IType elementType = ((IterableType) type).getElementType();
             if (elementType == ClassType.String) {
                 return String.format(
-                        "String.join(\"%2$s\", %1$s)",
+                        "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.joining(\"%2$s\"))",
                         name, delimiter);
-            } else if (elementType instanceof EnumType) {
-                IType enumValueType = ((EnumType) elementType).getElementType().asNullable();
-                if (enumValueType == ClassType.String) {
-                    return String.format(
-                            "%1$s.stream().map(%2$s::toString).collect(Collectors.joining(\"%3$s\"))",
-                            name, elementType, delimiter);
-                } else {
-                    return String.format(
-                            "%1$s.stream().map(%2$s::to%3$s).map(String::valueOf).collect(Collectors.joining(\"%4$s\"))",
-                            name, elementType, enumValueType, delimiter);
-                }
             } else {
-                // primitive
                 return String.format(
-                        "%1$s.stream().map(String::valueOf).collect(Collectors.joining(\"%2$s\"))",
-                        name, delimiter);
+                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%1$s, CollectionFormat.%2$s)",
+                        name, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
             }
         } else {
             // primitive
@@ -257,12 +246,12 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                 IType enumValueType = ((EnumType) enumType).getElementType().asNullable();
                 if (enumValueType == ClassType.String) {
                     return String.format(
-                            "%1$s.stream().map(%2$s::toString).collect(Collectors.toList())",
-                            name, enumType);
+                            "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.toList())",
+                            name);
                 } else {
                     return String.format(
-                            "%1$s.stream().map(%2$s::to%3$s).map(String::valueOf).collect(Collectors.toList())",
-                            name, enumType, enumValueType);
+                            "%1$s.stream().map(paramItemValue -> paramItemValue == null ? \"\" : String.valueOf(paramItemValue.to%2$s())).collect(Collectors.toList())",
+                            name, enumValueType);
                 }
             } else {
                 return name;

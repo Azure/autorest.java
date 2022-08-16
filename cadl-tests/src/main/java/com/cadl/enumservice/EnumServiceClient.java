@@ -17,12 +17,15 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
@@ -605,7 +608,10 @@ public final class EnumServiceClient {
     public String setStringEnumArray(List<ColorModel> colorArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
-                        colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
                 .getValue()
                 .toObject(String.class);
     }
@@ -632,12 +638,17 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "colorArrayOpt", colorArrayOpt.stream().map(ColorModel::toString).collect(Collectors.joining(",")));
+                    "colorArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
                 setStringEnumArrayWithResponse(
-                        colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions);
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 
@@ -659,7 +670,11 @@ public final class EnumServiceClient {
     public String setIntEnumArray(List<Priority> priorityArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
-                        priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
                         requestOptions)
                 .getValue()
                 .toObject(String.class);
@@ -688,15 +703,17 @@ public final class EnumServiceClient {
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
                     "priorityArrayOpt",
-                    priorityArrayOpt.stream()
-                            .map(Priority::toLong)
-                            .map(String::valueOf)
-                            .collect(Collectors.joining(",")));
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
                 setIntEnumArrayWithResponse(
-                        priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
                         requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
@@ -742,7 +759,11 @@ public final class EnumServiceClient {
             List<String> stringArray, List<String> stringArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
-            requestOptions.addQueryParam("stringArrayOpt", String.join(",", stringArrayOpt));
+            requestOptions.addQueryParam(
+                    "stringArrayOpt",
+                    stringArrayOpt.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = setStringArrayWithResponse(stringArray, requestOptions);
@@ -790,7 +811,9 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "intArrayOpt", intArrayOpt.stream().map(String::valueOf).collect(Collectors.joining(",")));
+                    "intArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = setIntArrayWithResponse(intArray, requestOptions);
