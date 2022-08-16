@@ -144,7 +144,7 @@ public class SchemaNameNormalization {
                     .filter(p -> ((ArraySchema) p.getSchema()).getElementType() == schema)
                     .findFirst();
             if (arrayProperty.isPresent()) {
-                String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(getSingular(arrayProperty.get().getSerializedName()));
+                String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(Utils.getSingular(arrayProperty.get().getSerializedName()));
                 newName = rename(newName, names, deduplicate);
                 LOGGER.warn("Rename schema from '{}' to '{}', based on parent schema '{}' and property '{}'",
                         Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType), arrayProperty.get().getSerializedName());
@@ -389,22 +389,5 @@ public class SchemaNameNormalization {
     private static boolean isSameCase(char c1, char c2) {
         return (Character.isUpperCase(c1) && Character.isUpperCase(c2))
                 || (Character.isLowerCase(c1) && Character.isLowerCase(c2));
-    }
-
-    // duplication of FluentUtils.getSingular
-    private static String getSingular(String name) {
-        if (name == null) {
-            return null;
-        }
-
-        if (name.endsWith("ies")) {
-            return name.substring(0, name.length() - 3) + 'y';
-        } else if (name.endsWith("sses")) {
-            return name.substring(0, name.length() - 2);
-        } else if (name.endsWith("s") && !name.endsWith("ss")) {
-            return name.substring(0, name.length() - 1);
-        } else {
-            return name;
-        }
     }
 }
