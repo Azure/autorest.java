@@ -582,13 +582,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param colorArray The colorArray parameter.
@@ -627,13 +621,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param colorArray The colorArray parameter.
@@ -665,13 +653,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param priorityArray The priorityArray parameter.
@@ -710,13 +692,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param priorityArray The priorityArray parameter.
@@ -748,13 +724,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param stringArray The stringArray parameter.
@@ -793,13 +763,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param stringArray The stringArray parameter.
@@ -831,13 +795,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param intArray The intArray parameter.
@@ -875,13 +833,7 @@ public final class EnumOpsImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param intArray The intArray parameter.

@@ -215,13 +215,7 @@ public final class EnumServiceAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param colorArray The colorArray parameter.
@@ -255,13 +249,7 @@ public final class EnumServiceAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param priorityArray The priorityArray parameter.
@@ -295,13 +283,7 @@ public final class EnumServiceAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param stringArray The stringArray parameter.
@@ -335,13 +317,7 @@ public final class EnumServiceAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param intArray The intArray parameter.
@@ -496,7 +472,7 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setStringEnumArray(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+    public Mono<String> setStringEnumArray(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -505,7 +481,7 @@ public final class EnumServiceAsyncClient {
         return setStringEnumArrayWithResponse(
                         colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -523,12 +499,12 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setStringEnumArray(List<ColorModel> colorArray) {
+    public Mono<String> setStringEnumArray(List<ColorModel> colorArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
                         colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -547,7 +523,7 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setIntEnumArray(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
+    public Mono<String> setIntEnumArray(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -561,7 +537,7 @@ public final class EnumServiceAsyncClient {
                         priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
                         requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -579,13 +555,13 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setIntEnumArray(List<Priority> priorityArray) {
+    public Mono<String> setIntEnumArray(List<Priority> priorityArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
                         priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
                         requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -604,14 +580,14 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
+    public Mono<String> setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
             requestOptions.addQueryParam("stringArrayOpt", String.join(",", stringArrayOpt));
         }
         return setStringArrayWithResponse(stringArray, requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -629,11 +605,11 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setStringArray(List<String> stringArray) {
+    public Mono<String> setStringArray(List<String> stringArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -652,7 +628,7 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+    public Mono<String> setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -660,7 +636,7 @@ public final class EnumServiceAsyncClient {
         }
         return setIntArrayWithResponse(intArray, requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /*
@@ -678,10 +654,10 @@ public final class EnumServiceAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
-    public Mono<Operation> setIntArray(List<Long> intArray) {
+    public Mono<String> setIntArray(List<Long> intArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

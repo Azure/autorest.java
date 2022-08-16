@@ -215,13 +215,7 @@ public final class EnumServiceClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param colorArray The colorArray parameter.
@@ -254,13 +248,7 @@ public final class EnumServiceClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param priorityArray The priorityArray parameter.
@@ -293,13 +281,7 @@ public final class EnumServiceClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param stringArray The stringArray parameter.
@@ -332,13 +314,7 @@ public final class EnumServiceClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     name: String(Read/Write) (Required)
-     *     best: boolean (Required)
-     *     age: long (Required)
-     *     priority: String(100/0) (Required)
-     *     color: String(Red/Blue/Green) (Required)
-     * }
+     * String
      * }</pre>
      *
      * @param intArray The intArray parameter.
@@ -626,12 +602,12 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    public Operation setStringEnumArray(List<ColorModel> colorArray) {
+    public String setStringEnumArray(List<ColorModel> colorArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
                         colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions)
                 .getValue()
-                .toObject(Operation.class);
+                .toObject(String.class);
     }
 
     /*
@@ -651,7 +627,7 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
-    public Response<Operation> setStringEnumArrayWithResponse(
+    public Response<String> setStringEnumArrayWithResponse(
             List<ColorModel> colorArray, List<ColorModel> colorArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
@@ -662,8 +638,7 @@ public final class EnumServiceClient {
         Response<BinaryData> protocolMethodResponse =
                 setStringEnumArrayWithResponse(
                         colorArray.stream().map(ColorModel::toString).collect(Collectors.toList()), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 
     /*
@@ -681,13 +656,13 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    public Operation setIntEnumArray(List<Priority> priorityArray) {
+    public String setIntEnumArray(List<Priority> priorityArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
                         priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
                         requestOptions)
                 .getValue()
-                .toObject(Operation.class);
+                .toObject(String.class);
     }
 
     /*
@@ -707,7 +682,7 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
-    public Response<Operation> setIntEnumArrayWithResponse(
+    public Response<String> setIntEnumArrayWithResponse(
             List<Priority> priorityArray, List<Priority> priorityArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
@@ -723,8 +698,7 @@ public final class EnumServiceClient {
                 setIntEnumArrayWithResponse(
                         priorityArray.stream().map(Priority::toLong).map(String::valueOf).collect(Collectors.toList()),
                         requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 
     /*
@@ -742,9 +716,9 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    public Operation setStringArray(List<String> stringArray) {
+    public String setStringArray(List<String> stringArray) {
         RequestOptions requestOptions = new RequestOptions();
-        return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(Operation.class);
+        return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
     }
 
     /*
@@ -764,7 +738,7 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
-    public Response<Operation> setStringArrayWithResponse(
+    public Response<String> setStringArrayWithResponse(
             List<String> stringArray, List<String> stringArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
@@ -772,8 +746,7 @@ public final class EnumServiceClient {
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = setStringArrayWithResponse(stringArray, requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 
     /*
@@ -791,9 +764,9 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    public Operation setIntArray(List<Long> intArray) {
+    public String setIntArray(List<Long> intArray) {
         RequestOptions requestOptions = new RequestOptions();
-        return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(Operation.class);
+        return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
 
     /*
@@ -813,7 +786,7 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
-    public Response<Operation> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
+    public Response<String> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -821,7 +794,6 @@ public final class EnumServiceClient {
         }
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = setIntArrayWithResponse(intArray, requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 }
