@@ -62,12 +62,29 @@ public class SchemaNameNormalization {
         Set<String> names = new HashSet<>();
         codeModel = normalizeUnnamedAdditionalProperties(codeModel, names);
         codeModel = normalizeUnnamedBaseType(codeModel, names);
-        codeModel = normalizeUnnamedChoiceSchema(codeModel, names);
+        codeModel = normalizeUnnamedObjectTypeInArray(codeModel, names);    // after normalizeUnnamedBaseType
+        codeModel = normalizeUnnamedChoiceType(codeModel, names);
         codeModel = normalizeUnnamedRequestBody(codeModel, names);
         return codeModel;
     }
 
-    protected CodeModel normalizeUnnamedChoiceSchema(CodeModel codeModel, Set<String> names) {
+    protected CodeModel normalizeUnnamedObjectTypeInArray(CodeModel codeModel, Set<String> names) {
+        final String prefix = "Components";
+        final String postfix = "Items";
+
+        List<ObjectSchema> unnamedObjectSchemas = codeModel.getSchemas().getObjects().stream()
+                .filter(s -> {
+                    String name = Utils.getDefaultName(s);
+                    return name.startsWith(prefix) && name.endsWith(postfix);
+                })
+                .collect(Collectors.toList());
+        if (!unnamedObjectSchemas.isEmpty()) {
+            unnamedObjectSchemas.forEach(s -> renameSchema(codeModel, s, names));
+        }
+        return codeModel;
+    }
+
+    protected CodeModel normalizeUnnamedChoiceType(CodeModel codeModel, Set<String> names) {
         List<ChoiceSchema> unnamedChoiceSchemas = codeModel.getSchemas().getChoices().stream()
                 .filter(s -> isUnnamedChoice(Utils.getDefaultName(s)))
                 .collect(Collectors.toList());
@@ -113,7 +130,24 @@ public class SchemaNameNormalization {
             if (property.isPresent()) {
                 String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(property.get().getSerializedName());
                 newName = rename(newName, names, deduplicate);
-                LOGGER.warn("Rename schema from '{}' to '{}', based on parent schema '{}'", Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType));
+                LOGGER.warn("Rename schema from '{}' to '{}', based on parent schema '{}' and property '{}'",
+                        Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType), property.get().getSerializedName());
+                schema.getLanguage().getDefault().setName(newName);
+                return;
+            }
+        }
+
+        // rename based for object in array
+        for (ObjectSchema compositeType : codeModel.getSchemas().getObjects()) {
+            Optional<Property> arrayProperty = compositeType.getProperties().stream()
+                    .filter(p -> p.getSchema() instanceof ArraySchema)
+                    .filter(p -> ((ArraySchema) p.getSchema()).getElementType() == schema)
+                    .findFirst();
+            if (arrayProperty.isPresent()) {
+                String newName = Utils.getDefaultName(compositeType) + CodeNamer.toPascalCase(getSingular(arrayProperty.get().getSerializedName()));
+                newName = rename(newName, names, deduplicate);
+                LOGGER.warn("Rename schema from '{}' to '{}', based on parent schema '{}' and property '{}'",
+                        Utils.getDefaultName(schema), newName, Utils.getDefaultName(compositeType), arrayProperty.get().getSerializedName());
                 schema.getLanguage().getDefault().setName(newName);
                 return;
             }
@@ -355,5 +389,22 @@ public class SchemaNameNormalization {
     private static boolean isSameCase(char c1, char c2) {
         return (Character.isUpperCase(c1) && Character.isUpperCase(c2))
                 || (Character.isLowerCase(c1) && Character.isLowerCase(c2));
+    }
+
+    // duplication of FluentUtils.getSingular
+    private static String getSingular(String name) {
+        if (name == null) {
+            return null;
+        }
+
+        if (name.endsWith("ies")) {
+            return name.substring(0, name.length() - 3) + 'y';
+        } else if (name.endsWith("sses")) {
+            return name.substring(0, name.length() - 2);
+        } else if (name.endsWith("s") && !name.endsWith("ss")) {
+            return name.substring(0, name.length() - 1);
+        } else {
+            return name;
+        }
     }
 }
