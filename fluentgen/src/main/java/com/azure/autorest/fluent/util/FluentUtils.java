@@ -196,19 +196,7 @@ public class FluentUtils {
     }
 
     public static String getSingular(String name) {
-        if (name == null) {
-            return null;
-        }
-
-        if (name.endsWith("ies")) {
-            return name.substring(0, name.length() - 3) + 'y';
-        } else if (name.endsWith("sses")) {
-            return name.substring(0, name.length() - 2);
-        } else if (name.endsWith("s") && !name.endsWith("ss")) {
-            return name.substring(0, name.length() - 1);
-        } else {
-            return name;
-        }
+        return Utils.getSingular(name);
     }
 
     public static boolean isContextParameter(ClientMethodParameter parameter) {

@@ -67,7 +67,7 @@ public class Main {
         // initialize plugin
         CadlPlugin cadlPlugin = new CadlPlugin(namespace);
 
-        // transform cod emodel
+        // transform code model
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model

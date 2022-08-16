@@ -27,12 +27,18 @@ do
     generate $f
 done
 
-## run cadl ranch tests sources
-#cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .
+# run cadl ranch tests sources
+cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .
+
+export NAMESPACE=Cadl.Testserver.Servicedriven1
+generate ./http/resiliency/srv-driven-1/main.cadl
+
+export NAMESPACE=Cadl.Testserver.Servicedriven2
+generate ./http/resiliency/srv-driven-2/main.cadl
 #for f in $(find ./http -name "*.cadl")
 #do
 #  if [[ $(realpath $f) == *"models"* ]]; then
 #    generate $f
 #  fi
 #done
-#rm -rf http
+rm -rf http

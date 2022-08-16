@@ -10,6 +10,7 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -71,6 +72,7 @@ public final class PagedOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> list(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -96,7 +98,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * The list operation.
+     * List Resource resources.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -124,7 +126,14 @@ public final class PagedOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.list(this.client.getEndpoint(), accept, requestOptions, context))
+        return FluxUtil.withContext(
+                        context ->
+                                service.list(
+                                        this.client.getEndpoint(),
+                                        this.client.getServiceVersion().getVersion(),
+                                        accept,
+                                        requestOptions,
+                                        context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
@@ -137,7 +146,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * The list operation.
+     * List Resource resources.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -174,7 +183,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * The list operation.
+     * List Resource resources.
      *
      * <p><strong>Response Body Schema</strong>
      *
