@@ -1,4 +1,2 @@
 emitters:
-  # '@azure-tools/cadl-autorest': true
-  '@cadl-lang/openapi3': true
   '@azure-tools/cadl-java': true
