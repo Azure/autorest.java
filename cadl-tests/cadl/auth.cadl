@@ -16,7 +16,7 @@ model AuthFlow {
     ]
 }
 
-@route("/response")
+@route("/auth")
 interface AuthOp {
   op get(): string;
 }

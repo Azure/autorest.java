@@ -16,10 +16,14 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Template to create a synchronous client.
@@ -184,6 +188,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     ClassType.BinaryData.addImportsTo(imports, false);
     ClassType.RequestOptions.addImportsTo(imports, false);
     imports.add(SimpleResponse.class.getName());
+    imports.add(Collectors.class.getName());
+    imports.add(Objects.class.getName());
+    imports.add(JacksonAdapter.class.getName());
+    imports.add(CollectionFormat.class.getName());
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {

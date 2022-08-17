@@ -17,11 +17,16 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
@@ -195,6 +200,138 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOperationWithResponse(String state, RequestOptions requestOptions) {
         return this.client.getOperationWithResponse(state, requestOptions).block();
+    }
+
+    /**
+     * The setStringEnumArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param colorArray The colorArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
+        return this.client.setStringEnumArrayWithResponse(colorArray, requestOptions).block();
+    }
+
+    /**
+     * The setIntEnumArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
+        return this.client.setIntEnumArrayWithResponse(priorityArray, requestOptions).block();
+    }
+
+    /**
+     * The setStringArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param stringArray The stringArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
+        return this.client.setStringArrayWithResponse(stringArray, requestOptions).block();
+    }
+
+    /**
+     * The setIntArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param intArray The intArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setIntArrayWithResponse(List<Long> intArray, RequestOptions requestOptions) {
+        return this.client.setIntArrayWithResponse(intArray, requestOptions).block();
     }
 
     /*
@@ -451,5 +588,235 @@ public final class EnumServiceClient {
         Response<BinaryData> protocolMethodResponse = getOperationWithResponse(state.toString(), requestOptions);
         return new SimpleResponse<>(
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+    }
+
+    /*
+     * Generated convenience method for setStringEnumArrayWithResponse
+     */
+    /**
+     * The setStringEnumArray operation.
+     *
+     * @param colorArray The colorArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public String setStringEnumArray(List<ColorModel> colorArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringEnumArrayWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /*
+     * Generated convenience method for setStringEnumArrayWithResponse
+     */
+    /**
+     * The setStringEnumArray operation.
+     *
+     * @param colorArray The colorArray parameter.
+     * @param colorArrayOpt The colorArrayOpt parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<String> setStringEnumArrayWithResponse(
+            List<ColorModel> colorArray, List<ColorModel> colorArrayOpt, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (colorArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "colorArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+        }
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setStringEnumArrayWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntEnumArrayWithResponse
+     */
+    /**
+     * The setIntEnumArray operation.
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public String setIntEnumArray(List<Priority> priorityArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntEnumArrayWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /*
+     * Generated convenience method for setIntEnumArrayWithResponse
+     */
+    /**
+     * The setIntEnumArray operation.
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @param priorityArrayOpt The priorityArrayOpt parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<String> setIntEnumArrayWithResponse(
+            List<Priority> priorityArray, List<Priority> priorityArrayOpt, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (priorityArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "priorityArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
+        }
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                setIntEnumArrayWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setStringArrayWithResponse
+     */
+    /**
+     * The setStringArray operation.
+     *
+     * @param stringArray The stringArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public String setStringArray(List<String> stringArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /*
+     * Generated convenience method for setStringArrayWithResponse
+     */
+    /**
+     * The setStringArray operation.
+     *
+     * @param stringArray The stringArray parameter.
+     * @param stringArrayOpt The stringArrayOpt parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<String> setStringArrayWithResponse(
+            List<String> stringArray, List<String> stringArrayOpt, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (stringArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "stringArrayOpt",
+                    stringArrayOpt.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = setStringArrayWithResponse(stringArray, requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntArrayWithResponse
+     */
+    /**
+     * The setIntArray operation.
+     *
+     * @param intArray The intArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    public String setIntArray(List<Long> intArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /*
+     * Generated convenience method for setIntArrayWithResponse
+     */
+    /**
+     * The setIntArray operation.
+     *
+     * @param intArray The intArray parameter.
+     * @param intArrayOpt The intArrayOpt parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    public Response<String> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (intArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "intArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
+        }
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = setIntArrayWithResponse(intArray, requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 }

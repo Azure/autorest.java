@@ -49,7 +49,7 @@ public final class AuthOpsImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "AuthAuthOps")
     private interface AuthOpsService {
-        @Get("/response")
+        @Get("/auth")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

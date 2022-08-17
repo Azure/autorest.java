@@ -15,12 +15,17 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.implementation.EnumOpsImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous EnumServiceClient type. */
@@ -197,6 +202,141 @@ public final class EnumServiceAsyncClient {
         return this.serviceClient.getOperationWithResponseAsync(state, requestOptions);
     }
 
+    /**
+     * The setStringEnumArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param colorArray The colorArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> setStringEnumArrayWithResponse(
+            List<String> colorArray, RequestOptions requestOptions) {
+        return this.serviceClient.setStringEnumArrayWithResponseAsync(colorArray, requestOptions);
+    }
+
+    /**
+     * The setIntEnumArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> setIntEnumArrayWithResponse(
+            List<String> priorityArray, RequestOptions requestOptions) {
+        return this.serviceClient.setIntEnumArrayWithResponseAsync(priorityArray, requestOptions);
+    }
+
+    /**
+     * The setStringArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param stringArray The stringArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> setStringArrayWithResponse(
+            List<String> stringArray, RequestOptions requestOptions) {
+        return this.serviceClient.setStringArrayWithResponseAsync(stringArray, requestOptions);
+    }
+
+    /**
+     * The setIntArray operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param intArray The intArray parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> setIntArrayWithResponse(List<Long> intArray, RequestOptions requestOptions) {
+        return this.serviceClient.setIntArrayWithResponseAsync(intArray, requestOptions);
+    }
+
     /*
      * Generated convenience method for getColorWithResponse
      */
@@ -317,5 +457,230 @@ public final class EnumServiceAsyncClient {
         return getOperationWithResponse(state.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
+    }
+
+    /*
+     * Generated convenience method for setStringEnumArrayWithResponse
+     */
+    /**
+     * The setStringEnumArray operation.
+     *
+     * @param colorArray The colorArray parameter.
+     * @param colorArrayOpt The colorArrayOpt parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setStringEnumArray(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (colorArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "colorArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+        }
+        return setStringEnumArrayWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setStringEnumArrayWithResponse
+     */
+    /**
+     * The setStringEnumArray operation.
+     *
+     * @param colorArray The colorArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setStringEnumArray(List<ColorModel> colorArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringEnumArrayWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntEnumArrayWithResponse
+     */
+    /**
+     * The setIntEnumArray operation.
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @param priorityArrayOpt The priorityArrayOpt parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setIntEnumArray(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (priorityArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "priorityArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
+        }
+        return setIntEnumArrayWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntEnumArrayWithResponse
+     */
+    /**
+     * The setIntEnumArray operation.
+     *
+     * @param priorityArray The priorityArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setIntEnumArray(List<Priority> priorityArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntEnumArrayWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setStringArrayWithResponse
+     */
+    /**
+     * The setStringArray operation.
+     *
+     * @param stringArray The stringArray parameter.
+     * @param stringArrayOpt The stringArrayOpt parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (stringArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "stringArrayOpt",
+                    stringArrayOpt.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        return setStringArrayWithResponse(stringArray, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setStringArrayWithResponse
+     */
+    /**
+     * The setStringArray operation.
+     *
+     * @param stringArray The stringArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setStringArray(List<String> stringArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringArrayWithResponse(stringArray, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntArrayWithResponse
+     */
+    /**
+     * The setIntArray operation.
+     *
+     * @param intArray The intArray parameter.
+     * @param intArrayOpt The intArrayOpt parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (intArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "intArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
+        }
+        return setIntArrayWithResponse(intArray, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /*
+     * Generated convenience method for setIntArrayWithResponse
+     */
+    /**
+     * The setIntArray operation.
+     *
+     * @param intArray The intArray parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    public Mono<String> setIntArray(List<Long> intArray) {
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntArrayWithResponse(intArray, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }
