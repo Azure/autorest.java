@@ -54,6 +54,9 @@ import {
 import {
   getVersion 
 } from "@cadl-lang/versioning";
+import { 
+  getPagedResult 
+} from "@azure-tools/cadl-azure-core/*";
 import {
   fail
 } from "assert";
@@ -290,20 +293,21 @@ export class CodeModelBuilder {
     }
     op.responses.map(it => this.processResponse(operation, it));
 
-    this.processRouteForPaged(operation, op.responses);
+    this.processRouteForPagedResult(operation, op.responses);
 
     operationGroup.addOperation(operation);
   }
 
-  private processRouteForPaged(op: Operation, responses: HttpOperationResponse[]) {
+  private processRouteForPagedResult(op: Operation, responses: HttpOperationResponse[]) {
     for (const response of responses) {
       if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
         const bodyType = this.findResponseBody(responseBody.type);
         if (bodyType.kind === "Model") {
-          if (this.hasDecorator(bodyType, "$pagedResult")) {
-            const itemsProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$items"));
-            const nextLinkProperty = Array.from(bodyType.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
+          const pagedResult = getPagedResult(this.program, bodyType);
+          if (pagedResult) {
+            const itemsProperty = pagedResult.itemsProperty;
+            const nextLinkProperty = pagedResult.nextLinkProperty;
 
             op.extensions = op.extensions || {};
             op.extensions["x-ms-pageable"] = {
