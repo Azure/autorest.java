@@ -15,7 +15,6 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
@@ -62,7 +61,7 @@ import java.util.stream.Stream;
 public class ClientMapper implements IMapper<CodeModel, Client> {
     private static final ClientMapper INSTANCE = new ClientMapper();
 
-    private ClientMapper() {
+    protected ClientMapper() {
     }
 
     public static ClientMapper getInstance() {
@@ -194,11 +193,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        final boolean hasModelsPackage = hasModelsPackage(codeModel, settings)
-                // models package is not same as implementation package
-                && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
-                // has classes in models
-                && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty());
+        final boolean hasModelsPackage = hasModelsPackage(clientModels, enumTypes, responseModels);
         if (hasModelsPackage) {
             String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
             if (!packageInfos.containsKey(modelsPackage)) {
@@ -469,14 +464,25 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return moduleInfo;
     }
 
-    private static boolean hasModelsPackage(CodeModel codeModel, JavaSettings settings) {
-        return (!settings.isDataPlaneClient() || settings.isGenerateModels()    // not DPG, or DPG requires all models
-                // models in convenience methods
-                || (codeModel.getSchemas().getObjects().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))
-                || codeModel.getSchemas().getSealedChoices().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))
-                || codeModel.getSchemas().getChoices().stream().anyMatch(o -> o.getUsage() != null && o.getUsage().contains(SchemaContext.CONVENIENCE_METHOD))))
+    /**
+     * Extension for whether SDK contains "models" package,
+     * that need have "exports" in "module-info.java", and have "package-info.java"
+     *
+     * @param clientModels the list of client models (ObjectSchema).
+     * @param enumTypes the list of enum models (ChoiceSchema and SealedChoiceSchema).
+     * @param responseModels the list of client response models (for responses that contains headers).
+     * @return whether SDK contains "models" package,
+     */
+    protected boolean hasModelsPackage(List<ClientModel> clientModels, List<EnumType> enumTypes, List<ClientResponse> responseModels) {
+
+        JavaSettings settings = JavaSettings.getInstance();
+        return (!settings.isDataPlaneClient() || settings.isGenerateModels())   // not DPG, or DPG that requires all models
                 // defined models package (it is defined by default)
-                && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty());
+                && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty())
+                // models package is not same as implementation package
+                && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
+                // has classes in models
+                && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty());
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
