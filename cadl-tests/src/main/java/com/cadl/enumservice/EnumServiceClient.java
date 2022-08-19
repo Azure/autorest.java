@@ -347,6 +347,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Color getColor() {
         RequestOptions requestOptions = new RequestOptions();
         return Color.fromString(getColorWithResponse(requestOptions).getValue());
@@ -367,6 +369,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Color> getColorWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -387,6 +391,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public ColorModel getColorModel() {
         RequestOptions requestOptions = new RequestOptions();
         return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue());
@@ -407,6 +413,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ColorModel> getColorModelWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -429,6 +437,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation setColorModel(ColorModel color) {
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions).getValue().toObject(Operation.class);
@@ -450,6 +460,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> setColorModelWithResponse(ColorModel color, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -473,6 +485,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation setPriority(Priority priority) {
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
@@ -496,6 +510,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> setPriorityWithResponse(Priority priority, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -518,6 +534,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation getRunningOperation() {
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions).getValue().toObject(Operation.class);
@@ -538,6 +556,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> getRunningOperationWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -561,6 +581,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation getOperation(OperationStateValues state) {
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions).getValue().toObject(Operation.class);
@@ -582,6 +604,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> getOperationWithResponse(OperationStateValues state, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -605,6 +629,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public String setStringEnumArray(List<ColorModel> colorArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
@@ -633,6 +659,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> setStringEnumArrayWithResponse(
             List<ColorModel> colorArray, List<ColorModel> colorArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
@@ -667,6 +695,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public String setIntEnumArray(List<Priority> priorityArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
@@ -697,6 +727,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> setIntEnumArrayWithResponse(
             List<Priority> priorityArray, List<Priority> priorityArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
@@ -733,6 +765,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public String setStringArray(List<String> stringArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
@@ -755,6 +789,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> setStringArrayWithResponse(
             List<String> stringArray, List<String> stringArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
@@ -785,6 +821,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public String setIntArray(List<Long> intArray) {
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
@@ -807,6 +845,8 @@ public final class EnumServiceClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {

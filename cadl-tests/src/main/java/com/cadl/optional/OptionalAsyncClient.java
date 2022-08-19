@@ -170,6 +170,8 @@ public final class OptionalAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AllPropertiesOptional> put(
             String requestHeaderRequired,
             boolean booleanRequired,
@@ -227,6 +229,8 @@ public final class OptionalAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AllPropertiesOptional> put(
             String requestHeaderRequired,
             boolean booleanRequired,

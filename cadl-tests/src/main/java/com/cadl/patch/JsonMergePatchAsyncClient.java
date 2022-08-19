@@ -122,6 +122,8 @@ public final class JsonMergePatchAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> create(String name, Resource body) {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
@@ -145,6 +147,8 @@ public final class JsonMergePatchAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> update(String name, Resource body) {
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)

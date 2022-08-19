@@ -147,6 +147,8 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> get() {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
@@ -169,6 +171,8 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> create(WriteDog dog) {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
@@ -191,6 +195,8 @@ public final class VisibilityOpAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> query(ReadDog dog) {
         RequestOptions requestOptions = new RequestOptions();
         return queryWithResponse(BinaryData.fromObject(dog), requestOptions)

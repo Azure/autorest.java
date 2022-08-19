@@ -62,6 +62,8 @@ public final class ServerClient {
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public void status(long code) {
         RequestOptions requestOptions = new RequestOptions();
         statusWithResponse(code, requestOptions).getValue();
@@ -83,6 +85,8 @@ public final class ServerClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(long code, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);

@@ -15,9 +15,11 @@ import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -48,6 +50,9 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                     classBlock.javadocComment(comment -> {
                         ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
                     });
+
+                    addGeneratedAnnotation(classBlock);
+                    TemplateUtil.writeClientMethodServiceMethodAnnotation(convenienceMethod, classBlock);
 
                     // convenience method
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
@@ -113,6 +118,10 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock);
                     });
                 });
+    }
+
+    protected void addGeneratedAnnotation(JavaType typeBlock) {
+        typeBlock.annotation("Generated");
     }
 
     /**

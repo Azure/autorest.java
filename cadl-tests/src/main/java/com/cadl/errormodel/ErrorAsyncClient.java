@@ -72,6 +72,8 @@ public final class ErrorAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Diagnostic> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)

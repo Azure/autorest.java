@@ -64,6 +64,8 @@ public final class ServerAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> status(long code) {
         RequestOptions requestOptions = new RequestOptions();
         return statusWithResponse(code, requestOptions).map(Response::getValue);

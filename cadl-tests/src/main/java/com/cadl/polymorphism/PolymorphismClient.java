@@ -138,6 +138,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(Pet.class);
@@ -158,6 +160,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Pet> readWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -180,6 +184,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public BaseType write(BaseType body) {
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(BaseType.class);
@@ -201,6 +207,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BaseType> writeWithResponse(BaseType body, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -223,6 +231,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Task task(Task body) {
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Task.class);
@@ -244,6 +254,8 @@ public final class PolymorphismClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Task> taskWithResponse(Task body, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);

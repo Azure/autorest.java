@@ -7,34 +7,34 @@ package cadl.testserver.servicedriven2.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for Contenttype. */
-public enum Contenttype {
+/** Defines values for ContentTypePath. */
+public enum ContentTypePath {
     /** Enum value json. */
     JSON("json"),
 
     /** Enum value jpeg. */
     JPEG("jpeg");
 
-    /** The actual serialized value for a Contenttype instance. */
+    /** The actual serialized value for a ContentTypePath instance. */
     private final String value;
 
-    Contenttype(String value) {
+    ContentTypePath(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a Contenttype instance.
+     * Parses a serialized value to a ContentTypePath instance.
      *
      * @param value the serialized value to parse.
-     * @return the parsed Contenttype object, or null if unable to parse.
+     * @return the parsed ContentTypePath object, or null if unable to parse.
      */
     @JsonCreator
-    public static Contenttype fromString(String value) {
+    public static ContentTypePath fromString(String value) {
         if (value == null) {
             return null;
         }
-        Contenttype[] items = Contenttype.values();
-        for (Contenttype item : items) {
+        ContentTypePath[] items = ContentTypePath.values();
+        for (ContentTypePath item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

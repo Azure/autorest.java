@@ -68,6 +68,8 @@ public final class AuthAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> get() {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)

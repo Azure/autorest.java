@@ -73,6 +73,8 @@ public final class VisibilityReadClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog get() {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(Dog.class);
@@ -93,6 +95,8 @@ public final class VisibilityReadClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> getWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);

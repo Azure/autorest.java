@@ -67,6 +67,8 @@ public final class ResponseClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBinary() {
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).getValue();
@@ -87,6 +89,8 @@ public final class ResponseClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);

@@ -195,6 +195,8 @@ public final class DPGClient {
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public void headNoParams() {
         RequestOptions requestOptions = new RequestOptions();
         headNoParamsWithResponse(requestOptions).getValue();
@@ -216,6 +218,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -238,6 +242,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially only has one required Query Parameter.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getRequired(String parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions).getValue().toObject(Message.class);
@@ -260,6 +266,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getRequiredWithResponse(String parameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -283,6 +291,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message putRequiredOptional(String requiredParam) {
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
@@ -306,6 +316,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> putRequiredOptionalWithResponse(
             String requiredParam, String optionalParam, Context context) {
         RequestOptions requestOptions = new RequestOptions();
@@ -332,6 +344,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message postParameters(PostInput parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
@@ -355,6 +369,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> postParametersWithResponse(PostInput parameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -377,6 +393,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially has one optional query parameter.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getOptional() {
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
@@ -399,6 +417,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getOptionalWithResponse(String optionalParam, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {

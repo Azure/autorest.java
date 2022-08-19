@@ -85,6 +85,8 @@ public final class BuiltinAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Builtin> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)

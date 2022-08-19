@@ -86,6 +86,8 @@ public final class VisibilityWriteAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> create(WriteDog dog) {
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)

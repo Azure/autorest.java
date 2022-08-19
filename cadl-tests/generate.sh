@@ -35,10 +35,12 @@ generate ./http/resiliency/srv-driven-1/main.cadl
 
 export NAMESPACE=Cadl.Testserver.Servicedriven2
 generate ./http/resiliency/srv-driven-2/main.cadl
-#for f in $(find ./http -name "*.cadl")
-#do
-#  if [[ $(realpath $f) == *"models"* ]]; then
-#    generate $f
-#  fi
-#done
+
+unset NAMESPACE
+for f in $(find ./http -name "*.cadl")
+do
+ if [[ $(realpath $f) == *"models"* ]]; then
+   generate $f
+ fi
+done
 rm -rf http

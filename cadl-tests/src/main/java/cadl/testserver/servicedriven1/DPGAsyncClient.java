@@ -199,6 +199,8 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> headNoParams() {
         RequestOptions requestOptions = new RequestOptions();
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
@@ -221,6 +223,8 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
      *     {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getRequired(String parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
@@ -245,6 +249,8 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
@@ -271,6 +277,8 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam) {
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
@@ -293,6 +301,8 @@ public final class DPGAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> postParameters(PostInput parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
@@ -317,6 +327,8 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
      *     Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional(String optionalParam) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
@@ -342,6 +354,8 @@ public final class DPGAsyncClient {
      * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
      *     Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional() {
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions)

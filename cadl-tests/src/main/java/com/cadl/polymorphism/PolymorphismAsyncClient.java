@@ -138,6 +138,8 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> read() {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
@@ -160,6 +162,8 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BaseType> write(BaseType body) {
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions)
@@ -182,6 +186,8 @@ public final class PolymorphismAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Task> task(Task body) {
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions)

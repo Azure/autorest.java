@@ -4,7 +4,7 @@
 
 package cadl.testserver.servicedriven2;
 
-import cadl.testserver.servicedriven2.models.Contenttype;
+import cadl.testserver.servicedriven2.models.ContentTypePath;
 import cadl.testserver.servicedriven2.models.Message;
 import cadl.testserver.servicedriven2.models.PostInput;
 import com.azure.core.annotation.Generated;
@@ -155,7 +155,7 @@ public final class DPGClient {
      * }
      * }</pre>
      *
-     * @param contenttype The contenttype parameter. Allowed values: "json", "jpeg".
+     * @param contentTypePath The contentTypePath parameter. Allowed values: "json", "jpeg".
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -167,8 +167,8 @@ public final class DPGClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
-            String contenttype, BinaryData parameter, RequestOptions requestOptions) {
-        return this.client.postParametersWithResponse(contenttype, parameter, requestOptions).block();
+            String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
+        return this.client.postParametersWithResponse(contentTypePath, parameter, requestOptions).block();
     }
 
     /**
@@ -262,6 +262,8 @@ public final class DPGClient {
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public void headNoParams() {
         RequestOptions requestOptions = new RequestOptions();
         headNoParamsWithResponse(requestOptions).getValue();
@@ -284,6 +286,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
@@ -309,6 +313,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially only has one required Query Parameter.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getRequired(String parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions).getValue().toObject(Message.class);
@@ -332,6 +338,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getRequiredWithResponse(String parameter, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
@@ -358,6 +366,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message putRequiredOptional(String requiredParam) {
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
@@ -382,6 +392,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> putRequiredOptionalWithResponse(
             String requiredParam, String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
@@ -402,7 +414,7 @@ public final class DPGClient {
     /**
      * POST a JSON or a JPEG.
      *
-     * @param contenttype The contenttype parameter.
+     * @param contentTypePath The contentTypePath parameter.
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -412,9 +424,11 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    public Message postParameters(Contenttype contenttype, PostInput parameter) {
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Message postParameters(ContentTypePath contentTypePath, PostInput parameter) {
         RequestOptions requestOptions = new RequestOptions();
-        return postParametersWithResponse(contenttype.toString(), BinaryData.fromObject(parameter), requestOptions)
+        return postParametersWithResponse(contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions)
                 .getValue()
                 .toObject(Message.class);
     }
@@ -425,7 +439,7 @@ public final class DPGClient {
     /**
      * POST a JSON or a JPEG.
      *
-     * @param contenttype The contenttype parameter.
+     * @param contentTypePath The contentTypePath parameter.
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -436,11 +450,15 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
-    public Response<Message> postParametersWithResponse(Contenttype contenttype, PostInput parameter, Context context) {
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Message> postParametersWithResponse(
+            ContentTypePath contentTypePath, PostInput parameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
-                postParametersWithResponse(contenttype.toString(), BinaryData.fromObject(parameter), requestOptions);
+                postParametersWithResponse(
+                        contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
@@ -457,6 +475,8 @@ public final class DPGClient {
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public void deleteParameters() {
         RequestOptions requestOptions = new RequestOptions();
         deleteParametersWithResponse(requestOptions).getValue();
@@ -478,6 +498,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
@@ -498,6 +520,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially has one optional query parameter.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getOptional() {
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
@@ -521,6 +545,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getOptionalWithResponse(String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
@@ -548,6 +574,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getNewOperation() {
         RequestOptions requestOptions = new RequestOptions();
         return getNewOperationWithResponse(requestOptions).getValue().toObject(Message.class);
@@ -569,6 +597,8 @@ public final class DPGClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getNewOperationWithResponse(Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
