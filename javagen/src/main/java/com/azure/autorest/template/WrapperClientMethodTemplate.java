@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaType;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,19 +47,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         }
 
         addGeneratedAnnotation(typeBlock);
-        switch (clientMethod.getType()) {
-            case PagingSync:
-            case PagingAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                break;
-            case LongRunningBeginSync:
-            case LongRunningBeginAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
-                break;
-            default:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                break;
-        }
+        TemplateUtil.writeClientMethodServiceMethodAnnotation(clientMethod, typeBlock);
 
         String methodName = clientMethod.getName();
         if (clientMethod.getType().name().contains("Async") && methodName.endsWith("Async")) {

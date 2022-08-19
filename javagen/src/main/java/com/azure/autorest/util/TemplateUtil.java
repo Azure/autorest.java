@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.MethodPollingDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
+import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
@@ -174,6 +175,28 @@ public class TemplateUtil {
             block.line("return (String) obj.get(path);");
             block.line("} catch (RuntimeException e) { return null; }");
         });
+    }
+
+    /**
+     * Writes corresponding "ServiceMethod" annotation for client method.
+     *
+     * @param clientMethod the client method.
+     * @param typeBlock the code block.
+     */
+    public static void writeClientMethodServiceMethodAnnotation(ClientMethod clientMethod, JavaType typeBlock) {
+        switch (clientMethod.getType()) {
+            case PagingSync:
+            case PagingAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                break;
+            case LongRunningBeginSync:
+            case LongRunningBeginAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+                break;
+            default:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                break;
+        }
     }
 
     /**
