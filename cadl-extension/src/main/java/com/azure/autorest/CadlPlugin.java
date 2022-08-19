@@ -7,14 +7,11 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.util.ClientModelUtil;
+import com.azure.cadl.mapper.CadlMapperFactory;
+import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,17 +37,17 @@ public class CadlPlugin extends Javagen {
     protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
         // Client model
         client.getModels().stream()
-                .filter(CadlPlugin::isGeneratingModel)
+                .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
 
         // Enum
         client.getEnums().stream()
-                .filter(CadlPlugin::isGeneratingModel)
+                .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addEnum(model.getPackage(), model.getName(), model));
 
         // Response
         client.getResponseModels().stream()
-                .filter(CadlPlugin::isGeneratingModel)
+                .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addClientResponse(model.getPackage(), model.getName(), model));
     }
 
@@ -66,31 +63,6 @@ public class CadlPlugin extends Javagen {
             throw new IllegalStateException(e);
         }
         LOGGER.info("Write file: {}", fileName);
-    }
-
-    private static boolean isGeneratingModel(ClientModel model) {
-        return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
-                && !model.getImplementationDetails().isException();
-    }
-
-    private static boolean isGeneratingModel(EnumType model) {
-        return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
-                && !model.getImplementationDetails().isException();
-    }
-
-    private static boolean isGeneratingModel(ClientResponse response) {
-        IType bodyType = response.getBodyType();
-        boolean ret = ClientModelUtil.isClientModel(bodyType);
-        if (ret) {
-            ClassType classType = (ClassType) bodyType;
-            ClientModel model = ClientModelUtil.getClientModel(classType.getName());
-            if (model != null) {
-                ret = isGeneratingModel(model);
-            }
-        }
-        return ret;
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
@@ -130,7 +102,9 @@ public class CadlPlugin extends Javagen {
         super(new MockConnection(), "dummy", "dummy");
         SETTINGS_MAP.put("namespace", namespace);
         JavaSettingsAccessor.setHost(this);
-   }
+
+        Mappers.setFactory(new CadlMapperFactory());
+    }
 
     @SuppressWarnings("unchecked")
     @Override
