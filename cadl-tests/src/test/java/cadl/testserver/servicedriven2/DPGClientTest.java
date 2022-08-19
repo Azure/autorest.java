@@ -1,7 +1,7 @@
 package cadl.testserver.servicedriven2;
 
 
-import cadl.testserver.servicedriven2.models.Contenttype;
+import cadl.testserver.servicedriven2.models.ContentTypePath;
 import cadl.testserver.servicedriven2.models.Message;
 import cadl.testserver.servicedriven2.models.PostInput;
 import com.azure.core.http.rest.Response;
@@ -37,7 +37,7 @@ class DPGClientTest {
     @Test
     void postParametersWithResponse() {
         PostInput postInput = new PostInput("http://example.org/myimage.jpeg");
-        Response<Message> response = client.postParametersWithResponse(Contenttype.JSON, postInput, Context.NONE);
+        Response<Message> response = client.postParametersWithResponse(ContentTypePath.JSON, postInput, Context.NONE);
         Assertions.assertEquals(200, response.getStatusCode());
         Message message = response.getValue();
         Assertions.assertNull(message);
@@ -80,7 +80,7 @@ class DPGClientTest {
     @Test
     void postParameters() {
         PostInput postInput = new PostInput("http://example.org/myimage.jpeg");
-        Message message = client.postParameters(Contenttype.JSON, postInput);
+        Message message = client.postParameters(ContentTypePath.JSON, postInput);
         Assertions.assertNull(message);
     }
 
