@@ -30,10 +30,10 @@ done
 # run cadl ranch tests sources
 cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .
 
-export NAMESPACE=Cadl.Testserver.Servicedriven1
+export NAMESPACE=com.cadl.testserver.servicedriven1
 generate ./http/resiliency/srv-driven-1/main.cadl
 
-export NAMESPACE=Cadl.Testserver.Servicedriven2
+export NAMESPACE=com.cadl.testserver.servicedriven2
 generate ./http/resiliency/srv-driven-2/main.cadl
 
 unset NAMESPACE
