@@ -97,6 +97,8 @@ public final class NamingClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public DataResponse post(String name) {
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).getValue().toObject(DataResponse.class);
@@ -123,6 +125,8 @@ public final class NamingClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response along with {@link Response}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DataResponse> postWithResponse(String name, String etag, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {

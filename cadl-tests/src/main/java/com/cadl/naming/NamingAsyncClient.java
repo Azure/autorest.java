@@ -99,6 +99,8 @@ public final class NamingAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name, String etag) {
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
@@ -127,6 +129,8 @@ public final class NamingAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summary of Response on successful completion of {@link Mono}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name) {
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions)

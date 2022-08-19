@@ -56,7 +56,7 @@ public final class ParamsImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DPGClientParams")
     private interface ParamsService {
-        @Head("/serviceDriven/parameters")
+        @Head("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -71,7 +71,7 @@ public final class ParamsImpl {
         Mono<Response<Void>> headNoParams(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/serviceDriven/parameters")
+        @Get("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -89,7 +89,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/serviceDriven/parameters")
+        @Put("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -107,7 +107,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/serviceDriven/parameters/{contenttype}")
+        @Post("/serviceDriven2/serviceDriven/parameters/{contentTypePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -120,13 +120,13 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postParameters(
-                @PathParam("contenttype") String contenttype,
+                @PathParam("contentTypePath") String contentTypePath,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData parameter,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Delete("/serviceDriven/parameters")
+        @Delete("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -141,7 +141,7 @@ public final class ParamsImpl {
         Mono<Response<Void>> deleteParameters(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/serviceDriven/moreParameters")
+        @Get("/serviceDriven2/serviceDriven/moreParameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -156,7 +156,7 @@ public final class ParamsImpl {
         Mono<Response<BinaryData>> getOptional(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/serviceDriven/newPath")
+        @Get("/serviceDriven2/serviceDriven/newPath")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -391,7 +391,7 @@ public final class ParamsImpl {
      * }
      * }</pre>
      *
-     * @param contenttype The contenttype parameter. Allowed values: "json", "jpeg".
+     * @param contentTypePath The contentTypePath parameter. Allowed values: "json", "jpeg".
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -402,10 +402,10 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
-            String contenttype, BinaryData parameter, RequestOptions requestOptions) {
+            String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postParameters(contenttype, accept, parameter, requestOptions, context));
+                context -> service.postParameters(contentTypePath, accept, parameter, requestOptions, context));
     }
 
     /**
@@ -427,7 +427,7 @@ public final class ParamsImpl {
      * }
      * }</pre>
      *
-     * @param contenttype The contenttype parameter. Allowed values: "json", "jpeg".
+     * @param contentTypePath The contentTypePath parameter. Allowed values: "json", "jpeg".
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -438,8 +438,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
-            String contenttype, BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(contenttype, parameter, requestOptions).block();
+            String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
+        return postParametersWithResponseAsync(contentTypePath, parameter, requestOptions).block();
     }
 
     /**

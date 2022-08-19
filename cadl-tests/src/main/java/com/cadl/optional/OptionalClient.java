@@ -168,6 +168,8 @@ public final class OptionalClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public AllPropertiesOptional put(
             String requestHeaderRequired,
             boolean booleanRequired,
@@ -211,6 +213,8 @@ public final class OptionalClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link ResponseBase}.
      */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<OptionalOpsPutHeaders, AllPropertiesOptional> putWithResponse(
             String requestHeaderRequired,
             boolean booleanRequired,

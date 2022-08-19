@@ -55,7 +55,7 @@ public final class ParamsImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DPGClientParams")
     private interface ParamsService {
-        @Head("/serviceDriven/parameters")
+        @Head("/serviceDriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -70,7 +70,7 @@ public final class ParamsImpl {
         Mono<Response<Void>> headNoParams(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/serviceDriven/parameters")
+        @Get("/serviceDriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -88,7 +88,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/serviceDriven/parameters")
+        @Put("/serviceDriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -106,7 +106,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/serviceDriven/parameters/{contenttype}")
+        @Post("/serviceDriven1/parameters/{contentTypePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -119,13 +119,13 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postParameters(
-                @PathParam("contenttype") String contenttype,
+                @PathParam("contentTypePath") String contentTypePath,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData parameter,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/serviceDriven/moreParameters")
+        @Get("/serviceDriven1/moreParameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -329,10 +329,10 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postParametersWithResponseAsync(
             BinaryData parameter, RequestOptions requestOptions) {
-        final String contenttype = "json";
+        final String contentTypePath = "json";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postParameters(contenttype, accept, parameter, requestOptions, context));
+                context -> service.postParameters(contentTypePath, accept, parameter, requestOptions, context));
     }
 
     /**
