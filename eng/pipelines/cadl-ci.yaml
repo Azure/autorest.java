@@ -49,35 +49,35 @@ jobs:
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Build CADL Java'
+        displayName: 'Build Cadl Java'
         inputs:
           command: custom
           customCommand: run build
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Lint CADL Java'
+        displayName: 'Lint Cadl Java'
         inputs:
           command: custom
           customCommand: run lint
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Check-Format CADL Java'
+        displayName: 'Check-Format Cadl Java'
         inputs:
           command: custom
           customCommand: run check-format
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Pack CADL Java'
+        displayName: 'Pack Cadl Java'
         inputs:
           command: custom
           customCommand: pack
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Check-Format CADL Test'
+        displayName: 'Check-Format Cadl Tests'
         inputs:
           command: custom
           customCommand: run check-format
@@ -85,7 +85,7 @@ jobs:
 
       - script: |
           npm install -g @cadl-lang/compiler
-        displayName: 'Install CADL'
+        displayName: 'Install Cadl'
 
       - script: |
           bash ./generate.sh
@@ -112,7 +112,7 @@ jobs:
         workingDirectory: ./cadl-tests
 
       - task: Maven@3
-        displayName: 'Run CADL Tests'
+        displayName: 'Run Cadl Tests'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
