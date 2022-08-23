@@ -1,8 +1,8 @@
-# CADL-Java
+# Cadl-Java
 
-## Install CADL
+## Install Cadl
 
-Install Node.js and [CADL](https://github.com/microsoft/cadl/).
+Install Node.js and [Cadl](https://github.com/microsoft/cadl/).
 
 ```shell
 npm install -g @cadl-lang/compiler
@@ -14,7 +14,7 @@ npm install -g @cadl-lang/compiler
 
 This will build `./cadl-extension`, which is basically `preprocessor` and `javagen` combined.
 
-## Build and Install CADL-Java
+## Build and Install Cadl-Java
 
 `bash setup.sh` in `./cadl-tests` folder.
 
@@ -34,7 +34,7 @@ Generated code will be at `./cadl-tests/cadl-ouput/java` folder.
 
 ## Temporary Demonstration for Convenience Methods
 
-To enable generating convenience method for an operation or a group, add `convenienceMethod` decorator to the operation of the interface in CADL.
+To enable generating convenience method for an operation or a group, add `convenienceMethod` decorator to the operation of the interface in Cadl.
 
 E.g.
 ```typescript

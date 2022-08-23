@@ -24,15 +24,13 @@ model Dog extends Pet {
 
 // discriminator with templated model
 @discriminator("kind")
-model Task {
-}
+model Task {}
 model TemplatedTask<TDiscriminator, TParameters> extends Task {
   kind: TDiscriminator;
   name: string;
   parameters?: TParameters;
 }
-model Parameter {
-}
+model Parameter {}
 model EntitiesTaskParameters extends Parameter {
   entity?: string;
 }
@@ -57,13 +55,13 @@ model DerivedTypeList extends DerivedType {
 
 @route("/Pets")
 interface Polymorphism {
-  op read(): {
+  read(): {
     @body body: Pet;
   };
 
   @put
-  op write(@body body: BaseType): BaseType;
+  write(@body body: BaseType): BaseType;
 
   @post
-  op task(@body body: Task): Task;
+  task(@body body: Task): Task;
 }

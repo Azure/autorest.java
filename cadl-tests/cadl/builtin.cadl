@@ -16,14 +16,13 @@ model Builtin {
   double: float64;
   duration: duration;
   dateTime: zonedDateTime;
-
   stringList: string[];
   bytesDict: Record<bytes>;
 }
 
 @route("/builtin")
 interface BuiltinOp {
-  op read(): {
+  read(): {
     @body body: Builtin;
   };
 }
