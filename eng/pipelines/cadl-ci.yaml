@@ -76,13 +76,6 @@ jobs:
           customCommand: pack
           workingDir: ./cadl-extension
 
-      - task: Npm@1
-        displayName: 'Check-Format Cadl Tests'
-        inputs:
-          command: custom
-          customCommand: run check-format
-          workingDir: ./cadl-tests
-
       - script: |
           npm install -g @cadl-lang/compiler
         displayName: 'Install Cadl'
@@ -91,6 +84,13 @@ jobs:
           bash ./generate.sh
         displayName: 'Generate Code'
         workingDirectory: ./cadl-tests
+
+      - task: Npm@1
+        displayName: 'Check-Format Cadl Tests'
+        inputs:
+          command: custom
+          customCommand: run check-format
+          workingDir: ./cadl-tests
 
       - script: |
           git status
