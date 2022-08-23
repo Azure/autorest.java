@@ -11,15 +11,18 @@ namespace Cadl.Patch;
 model Resource {
   @visibility("read")
   name: string;
-
   description?: string;
 }
 
 @route("/patch")
 interface Patch {
   @put
-  op create(@path name: string, @body body: Resource): Resource | ErrorResponse;
+  create(@path name: string, @body body: Resource): Resource | ErrorResponse;
 
   @patch
-  op update(@header("content-type") contentType: "application/merge-patch+json", @path name: string, @body body: Resource): Resource | ErrorResponse;
+  update(
+    @header("content-type") contentType: "application/merge-patch+json",
+    @path name: string,
+    @body body: Resource
+  ): Resource | ErrorResponse;
 }

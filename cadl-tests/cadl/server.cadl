@@ -4,16 +4,20 @@ using Cadl.Http;
 
 @serviceTitle("Server")
 @serviceVersion("1.0.0")
-@server("https://{domain}.{tld}", "Httpbin endpoint", {
-  @doc("second-level domain, use httpbin")
-  domain?: string = "httpbin";
+@server(
+  "https://{domain}.{tld}",
+  "Httpbin endpoint",
+  {
+    @doc("second-level domain, use httpbin")
+    domain?: string = "httpbin",
 
-  @doc("top-level domain, use org")
-  tld?: string = "org";
-})
+    @doc("top-level domain, use org")
+    tld?: string = "org",
+  }
+)
 namespace Cadl.Server;
 
 @route("/status/{code}")
 interface ServerOp {
-  op status(@path code: int32): OkResponse | NoContentResponse;
+  status(@path code: int32): OkResponse | NoContentResponse;
 }

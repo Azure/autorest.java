@@ -8,15 +8,13 @@ using Cadl.Http;
 namespace Cadl.Auth;
 
 model AuthFlow {
-    type: OAuth2FlowType.clientCredentials;
-    tokenUrl: "https://api.example.com/oauth2/token";
-    refreshUrl: "https://api.example.com/oauth2/refresh";
-    scopes: [
-        "https://api.example.com/.default"
-    ]
+  type: OAuth2FlowType.clientCredentials;
+  tokenUrl: "https://api.example.com/oauth2/token";
+  refreshUrl: "https://api.example.com/oauth2/refresh";
+  scopes: ["https://api.example.com/.default"];
 }
 
 @route("/auth")
 interface AuthOp {
-  op get(): string;
+  get(): string;
 }

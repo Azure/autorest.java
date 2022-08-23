@@ -15,5 +15,5 @@ model Diagnostic {
 
 @route("/error")
 interface ErrorOp {
-  op read(): ResourceCreatedOrOkResponse<Diagnostic> | ErrorResponse;
+  read(): ResourceCreatedOrOkResponse<Diagnostic> | ErrorResponse;
 }

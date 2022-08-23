@@ -30,18 +30,18 @@ model WriteDog {
 interface VisibilityRead {
   @get
   @route("/read")
-  op get(): Dog;
+  get(): Dog;
 }
 
 interface VisibilityWrite {
   @put
   @route("/write")
-  op create(@body dog: WriteDog): Dog;
+  create(@body dog: WriteDog): Dog;
 }
 
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post
   @route("/query")
-  op query(@body dog: ReadDog): Dog;
+  query(@body dog: ReadDog): Dog;
 }

@@ -8,8 +8,8 @@ namespace Cadl.Response;
 
 @route("/response")
 interface ResponseOp {
-  op getBinary(): {
-    @header contentType: "image/png",
+  getBinary(): {
+    @header contentType: "image/png";
     @body body: bytes;
   };
 }
