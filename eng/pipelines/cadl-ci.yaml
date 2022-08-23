@@ -63,11 +63,25 @@ jobs:
           workingDir: ./cadl-extension
 
       - task: Npm@1
+        displayName: 'Check-Format CADL Java'
+        inputs:
+          command: custom
+          customCommand: run check-format
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
         displayName: 'Pack CADL Java'
         inputs:
           command: custom
           customCommand: pack
           workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Check-Format CADL Test'
+        inputs:
+          command: custom
+          customCommand: run check-format
+          workingDir: ./cadl-tests
 
       - script: |
           npm install -g @cadl-lang/compiler
