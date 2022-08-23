@@ -7,9 +7,7 @@ import {
   StringSchema,
   ValueSchema,
 } from "@autorest/codemodel";
-import {
-  DeepPartial,
-} from "@azure-tools/codegen";
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
 export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema, SchemaUsage {
@@ -32,7 +30,9 @@ export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
 }
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
-export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema, SchemaUsage {
+export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
+  extends ValueSchema,
+    SchemaUsage {
   /** the schema type  */
   type: SchemaType.SealedChoice;
 
