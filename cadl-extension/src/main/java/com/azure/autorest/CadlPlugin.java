@@ -14,7 +14,6 @@ import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
