@@ -14,6 +14,7 @@
 # protocol
 /protocol*                  @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 /partial-update-tests       @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
+/partial-update             @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 
 # cadl
 /cadl-extension             @srnagar @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
