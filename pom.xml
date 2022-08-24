@@ -66,19 +66,19 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.0.0</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>3.1.2</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.0</version>
         </plugin>
 
         <plugin>
@@ -90,7 +90,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.2.0</version>
         </plugin>
 
         <!-- This plugin runs tests -->
@@ -137,7 +137,7 @@
         <plugin>
           <groupId>com.azure.tools</groupId>
           <artifactId>codesnippet-maven-plugin</artifactId>
-          <version>1.0.0-beta.7</version>
+          <version>1.0.0-beta.8</version>
           <configuration>
             <skip>${codesnippet.skip}</skip>
           </configuration>
@@ -146,7 +146,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.4.0</version>
+          <version>3.3.1</version>
           <configuration>
             <source>1.8</source>
             <detectJavaApiLink>false</detectJavaApiLink>
@@ -195,7 +195,6 @@
       <plugin>
         <groupId>com.azure.tools</groupId>
         <artifactId>codesnippet-maven-plugin</artifactId>
-        <version>1.0.0-beta.8</version>
         <executions>
           <execution>
             <id>update-codesnippets</id>
@@ -209,7 +208,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.4.0</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -223,7 +221,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.2</version>
         <executions>
           <execution>
             <phase>verify</phase>
@@ -237,7 +234,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.0.1</version>
         <configuration>
           <outputDirectory>${packageOutputDirectory}</outputDirectory>
         </configuration>
