@@ -48,6 +48,8 @@ public class Project {
 
     private String apiVersion;
 
+    private boolean integratedWithSdk = false;
+
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureJsonVersion = "1.0.0-beta.1";
@@ -135,7 +137,7 @@ public class Project {
             Path path = Paths.get(outputFolder).normalize();
             List<String> pathSegment = new ArrayList<>();
             while (path != null) {
-                if (path.getFileName() != null) {
+                if (path.getFileName() == null) {
                     // likely the case of "C:\"
                     path = null;
                     break;
@@ -177,7 +179,7 @@ public class Project {
             if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
                 Path path = Paths.get(outputFolder).normalize();
                 while (path != null) {
-                    if (path.getFileName() != null) {
+                    if (path.getFileName() == null) {
                         // likely the case of "C:\"
                         path = null;
                         break;
@@ -218,6 +220,7 @@ public class Project {
 
     protected void findPackageVersions() {
         Optional<String> sdkFolderOpt = findSdkFolder();
+        this.integratedWithSdk = sdkFolderOpt.isPresent();
         if (!sdkFolderOpt.isPresent()) {
             return;
         }
@@ -391,6 +394,10 @@ public class Project {
 
     public Optional<String> getSdkRepositoryUri() {
         return Optional.ofNullable(sdkRepositoryUri);
+    }
+
+    public boolean isIntegratedWithSdk() {
+        return integratedWithSdk;
     }
 
     public boolean isGenerateSamples() {
