@@ -24,7 +24,10 @@
     "test": "mocha",
     "test-official": "c8 mocha --forbid-only",
     "lint": "eslint . --ext .ts --max-warnings=0",
-    "lint:fix": "eslint . --fix --ext .ts"
+    "lint:fix": "eslint . --fix --ext .ts",
+    "format": "npm run -s prettier -- --write",
+    "check-format": "npm run prettier -- --check",
+    "prettier": "prettier --config ./.prettierrc.yaml **/*.ts"
   },
   "files": [
     "lib/*.cadl",

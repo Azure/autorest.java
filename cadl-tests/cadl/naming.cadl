@@ -83,5 +83,5 @@ interface NamingOp {
   @summary("summary of POST op")
   @doc("description of POST op")
   @post
-  op post(...Request): Response | ErrorResponse;
+  post(...Request): Response | ErrorResponse;
 }

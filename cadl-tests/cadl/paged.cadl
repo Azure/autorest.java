@@ -16,5 +16,5 @@ model Resource {
 
 @route("/paged")
 interface PagedOp {
-  op list is ResourceList<Resource>;
+  list is ResourceList<Resource>;
 }

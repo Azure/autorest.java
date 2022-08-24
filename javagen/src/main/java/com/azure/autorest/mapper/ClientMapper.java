@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
@@ -390,6 +391,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         headerSchema.getLanguage().getJava().setName(name);
         headerSchema.setProperties(new ArrayList<>());
         headerSchema.setStronglyTypedHeader(true);
+        headerSchema.setUsage(new HashSet<>(Collections.singletonList(SchemaContext.OUTPUT)));
+        if (operation.getExtensions() != null && operation.getExtensions().isConvenienceMethod()) {
+            headerSchema.getUsage().add(SchemaContext.CONVENIENCE_METHOD);
+        }
         for (Map.Entry<String, Schema> header : headerMap.entrySet()) {
             Property property = new Property();
             property.setSerializedName(header.getKey());

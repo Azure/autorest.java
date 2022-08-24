@@ -24,7 +24,7 @@ enum Priority {
 enum OperationStateValues {
   Running,
   Completed,
-  Failed
+  Failed,
 }
 
 model Operation {
@@ -39,41 +39,41 @@ model Operation {
 interface EnumOp {
   @get
   @route("/color")
-  op getColor(): Color;
+  getColor(): Color;
 
   @get
   @route("/colormodel")
-  op getColorModel(): ColorModel;
+  getColorModel(): ColorModel;
 
   @post
   @route("operation/colormodel")
-  op setColorModel(@query color: ColorModel): Operation;
+  setColorModel(@query color: ColorModel): Operation;
 
   @post
   @route("operation/priority")
-  op setPriority(@query priority: Priority) : Operation;
+  setPriority(@query priority: Priority): Operation;
 
   @get
   @route("operation/state/running")
-  op getRunningOperation(@query state: "Running"): Operation;
+  getRunningOperation(@query state: "Running"): Operation;
 
   @get
   @route("operation/state")
-  op getOperation(@query state: OperationStateValues): Operation;
+  getOperation(@query state: OperationStateValues): Operation;
 
   @post
   @route("operation/stringenumarray")
-  op setStringEnumArray(@query colorArray: ColorModel[], @query colorArrayOpt?: ColorModel[]): string;
+  setStringEnumArray(@query colorArray: ColorModel[], @query colorArrayOpt?: ColorModel[]): string;
 
   @post
   @route("operation/intenumarray")
-  op setIntEnumArray(@query priorityArray: Priority[], @query priorityArrayOpt?: Priority[]): string;
+  setIntEnumArray(@query priorityArray: Priority[], @query priorityArrayOpt?: Priority[]): string;
 
   @post
   @route("operation/stringarray")
-  op setStringArray(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+  setStringArray(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
 
   @post
   @route("operation/intarray")
-  op setIntArray(@query intArray: int32[], @query intArrayOpt?: int32[]): string;
+  setIntArray(@query intArray: int32[], @query intArrayOpt?: int32[]): string;
 }

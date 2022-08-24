@@ -167,9 +167,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             List<ProxyMethodParameter> allParameters = new ArrayList<>();
             List<ProxyMethod> proxyMethods = new ArrayList<>();
             // add content-type parameter to allParameters when body is optional and there is single content type
-            if (settings.isDataPlaneClient()) {
+            if (settings.isDataPlaneClient()
+                    // only if "content-type" is not already defined in parameters
+                    && request.getParameters().stream().noneMatch(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER && "content-type".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
                 boolean isBodyParamRequired = request.getParameters()
-                        .stream().filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null ? p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY : false)
+                        .stream().filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY)
                         .map(Parameter::isRequired).findFirst().orElse(false);
                 if (MethodUtil.getContentTypeCount(operation.getRequests()) == 1 && !isBodyParamRequired) {
                     Parameter contentTypeParameter = MethodUtil.createContentTypeParameter(request, operation);

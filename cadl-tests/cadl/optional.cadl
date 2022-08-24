@@ -22,33 +22,33 @@ model Optional {
   double?: float64;
   duration?: duration;
   dateTime?: zonedDateTime;
-
   stringList?: string[];
   bytesDict?: Record<bytes>;
 }
 
 @withOptionalProperties
 model AllPropertiesOptional {
-  ...Optional
+  ...Optional;
 }
 
 @route("/optional")
 interface OptionalOp {
   @put
   @route("/put")
-  op put(
-          @header requestHeaderRequired: string,
-          @header requestHeaderOptional?: string = "test-header",
-          @query booleanRequired: boolean,
-          @query booleanNullable?: boolean | null,
-          @query booleanRequiredNullable: boolean | null,
-          @query string?: string,
-          @query stringNullable?: string | null;
-          @query stringRequired: string;
-          @query stringRequiredNullable: string | null;
-          @body Optional?: Optional): {
+  put(
+    @header requestHeaderRequired: string,
+    @header requestHeaderOptional?: string = "test-header",
+    @query booleanRequired: boolean,
+    @query booleanNullable?: boolean | null,
+    @query booleanRequiredNullable: boolean | null,
+    @query string?: string,
+    @query stringNullable?: string | null,
+    @query stringRequired: string,
+    @query stringRequiredNullable: string | null,
+    @body Optional?: Optional
+  ): {
     @header headerRequired: string;
-    @header headerOptional? : string;
+    @header headerOptional?: string;
     @body body?: AllPropertiesOptional;
   };
 }
