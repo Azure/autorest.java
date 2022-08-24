@@ -81,7 +81,7 @@ public class Main {
         LOGGER.info("Count of text files: {}", javaPackage.getTextFiles().size());
 
         // handle partial update
-        ConcurrentHashMap<String, String> javaFiles = new ConcurrentHashMap<>();
+        Map<String, String> javaFiles = new ConcurrentHashMap<>();
         javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
             JavaSettings settings = JavaSettings.getInstance();
             if (settings.isHandlePartialUpdate()) {
@@ -92,11 +92,14 @@ public class Main {
         });
 
         // write output
+
+        // Format
         Formatter formatter = new Formatter();
 
-        // Java
         Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaFiles.forEach((filePath, fileContent) -> {
+        javaFiles.entrySet().parallelStream().forEach(entry -> {
+            String filePath = entry.getKey();
+            String fileContent = entry.getValue();
             String formattedSource = fileContent;
             try {
                 formattedSource = formatter.formatSourceAndFixImports(fileContent);
