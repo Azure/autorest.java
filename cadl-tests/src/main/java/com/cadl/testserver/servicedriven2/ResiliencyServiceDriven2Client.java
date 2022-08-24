@@ -14,26 +14,26 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.cadl.testserver.servicedriven2.implementation.ParamsImpl;
+import com.azure.core.util.Context;
 import com.cadl.testserver.servicedriven2.models.ContentTypePath;
 import com.cadl.testserver.servicedriven2.models.Message;
 import com.cadl.testserver.servicedriven2.models.PostInput;
-import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DPGClient type. */
-@ServiceClient(builder = DPGClientBuilder.class, isAsync = true)
-public final class DPGAsyncClient {
-    @Generated private final ParamsImpl serviceClient;
+/** Initializes a new instance of the synchronous ResiliencyServiceDriven2Client type. */
+@ServiceClient(builder = ResiliencyServiceDriven2ClientBuilder.class)
+public final class ResiliencyServiceDriven2Client {
+    @Generated private final ResiliencyServiceDriven2AsyncClient client;
 
     /**
-     * Initializes an instance of DPGAsyncClient class.
+     * Initializes an instance of ResiliencyServiceDriven2Client class.
      *
-     * @param serviceClient the service client implementation.
+     * @param client the async client.
      */
     @Generated
-    DPGAsyncClient(ParamsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    ResiliencyServiceDriven2Client(ResiliencyServiceDriven2AsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -55,12 +55,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.headNoParamsWithResponseAsync(requestOptions);
+    public Response<Void> headNoParamsWithResponse(RequestOptions requestOptions) {
+        return this.client.headNoParamsWithResponse(requestOptions).block();
     }
 
     /**
@@ -91,13 +91,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}
-     *     on successful completion of {@link Mono}.
+     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredWithResponseAsync(parameter, requestOptions);
+    public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
+        return this.client.getRequiredWithResponse(parameter, requestOptions).block();
     }
 
     /**
@@ -129,13 +128,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putRequiredOptionalWithResponse(
-            String requiredParam, RequestOptions requestOptions) {
-        return this.serviceClient.putRequiredOptionalWithResponseAsync(requiredParam, requestOptions);
+    public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
+        return this.client.putRequiredOptionalWithResponse(requiredParam, requestOptions).block();
     }
 
     /**
@@ -164,13 +162,13 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postParametersWithResponse(
+    public Response<BinaryData> postParametersWithResponse(
             String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
-        return this.serviceClient.postParametersWithResponseAsync(contentTypePath, parameter, requestOptions);
+        return this.client.postParametersWithResponse(contentTypePath, parameter, requestOptions).block();
     }
 
     /**
@@ -182,12 +180,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.deleteParametersWithResponseAsync(requestOptions);
+    public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
+        return this.client.deleteParametersWithResponse(requestOptions).block();
     }
 
     /**
@@ -218,13 +216,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getOptionalWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getOptionalWithResponseAsync(requestOptions);
+    public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
+        return this.client.getOptionalWithResponse(requestOptions).block();
     }
 
     /**
@@ -244,38 +241,12 @@ public final class DPGAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getNewOperationWithResponseAsync(requestOptions);
-    }
-
-    /*
-     * Generated convenience method for headNoParamsWithResponse
-     */
-    /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     *
-     * @param newParameter I'm a new input optional parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> headNoParams(String newParameter) {
-        RequestOptions requestOptions = new RequestOptions();
-        if (newParameter != null) {
-            requestOptions.addQueryParam("new_parameter", newParameter);
-        }
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+    public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
+        return this.client.getNewOperationWithResponse(requestOptions).block();
     }
 
     /*
@@ -290,43 +261,40 @@ public final class DPGAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> headNoParams() {
+    public void headNoParams() {
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        headNoParamsWithResponse(requestOptions).getValue();
     }
 
     /*
-     * Generated convenience method for getRequiredWithResponse
+     * Generated convenience method for headNoParamsWithResponse
      */
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
+     * added.
      *
-     * @param parameter I am a required parameter.
      * @param newParameter I'm a new input optional parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
-     *     {@link Mono}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getRequired(String parameter, String newParameter) {
+    public Response<Void> headNoParamsWithResponse(String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+        requestOptions.setContext(context);
+        return headNoParamsWithResponse(requestOptions);
     }
 
     /*
@@ -343,16 +311,66 @@ public final class DPGAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
-     *     {@link Mono}.
+     * @return true Boolean value on path. Initially only has one required Query Parameter.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getRequired(String parameter) {
+    public Message getRequired(String parameter) {
         RequestOptions requestOptions = new RequestOptions();
-        return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+        return getRequiredWithResponse(parameter, requestOptions).getValue().toObject(Message.class);
+    }
+
+    /*
+     * Generated convenience method for getRequiredWithResponse
+     */
+    /**
+     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
+     * query parameter is added.
+     *
+     * @param parameter I am a required parameter.
+     * @param newParameter I'm a new input optional parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Message> getRequiredWithResponse(String parameter, String newParameter, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (newParameter != null) {
+            requestOptions.addQueryParam("new_parameter", newParameter);
+        }
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getRequiredWithResponse(parameter, requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
+    }
+
+    /*
+     * Generated convenience method for putRequiredOptionalWithResponse
+     */
+    /**
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
+     * query parameter is added.
+     *
+     * @param requiredParam I am a required parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Message putRequiredOptional(String requiredParam) {
+        RequestOptions requestOptions = new RequestOptions();
+        return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
     }
 
     /*
@@ -365,17 +383,19 @@ public final class DPGAsyncClient {
      * @param requiredParam I am a required parameter.
      * @param optionalParam I am an optional parameter.
      * @param newParameter I'm a new input optional parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam, String newParameter) {
+    public Response<Message> putRequiredOptionalWithResponse(
+            String requiredParam, String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -383,34 +403,9 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /*
-     * Generated convenience method for putRequiredOptionalWithResponse
-     */
-    /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param requiredParam I am a required parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> putRequiredOptional(String requiredParam) {
-        RequestOptions requestOptions = new RequestOptions();
-        return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = putRequiredOptionalWithResponse(requiredParam, requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
     /*
@@ -427,15 +422,44 @@ public final class DPGAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> postParameters(ContentTypePath contentTypePath, PostInput parameter) {
+    public Message postParameters(ContentTypePath contentTypePath, PostInput parameter) {
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+                .getValue()
+                .toObject(Message.class);
+    }
+
+    /*
+     * Generated convenience method for postParametersWithResponse
+     */
+    /**
+     * POST a JSON or a JPEG.
+     *
+     * @param contentTypePath The contentTypePath parameter.
+     * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Message> postParametersWithResponse(
+            ContentTypePath contentTypePath, PostInput parameter, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse =
+                postParametersWithResponse(
+                        contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
     /*
@@ -450,13 +474,57 @@ public final class DPGAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> deleteParameters() {
+    public void deleteParameters() {
         RequestOptions requestOptions = new RequestOptions();
-        return deleteParametersWithResponse(requestOptions).map(Response::getValue);
+        deleteParametersWithResponse(requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for deleteParametersWithResponse
+     */
+    /**
+     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
+     * in a known path.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> deleteParametersWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        return deleteParametersWithResponse(requestOptions);
+    }
+
+    /*
+     * Generated convenience method for getOptionalWithResponse
+     */
+    /**
+     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
+     * parameter is added.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path. Initially has one optional query parameter.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Message getOptional() {
+        RequestOptions requestOptions = new RequestOptions();
+        return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
     }
 
     /*
@@ -468,18 +536,18 @@ public final class DPGAsyncClient {
      *
      * @param optionalParam I am an optional parameter.
      * @param newParameter I'm a new input optional parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
-     *     Mono}.
+     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getOptional(String optionalParam, String newParameter) {
+    public Response<Message> getOptionalWithResponse(String optionalParam, String newParameter, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -487,33 +555,9 @@ public final class DPGAsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /*
-     * Generated convenience method for getOptionalWithResponse
-     */
-    /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
-     *     Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getOptional() {
-        RequestOptions requestOptions = new RequestOptions();
-        return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getOptionalWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
     /*
@@ -528,14 +572,37 @@ public final class DPGAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getNewOperation() {
+    public Message getNewOperation() {
         RequestOptions requestOptions = new RequestOptions();
-        return getNewOperationWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
+        return getNewOperationWithResponse(requestOptions).getValue().toObject(Message.class);
+    }
+
+    /*
+     * Generated convenience method for getNewOperationWithResponse
+     */
+    /**
+     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
+     * method in a new path.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Message> getNewOperationWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = getNewOperationWithResponse(requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 }

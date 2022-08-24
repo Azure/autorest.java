@@ -24,7 +24,7 @@ It makes the npm package in `./cadl-extension`, then install it to `./cadl-tests
 
 `cadl compile <target.cadl>` in `./cadl-tests` folder.
 
-Generated code will be at `./cadl-tests/cadl-ouput/java` folder.
+Generated code will be at `./cadl-tests/cadl-ouput/` folder.
 
 ## Temporary Environment Variables for Testing
 
