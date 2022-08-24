@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +56,10 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isHandlePartialUpdate()) {
+            content = handlePartialUpdate(fileName, content);
+        }
         File parentFile = new File(fileName).getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
@@ -63,6 +70,22 @@ public class CadlPlugin extends Javagen {
             throw new IllegalStateException(e);
         }
         LOGGER.info("Write file: {}", fileName);
+    }
+
+    private String handlePartialUpdate(String filePath, String generatedContent) {
+        if (filePath.endsWith(".java")) { // only handle for .java file
+            // check if existingFile exists, if not, no need to handle partial update
+            if (Files.exists(Paths.get(filePath))) {
+                try {
+                    String existingFileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+                    String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
+                    return updatedContent;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return generatedContent;
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
@@ -89,6 +112,8 @@ public class CadlPlugin extends Javagen {
 
         SETTINGS_MAP.put("regenerate-pom", true);
         SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
+
+//        SETTINGS_MAP.put("partial-update", true);
     }
 
     public static class MockConnection extends Connection {
