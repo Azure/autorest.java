@@ -39,7 +39,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // parameters
         String inputYamlFileName = "cadl-tests/cadl-output/code-model.yaml";
-        String outputFolder = "cadl-tests/cadl-output/java/";
+        String outputFolder = "cadl-tests/cadl-output/";
         String namespace = "com.azure.cadl";
         if (args.length >= 1) {
             inputYamlFileName = args[0];

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class DPGClientTest {
 
-    DPGClient client = new DPGClientBuilder().buildClient();
+    ResiliencyServiceDriven1Client client = new ResiliencyServiceDriven1ClientBuilder().buildClient();
 
     @Test
     void headNoParamsWithResponse() {

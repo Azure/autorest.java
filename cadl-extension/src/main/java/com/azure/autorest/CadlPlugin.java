@@ -69,6 +69,8 @@ public class CadlPlugin extends Javagen {
     static {
         SETTINGS_MAP.put("data-plane", true);
 
+//        SETTINGS_MAP.put("sdk-integration", true);
+
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
         SETTINGS_MAP.put("generate-client-interfaces", false);
         SETTINGS_MAP.put("generate-client-as-impl", true);

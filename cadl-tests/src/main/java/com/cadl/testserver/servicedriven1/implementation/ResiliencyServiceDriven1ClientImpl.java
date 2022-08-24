@@ -12,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the DPGClient type. */
-public final class DPGClientImpl {
+/** Initializes a new instance of the ResiliencyServiceDriven1Client type. */
+public final class ResiliencyServiceDriven1ClientImpl {
     /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
@@ -50,8 +50,8 @@ public final class DPGClientImpl {
         return this.params;
     }
 
-    /** Initializes an instance of DPGClient client. */
-    public DPGClientImpl() {
+    /** Initializes an instance of ResiliencyServiceDriven1Client client. */
+    public ResiliencyServiceDriven1ClientImpl() {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -60,21 +60,21 @@ public final class DPGClientImpl {
     }
 
     /**
-     * Initializes an instance of DPGClient client.
+     * Initializes an instance of ResiliencyServiceDriven1Client client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public DPGClientImpl(HttpPipeline httpPipeline) {
+    public ResiliencyServiceDriven1ClientImpl(HttpPipeline httpPipeline) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
-     * Initializes an instance of DPGClient client.
+     * Initializes an instance of ResiliencyServiceDriven1Client client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */
-    public DPGClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public ResiliencyServiceDriven1ClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.params = new ParamsImpl(this);

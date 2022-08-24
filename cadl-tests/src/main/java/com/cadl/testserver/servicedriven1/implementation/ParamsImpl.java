@@ -36,24 +36,24 @@ public final class ParamsImpl {
     private final ParamsService service;
 
     /** The service client containing this operation class. */
-    private final DPGClientImpl client;
+    private final ResiliencyServiceDriven1ClientImpl client;
 
     /**
      * Initializes an instance of ParamsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ParamsImpl(DPGClientImpl client) {
+    ParamsImpl(ResiliencyServiceDriven1ClientImpl client) {
         this.service = RestProxy.create(ParamsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for DPGClientParams to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ResiliencyServiceDriven1Params to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DPGClientParams")
+    @ServiceInterface(name = "ResiliencyServiceDri")
     private interface ParamsService {
         @Head("/serviceDriven1/parameters")
         @ExpectedResponses({200})
