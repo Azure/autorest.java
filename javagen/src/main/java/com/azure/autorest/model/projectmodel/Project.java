@@ -134,7 +134,7 @@ public class Project {
         if (outputFolder != null) {
             Path path = Paths.get(outputFolder).normalize();
             List<String> pathSegment = new ArrayList<>();
-            while (path != null) {
+            while (path != null && path.getFileName() != null) {
                 Path childPath = path;
                 path = path.getParent();
 
@@ -170,7 +170,7 @@ public class Project {
             String outputFolder = settings.getAutorestSettings().getOutputFolder();
             if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
                 Path path = Paths.get(outputFolder).normalize();
-                while (path != null) {
+                while (path != null && path.getFileName() != null) {
                     Path childPath = path;
                     path = path.getParent();
 
