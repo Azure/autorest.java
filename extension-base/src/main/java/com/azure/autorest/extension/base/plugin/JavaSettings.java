@@ -103,7 +103,7 @@ public class JavaSettings {
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
                 getBooleanValue(host, "regenerate-pom", false),
-                    header,
+                header,
                 120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "").toLowerCase(),
