@@ -13,4 +13,26 @@ junit:junit
 org.junit.jupiter:junit-jupiter-api
 org.junit.jupiter:junit-jupiter-engine
 
+org.apache.maven.plugins:maven-antrun-plugin
+org.apache.maven.plugins:maven-assembly-plugin
+org.apache.maven.plugins:maven-checkstyle-plugin
+org.apache.maven.plugins:maven-clean-plugin
+org.apache.maven.plugins:maven-compiler-plugin
+org.apache.maven.plugins:maven-eclipse-plugin
+org.apache.maven.plugins:maven-enforcer-plugin
+org.apache.maven.plugins:maven-failsafe-plugin
+org.apache.maven.plugins:maven-help-plugin
+org.apache.maven.plugins:maven-install-plugin
+org.apache.maven.plugins:maven-jar-plugin
+org.apache.maven.plugins:maven-javadoc-plugin
+org.apache.maven.plugins:maven-jxr-plugin
+org.apache.maven.plugins:maven-plugin-plugin
+org.apache.maven.plugins:maven-project-info-reports-plugin
+org.apache.maven.plugins:maven-release-plugin
+org.apache.maven.plugins:maven-resources-plugin
+org.apache.maven.plugins:maven-shade-plugin
+org.apache.maven.plugins:maven-site-plugin
+org.apache.maven.plugins:maven-source-plugin
+org.apache.maven.plugins:maven-surefire-plugin
+
 com.azure.tools:codesnippet-maven-plugin

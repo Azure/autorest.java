@@ -24,7 +24,7 @@ export async function $onEmit(program: Program) {
     "-jar",
     "node_modules/@azure-tools/cadl-java/target/azure-cadl-extension-jar-with-dependencies.jar",
     codeModelFileName,
-    resolvePath(outputPath, "java"),
+    getNormalizedAbsolutePath(outputPath, undefined),
   ]);
   program.logger.info(output.stdout ? output.stdout : output.stderr);
 }

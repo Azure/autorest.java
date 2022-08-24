@@ -8,7 +8,7 @@ function generate {
         exit 1
     fi
 
-    cp -rf cadl-output/java/src .
+    cp -rf cadl-output/src .
     rm src/main/java/module-info.java
 
     rm -rf cadl-output/

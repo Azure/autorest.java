@@ -103,24 +103,21 @@ public final class AutoRestLongRunningOperationTestServiceBuilder {
      * @return an instance of AutoRestLongRunningOperationTestServiceImpl.
      */
     public AutoRestLongRunningOperationTestServiceImpl buildClient() {
-        if (endpoint == null) {
-            this.endpoint = "http://localhost:3000";
-        }
-        if (environment == null) {
-            this.environment = AzureEnvironment.AZURE;
-        }
-        if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build();
-        }
-        if (defaultPollInterval == null) {
-            this.defaultPollInterval = Duration.ofSeconds(30);
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
-        }
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
+        HttpPipeline localPipeline =
+            (pipeline != null)
+                ? pipeline
+                : new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build();
+        Duration localDefaultPollInterval =
+            (defaultPollInterval != null) ? defaultPollInterval : Duration.ofSeconds(30);
+        SerializerAdapter localSerializerAdapter =
+            (serializerAdapter != null)
+                ? serializerAdapter
+                : SerializerFactory.createDefaultManagementSerializerAdapter();
         AutoRestLongRunningOperationTestServiceImpl client =
             new AutoRestLongRunningOperationTestServiceImpl(
-                pipeline, serializerAdapter, defaultPollInterval, environment, endpoint);
+                localPipeline, localSerializerAdapter, localDefaultPollInterval, localEnvironment, localEndpoint);
         return client;
     }
 }
