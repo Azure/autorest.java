@@ -15,6 +15,10 @@
   <artifactId>azure-autorest-vanilla-tests</artifactId>
   <version>1.0.0-beta.1</version>
 
+  <properties>
+    <parallelizeTests>false</parallelizeTests>
+  </properties>
+
   <repositories>
     <repository>
       <id>azuresdkmaven</id>

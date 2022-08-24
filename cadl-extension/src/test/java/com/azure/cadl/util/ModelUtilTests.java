@@ -16,11 +16,10 @@ import java.util.HashSet;
 
 public class ModelUtilTests {
 
-    private static CadlPlugin plugin;   // sadly ModelUtil.isGeneratingModel queries JavaSettings
-
+    // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        plugin = new CadlPlugin("com.azure.client");
+        CadlPlugin plugin = new CadlPlugin("com.azure.client");
     }
 
     @Test
