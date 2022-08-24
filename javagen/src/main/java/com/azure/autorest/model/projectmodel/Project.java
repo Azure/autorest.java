@@ -134,13 +134,19 @@ public class Project {
         if (outputFolder != null) {
             Path path = Paths.get(outputFolder).normalize();
             List<String> pathSegment = new ArrayList<>();
-            while (path != null && path.getFileName() != null) {
+            while (path != null) {
+                if (path.getFileName() != null) {
+                    // likely the case of "C:\"
+                    path = null;
+                    break;
+                }
+
                 Path childPath = path;
                 path = path.getParent();
 
                 pathSegment.add(childPath.getFileName().toString());
 
-                if ("sdk".equals(childPath.getFileName().toString())) {
+                if (isRepoSdkFolder(childPath)) {
                     // childPath = azure-sdk-for-java/sdk, path = azure-sdk-for-java
                     break;
                 }
@@ -170,11 +176,17 @@ public class Project {
             String outputFolder = settings.getAutorestSettings().getOutputFolder();
             if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
                 Path path = Paths.get(outputFolder).normalize();
-                while (path != null && path.getFileName() != null) {
+                while (path != null) {
+                    if (path.getFileName() != null) {
+                        // likely the case of "C:\"
+                        path = null;
+                        break;
+                    }
+
                     Path childPath = path;
                     path = path.getParent();
 
-                    if ("sdk".equals(childPath.getFileName().toString())) {
+                    if (isRepoSdkFolder(childPath)) {
                         // childPath = azure-sdk-for-java/sdk, path = azure-sdk-for-java
                         break;
                     }
@@ -191,6 +203,17 @@ public class Project {
         }
 
         return sdkFolderOpt;
+    }
+
+    private static boolean isRepoSdkFolder(Path path) {
+        boolean ret = false;
+        if (path.getFileName() != null && "sdk".equals(path.getFileName().toString())) {
+            Path parentPomPath = path.resolve("parents/azure-client-sdk-parent/pom.xml");
+            if (parentPomPath.toFile().isFile()) {
+                ret = true;
+            }
+        }
+        return ret;
     }
 
     protected void findPackageVersions() {
