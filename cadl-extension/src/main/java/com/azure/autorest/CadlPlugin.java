@@ -45,8 +45,9 @@ public class CadlPlugin extends Javagen {
     }
 
     @Override
-    public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
-        return super.writeToTemplates(codeModel, client, settings);
+    public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
+                                        boolean generateSwaggerMarkdown) {
+        return super.writeToTemplates(codeModel, client, settings, false);
     }
 
     @Override
