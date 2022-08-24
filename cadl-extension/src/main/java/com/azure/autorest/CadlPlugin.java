@@ -14,6 +14,7 @@ import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
+import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,10 +57,6 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        JavaSettings settings = JavaSettings.getInstance();
-        if (settings.isHandlePartialUpdate()) {
-            content = handlePartialUpdate(fileName, content);
-        }
         File parentFile = new File(fileName).getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
@@ -72,7 +69,7 @@ public class CadlPlugin extends Javagen {
         LOGGER.info("Write file: {}", fileName);
     }
 
-    private String handlePartialUpdate(String filePath, String generatedContent) {
+    public String handlePartialUpdate(String filePath, String generatedContent) {
         if (filePath.endsWith(".java")) { // only handle for .java file
             // check if existingFile exists, if not, no need to handle partial update
             if (Files.exists(Paths.get(filePath))) {
@@ -91,6 +88,8 @@ public class CadlPlugin extends Javagen {
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
     static {
         SETTINGS_MAP.put("data-plane", true);
+
+//        SETTINGS_MAP.put("sdk-integration", true);
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
         SETTINGS_MAP.put("generate-client-interfaces", false);

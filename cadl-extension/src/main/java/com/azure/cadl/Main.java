@@ -39,7 +39,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // parameters
         String inputYamlFileName = "cadl-tests/cadl-output/code-model.yaml";
-        String outputFolder = "cadl-tests/cadl-output/java/";
+        String outputFolder = "cadl-tests/cadl-output/";
         String namespace = "com.azure.cadl";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
@@ -80,20 +80,31 @@ public class Main {
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
         LOGGER.info("Count of text files: {}", javaPackage.getTextFiles().size());
 
+        // handle partial update
+        ConcurrentHashMap<String, String> javaFiles = new ConcurrentHashMap<>();
+        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+            JavaSettings settings = JavaSettings.getInstance();
+            if (settings.isHandlePartialUpdate()) {
+                javaFiles.put(javaFile.getFilePath(), cadlPlugin.handlePartialUpdate(outputFolderFinal + javaFile.getFilePath(), javaFile.getContents().toString()));
+            } else {
+                javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
+            }
+        });
+
         // write output
         Formatter formatter = new Formatter();
 
         // Java
         Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-            String formattedSource = javaFile.getContents().toString();
+        javaFiles.forEach((filePath, fileContent) -> {
+            String formattedSource = fileContent;
             try {
-                formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                formattedSource = formatter.formatSourceAndFixImports(fileContent);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", outputFolderFinal + javaFile.getFilePath(), e);
+                LOGGER.error("Failed to format file: {}", outputFolderFinal + filePath, e);
                 // but we continue so user can still check the file and see why format fails
             }
-            formattedFiles.put(javaFile.getFilePath(), formattedSource);
+            formattedFiles.put(filePath, formattedSource);
         });
         formattedFiles.forEach((filePath, formattedSource) -> cadlPlugin.writeFile(outputFolderFinal + filePath, formattedSource, null));
 
