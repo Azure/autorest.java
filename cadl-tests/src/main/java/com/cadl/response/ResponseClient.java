@@ -14,8 +14,12 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.cadl.response.models.Resource;
+import com.cadl.response.models.ResponseOpsCreateWithHeadersHeaders;
+import com.cadl.response.models.ResponseOpsDeleteWithHeadersHeaders;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
 @ServiceClient(builder = ResponseClientBuilder.class)
@@ -52,6 +56,48 @@ public final class ResponseClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
         return this.client.getBinaryWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The createWithHeaders operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.client.createWithHeadersWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The deleteWithHeaders operation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.client.deleteWithHeadersWithResponse(requestOptions).block();
     }
 
     /*
@@ -95,5 +141,102 @@ public final class ResponseClient {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return getBinaryWithResponse(requestOptions);
+    }
+
+    /*
+     * Generated convenience method for createWithHeadersWithResponse
+     */
+    /**
+     * The createWithHeaders operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource createWithHeaders() {
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithHeadersWithResponse(requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /*
+     * Generated convenience method for createWithHeadersWithResponse
+     */
+    /**
+     * The createWithHeaders operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ResponseBase<ResponseOpsCreateWithHeadersHeaders, Resource> createWithHeadersWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = createWithHeadersWithResponse(requestOptions);
+        return new ResponseBase<>(
+                protocolMethodResponse.getRequest(),
+                protocolMethodResponse.getStatusCode(),
+                protocolMethodResponse.getHeaders(),
+                protocolMethodResponse.getValue().toObject(Resource.class),
+                new ResponseOpsCreateWithHeadersHeaders(protocolMethodResponse.getHeaders()));
+    }
+
+    /*
+     * Generated convenience method for deleteWithHeadersWithResponse
+     */
+    /**
+     * The deleteWithHeaders operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void deleteWithHeaders() {
+        RequestOptions requestOptions = new RequestOptions();
+        deleteWithHeadersWithResponse(requestOptions).getValue();
+    }
+
+    /*
+     * Generated convenience method for deleteWithHeadersWithResponse
+     */
+    /**
+     * The deleteWithHeaders operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ResponseBase<ResponseOpsDeleteWithHeadersHeaders, Void> deleteWithHeadersWithResponse(Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<Void> protocolMethodResponse = deleteWithHeadersWithResponse(requestOptions);
+        return new ResponseBase<>(
+                protocolMethodResponse.getRequest(),
+                protocolMethodResponse.getStatusCode(),
+                protocolMethodResponse.getHeaders(),
+                null,
+                new ResponseOpsDeleteWithHeadersHeaders(protocolMethodResponse.getHeaders()));
     }
 }

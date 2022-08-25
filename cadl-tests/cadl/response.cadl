@@ -1,15 +1,37 @@
 import "@cadl-lang/rest";
 
 using Cadl.Http;
+using Cadl.Rest;
 
 @serviceTitle("Response")
 @serviceVersion("1.0.0")
 namespace Cadl.Response;
 
+model Resource {
+  id: string;
+  name: string;
+  type: string;
+}
+
 @route("/response")
 interface ResponseOp {
-  getBinary(): {
+  getBinary(): OkResponse & {
     @header contentType: "image/png";
     @body body: bytes;
+  };
+
+  @put
+  createWithHeaders(): CreatedResponse & {
+    @header("operation-location")
+    operationLocation: ResourceLocation<Resource>;
+
+    @body
+    body: Resource;
+  };
+
+  @delete
+  deleteWithHeaders(): NoContentResponse & {
+    @header("operation-location")
+    operationLocation: ResourceLocation<Resource>;
   };
 }
