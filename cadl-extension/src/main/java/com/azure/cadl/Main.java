@@ -65,7 +65,10 @@ public class Main {
         LOGGER.info("Namespace: {}", namespace);
 
         // initialize plugin
-        CadlPlugin cadlPlugin = new CadlPlugin(namespace);
+        CadlPlugin cadlPlugin = new CadlPlugin(
+                new CadlPlugin.Options()
+                        .setNamespace(namespace)
+                        .setOutputFolder(outputFolderFinal));
 
         // transform code model
         codeModel = new Transformer().transform(codeModel);

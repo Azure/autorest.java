@@ -8,14 +8,15 @@ function generate {
         exit 1
     fi
 
+    rm cadl-output/src/main/java/module-info.java
+    rm -rf cadl-output/src/samples
     cp -rf cadl-output/src .
-    rm src/main/java/module-info.java
 
-    rm -rf cadl-output/
+    rm -rf cadl-output
 }
 
-rm -rf src/main/
-rm -rf cadl-output/
+rm -rf src/main
+rm -rf cadl-output
 
 # enable convenience methods for tests
 export GENERATE_MODELS=true

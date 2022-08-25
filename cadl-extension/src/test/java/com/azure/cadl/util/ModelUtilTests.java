@@ -19,7 +19,9 @@ public class ModelUtilTests {
     // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        CadlPlugin plugin = new CadlPlugin("com.azure.client");
+        CadlPlugin plugin = new CadlPlugin(
+                new CadlPlugin.Options()
+                        .setNamespace("com.azure.client"));
     }
 
     @Test

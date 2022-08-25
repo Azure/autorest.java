@@ -13,6 +13,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +29,23 @@ public class CadlPlugin extends Javagen {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
 
-    @Override
+    public static class Options {
+        private String namespace;
+        private String outputFolder;
+
+        public Options setNamespace(String namespace) {
+            this.namespace = namespace;
+            return this;
+        }
+
+        public Options setOutputFolder(String outputFolder) {
+            this.outputFolder = outputFolder;
+            return this;
+        }
+    }
+
     public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
-        return super.writeToTemplates(codeModel, client, settings);
+        return super.writeToTemplates(codeModel, client, settings, false);
     }
 
     @Override
@@ -69,7 +84,8 @@ public class CadlPlugin extends Javagen {
     static {
         SETTINGS_MAP.put("data-plane", true);
 
-//        SETTINGS_MAP.put("sdk-integration", true);
+        SETTINGS_MAP.put("sdk-integration", true);
+        SETTINGS_MAP.put("regenerate-pom", true);
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
         SETTINGS_MAP.put("generate-client-interfaces", false);
@@ -89,7 +105,6 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
 
-        SETTINGS_MAP.put("regenerate-pom", true);
         SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
     }
 
@@ -100,9 +115,12 @@ public class CadlPlugin extends Javagen {
         }
     }
 
-    public CadlPlugin(String namespace) {
+    public CadlPlugin(Options options) {
         super(new MockConnection(), "dummy", "dummy");
-        SETTINGS_MAP.put("namespace", namespace);
+        SETTINGS_MAP.put("namespace", options.namespace);
+        if (!CoreUtils.isNullOrEmpty(options.outputFolder)) {
+            SETTINGS_MAP.put("output-folder", options.outputFolder);
+        }
         JavaSettingsAccessor.setHost(this);
 
         Mappers.setFactory(new CadlMapperFactory());
