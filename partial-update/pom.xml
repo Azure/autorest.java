@@ -17,13 +17,6 @@
     <artifactId>azure-autorest-partial-update</artifactId>
     <version>1.0.0-beta.1</version>
 
-    <repositories>
-        <repository>
-            <id>azuresdkmaven</id>
-            <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>com.github.javaparser</groupId>
