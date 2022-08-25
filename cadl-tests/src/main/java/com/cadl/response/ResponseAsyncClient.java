@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.response.implementation.ResponseOpsImpl;
+import com.cadl.response.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResponseClient type. */
@@ -55,6 +56,48 @@ public final class ResponseAsyncClient {
         return this.serviceClient.getBinaryWithResponseAsync(requestOptions);
     }
 
+    /**
+     * The createWithHeaders operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.createWithHeadersWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The deleteWithHeaders operation.
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.deleteWithHeadersWithResponseAsync(requestOptions);
+    }
+
     /*
      * Generated convenience method for getBinaryWithResponse
      */
@@ -73,5 +116,47 @@ public final class ResponseAsyncClient {
     public Mono<BinaryData> getBinary() {
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /*
+     * Generated convenience method for createWithHeadersWithResponse
+     */
+    /**
+     * The createWithHeaders operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Resource> createWithHeaders() {
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithHeadersWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+    }
+
+    /*
+     * Generated convenience method for deleteWithHeadersWithResponse
+     */
+    /**
+     * The deleteWithHeaders operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> deleteWithHeaders() {
+        RequestOptions requestOptions = new RequestOptions();
+        return deleteWithHeadersWithResponse(requestOptions).map(Response::getValue);
     }
 }

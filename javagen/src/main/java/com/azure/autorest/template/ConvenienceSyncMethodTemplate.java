@@ -49,13 +49,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 && !(responseBodyType.asNullable() == ClassType.Void || responseBodyType == ClassType.BinaryData)) {
 
-            String statement = String.format("%1$s(%2$s)",
-                    getMethodName(protocolMethod),
-                    invocationExpression);
+            // protocolMethodResponse = ...
+            methodBlock.line(getProtocolMethodResponseStatement(protocolMethod, invocationExpression));
 
-            methodBlock.line(String.format(
-                    "%1$s protocolMethodResponse = %2$s;",
-                    protocolMethod.getReturnValue().getType(), statement));
+            // e.g. protocolMethodResponse.getValue().toObject(...)
             String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()");
 
             if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
@@ -72,12 +69,34 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     invocationExpression,
                     convertFromResponse);
             statement = expressionConvertFromBinaryData(responseBodyType, statement);
-            if (convenienceMethod.getType() != ClientMethodType.SimpleSyncRestResponse && responseBodyType.asNullable() == ClassType.Void) {
+            if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
+                if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
+                    IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
+
+                    methodBlock.line(getProtocolMethodResponseStatement(protocolMethod, invocationExpression));
+
+                    methodBlock.methodReturn(String.format(
+                            "new ResponseBase<>(protocolMethodResponse.getRequest(), protocolMethodResponse.getStatusCode(), protocolMethodResponse.getHeaders(), null, new %1$s(protocolMethodResponse.getHeaders()))", headerType));
+                } else {
+                    methodBlock.methodReturn(statement);
+                }
+            }
+            else if (responseBodyType.asNullable() == ClassType.Void) {
                 methodBlock.line(statement + ";");
             } else {
                 methodBlock.methodReturn(statement);
             }
         }
+    }
+
+    private String getProtocolMethodResponseStatement(ClientMethod protocolMethod, String invocationExpression) {
+        String statement = String.format("%1$s(%2$s)",
+                getMethodName(protocolMethod),
+                invocationExpression);
+
+        return String.format(
+                "%1$s protocolMethodResponse = %2$s;",
+                protocolMethod.getReturnValue().getType(), statement);
     }
 
     private IType getResponseBodyType(ClientMethod method) {
