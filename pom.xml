@@ -351,6 +351,7 @@
       <modules>
         <module>./javagen</module>
         <module>./preprocessor</module>
+        <module>./partial-update</module>
         <module>./extension-base</module>
         <module>./cadl-extension</module>
       </modules>

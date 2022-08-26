@@ -39,6 +39,9 @@ import { getDiscriminator } from "@cadl-lang/rest";
 import {
   getAllRoutes,
   getAuthentication,
+  getHeaderFieldName,
+  getPathParamName,
+  getQueryParamName,
   getServers,
   getStatusCodeDescription,
   HttpOperationParameter,
@@ -428,14 +431,8 @@ export class CodeModelBuilder {
   }
 
   private findResponseBody(bodyType: Type): Type {
-    // hack for ResourceOkResponse etc. in cadl-azure-core, which does not use @body on TResource
-    if (bodyType.kind === "Model" && bodyType.templateArguments?.length == 1 && bodyType.properties.has("statusCode")) {
-      const statusCodeProperty = bodyType.properties.get("statusCode");
-      if (statusCodeProperty && isStatusCode(this.program, statusCodeProperty)) {
-        bodyType = bodyType.templateArguments[0];
-      }
-    }
-    return bodyType;
+    // find a type that possibly without http metadata like @statusCode
+    return this.getEffectiveSchemaType(bodyType);
   }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
@@ -919,6 +916,26 @@ export class CodeModelBuilder {
     type.derivedModels?.filter(includeDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
+  }
+
+  private getEffectiveSchemaType(type: Type): Type {
+    const program = this.program;
+
+    function isSchemaProperty(property: ModelTypeProperty) {
+      const headerInfo = getHeaderFieldName(program, property);
+      const queryInfo = getQueryParamName(program, property);
+      const pathInfo = getPathParamName(program, property);
+      const statusCodeInfo = isStatusCode(program, property);
+      return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+    }
+
+    if (type.kind === "Model") {
+      const effective = program.checker.getEffectiveModelType(type, isSchemaProperty);
+      if (effective.name) {
+        return effective;
+      }
+    }
+    return type;
   }
 
   private applyModelPropertyDecorators(prop: ModelTypeProperty, schema: Schema): Schema {
