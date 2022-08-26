@@ -1,9 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.postprocessor.util;
+package com.azure.autorest.partialupdate.util;
 
 import com.github.javaparser.JavaToken;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
@@ -17,8 +18,6 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static com.github.javaparser.StaticJavaParser.parse;
 
 /**
  * Partial update handler. It can handle partial update for .java class files.
@@ -55,8 +54,8 @@ public class PartialUpdateHandler {
      */
     public static String handlePartialUpdateForFile(String generatedFileContent, String existingFileContent) {
         // 1. Parse existing file content and generated file content using JavaParser
-        CompilationUnit compilationUnitForGeneratedFile = parse(generatedFileContent);
-        CompilationUnit compilationUnitForExistingFile = parse(existingFileContent);
+        CompilationUnit compilationUnitForGeneratedFile = StaticJavaParser.parse(generatedFileContent);
+        CompilationUnit compilationUnitForExistingFile = StaticJavaParser.parse(existingFileContent);
 
         // 2. If it's module-info.java file, then go to handlePartialUpdateForModuleInfoFile
         if (compilationUnitForExistingFile.getModule().isPresent() &&
@@ -91,8 +90,8 @@ public class PartialUpdateHandler {
      */
     private static String handlePartialUpdateForClassOrInterfaceFile(String generatedFileContent, String existingFileContent) {
         // 1. Parse existing file content and generated file content using JavaParser
-        CompilationUnit compilationUnitForGeneratedFile = parse(generatedFileContent);
-        CompilationUnit compilationUnitForExistingFile = parse(existingFileContent);
+        CompilationUnit compilationUnitForGeneratedFile = StaticJavaParser.parse(generatedFileContent);
+        CompilationUnit compilationUnitForExistingFile = StaticJavaParser.parse(existingFileContent);
 
         ClassOrInterfaceDeclaration generatedClazz = getClassOrInterfaceDeclaration(compilationUnitForGeneratedFile);
         ClassOrInterfaceDeclaration existingClazz = getClassOrInterfaceDeclaration(compilationUnitForExistingFile);
@@ -179,8 +178,8 @@ public class PartialUpdateHandler {
      * @return merged module-info.java file content
      */
     private static String mergeModuleFileContent(String generatedFileContent, String existingFileContent) {
-        CompilationUnit compilationUnitForGeneratedFile = parse(generatedFileContent);
-        CompilationUnit compilationUnitForExistingFile = parse(existingFileContent);
+        CompilationUnit compilationUnitForGeneratedFile = StaticJavaParser.parse(generatedFileContent);
+        CompilationUnit compilationUnitForExistingFile = StaticJavaParser.parse(existingFileContent);
 
         if (!compilationUnitForExistingFile.getModule().isPresent() || !compilationUnitForGeneratedFile.getModule().isPresent()) {
             throw new RuntimeException("Generated file or existing file is not module-info file");
