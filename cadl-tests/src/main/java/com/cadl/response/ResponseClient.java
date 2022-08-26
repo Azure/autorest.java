@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.cadl.response.models.Resource;
@@ -98,6 +99,33 @@ public final class ResponseClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
         return this.client.deleteWithHeadersWithResponse(requestOptions).block();
+    }
+
+    /**
+     * Creates or replaces a Resource.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createWithResponse(String name, RequestOptions requestOptions) {
+        return this.client.createWithResponse(name, requestOptions).block();
     }
 
     /*
@@ -238,5 +266,52 @@ public final class ResponseClient {
                 protocolMethodResponse.getHeaders(),
                 null,
                 new ResponseOpsDeleteWithHeadersHeaders(protocolMethodResponse.getHeaders()));
+    }
+
+    /*
+     * Generated convenience method for createWithResponse
+     */
+    /**
+     * Creates or replaces a Resource.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource create(String name) {
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /*
+     * Generated convenience method for createWithResponse
+     */
+    /**
+     * Creates or replaces a Resource.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Resource> createWithResponse(String name, Context context) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.setContext(context);
+        Response<BinaryData> protocolMethodResponse = createWithResponse(name, requestOptions);
+        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Resource.class));
     }
 }

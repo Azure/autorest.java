@@ -12,6 +12,9 @@ pr:
       - '*'
     exclude:
       - 'fluent*'
+      - 'postprocessor'
+      - 'vanilla-tests'
+      - 'protocol*'
 
 jobs:
   - job: Build
