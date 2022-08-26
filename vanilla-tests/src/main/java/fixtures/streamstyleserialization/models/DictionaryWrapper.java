@@ -51,7 +51,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
         jsonWriter.writeStartObject();
         jsonWriter.writeMapField(
                 "defaultProgram", this.defaultProgram, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

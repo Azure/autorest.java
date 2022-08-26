@@ -81,22 +81,31 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
-        return String.format("%s.writeBinaryField(\"%s\", %s)", jsonWriterName, fieldName, valueGetter);
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        return fieldName == null
+            ? String.format("%s.writeBinary(%s)", jsonWriterName, valueGetter)
+            : String.format("%s.writeBinaryField(\"%s\", %s)", jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
-        return String.format("%s.writeBinary(%s)", jsonWriterName, valueGetter);
-    }
-
-    @Override
-    public String xmlAttributeSerializationMethod() {
-        return "writeBinaryAttribute";
-    }
-
-    @Override
-    public String xmlElementSerializationMethod() {
-        return "writeBinaryElement";
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute) {
+        if (isAttribute) {
+            return namespaceUri == null
+                ? String.format("%s.writeBinaryAttribute(\"%s\", %s)", xmlWriterName, attributeOrElementName,
+                    valueGetter)
+                : String.format("%s.writeBinaryAttribute(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
+                    attributeOrElementName, valueGetter);
+        } else {
+            if (attributeOrElementName == null) {
+                return String.format("%s.writeBinary(%s)", xmlWriterName, valueGetter);
+            } else {
+                return namespaceUri == null
+                    ? String.format("%s.writeBinaryElement(\"%s\", %s)", xmlWriterName, attributeOrElementName,
+                        valueGetter)
+                    : String.format("%s.writeBinaryElement(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
+                        attributeOrElementName, valueGetter);
+            }
+        }
     }
 }

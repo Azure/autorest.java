@@ -75,7 +75,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("field1", this.field1);
         jsonWriter.writeNumberField("field2", this.field2);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

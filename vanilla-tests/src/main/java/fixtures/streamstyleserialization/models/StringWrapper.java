@@ -101,7 +101,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
         jsonWriter.writeStringField("field", this.field);
         jsonWriter.writeStringField("empty", this.empty);
         jsonWriter.writeStringField("null", this.nullProperty);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

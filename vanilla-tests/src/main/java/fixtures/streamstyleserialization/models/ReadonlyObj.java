@@ -64,7 +64,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("id", this.id);
         jsonWriter.writeNumberField("size", this.size);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

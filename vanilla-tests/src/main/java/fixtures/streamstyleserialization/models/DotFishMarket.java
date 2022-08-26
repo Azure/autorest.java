@@ -141,7 +141,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
         jsonWriter.writeArrayField("salmons", this.salmons, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("sampleFish", this.sampleFish);
         jsonWriter.writeArrayField("fishes", this.fishes, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

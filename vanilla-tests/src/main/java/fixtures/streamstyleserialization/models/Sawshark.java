@@ -98,7 +98,7 @@ public final class Sawshark extends Shark {
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
         jsonWriter.writeBinaryField("picture", this.picture);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

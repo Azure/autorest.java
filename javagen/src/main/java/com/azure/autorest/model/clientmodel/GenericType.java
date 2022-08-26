@@ -250,6 +250,17 @@ public class GenericType implements IType {
     }
 
     @Override
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        return null;
+    }
+
+    @Override
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute) {
+        return null;
+    }
+
+    @Override
     public String validate(String expression) {
         return null;
     }

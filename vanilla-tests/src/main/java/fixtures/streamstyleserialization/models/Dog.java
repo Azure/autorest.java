@@ -67,7 +67,7 @@ public final class Dog extends Pet {
         jsonWriter.writeNumberField("id", getId());
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeStringField("food", this.food);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

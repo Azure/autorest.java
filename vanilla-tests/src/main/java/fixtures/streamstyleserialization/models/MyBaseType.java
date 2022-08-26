@@ -79,7 +79,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
             jsonWriter.writeStringField("propBH1", this.propBH1);
             jsonWriter.writeEndObject();
         }
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

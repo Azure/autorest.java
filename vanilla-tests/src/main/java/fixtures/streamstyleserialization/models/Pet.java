@@ -75,7 +75,7 @@ public class Pet implements JsonSerializable<Pet> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("id", this.id);
         jsonWriter.writeStringField("name", this.name);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

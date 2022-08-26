@@ -60,7 +60,7 @@ public final class XmlsGetHeadersHeaders implements JsonSerializable<XmlsGetHead
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("Custom-Header", this.customHeader);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

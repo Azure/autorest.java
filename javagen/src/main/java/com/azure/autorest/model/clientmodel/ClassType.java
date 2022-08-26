@@ -23,72 +23,49 @@ public class ClassType implements IType {
     public static final ClassType Boolean = new Builder(false).knownClass(Boolean.class)
         .defaultValueExpressionConverter(java.lang.String::toLowerCase)
         .jsonDeserializationMethod("getNullable(JsonReader::getBoolean)")
-        .jsonFieldSerializationMethodTemplate("%s.writeBooleanField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeBoolean(%s)")
-        .xmlAttributeSerializationMethod("writeBooleanAttribute")
-        .xmlElementSerializationMethod("writeBooleanElement")
+        .serializationMethodBase("writeBoolean")
         .build();
 
     public static final ClassType Byte = new Builder(false).knownClass(Byte.class)
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
-        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)")
-        .xmlAttributeSerializationMethod("writeNumberAttribute")
-        .xmlElementSerializationMethod("writeNumberElement")
+        .serializationMethodBase("writeNumber")
         .build();
 
     public static final ClassType Integer = new ClassType.Builder(false).knownClass(Integer.class)
         .defaultValueExpressionConverter(java.util.function.Function.identity())
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
-        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)")
-        .xmlAttributeSerializationMethod("writeNumberAttribute")
-        .xmlElementSerializationMethod("writeNumberElement")
+        .serializationMethodBase("writeNumber")
         .build();
 
     public static final ClassType Long = new ClassType.Builder(false).knownClass(Long.class)
         .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
         .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)")
-        .xmlAttributeSerializationMethod("writeNumberAttribute")
-        .xmlElementSerializationMethod("writeNumberElement")
+        .serializationMethodBase("writeNumber")
         .build();
 
     public static final ClassType Float = new ClassType.Builder(false).knownClass(Float.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'F')
         .jsonDeserializationMethod("getNullable(JsonReader::getFloat)")
-        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)")
-        .xmlAttributeSerializationMethod("writeNumberAttribute")
-        .xmlElementSerializationMethod("writeNumberElement")
+        .serializationMethodBase("writeNumber")
         .build();
 
     public static final ClassType Double = new ClassType.Builder(false).knownClass(Double.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
         .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)")
-        .xmlAttributeSerializationMethod("writeNumberAttribute")
-        .xmlElementSerializationMethod("writeNumberElement")
+        .serializationMethodBase("writeNumber")
         .build();
 
     public static final ClassType Character = new Builder(false).knownClass(Character.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf((defaultValueExpression.charAt(0))))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> nonNullReader.getString().charAt(0))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType String = new Builder(false).knownClass(String.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "\"" + escapeString(defaultValueExpression) + "\"")
         .jsonDeserializationMethod("getString()")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", %s)")
-        .jsonValueSerializationMethodTemplate("%s.writeString(%s)")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType Base64Url = new ClassType.Builder(false)
@@ -101,11 +78,9 @@ public class ClassType implements IType {
 
     public static final ClassType LocalDate = new Builder(false).knownClass(java.time.LocalDate.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType AndroidLocalDate = new ClassType.Builder(false)
@@ -114,20 +89,16 @@ public class ClassType implements IType {
 
     public static final ClassType DateTime = new ClassType.Builder(false).knownClass(java.time.OffsetDateTime.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType Duration = new ClassType.Builder(false).knownClass(java.time.Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType AndroidDuration = new ClassType.Builder(false)
@@ -137,11 +108,9 @@ public class ClassType implements IType {
     public static final ClassType DateTimeRfc1123 = new ClassType.Builder(false)
         .knownClass(com.azure.core.util.DateTimeRfc1123.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder(false)
@@ -154,11 +123,9 @@ public class ClassType implements IType {
 
     public static final ClassType UUID = new ClassType.Builder(false).knownClass(java.util.UUID.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression))
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> UUID.fromString(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType Object = new ClassType.Builder(false)
@@ -215,13 +182,11 @@ public class ClassType implements IType {
         .knownClass(java.nio.ByteBuffer.class)
         .build();
 
-    public static final ClassType URL = new ClassType.Builder(false)
+    public static final ClassType URL = new Builder(false)
         .knownClass(java.net.URL.class)
+        .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> new URL(nonNullReader.getString()))")
-        .jsonFieldSerializationMethodTemplate("%s.writeStringField(\"%s\", Objects.toString(%s, null))")
-        .jsonValueSerializationMethodTemplate("%s.writeString(Objects.toString(%s, null))")
-        .xmlAttributeSerializationMethod("writeStringAttribute")
-        .xmlElementSerializationMethod("writeStringElement")
+        .serializationMethodBase("writeString")
         .build();
 
     public static final ClassType NonNull = new ClassType.Builder(false)
@@ -365,16 +330,14 @@ public class ClassType implements IType {
     private final XmsExtensions extensions;
     private final java.util.function.Function<String, String> defaultValueExpressionConverter;
     private final boolean isSwaggerType;
+    private final boolean wrapSerializationWithObjectsToString;
+    private final String serializationMethodBase;
     private final String jsonDeserializationMethod;
-    private final String jsonFieldSerializationMethod;
-    private final String jsonValueSerializationMethod;
-    private final String xmlAttributeSerializationMethod;
-    private final String xmlElementSerializationMethod;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
-        String jsonDeserializationMethod, String jsonFieldSerializationMethod, String jsonValueSerializationMethod,
-        String xmlAttributeSerializationMethod, String xmlElementSerializationMethod) {
+        String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
+        String jsonDeserializationMethod) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -382,11 +345,9 @@ public class ClassType implements IType {
         this.extensions = extensions;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.isSwaggerType = isSwaggerType;
+        this.serializationMethodBase = serializationMethodBase;
+        this.wrapSerializationWithObjectsToString = wrapSerializationWithObjectsToString;
         this.jsonDeserializationMethod = jsonDeserializationMethod;
-        this.jsonFieldSerializationMethod = jsonFieldSerializationMethod;
-        this.jsonValueSerializationMethod = jsonValueSerializationMethod;
-        this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
-        this.xmlElementSerializationMethod = xmlElementSerializationMethod;
     }
 
     public final String getPackage() {
@@ -534,40 +495,49 @@ public class ClassType implements IType {
         return jsonDeserializationMethod;
     }
 
-//    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
-//        .jsonFieldSerializationMethodTemplate("%s.writeNumberField(\"%s\", %s)")
-//            .jsonValueSerializationMethodTemplate("%s.writeNumber(%s)");
-//
-//        StringBuilder methodCall = new StringBuilder(256);
-//        methodCall.append(jsonWriterName)
-//            .append('.')
-//            .append(baseSerializationMethodName);
-//
-//        if (fieldName != null) {
-//            methodCall.append("Field(\"").append(fieldName).append("\", ");
-//        }
-//
-//        return methodCall.append(valueGetter).append(")").toString();
-//    }
-
     @Override
-    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
-        return java.lang.String.format(jsonFieldSerializationMethod, jsonWriterName, fieldName, valueGetter);
+    public java.lang.String jsonSerializationMethodCall(java.lang.String jsonWriterName, java.lang.String fieldName,
+        java.lang.String valueGetter) {
+        String methodBase = isSwaggerType ? "writeJson" : serializationMethodBase;
+        String value = wrapSerializationWithObjectsToString
+            ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
+
+        return fieldName == null
+            ? java.lang.String.format("%s.%s(%s)", jsonWriterName, methodBase, value)
+            : java.lang.String.format("%s.%sField(\"%s\", %s)", jsonWriterName, methodBase, fieldName, value);
     }
 
     @Override
-    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
-        return java.lang.String.format(jsonValueSerializationMethod, jsonWriterName, valueGetter);
-    }
+    public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
+        java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
+        boolean isAttribute) {
+        if (isSwaggerType) {
+            if (isAttribute) {
+                throw new RuntimeException("Swagger types cannot be written as attributes.");
+            }
 
-    @Override
-    public java.lang.String xmlAttributeSerializationMethod() {
-        return xmlAttributeSerializationMethod;
-    }
+            return java.lang.String.format("%s.writeXml(%s)", xmlWriterName, valueGetter);
+        }
 
-    @Override
-    public java.lang.String xmlElementSerializationMethod() {
-        return xmlElementSerializationMethod;
+        String value = wrapSerializationWithObjectsToString
+            ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
+        if (isAttribute) {
+            return namespaceUri == null
+                ? java.lang.String.format("%s.%sAttribute(\"%s\", %s)", xmlWriterName, serializationMethodBase,
+                    attributeOrElementName, value)
+                : java.lang.String.format("%s.%sAttribute(\"%s\", \"%s\", %s)", xmlWriterName,
+                    serializationMethodBase, namespaceUri, attributeOrElementName, value);
+        } else {
+            if (attributeOrElementName == null) {
+                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodBase, value);
+            } else {
+                return namespaceUri == null
+                    ? java.lang.String.format("%s.%sElement(\"%s\", %s)", xmlWriterName, serializationMethodBase,
+                        attributeOrElementName, value)
+                    : java.lang.String.format("%s.%sElement(\"%s\", \"%s\", %s)", xmlWriterName,
+                        serializationMethodBase, namespaceUri, attributeOrElementName, value);
+            }
+        }
     }
 
     public static class Builder {
@@ -582,11 +552,9 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
+        private boolean wrapSerializationWithObjectsToString;
         private String jsonDeserializationMethod;
-        private String jsonFieldSerializationMethodTemplate;
-        private String jsonValueSerializationMethodTemplate;
-        private String xmlAttributeSerializationMethod;
-        private String xmlElementSerializationMethod;
+        private String serializationMethodBase;
 
         public Builder() {
             this(true);
@@ -626,28 +594,18 @@ public class ClassType implements IType {
             return this;
         }
 
+        public Builder wrapSerializationWithObjectsToString(boolean wrapSerializationWithObjectsToString) {
+            this.wrapSerializationWithObjectsToString = wrapSerializationWithObjectsToString;
+            return this;
+        }
+
         public Builder jsonDeserializationMethod(String jsonDeserializationMethod) {
             this.jsonDeserializationMethod = jsonDeserializationMethod;
             return this;
         }
 
-        public Builder jsonFieldSerializationMethodTemplate(String jsonFieldSerializationMethodTemplate) {
-            this.jsonFieldSerializationMethodTemplate = jsonFieldSerializationMethodTemplate;
-            return this;
-        }
-
-        public Builder jsonValueSerializationMethodTemplate(String jsonValueSerializationMethodTemplate) {
-            this.jsonValueSerializationMethodTemplate = jsonValueSerializationMethodTemplate;
-            return this;
-        }
-
-        public Builder xmlAttributeSerializationMethod(String xmlAttributeSerializationMethod) {
-            this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
-            return this;
-        }
-
-        public Builder xmlElementSerializationMethod(String xmlElementSerializationMethod) {
-            this.xmlElementSerializationMethod = xmlElementSerializationMethod;
+        public Builder serializationMethodBase(String serializationMethodBase) {
+            this.serializationMethodBase = serializationMethodBase;
             return this;
         }
 
@@ -656,26 +614,9 @@ public class ClassType implements IType {
             // to be passed to the deserialization method and the JsonReader name cannot be determined here.
             String jsonDeserializationMethod = isSwaggerType ? null : this.jsonDeserializationMethod;
 
-            // Types that are based on Swagger will use writeJsonField and writeJson as they should extend
-            // JsonSerializable.
-            String jsonFieldSerializationMethodTemplate =
-                (this.jsonFieldSerializationMethodTemplate == null && isSwaggerType)
-                    ? "%s.writeJsonField(\"%s\", %s)"
-                    : this.jsonFieldSerializationMethodTemplate;
-            String jsonValueSerializationMethodTemplate =
-                (this.jsonValueSerializationMethodTemplate == null && isSwaggerType)
-                    ? "%s.writeJson(%s)"
-                    : this.jsonValueSerializationMethodTemplate;
-
-            // Types that are based on Swagger won't have any XML serialization methods as they're handled differently
-            // than JSON. In JSON the containing class determines the JSON property name that'll be written but in XML
-            // the class itself handles writing the wrapping XML element.
-            String xmlAttributeSerializationMethod = isSwaggerType ? null : this.xmlAttributeSerializationMethod;
-            String xmlElementSerializationMethod = isSwaggerType ? null : this.xmlElementSerializationMethod;
-
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
-                isSwaggerType, jsonDeserializationMethod, jsonFieldSerializationMethodTemplate,
-                jsonValueSerializationMethodTemplate, xmlAttributeSerializationMethod, xmlElementSerializationMethod);
+                isSwaggerType, serializationMethodBase, wrapSerializationWithObjectsToString,
+                jsonDeserializationMethod);
         }
     }
 

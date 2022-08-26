@@ -111,7 +111,7 @@ public class Shark extends Fish {
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("birthday", Objects.toString(this.birthday, null));
         jsonWriter.writeNumberField("age", this.age);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

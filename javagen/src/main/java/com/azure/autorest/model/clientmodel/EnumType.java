@@ -164,24 +164,32 @@ public class EnumType implements IType {
     }
 
     @Override
-    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
-        return String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
-            jsonWriterName, fieldName, valueGetter);
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        return fieldName == null
+            ? String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter)
+            : String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
+                jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
-        return String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter);
-    }
-
-    @Override
-    public String xmlAttributeSerializationMethod() {
-        return "writeStringAttribute";
-    }
-
-    @Override
-    public String xmlElementSerializationMethod() {
-        return "writeStringElement";
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute) {
+        String value = "Objects.toString(" + valueGetter + ", null)";
+        if (isAttribute) {
+            return namespaceUri == null
+                ? String.format("%s.writeStringAttribute(\"%s\", %s)", xmlWriterName, attributeOrElementName, value)
+                : String.format("%s.writeStringAttribute(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
+                    attributeOrElementName, value);
+        } else {
+            if (attributeOrElementName == null) {
+                return String.format("%s.writeString(%s)", xmlWriterName, value);
+            } else {
+                return namespaceUri == null
+                    ? String.format("%s.writeStringElement(\"%s\", %s)", xmlWriterName, attributeOrElementName, value)
+                    : String.format("%s.writeStringElement(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
+                        attributeOrElementName, value);
+            }
+        }
     }
 
     @Override

@@ -14,37 +14,30 @@ public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
 
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase,
-        "false", "getBoolean()", "%s.writeBooleanField(\"%s\", %s)", "%s.writeBoolean(%s)", "writeBooleanAttribute",
-        "writeBooleanElement");
+        "false", "writeBoolean", false, "getBoolean()");
 
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0",
-        "getInt()", "%s.writeIntField(\"%s\", %s)", "%s.writeInt(%s)", "writeIntAttribute", "writeIntElement");
+        "writeInt", false, "getInt()");
 
     public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0",
-        "getInt()", "%s.writeIntField(\"%s\", %s)", "%s.writeInt(%s)", "writeIntAttribute", "writeIntElement");
+        "writeInt", false, "getInt()");
 
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long,
-        defaultValueExpression -> defaultValueExpression + 'L', "0", "getLong()", "%s.writeLongField(\"%s\", %s)",
-        "%s.writeLong(%s)", "writeLongAttribute", "writeLongElement");
+        defaultValueExpression -> defaultValueExpression + 'L', "0", "writeLong", false, "getLong()");
 
     public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float,
-        defaultValueExpression -> defaultValueExpression + "f", "0.0", "getFloat()", "%s.writeFloatField(\"%s\", %s)",
-        "%s.writeFloat(%s)", "writeFloatAttribute", "writeFloatElement");
+        defaultValueExpression -> defaultValueExpression + "f", "0.0", "writeFloat", false, "getFloat()");
 
     public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double,
         defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)),
-        "0.0", "getDouble()", "%s.writeDoubleField(\"%s\", %s)", "%s.writeDouble(%s)", "writeDoubleAttribute",
-        "writeDoubleElement");
+        "0.0", "writeDouble", false, "getDouble()");
 
     public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character,
-        defaultValueExpression -> java.lang.Integer.toString(defaultValueExpression.charAt(0)), "\u0000",
-        "getString().charAt(0)", "%1$s.writeStringField(\"%2$s\", %3$s == null ? null %3$s.toString())",
-        "%1$s.writeString(%2$s == null ? null : %2$s.toString())", "writeStringAttribute", "writeStringElement");
+        defaultValueExpression -> Integer.toString(defaultValueExpression.charAt(0)), "\u0000", "writeString",
+        true, "getString().charAt(0)");
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, null, null,
-        "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))",
-        "%s.writeStringField(\"%2$s\", Objects.toString(%s, null))", "%s.writeString(Objects.toString(%s, null))",
-        "writeLongAttribute", "writeLongElement");
+        "writeString", true, "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))");
 
     /**
      * The name of this type.
@@ -56,33 +49,28 @@ public class PrimitiveType implements IType {
     private final ClassType nullableType;
     private final Function<String, String> defaultValueExpressionConverter;
     private final String defaultValue;
+    private final String serializationMethodBase;
+    private final boolean wrapSerializationWithObjectsToString;
     private final String jsonDeserializationMethod;
-    private final String jsonFieldSerializationMethodTemplate;
-    private final String jsonValueSerializationMethodTemplate;
-    private final String xmlAttributeSerializationMethod;
-    private final String xmlElementSerializationMethod;
 
     /**
      * Create a new PrimitiveType from the provided properties.
      * @param name The name of this type.
      */
     private PrimitiveType(String name, ClassType nullableType) {
-        this(name, nullableType, null, null, null, null, null, null, null);
+        this(name, nullableType, null, null, null, false, null);
     }
 
     private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
-        String defaultValue, String jsonDeserializationMethod, String jsonFieldSerializationMethodTemplate,
-        String jsonValueSerializationMethodTemplate, String xmlAttributeSerializationMethod,
-        String xmlElementSerializationMethod, String... importsToAdd) {
+        String defaultValue, String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
+        String jsonDeserializationMethod, String... importsToAdd) {
         this.name = name;
         this.nullableType = nullableType;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.defaultValue = defaultValue;
+        this.serializationMethodBase = serializationMethodBase;
+        this.wrapSerializationWithObjectsToString = wrapSerializationWithObjectsToString;
         this.jsonDeserializationMethod = jsonDeserializationMethod;
-        this.jsonFieldSerializationMethodTemplate = jsonFieldSerializationMethodTemplate;
-        this.jsonValueSerializationMethodTemplate = jsonValueSerializationMethodTemplate;
-        this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
-        this.xmlElementSerializationMethod = xmlElementSerializationMethod;
     }
 
     public static PrimitiveType fromNullableType(ClassType nullableType) {
@@ -201,23 +189,45 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
-        return String.format(jsonFieldSerializationMethodTemplate, jsonWriterName, fieldName, valueGetter);
+    public java.lang.String jsonSerializationMethodCall(java.lang.String jsonWriterName, java.lang.String fieldName,
+        java.lang.String valueGetter) {
+        if (wrapSerializationWithObjectsToString) {
+            return fieldName == null
+                ? java.lang.String.format("%s.%s(Objects.toString(%s, null))", jsonWriterName,
+                serializationMethodBase, valueGetter)
+                : java.lang.String.format("%s.%sField(\"%s\", Objects.toString(%s, null))", jsonWriterName,
+                serializationMethodBase, fieldName, valueGetter);
+        }
+
+        return fieldName == null
+            ? java.lang.String.format("%s.%s(%s)", jsonWriterName, serializationMethodBase, valueGetter)
+            : java.lang.String.format("%s.%sField(\"%s\", %s)", jsonWriterName, serializationMethodBase, fieldName,
+            valueGetter);
     }
 
     @Override
-    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
-        return String.format(jsonValueSerializationMethodTemplate, jsonWriterName, valueGetter);
-    }
-
-    @Override
-    public String xmlAttributeSerializationMethod() {
-        return xmlAttributeSerializationMethod;
-    }
-
-    @Override
-    public String xmlElementSerializationMethod() {
-        return xmlElementSerializationMethod;
+    public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
+        java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
+        boolean isAttribute) {
+        String value = wrapSerializationWithObjectsToString
+            ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
+        if (isAttribute) {
+            return namespaceUri == null
+                ? java.lang.String.format("%s.%sAttribute(\"%s\", %s)", xmlWriterName, serializationMethodBase,
+                    attributeOrElementName, value)
+                : java.lang.String.format("%s.%sAttribute(\"%s\", \"%s\", %s)", xmlWriterName, serializationMethodBase,
+                    namespaceUri, attributeOrElementName, value);
+        } else {
+            if (attributeOrElementName == null) {
+                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodBase, value);
+            } else {
+                return namespaceUri == null
+                    ? java.lang.String.format("%s.%sElement(\"%s\", %s)", xmlWriterName, serializationMethodBase,
+                        attributeOrElementName, value)
+                    : java.lang.String.format("%s.%sElement(\"%s\", \"%s\", %s)", xmlWriterName,
+                        serializationMethodBase, namespaceUri, attributeOrElementName, value);
+            }
+        }
     }
 
     @Override

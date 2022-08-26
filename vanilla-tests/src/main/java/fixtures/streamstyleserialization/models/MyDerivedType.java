@@ -78,7 +78,7 @@ public final class MyDerivedType extends MyBaseType {
             jsonWriter.writeStringField("propBH1", getPropBH1());
             jsonWriter.writeEndObject();
         }
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

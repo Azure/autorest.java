@@ -81,10 +81,10 @@ public final class Blobs implements XmlSerializable<Blobs> {
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("Blobs");
         if (this.blobPrefix != null) {
-            this.blobPrefix.forEach(xmlWriter::writeXml);
+            this.blobPrefix.forEach(element -> xmlWriter.writeXml(element));
         }
         if (this.blob != null) {
-            this.blob.forEach(xmlWriter::writeXml);
+            this.blob.forEach(element -> xmlWriter.writeXml(element));
         }
         return xmlWriter.writeEndElement();
     }

@@ -111,7 +111,7 @@ public class Salmon extends Fish {
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

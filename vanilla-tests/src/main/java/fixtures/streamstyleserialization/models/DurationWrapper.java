@@ -51,7 +51,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("field", Objects.toString(this.field, null));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

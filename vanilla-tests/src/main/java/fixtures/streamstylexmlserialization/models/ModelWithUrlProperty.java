@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import java.net.URL;
+import java.util.Objects;
 
 /** The ModelWithUrlProperty model. */
 @Fluent
@@ -47,7 +48,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("ModelWithUrlProperty");
-        xmlWriter.writeStringElement("Url", this.url);
+        xmlWriter.writeStringElement("Url", Objects.toString(this.url, null));
         return xmlWriter.writeEndElement();
     }
 }

@@ -165,7 +165,7 @@ public final class Blob implements XmlSerializable<Blob> {
         xmlWriter.writeXml(this.properties);
         if (this.metadata != null) {
             xmlWriter.writeStartElement("Metadata");
-            this.metadata.forEach(xmlWriter::writeStringElement);
+            this.metadata.forEach((key, value) -> xmlWriter.writeStringElement("key", value));
             xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();

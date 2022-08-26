@@ -92,7 +92,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("field", Objects.toString(this.field, null));
         jsonWriter.writeStringField("now", Objects.toString(this.now, null));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

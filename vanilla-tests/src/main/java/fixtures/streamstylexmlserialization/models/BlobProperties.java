@@ -9,6 +9,7 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** Properties of a blob. */
 @Fluent
@@ -751,7 +752,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("BlobProperties");
-        xmlWriter.writeStringElement("Last-Modified", this.lastModified);
+        xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
         xmlWriter.writeNumberElement("Content-Length", this.contentLength);
         xmlWriter.writeStringElement("Content-Type", this.contentType);
@@ -761,26 +762,24 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
         xmlWriter.writeStringElement("Content-Disposition", this.contentDisposition);
         xmlWriter.writeStringElement("Cache-Control", this.cacheControl);
         xmlWriter.writeNumberElement("x-ms-blob-sequence-number", this.blobSequenceNumber);
-        xmlWriter.writeStringElement("BlobType", this.blobType == null ? null : this.blobType.toString());
-        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
-        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
-        xmlWriter.writeStringElement(
-                "LeaseDuration", this.leaseDuration == null ? null : this.leaseDuration.toString());
+        xmlWriter.writeStringElement("BlobType", Objects.toString(this.blobType, null));
+        xmlWriter.writeStringElement("LeaseStatus", Objects.toString(this.leaseStatus, null));
+        xmlWriter.writeStringElement("LeaseState", Objects.toString(this.leaseState, null));
+        xmlWriter.writeStringElement("LeaseDuration", Objects.toString(this.leaseDuration, null));
         xmlWriter.writeStringElement("CopyId", this.copyId);
-        xmlWriter.writeStringElement("CopyStatus", this.copyStatus == null ? null : this.copyStatus.toString());
+        xmlWriter.writeStringElement("CopyStatus", Objects.toString(this.copyStatus, null));
         xmlWriter.writeStringElement("CopySource", this.copySource);
         xmlWriter.writeStringElement("CopyProgress", this.copyProgress);
-        xmlWriter.writeStringElement("CopyCompletionTime", this.copyCompletionTime);
+        xmlWriter.writeStringElement("CopyCompletionTime", Objects.toString(this.copyCompletionTime, null));
         xmlWriter.writeStringElement("CopyStatusDescription", this.copyStatusDescription);
         xmlWriter.writeBooleanElement("ServerEncrypted", this.serverEncrypted);
         xmlWriter.writeBooleanElement("IncrementalCopy", this.incrementalCopy);
         xmlWriter.writeStringElement("DestinationSnapshot", this.destinationSnapshot);
-        xmlWriter.writeStringElement("DeletedTime", this.deletedTime);
+        xmlWriter.writeStringElement("DeletedTime", Objects.toString(this.deletedTime, null));
         xmlWriter.writeNumberElement("RemainingRetentionDays", this.remainingRetentionDays);
-        xmlWriter.writeStringElement("AccessTier", this.accessTier == null ? null : this.accessTier.toString());
+        xmlWriter.writeStringElement("AccessTier", Objects.toString(this.accessTier, null));
         xmlWriter.writeBooleanElement("AccessTierInferred", this.accessTierInferred);
-        xmlWriter.writeStringElement(
-                "ArchiveStatus", this.archiveStatus == null ? null : this.archiveStatus.toString());
+        xmlWriter.writeStringElement("ArchiveStatus", Objects.toString(this.archiveStatus, null));
         return xmlWriter.writeEndElement();
     }
 }

@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** A banana. */
 @Fluent
@@ -99,7 +100,7 @@ public final class Banana implements XmlSerializable<Banana> {
         xmlWriter.writeStartElement("banana");
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
-        xmlWriter.writeStringElement("expiration", this.expiration);
+        xmlWriter.writeStringElement("expiration", Objects.toString(this.expiration, null));
         return xmlWriter.writeEndElement();
     }
 }

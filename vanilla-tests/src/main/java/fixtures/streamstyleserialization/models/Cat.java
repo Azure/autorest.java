@@ -97,7 +97,7 @@ public class Cat extends Pet {
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeStringField("color", this.color);
         jsonWriter.writeArrayField("hates", this.hates, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

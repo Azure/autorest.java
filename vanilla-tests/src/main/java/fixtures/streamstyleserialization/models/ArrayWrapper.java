@@ -50,7 +50,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

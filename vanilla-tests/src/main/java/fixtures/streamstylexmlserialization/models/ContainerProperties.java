@@ -9,6 +9,7 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** Properties of a container. */
 @Fluent
@@ -187,13 +188,12 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("ContainerProperties");
-        xmlWriter.writeStringElement("Last-Modified", this.lastModified);
+        xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
-        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
-        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
-        xmlWriter.writeStringElement(
-                "LeaseDuration", this.leaseDuration == null ? null : this.leaseDuration.toString());
-        xmlWriter.writeStringElement("PublicAccess", this.publicAccess == null ? null : this.publicAccess.toString());
+        xmlWriter.writeStringElement("LeaseStatus", Objects.toString(this.leaseStatus, null));
+        xmlWriter.writeStringElement("LeaseState", Objects.toString(this.leaseState, null));
+        xmlWriter.writeStringElement("LeaseDuration", Objects.toString(this.leaseDuration, null));
+        xmlWriter.writeStringElement("PublicAccess", Objects.toString(this.publicAccess, null));
         return xmlWriter.writeEndElement();
     }
 }

@@ -50,7 +50,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeBinaryField("field", this.field);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

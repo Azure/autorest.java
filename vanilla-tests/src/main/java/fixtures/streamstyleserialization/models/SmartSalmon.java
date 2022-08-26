@@ -131,7 +131,7 @@ public final class SmartSalmon extends Salmon {
         if (additionalProperties != null) {
             additionalProperties.forEach(jsonWriter::writeUntypedField);
         }
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

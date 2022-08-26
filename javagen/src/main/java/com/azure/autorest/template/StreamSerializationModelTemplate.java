@@ -162,8 +162,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
                     ifAction.line(xmlElementNameCamelCase + ".forEach(xmlWriter::writeXml);");
                 } else {
-                    String xmlWrite = createXmlWrite(xmlListElementName, xmlNamespace,
-                        elementType.xmlElementSerializationMethod(), "element");
+                    String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", xmlListElementName,
+                        xmlNamespace, "element", false);
                     ifAction.line(xmlElementNameCamelCase + ".forEach(element -> " + xmlWrite + ");");
                 }
             });
@@ -281,7 +281,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
-        String fieldSerializationMethod = wireType.jsonFieldSerializationMethod("jsonWriter", serializedName,
+        String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
         if (fieldSerializationMethod != null) {
             methodBlock.line(fieldSerializationMethod + ";");
@@ -319,7 +319,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
         String elementName = depth == 0 ? "element" : "element" + depth;
-        String valueSerializationMethod = elementType.jsonValueSerializationMethod(lambdaWriterName, elementName);
+        String valueSerializationMethod = elementType.jsonSerializationMethodCall(lambdaWriterName, null, elementName);
         String serializeValue = depth == 0 ? propertyValueGetter
             : ((depth == 1) ? "element" : "element" + (depth - 1));
 
@@ -991,7 +991,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             methodBlock.line();
             methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \""
-                    + "+ String.join(\", \", missingProperties));");
+                + "+ String.join(\", \", missingProperties));");
         } else {
             createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, settings);
         }
@@ -1068,34 +1068,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line("xmlWriter.writeNamespace(\"" + modelXmlNamespace + "\");");
             }
 
-            propertiesManager.getXmlAttributes().forEach(property -> serializeXmlAttribute(methodBlock, property));
-            propertiesManager.getXmlElements().forEach(property -> serializeXmlProperty(methodBlock, property));
+            propertiesManager.getXmlAttributes().forEach(property -> serializeXml(methodBlock, property));
+            propertiesManager.getXmlElements().forEach(property -> serializeXml(methodBlock, property));
 
             methodBlock.methodReturn("xmlWriter.writeEndElement()");
         });
-    }
-
-    /**
-     * Serializes an XML attribute.
-     *
-     * @param methodBlock the method handling serialization.
-     * @param attribute The XML attribute being serialized.
-     */
-    private static void serializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute) {
-        // At this time there is an assumption being made that XML attributes won't be any more complex that just
-        // a primitive or simple class type.
-        IType wireType = attribute.getWireType();
-        String propertyValueGetter = "this." + attribute.getName();
-
-        String attributeSerializationMethod = wireType.xmlAttributeSerializationMethod();
-        if (attributeSerializationMethod == null) {
-            // TODO (alzimmer): Resolve this as serialization logic generation needs to handle all cases.
-            throw new RuntimeException("Unknown wire type " + wireType + " in XML attribute serialization. "
-                + "Need to add support for it.");
-        }
-
-        String value = getXmlWriteValue(wireType, propertyValueGetter, attributeSerializationMethod);
-        methodBlock.line(createXmlWrite(attribute.getXmlName(), attribute.getXmlNamespace(), attributeSerializationMethod, value) + ";");
     }
 
     /**
@@ -1104,7 +1081,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param methodBlock The method handling serialization.
      * @param element The XML element being serialized.
      */
-    private static void serializeXmlProperty(JavaBlock methodBlock, ClientModelProperty element) {
+    private static void serializeXml(JavaBlock methodBlock, ClientModelProperty element) {
         IType wireType = element.getWireType();
         String propertyValueGetter = "this." + element.getName();
 
@@ -1116,15 +1093,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
-        String xmlElementSerializationMethod = wireType.xmlElementSerializationMethod();
-        if (xmlElementSerializationMethod != null) {
-            String value = getXmlWriteValue(wireType, propertyValueGetter, xmlElementSerializationMethod);
-
+        String xmlSerializationMethodCall = wireType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
+            element.getXmlNamespace(), propertyValueGetter, element.getIsXmlAttribute());
+        if (xmlSerializationMethodCall != null) {
             // XML text has special handling.
             if (element.isXmlText()) {
-                methodBlock.line("xmlWriter.writeString(" + value + ");");
+                methodBlock.line("xmlWriter.writeString(" + propertyValueGetter + ");");
             } else {
-                methodBlock.line(createXmlWrite(element.getXmlName(), element.getXmlNamespace(), xmlElementSerializationMethod, value) + ";");
+                methodBlock.line(xmlSerializationMethodCall + ";");
             }
         } else if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
             methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
@@ -1132,13 +1108,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             IType elementType = ((IterableType) wireType).getElementType();
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
-                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
-                    ifAction.line(propertyValueGetter + ".forEach(xmlWriter::writeXml);");
-                } else {
-                    String xmlWrite = createXmlWrite(element.getXmlName(), element.getXmlNamespace(),
-                        elementType.xmlElementSerializationMethod(), "element");
-                    ifAction.line(propertyValueGetter + ".forEach(element -> " + xmlWrite + ");");
-                }
+                String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
+                    element.getXmlNamespace(), "element", element.getIsXmlAttribute());
+                ifAction.line(propertyValueGetter + ".forEach(element -> " + xmlWrite + ");");
             });
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
@@ -1159,13 +1131,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         + "xmlWriter.writeEndElement();\n"
                         + "});", writeStartElement);
                 } else {
-                    if (element.getXmlNamespace() != null) {
-                        ifAction.line(propertyValueGetter + ".forEach((key, value) -> xmlWriter.%s(null, key, %s, value));",
-                            valueType.xmlElementSerializationMethod(), element.getXmlNamespace());
-                    } else {
-                        ifAction.line(propertyValueGetter + ".forEach(xmlWriter::%s);",
-                            valueType.xmlElementSerializationMethod());
-                    }
+                    ifAction.line(propertyValueGetter + ".forEach((key, value) -> %s);",
+                        valueType.xmlSerializationMethodCall("xmlWriter", "key", element.getXmlNamespace(), "value",
+                            false));
                 }
 
                 ifAction.line("xmlWriter.writeEndElement();");
@@ -1175,20 +1143,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             throw new RuntimeException("Unknown wire type " + wireType + " in XML element serialization. "
                 + "Need to add support for it.");
         }
-    }
-
-    private static String getXmlWriteValue(IType wireType, String propertyValueGetter, String serializationMethod) {
-        if (wireType instanceof EnumType) {
-            return propertyValueGetter + " == null ? null : " + propertyValueGetter + ".toString()";
-        } else {
-            return propertyValueGetter;
-        }
-    }
-
-    private static String createXmlWrite(String xmlName, String xmlNamespace, String serializationMethod, String value) {
-        return xmlNamespace != null
-            ? String.format("xmlWriter.%s(null, \"%s\", \"%s\", %s)", serializationMethod, xmlNamespace, xmlName, value)
-            : String.format("xmlWriter." + serializationMethod + "(\"" + xmlName + "\", " + value + ")");
     }
 
     private static void writeFromXml(JavaClass classBlock, ClientModel model,

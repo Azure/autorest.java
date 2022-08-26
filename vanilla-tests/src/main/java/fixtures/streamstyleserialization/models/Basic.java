@@ -104,7 +104,7 @@ public final class Basic implements JsonSerializable<Basic> {
         jsonWriter.writeNumberField("id", this.id);
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("color", Objects.toString(this.color, null));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

@@ -123,7 +123,7 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeNumberField("age", getAge());
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", Objects.toString(this.color, null));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

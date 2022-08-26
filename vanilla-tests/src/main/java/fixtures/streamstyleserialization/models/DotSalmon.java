@@ -91,7 +91,7 @@ public class DotSalmon extends DotFish {
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

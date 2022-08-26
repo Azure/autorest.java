@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.json.JsonWriter;
+import com.azure.xml.XmlWriter;
 
 import java.util.Set;
 
@@ -94,38 +95,37 @@ public interface IType {
     }
 
     /**
-     * Gets the method that handles JSON field serialization for the type.
+     * Gets the method call that will handle JSON serialization.
      * <p>
-     * The JSON field serialization method handles writing both the JSON field name and value.
+     * If {@code fieldName} is null it is assumed that a JSON value is being serialized.
      * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a field
-     * serialization method and support needs to be added.
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
+     * method and support needs to be added.
      *
      * @param jsonWriterName The name of the {@link JsonWriter} performing serialization.
-     * @param fieldName The name of the JSON field.
+     * @param fieldName The name of the JSON field, optional.
      * @param valueGetter The value getter.
-     * @return The field serialization method, or null if it isn't supported directly.
+     * @return The method call that will handle JSON serialization, or null if it isn't supported directly.
      */
-    default String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
-        return null;
-    }
+    String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter);
 
     /**
-     * Gets the method that handles JSON value serialization for the type.
+     * Gets the method call that will handle XML serialization.
      * <p>
-     * The value serialization method only handles writing the JSON value. The enables it to be used in situations such
-     * as writing an array or writing to the root of the JSON string.
+     * If {@code attributeOrElementName} is null it is assumed that an XML value is being serialized.
      * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a value
-     * serialization method and support needs to be added.
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
+     * method and support needs to be added.
      *
-     * @param jsonWriterName The name of the {@link JsonWriter} performing serialization.
+     * @param xmlWriterName The name of the {@link XmlWriter} performing serialization.
+     * @param attributeOrElementName The name of the XML attribute or element, optional.
+     * @param namespaceUri The namespace URI of the XML attribute or element, optional.
      * @param valueGetter The value getter.
-     * @return The value serialization method, or null if it isn't supported directly.
+     * @param isAttribute Whether an attribute is being written, if true {@code attributeOrElementName} must be set.
+     * @return The method call that will handle XML serialization, or null if it isn't supported directly.
      */
-    default String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
-        return null;
-    }
+    String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute);
 
     /**
      * Gets the method that handles XML attribute deserialization for the type.
@@ -140,20 +140,6 @@ public interface IType {
     }
 
     /**
-     * Gets the method that handles XML attribute serialization for the type.
-     * <p>
-     * The attribute serialization method handles writing both the XML attribute and value.
-     * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an attribute
-     * serialization method and support needs to be added.
-     *
-     * @return The attribute serialization method, or null if it isn't supported directly.
-     */
-    default String xmlAttributeSerializationMethod() {
-        return null;
-    }
-
-    /**
      * Gets the method that handles XML element deserialization for the type.
      * <p>
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an element
@@ -162,20 +148,6 @@ public interface IType {
      * @return The element deserialization method, or null if it isn't supported directly.
      */
     default String xmlElementDeserializationMethod() {
-        return null;
-    }
-
-    /**
-     * Gets the method that handles XML element serialization for the type.
-     * <p>
-     * The element serialization method handles writing both the XML element tag and value.
-     * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an element
-     * serialization method and support needs to be added.
-     *
-     * @return The element serialization method, or null if it isn't supported directly.
-     */
-    default String xmlElementSerializationMethod() {
         return null;
     }
 }

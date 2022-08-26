@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** An Access policy. */
 @Fluent
@@ -107,8 +108,8 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("AccessPolicy");
-        xmlWriter.writeStringElement("Start", this.start);
-        xmlWriter.writeStringElement("Expiry", this.expiry);
+        xmlWriter.writeStringElement("Start", Objects.toString(this.start, null));
+        xmlWriter.writeStringElement("Expiry", Objects.toString(this.expiry, null));
         xmlWriter.writeStringElement("Permission", this.permission);
         return xmlWriter.writeEndElement();
     }

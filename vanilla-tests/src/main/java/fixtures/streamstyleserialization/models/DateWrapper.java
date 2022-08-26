@@ -77,7 +77,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("field", Objects.toString(this.field, null));
         jsonWriter.writeStringField("leap", Objects.toString(this.leap, null));
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

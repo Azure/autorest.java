@@ -84,7 +84,7 @@ public final class Siamese extends Cat {
         jsonWriter.writeStringField("color", getColor());
         jsonWriter.writeArrayField("hates", getHates(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("breed", this.breed);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

@@ -75,7 +75,7 @@ public final class Error implements JsonSerializable<Error> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("status", this.status);
         jsonWriter.writeStringField("message", this.message);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**

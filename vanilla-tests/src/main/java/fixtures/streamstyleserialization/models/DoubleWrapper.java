@@ -82,7 +82,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
         jsonWriter.writeNumberField(
                 "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose",
                 this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**
