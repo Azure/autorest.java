@@ -187,7 +187,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("ContainerProperties");
-        xmlWriter.writeStringElement("Last-Modified", this.lastModified == null ? null : this.lastModified.toString());
+        xmlWriter.writeStringElement("Last-Modified", this.lastModified);
         xmlWriter.writeStringElement("Etag", this.etag);
         xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
         xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());

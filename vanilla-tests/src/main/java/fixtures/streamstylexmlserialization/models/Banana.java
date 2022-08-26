@@ -99,7 +99,7 @@ public final class Banana implements XmlSerializable<Banana> {
         xmlWriter.writeStartElement("banana");
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
-        xmlWriter.writeStringElement("expiration", this.expiration == null ? null : this.expiration.toString());
+        xmlWriter.writeStringElement("expiration", this.expiration);
         return xmlWriter.writeEndElement();
     }
 }

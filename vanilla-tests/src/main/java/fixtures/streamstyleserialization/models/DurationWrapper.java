@@ -10,6 +10,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.Duration;
+import java.util.Objects;
 
 /** The DurationWrapper model. */
 @Fluent
@@ -49,7 +50,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -69,7 +70,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> Duration.parse(reader.getStringValue()));
+                            field = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

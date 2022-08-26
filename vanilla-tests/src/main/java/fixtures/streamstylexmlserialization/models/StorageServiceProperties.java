@@ -63,6 +63,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                                     items = new ArrayList<>();
                                 }
 
+                                items.add(CorsRule.fromXml(reader));
                             } else {
                                 reader.nextElement();
                             }

@@ -30,7 +30,9 @@ public final class LRORetrysPost202Retry200Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LRORetrysPost202Retry200Headers(HttpHeaders rawHeaders) {
-        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        if (rawHeaders.getValue("Retry-After") != null) {
+            this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        }
         this.location = rawHeaders.getValue("Location");
     }
 

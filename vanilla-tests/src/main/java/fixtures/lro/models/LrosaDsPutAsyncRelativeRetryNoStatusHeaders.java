@@ -36,7 +36,9 @@ public final class LrosaDsPutAsyncRelativeRetryNoStatusHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsPutAsyncRelativeRetryNoStatusHeaders(HttpHeaders rawHeaders) {
-        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        if (rawHeaders.getValue("Retry-After") != null) {
+            this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        }
         this.azureAsyncOperation = rawHeaders.getValue("Azure-AsyncOperation");
         this.location = rawHeaders.getValue("Location");
     }

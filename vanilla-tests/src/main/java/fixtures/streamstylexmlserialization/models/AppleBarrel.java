@@ -48,6 +48,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                                     items = new ArrayList<>();
                                 }
 
+                                items.add(reader.getElementStringValue());
                             } else {
                                 reader.nextElement();
                             }
@@ -92,6 +93,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                                     items = new ArrayList<>();
                                 }
 
+                                items.add(reader.getElementStringValue());
                             } else {
                                 reader.nextElement();
                             }

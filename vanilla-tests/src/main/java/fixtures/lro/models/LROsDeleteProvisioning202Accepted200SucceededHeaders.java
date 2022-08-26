@@ -30,7 +30,9 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsDeleteProvisioning202Accepted200SucceededHeaders(HttpHeaders rawHeaders) {
-        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        if (rawHeaders.getValue("Retry-After") != null) {
+            this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        }
         this.location = rawHeaders.getValue("Location");
     }
 

@@ -19,6 +19,7 @@ public final class AppleBarrel {
     /*
      * The GoodApples property.
      */
+    @JsonProperty(value = "GoodApples")
     private static final class GoodApplesWrapper {
         @JacksonXmlProperty(localName = "Apple")
         private final List<String> items;
@@ -29,12 +30,12 @@ public final class AppleBarrel {
         }
     }
 
-    @JsonProperty(value = "GoodApples")
     private GoodApplesWrapper goodApples;
 
     /*
      * The BadApples property.
      */
+    @JsonProperty(value = "BadApples")
     private static final class BadApplesWrapper {
         @JacksonXmlProperty(localName = "Apple")
         private final List<String> items;
@@ -45,7 +46,6 @@ public final class AppleBarrel {
         }
     }
 
-    @JsonProperty(value = "BadApples")
     private BadApplesWrapper badApples;
 
     /**

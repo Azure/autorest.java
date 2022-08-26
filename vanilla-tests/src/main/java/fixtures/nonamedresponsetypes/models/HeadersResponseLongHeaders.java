@@ -24,7 +24,9 @@ public final class HeadersResponseLongHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseLongHeaders(HttpHeaders rawHeaders) {
-        this.value = Long.parseLong(rawHeaders.getValue("value"));
+        if (rawHeaders.getValue("value") != null) {
+            this.value = Long.parseLong(rawHeaders.getValue("value"));
+        }
     }
 
     /**

@@ -73,8 +73,8 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("field1", this.field1, false);
-        jsonWriter.writeIntegerField("field2", this.field2, false);
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField("field2", this.field2);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -95,9 +95,9 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getIntegerNullableValue();
+                            field1 = reader.getNullable(JsonReader::getInt);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getIntegerNullableValue();
+                            field2 = reader.getNullable(JsonReader::getInt);
                         } else {
                             reader.skipChildren();
                         }

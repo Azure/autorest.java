@@ -79,11 +79,11 @@ public final class Siamese extends Cat {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", getId(), false);
-        jsonWriter.writeStringField("name", getName(), false);
-        jsonWriter.writeStringField("color", getColor(), false);
-        jsonWriter.writeArrayField("hates", getHates(), false, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("breed", this.breed, false);
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("color", getColor());
+        jsonWriter.writeArrayField("hates", getHates(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("breed", this.breed);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -107,15 +107,15 @@ public final class Siamese extends Cat {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
+                            color = reader.getString();
                         } else if ("hates".equals(fieldName)) {
                             hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
                         } else if ("breed".equals(fieldName)) {
-                            breed = reader.getStringValue();
+                            breed = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

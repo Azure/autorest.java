@@ -858,7 +858,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
-        if (wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String) {
+        if ((wireType instanceof ClassType || wireType instanceof EnumType || wireType instanceof GenericType)
+            && wireType != ClassType.String) {
             javaBlock.ifBlock(String.format("%s != null", rawHeaderAccess),
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {

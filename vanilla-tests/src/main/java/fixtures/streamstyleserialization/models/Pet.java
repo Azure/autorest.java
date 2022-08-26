@@ -73,8 +73,8 @@ public class Pet implements JsonSerializable<Pet> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", this.id, false);
-        jsonWriter.writeStringField("name", this.name, false);
+        jsonWriter.writeNumberField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -95,9 +95,9 @@ public class Pet implements JsonSerializable<Pet> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

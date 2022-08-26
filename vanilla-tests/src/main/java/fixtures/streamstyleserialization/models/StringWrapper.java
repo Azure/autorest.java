@@ -98,9 +98,9 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field, false);
-        jsonWriter.writeStringField("empty", this.empty, false);
-        jsonWriter.writeStringField("null", this.nullProperty, false);
+        jsonWriter.writeStringField("field", this.field);
+        jsonWriter.writeStringField("empty", this.empty);
+        jsonWriter.writeStringField("null", this.nullProperty);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -122,11 +122,11 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getStringValue();
+                            field = reader.getString();
                         } else if ("empty".equals(fieldName)) {
-                            empty = reader.getStringValue();
+                            empty = reader.getString();
                         } else if ("null".equals(fieldName)) {
-                            nullProperty = reader.getStringValue();
+                            nullProperty = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

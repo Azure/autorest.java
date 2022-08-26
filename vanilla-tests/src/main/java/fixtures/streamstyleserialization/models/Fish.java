@@ -102,8 +102,8 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
-        jsonWriter.writeStringField("species", this.species, false);
-        jsonWriter.writeArrayField("siblings", this.siblings, false, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("species", this.species);
+        jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -126,7 +126,7 @@ public class Fish implements JsonSerializable<Fish> {
                     reader.nextToken();
                     if ("fishtype".equals(reader.getFieldName())) {
                         reader.nextToken();
-                        discriminatorValue = reader.getStringValue();
+                        discriminatorValue = reader.getString();
                         readerToUse = reader;
                     } else {
                         // If it isn't the discriminator field buffer the JSON to make it replayable and find the
@@ -137,7 +137,7 @@ public class Fish implements JsonSerializable<Fish> {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
                             if ("fishtype".equals(fieldName)) {
-                                discriminatorValue = replayReader.getStringValue();
+                                discriminatorValue = replayReader.getString();
                                 break;
                             } else {
                                 replayReader.skipChildren();

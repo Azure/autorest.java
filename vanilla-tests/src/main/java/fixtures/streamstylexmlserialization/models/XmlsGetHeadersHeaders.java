@@ -59,7 +59,7 @@ public final class XmlsGetHeadersHeaders implements JsonSerializable<XmlsGetHead
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("Custom-Header", this.customHeader, false);
+        jsonWriter.writeStringField("Custom-Header", this.customHeader);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -79,7 +79,7 @@ public final class XmlsGetHeadersHeaders implements JsonSerializable<XmlsGetHead
                         reader.nextToken();
 
                         if ("Custom-Header".equals(fieldName)) {
-                            customHeader = reader.getStringValue();
+                            customHeader = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

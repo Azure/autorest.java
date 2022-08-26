@@ -68,6 +68,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                                     items = new ArrayList<>();
                                 }
 
+                                items.add(Container.fromXml(reader));
                             } else {
                                 reader.nextElement();
                             }

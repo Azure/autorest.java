@@ -751,7 +751,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("BlobProperties");
-        xmlWriter.writeStringElement("Last-Modified", this.lastModified == null ? null : this.lastModified.toString());
+        xmlWriter.writeStringElement("Last-Modified", this.lastModified);
         xmlWriter.writeStringElement("Etag", this.etag);
         xmlWriter.writeNumberElement("Content-Length", this.contentLength);
         xmlWriter.writeStringElement("Content-Type", this.contentType);
@@ -770,13 +770,12 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
         xmlWriter.writeStringElement("CopyStatus", this.copyStatus == null ? null : this.copyStatus.toString());
         xmlWriter.writeStringElement("CopySource", this.copySource);
         xmlWriter.writeStringElement("CopyProgress", this.copyProgress);
-        xmlWriter.writeStringElement(
-                "CopyCompletionTime", this.copyCompletionTime == null ? null : this.copyCompletionTime.toString());
+        xmlWriter.writeStringElement("CopyCompletionTime", this.copyCompletionTime);
         xmlWriter.writeStringElement("CopyStatusDescription", this.copyStatusDescription);
         xmlWriter.writeBooleanElement("ServerEncrypted", this.serverEncrypted);
         xmlWriter.writeBooleanElement("IncrementalCopy", this.incrementalCopy);
         xmlWriter.writeStringElement("DestinationSnapshot", this.destinationSnapshot);
-        xmlWriter.writeStringElement("DeletedTime", this.deletedTime == null ? null : this.deletedTime.toString());
+        xmlWriter.writeStringElement("DeletedTime", this.deletedTime);
         xmlWriter.writeNumberElement("RemainingRetentionDays", this.remainingRetentionDays);
         xmlWriter.writeStringElement("AccessTier", this.accessTier == null ? null : this.accessTier.toString());
         xmlWriter.writeBooleanElement("AccessTierInferred", this.accessTierInferred);

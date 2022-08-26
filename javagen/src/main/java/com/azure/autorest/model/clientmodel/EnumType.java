@@ -163,27 +163,24 @@ public class EnumType implements IType {
         return implementationDetails;
     }
 
-    public final boolean deserializationNeedsNullGuarding() {
-        return false;
+    @Override
+    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
+        return String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
+            jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String streamStyleJsonFieldSerializationMethod() {
-        return "writeStringField";
+    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
+        return String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter);
     }
 
     @Override
-    public String streamStyleJsonValueSerializationMethod() {
-        return "writeString";
-    }
-
-    @Override
-    public String streamStyleXmlAttributeSerializationMethod() {
+    public String xmlAttributeSerializationMethod() {
         return "writeStringAttribute";
     }
 
     @Override
-    public String streamStyleXmlElementSerializationMethod() {
+    public String xmlElementSerializationMethod() {
         return "writeStringElement";
     }
 

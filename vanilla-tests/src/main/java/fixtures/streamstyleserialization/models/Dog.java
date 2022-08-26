@@ -64,9 +64,9 @@ public final class Dog extends Pet {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", getId(), false);
-        jsonWriter.writeStringField("name", getName(), false);
-        jsonWriter.writeStringField("food", this.food, false);
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("food", this.food);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -88,11 +88,11 @@ public final class Dog extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else if ("food".equals(fieldName)) {
-                            food = reader.getStringValue();
+                            food = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

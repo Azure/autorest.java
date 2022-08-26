@@ -24,7 +24,9 @@ public final class HeadersResponseIntegerHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseIntegerHeaders(HttpHeaders rawHeaders) {
-        this.value = Integer.parseInt(rawHeaders.getValue("value"));
+        if (rawHeaders.getValue("value") != null) {
+            this.value = Integer.parseInt(rawHeaders.getValue("value"));
+        }
     }
 
     /**

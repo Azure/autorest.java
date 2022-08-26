@@ -37,6 +37,7 @@ public final class StorageServiceProperties {
     /*
      * The set of CORS rules.
      */
+    @JsonProperty(value = "Cors")
     private static final class CorsWrapper {
         @JacksonXmlProperty(localName = "CorsRule")
         private final List<CorsRule> items;
@@ -47,7 +48,6 @@ public final class StorageServiceProperties {
         }
     }
 
-    @JsonProperty(value = "Cors")
     private CorsWrapper cors;
 
     /*

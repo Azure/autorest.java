@@ -57,6 +57,7 @@ public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIde
                                 items = new ArrayList<>();
                             }
 
+                            items.add(SignedIdentifier.fromXml(reader));
                         } else {
                             reader.nextElement();
                         }

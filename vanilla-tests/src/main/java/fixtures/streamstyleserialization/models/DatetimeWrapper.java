@@ -10,6 +10,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** The DatetimeWrapper model. */
 @Fluent
@@ -74,8 +75,8 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        jsonWriter.writeStringField("now", this.now == null ? null : this.now.toString(), false);
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("now", Objects.toString(this.now, null));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -96,9 +97,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
+                            field =
+                                    reader.getNullable(
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("now".equals(fieldName)) {
-                            now = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
+                            now = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

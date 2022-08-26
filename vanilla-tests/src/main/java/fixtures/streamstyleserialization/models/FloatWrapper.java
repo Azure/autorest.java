@@ -73,8 +73,8 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("field1", this.field1, false);
-        jsonWriter.writeFloatField("field2", this.field2, false);
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField("field2", this.field2);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -95,9 +95,9 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getFloatNullableValue();
+                            field1 = reader.getNullable(JsonReader::getFloat);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getFloatNullableValue();
+                            field2 = reader.getNullable(JsonReader::getFloat);
                         } else {
                             reader.skipChildren();
                         }

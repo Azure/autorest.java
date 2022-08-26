@@ -57,6 +57,7 @@ public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
                                 items = new ArrayList<>();
                             }
 
+                            items.add(Banana.fromXml(reader));
                         } else {
                             reader.nextElement();
                         }

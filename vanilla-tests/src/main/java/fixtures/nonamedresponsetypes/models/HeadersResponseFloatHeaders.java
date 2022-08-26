@@ -24,7 +24,9 @@ public final class HeadersResponseFloatHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseFloatHeaders(HttpHeaders rawHeaders) {
-        this.value = Float.parseFloat(rawHeaders.getValue("value"));
+        if (rawHeaders.getValue("value") != null) {
+            this.value = Float.parseFloat(rawHeaders.getValue("value"));
+        }
     }
 
     /**

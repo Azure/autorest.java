@@ -78,11 +78,10 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeDoubleField("field1", this.field1, false);
-        jsonWriter.writeDoubleField(
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField(
                 "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose",
-                this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose,
-                false);
+                this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -103,11 +102,11 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getDoubleNullableValue();
+                            field1 = reader.getNullable(JsonReader::getDouble);
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
                             field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
-                                    reader.getDoubleNullableValue();
+                                    reader.getNullable(JsonReader::getDouble);
                         } else {
                             reader.skipChildren();
                         }

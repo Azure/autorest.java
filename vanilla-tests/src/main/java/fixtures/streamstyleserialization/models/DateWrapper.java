@@ -10,6 +10,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /** The DateWrapper model. */
 @Fluent
@@ -74,8 +75,8 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        jsonWriter.writeStringField("leap", this.leap == null ? null : this.leap.toString(), false);
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("leap", Objects.toString(this.leap, null));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -96,9 +97,9 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
+                            field = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else if ("leap".equals(fieldName)) {
-                            leap = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
+                            leap = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

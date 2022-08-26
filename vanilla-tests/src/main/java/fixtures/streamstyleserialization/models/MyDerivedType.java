@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.util.Objects;
 
 /** The MyDerivedType model. */
 @Fluent
@@ -69,12 +70,12 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString(), false);
-        jsonWriter.writeStringField("propB1", getPropB1(), false);
-        jsonWriter.writeStringField("propD1", this.propD1, false);
+        jsonWriter.writeStringField("kind", Objects.toString(this.kind, null));
+        jsonWriter.writeStringField("propB1", getPropB1());
+        jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
             jsonWriter.writeStartObject("helper");
-            jsonWriter.writeStringField("propBH1", getPropBH1(), false);
+            jsonWriter.writeStringField("propBH1", getPropBH1());
             jsonWriter.writeEndObject();
         }
         return jsonWriter.writeEndObject().flush();
@@ -91,7 +92,6 @@ public final class MyDerivedType extends MyBaseType {
     public static MyDerivedType fromJson(JsonReader jsonReader) {
         return jsonReader.readObject(
                 reader -> {
-                    MyKind kind = MyKind.KIND1;
                     String propB1 = null;
                     String propBH1 = null;
                     String propD1 = null;
@@ -100,18 +100,24 @@ public final class MyDerivedType extends MyBaseType {
                         reader.nextToken();
 
                         if ("kind".equals(fieldName)) {
-                            kind = MyKind.fromString(reader.getStringValue());
+                            String kind = reader.getString();
+                            if (!MyKind.KIND1.equals(kind)) {
+                                throw new IllegalStateException(
+                                        "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
+                                                + kind
+                                                + "'.");
+                            }
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = reader.getStringValue();
+                            propB1 = reader.getString();
                         } else if ("propD1".equals(fieldName)) {
-                            propD1 = reader.getStringValue();
+                            propD1 = reader.getString();
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = reader.getStringValue();
+                                    propBH1 = reader.getString();
                                 } else {
                                     reader.skipChildren();
                                 }
@@ -120,16 +126,7 @@ public final class MyDerivedType extends MyBaseType {
                             reader.skipChildren();
                         }
                     }
-
-                    if (!MyKind.KIND1.equals(kind)) {
-                        throw new IllegalStateException(
-                                "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
-                                        + kind
-                                        + "'.");
-                    }
-
                     MyDerivedType deserializedValue = new MyDerivedType();
-                    deserializedValue.kind = kind;
                     deserializedValue.setPropB1(propB1);
                     deserializedValue.setPropBH1(propBH1);
                     deserializedValue.propD1 = propD1;

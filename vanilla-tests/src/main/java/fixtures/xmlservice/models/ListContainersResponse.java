@@ -43,6 +43,7 @@ public final class ListContainersResponse {
     /*
      * The Containers property.
      */
+    @JsonProperty(value = "Containers")
     private static final class ContainersWrapper {
         @JacksonXmlProperty(localName = "Container")
         private final List<Container> items;
@@ -53,7 +54,6 @@ public final class ListContainersResponse {
         }
     }
 
-    @JsonProperty(value = "Containers")
     private ContainersWrapper containers;
 
     /*

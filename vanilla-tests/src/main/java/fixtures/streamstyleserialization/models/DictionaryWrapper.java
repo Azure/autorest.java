@@ -50,7 +50,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
         jsonWriter.writeMapField(
-                "defaultProgram", this.defaultProgram, false, (writer, element) -> writer.writeString(element));
+                "defaultProgram", this.defaultProgram, (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -70,7 +70,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
-                            defaultProgram = reader.readMap(reader1 -> reader1.getStringValue());
+                            defaultProgram = reader.readMap(reader1 -> reader1.getString());
                         } else {
                             reader.skipChildren();
                         }

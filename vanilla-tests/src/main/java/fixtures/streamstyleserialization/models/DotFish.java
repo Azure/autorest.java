@@ -48,7 +48,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("species", this.species, false);
+        jsonWriter.writeStringField("species", this.species);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -70,7 +70,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                     reader.nextToken();
                     if ("fish\\.type".equals(reader.getFieldName())) {
                         reader.nextToken();
-                        discriminatorValue = reader.getStringValue();
+                        discriminatorValue = reader.getString();
                         readerToUse = reader;
                     } else {
                         // If it isn't the discriminator field buffer the JSON to make it replayable and find the
@@ -81,7 +81,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
                             if ("fish\\.type".equals(fieldName)) {
-                                discriminatorValue = replayReader.getStringValue();
+                                discriminatorValue = replayReader.getString();
                                 break;
                             } else {
                                 replayReader.skipChildren();

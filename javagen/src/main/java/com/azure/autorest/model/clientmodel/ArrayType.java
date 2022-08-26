@@ -76,22 +76,27 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String streamStyleJsonFieldSerializationMethod() {
-        return "writeBinaryField";
+    public String jsonDeserializationMethod() {
+        return "getBinary()";
     }
 
     @Override
-    public String streamStyleJsonValueSerializationMethod() {
-        return "writeBinary";
+    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
+        return String.format("%s.writeBinaryField(\"%s\", %s)", jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String streamStyleXmlAttributeSerializationMethod() {
+    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
+        return String.format("%s.writeBinary(%s)", jsonWriterName, valueGetter);
+    }
+
+    @Override
+    public String xmlAttributeSerializationMethod() {
         return "writeBinaryAttribute";
     }
 
     @Override
-    public String streamStyleXmlElementSerializationMethod() {
+    public String xmlElementSerializationMethod() {
         return "writeBinaryElement";
     }
 }

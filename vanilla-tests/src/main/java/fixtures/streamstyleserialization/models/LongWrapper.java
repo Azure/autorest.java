@@ -73,8 +73,8 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("field1", this.field1, false);
-        jsonWriter.writeLongField("field2", this.field2, false);
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField("field2", this.field2);
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -95,9 +95,9 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getLongNullableValue();
+                            field1 = reader.getNullable(JsonReader::getLong);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getLongNullableValue();
+                            field2 = reader.getNullable(JsonReader::getLong);
                         } else {
                             reader.skipChildren();
                         }

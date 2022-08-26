@@ -11,6 +11,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** The Datetimerfc1123Wrapper model. */
 @Fluent
@@ -89,8 +90,8 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        jsonWriter.writeStringField("now", this.now == null ? null : this.now.toString(), false);
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("now", Objects.toString(this.now, null));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -112,12 +113,12 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
                         if ("field".equals(fieldName)) {
                             field =
-                                    reader.getNullableValue(
-                                            r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
+                                    reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))
+                                            .getDateTime();
                         } else if ("now".equals(fieldName)) {
                             now =
-                                    reader.getNullableValue(
-                                            r -> new DateTimeRfc1123(reader.getStringValue()).getDateTime());
+                                    reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))
+                                            .getDateTime();
                         } else {
                             reader.skipChildren();
                         }

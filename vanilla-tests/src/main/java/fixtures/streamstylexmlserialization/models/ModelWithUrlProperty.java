@@ -47,7 +47,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("ModelWithUrlProperty");
-        xmlWriter.writeStringElement("Url", this.url == null ? null : this.url.toString());
+        xmlWriter.writeStringElement("Url", this.url);
         return xmlWriter.writeEndElement();
     }
 }

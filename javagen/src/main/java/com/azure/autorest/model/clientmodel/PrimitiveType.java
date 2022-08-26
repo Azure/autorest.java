@@ -14,32 +14,37 @@ public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
 
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase,
-        "false", "writeBooleanField", "writeBoolean", "writeBooleanAttribute", "writeBooleanElement");
+        "false", "getBoolean()", "%s.writeBooleanField(\"%s\", %s)", "%s.writeBoolean(%s)", "writeBooleanAttribute",
+        "writeBooleanElement");
 
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0",
-        "writeIntField", "writeInt", "writeIntAttribute", "writeIntElement");
+        "getInt()", "%s.writeIntField(\"%s\", %s)", "%s.writeInt(%s)", "writeIntAttribute", "writeIntElement");
 
     public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0",
-        "writeIntField", "writeInt", "writeIntAttribute", "writeIntElement");
+        "getInt()", "%s.writeIntField(\"%s\", %s)", "%s.writeInt(%s)", "writeIntAttribute", "writeIntElement");
 
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long,
-        defaultValueExpression -> defaultValueExpression + 'L', "0", "writeLongField", "writeLong",
-        "writeLongAttribute", "writeLongElement");
+        defaultValueExpression -> defaultValueExpression + 'L', "0", "getLong()", "%s.writeLongField(\"%s\", %s)",
+        "%s.writeLong(%s)", "writeLongAttribute", "writeLongElement");
 
     public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float,
-        defaultValueExpression -> defaultValueExpression + "f", "0.0", "writeFloatField", "writeFloat",
-        "writeFloatAttribute", "writeFloatElement");
+        defaultValueExpression -> defaultValueExpression + "f", "0.0", "getFloat()", "%s.writeFloatField(\"%s\", %s)",
+        "%s.writeFloat(%s)", "writeFloatAttribute", "writeFloatElement");
 
     public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double,
         defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)),
-        "0.0", "writeDoubleField", "writeDouble", "writeDoubleAttribute", "writeDoubleElement");
+        "0.0", "getDouble()", "%s.writeDoubleField(\"%s\", %s)", "%s.writeDouble(%s)", "writeDoubleAttribute",
+        "writeDoubleElement");
 
     public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character,
         defaultValueExpression -> java.lang.Integer.toString(defaultValueExpression.charAt(0)), "\u0000",
-        "writeStringField", "writeString", "writeStringAttribute", "writeStringElement");
+        "getString().charAt(0)", "%1$s.writeStringField(\"%2$s\", %3$s == null ? null %3$s.toString())",
+        "%1$s.writeString(%2$s == null ? null : %2$s.toString())", "writeStringAttribute", "writeStringElement");
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, null, null,
-        "writeLongField", "writeLong", "writeLongAttribute", "writeLongElement");
+        "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))",
+        "%s.writeStringField(\"%2$s\", Objects.toString(%s, null))", "%s.writeString(Objects.toString(%s, null))",
+        "writeLongAttribute", "writeLongElement");
 
     /**
      * The name of this type.
@@ -51,8 +56,9 @@ public class PrimitiveType implements IType {
     private final ClassType nullableType;
     private final Function<String, String> defaultValueExpressionConverter;
     private final String defaultValue;
-    private final String jsonFieldSerializationMethod;
-    private final String jsonValueSerializationMethod;
+    private final String jsonDeserializationMethod;
+    private final String jsonFieldSerializationMethodTemplate;
+    private final String jsonValueSerializationMethodTemplate;
     private final String xmlAttributeSerializationMethod;
     private final String xmlElementSerializationMethod;
 
@@ -61,19 +67,20 @@ public class PrimitiveType implements IType {
      * @param name The name of this type.
      */
     private PrimitiveType(String name, ClassType nullableType) {
-        this(name, nullableType, null, null, null, null, null, null);
+        this(name, nullableType, null, null, null, null, null, null, null);
     }
 
     private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
-        String defaultValue, String jsonFieldSerializationMethod, String jsonValueSerializationMethod,
-        String xmlAttributeSerializationMethod, String xmlElementSerializationMethod,
-        String... importsToAdd) {
+        String defaultValue, String jsonDeserializationMethod, String jsonFieldSerializationMethodTemplate,
+        String jsonValueSerializationMethodTemplate, String xmlAttributeSerializationMethod,
+        String xmlElementSerializationMethod, String... importsToAdd) {
         this.name = name;
         this.nullableType = nullableType;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
         this.defaultValue = defaultValue;
-        this.jsonFieldSerializationMethod = jsonFieldSerializationMethod;
-        this.jsonValueSerializationMethod = jsonValueSerializationMethod;
+        this.jsonDeserializationMethod = jsonDeserializationMethod;
+        this.jsonFieldSerializationMethodTemplate = jsonFieldSerializationMethodTemplate;
+        this.jsonValueSerializationMethodTemplate = jsonValueSerializationMethodTemplate;
         this.xmlAttributeSerializationMethod = xmlAttributeSerializationMethod;
         this.xmlElementSerializationMethod = xmlElementSerializationMethod;
     }
@@ -111,11 +118,6 @@ public class PrimitiveType implements IType {
         if (this == PrimitiveType.UnixTimeLong) {
             imports.add(Instant.class.getName());
         }
-    }
-
-    @Override
-    public final boolean deserializationNeedsNullGuarding() {
-        return false;
     }
 
     @Override
@@ -194,22 +196,27 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public String streamStyleJsonFieldSerializationMethod() {
-        return jsonFieldSerializationMethod;
+    public String jsonDeserializationMethod() {
+        return jsonDeserializationMethod;
     }
 
     @Override
-    public String streamStyleJsonValueSerializationMethod() {
-        return jsonValueSerializationMethod;
+    public String jsonFieldSerializationMethod(String jsonWriterName, String fieldName, String valueGetter) {
+        return String.format(jsonFieldSerializationMethodTemplate, jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String streamStyleXmlAttributeSerializationMethod() {
+    public String jsonValueSerializationMethod(String jsonWriterName, String valueGetter) {
+        return String.format(jsonValueSerializationMethodTemplate, jsonWriterName, valueGetter);
+    }
+
+    @Override
+    public String xmlAttributeSerializationMethod() {
         return xmlAttributeSerializationMethod;
     }
 
     @Override
-    public String streamStyleXmlElementSerializationMethod() {
+    public String xmlElementSerializationMethod() {
         return xmlElementSerializationMethod;
     }
 

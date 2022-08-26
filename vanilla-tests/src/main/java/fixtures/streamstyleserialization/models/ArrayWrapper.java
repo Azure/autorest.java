@@ -49,7 +49,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("array", this.array, false, (writer, element) -> writer.writeString(element));
+        jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject().flush();
     }
 
@@ -69,7 +69,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array = reader.readArray(reader1 -> reader1.getStringValue());
+                            array = reader.readArray(reader1 -> reader1.getString());
                         } else {
                             reader.skipChildren();
                         }

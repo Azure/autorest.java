@@ -107,8 +107,8 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) {
         xmlWriter.writeStartElement("AccessPolicy");
-        xmlWriter.writeStringElement("Start", this.start == null ? null : this.start.toString());
-        xmlWriter.writeStringElement("Expiry", this.expiry == null ? null : this.expiry.toString());
+        xmlWriter.writeStringElement("Start", this.start);
+        xmlWriter.writeStringElement("Expiry", this.expiry);
         xmlWriter.writeStringElement("Permission", this.permission);
         return xmlWriter.writeEndElement();
     }
