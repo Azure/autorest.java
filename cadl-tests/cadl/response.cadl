@@ -14,7 +14,6 @@ model Resource {
 
   @key
   name: string;
-
   type: string;
 }
 
