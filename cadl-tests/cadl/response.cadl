@@ -23,7 +23,7 @@ interface ResponseOp {
   @route("/get-binary")
   @get
   getBinary(): OkResponse & {
-    @header contentType: "image/png";
+    @header("content-type") contentType: "image/png";
     @body body: bytes;
   };
 
