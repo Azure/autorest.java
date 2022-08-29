@@ -1,0 +1,21 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core;
+
+@serviceTitle("LongRunning")
+@serviceVersion("1.0.0")
+namespace Cadl.LongRunning;
+
+model Resource {
+  id: string;
+  @key
+  name: string;
+  type: string;
+}
+
+@route("/long-running")
+interface LongRunningOp {
+  createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+}
