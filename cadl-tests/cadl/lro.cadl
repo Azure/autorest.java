@@ -10,12 +10,24 @@ namespace Cadl.LongRunning;
 
 model Resource {
   id: string;
+
   @key
   name: string;
   type: string;
 }
 
+model ExportParams {
+  @query
+  projectFileVersion: string;
+}
+
 @route("/long-running")
 interface LongRunningOp {
   createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+
+  get is ResourceRead<Resource>;
+
+  delete is LongRunningResourceDelete<Resource>;
+
+  export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
 }
