@@ -88,11 +88,9 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
      * deserialization method and support needs to be added.
      *
-     * @return THe JSON deserialization method, or null i it isn't supported directly.
+     * @return The JSON deserialization method, or null i it isn't supported directly.
      */
-    default String jsonDeserializationMethod() {
-        return null;
-    }
+    String jsonDeserializationMethod();
 
     /**
      * Gets the method call that will handle JSON serialization.
@@ -108,6 +106,21 @@ public interface IType {
      * @return The method call that will handle JSON serialization, or null if it isn't supported directly.
      */
     String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter);
+
+    /**
+     * Gets the method that handles XML deserialization for the type.
+     * <p>
+     * This method handles both XML attributes and elements. If {@code attributeName} is null the XML element
+     * deserialization method is returned.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an XML
+     * deserialization method and support needs to be added.
+     *
+     * @param attributeName The attribute name, if null this is considered to be an element call.
+     * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
+     * @return The XML deserialization method, or null i it isn't supported directly.
+     */
+    String xmlDeserializationMethod(String attributeName, String attributeNamespace);
 
     /**
      * Gets the method call that will handle XML serialization.
@@ -126,28 +139,4 @@ public interface IType {
      */
     String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
         String valueGetter, boolean isAttribute);
-
-    /**
-     * Gets the method that handles XML attribute deserialization for the type.
-     * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an attribute
-     * deserialization method and support needs to be added.
-     *
-     * @return The attribute deserialization method, or null if it isn't supported directly.
-     */
-    default String xmlAttributeDeserializationMethod() {
-        return null;
-    }
-
-    /**
-     * Gets the method that handles XML element deserialization for the type.
-     * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an element
-     * deserialization method and support needs to be added.
-     *
-     * @return The element deserialization method, or null if it isn't supported directly.
-     */
-    default String xmlElementDeserializationMethod() {
-        return null;
-    }
 }

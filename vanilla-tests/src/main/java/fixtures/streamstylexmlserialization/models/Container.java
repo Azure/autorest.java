@@ -5,8 +5,13 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** An Azure Storage container. */
@@ -114,5 +119,46 @@ public final class Container implements XmlSerializable<Container> {
             xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Container from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     */
+    public static Container fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Container",
+                reader -> {
+                    String name = null;
+                    ContainerProperties properties = null;
+                    Map<String, String> metadata = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Name".equals(fieldName.getLocalPart())) {
+                            name = reader.getStringElement();
+                        } else if ("Properties".equals(fieldName.getLocalPart())) {
+                            properties = ContainerProperties.fromXml(reader);
+                        } else if ("Metadata".equals(fieldName.getLocalPart())) {
+                            if (metadata == null) {
+                                metadata = new LinkedHashMap<>();
+                            }
+                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                                metadata.put(reader.getElementName().getLocalPart(), reader.getStringElement());
+                            }
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Container deserializedValue = new Container();
+                    deserializedValue.name = name;
+                    deserializedValue.properties = properties;
+                    deserializedValue.metadata = metadata;
+
+                    return deserializedValue;
+                });
     }
 }

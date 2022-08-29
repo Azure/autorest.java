@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** Azure Analytics Logging settings. */
 @Fluent
@@ -161,5 +164,49 @@ public final class Logging implements XmlSerializable<Logging> {
         xmlWriter.writeBooleanElement("Write", this.write);
         xmlWriter.writeXml(this.retentionPolicy);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Logging from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Logging if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static Logging fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Logging",
+                reader -> {
+                    String version = null;
+                    boolean delete = false;
+                    boolean read = false;
+                    boolean write = false;
+                    RetentionPolicy retentionPolicy = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Version".equals(fieldName.getLocalPart())) {
+                            version = reader.getStringElement();
+                        } else if ("Delete".equals(fieldName.getLocalPart())) {
+                            delete = reader.getBooleanElement();
+                        } else if ("Read".equals(fieldName.getLocalPart())) {
+                            read = reader.getBooleanElement();
+                        } else if ("Write".equals(fieldName.getLocalPart())) {
+                            write = reader.getBooleanElement();
+                        } else if ("RetentionPolicy".equals(fieldName.getLocalPart())) {
+                            retentionPolicy = RetentionPolicy.fromXml(reader);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Logging deserializedValue = new Logging();
+                    deserializedValue.version = version;
+                    deserializedValue.delete = delete;
+                    deserializedValue.read = read;
+                    deserializedValue.write = write;
+                    deserializedValue.retentionPolicy = retentionPolicy;
+
+                    return deserializedValue;
+                });
     }
 }

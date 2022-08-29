@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** the retention policy. */
 @Fluent
@@ -77,5 +80,37 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
         xmlWriter.writeNumberElement("Days", this.days);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of RetentionPolicy from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of RetentionPolicy if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     */
+    public static RetentionPolicy fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "RetentionPolicy",
+                reader -> {
+                    boolean enabled = false;
+                    Integer days = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Enabled".equals(fieldName.getLocalPart())) {
+                            enabled = reader.getBooleanElement();
+                        } else if ("Days".equals(fieldName.getLocalPart())) {
+                            days = reader.getNullableElement(Integer::parseInt);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    RetentionPolicy deserializedValue = new RetentionPolicy();
+                    deserializedValue.enabled = enabled;
+                    deserializedValue.days = days;
+
+                    return deserializedValue;
+                });
     }
 }

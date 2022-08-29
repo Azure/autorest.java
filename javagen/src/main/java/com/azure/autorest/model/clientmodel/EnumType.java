@@ -164,11 +164,28 @@ public class EnumType implements IType {
     }
 
     @Override
+    public String jsonDeserializationMethod() {
+        return String.format("getNullable(enumReader -> %s.%s(enumReader.getString())", name, getFromJsonMethodName());
+    }
+
+    @Override
     public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
         return fieldName == null
             ? String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter)
             : String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
                 jsonWriterName, fieldName, valueGetter);
+    }
+
+    @Override
+    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+        String createCall = name + "::" + getFromJsonMethodName();
+        if (attributeName == null) {
+            return String.format("getNullableElement(%s)", createCall);
+        } else {
+            return (attributeNamespace == null)
+                ? String.format("getNullableAttribute(null, \"%s\", %s)", attributeName, createCall)
+                : String.format("getNullableAttribute(\"%s\", \"%s\", %s)", attributeNamespace, attributeName, createCall);
+        }
     }
 
     @Override

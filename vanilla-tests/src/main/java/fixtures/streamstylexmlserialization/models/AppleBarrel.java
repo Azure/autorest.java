@@ -9,7 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** A barrel of apples. */
@@ -93,7 +96,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                                     items = new ArrayList<>();
                                 }
 
-                                items.add(reader.getElementStringValue());
+                                items.add(reader.getStringElement());
                             } else {
                                 reader.nextElement();
                             }
@@ -164,5 +167,43 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         xmlWriter.writeXml(this.goodApples);
         xmlWriter.writeXml(this.badApples);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of AppleBarrel from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of AppleBarrel if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     */
+    public static AppleBarrel fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "AppleBarrel",
+                reader -> {
+                    List<String> goodApples = null;
+                    List<String> badApples = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("GoodApples".equals(fieldName.getLocalPart())) {
+                            if (goodApples == null) {
+                                goodApples = new LinkedList<>();
+                            }
+                            goodApples.add(reader.getStringElement());
+                        } else if ("BadApples".equals(fieldName.getLocalPart())) {
+                            if (badApples == null) {
+                                badApples = new LinkedList<>();
+                            }
+                            badApples.add(reader.getStringElement());
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    AppleBarrel deserializedValue = new AppleBarrel();
+                    deserializedValue.setGoodApples(goodApples);
+                    deserializedValue.setBadApples(badApples);
+
+                    return deserializedValue;
+                });
     }
 }

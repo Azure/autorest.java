@@ -6,8 +6,11 @@ package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** The ModelWithByteProperty model. */
 @Fluent
@@ -49,5 +52,33 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
         xmlWriter.writeStartElement("ModelWithByteProperty");
         xmlWriter.writeBinaryElement("Bytes", this.bytes);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ModelWithByteProperty from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     */
+    public static ModelWithByteProperty fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "ModelWithByteProperty",
+                reader -> {
+                    byte[] bytes = new byte[0];
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Bytes".equals(fieldName.getLocalPart())) {
+                            bytes = reader.getBinaryElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    ModelWithByteProperty deserializedValue = new ModelWithByteProperty();
+                    deserializedValue.bytes = bytes;
+
+                    return deserializedValue;
+                });
     }
 }

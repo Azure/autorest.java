@@ -5,8 +5,12 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -102,5 +106,41 @@ public final class Banana implements XmlSerializable<Banana> {
         xmlWriter.writeStringElement("flavor", this.flavor);
         xmlWriter.writeStringElement("expiration", Objects.toString(this.expiration, null));
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Banana from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static Banana fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "banana",
+                reader -> {
+                    String name = null;
+                    String flavor = null;
+                    OffsetDateTime expiration = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("name".equals(fieldName.getLocalPart())) {
+                            name = reader.getStringElement();
+                        } else if ("flavor".equals(fieldName.getLocalPart())) {
+                            flavor = reader.getStringElement();
+                        } else if ("expiration".equals(fieldName.getLocalPart())) {
+                            expiration = reader.getNullableElement(OffsetDateTime::parse);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Banana deserializedValue = new Banana();
+                    deserializedValue.name = name;
+                    deserializedValue.flavor = flavor;
+                    deserializedValue.expiration = expiration;
+
+                    return deserializedValue;
+                });
     }
 }

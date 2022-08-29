@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** The Metrics model. */
 @Fluent
@@ -132,5 +135,45 @@ public final class Metrics implements XmlSerializable<Metrics> {
         xmlWriter.writeBooleanElement("IncludeAPIs", this.includeAPIs);
         xmlWriter.writeXml(this.retentionPolicy);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Metrics from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static Metrics fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Metrics",
+                reader -> {
+                    String version = null;
+                    boolean enabled = false;
+                    Boolean includeAPIs = null;
+                    RetentionPolicy retentionPolicy = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Version".equals(fieldName.getLocalPart())) {
+                            version = reader.getStringElement();
+                        } else if ("Enabled".equals(fieldName.getLocalPart())) {
+                            enabled = reader.getBooleanElement();
+                        } else if ("IncludeAPIs".equals(fieldName.getLocalPart())) {
+                            includeAPIs = reader.getNullableElement(Boolean::parseBoolean);
+                        } else if ("RetentionPolicy".equals(fieldName.getLocalPart())) {
+                            retentionPolicy = RetentionPolicy.fromXml(reader);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Metrics deserializedValue = new Metrics();
+                    deserializedValue.version = version;
+                    deserializedValue.enabled = enabled;
+                    deserializedValue.includeAPIs = includeAPIs;
+                    deserializedValue.retentionPolicy = retentionPolicy;
+
+                    return deserializedValue;
+                });
     }
 }

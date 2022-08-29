@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /**
  * CORS is an HTTP feature that enables a web application running under one domain to access resources in another
@@ -186,5 +189,49 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
         xmlWriter.writeStringElement("ExposedHeaders", this.exposedHeaders);
         xmlWriter.writeIntElement("MaxAgeInSeconds", this.maxAgeInSeconds);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of CorsRule from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static CorsRule fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "CorsRule",
+                reader -> {
+                    String allowedOrigins = null;
+                    String allowedMethods = null;
+                    String allowedHeaders = null;
+                    String exposedHeaders = null;
+                    int maxAgeInSeconds = 0;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("AllowedOrigins".equals(fieldName.getLocalPart())) {
+                            allowedOrigins = reader.getStringElement();
+                        } else if ("AllowedMethods".equals(fieldName.getLocalPart())) {
+                            allowedMethods = reader.getStringElement();
+                        } else if ("AllowedHeaders".equals(fieldName.getLocalPart())) {
+                            allowedHeaders = reader.getStringElement();
+                        } else if ("ExposedHeaders".equals(fieldName.getLocalPart())) {
+                            exposedHeaders = reader.getStringElement();
+                        } else if ("MaxAgeInSeconds".equals(fieldName.getLocalPart())) {
+                            maxAgeInSeconds = reader.getIntElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    CorsRule deserializedValue = new CorsRule();
+                    deserializedValue.allowedOrigins = allowedOrigins;
+                    deserializedValue.allowedMethods = allowedMethods;
+                    deserializedValue.allowedHeaders = allowedHeaders;
+                    deserializedValue.exposedHeaders = exposedHeaders;
+                    deserializedValue.maxAgeInSeconds = maxAgeInSeconds;
+
+                    return deserializedValue;
+                });
     }
 }

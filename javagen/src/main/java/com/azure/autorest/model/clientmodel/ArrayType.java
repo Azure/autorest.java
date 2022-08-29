@@ -88,6 +88,17 @@ public class ArrayType implements IType {
     }
 
     @Override
+    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+        if (attributeName == null) {
+            return "getBinaryElement()";
+        } else {
+            return (attributeNamespace == null)
+                ? "getBinaryAttribute(null, \"" + attributeName + "\")"
+                : "getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
+        }
+    }
+
+    @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
         String valueGetter, boolean isAttribute) {
         if (isAttribute) {

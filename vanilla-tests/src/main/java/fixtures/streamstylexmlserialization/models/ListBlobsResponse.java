@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** An enumeration of blobs. */
 @Fluent
@@ -251,5 +254,61 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
         xmlWriter.writeXml(this.blobs);
         xmlWriter.writeStringElement("NextMarker", this.nextMarker);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ListBlobsResponse from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     */
+    public static ListBlobsResponse fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "EnumerationResults",
+                reader -> {
+                    String serviceEndpoint = null;
+                    String containerName = null;
+                    String prefix = null;
+                    String marker = null;
+                    int maxResults = 0;
+                    String delimiter = null;
+                    Blobs blobs = null;
+                    String nextMarker = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("ServiceEndpoint".equals(fieldName.getLocalPart())) {
+                            serviceEndpoint = reader.getStringElement();
+                        } else if ("ContainerName".equals(fieldName.getLocalPart())) {
+                            containerName = reader.getStringElement();
+                        } else if ("Prefix".equals(fieldName.getLocalPart())) {
+                            prefix = reader.getStringElement();
+                        } else if ("Marker".equals(fieldName.getLocalPart())) {
+                            marker = reader.getStringElement();
+                        } else if ("MaxResults".equals(fieldName.getLocalPart())) {
+                            maxResults = reader.getIntElement();
+                        } else if ("Delimiter".equals(fieldName.getLocalPart())) {
+                            delimiter = reader.getStringElement();
+                        } else if ("Blobs".equals(fieldName.getLocalPart())) {
+                            blobs = Blobs.fromXml(reader);
+                        } else if ("NextMarker".equals(fieldName.getLocalPart())) {
+                            nextMarker = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    ListBlobsResponse deserializedValue = new ListBlobsResponse();
+                    deserializedValue.serviceEndpoint = serviceEndpoint;
+                    deserializedValue.containerName = containerName;
+                    deserializedValue.prefix = prefix;
+                    deserializedValue.marker = marker;
+                    deserializedValue.maxResults = maxResults;
+                    deserializedValue.delimiter = delimiter;
+                    deserializedValue.blobs = blobs;
+                    deserializedValue.nextMarker = nextMarker;
+
+                    return deserializedValue;
+                });
     }
 }

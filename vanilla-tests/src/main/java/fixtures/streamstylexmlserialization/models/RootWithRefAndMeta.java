@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** I am root, and I ref a model WITH meta. */
 @Fluent
@@ -78,5 +81,37 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
         xmlWriter.writeXml(this.refToModel);
         xmlWriter.writeStringElement("Something", this.something);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of RootWithRefAndMeta from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of RootWithRefAndMeta if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     */
+    public static RootWithRefAndMeta fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "RootWithRefAndMeta",
+                reader -> {
+                    ComplexTypeWithMeta refToModel = null;
+                    String something = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("XMLComplexTypeWithMeta".equals(fieldName.getLocalPart())) {
+                            refToModel = ComplexTypeWithMeta.fromXml(reader);
+                        } else if ("Something".equals(fieldName.getLocalPart())) {
+                            something = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    RootWithRefAndMeta deserializedValue = new RootWithRefAndMeta();
+                    deserializedValue.refToModel = refToModel;
+                    deserializedValue.something = something;
+
+                    return deserializedValue;
+                });
     }
 }

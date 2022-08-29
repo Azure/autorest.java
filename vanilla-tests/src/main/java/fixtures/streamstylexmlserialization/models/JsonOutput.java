@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** The JsonOutput model. */
 @Fluent
@@ -48,5 +51,33 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
         xmlWriter.writeStartElement("JsonOutput");
         xmlWriter.writeNumberElement("id", this.id);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of JsonOutput from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of JsonOutput if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     */
+    public static JsonOutput fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "JsonOutput",
+                reader -> {
+                    Integer id = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("id".equals(fieldName.getLocalPart())) {
+                            id = reader.getNullableElement(Integer::parseInt);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    JsonOutput deserializedValue = new JsonOutput();
+                    deserializedValue.id = id;
+
+                    return deserializedValue;
+                });
     }
 }

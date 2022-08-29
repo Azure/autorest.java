@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** The BlobPrefix model. */
 @Fluent
@@ -52,5 +55,33 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
         xmlWriter.writeStartElement("BlobPrefix");
         xmlWriter.writeStringElement("Name", this.name);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of BlobPrefix from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of BlobPrefix if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     */
+    public static BlobPrefix fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "BlobPrefix",
+                reader -> {
+                    String name = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Name".equals(fieldName.getLocalPart())) {
+                            name = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    BlobPrefix deserializedValue = new BlobPrefix();
+                    deserializedValue.name = name;
+
+                    return deserializedValue;
+                });
     }
 }

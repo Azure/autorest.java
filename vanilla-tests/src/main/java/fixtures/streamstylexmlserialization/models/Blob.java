@@ -5,8 +5,13 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** An Azure Storage blob. */
@@ -169,5 +174,54 @@ public final class Blob implements XmlSerializable<Blob> {
             xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Blob from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
+     *     null.
+     */
+    public static Blob fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Blob",
+                reader -> {
+                    String name = null;
+                    boolean deleted = false;
+                    String snapshot = null;
+                    BlobProperties properties = null;
+                    Map<String, String> metadata = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Name".equals(fieldName.getLocalPart())) {
+                            name = reader.getStringElement();
+                        } else if ("Deleted".equals(fieldName.getLocalPart())) {
+                            deleted = reader.getBooleanElement();
+                        } else if ("Snapshot".equals(fieldName.getLocalPart())) {
+                            snapshot = reader.getStringElement();
+                        } else if ("Properties".equals(fieldName.getLocalPart())) {
+                            properties = BlobProperties.fromXml(reader);
+                        } else if ("Metadata".equals(fieldName.getLocalPart())) {
+                            if (metadata == null) {
+                                metadata = new LinkedHashMap<>();
+                            }
+                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                                metadata.put(reader.getElementName().getLocalPart(), reader.getStringElement());
+                            }
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Blob deserializedValue = new Blob();
+                    deserializedValue.name = name;
+                    deserializedValue.deleted = deleted;
+                    deserializedValue.snapshot = snapshot;
+                    deserializedValue.properties = properties;
+                    deserializedValue.metadata = metadata;
+
+                    return deserializedValue;
+                });
     }
 }

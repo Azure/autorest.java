@@ -9,7 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** An enumeration of containers. */
@@ -239,5 +242,56 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         xmlWriter.writeXml(this.containers);
         xmlWriter.writeStringElement("NextMarker", this.nextMarker);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ListContainersResponse from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     */
+    public static ListContainersResponse fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "EnumerationResults",
+                reader -> {
+                    String serviceEndpoint = null;
+                    String prefix = null;
+                    String marker = null;
+                    int maxResults = 0;
+                    List<Container> containers = null;
+                    String nextMarker = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("ServiceEndpoint".equals(fieldName.getLocalPart())) {
+                            serviceEndpoint = reader.getStringElement();
+                        } else if ("Prefix".equals(fieldName.getLocalPart())) {
+                            prefix = reader.getStringElement();
+                        } else if ("Marker".equals(fieldName.getLocalPart())) {
+                            marker = reader.getStringElement();
+                        } else if ("MaxResults".equals(fieldName.getLocalPart())) {
+                            maxResults = reader.getIntElement();
+                        } else if ("Containers".equals(fieldName.getLocalPart())) {
+                            if (containers == null) {
+                                containers = new LinkedList<>();
+                            }
+                            containers.add(Container.fromXml(reader));
+                        } else if ("NextMarker".equals(fieldName.getLocalPart())) {
+                            nextMarker = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    ListContainersResponse deserializedValue = new ListContainersResponse();
+                    deserializedValue.serviceEndpoint = serviceEndpoint;
+                    deserializedValue.prefix = prefix;
+                    deserializedValue.marker = marker;
+                    deserializedValue.maxResults = maxResults;
+                    deserializedValue.setContainers(containers);
+                    deserializedValue.nextMarker = nextMarker;
+
+                    return deserializedValue;
+                });
     }
 }

@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** signed identifier. */
 @Fluent
@@ -83,5 +86,37 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
         xmlWriter.writeStringElement("Id", this.id);
         xmlWriter.writeXml(this.accessPolicy);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of SignedIdentifier from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of SignedIdentifier if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     */
+    public static SignedIdentifier fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "SignedIdentifier",
+                reader -> {
+                    String id = null;
+                    AccessPolicy accessPolicy = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Id".equals(fieldName.getLocalPart())) {
+                            id = reader.getStringElement();
+                        } else if ("AccessPolicy".equals(fieldName.getLocalPart())) {
+                            accessPolicy = AccessPolicy.fromXml(reader);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    SignedIdentifier deserializedValue = new SignedIdentifier();
+                    deserializedValue.id = id;
+                    deserializedValue.accessPolicy = accessPolicy;
+
+                    return deserializedValue;
+                });
     }
 }

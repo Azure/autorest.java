@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** Contans property. */
 @Fluent
@@ -74,5 +77,37 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
         xmlWriter.writeStringAttribute("language", this.language);
         xmlWriter.writeString(this.content);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
+     *     it was pointing to XML null.
+     */
+    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Data",
+                reader -> {
+                    String language = null;
+                    String content = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("language".equals(fieldName.getLocalPart())) {
+                            language = reader.getStringElement();
+                        } else if ("content".equals(fieldName.getLocalPart())) {
+                            content = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    ObjectWithXMsTextProperty deserializedValue = new ObjectWithXMsTextProperty();
+                    deserializedValue.language = language;
+                    deserializedValue.content = content;
+
+                    return deserializedValue;
+                });
     }
 }

@@ -3,12 +3,15 @@
 
 package com.azure.autorest.implementation;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +46,7 @@ public final class ClientModelPropertiesManager {
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
 
+    private final String xmlReaderNameVariableName;
     private final List<ClientModelProperty> xmlAttributes;
     private final List<ClientModelProperty> xmlElements;
 
@@ -51,21 +55,27 @@ public final class ClientModelPropertiesManager {
      *
      * @param model The {@link ClientModel}.
      */
-    public ClientModelPropertiesManager(ClientModel model) {
-        // The reader JSON field name variable needs to be mutable as it may match a JSON property name in the class.
+    public ClientModelPropertiesManager(ClientModel model, JavaSettings settings) {
+        boolean requiredFieldsAsConstructorArgs = settings.isRequiredFieldsAsConstructorArgs();
+
+        // The reader name variable needs to be mutable as it may match a property name in the class.
         Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "fieldName", "jsonFieldName", "deserializationFieldName"));
+        Set<String> possibleXmlNameVariableNames = new LinkedHashSet<>(Arrays.asList(
+            "elementName", "xmlElementName", "deserializationElementName"));
         this.model = model;
         this.expectedDiscriminator = model.getSerializedName();
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
         List<ClientModelProperty> superRequiredProperties = new ArrayList<>();
         List<ClientModelProperty> superSetterProperties = new ArrayList<>();
+        List<ClientModelProperty> xmlAttributes = new ArrayList<>();
+        List<ClientModelProperty> xmlElements = new ArrayList<>();
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
             // Ignore additional and discriminator properties.
             if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
                 continue;
-            } else if (property.isRequired()) {
+            } else if (property.isRequired() && requiredFieldsAsConstructorArgs) {
                 superRequiredProperties.add(property);
             } else {
                 superSetterProperties.add(property);
@@ -76,17 +86,21 @@ public final class ClientModelPropertiesManager {
             }
 
             possibleReaderFieldNameVariableNames.remove(property.getName());
+            possibleXmlNameVariableNames.remove(property.getName());
+
+            if (property.getIsXmlAttribute()) {
+                xmlAttributes.add(property);
+            } else {
+                xmlElements.add(property);
+            }
         }
 
         List<ClientModelProperty> requiredProperties = new ArrayList<>();
         List<ClientModelProperty> setterProperties = new ArrayList<>();
         ClientModelProperty discriminatorProperty = null;
         ClientModelProperty additionalProperties = null;
-
-        List<ClientModelProperty> xmlAttributes = new ArrayList<>();
-        List<ClientModelProperty> xmlElements = new ArrayList<>();
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isRequired()) {
+            if (property.isRequired() && requiredFieldsAsConstructorArgs) {
                 requiredProperties.add(property);
             } else if (property.isAdditionalProperties()) {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization
@@ -103,6 +117,7 @@ public final class ClientModelPropertiesManager {
             }
 
             possibleReaderFieldNameVariableNames.remove(property.getName());
+            possibleXmlNameVariableNames.remove(property.getName());
 
             if (property.getIsXmlAttribute()) {
                 xmlAttributes.add(property);
@@ -125,6 +140,14 @@ public final class ClientModelPropertiesManager {
         } else {
             throw new IllegalStateException("Model properties exhausted all possible JsonReader field name variables. "
                 + "Add additional possible JsonReader field name variables to resolve this issue.");
+        }
+
+        Iterator<String> possibleXmlNameVariableNamesIterator = possibleXmlNameVariableNames.iterator();
+        if (possibleXmlNameVariableNamesIterator.hasNext()) {
+            this.xmlReaderNameVariableName = possibleXmlNameVariableNamesIterator.next();
+        } else {
+            throw new IllegalStateException("Model properties exhausted all possible XmlReader name variables. "
+                + "Add additional possible XmlReader name variables to resolve this issue.");
         }
 
         this.xmlAttributes = xmlAttributes;
@@ -242,6 +265,21 @@ public final class ClientModelPropertiesManager {
      */
     public String getJsonReaderFieldNameVariableName() {
         return jsonReaderFieldNameVariableName;
+    }
+
+    /**
+     * Gets the variable name for {@link XmlReader#getElementName()} in {@link XmlSerializable#fromXml(XmlReader)}
+     * implementations.
+     * <p>
+     * This is used instead of a static variable name as deserialization maintains holders for required properties which
+     * could conflict with the static variable name. The constructor manages determination of the variable name by
+     * tracking a set of possible names, if all possible names are exhausted the constructor will throw an exception to
+     * indicate more possible names need to be added to support all code generation expectations.
+     *
+     * @return The variable name that tracks the current XML name.
+     */
+    public String getXmlReaderNameVariableName() {
+        return xmlReaderNameVariableName;
     }
 
     /**

@@ -15,15 +15,15 @@ public class GenericType implements IType {
     /**
      * The main non-generic type of this generic type.
      */
-    private String name;
+    private final String name;
     /**
      * The package that this type belongs to.
      */
-    private String packageName;
+    private final String packageName;
     /**
      * The type arguments of this generic type.
      */
-    private IType[] typeArguments;
+    private final IType[] typeArguments;
 
     /**
      * Create a new GenericType from the provided properties.
@@ -136,7 +136,7 @@ public class GenericType implements IType {
 
     @Override
     public int hashCode() {
-        return getPackage().hashCode() + getName().hashCode() + Arrays.stream(getTypeArguments()).map(Object::hashCode).reduce(0, (a, b) -> a + b);
+        return getPackage().hashCode() + getName().hashCode() + Arrays.stream(getTypeArguments()).map(Object::hashCode).reduce(0, Integer::sum);
     }
 
     public final IType asNullable() {
@@ -250,13 +250,23 @@ public class GenericType implements IType {
     }
 
     @Override
-    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+    public final String jsonDeserializationMethod() {
         return null;
     }
 
     @Override
-    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute) {
+    public final String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        return null;
+    }
+
+    @Override
+    public final String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+        return null;
+    }
+
+    @Override
+    public final String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName,
+        String namespaceUri, String valueGetter, boolean isAttribute) {
         return null;
     }
 

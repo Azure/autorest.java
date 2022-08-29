@@ -9,7 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** Storage Service Properties. */
@@ -246,5 +249,56 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
         xmlWriter.writeStringElement("DefaultServiceVersion", this.defaultServiceVersion);
         xmlWriter.writeXml(this.deleteRetentionPolicy);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of StorageServiceProperties from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     */
+    public static StorageServiceProperties fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "StorageServiceProperties",
+                reader -> {
+                    Logging logging = null;
+                    Metrics hourMetrics = null;
+                    Metrics minuteMetrics = null;
+                    List<CorsRule> cors = null;
+                    String defaultServiceVersion = null;
+                    RetentionPolicy deleteRetentionPolicy = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("Logging".equals(fieldName.getLocalPart())) {
+                            logging = Logging.fromXml(reader);
+                        } else if ("HourMetrics".equals(fieldName.getLocalPart())) {
+                            hourMetrics = Metrics.fromXml(reader);
+                        } else if ("MinuteMetrics".equals(fieldName.getLocalPart())) {
+                            minuteMetrics = Metrics.fromXml(reader);
+                        } else if ("Cors".equals(fieldName.getLocalPart())) {
+                            if (cors == null) {
+                                cors = new LinkedList<>();
+                            }
+                            cors.add(CorsRule.fromXml(reader));
+                        } else if ("DefaultServiceVersion".equals(fieldName.getLocalPart())) {
+                            defaultServiceVersion = reader.getStringElement();
+                        } else if ("DeleteRetentionPolicy".equals(fieldName.getLocalPart())) {
+                            deleteRetentionPolicy = RetentionPolicy.fromXml(reader);
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    StorageServiceProperties deserializedValue = new StorageServiceProperties();
+                    deserializedValue.logging = logging;
+                    deserializedValue.hourMetrics = hourMetrics;
+                    deserializedValue.minuteMetrics = minuteMetrics;
+                    deserializedValue.setCors(cors);
+                    deserializedValue.defaultServiceVersion = defaultServiceVersion;
+                    deserializedValue.deleteRetentionPolicy = deleteRetentionPolicy;
+
+                    return deserializedValue;
+                });
     }
 }

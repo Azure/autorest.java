@@ -5,9 +5,14 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** The Blobs model. */
@@ -87,5 +92,43 @@ public final class Blobs implements XmlSerializable<Blobs> {
             this.blob.forEach(element -> xmlWriter.writeXml(element));
         }
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Blobs from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static Blobs fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "Blobs",
+                reader -> {
+                    List<BlobPrefix> blobPrefix = null;
+                    List<Blob> blob = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("BlobPrefix".equals(fieldName.getLocalPart())) {
+                            if (blobPrefix == null) {
+                                blobPrefix = new LinkedList<>();
+                            }
+                            blobPrefix.add(BlobPrefix.fromXml(reader));
+                        } else if ("Blob".equals(fieldName.getLocalPart())) {
+                            if (blob == null) {
+                                blob = new LinkedList<>();
+                            }
+                            blob.add(Blob.fromXml(reader));
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Blobs deserializedValue = new Blobs();
+                    deserializedValue.blobPrefix = blobPrefix;
+                    deserializedValue.blob = blob;
+
+                    return deserializedValue;
+                });
     }
 }

@@ -5,8 +5,11 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
 
 /** I am root, and I ref a model with no meta. */
 @Fluent
@@ -78,5 +81,37 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
         xmlWriter.writeXml(this.refToModel);
         xmlWriter.writeStringElement("Something", this.something);
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of RootWithRefAndNoMeta from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of RootWithRefAndNoMeta if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     */
+    public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "RootWithRefAndNoMeta",
+                reader -> {
+                    ComplexTypeNoMeta refToModel = null;
+                    String something = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("RefToModel".equals(fieldName.getLocalPart())) {
+                            refToModel = ComplexTypeNoMeta.fromXml(reader);
+                        } else if ("Something".equals(fieldName.getLocalPart())) {
+                            something = reader.getStringElement();
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    RootWithRefAndNoMeta deserializedValue = new RootWithRefAndNoMeta();
+                    deserializedValue.refToModel = refToModel;
+                    deserializedValue.something = something;
+
+                    return deserializedValue;
+                });
     }
 }

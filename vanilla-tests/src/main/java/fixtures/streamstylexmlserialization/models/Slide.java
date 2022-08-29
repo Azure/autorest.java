@@ -5,9 +5,14 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** A slide in a slideshow. */
@@ -104,5 +109,44 @@ public final class Slide implements XmlSerializable<Slide> {
             this.items.forEach(element -> xmlWriter.writeStringElement("items", element));
         }
         return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Slide from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Slide if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     */
+    public static Slide fromXml(XmlReader xmlReader) {
+        return xmlReader.readObject(
+                "slide",
+                reader -> {
+                    String type = null;
+                    String title = null;
+                    List<String> items = null;
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName fieldName = reader.getElementName();
+
+                        if ("type".equals(fieldName.getLocalPart())) {
+                            type = reader.getStringElement();
+                        } else if ("title".equals(fieldName.getLocalPart())) {
+                            title = reader.getStringElement();
+                        } else if ("items".equals(fieldName.getLocalPart())) {
+                            if (items == null) {
+                                items = new LinkedList<>();
+                            }
+                            items.add(reader.getStringElement());
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                    Slide deserializedValue = new Slide();
+                    deserializedValue.type = type;
+                    deserializedValue.title = title;
+                    deserializedValue.items = items;
+
+                    return deserializedValue;
+                });
     }
 }

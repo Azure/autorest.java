@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,35 +25,47 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(java.lang.String::toLowerCase)
         .jsonDeserializationMethod("getNullable(JsonReader::getBoolean)")
         .serializationMethodBase("writeBoolean")
+        .xmlElementDeserializationMethod("getNullableElement(Boolean::parseBoolean)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Boolean::parseBoolean)")
         .build();
 
     public static final ClassType Byte = new Builder(false).knownClass(Byte.class)
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
         .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Byte::parseByte)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Byte::parseByte)")
         .build();
 
-    public static final ClassType Integer = new ClassType.Builder(false).knownClass(Integer.class)
+    public static final ClassType Integer = new Builder(false).knownClass(Integer.class)
         .defaultValueExpressionConverter(java.util.function.Function.identity())
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
         .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Integer::parseInt)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
-    public static final ClassType Long = new ClassType.Builder(false).knownClass(Long.class)
+    public static final ClassType Long = new Builder(false).knownClass(Long.class)
         .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
         .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
         .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
         .build();
 
-    public static final ClassType Float = new ClassType.Builder(false).knownClass(Float.class)
+    public static final ClassType Float = new Builder(false).knownClass(Float.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'F')
         .jsonDeserializationMethod("getNullable(JsonReader::getFloat)")
         .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Float::parseFloat)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Float::parseFloat)")
         .build();
 
-    public static final ClassType Double = new ClassType.Builder(false).knownClass(Double.class)
+    public static final ClassType Double = new Builder(false).knownClass(Double.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
         .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
         .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
         .build();
 
     public static final ClassType Character = new Builder(false).knownClass(Character.class)
@@ -60,12 +73,16 @@ public class ClassType implements IType {
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> nonNullReader.getString().charAt(0))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(nonNullString -> nonNullString.charAt(0))")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, nonNullString -> nonNullString.charAt(0))")
         .build();
 
     public static final ClassType String = new Builder(false).knownClass(String.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "\"" + escapeString(defaultValueExpression) + "\"")
         .jsonDeserializationMethod("getString()")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getStringElement()")
+        .xmlAttributeDeserializationTemplate("getStringAttribute(%s, %s)")
         .build();
 
     public static final ClassType Base64Url = new ClassType.Builder(false)
@@ -81,36 +98,44 @@ public class ClassType implements IType {
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(LocalDate::parse)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, LocalDate::parse)")
         .build();
 
     public static final ClassType AndroidLocalDate = new ClassType.Builder(false)
         .packageName("org.threeten.bp").name("LocalDate")
         .build();
 
-    public static final ClassType DateTime = new ClassType.Builder(false).knownClass(java.time.OffsetDateTime.class)
+    public static final ClassType DateTime = new Builder(false).knownClass(OffsetDateTime.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(OffsetDateTime::parse)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, OffsetDateTime::parse)")
         .build();
 
-    public static final ClassType Duration = new ClassType.Builder(false).knownClass(java.time.Duration.class)
+    public static final ClassType Duration = new Builder(false).knownClass(java.time.Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression))
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(Duration::parse)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Duration::parse)")
         .build();
 
     public static final ClassType AndroidDuration = new ClassType.Builder(false)
         .packageName("org.threeten.bp").name("Duration")
         .build();
 
-    public static final ClassType DateTimeRfc1123 = new ClassType.Builder(false)
+    public static final ClassType DateTimeRfc1123 = new Builder(false)
         .knownClass(com.azure.core.util.DateTimeRfc1123.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression))
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(DateTimeRfc1123::new)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, DateTimeRfc1123::new)")
         .build();
 
     public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder(false)
@@ -121,11 +146,13 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression))
         .build();
 
-    public static final ClassType UUID = new ClassType.Builder(false).knownClass(java.util.UUID.class)
+    public static final ClassType UUID = new Builder(false).knownClass(java.util.UUID.class)
         .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression))
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> UUID.fromString(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(UUID::fromString)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, UUID::fromString)")
         .build();
 
     public static final ClassType Object = new ClassType.Builder(false)
@@ -187,6 +214,8 @@ public class ClassType implements IType {
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> new URL(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(URL::new)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, URL::new)")
         .build();
 
     public static final ClassType NonNull = new ClassType.Builder(false)
@@ -333,11 +362,14 @@ public class ClassType implements IType {
     private final boolean wrapSerializationWithObjectsToString;
     private final String serializationMethodBase;
     private final String jsonDeserializationMethod;
+    private final String xmlAttributeDeserializationTemplate;
+    private final String xmlElementDeserializationMethod;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
         String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
-        String jsonDeserializationMethod) {
+        String jsonDeserializationMethod, String xmlAttributeDeserializationTemplate,
+        String xmlElementDeserializationMethod) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -348,6 +380,8 @@ public class ClassType implements IType {
         this.serializationMethodBase = serializationMethodBase;
         this.wrapSerializationWithObjectsToString = wrapSerializationWithObjectsToString;
         this.jsonDeserializationMethod = jsonDeserializationMethod;
+        this.xmlAttributeDeserializationTemplate = xmlAttributeDeserializationTemplate;
+        this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
     }
 
     public final String getPackage() {
@@ -508,6 +542,18 @@ public class ClassType implements IType {
     }
 
     @Override
+    public java.lang.String xmlDeserializationMethod(java.lang.String attributeName, java.lang.String attributeNamespace) {
+        if (attributeName == null) {
+            return xmlElementDeserializationMethod;
+        } else {
+            return (attributeNamespace == null)
+                ? java.lang.String.format(xmlAttributeDeserializationTemplate, "null", "\"" + attributeName + "\"")
+                : java.lang.String.format(xmlAttributeDeserializationTemplate, "\"" + attributeNamespace + "\"",
+                "\"" + attributeName + "\"");
+        }
+    }
+
+    @Override
     public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
         java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
         boolean isAttribute) {
@@ -555,6 +601,8 @@ public class ClassType implements IType {
         private boolean wrapSerializationWithObjectsToString;
         private String jsonDeserializationMethod;
         private String serializationMethodBase;
+        private String xmlAttributeDeserializationTemplate;
+        private String xmlElementDeserializationMethod;
 
         public Builder() {
             this(true);
@@ -609,14 +657,27 @@ public class ClassType implements IType {
             return this;
         }
 
+        public Builder xmlAttributeDeserializationTemplate(String xmlAttributeDeserializationTemplate) {
+            this.xmlAttributeDeserializationTemplate = xmlAttributeDeserializationTemplate;
+            return this;
+        }
+
+        public Builder xmlElementDeserializationMethod(String xmlElementDeserializationMethod) {
+            this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
+            return this;
+        }
+
         public ClassType build() {
-            // JSON deserialization of Swagger types needs to be handled differently as the named JsonReader needs
-            // to be passed to the deserialization method and the JsonReader name cannot be determined here.
+            // Deserialization of Swagger types needs to be handled differently as the named reader needs
+            // to be passed to the deserialization method and the reader name cannot be determined here.
             String jsonDeserializationMethod = isSwaggerType ? null : this.jsonDeserializationMethod;
+            String xmlAttributeDeserializationTemplate = isSwaggerType
+                ? null : this.xmlAttributeDeserializationTemplate;
+            String xmlElementDeserializationMethod = isSwaggerType ? null : this.xmlElementDeserializationMethod;
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
                 isSwaggerType, serializationMethodBase, wrapSerializationWithObjectsToString,
-                jsonDeserializationMethod);
+                jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod);
         }
     }
 
