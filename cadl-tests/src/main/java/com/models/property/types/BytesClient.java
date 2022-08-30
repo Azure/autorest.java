@@ -83,9 +83,6 @@ public final class BytesClient {
         return this.client.putWithResponse(body, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -99,13 +96,11 @@ public final class BytesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BytesProperty get() {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(BytesProperty.class);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -121,6 +116,7 @@ public final class BytesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BytesProperty> getWithResponse(Context context) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
@@ -128,9 +124,6 @@ public final class BytesClient {
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(BytesProperty.class));
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -145,13 +138,11 @@ public final class BytesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put(BytesProperty body) {
+        // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -168,6 +159,7 @@ public final class BytesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BytesProperty body, Context context) {
+        // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return putWithResponse(BinaryData.fromObject(body), requestOptions);

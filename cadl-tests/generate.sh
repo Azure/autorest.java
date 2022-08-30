@@ -15,18 +15,28 @@ function generate {
     rm -rf cadl-output
 }
 
+mkdir -p ./existingcode/src/main/java/com/cadl/
+cp -rf ./src/main/java/com/cadl/partialupdate ./existingcode/src/main/java/com/cadl/partialupdate
 rm -rf src/main
 rm -rf cadl-output
 
 # enable convenience methods for tests
 export GENERATE_MODELS=true
 export GENERATE_CONVENIENCE_METHODS=true
+export PARTIAL_UPDATE=true
 
-# run local tests
+# run other local tests except partial update
 for f in $(find ./cadl/ -name "*.cadl")
 do
+  if [[ $(realpath $f) != *"partialupdate"* ]]; then
     generate $f
+  fi
 done
+
+# partial update test
+cadl compile ./cadl/partialupdate.cadl --outputPath=./existingcode/
+cp -rf ./existingcode/src/main/java/com/cadl/partialupdate ./src/main/java/com/cadl/partialupdate
+rm -rf ./existingcode
 
 # run cadl ranch tests sources
 cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .

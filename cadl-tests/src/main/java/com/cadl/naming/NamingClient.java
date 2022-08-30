@@ -79,9 +79,6 @@ public final class NamingClient {
         return this.client.postWithResponse(name, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for postWithResponse
-     */
     /**
      * summary of POST op
      *
@@ -100,13 +97,11 @@ public final class NamingClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DataResponse post(String name) {
+        // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).getValue().toObject(DataResponse.class);
     }
 
-    /*
-     * Generated convenience method for postWithResponse
-     */
     /**
      * summary of POST op
      *
@@ -128,6 +123,7 @@ public final class NamingClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DataResponse> postWithResponse(String name, String etag, Context context) {
+        // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader("etag", etag);

@@ -69,9 +69,6 @@ public final class RoundTripBasicAsyncClient {
         return this.serviceClient.getModelWithResponseAsync(input, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -87,6 +84,7 @@ public final class RoundTripBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RoundTripModel> getModel(RoundTripModel input) {
+        // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

@@ -92,9 +92,6 @@ public final class CollectionsModelAsyncClient {
         return this.serviceClient.putWithResponseAsync(body, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -108,15 +105,13 @@ public final class CollectionsModelAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CollectionsModelProperty> get() {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -132,6 +127,7 @@ public final class CollectionsModelAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put(CollectionsModelProperty body) {
+        // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
     }

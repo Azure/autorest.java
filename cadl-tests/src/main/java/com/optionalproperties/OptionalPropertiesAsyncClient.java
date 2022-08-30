@@ -149,9 +149,6 @@ public final class OptionalPropertiesAsyncClient {
         return this.serviceClient.setOptionalPropertyModelWithResponseAsync(input, requestOptions);
     }
 
-    /*
-     * Generated convenience method for sendOptionalPropertyModelWithResponse
-     */
     /**
      * The sendOptionalPropertyModel operation.
      *
@@ -167,14 +164,12 @@ public final class OptionalPropertiesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> sendOptionalPropertyModel(InputModel input) {
+        // Generated convenience method for sendOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue);
     }
 
-    /*
-     * Generated convenience method for getOptionalPropertyModelWithResponse
-     */
     /**
      * The getOptionalPropertyModel operation.
      *
@@ -188,15 +183,13 @@ public final class OptionalPropertiesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getOptionalPropertyModel() {
+        // Generated convenience method for getOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 
-    /*
-     * Generated convenience method for setOptionalPropertyModelWithResponse
-     */
     /**
      * The setOptionalPropertyModel operation.
      *
@@ -212,6 +205,7 @@ public final class OptionalPropertiesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RoundTripModel> setOptionalPropertyModel(RoundTripModel input) {
+        // Generated convenience method for setOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

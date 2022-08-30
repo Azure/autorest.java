@@ -146,9 +146,6 @@ public final class OptionalPropertiesClient {
         return this.client.setOptionalPropertyModelWithResponse(input, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for sendOptionalPropertyModelWithResponse
-     */
     /**
      * The sendOptionalPropertyModel operation.
      *
@@ -163,13 +160,11 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void sendOptionalPropertyModel(InputModel input) {
+        // Generated convenience method for sendOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for sendOptionalPropertyModelWithResponse
-     */
     /**
      * The sendOptionalPropertyModel operation.
      *
@@ -186,14 +181,12 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendOptionalPropertyModelWithResponse(InputModel input, Context context) {
+        // Generated convenience method for sendOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions);
     }
 
-    /*
-     * Generated convenience method for getOptionalPropertyModelWithResponse
-     */
     /**
      * The getOptionalPropertyModel operation.
      *
@@ -207,13 +200,11 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OutputModel getOptionalPropertyModel() {
+        // Generated convenience method for getOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
     }
 
-    /*
-     * Generated convenience method for getOptionalPropertyModelWithResponse
-     */
     /**
      * The getOptionalPropertyModel operation.
      *
@@ -229,6 +220,7 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<OutputModel> getOptionalPropertyModelWithResponse(Context context) {
+        // Generated convenience method for getOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getOptionalPropertyModelWithResponse(requestOptions);
@@ -236,9 +228,6 @@ public final class OptionalPropertiesClient {
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
     }
 
-    /*
-     * Generated convenience method for setOptionalPropertyModelWithResponse
-     */
     /**
      * The setOptionalPropertyModel operation.
      *
@@ -254,15 +243,13 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RoundTripModel setOptionalPropertyModel(RoundTripModel input) {
+        // Generated convenience method for setOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
     }
 
-    /*
-     * Generated convenience method for setOptionalPropertyModelWithResponse
-     */
     /**
      * The setOptionalPropertyModel operation.
      *
@@ -279,6 +266,7 @@ public final class OptionalPropertiesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<RoundTripModel> setOptionalPropertyModelWithResponse(RoundTripModel input, Context context) {
+        // Generated convenience method for setOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
