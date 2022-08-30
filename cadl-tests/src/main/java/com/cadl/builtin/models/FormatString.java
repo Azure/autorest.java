@@ -19,13 +19,13 @@ public final class FormatString {
      * The base64Encoded property.
      */
     @JsonProperty(value = "base64Encoded", required = true)
-    private byte[] base64Encoded;
+    private Base64Url base64Encoded;
 
     /*
      * The binary property.
      */
     @JsonProperty(value = "binary", required = true)
-    private Base64Url binary;
+    private byte[] binary;
 
     /*
      * The dateTime property.
@@ -61,8 +61,8 @@ public final class FormatString {
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "dateTimeRfc1123", required = true) OffsetDateTime dateTimeRfc1123,
             @JsonProperty(value = "password", required = true) String password) {
-        this.base64Encoded = base64Encoded;
-        this.binary = Base64Url.encode(binary);
+        this.base64Encoded = Base64Url.encode(base64Encoded);
+        this.binary = binary;
         this.dateTime = dateTime;
         this.dateTimeRfc1123 = new DateTimeRfc1123(dateTimeRfc1123);
         this.password = password;
@@ -74,7 +74,10 @@ public final class FormatString {
      * @return the base64Encoded value.
      */
     public byte[] getBase64Encoded() {
-        return CoreUtils.clone(this.base64Encoded);
+        if (this.base64Encoded == null) {
+            return new byte[0];
+        }
+        return this.base64Encoded.decodedBytes();
     }
 
     /**
@@ -83,10 +86,7 @@ public final class FormatString {
      * @return the binary value.
      */
     public byte[] getBinary() {
-        if (this.binary == null) {
-            return new byte[0];
-        }
-        return this.binary.decodedBytes();
+        return CoreUtils.clone(this.binary);
     }
 
     /**

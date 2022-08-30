@@ -1001,9 +1001,9 @@ export class CodeModelBuilder {
   private processFormatString(type: ModelType, format: string, nameHint: string): Schema {
     switch (format) {
       case "byte":
-        return this.processByteArraySchema(type, nameHint, false);
-      case "binary":
         return this.processByteArraySchema(type, nameHint, true);
+      case "binary":
+        return this.processByteArraySchema(type, nameHint, false);
       case "date-time":
         return this.processDateTimeSchema(type, nameHint, false);
       case "date-time-rfc1123":
