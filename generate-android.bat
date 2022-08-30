@@ -1,6 +1,6 @@
 ECHO OFF
 set AZURE_ARGUMENTS=--version=3.4.5 --android --v4 --java --use:. --output-folder=android-tests\app --sync-methods=all --generate-client-as-impl=true --generate-sync-async-clients=true
-set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger
+set INPUTSOURCE=https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger
 set NAMESPACE=com.azure.androidtest
 
 set INPUTFILE=%INPUTSOURCE%/additionalProperties.json

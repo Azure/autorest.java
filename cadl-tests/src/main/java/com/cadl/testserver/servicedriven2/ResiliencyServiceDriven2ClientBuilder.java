@@ -7,6 +7,7 @@ package com.cadl.testserver.servicedriven2;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -41,7 +42,8 @@ import java.util.stream.Collectors;
         serviceClients = {ResiliencyServiceDriven2Client.class, ResiliencyServiceDriven2AsyncClient.class})
 public final class ResiliencyServiceDriven2ClientBuilder
         implements HttpTrait<ResiliencyServiceDriven2ClientBuilder>,
-                ConfigurationTrait<ResiliencyServiceDriven2ClientBuilder> {
+                ConfigurationTrait<ResiliencyServiceDriven2ClientBuilder>,
+                EndpointTrait<ResiliencyServiceDriven2ClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -144,6 +146,19 @@ public final class ResiliencyServiceDriven2ClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated private String endpoint;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public ResiliencyServiceDriven2ClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -169,7 +184,8 @@ public final class ResiliencyServiceDriven2ClientBuilder
     private ResiliencyServiceDriven2ClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ResiliencyServiceDriven2ClientImpl client =
-                new ResiliencyServiceDriven2ClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+                new ResiliencyServiceDriven2ClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
         return client;
     }
 

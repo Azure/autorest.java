@@ -8,8 +8,8 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of ResiliencyServiceDriven2Client. */
 public enum ResiliencyServiceDriven2ServiceVersion implements ServiceVersion {
-    /** Enum value 1.1.0. */
-    V1_1_0("1.1.0");
+    /** Enum value 1.0.0. */
+    V1_0_0("1.0.0");
 
     private final String version;
 
@@ -29,6 +29,6 @@ public enum ResiliencyServiceDriven2ServiceVersion implements ServiceVersion {
      * @return The latest {@link ResiliencyServiceDriven2ServiceVersion}.
      */
     public static ResiliencyServiceDriven2ServiceVersion getLatest() {
-        return V1_1_0;
+        return V1_0_0;
     }
 }
