@@ -14,7 +14,7 @@ autorest readme.md --java
 ### Settings
 
 ``` yaml
-input-file: https://github.com/Azure/azure-rest-api-specs/blob/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
+input-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
 namespace: com.azure.resourcemanager.locks
 license-header: MICROSOFT_MIT_SMALL
 azure-arm: true

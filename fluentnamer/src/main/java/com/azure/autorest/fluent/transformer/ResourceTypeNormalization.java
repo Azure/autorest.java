@@ -74,7 +74,7 @@ class ResourceTypeNormalization {
     private static final ObjectSchema DUMMY_RESOURCE = dummyResourceSchema(ResourceTypeName.RESOURCE);
 
     private static ObjectSchema dummyResourceSchema(String javaName) {
-        // follow https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json
+        // follow https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v2/types.json
 
         ObjectSchema schema = new ObjectSchema();
         schema.setLanguage(new Languages());
