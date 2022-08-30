@@ -79,9 +79,6 @@ public final class NamingAsyncClient {
         return this.serviceClient.postWithResponseAsync(name, requestOptions);
     }
 
-    /*
-     * Generated convenience method for postWithResponse
-     */
     /**
      * summary of POST op
      *
@@ -102,6 +99,7 @@ public final class NamingAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name, String etag) {
+        // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader("etag", etag);
@@ -111,9 +109,6 @@ public final class NamingAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 
-    /*
-     * Generated convenience method for postWithResponse
-     */
     /**
      * summary of POST op
      *
@@ -132,6 +127,7 @@ public final class NamingAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name) {
+        // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions)
                 .map(Response::getValue)

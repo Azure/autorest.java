@@ -139,9 +139,6 @@ public final class ResponseClient {
         return this.client.createWithResponse(name, updateableProperties, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getBinaryWithResponse
-     */
     /**
      * The getBinary operation.
      *
@@ -155,13 +152,11 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBinary() {
+        // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for getBinaryWithResponse
-     */
     /**
      * The getBinary operation.
      *
@@ -177,14 +172,12 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(Context context) {
+        // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return getBinaryWithResponse(requestOptions);
     }
 
-    /*
-     * Generated convenience method for createWithHeadersWithResponse
-     */
     /**
      * The createWithHeaders operation.
      *
@@ -198,13 +191,11 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Resource createWithHeaders() {
+        // Generated convenience method for createWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithHeadersWithResponse(requestOptions).getValue().toObject(Resource.class);
     }
 
-    /*
-     * Generated convenience method for createWithHeadersWithResponse
-     */
     /**
      * The createWithHeaders operation.
      *
@@ -220,6 +211,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ResponseOpsCreateWithHeadersHeaders, Resource> createWithHeadersWithResponse(Context context) {
+        // Generated convenience method for createWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = createWithHeadersWithResponse(requestOptions);
@@ -231,9 +223,6 @@ public final class ResponseClient {
                 new ResponseOpsCreateWithHeadersHeaders(protocolMethodResponse.getHeaders()));
     }
 
-    /*
-     * Generated convenience method for deleteWithHeadersWithResponse
-     */
     /**
      * The deleteWithHeaders operation.
      *
@@ -246,13 +235,11 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void deleteWithHeaders() {
+        // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         deleteWithHeadersWithResponse(requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for deleteWithHeadersWithResponse
-     */
     /**
      * The deleteWithHeaders operation.
      *
@@ -268,6 +255,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ResponseOpsDeleteWithHeadersHeaders, Void> deleteWithHeadersWithResponse(Context context) {
+        // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<Void> protocolMethodResponse = deleteWithHeadersWithResponse(requestOptions);
@@ -279,9 +267,6 @@ public final class ResponseClient {
                 new ResponseOpsDeleteWithHeadersHeaders(protocolMethodResponse.getHeaders()));
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * Creates or replaces a Resource.
      *
@@ -298,15 +283,13 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Resource create(String name, ResourceRequest updateableProperties) {
+        // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions)
                 .getValue()
                 .toObject(Resource.class);
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * Creates or replaces a Resource.
      *
@@ -324,6 +307,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Resource> createWithResponse(String name, ResourceRequest updateableProperties, Context context) {
+        // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

@@ -72,9 +72,6 @@ public final class BuiltinAsyncClient {
         return this.serviceClient.readWithResponseAsync(requestOptions);
     }
 
-    /*
-     * Generated convenience method for readWithResponse
-     */
     /**
      * The read operation.
      *
@@ -88,6 +85,7 @@ public final class BuiltinAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Builtin> read() {
+        // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
                 .map(Response::getValue)

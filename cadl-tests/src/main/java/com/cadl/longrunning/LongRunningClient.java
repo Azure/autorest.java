@@ -145,9 +145,6 @@ public final class LongRunningClient {
         return this.client.beginExport(name, projectFileVersion, requestOptions).getSyncPoller();
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * Get a Resource.
      *
@@ -163,13 +160,11 @@ public final class LongRunningClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Resource get(String name) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * Get a Resource.
      *
@@ -186,6 +181,7 @@ public final class LongRunningClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Resource> getWithResponse(String name, Context context) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(name, requestOptions);

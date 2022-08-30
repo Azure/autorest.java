@@ -44,9 +44,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
         convenienceMethodObj.getConvenienceMethods().stream()
                 .filter(this::isMethodIncluded)
                 .forEach(convenienceMethod -> {
-                    // comments and javadoc
-                    classBlock.blockComment("Generated convenience method for " + getMethodName(protocolMethod));
-
+                    // javadoc
                     classBlock.javadocComment(comment -> {
                         ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
                     });
@@ -57,6 +55,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                     // convenience method
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
                     classBlock.publicMethod(methodDeclaration, methodBlock -> {
+                        methodBlock.line("// Generated convenience method for " + getMethodName(protocolMethod));
                         // RequestOptions
                         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 

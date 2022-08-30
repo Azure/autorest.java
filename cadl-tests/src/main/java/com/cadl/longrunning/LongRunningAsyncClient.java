@@ -145,9 +145,6 @@ public final class LongRunningAsyncClient {
         return this.serviceClient.beginExportAsync(name, projectFileVersion, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * Get a Resource.
      *
@@ -163,6 +160,7 @@ public final class LongRunningAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> get(String name) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions)
                 .map(Response::getValue)

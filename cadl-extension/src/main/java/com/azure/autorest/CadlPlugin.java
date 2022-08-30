@@ -126,7 +126,7 @@ public class CadlPlugin extends Javagen {
 
         SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
 
-//        SETTINGS_MAP.put("partial-update", true);
+        SETTINGS_MAP.put("partial-update", Configuration.getGlobalConfiguration().get("PARTIAL_UPDATE", false));
     }
 
     public static class MockConnection extends Connection {

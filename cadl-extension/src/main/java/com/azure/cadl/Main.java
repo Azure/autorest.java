@@ -100,9 +100,7 @@ public class Main {
             }
         });
 
-        // write output
-
-        // Format
+        // format
         Formatter formatter = new Formatter();
 
         Map<String, String> formattedFiles = new ConcurrentHashMap<>();
@@ -118,6 +116,9 @@ public class Main {
             }
             formattedFiles.put(filePath, formattedSource);
         });
+
+        // write output
+        // java files
         formattedFiles.forEach((filePath, formattedSource) -> cadlPlugin.writeFile(outputFolderFinal + filePath, formattedSource, null));
 
         // XML include POM

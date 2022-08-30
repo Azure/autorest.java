@@ -59,9 +59,6 @@ public final class ErrorClient {
         return this.client.readWithResponse(requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for readWithResponse
-     */
     /**
      * The read operation.
      *
@@ -75,13 +72,11 @@ public final class ErrorClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Diagnostic read() {
+        // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(Diagnostic.class);
     }
 
-    /*
-     * Generated convenience method for readWithResponse
-     */
     /**
      * The read operation.
      *
@@ -97,6 +92,7 @@ public final class ErrorClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Diagnostic> readWithResponse(Context context) {
+        // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = readWithResponse(requestOptions);
