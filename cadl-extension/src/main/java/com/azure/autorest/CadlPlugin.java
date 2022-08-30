@@ -148,7 +148,9 @@ public class CadlPlugin extends Javagen {
         if (!CoreUtils.isNullOrEmpty(options.outputFolder)) {
             SETTINGS_MAP.put("output-folder", options.outputFolder);
         }
-        SETTINGS_MAP.put("service-name", options.serviceName);
+        if (!CoreUtils.isNullOrEmpty(options.serviceName)) {
+            SETTINGS_MAP.put("service-name", options.serviceName);
+        }
         JavaSettingsAccessor.setHost(this);
 
         Mappers.setFactory(new CadlMapperFactory());
