@@ -145,4 +145,13 @@ public class CodeModel extends Metadata {
     public void setTestModel(TestModel testModel) {
         this.testModel = testModel;
     }
+
+    // TODO (weidxu): side-car
+    private Object configuration;
+    public Object getConfiguration() {
+        return configuration;
+    }
+    public void setConfiguration(Object configuration) {
+        this.configuration = configuration;
+    }
 }

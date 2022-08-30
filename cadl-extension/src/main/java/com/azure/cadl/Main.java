@@ -61,7 +61,13 @@ public class Main {
         if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
             namespace = codeModel.getLanguage().getJava().getNamespace();
         }
+
+        // TODO (weidxu): side-car
         namespace = Configuration.getGlobalConfiguration().get("NAMESPACE", namespace);
+        if (codeModel.getConfiguration() != null && codeModel.getConfiguration() instanceof Map) {
+            namespace = (String) ((Map<String, Object>) codeModel.getConfiguration()).get("namespace");
+        }
+
         LOGGER.info("Namespace: {}", namespace);
 
         // initialize plugin
