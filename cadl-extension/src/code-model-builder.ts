@@ -295,6 +295,7 @@ export class CodeModelBuilder {
     op.responses.map((it) => this.processResponse(operation, it));
 
     this.processRouteForPaged(operation, op.responses);
+    this.processRouteForLongRunning(operation, op.responses);
 
     operationGroup.addOperation(operation);
   }
@@ -318,6 +319,21 @@ export class CodeModelBuilder {
               itemName: itemsProperty?.name,
               nextLinkName: nextLinkProperty?.name,
             };
+
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  private processRouteForLongRunning(op: Operation, responses: HttpOperationResponse[]) {
+    for (const resp of responses) {
+      if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+        for (const [_, header] of Object.entries(resp.responses[0].headers)) {
+          if (this.hasDecorator(header, "$pollingLocation")) {
+            op.extensions = op.extensions || {};
+            op.extensions["x-ms-long-running-operation"] = true;
 
             break;
           }

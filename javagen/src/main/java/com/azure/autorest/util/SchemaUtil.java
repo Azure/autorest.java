@@ -154,7 +154,9 @@ public class SchemaUtil {
 
     /**
      * Whether response contains header schemas.
-     * Long-Running-Operation headers will be omitted and won't count as header schemas.
+     * <p>
+     * Response headers will be omitted, as polling method has return type as SyncPoller or PollerFlux, not Response.
+     *
      * @param operation the operation
      * @param settings the JavaSetting object
      * @return whether response of the operation contains headers
@@ -164,12 +166,12 @@ public class SchemaUtil {
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
                 .anyMatch(Objects::nonNull)
-                && notFluentLRO(operation, settings);
+                && notFluentLRO(operation, settings) && notDataPlaneLRO(operation, settings);
     }
 
     /**
      * Merge summary and description.
-     *
+     * <p>
      * If summary exists, it will take 1st line, and description will be moved to 2nd line in Javadoc.
      *
      * @param summary the summary text.
@@ -261,5 +263,9 @@ public class SchemaUtil {
     // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
     private static boolean notFluentLRO(Operation operation, JavaSettings settings) {
         return !(settings.isFluent() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
+    }
+
+    private static boolean notDataPlaneLRO(Operation operation, JavaSettings settings) {
+        return !(settings.isDataPlaneClient() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
     }
 }
