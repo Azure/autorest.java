@@ -337,9 +337,6 @@ public final class EnumServiceAsyncClient {
         return this.serviceClient.setIntArrayWithResponseAsync(intArray, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getColorWithResponse
-     */
     /**
      * The getColor operation.
      *
@@ -353,13 +350,11 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Color> getColor() {
+        // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getColorWithResponse(requestOptions).map(Response::getValue).map(Color::fromString);
     }
 
-    /*
-     * Generated convenience method for getColorModelWithResponse
-     */
     /**
      * The getColorModel operation.
      *
@@ -373,13 +368,11 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ColorModel> getColorModel() {
+        // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
     }
 
-    /*
-     * Generated convenience method for setColorModelWithResponse
-     */
     /**
      * The setColorModel operation.
      *
@@ -395,15 +388,13 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Operation> setColorModel(ColorModel color) {
+        // Generated convenience method for setColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
-    /*
-     * Generated convenience method for setPriorityWithResponse
-     */
     /**
      * The setPriority operation.
      *
@@ -419,15 +410,13 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Operation> setPriority(Priority priority) {
+        // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
-    /*
-     * Generated convenience method for getRunningOperationWithResponse
-     */
     /**
      * The getRunningOperation operation.
      *
@@ -441,15 +430,13 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Operation> getRunningOperation() {
+        // Generated convenience method for getRunningOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
-    /*
-     * Generated convenience method for getOperationWithResponse
-     */
     /**
      * The getOperation operation.
      *
@@ -465,15 +452,13 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Operation> getOperation(OperationStateValues state) {
+        // Generated convenience method for getOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
-    /*
-     * Generated convenience method for setStringEnumArrayWithResponse
-     */
     /**
      * The setStringEnumArray operation.
      *
@@ -490,6 +475,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setStringEnumArray(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+        // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -506,9 +492,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setStringEnumArrayWithResponse
-     */
     /**
      * The setStringEnumArray operation.
      *
@@ -524,6 +507,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setStringEnumArray(List<ColorModel> colorArray) {
+        // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
                         colorArray.stream()
@@ -534,9 +518,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setIntEnumArrayWithResponse
-     */
     /**
      * The setIntEnumArray operation.
      *
@@ -553,6 +534,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setIntEnumArray(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
+        // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -571,9 +553,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setIntEnumArrayWithResponse
-     */
     /**
      * The setIntEnumArray operation.
      *
@@ -589,6 +568,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setIntEnumArray(List<Priority> priorityArray) {
+        // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
                         priorityArray.stream()
@@ -601,9 +581,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setStringArrayWithResponse
-     */
     /**
      * The setStringArray operation.
      *
@@ -620,6 +597,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
+        // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -633,9 +611,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setStringArrayWithResponse
-     */
     /**
      * The setStringArray operation.
      *
@@ -651,15 +626,13 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setStringArray(List<String> stringArray) {
+        // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setIntArrayWithResponse
-     */
     /**
      * The setIntArray operation.
      *
@@ -676,6 +649,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+        // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -688,9 +662,6 @@ public final class EnumServiceAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
-    /*
-     * Generated convenience method for setIntArrayWithResponse
-     */
     /**
      * The setIntArray operation.
      *
@@ -706,6 +677,7 @@ public final class EnumServiceAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> setIntArray(List<Long> intArray) {
+        // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions)
                 .map(Response::getValue)

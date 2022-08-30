@@ -125,9 +125,6 @@ public final class ResponseAsyncClient {
         return this.serviceClient.createWithResponseAsync(name, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getBinaryWithResponse
-     */
     /**
      * The getBinary operation.
      *
@@ -141,13 +138,11 @@ public final class ResponseAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBinary() {
+        // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).map(Response::getValue);
     }
 
-    /*
-     * Generated convenience method for createWithHeadersWithResponse
-     */
     /**
      * The createWithHeaders operation.
      *
@@ -161,15 +156,13 @@ public final class ResponseAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> createWithHeaders() {
+        // Generated convenience method for createWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithHeadersWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
-    /*
-     * Generated convenience method for deleteWithHeadersWithResponse
-     */
     /**
      * The deleteWithHeaders operation.
      *
@@ -183,13 +176,11 @@ public final class ResponseAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteWithHeaders() {
+        // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return deleteWithHeadersWithResponse(requestOptions).map(Response::getValue);
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * Creates or replaces a Resource.
      *
@@ -205,6 +196,7 @@ public final class ResponseAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> create(String name) {
+        // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, requestOptions)
                 .map(Response::getValue)

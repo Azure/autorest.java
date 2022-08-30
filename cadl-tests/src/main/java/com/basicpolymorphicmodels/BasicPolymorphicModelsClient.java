@@ -106,9 +106,6 @@ public final class BasicPolymorphicModelsClient {
         return this.client.setValueWithPolymorphicPropertyWithResponse(input, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for setValueWithResponse
-     */
     /**
      * The setValue operation.
      *
@@ -124,13 +121,11 @@ public final class BasicPolymorphicModelsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BaseClass setValue(BaseClass input) {
+        // Generated convenience method for setValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue().toObject(BaseClass.class);
     }
 
-    /*
-     * Generated convenience method for setValueWithResponse
-     */
     /**
      * The setValue operation.
      *
@@ -147,6 +142,7 @@ public final class BasicPolymorphicModelsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BaseClass> setValueWithResponse(BaseClass input, Context context) {
+        // Generated convenience method for setValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
@@ -155,9 +151,6 @@ public final class BasicPolymorphicModelsClient {
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(BaseClass.class));
     }
 
-    /*
-     * Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-     */
     /**
      * The setValueWithPolymorphicProperty operation.
      *
@@ -173,15 +166,13 @@ public final class BasicPolymorphicModelsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ModelWithPolymorphicProperty setValueWithPolymorphicProperty(ModelWithPolymorphicProperty input) {
+        // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithPolymorphicPropertyWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(ModelWithPolymorphicProperty.class);
     }
 
-    /*
-     * Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-     */
     /**
      * The setValueWithPolymorphicProperty operation.
      *
@@ -199,6 +190,7 @@ public final class BasicPolymorphicModelsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ModelWithPolymorphicProperty> setValueWithPolymorphicPropertyWithResponse(
             ModelWithPolymorphicProperty input, Context context) {
+        // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

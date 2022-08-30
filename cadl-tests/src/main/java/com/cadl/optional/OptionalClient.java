@@ -149,9 +149,6 @@ public final class OptionalClient {
                 .block();
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -176,6 +173,7 @@ public final class OptionalClient {
             Boolean booleanRequiredNullable,
             String stringRequired,
             String stringRequiredNullable) {
+        // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(
                         requestHeaderRequired,
@@ -188,9 +186,6 @@ public final class OptionalClient {
                 .toObject(AllPropertiesOptional.class);
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -227,6 +222,7 @@ public final class OptionalClient {
             String stringNullable,
             Optional optional,
             Context context) {
+        // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);

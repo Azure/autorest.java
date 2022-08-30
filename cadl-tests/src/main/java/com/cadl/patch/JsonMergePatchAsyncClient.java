@@ -106,9 +106,6 @@ public final class JsonMergePatchAsyncClient {
         return this.serviceClient.updateWithResponseAsync(name, body, requestOptions);
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * The create operation.
      *
@@ -125,15 +122,13 @@ public final class JsonMergePatchAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> create(String name, Resource body) {
+        // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
-    /*
-     * Generated convenience method for updateWithResponse
-     */
     /**
      * The update operation.
      *
@@ -150,6 +145,7 @@ public final class JsonMergePatchAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> update(String name, Resource body) {
+        // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)

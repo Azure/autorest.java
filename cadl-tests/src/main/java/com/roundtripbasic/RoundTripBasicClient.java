@@ -69,9 +69,6 @@ public final class RoundTripBasicClient {
         return this.client.getModelWithResponse(input, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -87,15 +84,13 @@ public final class RoundTripBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RoundTripModel getModel(RoundTripModel input) {
+        // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -112,6 +107,7 @@ public final class RoundTripBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<RoundTripModel> getModelWithResponse(RoundTripModel input, Context context) {
+        // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

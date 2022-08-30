@@ -55,9 +55,6 @@ public final class AuthClient {
         return this.client.getWithResponse(requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -71,13 +68,11 @@ public final class AuthClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String get() {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(String.class);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -93,6 +88,7 @@ public final class AuthClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getWithResponse(Context context) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
