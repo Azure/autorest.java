@@ -79,8 +79,8 @@ Currently, we only support generating credentials of type `TokenCredential` and 
 [msrest_library]: https://pypi.org/project/msrest/
 [azure_mgmt_core_library]: https://pypi.org/project/azure-mgmt-core/
 [azure_identity_library]: https://docs.microsoft.com/java/api/com.azure.identity?view=azure-java-stable
-[flag_index]: https://github.com/Azure/autorest/tree/master/docs/generate/flags.md
+[flag_index]: https://github.com/Azure/autorest/tree/main/docs/generate/flags.md
 [aad_authentication]: https://docs.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
-[identity_credentials]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/identity/azure-identity#credential-classes
+[identity_credentials]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/identity/azure-identity#credential-classes
 [default_azure_credential]: https://docs.microsoft.com/java/api/com.azure.identity.defaultazurecredential?view=azure-java-stable
 [azure_key_credential]: https://docs.microsoft.com/java/api/com.azure.core.credential.azurekeycredential?view=azure-java-stable

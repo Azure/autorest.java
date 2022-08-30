@@ -273,7 +273,7 @@ This contains the actual generator extension, including mappers that maps a code
 This contains the [generator extension for Azure Management Libraries](#additional-settings-for-fluent).
 
 ## tests
-This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`.
+This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/main/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`.
 
 This also contains test code for these generated code under `src/test`. Running the tests will hit the test server running locally (see https://github.com/Azure/autorest.testserver for instructions) and verify the correctness of the generated code.
 
@@ -293,7 +293,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ### Autorest plugin configuration
 - Please don't edit this section unless you're re-configuring how the Java extension plugs in to AutoRest
-AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
+AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/main/docs/developer/architecture/AutoRest-extension.md
 
 #### Javagen
 
