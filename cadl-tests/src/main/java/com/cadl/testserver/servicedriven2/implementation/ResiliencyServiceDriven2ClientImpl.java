@@ -14,6 +14,18 @@ import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the ResiliencyServiceDriven2Client type. */
 public final class ResiliencyServiceDriven2ClientImpl {
+    /** Server parameter. */
+    private final String endpoint;
+
+    /**
+     * Gets Server parameter.
+     *
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
     /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
@@ -50,22 +62,28 @@ public final class ResiliencyServiceDriven2ClientImpl {
         return this.params;
     }
 
-    /** Initializes an instance of ResiliencyServiceDriven2Client client. */
-    public ResiliencyServiceDriven2ClientImpl() {
+    /**
+     * Initializes an instance of ResiliencyServiceDriven2Client client.
+     *
+     * @param endpoint Server parameter.
+     */
+    public ResiliencyServiceDriven2ClientImpl(String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+                JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint);
     }
 
     /**
      * Initializes an instance of ResiliencyServiceDriven2Client client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Server parameter.
      */
-    public ResiliencyServiceDriven2ClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public ResiliencyServiceDriven2ClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -73,10 +91,13 @@ public final class ResiliencyServiceDriven2ClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Server parameter.
      */
-    public ResiliencyServiceDriven2ClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public ResiliencyServiceDriven2ClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.params = new ParamsImpl(this);
     }
 }

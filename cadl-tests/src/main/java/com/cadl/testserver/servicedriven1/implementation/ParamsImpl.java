@@ -55,7 +55,7 @@ public final class ParamsImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ResiliencyServiceDri")
     private interface ParamsService {
-        @Head("/serviceDriven1/parameters")
+        @Head("/resilency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -70,7 +70,7 @@ public final class ParamsImpl {
         Mono<Response<Void>> headNoParams(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/serviceDriven1/parameters")
+        @Get("/resilency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -88,7 +88,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/serviceDriven1/parameters")
+        @Put("/resilency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -106,7 +106,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/serviceDriven1/parameters/{contentTypePath}")
+        @Post("/resilency/servicedriven1/parameters/{contentTypePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -125,7 +125,7 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/serviceDriven1/moreParameters")
+        @Get("/resilency/servicedriven1/moreParameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

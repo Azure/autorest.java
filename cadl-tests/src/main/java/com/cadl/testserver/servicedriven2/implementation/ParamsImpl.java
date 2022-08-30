@@ -11,6 +11,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -53,7 +54,7 @@ public final class ParamsImpl {
      * The interface defining all the services for ResiliencyServiceDriven2Params to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ResiliencyServiceDri")
     private interface ParamsService {
         @Head("/serviceDriven2/serviceDriven/parameters")
@@ -69,7 +70,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> headNoParams(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
@@ -84,6 +88,7 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRequired(
+                @HostParam("endpoint") String endpoint,
                 @QueryParam("parameter") String parameter,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -102,6 +107,7 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putRequiredOptional(
+                @HostParam("endpoint") String endpoint,
                 @QueryParam("requiredParam") String requiredParam,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -120,6 +126,7 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postParameters(
+                @HostParam("endpoint") String endpoint,
                 @PathParam("contentTypePath") String contentTypePath,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData parameter,
@@ -139,7 +146,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteParameters(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/serviceDriven2/serviceDriven/moreParameters")
         @ExpectedResponses({200})
@@ -154,7 +164,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOptional(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
 
         @Get("/serviceDriven2/serviceDriven/newPath")
         @ExpectedResponses({200})
@@ -169,7 +182,10 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNewOperation(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -196,7 +212,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> headNoParamsWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.headNoParams(accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.headNoParams(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -259,7 +276,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getRequired(parameter, accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.getRequired(this.client.getEndpoint(), parameter, accept, requestOptions, context));
     }
 
     /**
@@ -333,7 +351,9 @@ public final class ParamsImpl {
             String requiredParam, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putRequiredOptional(requiredParam, accept, requestOptions, context));
+                context ->
+                        service.putRequiredOptional(
+                                this.client.getEndpoint(), requiredParam, accept, requestOptions, context));
     }
 
     /**
@@ -405,7 +425,14 @@ public final class ParamsImpl {
             String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.postParameters(contentTypePath, accept, parameter, requestOptions, context));
+                context ->
+                        service.postParameters(
+                                this.client.getEndpoint(),
+                                contentTypePath,
+                                accept,
+                                parameter,
+                                requestOptions,
+                                context));
     }
 
     /**
@@ -456,7 +483,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteParametersWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteParameters(accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.deleteParameters(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -509,7 +537,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getOptional(accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.getOptional(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -569,7 +598,8 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNewOperationWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNewOperation(accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.getNewOperation(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**

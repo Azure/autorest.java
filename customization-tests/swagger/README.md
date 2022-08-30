@@ -20,7 +20,7 @@ autorest --java --use=C:/work/autorest.java
 
 ### Code generation settings
 ```yaml
-input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json
+input-file: https://raw.githubusercontent.com/Azure/autorest.testserver/main/swagger/body-complex.json
 java: true
 output-folder: ..\
 required-parameter-client-methods: true

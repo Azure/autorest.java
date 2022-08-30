@@ -221,7 +221,7 @@ This experiment introduces how to grow up from pure DPG code to the target code.
 ### Configuration for generating DPG code
 
 Please refer
-to [`swagger/README.md`](https://github.com/haolingdong-msft/metrics-advisor-poc/blob/master/swagger/README.md) for the detailed configuration.
+to [`swagger/README.md`](https://github.com/haolingdong-msft/metrics-advisor-poc/blob/main/swagger/README.md) for the detailed configuration.
 
 ```yaml
 input-file: https://github.com/Azure/azure-rest-api-specs/blob/f9a5bf06925934b7841bdc95c14e9b70379b426b/specification/cognitiveservices/data-plane/MetricsAdvisor/stable/v1.0/MetricsAdvisor.json
@@ -250,7 +250,7 @@ DPG generated code: [API View](https://apiview.dev/Assemblies/Review/250323618f1
 
 We also generate JavaDoc for each method to let user know what does the payload look like.
 
-We also generate [tests and samples](https://github.com/haolingdong-msft/metrics-advisor-poc/tree/master/src) automatically.
+We also generate [tests and samples](https://github.com/haolingdong-msft/metrics-advisor-poc/tree/main/src) automatically.
 
 ### Customized authentication
 
