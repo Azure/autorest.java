@@ -15,8 +15,8 @@ function generate {
     rm -rf cadl-output
 }
 
-mkdir existingcode
-cp -rf ./src existingcode
+mkdir -p ./existingcode/src/main/java/com/cadl/
+cp -rf ./src/main/java/com/cadl/partialupdate ./existingcode/src/main/java/com/cadl/partialupdate
 rm -rf src/main
 rm -rf cadl-output
 
