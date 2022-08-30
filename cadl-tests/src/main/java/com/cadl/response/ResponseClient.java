@@ -19,6 +19,7 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.cadl.response.models.Resource;
+import com.cadl.response.models.ResourceRequest;
 import com.cadl.response.models.ResponseOpsCreateWithHeadersHeaders;
 import com.cadl.response.models.ResponseOpsDeleteWithHeadersHeaders;
 
@@ -104,6 +105,14 @@ public final class ResponseClient {
     /**
      * Creates or replaces a Resource.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -115,6 +124,7 @@ public final class ResponseClient {
      * }</pre>
      *
      * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -124,8 +134,9 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.createWithResponse(name, requestOptions).block();
+    public Response<BinaryData> createWithResponse(
+            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
+        return this.client.createWithResponse(name, updateableProperties, requestOptions).block();
     }
 
     /*
@@ -275,6 +286,7 @@ public final class ResponseClient {
      * Creates or replaces a Resource.
      *
      * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -285,9 +297,11 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource create(String name) {
+    public Resource create(String name, ResourceRequest updateableProperties) {
         RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+        return createWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions)
+                .getValue()
+                .toObject(Resource.class);
     }
 
     /*
@@ -297,6 +311,7 @@ public final class ResponseClient {
      * Creates or replaces a Resource.
      *
      * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -308,10 +323,11 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Resource> createWithResponse(String name, Context context) {
+    public Response<Resource> createWithResponse(String name, ResourceRequest updateableProperties, Context context) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = createWithResponse(name, requestOptions);
+        Response<BinaryData> protocolMethodResponse =
+                createWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Resource.class));
     }
 }

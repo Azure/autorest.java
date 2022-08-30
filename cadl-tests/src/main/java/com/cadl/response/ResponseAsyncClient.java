@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.response.implementation.ResponseOpsImpl;
 import com.cadl.response.models.Resource;
+import com.cadl.response.models.ResourceRequest;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResponseClient type. */
@@ -101,6 +102,14 @@ public final class ResponseAsyncClient {
     /**
      * Creates or replaces a Resource.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -112,6 +121,7 @@ public final class ResponseAsyncClient {
      * }</pre>
      *
      * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -121,8 +131,9 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createWithResponse(String name, RequestOptions requestOptions) {
-        return this.serviceClient.createWithResponseAsync(name, requestOptions);
+    public Mono<Response<BinaryData>> createWithResponse(
+            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
+        return this.serviceClient.createWithResponseAsync(name, updateableProperties, requestOptions);
     }
 
     /*
@@ -194,6 +205,7 @@ public final class ResponseAsyncClient {
      * Creates or replaces a Resource.
      *
      * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -204,9 +216,9 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> create(String name) {
+    public Mono<Resource> create(String name, ResourceRequest updateableProperties) {
         RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(name, requestOptions)
+        return createWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
