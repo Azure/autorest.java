@@ -293,7 +293,9 @@ export class CodeModelBuilder {
       this.processParameterBody(operation, op.parameters.bodyParameter);
     } else if (op.parameters.bodyType) {
       const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
-      this.processParameterBody(operation, bodyType);
+      if (bodyType.kind === "Model") {
+        this.processParameterBody(operation, bodyType);
+      }
     }
     op.responses.map((it) => this.processResponse(operation, it));
 
@@ -1088,7 +1090,13 @@ export class CodeModelBuilder {
         ]);
 
         let modelUsedInCoreRequest = false;
-        while (knownCoreTemplate.has(target.name) && target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0 && target.templateArguments[0].kind === "Model") {
+        while (
+          knownCoreTemplate.has(target.name) &&
+          target.kind === "Model" &&
+          target.templateArguments &&
+          target.templateArguments.length > 0 &&
+          target.templateArguments[0].kind === "Model"
+        ) {
           modelUsedInCoreRequest = true;
           target = target.templateArguments[0];
         }
@@ -1099,8 +1107,8 @@ export class CodeModelBuilder {
           // hack for other cases, mostly Page<>
           return (
             target.name +
-            target.templateArguments!
-              .map((it) => {
+            target
+              .templateArguments!.map((it) => {
                 switch (it.kind) {
                   case "Model":
                     return it.name;
