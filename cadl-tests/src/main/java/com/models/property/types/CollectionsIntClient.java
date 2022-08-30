@@ -101,7 +101,6 @@ public final class CollectionsIntClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CollectionsIntProperty get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(CollectionsIntProperty.class);
     }
@@ -122,7 +121,6 @@ public final class CollectionsIntClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CollectionsIntProperty> getWithResponse(Context context) {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
@@ -145,7 +143,6 @@ public final class CollectionsIntClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put(CollectionsIntProperty body) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
@@ -167,7 +164,6 @@ public final class CollectionsIntClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(CollectionsIntProperty body, Context context) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return putWithResponse(BinaryData.fromObject(body), requestOptions);

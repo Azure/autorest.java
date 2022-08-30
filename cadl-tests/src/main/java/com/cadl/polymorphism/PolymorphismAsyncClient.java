@@ -139,7 +139,6 @@ public final class PolymorphismAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> read() {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
                 .map(Response::getValue)
@@ -162,7 +161,6 @@ public final class PolymorphismAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BaseType> write(BaseType body) {
         // Generated convenience method for writeWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
@@ -185,7 +183,6 @@ public final class PolymorphismAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Task> task(Task body) {
         // Generated convenience method for taskWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)

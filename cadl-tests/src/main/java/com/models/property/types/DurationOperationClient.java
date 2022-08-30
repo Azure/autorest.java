@@ -97,7 +97,6 @@ public final class DurationOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationProperty get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(DurationProperty.class);
     }
@@ -118,7 +117,6 @@ public final class DurationOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DurationProperty> getWithResponse(Context context) {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
@@ -141,7 +139,6 @@ public final class DurationOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put(DurationProperty body) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
@@ -163,7 +160,6 @@ public final class DurationOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(DurationProperty body, Context context) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return putWithResponse(BinaryData.fromObject(body), requestOptions);

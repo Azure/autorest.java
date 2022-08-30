@@ -73,7 +73,6 @@ public final class OutputBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getModel() {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(requestOptions)
                 .map(Response::getValue)

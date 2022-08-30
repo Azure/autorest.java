@@ -76,7 +76,6 @@ public final class InputBasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getModel(InputModel input) {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
     }

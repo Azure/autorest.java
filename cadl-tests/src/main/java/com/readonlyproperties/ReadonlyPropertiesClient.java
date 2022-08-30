@@ -163,7 +163,6 @@ public final class ReadonlyPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OutputModel getOptionalPropertyModel() {
         // Generated convenience method for getOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
     }
@@ -184,7 +183,6 @@ public final class ReadonlyPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<OutputModel> getOptionalPropertyModelWithResponse(Context context) {
         // Generated convenience method for getOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getOptionalPropertyModelWithResponse(requestOptions);
@@ -208,7 +206,6 @@ public final class ReadonlyPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RoundTripModel setOptionalPropertyModel(RoundTripModel input) {
         // Generated convenience method for setOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
@@ -232,7 +229,6 @@ public final class ReadonlyPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<RoundTripModel> setOptionalPropertyModelWithResponse(RoundTripModel input, Context context) {
         // Generated convenience method for setOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

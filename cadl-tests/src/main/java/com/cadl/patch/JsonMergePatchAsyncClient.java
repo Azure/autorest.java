@@ -123,7 +123,6 @@ public final class JsonMergePatchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> create(String name, Resource body) {
         // Generated convenience method for createWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)
@@ -147,7 +146,6 @@ public final class JsonMergePatchAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Resource> update(String name, Resource body) {
         // Generated convenience method for updateWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .map(Response::getValue)

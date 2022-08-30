@@ -348,7 +348,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Color getColor() {
         // Generated convenience method for getColorWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return Color.fromString(getColorWithResponse(requestOptions).getValue());
     }
@@ -369,7 +368,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Color> getColorWithResponse(Context context) {
         // Generated convenience method for getColorWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<String> protocolMethodResponse = getColorWithResponse(requestOptions);
@@ -390,7 +388,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ColorModel getColorModel() {
         // Generated convenience method for getColorModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue());
     }
@@ -411,7 +408,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ColorModel> getColorModelWithResponse(Context context) {
         // Generated convenience method for getColorModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<String> protocolMethodResponse = getColorModelWithResponse(requestOptions);
@@ -434,7 +430,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation setColorModel(ColorModel color) {
         // Generated convenience method for setColorModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions).getValue().toObject(Operation.class);
     }
@@ -456,7 +451,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> setColorModelWithResponse(ColorModel color, Context context) {
         // Generated convenience method for setColorModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = setColorModelWithResponse(color.toString(), requestOptions);
@@ -480,7 +474,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation setPriority(Priority priority) {
         // Generated convenience method for setPriorityWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
                 .getValue()
@@ -504,7 +497,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> setPriorityWithResponse(Priority priority, Context context) {
         // Generated convenience method for setPriorityWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
@@ -527,7 +519,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation getRunningOperation() {
         // Generated convenience method for getRunningOperationWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions).getValue().toObject(Operation.class);
     }
@@ -548,7 +539,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> getRunningOperationWithResponse(Context context) {
         // Generated convenience method for getRunningOperationWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getRunningOperationWithResponse(requestOptions);
@@ -572,7 +562,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Operation getOperation(OperationStateValues state) {
         // Generated convenience method for getOperationWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions).getValue().toObject(Operation.class);
     }
@@ -594,7 +583,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Operation> getOperationWithResponse(OperationStateValues state, Context context) {
         // Generated convenience method for getOperationWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getOperationWithResponse(state.toString(), requestOptions);
@@ -618,7 +606,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String setStringEnumArray(List<ColorModel> colorArray) {
         // Generated convenience method for setStringEnumArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(
                         colorArray.stream()
@@ -648,7 +635,6 @@ public final class EnumServiceClient {
     public Response<String> setStringEnumArrayWithResponse(
             List<ColorModel> colorArray, List<ColorModel> colorArrayOpt, Context context) {
         // Generated convenience method for setStringEnumArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -682,7 +668,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String setIntEnumArray(List<Priority> priorityArray) {
         // Generated convenience method for setIntEnumArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
                         priorityArray.stream()
@@ -714,7 +699,6 @@ public final class EnumServiceClient {
     public Response<String> setIntEnumArrayWithResponse(
             List<Priority> priorityArray, List<Priority> priorityArrayOpt, Context context) {
         // Generated convenience method for setIntEnumArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -750,7 +734,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String setStringArray(List<String> stringArray) {
         // Generated convenience method for setStringArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
     }
@@ -774,7 +757,6 @@ public final class EnumServiceClient {
     public Response<String> setStringArrayWithResponse(
             List<String> stringArray, List<String> stringArrayOpt, Context context) {
         // Generated convenience method for setStringArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
             requestOptions.addQueryParam(
@@ -804,7 +786,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String setIntArray(List<Long> intArray) {
         // Generated convenience method for setIntArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
@@ -827,7 +808,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
         // Generated convenience method for setIntArrayWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             requestOptions.addQueryParam(

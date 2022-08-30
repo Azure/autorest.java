@@ -123,7 +123,6 @@ public final class BasicPolymorphicModelsAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BaseClass> setValue(BaseClass input) {
         // Generated convenience method for setValueWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)
@@ -146,7 +145,6 @@ public final class BasicPolymorphicModelsAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ModelWithPolymorphicProperty> setValueWithPolymorphicProperty(ModelWithPolymorphicProperty input) {
         // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithPolymorphicPropertyWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

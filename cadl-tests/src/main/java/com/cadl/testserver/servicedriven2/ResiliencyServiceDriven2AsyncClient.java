@@ -269,7 +269,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> headNoParams(String newParameter) {
         // Generated convenience method for headNoParamsWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -292,7 +291,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
@@ -316,7 +314,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getRequired(String parameter, String newParameter) {
         // Generated convenience method for getRequiredWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -344,7 +341,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getRequired(String parameter) {
         // Generated convenience method for getRequiredWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
@@ -370,7 +366,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam, String newParameter) {
         // Generated convenience method for putRequiredOptionalWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -400,7 +395,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam) {
         // Generated convenience method for putRequiredOptionalWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
@@ -424,7 +418,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> postParameters(ContentTypePath contentTypePath, PostInput parameter) {
         // Generated convenience method for postParametersWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions)
                 .map(Response::getValue)
@@ -446,7 +439,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteParameters() {
         // Generated convenience method for deleteParametersWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return deleteParametersWithResponse(requestOptions).map(Response::getValue);
     }
@@ -470,7 +462,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional(String optionalParam, String newParameter) {
         // Generated convenience method for getOptionalWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -499,7 +490,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional() {
         // Generated convenience method for getOptionalWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions)
                 .map(Response::getValue)
@@ -521,7 +511,6 @@ public final class ResiliencyServiceDriven2AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getNewOperation() {
         // Generated convenience method for getNewOperationWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getNewOperationWithResponse(requestOptions)
                 .map(Response::getValue)

@@ -73,7 +73,6 @@ public final class ErrorAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Diagnostic> read() {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
                 .map(Response::getValue)

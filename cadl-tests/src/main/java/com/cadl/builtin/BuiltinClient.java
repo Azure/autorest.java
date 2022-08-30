@@ -86,7 +86,6 @@ public final class BuiltinClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Builtin read() {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(Builtin.class);
     }
@@ -107,7 +106,6 @@ public final class BuiltinClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Builtin> readWithResponse(Context context) {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = readWithResponse(requestOptions);

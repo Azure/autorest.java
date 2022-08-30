@@ -87,7 +87,6 @@ public final class VisibilityWriteAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> create(WriteDog dog) {
         // Generated convenience method for createWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)

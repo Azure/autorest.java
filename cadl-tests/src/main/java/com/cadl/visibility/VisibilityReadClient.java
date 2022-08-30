@@ -74,7 +74,6 @@ public final class VisibilityReadClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(Dog.class);
     }
@@ -95,7 +94,6 @@ public final class VisibilityReadClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> getWithResponse(Context context) {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);

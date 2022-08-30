@@ -73,7 +73,6 @@ public final class OutputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OutputModel getModel() {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
     }
@@ -94,7 +93,6 @@ public final class OutputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<OutputModel> getModelWithResponse(Context context) {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getModelWithResponse(requestOptions);

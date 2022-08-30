@@ -63,7 +63,6 @@ public final class ServerClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void status(long code) {
         // Generated convenience method for statusWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         statusWithResponse(code, requestOptions).getValue();
     }
@@ -85,7 +84,6 @@ public final class ServerClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(long code, Context context) {
         // Generated convenience method for statusWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return statusWithResponse(code, requestOptions);

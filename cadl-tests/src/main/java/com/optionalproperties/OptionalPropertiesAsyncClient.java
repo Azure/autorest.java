@@ -165,7 +165,6 @@ public final class OptionalPropertiesAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> sendOptionalPropertyModel(InputModel input) {
         // Generated convenience method for sendOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return sendOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue);
@@ -185,7 +184,6 @@ public final class OptionalPropertiesAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getOptionalPropertyModel() {
         // Generated convenience method for getOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions)
                 .map(Response::getValue)
@@ -208,7 +206,6 @@ public final class OptionalPropertiesAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RoundTripModel> setOptionalPropertyModel(RoundTripModel input) {
         // Generated convenience method for setOptionalPropertyModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

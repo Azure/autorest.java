@@ -148,7 +148,6 @@ public final class VisibilityOpAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)
@@ -171,7 +170,6 @@ public final class VisibilityOpAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> create(WriteDog dog) {
         // Generated convenience method for createWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)
@@ -194,7 +192,6 @@ public final class VisibilityOpAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> query(ReadDog dog) {
         // Generated convenience method for queryWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return queryWithResponse(BinaryData.fromObject(dog), requestOptions)
                 .map(Response::getValue)

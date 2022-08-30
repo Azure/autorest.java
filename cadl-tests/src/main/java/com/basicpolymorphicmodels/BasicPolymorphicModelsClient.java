@@ -122,7 +122,6 @@ public final class BasicPolymorphicModelsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BaseClass setValue(BaseClass input) {
         // Generated convenience method for setValueWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue().toObject(BaseClass.class);
     }
@@ -144,7 +143,6 @@ public final class BasicPolymorphicModelsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BaseClass> setValueWithResponse(BaseClass input, Context context) {
         // Generated convenience method for setValueWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
@@ -169,7 +167,6 @@ public final class BasicPolymorphicModelsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ModelWithPolymorphicProperty setValueWithPolymorphicProperty(ModelWithPolymorphicProperty input) {
         // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return setValueWithPolymorphicPropertyWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
@@ -194,7 +191,6 @@ public final class BasicPolymorphicModelsClient {
     public Response<ModelWithPolymorphicProperty> setValueWithPolymorphicPropertyWithResponse(
             ModelWithPolymorphicProperty input, Context context) {
         // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

@@ -74,7 +74,6 @@ public final class InputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getModel(InputModel input) {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         getModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
     }
@@ -96,7 +95,6 @@ public final class InputBasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getModelWithResponse(InputModel input, Context context) {
         // Generated convenience method for getModelWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions);

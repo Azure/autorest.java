@@ -123,7 +123,6 @@ public final class JsonMergePatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Resource create(String name, Resource body) {
         // Generated convenience method for createWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .getValue()
@@ -148,7 +147,6 @@ public final class JsonMergePatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Resource> createWithResponse(String name, Resource body, Context context) {
         // Generated convenience method for createWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
@@ -173,7 +171,6 @@ public final class JsonMergePatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Resource update(String name, Resource body) {
         // Generated convenience method for updateWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return updateWithResponse(name, BinaryData.fromObject(body), requestOptions)
                 .getValue()
@@ -198,7 +195,6 @@ public final class JsonMergePatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Resource> updateWithResponse(String name, Resource body, Context context) {
         // Generated convenience method for updateWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

@@ -139,7 +139,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet read() {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(Pet.class);
     }
@@ -160,7 +159,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Pet> readWithResponse(Context context) {
         // Generated convenience method for readWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = readWithResponse(requestOptions);
@@ -183,7 +181,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BaseType write(BaseType body) {
         // Generated convenience method for writeWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(BaseType.class);
     }
@@ -205,7 +202,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BaseType> writeWithResponse(BaseType body, Context context) {
         // Generated convenience method for writeWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = writeWithResponse(BinaryData.fromObject(body), requestOptions);
@@ -228,7 +224,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Task task(Task body) {
         // Generated convenience method for taskWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Task.class);
     }
@@ -250,7 +245,6 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Task> taskWithResponse(Task body, Context context) {
         // Generated convenience method for taskWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = taskWithResponse(BinaryData.fromObject(body), requestOptions);

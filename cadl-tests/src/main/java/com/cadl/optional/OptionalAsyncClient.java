@@ -181,7 +181,6 @@ public final class OptionalAsyncClient {
             String stringNullable,
             Optional optional) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);
@@ -234,7 +233,6 @@ public final class OptionalAsyncClient {
             String stringRequired,
             String stringRequiredNullable) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(
                         requestHeaderRequired,

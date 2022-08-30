@@ -55,7 +55,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                     // convenience method
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
                     classBlock.publicMethod(methodDeclaration, methodBlock -> {
-                        methodBlock.line("//Generated convenience method for " + getMethodName(protocolMethod) + "\n");;
+                        methodBlock.line("// Generated convenience method for " + getMethodName(protocolMethod));
                         // RequestOptions
                         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 

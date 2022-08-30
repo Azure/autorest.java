@@ -102,7 +102,6 @@ public final class CollectionsStringAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CollectionsStringProperty> get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)
@@ -125,7 +124,6 @@ public final class CollectionsStringAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put(CollectionsStringProperty body) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
     }

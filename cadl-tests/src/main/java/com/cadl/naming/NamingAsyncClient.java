@@ -100,7 +100,6 @@ public final class NamingAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name, String etag) {
         // Generated convenience method for postWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader("etag", etag);
@@ -129,7 +128,6 @@ public final class NamingAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DataResponse> post(String name) {
         // Generated convenience method for postWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions)
                 .map(Response::getValue)

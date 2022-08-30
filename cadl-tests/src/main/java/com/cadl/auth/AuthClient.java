@@ -69,7 +69,6 @@ public final class AuthClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(String.class);
     }
@@ -90,7 +89,6 @@ public final class AuthClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getWithResponse(Context context) {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);

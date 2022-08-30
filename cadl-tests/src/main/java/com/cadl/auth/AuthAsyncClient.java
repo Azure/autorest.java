@@ -69,7 +69,6 @@ public final class AuthAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> get() {
         // Generated convenience method for getWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)

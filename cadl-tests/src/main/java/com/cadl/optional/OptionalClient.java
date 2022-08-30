@@ -174,7 +174,6 @@ public final class OptionalClient {
             String stringRequired,
             String stringRequiredNullable) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(
                         requestHeaderRequired,
@@ -224,7 +223,6 @@ public final class OptionalClient {
             Optional optional,
             Context context) {
         // Generated convenience method for putWithResponse
-
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);
