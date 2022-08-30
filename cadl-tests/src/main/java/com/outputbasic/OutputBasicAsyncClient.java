@@ -59,9 +59,6 @@ public final class OutputBasicAsyncClient {
         return this.serviceClient.getModelWithResponseAsync(requestOptions);
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -75,6 +72,8 @@ public final class OutputBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getModel() {
+        // Generated convenience method for getModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(requestOptions)
                 .map(Response::getValue)

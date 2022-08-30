@@ -249,9 +249,6 @@ public final class ResiliencyServiceDriven2Client {
         return this.client.getNewOperationWithResponse(requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for headNoParamsWithResponse
-     */
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
@@ -265,13 +262,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void headNoParams() {
+        // Generated convenience method for headNoParamsWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         headNoParamsWithResponse(requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for headNoParamsWithResponse
-     */
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
@@ -289,6 +285,8 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(String newParameter, Context context) {
+        // Generated convenience method for headNoParamsWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -297,9 +295,6 @@ public final class ResiliencyServiceDriven2Client {
         return headNoParamsWithResponse(requestOptions);
     }
 
-    /*
-     * Generated convenience method for getRequiredWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
@@ -316,13 +311,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getRequired(String parameter) {
+        // Generated convenience method for getRequiredWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions).getValue().toObject(Message.class);
     }
 
-    /*
-     * Generated convenience method for getRequiredWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
@@ -341,6 +335,8 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getRequiredWithResponse(String parameter, String newParameter, Context context) {
+        // Generated convenience method for getRequiredWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
@@ -350,9 +346,6 @@ public final class ResiliencyServiceDriven2Client {
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for putRequiredOptionalWithResponse
-     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -369,13 +362,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Message putRequiredOptional(String requiredParam) {
+        // Generated convenience method for putRequiredOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
     }
 
-    /*
-     * Generated convenience method for putRequiredOptionalWithResponse
-     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -396,6 +388,8 @@ public final class ResiliencyServiceDriven2Client {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> putRequiredOptionalWithResponse(
             String requiredParam, String optionalParam, String newParameter, Context context) {
+        // Generated convenience method for putRequiredOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -408,9 +402,6 @@ public final class ResiliencyServiceDriven2Client {
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for postParametersWithResponse
-     */
     /**
      * POST a JSON or a JPEG.
      *
@@ -427,15 +418,14 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Message postParameters(ContentTypePath contentTypePath, PostInput parameter) {
+        // Generated convenience method for postParametersWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions)
                 .getValue()
                 .toObject(Message.class);
     }
 
-    /*
-     * Generated convenience method for postParametersWithResponse
-     */
     /**
      * POST a JSON or a JPEG.
      *
@@ -454,6 +444,8 @@ public final class ResiliencyServiceDriven2Client {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> postParametersWithResponse(
             ContentTypePath contentTypePath, PostInput parameter, Context context) {
+        // Generated convenience method for postParametersWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =
@@ -462,9 +454,6 @@ public final class ResiliencyServiceDriven2Client {
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for deleteParametersWithResponse
-     */
     /**
      * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
      * in a known path.
@@ -478,13 +467,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void deleteParameters() {
+        // Generated convenience method for deleteParametersWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         deleteParametersWithResponse(requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for deleteParametersWithResponse
-     */
     /**
      * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
      * in a known path.
@@ -501,14 +489,13 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(Context context) {
+        // Generated convenience method for deleteParametersWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return deleteParametersWithResponse(requestOptions);
     }
 
-    /*
-     * Generated convenience method for getOptionalWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -523,13 +510,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getOptional() {
+        // Generated convenience method for getOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
     }
 
-    /*
-     * Generated convenience method for getOptionalWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -548,6 +534,8 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getOptionalWithResponse(String optionalParam, String newParameter, Context context) {
+        // Generated convenience method for getOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -560,9 +548,6 @@ public final class ResiliencyServiceDriven2Client {
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for getNewOperationWithResponse
-     */
     /**
      * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
@@ -577,13 +562,12 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Message getNewOperation() {
+        // Generated convenience method for getNewOperationWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getNewOperationWithResponse(requestOptions).getValue().toObject(Message.class);
     }
 
-    /*
-     * Generated convenience method for getNewOperationWithResponse
-     */
     /**
      * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
@@ -600,6 +584,8 @@ public final class ResiliencyServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Message> getNewOperationWithResponse(Context context) {
+        // Generated convenience method for getNewOperationWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getNewOperationWithResponse(requestOptions);

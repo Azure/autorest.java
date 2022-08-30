@@ -83,9 +83,6 @@ public final class BooleanOperationClient {
         return this.client.putWithResponse(body, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -99,13 +96,12 @@ public final class BooleanOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanProperty get() {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(BooleanProperty.class);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -121,6 +117,8 @@ public final class BooleanOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BooleanProperty> getWithResponse(Context context) {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
@@ -128,9 +126,6 @@ public final class BooleanOperationClient {
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(BooleanProperty.class));
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -145,13 +140,12 @@ public final class BooleanOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put(BooleanProperty body) {
+        // Generated convenience method for putWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -168,6 +162,8 @@ public final class BooleanOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BooleanProperty body, Context context) {
+        // Generated convenience method for putWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return putWithResponse(BinaryData.fromObject(body), requestOptions);

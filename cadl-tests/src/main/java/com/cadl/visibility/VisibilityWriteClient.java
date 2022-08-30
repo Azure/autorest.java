@@ -71,9 +71,6 @@ public final class VisibilityWriteClient {
         return this.client.createWithResponse(dog, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * The create operation.
      *
@@ -89,13 +86,12 @@ public final class VisibilityWriteClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog create(WriteDog dog) {
+        // Generated convenience method for createWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * The create operation.
      *
@@ -112,6 +108,8 @@ public final class VisibilityWriteClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> createWithResponse(WriteDog dog, Context context) {
+        // Generated convenience method for createWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = createWithResponse(BinaryData.fromObject(dog), requestOptions);

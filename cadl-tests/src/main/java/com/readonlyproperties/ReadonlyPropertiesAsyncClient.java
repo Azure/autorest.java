@@ -152,9 +152,6 @@ public final class ReadonlyPropertiesAsyncClient {
         return this.serviceClient.setOptionalPropertyModelWithResponseAsync(input, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getOptionalPropertyModelWithResponse
-     */
     /**
      * The getOptionalPropertyModel operation.
      *
@@ -168,15 +165,14 @@ public final class ReadonlyPropertiesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getOptionalPropertyModel() {
+        // Generated convenience method for getOptionalPropertyModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 
-    /*
-     * Generated convenience method for setOptionalPropertyModelWithResponse
-     */
     /**
      * The setOptionalPropertyModel operation.
      *
@@ -192,6 +188,8 @@ public final class ReadonlyPropertiesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RoundTripModel> setOptionalPropertyModel(RoundTripModel input) {
+        // Generated convenience method for setOptionalPropertyModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

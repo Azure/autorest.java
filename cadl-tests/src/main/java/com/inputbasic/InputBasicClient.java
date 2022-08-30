@@ -59,9 +59,6 @@ public final class InputBasicClient {
         return this.client.getModelWithResponse(input, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -76,13 +73,12 @@ public final class InputBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getModel(InputModel input) {
+        // Generated convenience method for getModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         getModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -99,6 +95,8 @@ public final class InputBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getModelWithResponse(InputModel input, Context context) {
+        // Generated convenience method for getModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions);

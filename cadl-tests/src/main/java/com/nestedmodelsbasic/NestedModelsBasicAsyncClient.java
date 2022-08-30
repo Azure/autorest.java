@@ -196,9 +196,6 @@ public final class NestedModelsBasicAsyncClient {
         return this.serviceClient.setNestedModelWithResponseAsync(input, requestOptions);
     }
 
-    /*
-     * Generated convenience method for sendNestedModelWithResponse
-     */
     /**
      * The sendNestedModel operation.
      *
@@ -214,13 +211,12 @@ public final class NestedModelsBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> sendNestedModel(InputModel input) {
+        // Generated convenience method for sendNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
     }
 
-    /*
-     * Generated convenience method for getNestedModelWithResponse
-     */
     /**
      * The getNestedModel operation.
      *
@@ -234,15 +230,14 @@ public final class NestedModelsBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OutputModel> getNestedModel() {
+        // Generated convenience method for getNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getNestedModelWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 
-    /*
-     * Generated convenience method for setNestedModelWithResponse
-     */
     /**
      * The setNestedModel operation.
      *
@@ -258,6 +253,8 @@ public final class NestedModelsBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RoundTripModel> setNestedModel(RoundTripModel input) {
+        // Generated convenience method for setNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return setNestedModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .map(Response::getValue)

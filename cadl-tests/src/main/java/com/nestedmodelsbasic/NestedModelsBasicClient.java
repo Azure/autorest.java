@@ -194,9 +194,6 @@ public final class NestedModelsBasicClient {
         return this.client.setNestedModelWithResponse(input, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for sendNestedModelWithResponse
-     */
     /**
      * The sendNestedModel operation.
      *
@@ -211,13 +208,12 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void sendNestedModel(InputModel input) {
+        // Generated convenience method for sendNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
     }
 
-    /*
-     * Generated convenience method for sendNestedModelWithResponse
-     */
     /**
      * The sendNestedModel operation.
      *
@@ -234,14 +230,13 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendNestedModelWithResponse(InputModel input, Context context) {
+        // Generated convenience method for sendNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions);
     }
 
-    /*
-     * Generated convenience method for getNestedModelWithResponse
-     */
     /**
      * The getNestedModel operation.
      *
@@ -255,13 +250,12 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OutputModel getNestedModel() {
+        // Generated convenience method for getNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getNestedModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
     }
 
-    /*
-     * Generated convenience method for getNestedModelWithResponse
-     */
     /**
      * The getNestedModel operation.
      *
@@ -277,6 +271,8 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<OutputModel> getNestedModelWithResponse(Context context) {
+        // Generated convenience method for getNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getNestedModelWithResponse(requestOptions);
@@ -284,9 +280,6 @@ public final class NestedModelsBasicClient {
                 protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
     }
 
-    /*
-     * Generated convenience method for setNestedModelWithResponse
-     */
     /**
      * The setNestedModel operation.
      *
@@ -302,15 +295,14 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RoundTripModel setNestedModel(RoundTripModel input) {
+        // Generated convenience method for setNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return setNestedModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
     }
 
-    /*
-     * Generated convenience method for setNestedModelWithResponse
-     */
     /**
      * The setNestedModel operation.
      *
@@ -327,6 +319,8 @@ public final class NestedModelsBasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<RoundTripModel> setNestedModelWithResponse(RoundTripModel input, Context context) {
+        // Generated convenience method for setNestedModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse =

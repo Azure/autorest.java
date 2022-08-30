@@ -60,9 +60,6 @@ public final class InputBasicAsyncClient {
         return this.serviceClient.getModelWithResponseAsync(input, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getModelWithResponse
-     */
     /**
      * The getModel operation.
      *
@@ -78,6 +75,8 @@ public final class InputBasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getModel(InputModel input) {
+        // Generated convenience method for getModelWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
     }

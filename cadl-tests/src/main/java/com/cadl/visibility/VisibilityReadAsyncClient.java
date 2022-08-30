@@ -60,9 +60,6 @@ public final class VisibilityReadAsyncClient {
         return this.serviceClient.getWithResponseAsync(requestOptions);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -76,6 +73,8 @@ public final class VisibilityReadAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> get() {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)

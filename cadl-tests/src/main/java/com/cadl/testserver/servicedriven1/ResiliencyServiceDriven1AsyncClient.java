@@ -185,9 +185,6 @@ public final class ResiliencyServiceDriven1AsyncClient {
         return this.serviceClient.getOptionalWithResponseAsync(requestOptions);
     }
 
-    /*
-     * Generated convenience method for headNoParamsWithResponse
-     */
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
@@ -202,13 +199,12 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> headNoParams() {
+        // Generated convenience method for headNoParamsWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return headNoParamsWithResponse(requestOptions).map(Response::getValue);
     }
 
-    /*
-     * Generated convenience method for getRequiredWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
@@ -226,15 +222,14 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getRequired(String parameter) {
+        // Generated convenience method for getRequiredWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for putRequiredOptionalWithResponse
-     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -252,6 +247,8 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam) {
+        // Generated convenience method for putRequiredOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -261,9 +258,6 @@ public final class ResiliencyServiceDriven1AsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for putRequiredOptionalWithResponse
-     */
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
@@ -280,15 +274,14 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> putRequiredOptional(String requiredParam) {
+        // Generated convenience method for putRequiredOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for postParametersWithResponse
-     */
     /**
      * POST a JSON.
      *
@@ -304,15 +297,14 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> postParameters(PostInput parameter) {
+        // Generated convenience method for postParametersWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for getOptionalWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -330,6 +322,8 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional(String optionalParam) {
+        // Generated convenience method for getOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
             requestOptions.addQueryParam("optionalParam", optionalParam);
@@ -339,9 +333,6 @@ public final class ResiliencyServiceDriven1AsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
-    /*
-     * Generated convenience method for getOptionalWithResponse
-     */
     /**
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
@@ -357,6 +348,8 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Message> getOptional() {
+        // Generated convenience method for getOptionalWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions)
                 .map(Response::getValue)

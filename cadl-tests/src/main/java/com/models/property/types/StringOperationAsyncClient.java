@@ -83,9 +83,6 @@ public final class StringOperationAsyncClient {
         return this.serviceClient.putWithResponseAsync(body, requestOptions);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -99,15 +96,14 @@ public final class StringOperationAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StringProperty> get() {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(StringProperty.class));
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -123,6 +119,8 @@ public final class StringOperationAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put(StringProperty body) {
+        // Generated convenience method for putWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
     }

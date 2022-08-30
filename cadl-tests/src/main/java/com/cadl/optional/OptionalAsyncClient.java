@@ -146,9 +146,6 @@ public final class OptionalAsyncClient {
                 requestOptions);
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -183,6 +180,8 @@ public final class OptionalAsyncClient {
             String string,
             String stringNullable,
             Optional optional) {
+        // Generated convenience method for putWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);
@@ -210,9 +209,6 @@ public final class OptionalAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 
-    /*
-     * Generated convenience method for putWithResponse
-     */
     /**
      * The put operation.
      *
@@ -237,6 +233,8 @@ public final class OptionalAsyncClient {
             Boolean booleanRequiredNullable,
             String stringRequired,
             String stringRequiredNullable) {
+        // Generated convenience method for putWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(
                         requestHeaderRequired,

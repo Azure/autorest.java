@@ -134,9 +134,6 @@ public final class VisibilityOpClient {
         return this.client.queryWithResponse(dog, requestOptions).block();
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -150,13 +147,12 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog get() {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).getValue().toObject(Dog.class);
     }
 
-    /*
-     * Generated convenience method for getWithResponse
-     */
     /**
      * The get operation.
      *
@@ -172,15 +168,14 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> getWithResponse(Context context) {
+        // Generated convenience method for getWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = getWithResponse(requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Dog.class));
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * The create operation.
      *
@@ -196,13 +191,12 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog create(WriteDog dog) {
+        // Generated convenience method for createWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
     }
 
-    /*
-     * Generated convenience method for createWithResponse
-     */
     /**
      * The create operation.
      *
@@ -219,15 +213,14 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> createWithResponse(WriteDog dog, Context context) {
+        // Generated convenience method for createWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = createWithResponse(BinaryData.fromObject(dog), requestOptions);
         return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Dog.class));
     }
 
-    /*
-     * Generated convenience method for queryWithResponse
-     */
     /**
      * The query operation.
      *
@@ -243,13 +236,12 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog query(ReadDog dog) {
+        // Generated convenience method for queryWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         return queryWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
     }
 
-    /*
-     * Generated convenience method for queryWithResponse
-     */
     /**
      * The query operation.
      *
@@ -266,6 +258,8 @@ public final class VisibilityOpClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> queryWithResponse(ReadDog dog, Context context) {
+        // Generated convenience method for queryWithResponse
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.setContext(context);
         Response<BinaryData> protocolMethodResponse = queryWithResponse(BinaryData.fromObject(dog), requestOptions);
