@@ -287,6 +287,11 @@ export class CodeModelBuilder {
     this.addAcceptHeaderParameter(operation, op.responses);
     if (op.parameters.bodyParameter) {
       this.processParameterBody(operation, op.parameters.bodyParameter);
+    } else if (op.parameters.bodyType) {
+      const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+      if (bodyType.kind === "Model") {
+        this.processParameterBody(operation, bodyType);
+      }
     }
     op.responses.map((it) => this.processResponse(operation, it));
 
@@ -422,12 +427,12 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: Operation, body: ModelTypeProperty) {
-    const schema = this.processSchema(body.type, body.name);
+  private processParameterBody(op: Operation, body: ModelTypeProperty | ModelType) {
+    const schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
-      required: !body.optional,
+      required: body.kind === "Model" || !body.optional,
       protocol: {
         http: new HttpParameter(ParameterLocation.Body),
       },
@@ -1099,21 +1104,45 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
-        return (
-          target.name +
-          target.templateArguments
-            .map((it) => {
-              switch (it.kind) {
-                case "Model":
-                  return it.name;
-                case "String":
-                  return it.value;
-                default:
-                  return "";
-              }
-            })
-            .join("")
-        );
+        // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
+        const knownCoreTemplate = new Set<string>([
+          "OptionalProperties",
+          "UpdateableProperties",
+          "DefaultKeyVisibility",
+        ]);
+
+        let modelUsedInCoreRequest = false;
+        while (
+          knownCoreTemplate.has(target.name) &&
+          target.kind === "Model" &&
+          target.templateArguments &&
+          target.templateArguments.length > 0 &&
+          target.templateArguments[0].kind === "Model"
+        ) {
+          modelUsedInCoreRequest = true;
+          target = target.templateArguments[0];
+        }
+
+        if (modelUsedInCoreRequest) {
+          return target.name + "Request";
+        } else {
+          // hack for other cases, mostly Page<>
+          return (
+            target.name +
+            target
+              .templateArguments!.map((it) => {
+                switch (it.kind) {
+                  case "Model":
+                    return it.name;
+                  case "String":
+                    return it.value;
+                  default:
+                    return "";
+                }
+              })
+              .join("")
+          );
+        }
       } else {
         return target.name;
       }

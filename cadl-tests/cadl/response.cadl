@@ -10,6 +10,7 @@ using Azure.Core;
 namespace Cadl.Response;
 
 model Resource {
+  @visibility("read")
   id: string;
 
   @key

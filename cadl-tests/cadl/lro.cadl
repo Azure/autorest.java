@@ -9,6 +9,7 @@ using Azure.Core;
 namespace Cadl.LongRunning;
 
 model Resource {
+  @visibility("read")
   id: string;
 
   @key
