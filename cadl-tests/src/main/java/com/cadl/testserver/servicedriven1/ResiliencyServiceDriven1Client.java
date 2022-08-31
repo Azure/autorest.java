@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.cadl.testserver.servicedriven1.models.Message;
 import com.cadl.testserver.servicedriven1.models.PostInput;
 
@@ -201,28 +199,6 @@ public final class ResiliencyServiceDriven1Client {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> headNoParamsWithResponse(Context context) {
-        // Generated convenience method for headNoParamsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        return headNoParamsWithResponse(requestOptions);
-    }
-
-    /**
      * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
      * query parameter is added.
      *
@@ -244,27 +220,28 @@ public final class ResiliencyServiceDriven1Client {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
      *
-     * @param parameter I am a required parameter.
-     * @param context The context to associate with this operation.
+     * @param requiredParam I am a required parameter.
+     * @param optionalParam I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Message> getRequiredWithResponse(String parameter, Context context) {
-        // Generated convenience method for getRequiredWithResponse
+    public Message putRequiredOptional(String requiredParam, String optionalParam) {
+        // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getRequiredWithResponse(parameter, requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
     }
 
     /**
@@ -286,35 +263,6 @@ public final class ResiliencyServiceDriven1Client {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
-    }
-
-    /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param requiredParam I am a required parameter.
-     * @param optionalParam I am an optional parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Message> putRequiredOptionalWithResponse(
-            String requiredParam, String optionalParam, Context context) {
-        // Generated convenience method for putRequiredOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = putRequiredOptionalWithResponse(requiredParam, requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 
     /**
@@ -340,27 +288,27 @@ public final class ResiliencyServiceDriven1Client {
     }
 
     /**
-     * POST a JSON.
+     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
+     * parameter is added.
      *
-     * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
-     * @param context The context to associate with this operation.
+     * @param optionalParam I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return true Boolean value on path. Initially has one optional query parameter.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Message> postParametersWithResponse(PostInput parameter, Context context) {
-        // Generated convenience method for postParametersWithResponse
+    public Message getOptional(String optionalParam) {
+        // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
+        if (optionalParam != null) {
+            requestOptions.addQueryParam("optionalParam", optionalParam);
+        }
+        return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
     }
 
     /**
@@ -380,32 +328,5 @@ public final class ResiliencyServiceDriven1Client {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
-    }
-
-    /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * @param optionalParam I am an optional parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Message> getOptionalWithResponse(String optionalParam, Context context) {
-        // Generated convenience method for getOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getOptionalWithResponse(requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(Message.class));
     }
 }

@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.readonlyproperties.models.OutputModel;
 import com.readonlyproperties.models.RoundTripModel;
 
@@ -168,29 +166,6 @@ public final class ReadonlyPropertiesClient {
     }
 
     /**
-     * The getOptionalPropertyModel operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return output model with readonly properties along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OutputModel> getOptionalPropertyModelWithResponse(Context context) {
-        // Generated convenience method for getOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getOptionalPropertyModelWithResponse(requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
-    }
-
-    /**
      * The setOptionalPropertyModel operation.
      *
      * @param input Round-trip model with readonly properties.
@@ -210,30 +185,5 @@ public final class ReadonlyPropertiesClient {
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
-    }
-
-    /**
-     * The setOptionalPropertyModel operation.
-     *
-     * @param input Round-trip model with readonly properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return round-trip model with readonly properties along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<RoundTripModel> setOptionalPropertyModelWithResponse(RoundTripModel input, Context context) {
-        // Generated convenience method for setOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }

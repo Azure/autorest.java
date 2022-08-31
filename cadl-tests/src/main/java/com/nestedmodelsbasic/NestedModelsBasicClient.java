@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.nestedmodelsbasic.models.InputModel;
 import com.nestedmodelsbasic.models.OutputModel;
 import com.nestedmodelsbasic.models.RoundTripModel;
@@ -214,28 +212,6 @@ public final class NestedModelsBasicClient {
     }
 
     /**
-     * The sendNestedModel operation.
-     *
-     * @param input Input model with nested model properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendNestedModelWithResponse(InputModel input, Context context) {
-        // Generated convenience method for sendNestedModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions);
-    }
-
-    /**
      * The getNestedModel operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -251,29 +227,6 @@ public final class NestedModelsBasicClient {
         // Generated convenience method for getNestedModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getNestedModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
-    }
-
-    /**
-     * The getNestedModel operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return output model with nested model properties along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OutputModel> getNestedModelWithResponse(Context context) {
-        // Generated convenience method for getNestedModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getNestedModelWithResponse(requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(OutputModel.class));
     }
 
     /**
@@ -296,30 +249,5 @@ public final class NestedModelsBasicClient {
         return setNestedModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
-    }
-
-    /**
-     * The setNestedModel operation.
-     *
-     * @param input Round-trip model with nested model properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return round-trip model with nested model properties along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<RoundTripModel> setNestedModelWithResponse(RoundTripModel input, Context context) {
-        // Generated convenience method for setNestedModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setNestedModelWithResponse(BinaryData.fromObject(input), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }
