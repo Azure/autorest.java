@@ -4,14 +4,10 @@ import {
   DecoratedType,
   EnumType,
   getDoc,
+  getFormat,
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
-  getMaxLength,
-  getMaxValue,
-  getMinLength,
-  getMinValue,
-  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
@@ -572,8 +568,8 @@ export class CodeModelBuilder {
         return this.processUnionSchema(type, nameHint);
 
       case "ModelProperty":
-        return this.processSchema(type.type, nameHint);
-      // return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
+        // return this.processSchema(type.type, nameHint);
+        return this.applyModelPropertyDecorators(type, nameHint, this.processSchema(type.type, nameHint));
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
@@ -584,12 +580,16 @@ export class CodeModelBuilder {
               if (enumType) {
                 return this.processChoiceSchema(enumType, this.getName(type), false);
               } else {
+                const format = getFormat(this.program, type);
+                if (format) {
+                  return this.processFormatString(type, format, nameHint);
+                }
                 return this.processStringSchema(type, nameHint);
               }
             }
 
             case "bytes":
-              return this.processByteArraySchema(type, nameHint);
+              return this.processByteArraySchema(type, nameHint, false);
 
             case "boolean":
               return this.processBooleanSchema(type, nameHint);
@@ -640,11 +640,11 @@ export class CodeModelBuilder {
     );
   }
 
-  private processByteArraySchema(type: ModelType, name: string): ByteArraySchema {
+  private processByteArraySchema(type: ModelType, name: string, base64Encoded: boolean): ByteArraySchema {
     return this.codeModel.schemas.add(
       new ByteArraySchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-        format: "byte",
+        format: base64Encoded ? "base64url" : "byte",
       }),
     );
   }
@@ -954,41 +954,47 @@ export class CodeModelBuilder {
     return type;
   }
 
-  private applyModelPropertyDecorators(prop: ModelTypeProperty, schema: Schema): Schema {
-    if (schema instanceof StringSchema) {
-      const decorators = {
-        minLength: getMinLength(this.program, prop),
-        maxLength: getMaxLength(this.program, prop),
-        pattern: getPattern(this.program, prop),
-      };
+  private applyModelPropertyDecorators(prop: ModelTypeProperty, nameHint: string, schema: Schema): Schema {
+    // if (schema instanceof StringSchema) {
+    //   const decorators = {
+    //     minLength: getMinLength(this.program, prop),
+    //     maxLength: getMaxLength(this.program, prop),
+    //     pattern: getPattern(this.program, prop),
+    //   };
 
-      if (Object.values(decorators).some((it) => it !== undefined)) {
-        schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
-          language: schema.language,
-          summary: schema.summary,
-          extensions: schema.extensions,
-          ...decorators,
-        });
-      }
-    } else if (schema instanceof NumberSchema) {
-      const decorators = {
-        minimum: getMinValue(this.program, prop),
-        maximum: getMaxValue(this.program, prop),
-      };
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
+    //       language: schema.language,
+    //       summary: schema.summary,
+    //       extensions: schema.extensions,
+    //       ...decorators,
+    //     });
+    //   }
+    // } else if (schema instanceof NumberSchema) {
+    //   const decorators = {
+    //     minimum: getMinValue(this.program, prop),
+    //     maximum: getMaxValue(this.program, prop),
+    //   };
 
-      if (Object.values(decorators).some((it) => it !== undefined)) {
-        schema = new NumberSchema(
-          schema.language.default.name,
-          schema.language.default.description,
-          schema.type,
-          schema.precision,
-          {
-            language: schema.language,
-            summary: schema.summary,
-            extensions: schema.extensions,
-            ...decorators,
-          },
-        );
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new NumberSchema(
+    //       schema.language.default.name,
+    //       schema.language.default.description,
+    //       schema.type,
+    //       schema.precision,
+    //       {
+    //         language: schema.language,
+    //         summary: schema.summary,
+    //         extensions: schema.extensions,
+    //         ...decorators,
+    //       },
+    //     );
+    //   }
+    // }
+    const format = getFormat(this.program, prop);
+    if (format) {
+      if (prop.type.kind === "Model" && schema instanceof StringSchema) {
+        schema = this.processFormatString(prop.type, format, nameHint);
       }
     }
     return schema;
@@ -1006,6 +1012,22 @@ export class CodeModelBuilder {
       // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.name,
     });
+  }
+
+  private processFormatString(type: ModelType, format: string, nameHint: string): Schema {
+    switch (format) {
+      case "byte":
+        return this.processByteArraySchema(type, nameHint, true);
+      case "binary":
+        return this.processByteArraySchema(type, nameHint, false);
+      case "date-time":
+        return this.processDateTimeSchema(type, nameHint, false);
+      case "date-time-rfc1123":
+        return this.processDateTimeSchema(type, nameHint, true);
+      case "password":
+        return this.processStringSchema(type, nameHint);
+    }
+    throw new Error(`Unrecognized string format: '${format}'.`);
   }
 
   private processUnionSchema(type: UnionType, name: string): Schema {
