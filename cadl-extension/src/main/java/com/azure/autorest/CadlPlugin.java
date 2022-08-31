@@ -35,6 +35,7 @@ public class CadlPlugin extends Javagen {
     public static class Options {
         private String namespace;
         private String outputFolder;
+        private String serviceName;
 
         public Options setNamespace(String namespace) {
             this.namespace = namespace;
@@ -43,6 +44,11 @@ public class CadlPlugin extends Javagen {
 
         public Options setOutputFolder(String outputFolder) {
             this.outputFolder = outputFolder;
+            return this;
+        }
+
+        public Options setServiceName(String serviceName) {
+            this.serviceName = serviceName;
             return this;
         }
     }
@@ -141,6 +147,9 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("namespace", options.namespace);
         if (!CoreUtils.isNullOrEmpty(options.outputFolder)) {
             SETTINGS_MAP.put("output-folder", options.outputFolder);
+        }
+        if (!CoreUtils.isNullOrEmpty(options.serviceName)) {
+            SETTINGS_MAP.put("service-name", options.serviceName);
         }
         JavaSettingsAccessor.setHost(this);
 
