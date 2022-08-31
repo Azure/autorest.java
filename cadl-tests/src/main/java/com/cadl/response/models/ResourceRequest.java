@@ -4,12 +4,12 @@
 
 package com.cadl.response.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The template for adding updateable properties. */
-@Fluent
+@Immutable
 public final class ResourceRequest {
     /*
      * The type property.
