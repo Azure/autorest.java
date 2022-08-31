@@ -26,9 +26,16 @@ model Optional {
   bytesDict?: Record<bytes>;
 }
 
+model Immutable {
+  stringReadWriteRequired: string;
+  @visibility("read")
+  stringReadOnlyOptional?: string;
+}
+
 @withOptionalProperties
 model AllPropertiesOptional {
   ...Optional;
+  immutable: Immutable;
 }
 
 @route("/optional")

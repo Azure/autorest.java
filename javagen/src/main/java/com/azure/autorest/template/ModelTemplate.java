@@ -44,6 +44,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Writes a ClientModel to a JavaFile.
@@ -295,7 +296,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property is not readOnly or required 2. child does not contain property
+     * Override parent setters if: 1. parent property does not have setter 2. child does not contain property
      * that shadow this parent property, otherwise overridden parent setter methods will collide with child setter
      * methods
      *
@@ -309,9 +310,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
             .filter(parentProperty -> {
-                    // parent property is readOnly or required
-                    if (parentProperty.getIsReadOnly() ||
-                        (settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    // parent property doesn't have setter
+                    if (!ClientModelUtil.hasSetter(parentProperty, settings)) {
                         return false;
                     }
                     // child does not contain property that shadow this parent property
@@ -413,19 +413,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
                                                 List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
-        boolean isImmutable =
-                // only contains read-only properties
-                (model.getProperties().stream().allMatch(ClientModelProperty::getIsReadOnly)
-                        && propertyReferences.stream().allMatch(ClientModelPropertyReference::getIsReadOnly))
-                // only contains required properties and "requiredFieldsAsConstructorArgs" is set to true
-                || (settings.isRequiredFieldsAsConstructorArgs()
-                        && model.getProperties().stream().allMatch(ClientModelProperty::isRequired)
-                        && propertyReferences.stream().allMatch(ClientModelPropertyReference::isRequired));
+        boolean fluent = Stream
+                .concat(model.getProperties().stream(), propertyReferences.stream())
+                .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
 
-        if (isImmutable) {
-            javaFile.annotation("Immutable");
-        } else {
+        if (fluent) {
             javaFile.annotation("Fluent");
+        } else {
+            javaFile.annotation("Immutable");
         }
     }
 

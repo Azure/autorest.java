@@ -14,6 +14,8 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
@@ -410,15 +412,29 @@ public class ClientModelUtil {
     /**
      * Indicates whether the property will have a setter method generated for it.
      *
-     * @param property The client model property.
+     * @param property The client model property, or a reference.
      * @param settings Autorest generation settings.
      * @return Whether the property will have a setter method.
      */
-    public static boolean hasSetter(ClientModelProperty property, JavaSettings settings) {
+    public static boolean hasSetter(ClientModelPropertyAccess property, JavaSettings settings) {
         // If the property isn't read-only or required and part of the constructor, and it isn't private,
         // add a setter.
-        return !property.getIsReadOnly()
-            && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired())
-            && !property.getClientFlatten();
+        return !readOnlyOrInConstructor(property, settings)
+                && !privateAccess(property);
+    }
+
+    // A property has private access when it is to be flattened.
+    private static boolean privateAccess(ClientModelPropertyAccess property) {
+        boolean privateAccess = false;
+        // ClientModelPropertyReference never refers to a private access property, so only check ClientModelProperty here.
+        if (property instanceof ClientModelProperty) {
+            privateAccess = ((ClientModelProperty) property).getClientFlatten();
+        }
+        return privateAccess;
+    }
+
+    private static boolean readOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
+        return property.getIsReadOnly()
+                || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
     }
 }
