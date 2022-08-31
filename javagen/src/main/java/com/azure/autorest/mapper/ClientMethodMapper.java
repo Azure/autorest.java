@@ -647,7 +647,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .isGroupedParameterRequired(false)
                                 .methodVisibility(methodVisibility(ClientMethodType.SimpleSync, false, isProtocolMethod));
 
-                        if (!(settings.isFluent() || settings.isDataPlaneClient()) || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+                        if (!(settings.isFluent() || isProtocolMethod) || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
                             // if context parameter is required, that method will do the overload with max parameters
                             methods.add(builder.build());
                         }
@@ -898,8 +898,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             } else {
                 // at present, only generate convenience method for simple API (no pageable, no LRO)
                 return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
-                        || methodType == ClientMethodType.SimpleSync
-                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
+                        || methodType == ClientMethodType.SimpleSync && !hasContextParameter)
+//                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                         ? VISIBLE
                         : NOT_GENERATE;
             }

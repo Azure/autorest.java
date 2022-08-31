@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.basicpolymorphicmodels.models.BaseClass;
 import com.basicpolymorphicmodels.models.ModelWithPolymorphicProperty;
 
@@ -127,31 +125,6 @@ public final class BasicPolymorphicModelsClient {
     }
 
     /**
-     * The setValue operation.
-     *
-     * @param input Example base type.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return example base type along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BaseClass> setValueWithResponse(BaseClass input, Context context) {
-        // Generated convenience method for setValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setValueWithResponse(BinaryData.fromObject(input), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(BaseClass.class));
-    }
-
-    /**
      * The setValueWithPolymorphicProperty operation.
      *
      * @param input Illustrates case where a basic model has polymorphic properties.
@@ -171,31 +144,5 @@ public final class BasicPolymorphicModelsClient {
         return setValueWithPolymorphicPropertyWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(ModelWithPolymorphicProperty.class);
-    }
-
-    /**
-     * The setValueWithPolymorphicProperty operation.
-     *
-     * @param input Illustrates case where a basic model has polymorphic properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return illustrates case where a basic model has polymorphic properties along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ModelWithPolymorphicProperty> setValueWithPolymorphicPropertyWithResponse(
-            ModelWithPolymorphicProperty input, Context context) {
-        // Generated convenience method for setValueWithPolymorphicPropertyWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setValueWithPolymorphicPropertyWithResponse(BinaryData.fromObject(input), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(ModelWithPolymorphicProperty.class));
     }
 }
