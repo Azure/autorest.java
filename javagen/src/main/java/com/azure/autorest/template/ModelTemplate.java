@@ -382,8 +382,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Adds class level annotations such as XML root element, JsonFlatten, and Fluent/Immutable based on the
-     * configurations of the model.
+     * Adds class level annotations such as XML root element, JsonFlatten based on the configurations of the model.
      *
      * @param model The client model.
      * @param javaFile The Java class file.
