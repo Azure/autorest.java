@@ -93,14 +93,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
 
-        // Add Fluent or Immutable based on whether the model only has read-only properties.
-        boolean isFluent = model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly());
-        if (isFluent) {
-            javaFile.annotation("Fluent");
-        } else {
-            javaFile.annotation("Immutable");
-        }
+        // Add Fluent or Immutable based on whether the model has any setters.
+        addFluentOrImmutableAnnotation(model, javaFile, propertyReferences, settings);
 
         // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
@@ -408,6 +402,31 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE
             && model.getNeedsFlatten()) {
             javaFile.annotation("JsonFlatten");
+        }
+    }
+
+    /**
+     * Adds Fluent or Immutable based on whether model has any setters.
+     * @param model The client model.
+     * @param javaFile The Java class file.
+     * @param propertyReferences The client model property reference.
+     * @param settings Autorest generation settings.
+     */
+    private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
+                                                List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
+        boolean isImmutable =
+                // only contains read-only properties
+                (model.getProperties().stream().allMatch(ClientModelProperty::getIsReadOnly)
+                        && propertyReferences.stream().allMatch(ClientModelPropertyReference::getIsReadOnly))
+                // only contains required properties and "requiredFieldsAsConstructorArgs" is set to true
+                || (settings.isRequiredFieldsAsConstructorArgs()
+                        && model.getProperties().stream().allMatch(ClientModelProperty::isRequired)
+                        && propertyReferences.stream().allMatch(ClientModelPropertyReference::isRequired));
+
+        if (isImmutable) {
+            javaFile.annotation("Immutable");
+        } else {
+            javaFile.annotation("Fluent");
         }
     }
 
