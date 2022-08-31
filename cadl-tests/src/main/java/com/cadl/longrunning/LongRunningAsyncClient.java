@@ -38,6 +38,14 @@ public final class LongRunningAsyncClient {
     /**
      * Creates or updates a Resource asynchronously.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     type: String (Optional)
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -49,6 +57,7 @@ public final class LongRunningAsyncClient {
      * }</pre>
      *
      * @param name The name parameter.
+     * @param optionalProperties The template for adding optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,8 +67,9 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrUpdate(String name, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateOrUpdateAsync(name, requestOptions);
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrUpdate(
+            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateOrUpdateAsync(name, optionalProperties, requestOptions);
     }
 
     /**

@@ -4,14 +4,10 @@ import {
   DecoratedType,
   EnumType,
   getDoc,
+  getFormat,
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
-  getMaxLength,
-  getMaxValue,
-  getMinLength,
-  getMinValue,
-  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
@@ -291,6 +287,11 @@ export class CodeModelBuilder {
     this.addAcceptHeaderParameter(operation, op.responses);
     if (op.parameters.bodyParameter) {
       this.processParameterBody(operation, op.parameters.bodyParameter);
+    } else if (op.parameters.bodyType) {
+      const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+      if (bodyType.kind === "Model") {
+        this.processParameterBody(operation, bodyType);
+      }
     }
     op.responses.map((it) => this.processResponse(operation, it));
 
@@ -426,12 +427,12 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: Operation, body: ModelTypeProperty) {
-    const schema = this.processSchema(body.type, body.name);
+  private processParameterBody(op: Operation, body: ModelTypeProperty | ModelType) {
+    const schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
-      required: !body.optional,
+      required: body.kind === "Model" || !body.optional,
       protocol: {
         http: new HttpParameter(ParameterLocation.Body),
       },
@@ -572,8 +573,8 @@ export class CodeModelBuilder {
         return this.processUnionSchema(type, nameHint);
 
       case "ModelProperty":
-        return this.processSchema(type.type, nameHint);
-      // return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
+        // return this.processSchema(type.type, nameHint);
+        return this.applyModelPropertyDecorators(type, nameHint, this.processSchema(type.type, nameHint));
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
@@ -584,12 +585,16 @@ export class CodeModelBuilder {
               if (enumType) {
                 return this.processChoiceSchema(enumType, this.getName(type), false);
               } else {
+                const format = getFormat(this.program, type);
+                if (format) {
+                  return this.processFormatString(type, format, nameHint);
+                }
                 return this.processStringSchema(type, nameHint);
               }
             }
 
             case "bytes":
-              return this.processByteArraySchema(type, nameHint);
+              return this.processByteArraySchema(type, nameHint, false);
 
             case "boolean":
               return this.processBooleanSchema(type, nameHint);
@@ -640,11 +645,11 @@ export class CodeModelBuilder {
     );
   }
 
-  private processByteArraySchema(type: ModelType, name: string): ByteArraySchema {
+  private processByteArraySchema(type: ModelType, name: string, base64Encoded: boolean): ByteArraySchema {
     return this.codeModel.schemas.add(
       new ByteArraySchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-        format: "byte",
+        format: base64Encoded ? "base64url" : "byte",
       }),
     );
   }
@@ -954,41 +959,47 @@ export class CodeModelBuilder {
     return type;
   }
 
-  private applyModelPropertyDecorators(prop: ModelTypeProperty, schema: Schema): Schema {
-    if (schema instanceof StringSchema) {
-      const decorators = {
-        minLength: getMinLength(this.program, prop),
-        maxLength: getMaxLength(this.program, prop),
-        pattern: getPattern(this.program, prop),
-      };
+  private applyModelPropertyDecorators(prop: ModelTypeProperty, nameHint: string, schema: Schema): Schema {
+    // if (schema instanceof StringSchema) {
+    //   const decorators = {
+    //     minLength: getMinLength(this.program, prop),
+    //     maxLength: getMaxLength(this.program, prop),
+    //     pattern: getPattern(this.program, prop),
+    //   };
 
-      if (Object.values(decorators).some((it) => it !== undefined)) {
-        schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
-          language: schema.language,
-          summary: schema.summary,
-          extensions: schema.extensions,
-          ...decorators,
-        });
-      }
-    } else if (schema instanceof NumberSchema) {
-      const decorators = {
-        minimum: getMinValue(this.program, prop),
-        maximum: getMaxValue(this.program, prop),
-      };
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
+    //       language: schema.language,
+    //       summary: schema.summary,
+    //       extensions: schema.extensions,
+    //       ...decorators,
+    //     });
+    //   }
+    // } else if (schema instanceof NumberSchema) {
+    //   const decorators = {
+    //     minimum: getMinValue(this.program, prop),
+    //     maximum: getMaxValue(this.program, prop),
+    //   };
 
-      if (Object.values(decorators).some((it) => it !== undefined)) {
-        schema = new NumberSchema(
-          schema.language.default.name,
-          schema.language.default.description,
-          schema.type,
-          schema.precision,
-          {
-            language: schema.language,
-            summary: schema.summary,
-            extensions: schema.extensions,
-            ...decorators,
-          },
-        );
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new NumberSchema(
+    //       schema.language.default.name,
+    //       schema.language.default.description,
+    //       schema.type,
+    //       schema.precision,
+    //       {
+    //         language: schema.language,
+    //         summary: schema.summary,
+    //         extensions: schema.extensions,
+    //         ...decorators,
+    //       },
+    //     );
+    //   }
+    // }
+    const format = getFormat(this.program, prop);
+    if (format) {
+      if (prop.type.kind === "Model" && schema instanceof StringSchema) {
+        schema = this.processFormatString(prop.type, format, nameHint);
       }
     }
     return schema;
@@ -1006,6 +1017,22 @@ export class CodeModelBuilder {
       // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.name,
     });
+  }
+
+  private processFormatString(type: ModelType, format: string, nameHint: string): Schema {
+    switch (format) {
+      case "byte":
+        return this.processByteArraySchema(type, nameHint, true);
+      case "binary":
+        return this.processByteArraySchema(type, nameHint, false);
+      case "date-time":
+        return this.processDateTimeSchema(type, nameHint, false);
+      case "date-time-rfc1123":
+        return this.processDateTimeSchema(type, nameHint, true);
+      case "password":
+        return this.processStringSchema(type, nameHint);
+    }
+    throw new Error(`Unrecognized string format: '${format}'.`);
   }
 
   private processUnionSchema(type: UnionType, name: string): Schema {
@@ -1077,21 +1104,45 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
-        return (
-          target.name +
-          target.templateArguments
-            .map((it) => {
-              switch (it.kind) {
-                case "Model":
-                  return it.name;
-                case "String":
-                  return it.value;
-                default:
-                  return "";
-              }
-            })
-            .join("")
-        );
+        // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
+        const knownCoreTemplate = new Set<string>([
+          "OptionalProperties",
+          "UpdateableProperties",
+          "DefaultKeyVisibility",
+        ]);
+
+        let modelUsedInCoreRequest = false;
+        while (
+          knownCoreTemplate.has(target.name) &&
+          target.kind === "Model" &&
+          target.templateArguments &&
+          target.templateArguments.length > 0 &&
+          target.templateArguments[0].kind === "Model"
+        ) {
+          modelUsedInCoreRequest = true;
+          target = target.templateArguments[0];
+        }
+
+        if (modelUsedInCoreRequest) {
+          return target.name + "Request";
+        } else {
+          // hack for other cases, mostly Page<>
+          return (
+            target.name +
+            target
+              .templateArguments!.map((it) => {
+                switch (it.kind) {
+                  case "Model":
+                    return it.name;
+                  case "String":
+                    return it.value;
+                  default:
+                    return "";
+                }
+              })
+              .join("")
+          );
+        }
       } else {
         return target.name;
       }
