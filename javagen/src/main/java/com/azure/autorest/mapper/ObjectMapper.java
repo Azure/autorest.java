@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -54,6 +55,9 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
             // put class of flattened type to implementation package
             classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
+        } else if (settings.isDataPlaneClient() && isPageModel(compositeType)) {
+            // put class of Page<> type to implementation package
+            classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         } else {
             classPackage = settings.getPackage(settings.getModelsSubpackage());
         }
@@ -94,5 +98,32 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
      */
     protected boolean isInnerModel(ObjectSchema compositeType) {
         return false;
+    }
+
+    /**
+     * Extension for Page model.
+     * <p>
+     * Page model does not need to be exposed to user, as it is internal wire data that will be converted to PagedFlux or PagedIterable.
+     * Check in Cadl.
+     *
+     * @param compositeType object type
+     * @return whether the type is a Page model.
+     */
+    protected boolean isPageModel(ObjectSchema compositeType) {
+        boolean ret = false;
+
+        if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
+            String namespace = compositeType.getLanguage().getDefault().getNamespace();
+            String name = compositeType.getLanguage().getDefault().getName();
+
+            if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
+                // both is Template, hence we may improve the logic with finer info about the ObjectSchema
+                if (("Azure.Core.Foundations".equals(namespace) && name.startsWith("CustomPage"))
+                        || ("Azure.Core".equals(namespace) && name.startsWith("Page"))) {
+                    ret = true;
+                }
+            }
+        }
+        return ret;
     }
 }
