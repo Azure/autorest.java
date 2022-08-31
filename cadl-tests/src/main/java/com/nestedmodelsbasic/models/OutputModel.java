@@ -4,12 +4,12 @@
 
 package com.nestedmodelsbasic.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Output model with nested model properties. */
-@Fluent
+@Immutable
 public final class OutputModel {
     /*
      * Required nested output model.

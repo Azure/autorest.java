@@ -4,7 +4,7 @@
 
 package com.cadl.naming.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * <p>description of Data.
  */
-@Fluent
+@Immutable
 public final class BinaryData {
     /*
      * summary of data property

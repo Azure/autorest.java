@@ -4,7 +4,7 @@
 
 package com.cadl.naming.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * <p>description of Response.
  */
-@Fluent
+@Immutable
 public final class DataResponse {
     /*
      * summary of name property

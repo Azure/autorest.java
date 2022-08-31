@@ -4,12 +4,12 @@
 
 package com.readonlyproperties.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Readonly model. */
-@Fluent
+@Immutable
 public final class ReadonlyModel {
     /*
      * Required string

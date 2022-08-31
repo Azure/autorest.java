@@ -4,12 +4,12 @@
 
 package com.models.property.types.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Model with extensible enum properties. */
-@Fluent
+@Immutable
 public final class ExtensibleEnumProperty {
     /*
      * Property

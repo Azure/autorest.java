@@ -4,12 +4,12 @@
 
 package com.roundtripbasic.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Round-trip Model. */
-@Fluent
+@Immutable
 public final class RoundTripModel {
     /*
      * Required string, illustrating a reference type property.
