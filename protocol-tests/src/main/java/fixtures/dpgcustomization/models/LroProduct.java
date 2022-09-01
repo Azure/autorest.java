@@ -4,12 +4,12 @@
 
 package fixtures.dpgcustomization.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LroProduct model. */
-@Fluent
+@Immutable
 public final class LroProduct extends Product {
     /*
      * The provisioningState property.
