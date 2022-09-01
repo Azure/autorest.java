@@ -14,7 +14,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.Context;
 
 /** Initializes a new instance of the synchronous ServerClient type. */
 @ServiceClient(builder = ServerClientBuilder.class)
@@ -65,27 +64,5 @@ public final class ServerClient {
         // Generated convenience method for statusWithResponse
         RequestOptions requestOptions = new RequestOptions();
         statusWithResponse(code, requestOptions).getValue();
-    }
-
-    /**
-     * The status operation.
-     *
-     * @param code The code parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> statusWithResponse(long code, Context context) {
-        // Generated convenience method for statusWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        return statusWithResponse(code, requestOptions);
     }
 }

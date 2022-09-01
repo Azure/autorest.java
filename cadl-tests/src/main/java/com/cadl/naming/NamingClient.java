@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.cadl.naming.models.DataResponse;
 
 /** Initializes a new instance of the synchronous NamingClient type. */
@@ -86,6 +84,34 @@ public final class NamingClient {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param etag summary of etag header parameter
+     *     <p>description of etag header parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return summary of Response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DataResponse post(String name, String etag) {
+        // Generated convenience method for postWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (etag != null) {
+            requestOptions.setHeader("etag", etag);
+        }
+        return postWithResponse(name, requestOptions).getValue().toObject(DataResponse.class);
+    }
+
+    /**
+     * summary of POST op
+     *
+     * <p>description of POST op.
+     *
+     * @param name summary of name query parameter
+     *     <p>description of name query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -100,37 +126,5 @@ public final class NamingClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).getValue().toObject(DataResponse.class);
-    }
-
-    /**
-     * summary of POST op
-     *
-     * <p>description of POST op.
-     *
-     * @param name summary of name query parameter
-     *     <p>description of name query parameter.
-     * @param etag summary of etag header parameter
-     *     <p>description of etag header parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summary of Response along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DataResponse> postWithResponse(String name, String etag, Context context) {
-        // Generated convenience method for postWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (etag != null) {
-            requestOptions.setHeader("etag", etag);
-        }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = postWithResponse(name, requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(DataResponse.class));
     }
 }

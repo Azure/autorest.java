@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.models.Color;
@@ -353,28 +351,6 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The getColor operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Color> getColorWithResponse(Context context) {
-        // Generated convenience method for getColorWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<String> protocolMethodResponse = getColorWithResponse(requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, Color.fromString(protocolMethodResponse.getValue()));
-    }
-
-    /**
      * The getColorModel operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -390,28 +366,6 @@ public final class EnumServiceClient {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue());
-    }
-
-    /**
-     * The getColorModel operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ColorModel> getColorModelWithResponse(Context context) {
-        // Generated convenience method for getColorModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<String> protocolMethodResponse = getColorModelWithResponse(requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, ColorModel.fromString(protocolMethodResponse.getValue()));
     }
 
     /**
@@ -432,30 +386,6 @@ public final class EnumServiceClient {
         // Generated convenience method for setColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions).getValue().toObject(Operation.class);
-    }
-
-    /**
-     * The setColorModel operation.
-     *
-     * @param color The color parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Operation> setColorModelWithResponse(ColorModel color, Context context) {
-        // Generated convenience method for setColorModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = setColorModelWithResponse(color.toString(), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
     }
 
     /**
@@ -481,31 +411,6 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The setPriority operation.
-     *
-     * @param priority The priority parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Operation> setPriorityWithResponse(Priority priority, Context context) {
-        // Generated convenience method for setPriorityWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
-    }
-
-    /**
      * The getRunningOperation operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -521,29 +426,6 @@ public final class EnumServiceClient {
         // Generated convenience method for getRunningOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions).getValue().toObject(Operation.class);
-    }
-
-    /**
-     * The getRunningOperation operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Operation> getRunningOperationWithResponse(Context context) {
-        // Generated convenience method for getRunningOperationWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getRunningOperationWithResponse(requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
     }
 
     /**
@@ -567,27 +449,36 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The getOperation operation.
+     * The setStringEnumArray operation.
      *
-     * @param state The state parameter.
-     * @param context The context to associate with this operation.
+     * @param colorArray The colorArray parameter.
+     * @param colorArrayOpt The colorArrayOpt parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Operation> getOperationWithResponse(OperationStateValues state, Context context) {
-        // Generated convenience method for getOperationWithResponse
+    public String setStringEnumArray(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+        // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = getOperationWithResponse(state.toString(), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(Operation.class));
+        if (colorArrayOpt != null) {
+            requestOptions.addQueryParam(
+                    "colorArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+        }
+        return setStringEnumArrayWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
     }
 
     /**
@@ -617,39 +508,38 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The setStringEnumArray operation.
+     * The setIntEnumArray operation.
      *
-     * @param colorArray The colorArray parameter.
-     * @param colorArrayOpt The colorArrayOpt parameter.
-     * @param context The context to associate with this operation.
+     * @param priorityArray The priorityArray parameter.
+     * @param priorityArrayOpt The priorityArrayOpt parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> setStringEnumArrayWithResponse(
-            List<ColorModel> colorArray, List<ColorModel> colorArrayOpt, Context context) {
-        // Generated convenience method for setStringEnumArrayWithResponse
+    public String setIntEnumArray(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
+        // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        if (colorArrayOpt != null) {
+        if (priorityArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "colorArrayOpt",
+                    "priorityArrayOpt",
                     JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
         }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setStringEnumArrayWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        return setIntEnumArrayWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
-                        requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
     }
 
     /**
@@ -681,41 +571,31 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The setIntEnumArray operation.
+     * The setStringArray operation.
      *
-     * @param priorityArray The priorityArray parameter.
-     * @param priorityArrayOpt The priorityArrayOpt parameter.
-     * @param context The context to associate with this operation.
+     * @param stringArray The stringArray parameter.
+     * @param stringArrayOpt The stringArrayOpt parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> setIntEnumArrayWithResponse(
-            List<Priority> priorityArray, List<Priority> priorityArrayOpt, Context context) {
-        // Generated convenience method for setIntEnumArrayWithResponse
+    public String setStringArray(List<String> stringArray, List<String> stringArrayOpt) {
+        // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        if (priorityArrayOpt != null) {
+        if (stringArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "priorityArrayOpt",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
+                    "stringArrayOpt",
+                    stringArrayOpt.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
         }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                setIntEnumArrayWithResponse(
-                        priorityArray.stream()
-                                .map(
-                                        paramItemValue ->
-                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
-                                .collect(Collectors.toList()),
-                        requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+        return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
     }
 
     /**
@@ -739,35 +619,30 @@ public final class EnumServiceClient {
     }
 
     /**
-     * The setStringArray operation.
+     * The setIntArray operation.
      *
-     * @param stringArray The stringArray parameter.
-     * @param stringArrayOpt The stringArrayOpt parameter.
-     * @param context The context to associate with this operation.
+     * @param intArray The intArray parameter.
+     * @param intArrayOpt The intArrayOpt parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> setStringArrayWithResponse(
-            List<String> stringArray, List<String> stringArrayOpt, Context context) {
-        // Generated convenience method for setStringArrayWithResponse
+    public String setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+        // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        if (stringArrayOpt != null) {
+        if (intArrayOpt != null) {
             requestOptions.addQueryParam(
-                    "stringArrayOpt",
-                    stringArrayOpt.stream()
-                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                            .collect(Collectors.joining(",")));
+                    "intArrayOpt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
         }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = setStringArrayWithResponse(stringArray, requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
+        return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
 
     /**
@@ -788,35 +663,5 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
-    }
-
-    /**
-     * The setIntArray operation.
-     *
-     * @param intArray The intArray parameter.
-     * @param intArrayOpt The intArrayOpt parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> setIntArrayWithResponse(List<Long> intArray, List<Long> intArrayOpt, Context context) {
-        // Generated convenience method for setIntArrayWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (intArrayOpt != null) {
-            requestOptions.addQueryParam(
-                    "intArrayOpt",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
-        }
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse = setIntArrayWithResponse(intArray, requestOptions);
-        return new SimpleResponse<>(protocolMethodResponse, protocolMethodResponse.getValue().toObject(String.class));
     }
 }

@@ -9,7 +9,10 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.cadl.util.ModelUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CadlClientMapper extends ClientMapper {
 
@@ -23,10 +26,23 @@ public class CadlClientMapper extends ClientMapper {
     }
 
     @Override
-    protected boolean hasModelsPackage(List<ClientModel> clientModels, List<EnumType> enumTypes, List<ClientResponse> responseModels) {
+    protected List<String> getModelsPackages(List<ClientModel> clientModels, List<EnumType> enumTypes, List<ClientResponse> responseModels) {
 
-        return clientModels.stream().anyMatch(ModelUtil::isGeneratingModel)
-                || enumTypes.stream().anyMatch(ModelUtil::isGeneratingModel)
-                || responseModels.stream().anyMatch(ModelUtil::isGeneratingModel);
+        Set<String> packages = clientModels.stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .map(ClientModel::getPackage)
+                .collect(Collectors.toSet());
+
+        packages.addAll(enumTypes.stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .map(EnumType::getPackage)
+                .collect(Collectors.toSet()));
+
+        packages.addAll(responseModels.stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .map(ClientResponse::getPackage)
+                .collect(Collectors.toSet()));
+
+        return new ArrayList<>(packages);
     }
 }

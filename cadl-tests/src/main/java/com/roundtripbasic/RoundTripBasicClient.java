@@ -14,9 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.roundtripbasic.models.RoundTripModel;
 
 /** Initializes a new instance of the synchronous RoundTripBasicClient type. */
@@ -89,30 +87,5 @@ public final class RoundTripBasicClient {
         return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
                 .getValue()
                 .toObject(RoundTripModel.class);
-    }
-
-    /**
-     * The getModel operation.
-     *
-     * @param input Round-trip Model.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return round-trip Model along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<RoundTripModel> getModelWithResponse(RoundTripModel input, Context context) {
-        // Generated convenience method for getModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.setContext(context);
-        Response<BinaryData> protocolMethodResponse =
-                getModelWithResponse(BinaryData.fromObject(input), requestOptions);
-        return new SimpleResponse<>(
-                protocolMethodResponse, protocolMethodResponse.getValue().toObject(RoundTripModel.class));
     }
 }
