@@ -418,12 +418,13 @@ public class ClientModelUtil {
     public static boolean hasSetter(ClientModelPropertyAccess property, JavaSettings settings) {
         // If the property isn't read-only or required and part of the constructor, and it isn't private,
         // add a setter.
-        return !readOnlyOrInConstructor(property, settings)
-                && !privateAccess(property);
+        return !isReadOnlyOrInConstructor(property, settings)
+                && !isPrivateAccess(property);
     }
 
     // A property has private access when it is to be flattened.
-    private static boolean privateAccess(ClientModelPropertyAccess property) {
+    // Only applies to mgmt, no effect on vanilla or DPG.
+    private static boolean isPrivateAccess(ClientModelPropertyAccess property) {
         boolean privateAccess = false;
         // ClientModelPropertyReference never refers to a private access property, so only check ClientModelProperty here.
         if (property instanceof ClientModelProperty) {
@@ -432,7 +433,7 @@ public class ClientModelUtil {
         return privateAccess;
     }
 
-    private static boolean readOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
+    private static boolean isReadOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
         return property.getIsReadOnly()
                 || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
     }
