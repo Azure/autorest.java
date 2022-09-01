@@ -28,6 +28,7 @@ model Optional {
 
 model Immutable {
   stringReadWriteRequired: string;
+
   @visibility("read")
   stringReadOnlyOptional?: string;
 }
