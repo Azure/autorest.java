@@ -254,8 +254,7 @@ export class CodeModelBuilder {
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const opId = `${groupName}_${op.operation.name}`;
 
-    const requireConvenienceMethod =
-      this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
+    const requireConvenienceMethod = this.isConvenienceMethod(op);
 
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
@@ -1156,6 +1155,28 @@ export class CodeModelBuilder {
     } else {
       return false;
     }
+  }
+
+  private isConvenienceMethod(op: OperationDetails) {
+    // check @convenienceMethod
+    let hasConvenienceMethod =
+      this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
+    if (!hasConvenienceMethod) {
+      // check @extension with x-ms-convenient-api=true
+      const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
+      for (const extensionDecorator of extensionDecorators) {
+        if (extensionDecorator.args.length == 2) {
+          const name = extensionDecorator.args[0].value;
+          const value = extensionDecorator.args[1].value;
+
+          if (name === "x-ms-convenient-api" && value === true) {
+            hasConvenienceMethod = true;
+            break;
+          }
+        }
+      }
+    }
+    return hasConvenienceMethod;
   }
 
   private _stringSchema?: StringSchema;
