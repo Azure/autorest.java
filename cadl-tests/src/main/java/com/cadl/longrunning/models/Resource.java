@@ -4,12 +4,12 @@
 
 package com.cadl.longrunning.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Resource model. */
-@Fluent
+@Immutable
 public final class Resource {
     /*
      * The id property.

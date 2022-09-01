@@ -4,13 +4,13 @@
 
 package com.nestedmodelsbasic.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Model to illustrate a nested model that appears as a nested model on input, output, and round-trip models. */
-@Fluent
+@Immutable
 public final class NestedRoundTripSharedModel {
     /*
      * Required string, illustrating a reference type property.

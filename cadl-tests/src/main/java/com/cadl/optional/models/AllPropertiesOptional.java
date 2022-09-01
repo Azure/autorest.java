@@ -117,6 +117,12 @@ public final class AllPropertiesOptional {
     @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
+    /*
+     * The immutable property.
+     */
+    @JsonProperty(value = "immutable")
+    private ImmutableModel immutable;
+
     /**
      * Get the booleanProperty property: The boolean property.
      *
@@ -454,6 +460,26 @@ public final class AllPropertiesOptional {
      */
     public AllPropertiesOptional setBytesDict(Map<String, byte[]> bytesDict) {
         this.bytesDict = bytesDict;
+        return this;
+    }
+
+    /**
+     * Get the immutable property: The immutable property.
+     *
+     * @return the immutable value.
+     */
+    public ImmutableModel getImmutable() {
+        return this.immutable;
+    }
+
+    /**
+     * Set the immutable property: The immutable property.
+     *
+     * @param immutable the immutable value to set.
+     * @return the AllPropertiesOptional object itself.
+     */
+    public AllPropertiesOptional setImmutable(ImmutableModel immutable) {
+        this.immutable = immutable;
         return this;
     }
 }

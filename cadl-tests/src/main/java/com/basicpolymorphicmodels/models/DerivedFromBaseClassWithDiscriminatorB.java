@@ -4,7 +4,7 @@
 
 package com.basicpolymorphicmodels.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /** The DerivedFromBaseClassWithDiscriminatorB model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "discriminatorProperty")
 @JsonTypeName("B")
-@Fluent
+@Immutable
 public final class DerivedFromBaseClassWithDiscriminatorB extends BaseClassWithDiscriminator {
     /**
      * Creates an instance of DerivedFromBaseClassWithDiscriminatorB class.

@@ -4,12 +4,12 @@
 
 package com.basicpolymorphicmodels.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DerivedFromBaseClassA model. */
-@Fluent
+@Immutable
 public final class DerivedFromBaseClassA extends BaseClass {
     /*
      * An example property on a derived type

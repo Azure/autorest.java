@@ -4,12 +4,12 @@
 
 package com.cadl.testserver.servicedriven2.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The PostInput model. */
-@Fluent
+@Immutable
 public final class PostInput {
     /*
      * The url property.

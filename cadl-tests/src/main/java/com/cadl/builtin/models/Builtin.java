@@ -4,7 +4,7 @@
 
 package com.cadl.builtin.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /** The Builtin model. */
-@Fluent
+@Immutable
 public final class Builtin {
     /*
      * The formatString property.

@@ -4,12 +4,12 @@
 
 package com.basicpolymorphicmodels.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Illustrates case where a basic model has polymorphic properties. */
-@Fluent
+@Immutable
 public final class ModelWithPolymorphicProperty {
     /*
      * Example polymorphic type property.

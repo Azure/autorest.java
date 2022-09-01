@@ -113,6 +113,10 @@ public final class OptionalAsyncClient {
      *     bytesDict (Optional): {
      *         String: byte[] (Optional)
      *     }
+     *     immutable (Optional): {
+     *         stringReadWriteRequired: String (Required)
+     *         stringReadOnlyOptional: String (Optional)
+     *     }
      * }
      * }</pre>
      *

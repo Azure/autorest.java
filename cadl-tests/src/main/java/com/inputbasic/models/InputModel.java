@@ -4,12 +4,12 @@
 
 package com.inputbasic.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Input Model. */
-@Fluent
+@Immutable
 public final class InputModel {
     /*
      * Required string, illustrating a reference type property.

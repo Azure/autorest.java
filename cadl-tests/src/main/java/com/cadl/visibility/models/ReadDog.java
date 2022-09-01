@@ -4,12 +4,12 @@
 
 package com.cadl.visibility.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ReadDog model. */
-@Fluent
+@Immutable
 public final class ReadDog {
     /*
      * The id property.

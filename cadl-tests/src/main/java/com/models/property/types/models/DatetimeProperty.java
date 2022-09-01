@@ -4,13 +4,13 @@
 
 package com.models.property.types.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** Model with a datetime property. */
-@Fluent
+@Immutable
 public final class DatetimeProperty {
     /*
      * Property

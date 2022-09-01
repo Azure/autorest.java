@@ -4,12 +4,12 @@
 
 package fixtures.dpgcustomization.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Input model. */
-@Fluent
+@Immutable
 public final class Input {
     /*
      * The hello property.

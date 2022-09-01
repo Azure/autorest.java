@@ -154,6 +154,10 @@ public final class OptionalOpsImpl {
      *     bytesDict (Optional): {
      *         String: byte[] (Optional)
      *     }
+     *     immutable (Optional): {
+     *         stringReadWriteRequired: String (Required)
+     *         stringReadOnlyOptional: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -269,6 +273,10 @@ public final class OptionalOpsImpl {
      *     ]
      *     bytesDict (Optional): {
      *         String: byte[] (Optional)
+     *     }
+     *     immutable (Optional): {
+     *         stringReadWriteRequired: String (Required)
+     *         stringReadOnlyOptional: String (Optional)
      *     }
      * }
      * }</pre>

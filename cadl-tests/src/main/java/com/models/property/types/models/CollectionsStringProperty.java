@@ -4,13 +4,13 @@
 
 package com.models.property.types.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Model with collection string properties. */
-@Fluent
+@Immutable
 public final class CollectionsStringProperty {
     /*
      * Property

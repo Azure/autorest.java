@@ -4,13 +4,13 @@
 
 package com.cadl.errormodel.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Diagnostic model. */
-@Fluent
+@Immutable
 public final class Diagnostic {
     /*
      * The name property.

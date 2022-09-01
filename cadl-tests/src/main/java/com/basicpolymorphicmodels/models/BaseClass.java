@@ -4,12 +4,12 @@
 
 package com.basicpolymorphicmodels.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Example base type. */
-@Fluent
+@Immutable
 public class BaseClass {
     /*
      * An example property.

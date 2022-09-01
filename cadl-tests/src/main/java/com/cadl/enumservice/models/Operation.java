@@ -4,12 +4,12 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Operation model. */
-@Fluent
+@Immutable
 public final class Operation {
     /*
      * The name property.

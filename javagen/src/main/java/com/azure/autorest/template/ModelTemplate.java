@@ -44,6 +44,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Writes a ClientModel to a JavaFile.
@@ -93,14 +94,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
 
-        // Add Fluent or Immutable based on whether the model only has read-only properties.
-        boolean isFluent = model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly());
-        if (isFluent) {
-            javaFile.annotation("Fluent");
-        } else {
-            javaFile.annotation("Immutable");
-        }
+        // Add Fluent or Immutable based on whether the model has any setters.
+        addFluentOrImmutableAnnotation(model, javaFile, propertyReferences, settings);
 
         // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
@@ -301,7 +296,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property is not readOnly or required 2. child does not contain property
+     * Override parent setters if: 1. parent property does not have setter 2. child does not contain property
      * that shadow this parent property, otherwise overridden parent setter methods will collide with child setter
      * methods
      *
@@ -315,9 +310,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
             .filter(parentProperty -> {
-                    // parent property is readOnly or required
-                    if (parentProperty.getIsReadOnly() ||
-                        (settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    // parent property doesn't have setter
+                    if (!ClientModelUtil.hasSetter(parentProperty, settings)) {
                         return false;
                     }
                     // child does not contain property that shadow this parent property
@@ -388,8 +382,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Adds class level annotations such as XML root element, JsonFlatten, and Fluent/Immutable based on the
-     * configurations of the model.
+     * Adds class level annotations such as XML root element, JsonFlatten based on the configurations of the model.
      *
      * @param model The client model.
      * @param javaFile The Java class file.
@@ -408,6 +401,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE
             && model.getNeedsFlatten()) {
             javaFile.annotation("JsonFlatten");
+        }
+    }
+
+    /**
+     * Adds Fluent or Immutable based on whether model has any setters.
+     * @param model The client model.
+     * @param javaFile The Java class file.
+     * @param propertyReferences The client model property reference.
+     * @param settings Autorest generation settings.
+     */
+    private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
+                                                List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
+        boolean fluent = Stream
+                .concat(model.getProperties().stream(), propertyReferences.stream())
+                .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
+
+        if (fluent) {
+            javaFile.annotation("Fluent");
+        } else {
+            javaFile.annotation("Immutable");
         }
     }
 

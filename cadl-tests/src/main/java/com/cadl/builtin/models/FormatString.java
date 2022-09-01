@@ -4,7 +4,7 @@
 
 package com.cadl.builtin.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The FormatString model. */
-@Fluent
+@Immutable
 public final class FormatString {
     /*
      * The base64Encoded property.
