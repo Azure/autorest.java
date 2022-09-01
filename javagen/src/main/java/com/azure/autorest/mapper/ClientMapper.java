@@ -194,9 +194,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
-        final boolean hasModelsPackage = hasModelsPackage(clientModels, enumTypes, responseModels);
-        if (hasModelsPackage) {
-            String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
+        final List<String> modelsPackages = getModelsPackages(clientModels, enumTypes, responseModels);
+        for (String modelsPackage : modelsPackages) {
             if (!packageInfos.containsKey(modelsPackage)) {
                 packageInfos.put(modelsPackage, new PackageInfo(
                         modelsPackage,
@@ -217,7 +216,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
 
         // module info
-        builder.moduleInfo(moduleInfo(hasModelsPackage));
+        builder.moduleInfo(getModuleInfo(modelsPackages));
 
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -434,7 +433,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .build();
     }
 
-    private static ModuleInfo moduleInfo(boolean hasModulesPackage) {
+    private static ModuleInfo getModuleInfo(List<String> modelsPackages) {
         // WARNING: Only tested for low level clients
         JavaSettings settings = JavaSettings.getInstance();
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
@@ -445,49 +444,59 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
 
-        if (hasModulesPackage) {
+        final String implementationSubpackagePrefix = settings.getPackage(settings.getImplementationSubpackage()) + ".";
+        for (String modelsPackage : modelsPackages) {
             // export if models is not in implementation
-            final String implementationSubpackagePrefix = "implementation.";
-            if (!CoreUtils.isNullOrEmpty(settings.getModelsSubpackage()) && !settings.getModelsSubpackage().startsWith(implementationSubpackagePrefix)) {
-                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
-            }
-            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage()) && !settings.getCustomTypesSubpackage().startsWith(implementationSubpackagePrefix)) {
-                exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getCustomTypesSubpackage())));
+            if (!modelsPackage.startsWith(implementationSubpackagePrefix)) {
+                exportModules.add(new ModuleInfo.ExportModule(modelsPackage));
             }
 
             // open models package to azure-core and jaskson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
-            openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
-
-            if (!CoreUtils.isNullOrEmpty(settings.getCustomTypesSubpackage())
-                    && !settings.getCustomTypesSubpackage().equals(settings.getModelsSubpackage())) {
-                openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getCustomTypesSubpackage()), openToModules));
-            }
+            openModules.add(new ModuleInfo.OpenModule(modelsPackage, openToModules));
         }
 
         return moduleInfo;
     }
 
     /**
-     * Extension for whether SDK contains "models" package,
-     * that need have "exports" in "module-info.java", and have "package-info.java"
+     * Extension for the list of "models" package (it could contain "implementation.models" and that of custom-types-subpackage),
+     * that need to have "exports" or "opens" in "module-info.java", and have "package-info.java"
      *
      * @param clientModels the list of client models (ObjectSchema).
      * @param enumTypes the list of enum models (ChoiceSchema and SealedChoiceSchema).
      * @param responseModels the list of client response models (for responses that contains headers).
      * @return whether SDK contains "models" package,
      */
-    protected boolean hasModelsPackage(List<ClientModel> clientModels, List<EnumType> enumTypes, List<ClientResponse> responseModels) {
+    protected List<String> getModelsPackages(List<ClientModel> clientModels, List<EnumType> enumTypes, List<ClientResponse> responseModels) {
+
+        List<String> ret = Collections.emptyList();
 
         JavaSettings settings = JavaSettings.getInstance();
-        return (!settings.isDataPlaneClient() || settings.isGenerateModels())   // not DPG, or DPG that requires all models
+        boolean hasModels = (!settings.isDataPlaneClient() || settings.isGenerateModels())   // not DPG, or DPG that requires all models
                 // defined models package (it is defined by default)
                 && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty())
                 // models package is not same as implementation package
-                && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())
-                // has classes in models
-                && !(clientModels.isEmpty() && enumTypes.isEmpty() && responseModels.isEmpty());
+                && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage());
+
+        if (hasModels) {
+            Set<String> packages = clientModels.stream()
+                    .map(ClientModel::getPackage)
+                    .collect(Collectors.toSet());
+
+            packages.addAll(enumTypes.stream()
+                    .map(EnumType::getPackage)
+                    .collect(Collectors.toSet()));
+
+            packages.addAll(responseModels.stream()
+                    .map(ClientResponse::getPackage)
+                    .collect(Collectors.toSet()));
+
+            ret = new ArrayList<>(packages);
+        }
+
+        return ret;
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
