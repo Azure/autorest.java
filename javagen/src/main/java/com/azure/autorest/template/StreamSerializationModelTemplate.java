@@ -32,6 +32,8 @@ import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -66,12 +68,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
         if (settings.shouldGenerateXmlSerialization() && model.getXmlName() != null) {
             imports.add(QName.class.getName());
+            imports.add(XMLStreamException.class.getName());
+
             imports.add(XmlProviders.class.getName());
             imports.add(XmlSerializable.class.getName());
             imports.add(XmlWriter.class.getName());
             imports.add(XmlReader.class.getName());
             imports.add(XmlToken.class.getName());
         } else {
+            imports.add(IOException.class.getName());
+
             imports.add(JsonProviders.class.getName());
             imports.add(JsonSerializable.class.getName());
             imports.add(JsonWriter.class.getName());
@@ -154,7 +160,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         IType elementType = ((IterableType) iterableType).getElementType();
 
         classBlock.annotation("Override");
-        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", writerMethod -> {
+        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException", writerMethod -> {
             String writeStartElement = (xmlNamespace != null)
                 ? "xmlWriter.writeStartElement(null, \"" + xmlNamespace + "\", \"" + xmlRootElementName + "\");"
                 : "xmlWriter.writeStartElement(\"" + xmlRootElementName + "\");";
@@ -173,7 +179,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writerMethod.methodReturn("xmlWriter.writeEndElement()");
         });
 
-        classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader)", readerMethod -> {
+        classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader) throws XMLStreamException", readerMethod -> {
             String readObject = (xmlNamespace != null)
                 ? "return xmlReader.readObject(\"" + xmlNamespace + "\", \"" + xmlRootElementName + "\", reader -> {"
                 : "return xmlReader.readObject(\"" + xmlRootElementName + "\", reader -> {";
@@ -223,7 +229,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
         classBlock.annotation("Override");
-        classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter)", methodBlock -> {
+        classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException", methodBlock -> {
             methodBlock.line("jsonWriter.writeStartObject();");
 
             // If the model has a discriminator property serialize it first.
@@ -706,7 +712,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             });
         }
 
-        classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader)", methodBlock -> {
+        classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader) throws IOException", methodBlock -> {
             // For now, use the basic readObject which will return null if the JsonReader is pointing to JsonToken.NULL.
             //
             // Support for a default value if null will need to be supported and for objects that get their value
@@ -1081,7 +1087,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void writeToXml(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
         classBlock.annotation("Override");
-        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter)", methodBlock -> {
+        classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException", methodBlock -> {
             String modelXmlName = propertiesManager.getModel().getXmlName();
             methodBlock.line("xmlWriter.writeStartElement(\"" + modelXmlName + "\");");
 
@@ -1327,7 +1333,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             });
         }
 
-        classBlock.staticMethod(visibility, modelName + " " + methodName + "(XmlReader xmlReader)", methodBlock -> {
+        classBlock.staticMethod(visibility, modelName + " " + methodName + "(XmlReader xmlReader) throws XMLStreamException", methodBlock -> {
             // For now, use the basic readObject which will return null if the XmlReader is pointing to JsonToken.NULL.
             //
             // Support for a default value if null will need to be supported and for objects that get their value
