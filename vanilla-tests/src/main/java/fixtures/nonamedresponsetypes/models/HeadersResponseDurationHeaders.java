@@ -25,7 +25,8 @@ public final class HeadersResponseDurationHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDurationHeaders(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("value") != null) {
+        String value = rawHeaders.getValue("value");
+        if (value != null) {
             this.value = Duration.parse(rawHeaders.getValue("value"));
         }
     }

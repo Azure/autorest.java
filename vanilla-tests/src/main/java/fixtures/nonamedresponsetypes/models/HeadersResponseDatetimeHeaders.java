@@ -25,7 +25,8 @@ public final class HeadersResponseDatetimeHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDatetimeHeaders(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("value") != null) {
+        String value = rawHeaders.getValue("value");
+        if (value != null) {
             this.value = OffsetDateTime.parse(rawHeaders.getValue("value"));
         }
     }
