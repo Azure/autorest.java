@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -56,67 +57,74 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
                     classBlock.publicMethod(methodDeclaration, methodBlock -> {
                         methodBlock.line("// Generated convenience method for " + getMethodName(protocolMethod));
-                        // RequestOptions
-                        methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
-                        // matched parameters from convenience method to protocol method
-                        Map<MethodParameter, MethodParameter> parametersMap =
-                                findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
-                        Map<String, String> parameterExpressionsMap = new HashMap<>();
-                        for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
-                            MethodParameter parameter = entry.getKey();
-                            MethodParameter protocolParameter = entry.getValue();
-
-                            if (parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
-                                // Context
-                                methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
-                            } else if (protocolParameter != null) {
-                                // protocol method parameter exists
-                                String expression = expressionConvertToType(parameter.getName(), parameter);
-                                parameterExpressionsMap.put(protocolParameter.getName(), expression);
-                            } else {
-                                // protocol method parameter not exist, set the parameter via RequestOptions
-                                switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
-                                    case HEADER:
-                                        writeHeader(parameter, methodBlock);
-                                        break;
-
-                                    case QUERY:
-                                        writeQueryParam(parameter, methodBlock);
-                                        break;
-
-                                    case BODY: {
-                                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                                String.format("requestOptions.setBody(%s);",
-                                                        expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                                        if (!parameter.getClientMethodParameter().getIsRequired()) {
-                                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                                                writeLine.accept(ifBlock);
-                                            });
-                                        } else {
-                                            writeLine.accept(methodBlock);
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-
-                        // invocation with protocol method parameters and RequestOptions
-                        String invocationExpression = protocolMethod.getMethodInputParameters().stream()
-                                .map(p -> {
-                                    String expression = parameterExpressionsMap.get(p.getName());
-                                    if (expression == null) {
-                                        expression = p.getName();
-                                    }
-                                    return expression;
-                                })
-                                .collect(Collectors.joining(", "));
-
-                        // write the invocation of protocol method, and related type conversion
-                        writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock);
+                        writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
                     });
                 });
+    }
+
+    protected void writeMethodImplementation(
+            ClientMethod protocolMethod, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+
+        // RequestOptions
+        methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
+
+        // matched parameters from convenience method to protocol method
+        Map<MethodParameter, MethodParameter> parametersMap =
+                findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
+        Map<String, String> parameterExpressionsMap = new HashMap<>();
+        for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
+            MethodParameter parameter = entry.getKey();
+            MethodParameter protocolParameter = entry.getValue();
+
+            if (parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
+                // Context
+                methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
+            } else if (protocolParameter != null) {
+                // protocol method parameter exists
+                String expression = expressionConvertToType(parameter.getName(), parameter);
+                parameterExpressionsMap.put(protocolParameter.getName(), expression);
+            } else {
+                // protocol method parameter not exist, set the parameter via RequestOptions
+                switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
+                    case HEADER:
+                        writeHeader(parameter, methodBlock);
+                        break;
+
+                    case QUERY:
+                        writeQueryParam(parameter, methodBlock);
+                        break;
+
+                    case BODY: {
+                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
+                                String.format("requestOptions.setBody(%s);",
+                                        expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
+                        if (!parameter.getClientMethodParameter().getIsRequired()) {
+                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
+                                writeLine.accept(ifBlock);
+                            });
+                        } else {
+                            writeLine.accept(methodBlock);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        // invocation with protocol method parameters and RequestOptions
+        String invocationExpression = protocolMethod.getMethodInputParameters().stream()
+                .map(p -> {
+                    String expression = parameterExpressionsMap.get(p.getName());
+                    if (expression == null) {
+                        expression = p.getName();
+                    }
+                    return expression;
+                })
+                .collect(Collectors.joining(", "));
+
+        // write the invocation of protocol method, and related type conversion
+        writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
