@@ -62,6 +62,13 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                 });
     }
 
+    /**
+     * Write the implementation of the convenience method.
+     * 
+     * @param protocolMethod the protocol method.
+     * @param convenienceMethod the convenience method.
+     * @param methodBlock the code block.
+     */
     protected void writeMethodImplementation(
             ClientMethod protocolMethod, ClientMethod convenienceMethod, JavaBlock methodBlock) {
 
