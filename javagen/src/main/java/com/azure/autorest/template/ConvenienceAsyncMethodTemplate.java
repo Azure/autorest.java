@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -38,12 +39,18 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             String invocationExpression,
             JavaBlock methodBlock) {
 
+        ClientMethodType methodType = protocolMethod.getType();
+
         IType responseBodyType = getResponseBodyType(convenienceMethod);
 
-        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType);
+        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType, methodType);
+
+        String returnExpression = (methodType == ClientMethodType.PagingAsync)
+                ? "%1$s(%2$s)%3$s"
+                : "%1$s(%2$s).map(Response::getValue)%3$s";
 
         methodBlock.methodReturn(
-                String.format("%1$s(%2$s).map(Response::getValue)%3$s",
+                String.format(returnExpression,
                         getMethodName(protocolMethod),
                         invocationExpression,
                         returnTypeConversionExpression));
@@ -54,13 +61,14 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
     }
 
-    private String expressionConvertFromBinaryData(IType responseBodyType) {
+    private String expressionConvertFromBinaryData(IType responseBodyType, ClientMethodType methodType) {
+        String mapMethod = (methodType == ClientMethodType.PagingAsync) ? "mapPage" : "map";
         if (responseBodyType instanceof EnumType) {
             // enum
-            return String.format(".map(%1$s::from%2$s)", responseBodyType, ((EnumType) responseBodyType).getElementType());
+            return String.format(".%1$s(%2$s::from%3$s)", mapMethod, responseBodyType, ((EnumType) responseBodyType).getElementType());
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
-            return String.format(".map(protocolMethodData -> protocolMethodData.toObject(%s.class))", responseBodyType);
+            return String.format(".%1$s(protocolMethodData -> protocolMethodData.toObject(%2$s.class))", mapMethod, responseBodyType);
         } else {
             return "";
         }

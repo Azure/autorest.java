@@ -896,9 +896,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         ? NOT_GENERATE
                         : VISIBLE;
             } else {
-                // at present, only generate convenience method for simple API (no pageable, no LRO)
+                // at present, only generate convenience method for simple API and pageable API (no LRO)
                 return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
-                        || methodType == ClientMethodType.SimpleSync && !hasContextParameter)
+                        || (methodType == ClientMethodType.SimpleSync && !hasContextParameter)
+                        || (methodType == ClientMethodType.PagingAsync && !hasContextParameter)
+                        || (methodType == ClientMethodType.PagingSync && !hasContextParameter))
 //                        || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                         ? VISIBLE
                         : NOT_GENERATE;
