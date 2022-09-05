@@ -64,11 +64,11 @@ public class Main {
 
         // TODO (weidxu): side-car
         namespace = Configuration.getGlobalConfiguration().get("NAMESPACE", namespace);
-        String serviceName = Configuration.getGlobalConfiguration().get("SERVICE_NAME");
+        String serviceName = null;
         if (codeModel.getConfiguration() != null && codeModel.getConfiguration() instanceof Map) {
-            Map<String, Object> configuration = ((Map<String, Object>) codeModel.getConfiguration());
-            namespace = (String) configuration.get("namespace");
-            serviceName = (String) configuration.get("service-name");
+            Map<String, String> configuration = ((Map<String, String>) codeModel.getConfiguration());
+            namespace = configuration.get("namespace");
+            serviceName = configuration.get("service-name");
         }
 
         LOGGER.info("Namespace: {}", namespace);
