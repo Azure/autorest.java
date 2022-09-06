@@ -43,11 +43,12 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import fixtures.dpgcustomization.models.LroProduct;
+import reactor.core.publisher.Mono;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the DpgClient type. */
 public final class DpgClientImpl {
@@ -382,7 +383,7 @@ public final class DpgClientImpl {
      *     along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getPages(this.getHost(), mode, accept, requestOptions, context))
                 .map(
@@ -647,8 +648,7 @@ public final class DpgClientImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions) {
+    public Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context -> service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context))

@@ -513,7 +513,7 @@ public final class HeadersImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(
             RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
@@ -640,7 +640,7 @@ public final class HeadersImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(
+    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
