@@ -27,9 +27,6 @@ model FormatString {
 
   @format("binary")
   binary: string;
-  // @format("date")
-  // date: string;
-
 
   @format("date-time")
   dateTime: string;

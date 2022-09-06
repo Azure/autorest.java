@@ -22,6 +22,11 @@ model ExportParams {
   projectFileVersion: string;
 }
 
+model ExportedResource {
+  id: string;
+  resourceUri: string;
+}
+
 @route("/long-running")
 interface LongRunningOp {
   createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
@@ -31,4 +36,10 @@ interface LongRunningOp {
   delete is LongRunningResourceDelete<Resource>;
 
   export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
+
+  importx is ResourceAction<
+    Resource,
+    ExportedResource,
+    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+  >;
 }
