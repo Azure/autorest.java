@@ -27,7 +27,7 @@ public final class HeadersResponseDatetimeHeaders {
     public HeadersResponseDatetimeHeaders(HttpHeaders rawHeaders) {
         String value = rawHeaders.getValue("value");
         if (value != null) {
-            this.value = OffsetDateTime.parse(rawHeaders.getValue("value"));
+            this.value = OffsetDateTime.parse(value);
         }
     }
 

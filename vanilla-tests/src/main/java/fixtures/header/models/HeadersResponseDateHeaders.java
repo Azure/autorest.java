@@ -27,7 +27,7 @@ public final class HeadersResponseDateHeaders {
     public HeadersResponseDateHeaders(HttpHeaders rawHeaders) {
         String value = rawHeaders.getValue("value");
         if (value != null) {
-            this.value = LocalDate.parse(rawHeaders.getValue("value"));
+            this.value = LocalDate.parse(value);
         }
     }
 

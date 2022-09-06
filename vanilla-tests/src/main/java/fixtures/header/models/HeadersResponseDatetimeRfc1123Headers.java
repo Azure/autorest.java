@@ -28,7 +28,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
     public HeadersResponseDatetimeRfc1123Headers(HttpHeaders rawHeaders) {
         String value = rawHeaders.getValue("value");
         if (value != null) {
-            this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+            this.value = new DateTimeRfc1123(value);
         }
     }
 

@@ -821,12 +821,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         block.line();
 
         block.block("for (HttpHeader header : rawHeaders)", body -> {
-            for (ClientModelProperty property : properties) {
-                body.ifBlock(String.format("header.getName().startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
+            body.line("String headerName = header.getName();");
+            int propertiesSize = properties.size();
+            for (int i = 0; i < propertiesSize; i++) {
+                ClientModelProperty property = properties.get(i);
+                boolean needsContinue = i < propertiesSize - 1;
+                body.ifBlock(String.format("headerName.startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
                     ifBlock -> {
-                        ifBlock.line("%sHeaderCollection.put(header.getName().substring(%d), header.getValue());",
+                        ifBlock.line("%sHeaderCollection.put(headerName.substring(%d), header.getValue());",
                             property.getName(), property.getHeaderCollectionPrefix().length());
-                        ifBlock.line("break;");
+                        if (needsContinue) {
+                            ifBlock.line("continue;");
+                        }
                     });
             }
         });
@@ -840,9 +846,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
+        boolean needsNullGuarding = wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String;
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
+        if (needsNullGuarding) {
+            javaBlock.line("String %s = %s;", property.getName(), rawHeaderAccess);
+            rawHeaderAccess = property.getName();
+        }
 
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
@@ -877,8 +888,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
-        if (wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String) {
-            javaBlock.line("String %s = %s;", property.getName(), rawHeaderAccess);
+        if (needsNullGuarding) {
             javaBlock.ifBlock(String.format("%s != null", property.getName()),
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {

@@ -28,7 +28,7 @@ public final class HeadersResponseByteHeaders {
     public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
         String value = rawHeaders.getValue("value");
         if (value != null) {
-            this.value = Base64.getDecoder().decode(rawHeaders.getValue("value"));
+            this.value = Base64.getDecoder().decode(value);
         }
     }
 

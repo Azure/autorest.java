@@ -27,7 +27,7 @@ public final class HeadersResponseDurationHeaders {
     public HeadersResponseDurationHeaders(HttpHeaders rawHeaders) {
         String value = rawHeaders.getValue("value");
         if (value != null) {
-            this.value = Duration.parse(rawHeaders.getValue("value"));
+            this.value = Duration.parse(value);
         }
     }
 
