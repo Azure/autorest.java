@@ -146,6 +146,34 @@ public final class LongRunningAsyncClient {
     }
 
     /**
+     * Runs a custom action on Resource.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     resourceUri: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param exportedResource The exportedResource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginImportx(
+            String name, BinaryData exportedResource, RequestOptions requestOptions) {
+        return this.serviceClient.beginImportxAsync(name, exportedResource, requestOptions);
+    }
+
+    /**
      * Get a Resource.
      *
      * @param name The name parameter.
