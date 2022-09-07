@@ -17,14 +17,14 @@ class CollectionsIntClientTest {
     @Test
     void get() {
         CollectionsIntProperty collectionsIntProperty = client.get();
-        List<Long> properties = collectionsIntProperty.getProperty();
-        Assertions.assertEquals(1L, properties.get(0));
-        Assertions.assertEquals(2L, properties.get(1));
+        List<Integer> properties = collectionsIntProperty.getProperty();
+        Assertions.assertEquals(1, properties.get(0));
+        Assertions.assertEquals(2, properties.get(1));
     }
 
     @Test
     void put() {
-        CollectionsIntProperty collectionsIntProperty = new CollectionsIntProperty(Arrays.asList(1L, 2L));
+        CollectionsIntProperty collectionsIntProperty = new CollectionsIntProperty(Arrays.asList(1, 2));
         client.put(collectionsIntProperty);
     }
 }

@@ -94,7 +94,7 @@ public final class DurationOperationsImpl {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      *
@@ -118,7 +118,7 @@ public final class DurationOperationsImpl {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      *
@@ -141,7 +141,7 @@ public final class DurationOperationsImpl {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      *
@@ -166,7 +166,7 @@ public final class DurationOperationsImpl {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      *

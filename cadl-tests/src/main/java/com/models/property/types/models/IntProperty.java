@@ -15,7 +15,7 @@ public final class IntProperty {
      * Property
      */
     @JsonProperty(value = "property", required = true)
-    private long property;
+    private int property;
 
     /**
      * Creates an instance of IntProperty class.
@@ -23,7 +23,7 @@ public final class IntProperty {
      * @param property the property value to set.
      */
     @JsonCreator
-    public IntProperty(@JsonProperty(value = "property", required = true) long property) {
+    public IntProperty(@JsonProperty(value = "property", required = true) int property) {
         this.property = property;
     }
 
@@ -32,7 +32,7 @@ public final class IntProperty {
      *
      * @return the property value.
      */
-    public long getProperty() {
+    public int getProperty() {
         return this.property;
     }
 }

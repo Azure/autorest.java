@@ -39,7 +39,7 @@ public final class IntClient {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *
@@ -63,7 +63,7 @@ public final class IntClient {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *

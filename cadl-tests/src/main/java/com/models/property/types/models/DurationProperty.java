@@ -7,7 +7,7 @@ package com.models.property.types.models;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.time.Duration;
 
 /** Model with a duration property. */
 @Immutable
@@ -16,7 +16,7 @@ public final class DurationProperty {
      * Property
      */
     @JsonProperty(value = "property", required = true)
-    private OffsetDateTime property;
+    private Duration property;
 
     /**
      * Creates an instance of DurationProperty class.
@@ -24,7 +24,7 @@ public final class DurationProperty {
      * @param property the property value to set.
      */
     @JsonCreator
-    public DurationProperty(@JsonProperty(value = "property", required = true) OffsetDateTime property) {
+    public DurationProperty(@JsonProperty(value = "property", required = true) Duration property) {
         this.property = property;
     }
 
@@ -33,7 +33,7 @@ public final class DurationProperty {
      *
      * @return the property value.
      */
-    public OffsetDateTime getProperty() {
+    public Duration getProperty() {
         return this.property;
     }
 }
