@@ -41,7 +41,7 @@ public final class IntAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *
@@ -65,7 +65,7 @@ public final class IntAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *

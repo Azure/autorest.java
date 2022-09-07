@@ -19,7 +19,7 @@ public final class Cat extends Pet {
      * The meow property.
      */
     @JsonProperty(value = "meow", required = true)
-    private long meow;
+    private int meow;
 
     /**
      * Creates an instance of Cat class.
@@ -30,7 +30,7 @@ public final class Cat extends Pet {
     @JsonCreator
     public Cat(
             @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "meow", required = true) long meow) {
+            @JsonProperty(value = "meow", required = true) int meow) {
         super(name);
         this.meow = meow;
     }
@@ -40,7 +40,7 @@ public final class Cat extends Pet {
      *
      * @return the meow value.
      */
-    public long getMeow() {
+    public int getMeow() {
         return this.meow;
     }
 

@@ -42,7 +42,7 @@ public final class InputBasicAsyncClient {
      * <pre>{@code
      * {
      *     requiredString: String (Required)
-     *     requiredInt: long (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      *

@@ -787,7 +787,7 @@ public final class EnumOpsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -807,7 +807,8 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntArrayWithResponseAsync(List<Long> intArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntArrayWithResponseAsync(
+            List<Integer> intArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String intArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArray, CollectionFormat.CSV);
@@ -825,7 +826,7 @@ public final class EnumOpsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -845,7 +846,7 @@ public final class EnumOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> setIntArrayWithResponse(List<Long> intArray, RequestOptions requestOptions) {
+    public Response<BinaryData> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
         return setIntArrayWithResponseAsync(intArray, requestOptions).block();
     }
 }

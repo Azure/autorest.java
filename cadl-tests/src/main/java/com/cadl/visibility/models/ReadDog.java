@@ -15,7 +15,7 @@ public final class ReadDog {
      * The id property.
      */
     @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private long id;
+    private int id;
 
     /*
      * The name property.
@@ -31,7 +31,7 @@ public final class ReadDog {
      */
     @JsonCreator
     public ReadDog(
-            @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) long id,
+            @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) int id,
             @JsonProperty(value = "name", required = true) String name) {
         this.id = id;
         this.name = name;
@@ -42,7 +42,7 @@ public final class ReadDog {
      *
      * @return the id value.
      */
-    public long getId() {
+    public int getId() {
         return this.id;
     }
 

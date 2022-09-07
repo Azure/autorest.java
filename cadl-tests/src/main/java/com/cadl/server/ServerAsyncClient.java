@@ -45,7 +45,7 @@ public final class ServerAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> statusWithResponse(long code, RequestOptions requestOptions) {
+    public Mono<Response<Void>> statusWithResponse(int code, RequestOptions requestOptions) {
         return this.serviceClient.statusWithResponseAsync(code, requestOptions);
     }
 
@@ -63,7 +63,7 @@ public final class ServerAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> status(long code) {
+    public Mono<Void> status(int code) {
         // Generated convenience method for statusWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusWithResponse(code, requestOptions).map(Response::getValue);

@@ -22,7 +22,7 @@ public final class OutputModel {
      * Required int, illustrating a readonly value type property.
      */
     @JsonProperty(value = "requiredReadonlyInt", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private long requiredReadonlyInt;
+    private int requiredReadonlyInt;
 
     /*
      * Optional string, illustrating a readonly reference type property.
@@ -34,7 +34,7 @@ public final class OutputModel {
      * Optional int, illustrating a readonly value type property.
      */
     @JsonProperty(value = "optionalReadonlyInt", access = JsonProperty.Access.WRITE_ONLY)
-    private Long optionalReadonlyInt;
+    private Integer optionalReadonlyInt;
 
     /*
      * Required readonly model.
@@ -58,7 +58,7 @@ public final class OutputModel {
      * Required readonly int collection.
      */
     @JsonProperty(value = "requiredReadonlyIntList", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private List<Long> requiredReadonlyIntList;
+    private List<Integer> requiredReadonlyIntList;
 
     /*
      * Optional readonly string collection.
@@ -70,7 +70,7 @@ public final class OutputModel {
      * Optional readonly int collection.
      */
     @JsonProperty(value = "optionalReadonlyIntList", access = JsonProperty.Access.WRITE_ONLY)
-    private List<Long> optionalReadonlyIntList;
+    private List<Integer> optionalReadonlyIntList;
 
     /**
      * Creates an instance of OutputModel class.
@@ -86,7 +86,7 @@ public final class OutputModel {
             @JsonProperty(value = "requiredReadonlyString", required = true, access = JsonProperty.Access.WRITE_ONLY)
                     String requiredReadonlyString,
             @JsonProperty(value = "requiredReadonlyInt", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    long requiredReadonlyInt,
+                    int requiredReadonlyInt,
             @JsonProperty(value = "requiredReadonlyModel", required = true, access = JsonProperty.Access.WRITE_ONLY)
                     ReadonlyModel requiredReadonlyModel,
             @JsonProperty(
@@ -95,7 +95,7 @@ public final class OutputModel {
                             access = JsonProperty.Access.WRITE_ONLY)
                     List<String> requiredReadonlyStringList,
             @JsonProperty(value = "requiredReadonlyIntList", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    List<Long> requiredReadonlyIntList) {
+                    List<Integer> requiredReadonlyIntList) {
         this.requiredReadonlyString = requiredReadonlyString;
         this.requiredReadonlyInt = requiredReadonlyInt;
         this.requiredReadonlyModel = requiredReadonlyModel;
@@ -117,7 +117,7 @@ public final class OutputModel {
      *
      * @return the requiredReadonlyInt value.
      */
-    public long getRequiredReadonlyInt() {
+    public int getRequiredReadonlyInt() {
         return this.requiredReadonlyInt;
     }
 
@@ -135,7 +135,7 @@ public final class OutputModel {
      *
      * @return the optionalReadonlyInt value.
      */
-    public Long getOptionalReadonlyInt() {
+    public Integer getOptionalReadonlyInt() {
         return this.optionalReadonlyInt;
     }
 
@@ -171,7 +171,7 @@ public final class OutputModel {
      *
      * @return the requiredReadonlyIntList value.
      */
-    public List<Long> getRequiredReadonlyIntList() {
+    public List<Integer> getRequiredReadonlyIntList() {
         return this.requiredReadonlyIntList;
     }
 
@@ -189,7 +189,7 @@ public final class OutputModel {
      *
      * @return the optionalReadonlyIntList value.
      */
-    public List<Long> getOptionalReadonlyIntList() {
+    public List<Integer> getOptionalReadonlyIntList() {
         return this.optionalReadonlyIntList;
     }
 }

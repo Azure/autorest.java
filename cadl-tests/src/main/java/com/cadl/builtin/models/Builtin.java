@@ -44,7 +44,13 @@ public final class Builtin {
      * The int property.
      */
     @JsonProperty(value = "int", required = true)
-    private long intProperty;
+    private int intProperty;
+
+    /*
+     * The safeint property.
+     */
+    @JsonProperty(value = "safeint", required = true)
+    private long safeint;
 
     /*
      * The long property.
@@ -96,6 +102,7 @@ public final class Builtin {
      * @param string the string value to set.
      * @param bytes the bytes value to set.
      * @param intProperty the intProperty value to set.
+     * @param safeint the safeint value to set.
      * @param longProperty the longProperty value to set.
      * @param floatProperty the floatProperty value to set.
      * @param doubleProperty the doubleProperty value to set.
@@ -110,7 +117,8 @@ public final class Builtin {
             @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
             @JsonProperty(value = "string", required = true) String string,
             @JsonProperty(value = "bytes", required = true) byte[] bytes,
-            @JsonProperty(value = "int", required = true) long intProperty,
+            @JsonProperty(value = "int", required = true) int intProperty,
+            @JsonProperty(value = "safeint", required = true) long safeint,
             @JsonProperty(value = "long", required = true) long longProperty,
             @JsonProperty(value = "float", required = true) double floatProperty,
             @JsonProperty(value = "double", required = true) double doubleProperty,
@@ -123,6 +131,7 @@ public final class Builtin {
         this.string = string;
         this.bytes = bytes;
         this.intProperty = intProperty;
+        this.safeint = safeint;
         this.longProperty = longProperty;
         this.floatProperty = floatProperty;
         this.doubleProperty = doubleProperty;
@@ -173,8 +182,17 @@ public final class Builtin {
      *
      * @return the intProperty value.
      */
-    public long getIntProperty() {
+    public int getIntProperty() {
         return this.intProperty;
+    }
+
+    /**
+     * Get the safeint property: The safeint property.
+     *
+     * @return the safeint value.
+     */
+    public long getSafeint() {
+        return this.safeint;
     }
 
     /**

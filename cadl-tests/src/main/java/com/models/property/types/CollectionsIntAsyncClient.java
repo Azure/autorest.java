@@ -42,7 +42,7 @@ public final class CollectionsIntAsyncClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -69,7 +69,7 @@ public final class CollectionsIntAsyncClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>

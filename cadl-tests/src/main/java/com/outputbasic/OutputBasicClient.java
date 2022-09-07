@@ -40,7 +40,7 @@ public final class OutputBasicClient {
      * <pre>{@code
      * {
      *     requiredString: String (Required)
-     *     requiredInt: long (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      *
