@@ -30,6 +30,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -565,6 +566,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case SimpleSync:
+                generateSimpleSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
             case SimpleSyncRestResponse:
                 generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
@@ -584,6 +587,25 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 generateSendRequestSync(clientMethod, typeBlock, settings);
                 break;
         }
+    }
+
+    private void generateSimpleSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+
+            String argumentList = clientMethod.getArgumentList();
+            argumentList = CoreUtils.isNullOrEmpty(argumentList) ? "Context.NONE" : argumentList + ", Context.NONE";
+            if(clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+                function.line("%s(%s);",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                        argumentList);
+            } else {
+                function.line("return %s(%s).getValue();",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", "" ),
+                        argumentList);
+            }
+        }));
     }
 
     protected void generateProtocolPagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
@@ -666,17 +688,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
-        if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
-            asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
-        }
-        String effectiveAsyncMethodName = asyncMethodName;
+        String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            // addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), false,
+                    settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                    effectiveAsyncMethodName, clientMethod.getArgumentList());
+                        effectiveMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -687,8 +713,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
-                    function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                        effectiveAsyncMethodName, clientMethod.getArgumentList());
+                    function.line("%s value = %s(%s);", returnType.asNullable(),
+                            effectiveMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -699,10 +725,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         }
                     });
                 } else {
-                    function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
+                    function.methodReturn(serviceMethodCall);
                 }
             } else {
-                function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
+                function.line("%s(%s);", effectiveMethodName, clientMethod.getArgumentList());
             }
         });
     }

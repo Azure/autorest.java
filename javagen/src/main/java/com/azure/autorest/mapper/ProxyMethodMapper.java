@@ -290,10 +290,24 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
             }
 
+            addSyncProxyMethods(proxyMethods);
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
+        List<ProxyMethod> syncProxyMethods = new ArrayList<>();
+        for (ProxyMethod asyncProxyMethod : proxyMethods) {
+            if (asyncProxyMethod.getParameters()
+                    .stream()
+                    .anyMatch(param -> param.getClientType() == GenericType.FluxByteBuffer)) {
+                continue;
+            }
+            syncProxyMethods.add(asyncProxyMethod.toSync());
+        }
+        proxyMethods.addAll(syncProxyMethods);
     }
 
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {

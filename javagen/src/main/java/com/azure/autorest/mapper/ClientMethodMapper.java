@@ -226,6 +226,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         for (Request request : requests) {
             List<ProxyMethod> proxyMethods = proxyMethodsMap.get(request);
             for (ProxyMethod proxyMethod : proxyMethods) {
+                if (proxyMethod.isSync()) {
+                    continue;
+                }
                 builder.proxyMethod(proxyMethod);
                 List<ClientMethodParameter> parameters = new ArrayList<>();
                 List<String> requiredParameterExpressions = new ArrayList<>();
