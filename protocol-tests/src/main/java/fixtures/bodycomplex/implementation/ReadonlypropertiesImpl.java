@@ -132,33 +132,6 @@ public final class ReadonlypropertiesImpl {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getValid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -195,34 +168,6 @@ public final class ReadonlypropertiesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context));
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
-     * }
-     * }</pre>
-     *
-     * @param complexBody The complexBody parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(
-            BinaryData complexBody, RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.putValid(this.client.getHost(), complexBody, accept, requestOptions, context);
     }
 
     /**

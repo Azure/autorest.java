@@ -7,6 +7,7 @@ using Cadl.Http;
 namespace Cadl.Builtin;
 
 model Builtin {
+  formatString: FormatString;
   boolean: boolean;
   string: string;
   bytes: bytes;
@@ -16,14 +17,31 @@ model Builtin {
   double: float64;
   duration: duration;
   dateTime: zonedDateTime;
-
   stringList: string[];
-  bytesDict: Map<string, bytes>;
+  bytesDict: Record<bytes>;
 }
+
+model FormatString {
+  @format("byte")
+  base64Encoded: string;
+
+  @format("binary")
+  binary: string;
+
+  @format("date-time")
+  dateTime: string;
+  dateTimeRfc1123: DateTimeRfc1123;
+
+  @format("password")
+  password: string;
+}
+
+@format("date-time-rfc1123")
+model DateTimeRfc1123 is string;
 
 @route("/builtin")
 interface BuiltinOp {
-  op read(): {
+  read(): {
     @body body: Builtin;
   };
 }

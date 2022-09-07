@@ -10,10 +10,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** Properties of a container. */
 @Fluent
@@ -190,7 +190,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("ContainerProperties");
         xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
@@ -208,7 +208,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static ContainerProperties fromXml(XmlReader xmlReader) {
+    public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "ContainerProperties",
                 reader -> {

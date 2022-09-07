@@ -24,8 +24,9 @@ public final class HeadersResponseEnumHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseEnumHeaders(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("value") != null) {
-            this.value = GreyscaleColors.fromString(rawHeaders.getValue("value"));
+        String value = rawHeaders.getValue("value");
+        if (value != null) {
+            this.value = GreyscaleColors.fromString(value);
         }
     }
 

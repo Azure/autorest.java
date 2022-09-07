@@ -65,10 +65,12 @@ public class PomMapper implements IMapper<Project, Pom> {
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
-        if (JavaSettings.getInstance().isSdkIntegration()) {
+        if (project.isIntegratedWithSdk()) {
             pom.setParentIdentifier(CLIENT_SDK_PARENT_PREFIX + project.getPackageVersions().getAzureClientSdkParentVersion());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
+
+        pom.setRequireCompilerPlugins(!project.isIntegratedWithSdk());
 
         return pom;
     }

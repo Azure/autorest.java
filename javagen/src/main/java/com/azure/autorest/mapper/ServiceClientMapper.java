@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
@@ -24,6 +25,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +64,13 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         builder.interfaceName(serviceClientInterfaceName)
                 .className(serviceClientClassName)
                 .packageName(packageName);
+
+        // assume all operations share the same base url
+        if (!CoreUtils.isNullOrEmpty(codeModel.getOperationGroups())) {
+            builder.baseUrl(
+                    codeModel.getOperationGroups().get(0).getOperations().get(0).getRequests().get(0)
+                            .getProtocol().getHttp().getUri());
+        }
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
                 .filter(og -> og.getLanguage().getJava().getName() == null ||
@@ -140,8 +149,9 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
             boolean serviceClientPropertyRequired = p.isRequired();
+            String serializedName = p.getLanguage().getDefault().getSerializedName();
 
-            if (settings.isDataPlaneClient() && serviceClientPropertyName.equals("apiVersion")) {
+            if (settings.isDataPlaneClient() && ParameterSynthesizedOrigin.fromValue(p.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION) {
                 String enumTypeName = ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()
@@ -165,6 +175,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                                 .readOnly(serviceClientPropertyIsReadOnly)
                                 .defaultValueExpression(serviceClientPropertyDefaultValueExpression)
                                 .required(serviceClientPropertyRequired)
+                                .requestParameterName(serializedName)
                                 .build();
                 if (!serviceClientProperties.contains(serviceClientProperty)) {
                     // Ignore duplicate client property.

@@ -111,20 +111,28 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                         } else {
                             valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s, \"%2$s\")", ModelNaming.METHOD_PARAMETER_NAME_ID, urlSegmentName);
                         }
-                        if (p.getClientMethodParameter().getClientType() != ClassType.String) {
-                            valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
-                        }
                         LocalVariable var = localVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
-                        block.line(String.format("%1$s %2$s = %3$s;", var.getVariableType().toString(), var.getName(), valueFromIdText));
+                        // need additional conversion from String to LocalVariable.variableType
+                        boolean needsLocalVar = var.getVariableType() != ClassType.String;
+                        String varName = needsLocalVar ? var.getName() + "Local" : var.getName();
+                        block.line(String.format("%1$s %2$s = %3$s;", ClassType.String.getName(), varName, valueFromIdText));
 
                         String segmentNameForErrorPrompt = urlSegmentName.isEmpty() ? p.getSerializedName() : urlSegmentName;
-                        block.ifBlock(String.format("%1$s == null", var.getName()), ifBlock -> {
+                        block.ifBlock(String.format("%1$s == null", varName), ifBlock -> {
                             String errorMessageExpr = String.format("String.format(\"The resource ID '%%s' is not valid. Missing path segment '%1$s'.\", %2$s)",
                                     segmentNameForErrorPrompt, ModelNaming.METHOD_PARAMETER_NAME_ID);
                             ifBlock.line(String.format(
                                     "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%1$s));",
                                     errorMessageExpr));
                         });
+                        if (needsLocalVar) {
+                            // currently this works only for UUID or Enum
+                            block.line(String.format("%1$s %2$s = %3$s.fromString(%4$s);",
+                                    var.getVariableType().toString(),
+                                    var.getName(),
+                                    var.getVariableType().toString(),
+                                    varName));
+                        }
                     });
 
                     if (!includeContextParameter) {

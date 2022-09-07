@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** the retention policy. */
 @Fluent
@@ -75,7 +76,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("RetentionPolicy");
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
         xmlWriter.writeNumberElement("Days", this.days);
@@ -89,7 +90,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * @return An instance of RetentionPolicy if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static RetentionPolicy fromXml(XmlReader xmlReader) {
+    public static RetentionPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "RetentionPolicy",
                 reader -> {

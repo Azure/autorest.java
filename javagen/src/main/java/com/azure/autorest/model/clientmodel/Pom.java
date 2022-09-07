@@ -16,6 +16,8 @@ public class Pom {
     private String serviceDescription;
     private List<String> dependencyIdentifiers;
 
+    private boolean requireCompilerPlugins = false;
+
     public List<String> getDependencyIdentifiers() {
         return dependencyIdentifiers;
     }
@@ -93,6 +95,15 @@ public class Pom {
 
     public Pom setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
+        return this;
+    }
+
+    public boolean isRequireCompilerPlugins() {
+        return requireCompilerPlugins;
+    }
+
+    public Pom setRequireCompilerPlugins(boolean requireCompilerPlugins) {
+        this.requireCompilerPlugins = requireCompilerPlugins;
         return this;
     }
 }

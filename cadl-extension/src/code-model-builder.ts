@@ -1,17 +1,13 @@
 import {
-  ArrayType,
+  ArrayModelType,
   BooleanLiteralType,
   DecoratedType,
   EnumType,
   getDoc,
+  getFormat,
   getFriendlyName,
   getIntrinsicModelName,
   getKnownValues,
-  getMaxLength,
-  getMaxValue,
-  getMinLength,
-  getMinValue,
-  getPattern,
   getServiceNamespace,
   getServiceNamespaceString,
   getServiceTitle,
@@ -19,40 +15,45 @@ import {
   getSummary,
   getVisibility,
   ignoreDiagnostics,
+  isArrayModelType,
   isIntrinsic,
+  isRecordModelType,
+  isTemplateDeclaration,
+  isTemplateInstance,
   ModelType,
   ModelTypeProperty,
   NumericLiteralType,
   OperationType,
   Program,
+  RecordModelType,
   StringLiteralType,
-  TemplateDeclarationNode,
   Type,
   UnionType,
   UnionTypeVariant,
 } from "@cadl-lang/compiler";
-import {
-  getDiscriminator,
-} from "@cadl-lang/rest";
+import { getDiscriminator } from "@cadl-lang/rest";
 import {
   getAllRoutes,
+  getAuthentication,
+  getHeaderFieldName,
+  getPathParamName,
+  getQueryParamName,
   getServers,
   getStatusCodeDescription,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
+  isStatusCode,
   OperationDetails,
+  ServiceAuthentication,
   StatusCode,
 } from "@cadl-lang/rest/http";
-import {
-  getVersion 
-} from "@cadl-lang/versioning";
-import {
-  fail
-} from "assert";
+import { getVersion } from "@cadl-lang/versioning";
+import { fail } from "assert";
 import {
   AnySchema,
   ArraySchema,
+  BinaryResponse,
   BinarySchema,
   BooleanSchema,
   ByteArraySchema,
@@ -80,17 +81,15 @@ import {
   Schema,
   SchemaResponse,
   SchemaType,
+  SecurityScheme,
   StringSchema,
   TimeSchema,
+  Security,
+  OAuth2SecurityScheme,
+  KeySecurityScheme,
 } from "@autorest/codemodel";
-import {
-  SchemaContext,
-  SchemaUsage,
-} from "./schemas/usage.js";
-import {
-  ChoiceSchema,
-  SealedChoiceSchema,
-} from "./schemas/choice.js"
+import { SchemaContext, SchemaUsage } from "./schemas/usage.js";
+import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -100,9 +99,7 @@ export class CodeModelBuilder {
 
   private codeModel: CodeModel;
 
-  private schemaCache = new ProcessingCache((type: Type, name: string) =>
-    this.processSchemaImpl(type, name),
-  );
+  private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
 
   public constructor(program1: Program) {
     this.program = program1;
@@ -112,7 +109,7 @@ export class CodeModelBuilder {
     }
 
     // java namespace
-    const namespace = getServiceNamespaceString(this.program)|| "Azure.Client";
+    const namespace = getServiceNamespaceString(this.program) || "Azure.Client";
     const javaNamespace = getJavaNamespace(namespace);
 
     // service version
@@ -133,19 +130,19 @@ export class CodeModelBuilder {
     const description = this.getDoc(serviceNamespace);
     this.codeModel = new CodeModel(title, false, {
       info: {
-        description: description
+        description: description,
       },
       language: {
         default: {
           name: title,
           description: description,
           summary: this.getSummary(serviceNamespace),
-          namespace: namespace
+          namespace: namespace,
         },
         java: {
-          namespace: javaNamespace
-        }
-      }
+          namespace: javaNamespace,
+        },
+      },
     });
 
     // host
@@ -157,108 +154,170 @@ export class CodeModelBuilder {
     }
     this.hostParameters = [];
     this.processHost(servers?.length === 1 ? servers[0] : undefined);
+
+    const auth = getAuthentication(this.program, serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
   }
 
   public build(): CodeModel {
-    ignoreDiagnostics(getAllRoutes(this.program)).map(it => this.processRoute(it));
+    ignoreDiagnostics(getAllRoutes(this.program)).map((it) => this.processRoute(it));
 
-    this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
+    this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
     return this.codeModel;
   }
 
   private processHost(server: HttpServer | undefined) {
     if (server) {
-      server.parameters.forEach(it => {
+      server.parameters.forEach((it) => {
         const schema = this.processSchema(it.type, it.name);
-        return this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter(it.name, this.getDoc(it), schema, {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/host",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Uri)
-          },
-          clientDefaultValue: this.getDefaultValue(it.default),
-          language: {
-            default: {
-              serializedName: it.name
-            }
-          }
-        })));
+        return this.hostParameters.push(
+          this.codeModel.addGlobalParameter(
+            new Parameter(it.name, this.getDoc(it), schema, {
+              implementation: ImplementationLocation.Client,
+              origin: "modelerfour:synthesized/host",
+              required: true,
+              protocol: {
+                http: new HttpParameter(ParameterLocation.Uri),
+              },
+              clientDefaultValue: this.getDefaultValue(it.default),
+              language: {
+                default: {
+                  serializedName: it.name,
+                },
+              },
+            }),
+          ),
+        );
       });
     } else {
-      this.hostParameters.push(this.codeModel.addGlobalParameter(new Parameter("endpoint", "Server parameter", this.stringSchema, {
-        implementation: ImplementationLocation.Client,
-        origin: "modelerfour:synthesized/host",
-        required: true,
-        protocol: {
-          http: new HttpParameter(ParameterLocation.Uri),
-        },
-        language: {
-          default: {
-            serializedName: "endpoint"
-          }
-        },
-        extensions: {
-          "x-ms-skip-url-encoding": true
+      this.hostParameters.push(
+        this.codeModel.addGlobalParameter(
+          new Parameter("endpoint", "Server parameter", this.stringSchema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/host",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            language: {
+              default: {
+                serializedName: "endpoint",
+              },
+            },
+            extensions: {
+              "x-ms-skip-url-encoding": true,
+            },
+          }),
+        ),
+      );
+    }
+  }
+
+  private processAuth(auth: ServiceAuthentication) {
+    const securitySchemes: SecurityScheme[] = [];
+    for (const option of auth.options) {
+      for (const scheme of option.schemes) {
+        switch (scheme.type) {
+          case "oauth2":
+            {
+              const oauth2Scheme = new OAuth2SecurityScheme({
+                scopes: [],
+              });
+              scheme.flows.forEach((it) => oauth2Scheme.scopes.push(...it.scopes));
+              securitySchemes.push(oauth2Scheme);
+            }
+            break;
+
+          case "apiKey":
+            {
+              const keyScheme = new KeySecurityScheme({
+                name: scheme.name,
+              });
+              securitySchemes.push(keyScheme);
+            }
+            break;
         }
-      })));
+      }
+    }
+    if (securitySchemes.length > 0) {
+      this.codeModel.security = new Security(true, {
+        schemes: securitySchemes,
+      });
     }
   }
 
   private processRoute(op: OperationDetails) {
-    const operationGroup = this.codeModel.getOperationGroup(op.groupName);
-    const opId = `${op.groupName}_${op.operation.name}`
+    const groupName = op.container.name;
+    const operationGroup = this.codeModel.getOperationGroup(groupName);
+    const opId = `${groupName}_${op.operation.name}`;
 
-    const requireConvenienceMethod = this.hasDecorator(op.operation, "$convenienceMethod");
+    const requireConvenienceMethod = this.isConvenienceMethod(op);
 
     const operation = new Operation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
       summary: this.getSummary(op.operation),
-      apiVersions: [{
-        version: this.version
-      }],
+      apiVersions: [
+        {
+          version: this.version,
+        },
+      ],
       extensions: {
-        convenienceMethod: requireConvenienceMethod
-      }
+        convenienceMethod: requireConvenienceMethod,
+      },
     });
 
-    operation.addRequest(new Request({
-      protocol: {
-        http: {
-          path: op.path,
-          method: op.verb,
-          uri: this.baseUri
-        }
-      }
-    }));
+    operation.addRequest(
+      new Request({
+        protocol: {
+          http: {
+            path: op.path,
+            method: op.verb,
+            uri: this.baseUri,
+          },
+        },
+      }),
+    );
 
-    this.hostParameters.forEach(it => operation.addParameter(it));
-    op.parameters.parameters.map(it => this.processParameter(operation, it));
+    this.hostParameters.forEach((it) => operation.addParameter(it));
+    op.parameters.parameters.map((it) => this.processParameter(operation, it));
     this.addAcceptHeaderParameter(operation, op.responses);
-    if (op.parameters.body) {
-      this.processParameterBody(operation, op.parameters.body);
+    if (op.parameters.bodyParameter) {
+      this.processParameterBody(operation, op.parameters.bodyParameter);
+    } else if (op.parameters.bodyType) {
+      const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+      if (bodyType.kind === "Model") {
+        this.processParameterBody(operation, bodyType);
+      }
     }
-    op.responses.map(it => this.processResponse(operation, it));
+    op.responses.map((it) => this.processResponse(operation, it));
 
     this.processRouteForPaged(operation, op.responses);
+    this.processRouteForLongRunning(operation, op.responses);
 
     operationGroup.addOperation(operation);
   }
 
   private processRouteForPaged(op: Operation, responses: HttpOperationResponse[]) {
     for (const response of responses) {
-      if (response.responses && response.responses.length > 0) {
+      if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
-        if (responseBody && responseBody.type.kind === "Model") {
-          if (this.hasDecorator(responseBody.type, "$pagedResult")) {
-            const itemsProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$items"));
-            const nextLinkProperty = Array.from(responseBody.type.properties.values()).find(it => this.hasDecorator(it, "$nextLink"));
+        const bodyType = this.findResponseBody(responseBody.type);
+        if (bodyType.kind === "Model") {
+          if (this.hasDecorator(bodyType, "$pagedResult")) {
+            const itemsProperty = Array.from(bodyType.properties.values()).find((it) =>
+              this.hasDecorator(it, "$items"),
+            );
+            const nextLinkProperty = Array.from(bodyType.properties.values()).find((it) =>
+              this.hasDecorator(it, "$nextLink"),
+            );
 
             op.extensions = op.extensions || {};
             op.extensions["x-ms-pageable"] = {
               itemName: itemsProperty?.name,
-              nextLinkName: nextLinkProperty?.name
+              nextLinkName: nextLinkProperty?.name,
             };
 
             break;
@@ -268,8 +327,23 @@ export class CodeModelBuilder {
     }
   }
 
+  private processRouteForLongRunning(op: Operation, responses: HttpOperationResponse[]) {
+    for (const resp of responses) {
+      if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+        for (const [_, header] of Object.entries(resp.responses[0].headers)) {
+          if (this.hasDecorator(header, "$pollingLocation")) {
+            op.extensions = op.extensions || {};
+            op.extensions["x-ms-long-running-operation"] = true;
+
+            break;
+          }
+        }
+      }
+    }
+  }
+
   private hasDecorator(type: DecoratedType, name: string): boolean {
-    return type.decorators.find(it => it.decorator.name === name) !== undefined;
+    return type.decorators.find((it) => it.decorator.name === name) !== undefined;
   }
 
   private processParameter(op: Operation, param: HttpOperationParameter) {
@@ -285,14 +359,14 @@ export class CodeModelBuilder {
         required: !param.param.optional,
         nullable: nullable,
         protocol: {
-          http: new HttpParameter(param.type)
+          http: new HttpParameter(param.type),
         },
         // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
           default: {
-            serializedName: param.name
-          }
-        }
+            serializedName: param.name,
+          },
+        },
       });
       op.addParameter(parameter);
 
@@ -307,7 +381,7 @@ export class CodeModelBuilder {
         if (schema instanceof ConstantSchema) {
           mediaTypes = [schema.value.value.toString()];
         } else if (schema instanceof SealedChoiceSchema) {
-          mediaTypes = schema.choices.map(it => it.value.toString());
+          mediaTypes = schema.choices.map((it) => it.value.toString());
         }
         op.requests![0].protocol.http!.mediaTypes = mediaTypes;
       }
@@ -319,41 +393,47 @@ export class CodeModelBuilder {
     for (const resp of responses) {
       if (resp.responses && resp.responses.length > 0) {
         for (const response of resp.responses) {
-          response.body?.contentTypes.forEach(it => produces.add(it));
+          response.body?.contentTypes.forEach((it) => produces.add(it));
         }
       }
     }
     const acceptTypes = Array.from(produces.values()).join(", ");
 
-    const acceptSchema = this.codeModel.schemas.constants?.find(
-      it => it.language.default.name === "accept" && it.value.value === acceptTypes,
-    ) || this.codeModel.schemas.add(new ConstantSchema("accept", `Accept: ${acceptTypes}`, {
-      valueType: this.stringSchema,
-      value: new ConstantValue(acceptTypes)
-    }));
-    op.addParameter(new Parameter("accept", "Accept header", acceptSchema, {
-      implementation: ImplementationLocation.Method,
-      origin: "modelerfour:synthesized/accept",
-      required: true,
-      protocol: {
-        http: new HttpParameter(ParameterLocation.Header)
-      },
-      language: {
-        default: {
-          serializedName: "accept",
+    const acceptSchema =
+      this.codeModel.schemas.constants?.find(
+        (it) => it.language.default.name === "accept" && it.value.value === acceptTypes,
+      ) ||
+      this.codeModel.schemas.add(
+        new ConstantSchema("accept", `Accept: ${acceptTypes}`, {
+          valueType: this.stringSchema,
+          value: new ConstantValue(acceptTypes),
+        }),
+      );
+    op.addParameter(
+      new Parameter("accept", "Accept header", acceptSchema, {
+        implementation: ImplementationLocation.Method,
+        origin: "modelerfour:synthesized/accept",
+        required: true,
+        protocol: {
+          http: new HttpParameter(ParameterLocation.Header),
         },
-      }
-    }));
+        language: {
+          default: {
+            serializedName: "accept",
+          },
+        },
+      }),
+    );
   }
 
-  private processParameterBody(op: Operation, body: ModelTypeProperty) {
-    const schema = this.processSchema(body.type, body.name);
+  private processParameterBody(op: Operation, body: ModelTypeProperty | ModelType) {
+    const schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
-      required: !body.optional,
+      required: body.kind === "Model" || !body.optional,
       protocol: {
-        http: new HttpParameter(ParameterLocation.Body)
+        http: new HttpParameter(ParameterLocation.Body),
       },
       // clientDefaultValue: this.getDefaultValue(body.default),
     });
@@ -364,7 +444,12 @@ export class CodeModelBuilder {
     if (op.extensions?.convenienceMethod) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
     }
-}
+  }
+
+  private findResponseBody(bodyType: Type): Type {
+    // find a type that possibly without http metadata like @statusCode
+    return this.getEffectiveSchemaType(bodyType);
+  }
 
   private processResponse(op: Operation, resp: HttpOperationResponse) {
     // TODO: what to do if more than 1 response?
@@ -380,34 +465,40 @@ export class CodeModelBuilder {
     }
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      if (responseBody.type.kind === "Model" && responseBody.type.name === "bytes") {
+      const bodyType = this.findResponseBody(responseBody.type);
+      if (bodyType.kind === "Model" && bodyType.name === "bytes") {
         // binary
-        response = new BinarySchema(this.getResponseDescription(resp), {
+        response = new BinaryResponse({
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
               headers: headers,
               mediaTypes: responseBody.contentTypes,
-              knownMediaType: "binary"
-            }
-          }
+              knownMediaType: "binary",
+            },
+          },
+          language: {
+            default: {
+              description: this.getResponseDescription(resp),
+            },
+          },
         });
       } else {
         // schema (usually JSON)
-        const schema = this.processSchema(responseBody.type, "response");
+        const schema = this.processSchema(bodyType, "response");
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
               statusCodes: [this.getStatusCode(resp.statusCode)],
               headers: headers,
-              mediaTypes: responseBody.contentTypes
-            }
+              mediaTypes: responseBody.contentTypes,
+            },
           },
           language: {
             default: {
-              description: this.getResponseDescription(resp)
-            }
-          }
+              description: this.getResponseDescription(resp),
+            },
+          },
         });
       }
     } else {
@@ -417,25 +508,25 @@ export class CodeModelBuilder {
           http: {
             statusCodes: [this.getStatusCode(resp.statusCode)],
             headers: headers,
-          }
+          },
         },
         language: {
           default: {
-            description: this.getResponseDescription(resp)
-          }
-        }
+            description: this.getResponseDescription(resp),
+          },
+        },
       });
     }
-    if (resp.statusCode === "*" || (Number(resp.statusCode) / 100 > 3)) {
+    if (resp.statusCode === "*" || Number(resp.statusCode) / 100 > 3) {
       // TODO: x-ms-error-response
       op.addException(response);
-      
+
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Exception] });
       }
     } else {
       op.addResponse(response);
-      
+
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
@@ -451,7 +542,11 @@ export class CodeModelBuilder {
   }
 
   private getResponseDescription(resp: HttpOperationResponse): string {
-    return resp.description || (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) || "";
+    return (
+      resp.description ||
+      (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) ||
+      ""
+    );
   }
 
   private processSchema(type: Type, nameHint: string): Schema {
@@ -462,16 +557,13 @@ export class CodeModelBuilder {
     switch (type.kind) {
       case "String":
         return this.processChoiceSchemaForLiteral(type, nameHint);
-        
+
       case "Number":
         // TODO: float
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
       case "Boolean":
         return this.processChoiceSchemaForLiteral(type, nameHint);
-
-      case "Array":
-        return this.processArraySchema(type, nameHint);
 
       case "Enum":
         return this.processChoiceSchema(type, this.getName(type), true);
@@ -480,31 +572,31 @@ export class CodeModelBuilder {
         return this.processUnionSchema(type, nameHint);
 
       case "ModelProperty":
-        return this.processSchema(type.type, nameHint);
-        // return this.applyModelPropertyDecorators(type, this.processSchema(type.type, name));
+        // return this.processSchema(type.type, nameHint);
+        return this.applyModelPropertyDecorators(type, nameHint, this.processSchema(type.type, nameHint));
 
       case "Model":
         if (isIntrinsic(this.program, type)) {
           const intrinsicModelName = getIntrinsicModelName(this.program, type);
           switch (intrinsicModelName) {
-            case "string":
-              {
-                const enumType = getKnownValues(this.program, type);
-                if (enumType) {
-                  return this.processChoiceSchema(enumType, this.getName(type), false);
-                } else {
-                  return this.processStringSchema(type, nameHint);
+            case "string": {
+              const enumType = getKnownValues(this.program, type);
+              if (enumType) {
+                return this.processChoiceSchema(enumType, this.getName(type), false);
+              } else {
+                const format = getFormat(this.program, type);
+                if (format) {
+                  return this.processFormatString(type, format, nameHint);
                 }
+                return this.processStringSchema(type, nameHint);
               }
+            }
 
             case "bytes":
-              return this.processByteArraySchema(type, nameHint);
+              return this.processByteArraySchema(type, nameHint, false);
 
             case "boolean":
               return this.processBooleanSchema(type, nameHint);
-              
-            case "Map":
-              return this.processMapSchema(type, nameHint);
 
             case "plainTime":
               return this.processTimeSchema(type, nameHint);
@@ -519,16 +611,24 @@ export class CodeModelBuilder {
               return this.processDurationSchema(type, nameHint);
           }
 
-          if (intrinsicModelName.startsWith("int") || intrinsicModelName.startsWith("uint") || intrinsicModelName === "safeint") {
+          if (
+            intrinsicModelName.startsWith("int") ||
+            intrinsicModelName.startsWith("uint") ||
+            intrinsicModelName === "safeint"
+          ) {
             // integer
             return this.processIntegerSchema(type, nameHint, 64);
-              // (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
+            // (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32);
           } else if (intrinsicModelName.startsWith("float")) {
             // float point
             return this.processNumberSchema(type, nameHint);
           } else {
             throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
           }
+        } else if (isArrayModelType(this.program, type)) {
+          return this.processArraySchema(type, nameHint);
+        } else if (isRecordModelType(this.program, type)) {
+          return this.processMapSchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
@@ -540,16 +640,16 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new StringSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-      })
+      }),
     );
   }
 
-  private processByteArraySchema(type: ModelType, name: string): ByteArraySchema {
+  private processByteArraySchema(type: ModelType, name: string, base64Encoded: boolean): ByteArraySchema {
     return this.codeModel.schemas.add(
       new ByteArraySchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
-        format: "byte"
-      })
+        format: base64Encoded ? "base64url" : "byte",
+      }),
     );
   }
 
@@ -557,7 +657,7 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Integer, precision, {
         summary: this.getSummary(type),
-      })
+      }),
     );
   }
 
@@ -565,58 +665,63 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
         summary: this.getSummary(type),
-      })
+      }),
     );
   }
 
   private processBooleanSchema(type: ModelType, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
       new BooleanSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type)
-      })
+        summary: this.getSummary(type),
+      }),
     );
   }
 
-  private processArraySchema(type: ArrayType, name: string): ArraySchema {
-    const elementSchema = this.processSchema(type.elementType, name);
+  private processArraySchema(type: ArrayModelType, name: string): ArraySchema {
+    const elementSchema = this.processSchema(type.indexer.value, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, this.getDoc(type), elementSchema, {
         summary: this.getSummary(type),
-      }));
+      }),
+    );
   }
 
-  private processMapSchema(type: ModelType, name: string): DictionarySchema {
+  private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
     const dictSchema = this.codeModel.schemas.add(
       new DictionarySchema<any>(name, this.getDoc(type), null, {
         summary: this.getSummary(type),
-      }));
+      }),
+    );
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
 
-    const elementType = type.properties.get("v")!;
-    const elementSchema = this.processSchema(elementType.type, elementType.name);
+    const elementSchema = this.processSchema(type.indexer.value, name);
     dictSchema.elementType = elementSchema;
 
     return this.codeModel.schemas.add(dictSchema);
   }
 
-  private processChoiceSchema(type: EnumType, name: string, sealed: boolean): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
+  private processChoiceSchema(
+    type: EnumType,
+    name: string,
+    sealed: boolean,
+  ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type);
-    const isConstant = false;//sealed && type.members.length === 1;
+    const isConstant = false; //sealed && type.members.length === 1;
     const valueType = typeof type.members[0].value === "number" ? this.integerSchema : this.stringSchema;
-    
+
     if (isConstant) {
       return this.codeModel.schemas.add(
         new ConstantSchema(name, this.getDoc(type), {
           summary: this.getSummary(type),
           valueType: valueType,
-          value: new ConstantValue(type.members[0].value)
-        })
+          value: new ConstantValue(type.members[0].value),
+        }),
       );
     } else {
       const choices: ChoiceValue[] = [];
-      type.members.forEach(it => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value !== undefined && it.value != null ? it.value : it.name)));
+      type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
       if (sealed) {
         return this.codeModel.schemas.add(
@@ -631,8 +736,8 @@ export class CodeModelBuilder {
               java: {
                 namespace: getJavaNamespace(namespace),
               },
-            }
-          })
+            },
+          }),
         );
       } else {
         return this.codeModel.schemas.add(
@@ -647,22 +752,26 @@ export class CodeModelBuilder {
               java: {
                 namespace: getJavaNamespace(namespace),
               },
-            }    
-          })
+            },
+          }),
         );
       }
     }
   }
 
-  private processChoiceSchemaForLiteral(type: StringLiteralType | NumericLiteralType | BooleanLiteralType, name: string): ConstantSchema {
-    const valueType = (type.kind === "String") ? this.stringSchema : ((type.kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
+  private processChoiceSchemaForLiteral(
+    type: StringLiteralType | NumericLiteralType | BooleanLiteralType,
+    name: string,
+  ): ConstantSchema {
+    const valueType =
+      type.kind === "String" ? this.stringSchema : type.kind === "Boolean" ? this.booleanSchema : this.integerSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
         valueType: valueType,
-        value: new ConstantValue(type.value)
-      })
+        value: new ConstantValue(type.value),
+      }),
     );
 
     // return this.codeModel.schemas.add(
@@ -676,10 +785,13 @@ export class CodeModelBuilder {
 
   private processChoiceSchemaForUnion(type: UnionType, variants: UnionTypeVariant[], name: string): SealedChoiceSchema {
     const kind = variants[0].type.kind;
-    const valueType = (kind === "String") ? this.stringSchema : ((kind) === "Boolean" ? this.booleanSchema : this.integerSchema);
+    const valueType =
+      kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
 
     const choices: ChoiceValue[] = [];
-    variants.forEach(it => choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)));
+    variants.forEach((it) =>
+      choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)),
+    );
 
     const namespace = getNamespace(type);
     return this.codeModel.schemas.add(
@@ -694,41 +806,41 @@ export class CodeModelBuilder {
           java: {
             namespace: getJavaNamespace(namespace),
           },
-        }
-      })
+        },
+      }),
     );
   }
 
   private processDateTimeSchema(type: ModelType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
-        new DateTimeSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          format: rfc1123 ? "date-time-rfc1123" : "date-time",
-        })
+      new DateTimeSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        format: rfc1123 ? "date-time-rfc1123" : "date-time",
+      }),
     );
   }
 
   private processDateSchema(type: ModelType, name: string): DateSchema {
     return this.codeModel.schemas.add(
-        new DateSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-        })
+      new DateSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
     );
   }
 
   private processTimeSchema(type: ModelType, name: string): TimeSchema {
     return this.codeModel.schemas.add(
-        new TimeSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-        })
+      new TimeSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
     );
   }
 
   private processDurationSchema(type: ModelType, name: string): DurationSchema {
     return this.codeModel.schemas.add(
-        new DurationSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-        })
+      new DurationSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
     );
   }
 
@@ -744,8 +856,8 @@ export class CodeModelBuilder {
           java: {
             namespace: getJavaNamespace(namespace),
           },
-        }
-      })
+        },
+      }),
     );
 
     // cache this now before we accidentally recurse on this type.
@@ -759,8 +871,8 @@ export class CodeModelBuilder {
       objectSchema.discriminator = new Discriminator(
         new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
           required: true,
-          serializedName: discriminatorPropertyName
-        })
+          serializedName: discriminatorPropertyName,
+        }),
       );
     }
 
@@ -780,7 +892,7 @@ export class CodeModelBuilder {
         if (parentSchema.parents) {
           pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
 
-          parentSchema.parents.all.forEach(it => {
+          parentSchema.parents.all.forEach((it) => {
             if (it instanceof ObjectSchema && it.children) {
               pushDistinct(it.children.all, objectSchema);
             }
@@ -791,11 +903,15 @@ export class CodeModelBuilder {
 
     // value of the discriminator property
     if (objectSchema.parents) {
-      const parentWithDiscriminator = objectSchema.parents.all.find(it => it instanceof ObjectSchema && it.discriminator);
+      const parentWithDiscriminator = objectSchema.parents.all.find(
+        (it) => it instanceof ObjectSchema && it.discriminator,
+      );
       if (parentWithDiscriminator) {
         discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
 
-        const discriminatorProperty = Array.from(type.properties.values()).find(it => it.name === discriminatorPropertyName && it.type.kind === "String");
+        const discriminatorProperty = Array.from(type.properties.values()).find(
+          (it) => it.name === discriminatorPropertyName && it.type.kind === "String",
+        );
         if (discriminatorProperty) {
           // value of the StringLiteralType of the discriminator property
           objectSchema.discriminatorValue = (discriminatorProperty.type as StringLiteralType).value;
@@ -817,40 +933,72 @@ export class CodeModelBuilder {
     }
 
     // process all children
-    type.derivedModels?.filter(includeDerivedModel).forEach(it => this.processSchema(it, this.getName(it)));
+    type.derivedModels?.filter(includeDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
   }
 
-  private applyModelPropertyDecorators(prop: ModelTypeProperty, schema: Schema): Schema {
-    if (schema instanceof StringSchema) {
-      const decorators = {
-        minLength: getMinLength(this.program, prop),
-        maxLength: getMaxLength(this.program, prop),
-        pattern: getPattern(this.program, prop),
-      };
+  private getEffectiveSchemaType(type: Type): Type {
+    const program = this.program;
 
-      if (Object.values(decorators).some(it => it !== undefined)) {
-        schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
-          language: schema.language,
-          summary: schema.summary,
-          extensions: schema.extensions,
-          ...decorators
-        });
+    function isSchemaProperty(property: ModelTypeProperty) {
+      const headerInfo = getHeaderFieldName(program, property);
+      const queryInfo = getQueryParamName(program, property);
+      const pathInfo = getPathParamName(program, property);
+      const statusCodeInfo = isStatusCode(program, property);
+      return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+    }
+
+    if (type.kind === "Model") {
+      const effective = program.checker.getEffectiveModelType(type, isSchemaProperty);
+      if (effective.name) {
+        return effective;
       }
-    } else if (schema instanceof NumberSchema) {
-      const decorators = {
-        minimum: getMinValue(this.program, prop),
-        maximum: getMaxValue(this.program, prop),
-      };
+    }
+    return type;
+  }
 
-      if (Object.values(decorators).some(it => it !== undefined)) {
-        schema = new NumberSchema(schema.language.default.name, schema.language.default.description, schema.type, schema.precision, {
-          language: schema.language,
-          summary: schema.summary,
-          extensions: schema.extensions,
-          ...decorators
-        });
+  private applyModelPropertyDecorators(prop: ModelTypeProperty, nameHint: string, schema: Schema): Schema {
+    // if (schema instanceof StringSchema) {
+    //   const decorators = {
+    //     minLength: getMinLength(this.program, prop),
+    //     maxLength: getMaxLength(this.program, prop),
+    //     pattern: getPattern(this.program, prop),
+    //   };
+
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
+    //       language: schema.language,
+    //       summary: schema.summary,
+    //       extensions: schema.extensions,
+    //       ...decorators,
+    //     });
+    //   }
+    // } else if (schema instanceof NumberSchema) {
+    //   const decorators = {
+    //     minimum: getMinValue(this.program, prop),
+    //     maximum: getMaxValue(this.program, prop),
+    //   };
+
+    //   if (Object.values(decorators).some((it) => it !== undefined)) {
+    //     schema = new NumberSchema(
+    //       schema.language.default.name,
+    //       schema.language.default.description,
+    //       schema.type,
+    //       schema.precision,
+    //       {
+    //         language: schema.language,
+    //         summary: schema.summary,
+    //         extensions: schema.extensions,
+    //         ...decorators,
+    //       },
+    //     );
+    //   }
+    // }
+    const format = getFormat(this.program, prop);
+    if (format) {
+      if (prop.type.kind === "Model" && schema instanceof StringSchema) {
+        schema = this.processFormatString(prop.type, format, nameHint);
       }
     }
     return schema;
@@ -866,12 +1014,30 @@ export class CodeModelBuilder {
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
       // clientDefaultValue: this.getDefaultValue(prop.default),
-      serializedName: prop.name
+      serializedName: prop.name,
     });
   }
 
+  private processFormatString(type: ModelType, format: string, nameHint: string): Schema {
+    switch (format) {
+      case "byte":
+        return this.processByteArraySchema(type, nameHint, true);
+      case "binary":
+        return this.processByteArraySchema(type, nameHint, false);
+      case "date-time":
+        return this.processDateTimeSchema(type, nameHint, false);
+      case "date-time-rfc1123":
+        return this.processDateTimeSchema(type, nameHint, true);
+      case "password":
+        return this.processStringSchema(type, nameHint);
+    }
+    throw new Error(`Unrecognized string format: '${format}'.`);
+  }
+
   private processUnionSchema(type: UnionType, name: string): Schema {
-    const nonNullVariants = Array.from(type.variants.values()).filter(it => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"));
+    const nonNullVariants = Array.from(type.variants.values()).filter(
+      (it) => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"),
+    );
     if (nonNullVariants.length === 1) {
       // nullable
       return this.processSchema(nonNullVariants[0].type, name);
@@ -888,7 +1054,9 @@ export class CodeModelBuilder {
 
   private isNullableType(type: Type): boolean {
     if (type.kind === "Union") {
-      const nullVariants = Array.from(type.variants.values()).filter(it => isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null");
+      const nullVariants = Array.from(type.variants.values()).filter(
+        (it) => isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null",
+      );
       return nullVariants.length >= 1;
     } else {
       return false;
@@ -896,7 +1064,7 @@ export class CodeModelBuilder {
   }
 
   private isSameLiteralTypes(variants: UnionTypeVariant[]): boolean {
-    const kindSet = new Set(variants.map(it => it.type.kind));
+    const kindSet = new Set(variants.map((it) => it.type.kind));
     if (kindSet.size === 1) {
       const kind = kindSet.values().next().value;
       return kind === "String" || kind === "Number" || kind === "Boolean";
@@ -935,16 +1103,45 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
-        return target.name + target.templateArguments.map(it => {
-          switch (it.kind) {
-            case "Model":
-              return it.name;
-            case "String":
-              return it.value;
-            default:
-              return "";
-          }
-        }).join("");
+        // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
+        const knownCoreTemplate = new Set<string>([
+          "OptionalProperties",
+          "UpdateableProperties",
+          "DefaultKeyVisibility",
+        ]);
+
+        let modelUsedInCoreRequest = false;
+        while (
+          knownCoreTemplate.has(target.name) &&
+          target.kind === "Model" &&
+          target.templateArguments &&
+          target.templateArguments.length > 0 &&
+          target.templateArguments[0].kind === "Model"
+        ) {
+          modelUsedInCoreRequest = true;
+          target = target.templateArguments[0];
+        }
+
+        if (modelUsedInCoreRequest) {
+          return target.name + "Request";
+        } else {
+          // hack for other cases, mostly Page<>
+          return (
+            target.name +
+            target
+              .templateArguments!.map((it) => {
+                switch (it.kind) {
+                  case "Model":
+                    return it.name;
+                  case "String":
+                    return it.value;
+                  default:
+                    return "";
+                }
+              })
+              .join("")
+          );
+        }
       } else {
         return target.name;
       }
@@ -960,6 +1157,28 @@ export class CodeModelBuilder {
     }
   }
 
+  private isConvenienceMethod(op: OperationDetails) {
+    // check @convenienceMethod
+    let hasConvenienceMethod =
+      this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
+    if (!hasConvenienceMethod) {
+      // check @extension with x-ms-convenient-api=true
+      const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
+      for (const extensionDecorator of extensionDecorators) {
+        if (extensionDecorator.args.length == 2) {
+          const name = extensionDecorator.args[0].value;
+          const value = extensionDecorator.args[1].value;
+
+          if (name === "x-ms-convenient-api" && value === true) {
+            hasConvenienceMethod = true;
+            break;
+          }
+        }
+      }
+    }
+    return hasConvenienceMethod;
+  }
+
   private _stringSchema?: StringSchema;
   get stringSchema(): StringSchema {
     return (
@@ -972,7 +1191,9 @@ export class CodeModelBuilder {
   get integerSchema(): NumberSchema {
     return (
       this._integerSchema ||
-      (this._integerSchema = this.codeModel.schemas.add(new NumberSchema("integer", "simple integer", SchemaType.Integer, 64)))
+      (this._integerSchema = this.codeModel.schemas.add(
+        new NumberSchema("integer", "simple integer", SchemaType.Integer, 64),
+      ))
     );
   }
 
@@ -986,10 +1207,7 @@ export class CodeModelBuilder {
 
   private _binarySchema?: BinarySchema;
   get binarySchema(): BinarySchema {
-    return (
-      this._binarySchema ||
-      (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("binary")))
-    );
+    return this._binarySchema || (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("binary")));
   }
 
   private _anySchema?: AnySchema;
@@ -1001,23 +1219,30 @@ export class CodeModelBuilder {
   get apiVersionParameter(): Parameter {
     return (
       this._apiVersionParameter ||
-      (this._apiVersionParameter = new Parameter("api-version", "Version parameter", this.codeModel.schemas.add(new ConstantSchema("accept", `api-version: ${this.version}`, {
-        valueType: this.stringSchema,
-        value: new ConstantValue(this.version)
-      })), {
-        implementation: ImplementationLocation.Client,
-        origin: "modelerfour:synthesized/api-version",
-        required: true,
-        protocol: {
-          http: new HttpParameter(ParameterLocation.Query),
+      (this._apiVersionParameter = new Parameter(
+        "api-version",
+        "Version parameter",
+        this.codeModel.schemas.add(
+          new ConstantSchema("accept", `api-version: ${this.version}`, {
+            valueType: this.stringSchema,
+            value: new ConstantValue(this.version),
+          }),
+        ),
+        {
+          implementation: ImplementationLocation.Client,
+          origin: "modelerfour:synthesized/api-version",
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Query),
+          },
+          clientDefaultValue: this.version,
+          language: {
+            default: {
+              serializedName: "api-version",
+            },
+          },
         },
-        clientDefaultValue: this.version,
-        language: {
-          default: {
-            serializedName: "api-version"
-          }
-        }
-      }))
+      ))
     );
   }
 
@@ -1121,7 +1346,7 @@ function getNamespace(type: ModelType | EnumType | UnionType | OperationType): s
   let namespaceRef = type.namespace;
   let namespaceStr: string | undefined = undefined;
   while (namespaceRef && namespaceRef.name.length !== 0) {
-    namespaceStr = namespaceRef.name + (namespaceStr ? ("." + namespaceStr) : "");
+    namespaceStr = namespaceRef.name + (namespaceStr ? "." + namespaceStr : "");
     namespaceRef = namespaceRef.namespace;
   }
   return namespaceStr;
@@ -1132,22 +1357,5 @@ function getJavaNamespace(namespace: string | undefined): string | undefined {
 }
 
 function includeDerivedModel(model: ModelType): boolean {
-  return (
-    !isTemplateDeclaration(model) &&
-    !(isTemplateInstance(model) && model.derivedModels.length === 0)
-  );
-}
-// TODO: use method from cadl-compiler after version upgrade
-function isTemplateDeclaration(type: ModelType): boolean {
-  if (type.node === undefined) {
-    return false;
-  }
-  const node = type.node as TemplateDeclarationNode;
-  return node.templateParameters.length > 0 && !isTemplateInstance(type);
-}
-function isTemplateInstance(type: ModelType): boolean {
-  return (
-    type.templateArguments !== undefined &&
-    type.templateArguments.length > 0
-  );
+  return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
 }

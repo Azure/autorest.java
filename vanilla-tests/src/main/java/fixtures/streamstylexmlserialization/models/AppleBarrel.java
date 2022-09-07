@@ -9,11 +9,11 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** A barrel of apples. */
 @Fluent
@@ -29,7 +29,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         @Override
-        public XmlWriter toXml(XmlWriter xmlWriter) {
+        public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("GoodApples");
             if (items != null) {
                 items.forEach(element -> xmlWriter.writeStringElement("Apple", element));
@@ -37,7 +37,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
             return xmlWriter.writeEndElement();
         }
 
-        public static GoodApplesWrapper fromXml(XmlReader xmlReader) {
+        public static GoodApplesWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
             return xmlReader.readObject(
                     "GoodApples",
                     reader -> {
@@ -74,7 +74,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         @Override
-        public XmlWriter toXml(XmlWriter xmlWriter) {
+        public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("BadApples");
             if (items != null) {
                 items.forEach(element -> xmlWriter.writeStringElement("Apple", element));
@@ -82,7 +82,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
             return xmlWriter.writeEndElement();
         }
 
-        public static BadApplesWrapper fromXml(XmlReader xmlReader) {
+        public static BadApplesWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
             return xmlReader.readObject(
                     "BadApples",
                     reader -> {
@@ -162,7 +162,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("AppleBarrel");
         xmlWriter.writeXml(this.goodApples);
         xmlWriter.writeXml(this.badApples);
@@ -176,7 +176,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * @return An instance of AppleBarrel if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
      */
-    public static AppleBarrel fromXml(XmlReader xmlReader) {
+    public static AppleBarrel fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "AppleBarrel",
                 reader -> {

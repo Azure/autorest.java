@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** I am a complex type with XML node. */
 @Fluent
@@ -47,7 +48,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("XMLComplexTypeWithMeta");
         xmlWriter.writeStringElement("ID", this.id);
         return xmlWriter.writeEndElement();
@@ -60,7 +61,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * @return An instance of ComplexTypeWithMeta if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static ComplexTypeWithMeta fromXml(XmlReader xmlReader) {
+    public static ComplexTypeWithMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "XMLComplexTypeWithMeta",
                 reader -> {

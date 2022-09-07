@@ -9,11 +9,11 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The Blobs model. */
 @Fluent
@@ -83,7 +83,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Blobs");
         if (this.blobPrefix != null) {
             this.blobPrefix.forEach(element -> xmlWriter.writeXml(element));
@@ -101,7 +101,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      */
-    public static Blobs fromXml(XmlReader xmlReader) {
+    public static Blobs fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Blobs",
                 reader -> {

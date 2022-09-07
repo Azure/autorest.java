@@ -1,0 +1,45 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Azure.Core;
+
+@serviceTitle("LongRunning")
+@serviceVersion("1.0.0")
+namespace Cadl.LongRunning;
+
+model Resource {
+  @visibility("read")
+  id: string;
+
+  @key
+  name: string;
+  type: string;
+}
+
+model ExportParams {
+  @query
+  projectFileVersion: string;
+}
+
+model ExportedResource {
+  id: string;
+  resourceUri: string;
+}
+
+@route("/long-running")
+interface LongRunningOp {
+  createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+
+  get is ResourceRead<Resource>;
+
+  delete is LongRunningResourceDelete<Resource>;
+
+  export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
+
+  importx is ResourceAction<
+    Resource,
+    ExportedResource,
+    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+  >;
+}

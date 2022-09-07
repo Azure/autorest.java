@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The Cat model. */
@@ -91,7 +92,7 @@ public class Cat extends Pet {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("id", getId());
         jsonWriter.writeStringField("name", getName());
@@ -107,7 +108,7 @@ public class Cat extends Pet {
      * @return An instance of Cat if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Cat fromJson(JsonReader jsonReader) {
+    public static Cat fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;

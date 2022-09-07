@@ -10,9 +10,10 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.1</version>
+    <version>1.0.0-beta.2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-cadl-extension</artifactId>
   <version>1.0.0-beta.1</version>
@@ -38,6 +39,11 @@
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-partial-update</artifactId>
+      <version>1.0.0-beta.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-preprocessor</artifactId>
       <version>1.0.0-beta.1</version>
       <exclusions>
@@ -60,12 +66,18 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.30.0</version>
+      <version>1.31.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
       <artifactId>google-java-format</artifactId>
       <version>1.0.0-beta.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

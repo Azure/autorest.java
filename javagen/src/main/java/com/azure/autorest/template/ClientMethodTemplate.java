@@ -35,6 +35,7 @@ import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -403,7 +404,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 // Always use serializeIterable as Iterable supports both Iterable and List.
                                 expression = String.format(
                                     "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
-                                    parameterName, collectionFormat.toString().toUpperCase());
+                                    parameterName, collectionFormat.toString().toUpperCase(Locale.ROOT));
                             }
                         }
                     } else {
@@ -924,7 +925,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
             function.decreaseIndent();
         });
     }
@@ -944,7 +945,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
-            TemplateUtil.writeLongRunningOperationTypeReference(function, clientMethod);
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
             function.decreaseIndent();
         });
     }

@@ -5,7 +5,6 @@ package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.mapper.PomMapper;
 import com.azure.autorest.model.clientmodel.Pom;
 
@@ -55,10 +54,12 @@ public class FluentPomMapper extends PomMapper {
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
-        if (FluentStatic.getFluentJavaSettings().isSdkIntegration()) {
+        if (project.isIntegratedWithSdk()) {
             pom.setParentIdentifier(CLIENT_SDK_PARENT_PREFIX + project.getPackageVersions().getAzureClientSdkParentVersion());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
+
+        pom.setRequireCompilerPlugins(!project.isIntegratedWithSdk());
 
         return pom;
     }

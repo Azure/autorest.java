@@ -2,7 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
-using Azure.Core.Operations;
+using Azure.Core.Foundations;
 
 @summary("summary of Naming")
 @doc("description of Naming")
@@ -83,5 +83,5 @@ interface NamingOp {
   @summary("summary of POST op")
   @doc("description of POST op")
   @post
-  op post(...Request): OkResponse<Response> | ErrorResponse;
+  post(...Request): Response | ErrorResponse;
 }

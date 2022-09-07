@@ -1,0 +1,52 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+
+@serviceTitle("Response")
+@serviceVersion("1.0.0")
+namespace Cadl.Response;
+
+model Resource {
+  @visibility("read")
+  id: string;
+
+  @key
+  name: string;
+  type: string;
+}
+
+@route("/response")
+interface ResponseOp {
+  // binary
+  @route("/get-binary")
+  @get
+  getBinary(): OkResponse & {
+    @header("content-type") contentType: "image/png";
+    @body body: bytes;
+  };
+
+  // response with headers
+  @route("/create-with-headers")
+  @put
+  createWithHeaders(): CreatedResponse & {
+    @header("operation-location")
+    operationLocation: ResourceLocation<Resource>;
+
+    @body
+    body: Resource;
+  };
+
+  @route("/delete-with-headers")
+  @delete
+  deleteWithHeaders(): NoContentResponse & {
+    @header("operation-location")
+    operationLocation: ResourceLocation<Resource>;
+  };
+
+  // response of operation using Azure.Core
+  @route("/create")
+  create is ResourceCreateOrReplace<Resource>;
+}

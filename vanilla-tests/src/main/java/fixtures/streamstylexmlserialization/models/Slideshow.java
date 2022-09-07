@@ -9,11 +9,11 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** Data about a slideshow. */
 @Fluent
@@ -130,7 +130,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("slideshow");
         xmlWriter.writeStringAttribute("title", this.title);
         xmlWriter.writeStringAttribute("date", this.date);
@@ -148,7 +148,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
      */
-    public static Slideshow fromXml(XmlReader xmlReader) {
+    public static Slideshow fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "slideshow",
                 reader -> {

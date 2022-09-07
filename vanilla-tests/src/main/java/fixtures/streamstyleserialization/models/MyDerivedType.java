@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Objects;
 
 /** The MyDerivedType model. */
@@ -68,7 +69,7 @@ public final class MyDerivedType extends MyBaseType {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", Objects.toString(this.kind, null));
         jsonWriter.writeStringField("propB1", getPropB1());
@@ -89,7 +90,7 @@ public final class MyDerivedType extends MyBaseType {
      *     pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static MyDerivedType fromJson(JsonReader jsonReader) {
+    public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String propB1 = null;

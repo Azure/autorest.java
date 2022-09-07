@@ -248,42 +248,6 @@ public final class EnumServiceClientImpl {
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
      *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putQueryEnumsWithResponseAsync(
-            String queryIntegerEnum,
-            String queryBooleanEnum,
-            String queryRequiredEnum,
-            RequestOptions requestOptions,
-            Context context) {
-        return service.putQueryEnums(
-                this.getHost(), queryIntegerEnum, queryBooleanEnum, queryRequiredEnum, requestOptions, context);
-    }
-
-    /**
-     * query enums operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
-     * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -324,35 +288,6 @@ public final class EnumServiceClientImpl {
             String headerRequiredStringEnum, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.putHeaderEnums(this.getHost(), headerRequiredStringEnum, requestOptions, context));
-    }
-
-    /**
-     * enums header operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     *     "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putHeaderEnumsWithResponseAsync(
-            String headerRequiredStringEnum, RequestOptions requestOptions, Context context) {
-        return service.putHeaderEnums(this.getHost(), headerRequiredStringEnum, requestOptions, context);
     }
 
     /**
@@ -417,30 +352,6 @@ public final class EnumServiceClientImpl {
      *
      * @param bodyRequiredEnum body required enum.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putRequiredBodyEnumsWithResponseAsync(
-            BinaryData bodyRequiredEnum, RequestOptions requestOptions, Context context) {
-        return service.putRequiredBodyEnums(this.getHost(), bodyRequiredEnum, requestOptions, context);
-    }
-
-    /**
-     * enums required body operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
-     * }</pre>
-     *
-     * @param bodyRequiredEnum body required enum.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -482,39 +393,6 @@ public final class EnumServiceClientImpl {
     public Mono<Response<Void>> putNonRequiredBodyEnumsWithResponseAsync(RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context -> service.putNonRequiredBodyEnums(this.getHost(), requestOptions, context));
-    }
-
-    /**
-     * enums non required body operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String(test1/test2)
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNonRequiredBodyEnumsWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        return service.putNonRequiredBodyEnums(this.getHost(), requestOptions, context);
     }
 
     /**

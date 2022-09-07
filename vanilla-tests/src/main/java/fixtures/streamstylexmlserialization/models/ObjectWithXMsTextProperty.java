@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** Contans property. */
 @Fluent
@@ -72,7 +73,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Data");
         xmlWriter.writeStringAttribute("language", this.language);
         xmlWriter.writeString(this.content);
@@ -86,7 +87,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
      *     it was pointing to XML null.
      */
-    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) {
+    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Data",
                 reader -> {

@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The Error model. */
 @Fluent
@@ -71,7 +72,7 @@ public final class Error implements JsonSerializable<Error> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("status", this.status);
         jsonWriter.writeStringField("message", this.message);
@@ -85,7 +86,7 @@ public final class Error implements JsonSerializable<Error> {
      * @return An instance of Error if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Error fromJson(JsonReader jsonReader) {
+    public static Error fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer status = null;

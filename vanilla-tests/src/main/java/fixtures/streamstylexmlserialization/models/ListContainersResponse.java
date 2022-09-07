@@ -9,11 +9,11 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** An enumeration of containers. */
 @Fluent
@@ -49,7 +49,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         }
 
         @Override
-        public XmlWriter toXml(XmlWriter xmlWriter) {
+        public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("Containers");
             if (items != null) {
                 items.forEach(xmlWriter::writeXml);
@@ -57,7 +57,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
             return xmlWriter.writeEndElement();
         }
 
-        public static ContainersWrapper fromXml(XmlReader xmlReader) {
+        public static ContainersWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
             return xmlReader.readObject(
                     "Containers",
                     reader -> {
@@ -233,7 +233,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("EnumerationResults");
         xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
         xmlWriter.writeStringElement("Prefix", this.prefix);
@@ -251,7 +251,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
      */
-    public static ListContainersResponse fromXml(XmlReader xmlReader) {
+    public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "EnumerationResults",
                 reader -> {

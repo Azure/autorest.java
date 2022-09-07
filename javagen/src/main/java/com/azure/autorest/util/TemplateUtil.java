@@ -6,12 +6,18 @@ package com.azure.autorest.util;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.MethodPollingDetails;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
+import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
 
@@ -95,22 +101,25 @@ public class TemplateUtil {
         JavaSettings settings = JavaSettings.getInstance();
 
         // collect types of TypeReference<T>
-        Set<String> typeReferenceStaticClasses = new HashSet<>();
+        Set<GenericType> typeReferenceStaticClasses = new HashSet<>();
 
         for (ClientMethod clientMethod : clientMethods) {
             Templates.getClientMethodTemplate().write(clientMethod, classBlock);
 
             // this is coupled with ClientMethodTemplate.generateLongRunningBeginAsync, see writeLongRunningOperationTypeReference
             if (clientMethod.getType() == ClientMethodType.LongRunningBeginAsync && clientMethod.getMethodPollingDetails() != null) {
-                if (clientMethod.getMethodPollingDetails().getIntermediateType() instanceof ClassType && clientMethod.getMethodPollingDetails().getFinalType() instanceof ClassType) {
-                    typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getIntermediateType().toString());
-                    typeReferenceStaticClasses.add(clientMethod.getMethodPollingDetails().getFinalType().toString());
+                if (clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType) {
+                    typeReferenceStaticClasses.add((GenericType) clientMethod.getMethodPollingDetails().getIntermediateType());
+                }
+
+                if (clientMethod.getMethodPollingDetails().getFinalType() instanceof GenericType) {
+                    typeReferenceStaticClasses.add((GenericType) clientMethod.getMethodPollingDetails().getFinalType());
                 }
             }
         }
 
         // static classes for LRO
-        for (String typeReferenceStaticClass : typeReferenceStaticClasses) {
+        for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
             writeTypeReferenceStaticClass(classBlock, typeReferenceStaticClass);
         }
 
@@ -121,27 +130,30 @@ public class TemplateUtil {
         }
     }
 
-    public static void writeLongRunningOperationTypeReference(JavaBlock javaBlock, ClientMethod clientMethod) {
+    public static String getLongRunningOperationTypeReferenceExpression(MethodPollingDetails details) {
         // see writeTypeReferenceStaticClass
 
-        if (clientMethod.getMethodPollingDetails().getIntermediateType() instanceof ClassType && clientMethod.getMethodPollingDetails().getFinalType() instanceof ClassType) {
-            // use static inner class
-            javaBlock.line("new TypeReference%s(), new TypeReference%s());",
-                    clientMethod.getMethodPollingDetails().getIntermediateType(),
-                    clientMethod.getMethodPollingDetails().getFinalType());
-        } else {
-            javaBlock.line("new TypeReference<%s>() {\n// empty\n}, new TypeReference<%s>() {\n// empty\n});",
-                    clientMethod.getMethodPollingDetails().getIntermediateType(),
-                    clientMethod.getMethodPollingDetails().getFinalType());
-        }
+        return String.format("%s, %s",
+            getTypeReferenceCreation(details.getIntermediateType()),
+            getTypeReferenceCreation(details.getFinalType()));
     }
 
-    private static void writeTypeReferenceStaticClass(JavaClass classBlock, String typeReferenceStaticClass) {
+    private static String getTypeReferenceCreation(IType type) {
+        // see writeTypeReferenceStaticClass
+
+        // Array, class, enum, and primitive types are all able to use TypeReference.createInstance which will create
+        // or use a singleton instance.
+        // Generic types must use a custom instance that supports complex generic parameters.
+        return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
+            ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
+            : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
+    }
+
+    private static void writeTypeReferenceStaticClass(JavaClass classBlock, GenericType type) {
         // see writeLongRunningOperationTypeReference
 
-        classBlock.privateStaticFinalClass(String.format("TypeReference%1$s extends TypeReference<%1$s>", typeReferenceStaticClass), classBlock1 -> {
-            classBlock1.lineComment("empty");
-        });
+        classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
+            type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
     }
 
     /**
@@ -163,6 +175,28 @@ public class TemplateUtil {
             block.line("return (String) obj.get(path);");
             block.line("} catch (RuntimeException e) { return null; }");
         });
+    }
+
+    /**
+     * Writes corresponding "ServiceMethod" annotation for client method.
+     *
+     * @param clientMethod the client method.
+     * @param typeBlock the code block.
+     */
+    public static void writeClientMethodServiceMethodAnnotation(ClientMethod clientMethod, JavaType typeBlock) {
+        switch (clientMethod.getType()) {
+            case PagingSync:
+            case PagingAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                break;
+            case LongRunningBeginSync:
+            case LongRunningBeginAsync:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+                break;
+            default:
+                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                break;
+        }
     }
 
     /**

@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@serviceTitle("PartialUpdate")
+@serviceVersion("1.0.0")
+namespace Cadl.Partialupdate;
+
+model PartialUpdateModel {
+  boolean: boolean;
+  string: string;
+  bytes: bytes;
+}
+
+@route("/partialupdate")
+interface PartialUpdateOp {
+  read(): {
+    @body body: PartialUpdateModel;
+  };
+}

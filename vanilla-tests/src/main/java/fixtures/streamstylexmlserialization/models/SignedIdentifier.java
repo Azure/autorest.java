@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** signed identifier. */
 @Fluent
@@ -81,7 +82,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("SignedIdentifier");
         xmlWriter.writeStringElement("Id", this.id);
         xmlWriter.writeXml(this.accessPolicy);
@@ -95,7 +96,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * @return An instance of SignedIdentifier if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static SignedIdentifier fromXml(XmlReader xmlReader) {
+    public static SignedIdentifier fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "SignedIdentifier",
                 reader -> {

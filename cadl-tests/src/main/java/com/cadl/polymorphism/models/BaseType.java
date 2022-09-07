@@ -4,12 +4,12 @@
 
 package com.cadl.polymorphism.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The BaseType model. */
-@Fluent
+@Immutable
 public class BaseType {
     /*
      * The name property.

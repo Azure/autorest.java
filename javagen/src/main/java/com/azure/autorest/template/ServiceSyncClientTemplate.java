@@ -5,7 +5,9 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -13,9 +15,15 @@ import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Template to create a synchronous client.
@@ -54,6 +62,8 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     }
     imports.add(builderPackageName + "." + builderClassName);
     addServiceClientAnnotationImport(imports);
+
+    addImportsToConvenienceMethods(imports, syncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
@@ -137,7 +147,9 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
           });
     }
 
-    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), this.clientReference());
+    syncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
+
+    ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), serviceClient, this.clientReference());
   }
 
   /**
@@ -166,5 +178,23 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
     classBlock.annotation("Generated");
+  }
+
+  private static void addImportsToConvenienceMethods(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+    JavaSettings settings = JavaSettings.getInstance();
+    convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+        .forEach(m -> m.addImportsTo(imports, false, settings));
+
+    ClassType.BinaryData.addImportsTo(imports, false);
+    ClassType.RequestOptions.addImportsTo(imports, false);
+    imports.add(SimpleResponse.class.getName());
+    imports.add(Collectors.class.getName());
+    imports.add(Objects.class.getName());
+    imports.add(JacksonAdapter.class.getName());
+    imports.add(CollectionFormat.class.getName());
+  }
+
+  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
+    Templates.getConvenienceSyncMethodTemplate().write(convenienceMethod, classBlock);
   }
 }

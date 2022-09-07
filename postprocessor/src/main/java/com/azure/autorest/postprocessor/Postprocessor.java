@@ -13,7 +13,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.postprocessor.util.PartialUpdateHandler;
+import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 

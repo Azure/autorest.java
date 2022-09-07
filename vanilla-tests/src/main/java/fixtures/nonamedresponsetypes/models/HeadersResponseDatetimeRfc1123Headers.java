@@ -26,8 +26,9 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDatetimeRfc1123Headers(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("value") != null) {
-            this.value = new DateTimeRfc1123(rawHeaders.getValue("value"));
+        String value = rawHeaders.getValue("value");
+        if (value != null) {
+            this.value = new DateTimeRfc1123(value);
         }
     }
 

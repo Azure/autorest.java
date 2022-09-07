@@ -4,13 +4,13 @@
 
 package com.cadl.polymorphism.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DerivedTypeData model. */
-@Fluent
+@Immutable
 public final class DerivedTypeData extends BaseType {
     /*
      * The data property.

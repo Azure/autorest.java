@@ -10,7 +10,6 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -147,7 +146,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
      * @param pom the pom model.
      */
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
-        if (!JavaSettings.getInstance().isSdkIntegration()) {
+        if (pom.isRequireCompilerPlugins()) {
             projectBlock.block("build", buildBlock -> {
                 buildBlock.block("plugins", pluginsBlock -> {
                     writeStandAlonePlugins(projectBlock);
@@ -161,7 +160,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
         pluginsBlock.block("plugin", pluginBlock -> {
             pluginBlock.tag("groupId", "org.apache.maven.plugins");
             pluginBlock.tag("artifactId", "maven-compiler-plugin");
-            pluginBlock.tag("version", "3.8.1");
+            pluginBlock.tag("version", "3.10.1");
             pluginBlock.block("configuration", configurationBlock -> {
                 configurationBlock.tag("release", "11");
             });

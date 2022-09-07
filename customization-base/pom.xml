@@ -31,6 +31,9 @@
 
   <properties>
     <codesnippet.skip>false</codesnippet.skip>
+
+    <!-- ClassCustomizationTests requires language server on a single port. -->
+    <parallelizeTests>false</parallelizeTests>
   </properties>
 
   <dependencies>

@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -16,9 +17,14 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.core.client.traits.EndpointTrait;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Template to create an asynchronous client.
@@ -57,6 +63,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     }
     imports.add(builderPackageName + "." + builderClassName);
     addServiceClientAnnotationImports(imports);
+
+    addImportsToConvenienceMethods(imports, asyncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
@@ -118,7 +126,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
       }
 
-      ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), "this.serviceClient");
+      asyncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
+
+      ServiceAsyncClientTemplate.addEndpointMethod(classBlock, asyncClient.getClientBuilder(), serviceClient, "this.serviceClient");
     });
   }
 
@@ -140,7 +150,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
    * @param clientBuilder the client builder.
    * @param clientReference the code for client reference. E.g. "this.serviceClient" or "this.client".
    */
-  static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, String clientReference) {
+  static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, ServiceClient serviceClient, String clientReference) {
     // expose "getEndpoint" as public, as companion to "sendRequest" method
     if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
       clientBuilder.getBuilderTraits().stream()
@@ -154,9 +164,33 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
             classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
                 serviceClientProperty.getType(), methodName), function -> {
-              function.methodReturn(String.format("%1$s.%2$s()", clientReference, methodName));
+              String endpointInvocation = String.format("%1$s.%2$s()", clientReference, methodName);
+              String baseUrl = serviceClient.getBaseUrl();
+              function.methodReturn(
+                  // if we get endpoint from EndpointTrait, it likely has serialized name of either "endpoint" or "Endpoint"
+                  String.format("%1$s.replace(%2$s, %3$s)",
+                      ClassType.String.defaultValueExpression(baseUrl),
+                      ClassType.String.defaultValueExpression('{' + serviceClientProperty.getRequestParameterName() + '}'),
+                      endpointInvocation));
             });
           });
     }
+  }
+
+  private static void addImportsToConvenienceMethods(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+    JavaSettings settings = JavaSettings.getInstance();
+    convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+        .forEach(m -> m.addImportsTo(imports, false, settings));
+
+    ClassType.BinaryData.addImportsTo(imports, false);
+    ClassType.RequestOptions.addImportsTo(imports, false);
+    imports.add(Collectors.class.getName());
+    imports.add(Objects.class.getName());
+    imports.add(JacksonAdapter.class.getName());
+    imports.add(CollectionFormat.class.getName());
+  }
+
+  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
+    Templates.getConvenienceAsyncMethodTemplate().write(convenienceMethod, classBlock);
   }
 }

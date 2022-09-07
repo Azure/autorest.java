@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** An enumeration of blobs. */
 @Fluent
@@ -243,7 +244,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("EnumerationResults");
         xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
         xmlWriter.writeStringAttribute("ContainerName", this.containerName);
@@ -263,7 +264,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static ListBlobsResponse fromXml(XmlReader xmlReader) {
+    public static ListBlobsResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "EnumerationResults",
                 reader -> {

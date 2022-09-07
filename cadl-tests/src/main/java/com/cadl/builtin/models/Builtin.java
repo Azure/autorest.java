@@ -4,7 +4,7 @@
 
 package com.cadl.builtin.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,8 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 /** The Builtin model. */
-@Fluent
+@Immutable
 public final class Builtin {
+    /*
+     * The formatString property.
+     */
+    @JsonProperty(value = "formatString", required = true)
+    private FormatString formatString;
+
     /*
      * The boolean property.
      */
@@ -85,6 +91,7 @@ public final class Builtin {
     /**
      * Creates an instance of Builtin class.
      *
+     * @param formatString the formatString value to set.
      * @param booleanProperty the booleanProperty value to set.
      * @param string the string value to set.
      * @param bytes the bytes value to set.
@@ -99,6 +106,7 @@ public final class Builtin {
      */
     @JsonCreator
     public Builtin(
+            @JsonProperty(value = "formatString", required = true) FormatString formatString,
             @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
             @JsonProperty(value = "string", required = true) String string,
             @JsonProperty(value = "bytes", required = true) byte[] bytes,
@@ -110,6 +118,7 @@ public final class Builtin {
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "stringList", required = true) List<String> stringList,
             @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict) {
+        this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;
@@ -121,6 +130,15 @@ public final class Builtin {
         this.dateTime = dateTime;
         this.stringList = stringList;
         this.bytesDict = bytesDict;
+    }
+
+    /**
+     * Get the formatString property: The formatString property.
+     *
+     * @return the formatString value.
+     */
+    public FormatString getFormatString() {
+        return this.formatString;
     }
 
     /**

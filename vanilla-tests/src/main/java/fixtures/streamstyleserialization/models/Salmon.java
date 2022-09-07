@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +104,7 @@ public class Salmon extends Fish {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
@@ -123,7 +124,7 @@ public class Salmon extends Fish {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Salmon fromJson(JsonReader jsonReader) {
+    public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
@@ -169,7 +170,7 @@ public class Salmon extends Fish {
                 });
     }
 
-    static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) {
+    static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     boolean lengthFound = false;

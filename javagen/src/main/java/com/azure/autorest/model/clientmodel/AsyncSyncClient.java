@@ -3,6 +3,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class AsyncSyncClient {
@@ -14,15 +16,20 @@ public class AsyncSyncClient {
 
     private final ServiceClient serviceClient;
 
+    private List<ConvenienceMethod> convenienceMethods;
+
     // There is also reference from Client to ClientBuilder via "@ServiceClient(builder = ClientBuilder.class)"
     // clientBuilder can be null, if builder is disabled via "disable-client-builder"
     private ClientBuilder clientBuilder;
 
-    private AsyncSyncClient(String packageName, String className, MethodGroupClient methodGroupClient, ServiceClient serviceClient) {
+    private AsyncSyncClient(String packageName, String className,
+                            MethodGroupClient methodGroupClient, ServiceClient serviceClient,
+                            List<ConvenienceMethod> convenienceMethods) {
         this.packageName = packageName;
         this.className = className;
         this.methodGroupClient = methodGroupClient;
         this.serviceClient = serviceClient;
+        this.convenienceMethods = convenienceMethods;
     }
 
     /**
@@ -57,6 +64,13 @@ public class AsyncSyncClient {
         return serviceClient;
     }
 
+    /**
+     * @return the list of convenience methods.
+     */
+    public List<ConvenienceMethod> getConvenienceMethods() {
+        return convenienceMethods;
+    }
+
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         imports.add(String.format("%1$s.%2$s", getPackageName(), getClassName()));
     }
@@ -78,6 +92,8 @@ public class AsyncSyncClient {
 
         private ServiceClient serviceClient;
 
+        private List<ConvenienceMethod> convenienceMethods = Collections.emptyList();
+
         public Builder className(String className) {
             this.className = className;
             return this;
@@ -98,8 +114,13 @@ public class AsyncSyncClient {
             return this;
         }
 
+        public Builder convenienceMethods(List<ConvenienceMethod> convenienceMethods) {
+            this.convenienceMethods = convenienceMethods;
+            return this;
+        }
+
         public AsyncSyncClient build() {
-            return new AsyncSyncClient(packageName, className, methodGroupClient, serviceClient);
+            return new AsyncSyncClient(packageName, className, methodGroupClient, serviceClient, convenienceMethods);
         }
     }
 }

@@ -721,24 +721,6 @@ public final class QueriesImpl {
      * Get true Boolean value on path.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getBooleanTrueWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final boolean boolQuery = true;
-        final String accept = "application/json";
-        return service.getBooleanTrue(this.client.getHost(), boolQuery, accept, requestOptions, context);
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -766,24 +748,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return false Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getBooleanFalseWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final boolean boolQuery = false;
-        final String accept = "application/json";
-        return service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context);
     }
 
     /**
@@ -843,34 +807,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getBooleanNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getBooleanNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null Boolean value on query (query string should be absent).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -898,24 +834,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getIntOneMillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final int intQuery = 1000000;
-        final String accept = "application/json";
-        return service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context);
     }
 
     /**
@@ -951,25 +869,6 @@ public final class QueriesImpl {
                 context ->
                         service.getIntNegativeOneMillion(
                                 this.client.getHost(), intQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final int intQuery = -1000000;
-        final String accept = "application/json";
-        return service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1029,34 +928,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getIntNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null integer value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1084,24 +955,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final long longQuery = 10000000000L;
-        final String accept = "application/json";
-        return service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1137,24 +990,6 @@ public final class QueriesImpl {
                 context ->
                         service.getNegativeTenBillion(
                                 this.client.getHost(), longQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final long longQuery = -10000000000L;
-        final String accept = "application/json";
-        return service.getNegativeTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1214,34 +1049,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getLongNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.getLongNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1277,25 +1084,6 @@ public final class QueriesImpl {
      * Get '1.034E+20' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '1.034E+20' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final float floatQuery = 103400000000000000000f;
-        final String accept = "application/json";
-        return service.floatScientificPositive(this.client.getHost(), floatQuery, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1325,25 +1113,6 @@ public final class QueriesImpl {
                 context ->
                         service.floatScientificNegative(
                                 this.client.getHost(), floatQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-1.034E-20' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final float floatQuery = -1.034E-20f;
-        final String accept = "application/json";
-        return service.floatScientificNegative(this.client.getHost(), floatQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1403,34 +1172,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.floatNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1466,24 +1207,6 @@ public final class QueriesImpl {
      * Get '9999999.999' numeric value.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final double doubleQuery = 9999999.999;
-        final String accept = "application/json";
-        return service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept, requestOptions, context);
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1513,24 +1236,6 @@ public final class QueriesImpl {
                 context ->
                         service.doubleDecimalNegative(
                                 this.client.getHost(), doubleQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final double doubleQuery = -9999999.999;
-        final String accept = "application/json";
-        return service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1590,34 +1295,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.doubleNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1646,25 +1323,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
-        final String accept = "application/json";
-        return service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1705,24 +1363,6 @@ public final class QueriesImpl {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
-        final String accept = "application/json";
-        return service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, requestOptions, context);
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1750,24 +1390,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get ''.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '' along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String stringQuery = "";
-        final String accept = "application/json";
-        return service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context);
     }
 
     /**
@@ -1810,33 +1432,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.stringNull(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null (no query parameter in url) along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> stringNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.stringNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -1906,34 +1501,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> enumValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.enumValid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get using uri with query parameter 'green color'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1970,33 +1537,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.enumNull(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null (no query parameter in url) along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> enumNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.enumNull(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2066,34 +1606,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteMultiByteWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.byteMultiByte(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2123,25 +1635,6 @@ public final class QueriesImpl {
         return FluxUtil.withContext(
                 context ->
                         service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '' as byte array along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final byte[] byteQuery = "".getBytes();
-        final String accept = "application/json";
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context);
     }
 
     /**
@@ -2201,34 +1694,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> byteNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.byteNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as byte array (no query parameters in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2256,24 +1721,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '2012-01-01' as date along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String dateQuery = "2012-01-01";
-        final String accept = "application/json";
-        return service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context);
     }
 
     /**
@@ -2333,34 +1780,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.dateNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as date - this should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2389,24 +1808,6 @@ public final class QueriesImpl {
         return FluxUtil.withContext(
                 context ->
                         service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
-        final String accept = "application/json";
-        return service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context);
     }
 
     /**
@@ -2466,34 +1867,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.dateTimeNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get null as date-time, should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2531,34 +1904,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2629,34 +1974,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
-     *     {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringCsvNull(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get a null array of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2694,34 +2011,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get an empty array [] of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an empty array [] of string using the csv-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2794,35 +2083,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(
-            RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
-     * the 'arrayQuery' parameter to the service.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -2860,34 +2120,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**
@@ -2958,34 +2190,6 @@ public final class QueriesImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringTsvValid(this.client.getHost(), accept, requestOptions, context);
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -3025,35 +2229,6 @@ public final class QueriesImpl {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context));
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     * format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context);
     }
 
     /**

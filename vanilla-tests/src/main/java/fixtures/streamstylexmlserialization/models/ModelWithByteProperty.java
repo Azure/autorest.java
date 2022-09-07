@@ -11,6 +11,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The ModelWithByteProperty model. */
 @Fluent
@@ -48,7 +49,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("ModelWithByteProperty");
         xmlWriter.writeBinaryElement("Bytes", this.bytes);
         return xmlWriter.writeEndElement();
@@ -61,7 +62,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
      */
-    public static ModelWithByteProperty fromXml(XmlReader xmlReader) {
+    public static ModelWithByteProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "ModelWithByteProperty",
                 reader -> {

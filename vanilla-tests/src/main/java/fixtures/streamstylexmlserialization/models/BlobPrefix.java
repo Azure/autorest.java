@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The BlobPrefix model. */
 @Fluent
@@ -51,7 +52,7 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("BlobPrefix");
         xmlWriter.writeStringElement("Name", this.name);
         return xmlWriter.writeEndElement();
@@ -64,7 +65,7 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
      * @return An instance of BlobPrefix if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
      */
-    public static BlobPrefix fromXml(XmlReader xmlReader) {
+    public static BlobPrefix fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "BlobPrefix",
                 reader -> {

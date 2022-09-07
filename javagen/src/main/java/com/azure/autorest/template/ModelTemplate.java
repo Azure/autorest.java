@@ -44,6 +44,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Writes a ClientModel to a JavaFile.
@@ -93,14 +94,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
 
-        // Add Fluent or Immutable based on whether the model only has read-only properties.
-        boolean isFluent = model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-            || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly());
-        if (isFluent) {
-            javaFile.annotation("Fluent");
-        } else {
-            javaFile.annotation("Immutable");
-        }
+        // Add Fluent or Immutable based on whether the model has any setters.
+        addFluentOrImmutableAnnotation(model, javaFile, propertyReferences, settings);
 
         // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
@@ -301,7 +296,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property is not readOnly or required 2. child does not contain property
+     * Override parent setters if: 1. parent property does not have setter 2. child does not contain property
      * that shadow this parent property, otherwise overridden parent setter methods will collide with child setter
      * methods
      *
@@ -315,9 +310,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
             .filter(parentProperty -> {
-                    // parent property is readOnly or required
-                    if (parentProperty.getIsReadOnly() ||
-                        (settings.isRequiredFieldsAsConstructorArgs() && parentProperty.isRequired())) {
+                    // parent property doesn't have setter
+                    if (!ClientModelUtil.hasSetter(parentProperty, settings)) {
                         return false;
                     }
                     // child does not contain property that shadow this parent property
@@ -388,8 +382,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Adds class level annotations such as XML root element, JsonFlatten, and Fluent/Immutable based on the
-     * configurations of the model.
+     * Adds class level annotations such as XML root element, JsonFlatten based on the configurations of the model.
      *
      * @param model The client model.
      * @param javaFile The Java class file.
@@ -408,6 +401,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE
             && model.getNeedsFlatten()) {
             javaFile.annotation("JsonFlatten");
+        }
+    }
+
+    /**
+     * Adds Fluent or Immutable based on whether model has any setters.
+     * @param model The client model.
+     * @param javaFile The Java class file.
+     * @param propertyReferences The client model property reference.
+     * @param settings Autorest generation settings.
+     */
+    private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
+                                                List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
+        boolean fluent = Stream
+                .concat(model.getProperties().stream(), propertyReferences.stream())
+                .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
+
+        if (fluent) {
+            javaFile.annotation("Fluent");
+        } else {
+            javaFile.annotation("Immutable");
         }
     }
 
@@ -705,20 +718,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             comment.param("rawHeaders", "The raw HttpHeaders that will be used to create the property values.");
         });
         classBlock.publicConstructor(String.format("%s(HttpHeaders rawHeaders)", model.getName()), constructor -> {
+            // HeaderCollections need special handling as they may have multiple values that need to be retrieved from
+            // the raw headers.
+            List<ClientModelProperty> collectionProperties = new ArrayList<>();
             for (ClientModelProperty property : model.getProperties()) {
-                addConstructorCustomDeserialization(property, constructor);
+                if (CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+                    generateHeaderDeserializationFunction(property, constructor);
+                } else {
+                    collectionProperties.add(property);
+                }
+            }
+
+            if (!CoreUtils.isNullOrEmpty(collectionProperties)) {
+                // Bundle all collection properties into one iteration over the HttpHeaders.
+                generateHeaderCollectionDeserialization(collectionProperties, constructor);
             }
         });
-    }
-
-    private static void addConstructorCustomDeserialization(ClientModelProperty property, JavaBlock javaBlock) {
-        // HeaderCollections need special handling as they may have multiple values that need to be
-        // retrieved from the raw headers.
-        if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
-            generateHeaderCollectionDeserialization(property, javaBlock);
-        } else {
-            generateHeaderDeserializationFunction(property, javaBlock);
-        }
     }
 
     /**
@@ -800,30 +815,52 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         methodBlock.methodReturn("this");
     }
 
-    private static void generateHeaderCollectionDeserialization(ClientModelProperty property, JavaBlock block) {
-        int headerPrefixLength = property.getHeaderCollectionPrefix().length();
-        // HeaderCollections are always Maps that use String as the key.
-        MapType wireType = (MapType) property.getWireType();
-        String collectionName = property.getName() + "HeaderCollection";
+    private static void generateHeaderCollectionDeserialization(List<ClientModelProperty> properties, JavaBlock block) {
+        for (ClientModelProperty property : properties) {
+            // HeaderCollections are always Maps that use String as the key.
+            MapType wireType = (MapType) property.getWireType();
 
-        // Prefix the map with the property name for the cases where multiple header collections exist.
-        // TODO: If there are multiple header collections they can be combined into a single loop over the headers.
-        // Not a high priority as loop should be relatively cheap, and only constant time.
-        block.line("%s %s = new HashMap<>();", wireType, collectionName);
+            // Prefix the map with the property name for the cases where multiple header collections exist.
+            block.line("%s %sHeaderCollection = new HashMap<>();", wireType, property.getName());
+        }
+
         block.line();
+
         block.block("for (HttpHeader header : rawHeaders)", body -> {
-            body.ifBlock(String.format("!header.getName().startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
-                ifBlock -> ifBlock.line("continue;"));
-            body.line(collectionName + ".put(header.getName().substring(%d), header.getValue());", headerPrefixLength);
+            body.line("String headerName = header.getName();");
+            int propertiesSize = properties.size();
+            for (int i = 0; i < propertiesSize; i++) {
+                ClientModelProperty property = properties.get(i);
+                boolean needsContinue = i < propertiesSize - 1;
+                body.ifBlock(String.format("headerName.startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
+                    ifBlock -> {
+                        ifBlock.line("%sHeaderCollection.put(headerName.substring(%d), header.getValue());",
+                            property.getName(), property.getHeaderCollectionPrefix().length());
+                        if (needsContinue) {
+                            ifBlock.line("continue;");
+                        }
+                    });
+            }
         });
-        block.line("this.%s = %s;", property.getName(), collectionName);
+
+        block.line();
+
+        for (ClientModelProperty property : properties) {
+            block.line("this.%s = %sHeaderCollection;", property.getName(), property.getName());
+        }
     }
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
+        boolean needsNullGuarding = wireType != ClassType.String &&
+            (wireType instanceof ClassType || wireType instanceof EnumType || wireType instanceof GenericType);
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
+        if (needsNullGuarding) {
+            javaBlock.line("String %s = %s;", property.getName(), rawHeaderAccess);
+            rawHeaderAccess = property.getName();
+        }
 
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
@@ -858,9 +895,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
-        if ((wireType instanceof ClassType || wireType instanceof EnumType || wireType instanceof GenericType)
-            && wireType != ClassType.String) {
-            javaBlock.ifBlock(String.format("%s != null", rawHeaderAccess),
+        if (needsNullGuarding) {
+            javaBlock.ifBlock(String.format("%s != null", property.getName()),
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {
             javaBlock.line("this.%s = %s;", property.getName(), setter);

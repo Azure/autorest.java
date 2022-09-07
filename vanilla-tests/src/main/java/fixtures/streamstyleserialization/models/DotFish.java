@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The DotFish model. */
 @Fluent
@@ -46,7 +47,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("species", this.species);
         return jsonWriter.writeEndObject();
@@ -60,7 +61,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      *     JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static DotFish fromJson(JsonReader jsonReader) {
+    public static DotFish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;

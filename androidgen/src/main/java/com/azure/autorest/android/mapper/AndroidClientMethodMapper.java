@@ -83,8 +83,8 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, JavaSettings settings) {
-        return (GenericType.AndroidResponse(syncReturnType));
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation, boolean isProtocolMethod, JavaSettings settings) {
+        return GenericType.AndroidResponse(syncReturnType);
     }
 
     @Override
@@ -98,9 +98,9 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected ReturnValue createSimpleAsyncRestResponseReturnValue(Operation operation, ProxyMethod proxyMethod, IType syncReturnType) {
+    protected ReturnValue createSimpleAsyncRestResponseReturnValue(Operation operation, IType asyncRestResponseReturnType, IType syncReturnType) {
         IType asyncWithResponseType = GenericType.AndroidCompletableFuture(GenericType.AndroidResponse(syncReturnType));
-        return new ReturnValue(returnTypeDescription(operation, proxyMethod.getReturnType().getClientType(), syncReturnType),
+        return new ReturnValue(returnTypeDescription(operation, asyncWithResponseType, syncReturnType),
                 asyncWithResponseType);
     }
 

@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@serviceTitle("Auth")
+@serviceVersion("1.0.0")
+@useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
+namespace Cadl.Auth;
+
+model AuthFlow {
+  type: OAuth2FlowType.clientCredentials;
+  tokenUrl: "https://api.example.com/oauth2/token";
+  refreshUrl: "https://api.example.com/oauth2/refresh";
+  scopes: ["https://api.example.com/.default"];
+}
+
+@route("/auth")
+interface AuthOp {
+  get(): string;
+}

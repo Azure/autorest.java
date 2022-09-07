@@ -9,10 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** An Azure Storage container. */
 @Fluent
@@ -109,7 +109,7 @@ public final class Container implements XmlSerializable<Container> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Container");
         xmlWriter.writeStringElement("Name", this.name);
         xmlWriter.writeXml(this.properties);
@@ -128,7 +128,7 @@ public final class Container implements XmlSerializable<Container> {
      * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
      */
-    public static Container fromXml(XmlReader xmlReader) {
+    public static Container fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Container",
                 reader -> {

@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The Metrics model. */
 @Fluent
@@ -128,7 +129,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Metrics");
         xmlWriter.writeStringElement("Version", this.version);
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
@@ -144,7 +145,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      */
-    public static Metrics fromXml(XmlReader xmlReader) {
+    public static Metrics fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Metrics",
                 reader -> {

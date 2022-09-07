@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** I am root, and I ref a model WITH meta. */
 @Fluent
@@ -76,7 +77,7 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("RootWithRefAndMeta");
         xmlWriter.writeXml(this.refToModel);
         xmlWriter.writeStringElement("Something", this.something);
@@ -90,7 +91,7 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
      * @return An instance of RootWithRefAndMeta if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static RootWithRefAndMeta fromXml(XmlReader xmlReader) {
+    public static RootWithRefAndMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "RootWithRefAndMeta",
                 reader -> {

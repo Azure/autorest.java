@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // parameters
         String inputYamlFileName = "cadl-tests/cadl-output/code-model.yaml";
-        String outputFolder = "cadl-tests/cadl-output/java/";
+        String outputFolder = "cadl-tests/cadl-output/";
         String namespace = "com.azure.cadl";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
@@ -60,12 +61,26 @@ public class Main {
         if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
             namespace = codeModel.getLanguage().getJava().getNamespace();
         }
+
+        // TODO (weidxu): side-car
+        namespace = Configuration.getGlobalConfiguration().get("NAMESPACE", namespace);
+        String serviceName = null;
+        if (codeModel.getConfiguration() != null && codeModel.getConfiguration() instanceof Map) {
+            Map<String, String> configuration = ((Map<String, String>) codeModel.getConfiguration());
+            namespace = configuration.get("namespace");
+            serviceName = configuration.get("service-name");
+        }
+
         LOGGER.info("Namespace: {}", namespace);
 
         // initialize plugin
-        CadlPlugin cadlPlugin = new CadlPlugin(namespace);
+        CadlPlugin cadlPlugin = new CadlPlugin(
+                new CadlPlugin.Options()
+                        .setNamespace(namespace)
+                        .setOutputFolder(outputFolderFinal)
+                        .setServiceName(serviceName));
 
-        // transform cod emodel
+        // transform code model
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model
@@ -78,21 +93,36 @@ public class Main {
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
         LOGGER.info("Count of text files: {}", javaPackage.getTextFiles().size());
 
-        // write output
+        // handle partial update
+        Map<String, String> javaFiles = new ConcurrentHashMap<>();
+        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+            JavaSettings settings = JavaSettings.getInstance();
+            if (settings.isHandlePartialUpdate()) {
+                javaFiles.put(javaFile.getFilePath(), cadlPlugin.handlePartialUpdate(outputFolderFinal + javaFile.getFilePath(), javaFile.getContents().toString()));
+            } else {
+                javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
+            }
+        });
+
+        // format
         Formatter formatter = new Formatter();
 
-        // Java
         Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-            String formattedSource = javaFile.getContents().toString();
+        javaFiles.entrySet().parallelStream().forEach(entry -> {
+            String filePath = entry.getKey();
+            String fileContent = entry.getValue();
+            String formattedSource = fileContent;
             try {
-                formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                formattedSource = formatter.formatSourceAndFixImports(fileContent);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", outputFolderFinal + javaFile.getFilePath(), e);
+                LOGGER.error("Failed to format file: {}", outputFolderFinal + filePath, e);
                 // but we continue so user can still check the file and see why format fails
             }
-            formattedFiles.put(javaFile.getFilePath(), formattedSource);
+            formattedFiles.put(filePath, formattedSource);
         });
+
+        // write output
+        // java files
         formattedFiles.forEach((filePath, formattedSource) -> cadlPlugin.writeFile(outputFolderFinal + filePath, formattedSource, null));
 
         // XML include POM

@@ -12,6 +12,7 @@ import com.azure.xml.XmlWriter;
 import java.net.URL;
 import java.util.Objects;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The ModelWithUrlProperty model. */
 @Fluent
@@ -49,7 +50,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("ModelWithUrlProperty");
         xmlWriter.writeStringElement("Url", Objects.toString(this.url, null));
         return xmlWriter.writeEndElement();
@@ -62,7 +63,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * @return An instance of ModelWithUrlProperty if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static ModelWithUrlProperty fromXml(XmlReader xmlReader) {
+    public static ModelWithUrlProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "ModelWithUrlProperty",
                 reader -> {

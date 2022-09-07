@@ -2,7 +2,6 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
-using Azure.Core.Operations;
 
 @serviceTitle("EnumService")
 @serviceVersion("1.0.0")
@@ -25,7 +24,7 @@ enum Priority {
 enum OperationStateValues {
   Running,
   Completed,
-  Failed
+  Failed,
 }
 
 model Operation {
@@ -40,25 +39,41 @@ model Operation {
 interface EnumOp {
   @get
   @route("/color")
-  op getColor(): Color;
+  getColor(): Color;
 
   @get
   @route("/colormodel")
-  op getColorModel(): ColorModel;
+  getColorModel(): ColorModel;
 
   @post
   @route("operation/colormodel")
-  op setColorModel(@query color: ColorModel): OkResponse<Operation> | ErrorResponse;
+  setColorModel(@query color: ColorModel): Operation;
 
   @post
   @route("operation/priority")
-  op setPriority(@query priority: Priority) : OkResponse<Operation> | ErrorResponse;
+  setPriority(@query priority: Priority): Operation;
 
   @get
   @route("operation/state/running")
-  op getRunningOperation(@query state: "Running"): OkResponse<Operation> | ErrorResponse;
+  getRunningOperation(@query state: "Running"): Operation;
 
   @get
   @route("operation/state")
-  op getOperation(@query state: OperationStateValues): OkResponse<Operation> | ErrorResponse;
+  getOperation(@query state: OperationStateValues): Operation;
+
+  @post
+  @route("operation/stringenumarray")
+  setStringEnumArray(@query colorArray: ColorModel[], @query colorArrayOpt?: ColorModel[]): string;
+
+  @post
+  @route("operation/intenumarray")
+  setIntEnumArray(@query priorityArray: Priority[], @query priorityArrayOpt?: Priority[]): string;
+
+  @post
+  @route("operation/stringarray")
+  setStringArray(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+
+  @post
+  @route("operation/intarray")
+  setIntArray(@query intArray: int32[], @query intArrayOpt?: int32[]): string;
 }

@@ -77,6 +77,13 @@ public final class BuiltinOpsImpl {
      *
      * <pre>{@code
      * {
+     *     formatString (Required): {
+     *         base64Encoded: byte[] (Required)
+     *         binary: byte[] (Required)
+     *         dateTime: OffsetDateTime (Required)
+     *         dateTimeRfc1123: OffsetDateTime (Required)
+     *         password: String (Required)
+     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -116,45 +123,13 @@ public final class BuiltinOpsImpl {
      *
      * <pre>{@code
      * {
-     *     boolean: boolean (Required)
-     *     string: String (Required)
-     *     bytes: byte[] (Required)
-     *     int: long (Required)
-     *     long: long (Required)
-     *     float: double (Required)
-     *     double: double (Required)
-     *     duration: Duration (Required)
-     *     dateTime: OffsetDateTime (Required)
-     *     stringList (Required): [
-     *         String (Required)
-     *     ]
-     *     bytesDict (Required): {
-     *         String: byte[] (Required)
+     *     formatString (Required): {
+     *         base64Encoded: byte[] (Required)
+     *         binary: byte[] (Required)
+     *         dateTime: OffsetDateTime (Required)
+     *         dateTimeRfc1123: OffsetDateTime (Required)
+     *         password: String (Required)
      *     }
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions, Context context) {
-        final String accept = "application/json";
-        return service.read(this.client.getEndpoint(), accept, requestOptions, context);
-    }
-
-    /**
-     * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)

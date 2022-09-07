@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The DotFishMarket model. */
@@ -135,7 +136,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeJsonField("sampleSalmon", this.sampleSalmon);
         jsonWriter.writeArrayField("salmons", this.salmons, (writer, element) -> writer.writeJson(element));
@@ -151,7 +152,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * @return An instance of DotFishMarket if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DotFishMarket fromJson(JsonReader jsonReader) {
+    public static DotFishMarket fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     DotSalmon sampleSalmon = null;

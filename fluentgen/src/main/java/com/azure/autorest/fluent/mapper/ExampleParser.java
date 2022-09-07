@@ -163,7 +163,7 @@ public class ExampleParser {
         List<FluentCollectionMethodExample> ret = null;
 
         ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-        if (collectionMethod.getInnerClientMethod().getProxyMethod().getExamples() != null && requiresExample(clientMethod)) {
+        if (needToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -181,7 +181,7 @@ public class ExampleParser {
     private static List<FluentClientMethodExample> parseMethod(MethodGroupClient methodGroup, ClientMethod clientMethod) {
         List<FluentClientMethodExample> ret = null;
 
-        if (clientMethod.getProxyMethod().getExamples() != null && requiresExample(clientMethod)) {
+        if (needToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -246,7 +246,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (collectionMethod.getInnerClientMethod().getProxyMethod().getExamples() != null && requiresExample(clientMethod)) {
+            if (needToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
@@ -362,7 +362,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceUpdate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (collectionMethod.getInnerClientMethod().getProxyMethod().getExamples() != null && requiresExample(clientMethod)) {
+            if (needToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
@@ -387,6 +387,14 @@ public class ExampleParser {
             }
         }
         return ret;
+    }
+
+    private static boolean needToGenerateExample(ClientMethod clientMethod) {
+        String requestContentType = clientMethod.getProxyMethod().getRequestContentType();
+        return clientMethod.getProxyMethod().getExamples() != null
+                && requiresExample(clientMethod)
+                // currently only generate for json payload, i.e. "text/json", "application/json"
+                && requestContentType != null && requestContentType.contains("json");
     }
 
     private static FluentCollectionMethod findResourceGetMethod(ResourceUpdate resourceUpdate) {

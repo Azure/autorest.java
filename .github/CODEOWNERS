@@ -2,7 +2,7 @@
 *                           @weidongxu-microsoft @srnagar
 
 # Git Hub bot rules
-/.github/fabricbot.json     @AlexGhiondea @jsquire @ronniegeraghty
+/.github/fabricbot.json     @jsquire @ronniegeraghty
 
 # fluentgen
 /fluent*                    @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
@@ -13,6 +13,8 @@
 
 # protocol
 /protocol*                  @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
+/partial-update-tests       @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
+/partial-update             @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 
 # cadl
 /cadl-extension             @srnagar @weidongxu-microsoft @haolingdong-msft @XiaofeiCao

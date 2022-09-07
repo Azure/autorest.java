@@ -83,7 +83,7 @@ public class Javagen extends NewPlugin {
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 3: Write to templates
-            JavaPackage javaPackage = writeToTemplates(codeModel, client, settings);
+            JavaPackage javaPackage = writeToTemplates(codeModel, client, settings, true);
 
             //Step 4: Print to files
             Map<String, String> formattedFiles = new ConcurrentHashMap<>();
@@ -150,7 +150,8 @@ public class Javagen extends NewPlugin {
         return newYaml.loadAs(file, CodeModel.class);
     }
 
-    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
+    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
+                                 boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         javaPackage
@@ -266,7 +267,9 @@ public class Javagen extends NewPlugin {
             // Readme, Changelog
             if (settings.isSdkIntegration()) {
                 javaPackage.addReadmeMarkdown(project);
-                javaPackage.addSwaggerReadmeMarkdown(project);    // use readme in spec repo instead
+                if (generateSwaggerMarkdown) {
+                    javaPackage.addSwaggerReadmeMarkdown(project);
+                }
                 javaPackage.addChangelogMarkdown(project);
 
                 // Blank readme sample

@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The MyBaseType model. */
 @Fluent
@@ -71,7 +72,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("propB1", this.propB1);
         if (propBH1 != null) {
@@ -90,7 +91,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      *     to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static MyBaseType fromJson(JsonReader jsonReader) {
+    public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;

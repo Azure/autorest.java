@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public final class Cookiecuttershark extends Shark {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
@@ -83,7 +84,7 @@ public final class Cookiecuttershark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Cookiecuttershark fromJson(JsonReader jsonReader) {
+    public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     boolean lengthFound = false;

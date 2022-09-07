@@ -21,6 +21,9 @@
     <jacoco.min.linecoverage>0.7</jacoco.min.linecoverage>
     <jacoco.min.branchcoverage>0.5</jacoco.min.branchcoverage>
     <jacoco.skip.coverage.check>false</jacoco.skip.coverage.check>
+
+    <!-- Tests requires shared static class, like FluentStatic. -->
+    <parallelizeTests>false</parallelizeTests>
   </properties>
 
   <repositories>
@@ -112,18 +115,6 @@
                   <goal>prepare-agent</goal>
                 </goals>
               </execution>
-              <!--              <execution>-->
-              <!--                <id>default-instrument</id>-->
-              <!--                <goals>-->
-              <!--                  <goal>instrument</goal>-->
-              <!--                </goals>-->
-              <!--              </execution>-->
-              <!--              <execution>-->
-              <!--                <id>default-restore-instrumented-classes</id>-->
-              <!--                <goals>-->
-              <!--                  <goal>restore-instrumented-classes</goal>-->
-              <!--                </goals>-->
-              <!--              </execution>-->
               <execution>
                 <id>post-unit-test</id>
                 <goals>

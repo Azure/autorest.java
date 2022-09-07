@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,7 @@ public final class Goblinshark extends Shark {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
@@ -135,7 +136,7 @@ public final class Goblinshark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Goblinshark fromJson(JsonReader jsonReader) {
+    public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     boolean lengthFound = false;
@@ -176,7 +177,9 @@ public final class Goblinshark extends Shark {
                         } else if ("jawsize".equals(fieldName)) {
                             jawsize = reader.getNullable(JsonReader::getInt);
                         } else if ("color".equals(fieldName)) {
-                            color = GoblinSharkColor.fromString(reader.getString());
+                            color =
+                                    reader.getNullable(
+                                            enumReader -> GoblinSharkColor.fromString(enumReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

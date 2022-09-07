@@ -18,8 +18,7 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = {LroWithParamaterizedEndpointsImpl.class})
 public final class LroWithParamaterizedEndpointsBuilder {
     /*
-     * A string value that is used as a global part of the parameterized host.
-     * Pass in 'host:3000' to pass test.
+     * A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test.
      */
     private String host;
 
@@ -104,23 +103,21 @@ public final class LroWithParamaterizedEndpointsBuilder {
      * @return an instance of LroWithParamaterizedEndpointsImpl.
      */
     public LroWithParamaterizedEndpointsImpl buildClient() {
-        if (host == null) {
-            this.host = "host";
-        }
-        if (environment == null) {
-            this.environment = AzureEnvironment.AZURE;
-        }
-        if (pipeline == null) {
-            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build();
-        }
-        if (defaultPollInterval == null) {
-            this.defaultPollInterval = Duration.ofSeconds(30);
-        }
-        if (serializerAdapter == null) {
-            this.serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
-        }
+        String localHost = (host != null) ? host : "host";
+        AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
+        HttpPipeline localPipeline =
+            (pipeline != null)
+                ? pipeline
+                : new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build();
+        Duration localDefaultPollInterval =
+            (defaultPollInterval != null) ? defaultPollInterval : Duration.ofSeconds(30);
+        SerializerAdapter localSerializerAdapter =
+            (serializerAdapter != null)
+                ? serializerAdapter
+                : SerializerFactory.createDefaultManagementSerializerAdapter();
         LroWithParamaterizedEndpointsImpl client =
-            new LroWithParamaterizedEndpointsImpl(pipeline, serializerAdapter, defaultPollInterval, environment, host);
+            new LroWithParamaterizedEndpointsImpl(
+                localPipeline, localSerializerAdapter, localDefaultPollInterval, localEnvironment, localHost);
         return client;
     }
 }

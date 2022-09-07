@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The Siamese model. */
@@ -77,7 +78,7 @@ public final class Siamese extends Cat {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("id", getId());
         jsonWriter.writeStringField("name", getName());
@@ -94,7 +95,7 @@ public final class Siamese extends Cat {
      * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Siamese fromJson(JsonReader jsonReader) {
+    public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;

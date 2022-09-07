@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The DotSalmon model. */
 @Fluent
@@ -85,7 +86,7 @@ public class DotSalmon extends DotFish {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fish\\.type", this.fishType);
         jsonWriter.writeStringField("species", getSpecies());
@@ -102,7 +103,7 @@ public class DotSalmon extends DotFish {
      *     to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static DotSalmon fromJson(JsonReader jsonReader) {
+    public static DotSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String species = null;

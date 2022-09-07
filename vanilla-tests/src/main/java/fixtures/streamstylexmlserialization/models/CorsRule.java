@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * CORS is an HTTP feature that enables a web application running under one domain to access resources in another
@@ -181,7 +182,7 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("CorsRule");
         xmlWriter.writeStringElement("AllowedOrigins", this.allowedOrigins);
         xmlWriter.writeStringElement("AllowedMethods", this.allowedMethods);
@@ -198,7 +199,7 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
      * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      */
-    public static CorsRule fromXml(XmlReader xmlReader) {
+    public static CorsRule fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "CorsRule",
                 reader -> {

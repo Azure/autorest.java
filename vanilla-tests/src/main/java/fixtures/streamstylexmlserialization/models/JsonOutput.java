@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The JsonOutput model. */
 @Fluent
@@ -47,7 +48,7 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("JsonOutput");
         xmlWriter.writeNumberElement("id", this.id);
         return xmlWriter.writeEndElement();
@@ -60,7 +61,7 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
      * @return An instance of JsonOutput if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
      */
-    public static JsonOutput fromXml(XmlReader xmlReader) {
+    public static JsonOutput fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "JsonOutput",
                 reader -> {

@@ -10,6 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** The Error model. */
 @Fluent
@@ -72,7 +73,7 @@ public final class Error implements XmlSerializable<Error> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Error");
         xmlWriter.writeNumberElement("status", this.status);
         xmlWriter.writeStringElement("message", this.message);
@@ -86,7 +87,7 @@ public final class Error implements XmlSerializable<Error> {
      * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      */
-    public static Error fromXml(XmlReader xmlReader) {
+    public static Error fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Error",
                 reader -> {

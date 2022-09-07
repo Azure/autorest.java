@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
@@ -108,43 +109,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             }
         }
         builder.responseBodyType(responseBodyType);
-
-        if (settings.isDataPlaneClient()) {
-            IType singleValueType;
-            if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
-            } else {
-                singleValueType = GenericType.Response(responseBodyType);
-            }
-            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
-        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
-                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
-                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
-            builder.returnType(createBinaryContentAsyncReturnType());
-        } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
-            // SchemaResponse
-            // method with schema in headers would require a ClientResponse
-            IType clientResponseClassType;
-            if (settings.isGenericResponseTypes()) {
-                clientResponseClassType = GenericType.RestResponse(
-                    Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                    responseBodyType);
-            } else {
-                clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-            }
-            builder.returnType(GenericType.Mono(clientResponseClassType));
-        } else {
-            IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)
-                    || responseBodyType.equals(ClassType.InputStream)) {
-                singleValueType = ClassType.StreamResponse;
-            } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
-            } else {
-                singleValueType = GenericType.Response(responseBodyType);
-            }
-            builder.returnType(createSingleValueAsyncReturnType(singleValueType));
-        }
+        builder.returnType(
+                getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings));
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
@@ -165,7 +131,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
         builder.responseContentTypes(responseContentTypes);
 
-        // Low-level client only requires one request per operation
+        // DPG client only requires one request per operation
         List<Request> requests = operation.getRequests();
         if (settings.isDataPlaneClient()) {
             Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
@@ -175,7 +141,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         // Used to deduplicate method with same signature.
         // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
         Set<List<String>> methodSignatures = new HashSet<>();
-
 
         for (Request request : requests) {
             if (parsed.containsKey(request)) {
@@ -202,9 +167,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             List<ProxyMethodParameter> allParameters = new ArrayList<>();
             List<ProxyMethod> proxyMethods = new ArrayList<>();
             // add content-type parameter to allParameters when body is optional and there is single content type
-            if (settings.isDataPlaneClient()) {
+            if (settings.isDataPlaneClient()
+                    // only if "content-type" is not already defined in parameters
+                    && request.getParameters().stream().noneMatch(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.HEADER && "content-type".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
                 boolean isBodyParamRequired = request.getParameters()
-                        .stream().filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null ? p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY : false)
+                        .stream().filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null && p.getProtocol().getHttp().getIn() == RequestParameterLocation.BODY)
                         .map(Parameter::isRequired).findFirst().orElse(false);
                 if (MethodUtil.getContentTypeCount(operation.getRequests()) == 1 && !isBodyParamRequired) {
                     Parameter contentTypeParameter = MethodUtil.createContentTypeParameter(request, operation);
@@ -227,7 +194,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     // LLC will put required path, body, query, header parameters to method signature
                     final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
-                            && parameter.getLanguage().getJava().getName().equalsIgnoreCase("apiversion");
+                            && ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION;
                     final boolean parameterIsConstantOrFromClient = proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient();
                     if (parameterIsRequired
                             || parameterIsConstantOrFromClient
@@ -260,6 +227,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .isNullable(false)
                         .fromClient(false)
                         .parameterReference("requestOptions")
+                        .origin(ParameterSynthesizedOrigin.REQUEST_OPTIONS)
                         .build();
                 allParameters.add(requestOptions);
                 parameters.add(requestOptions);
@@ -280,6 +248,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .isNullable(false)
                         .fromClient(false)
                         .parameterReference("context")
+                        .origin(ParameterSynthesizedOrigin.CONTEXT)
                         .build();
                 allParameters.add(contextParameter);
                 parameters.add(contextParameter);
@@ -341,11 +310,59 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
     }
 
+    /**
+     * Gets the type for AsyncRestResponse.
+     *
+     * @param operation the operation.
+     * @param responseBodyType the type of the response body.
+     * @param isProtocolMethod whether the client method to be simplified for resilience to API changes.
+     * @param settings the JavaSettings.
+     * @return the type for AsyncRestResponse.
+     */
+    protected IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
+                                                   boolean isProtocolMethod, JavaSettings settings) {
+        if (isProtocolMethod) {
+            IType singleValueType;
+            if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.Response(responseBodyType);
+            }
+            return createSingleValueAsyncReturnType(singleValueType);
+        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
+                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
+            return createBinaryContentAsyncReturnType();
+        } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
+            // SchemaResponse
+            // method with schema in headers would require a ClientResponse
+            if (settings.isGenericResponseTypes()) {
+                IType genericResponseType = GenericType.RestResponse(
+                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
+                        responseBodyType);
+                return createSingleValueAsyncReturnType(genericResponseType);
+            } else {
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                return createClientResponseAsyncReturnType(clientResponseClassType);
+            }
+        } else {
+            if (responseBodyType.equals(ClassType.InputStream)) {
+                return createStreamContentAsyncReturnType();
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+                IType singleValueType = GenericType.Response(ClassType.Void);
+                return createSingleValueAsyncReturnType(singleValueType);
+            } else {
+                IType singleValueType = GenericType.Response(responseBodyType);
+                return createSingleValueAsyncReturnType(singleValueType);
+            }
+        }
+    }
+
     protected IType createSingleValueAsyncReturnType(IType singleValueType) {
         return GenericType.Mono(singleValueType);
     }
 
-    protected IType createAsyncResponseReturnType(ClassType clientResponseClassType) {
+    protected IType createClientResponseAsyncReturnType(ClassType clientResponseClassType) {
         return GenericType.Mono(clientResponseClassType);
     }
 

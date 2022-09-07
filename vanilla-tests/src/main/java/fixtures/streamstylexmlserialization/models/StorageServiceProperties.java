@@ -9,11 +9,11 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** Storage Service Properties. */
 @Fluent
@@ -44,7 +44,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
         }
 
         @Override
-        public XmlWriter toXml(XmlWriter xmlWriter) {
+        public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("Cors");
             if (items != null) {
                 items.forEach(xmlWriter::writeXml);
@@ -52,7 +52,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
             return xmlWriter.writeEndElement();
         }
 
-        public static CorsWrapper fromXml(XmlReader xmlReader) {
+        public static CorsWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
             return xmlReader.readObject(
                     "Cors",
                     reader -> {
@@ -240,7 +240,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("StorageServiceProperties");
         xmlWriter.writeXml(this.logging);
         xmlWriter.writeXml(this.hourMetrics);
@@ -258,7 +258,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
      */
-    public static StorageServiceProperties fromXml(XmlReader xmlReader) {
+    public static StorageServiceProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "StorageServiceProperties",
                 reader -> {

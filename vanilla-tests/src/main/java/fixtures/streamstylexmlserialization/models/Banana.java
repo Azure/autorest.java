@@ -9,10 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** A banana. */
 @Fluent
@@ -100,7 +100,7 @@ public final class Banana implements XmlSerializable<Banana> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("banana");
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
@@ -115,7 +115,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      */
-    public static Banana fromXml(XmlReader xmlReader) {
+    public static Banana fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "banana",
                 reader -> {

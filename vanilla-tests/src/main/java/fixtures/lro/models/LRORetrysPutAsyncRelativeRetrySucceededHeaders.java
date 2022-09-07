@@ -36,8 +36,9 @@ public final class LRORetrysPutAsyncRelativeRetrySucceededHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LRORetrysPutAsyncRelativeRetrySucceededHeaders(HttpHeaders rawHeaders) {
-        if (rawHeaders.getValue("Retry-After") != null) {
-            this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        String retryAfter = rawHeaders.getValue("Retry-After");
+        if (retryAfter != null) {
+            this.retryAfter = Integer.parseInt(retryAfter);
         }
         this.azureAsyncOperation = rawHeaders.getValue("Azure-AsyncOperation");
         this.location = rawHeaders.getValue("Location");

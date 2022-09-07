@@ -9,6 +9,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +104,7 @@ public class Shark extends Fish {
     private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
@@ -123,7 +124,7 @@ public class Shark extends Fish {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Shark fromJson(JsonReader jsonReader) {
+    public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
@@ -173,7 +174,7 @@ public class Shark extends Fish {
                 });
     }
 
-    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) {
+    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     boolean lengthFound = false;

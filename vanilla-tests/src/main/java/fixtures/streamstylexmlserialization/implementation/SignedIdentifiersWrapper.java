@@ -35,7 +35,7 @@ public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIde
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("SignedIdentifiers");
         if (signedIdentifiers != null) {
             signedIdentifiers.forEach(xmlWriter::writeXml);
@@ -43,7 +43,7 @@ public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIde
         return xmlWriter.writeEndElement();
     }
 
-    public static SignedIdentifiersWrapper fromXml(XmlReader xmlReader) {
+    public static SignedIdentifiersWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "SignedIdentifiers",
                 reader -> {

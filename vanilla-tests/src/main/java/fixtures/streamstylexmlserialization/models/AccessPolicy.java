@@ -9,10 +9,10 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
-import javax.xml.namespace.QName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /** An Access policy. */
 @Fluent
@@ -110,7 +110,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("AccessPolicy");
         xmlWriter.writeStringElement("Start", Objects.toString(this.start, null));
         xmlWriter.writeStringElement("Expiry", Objects.toString(this.expiry, null));
@@ -125,7 +125,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * @return An instance of AccessPolicy if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      */
-    public static AccessPolicy fromXml(XmlReader xmlReader) {
+    public static AccessPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "AccessPolicy",
                 reader -> {

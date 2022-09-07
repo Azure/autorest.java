@@ -42,6 +42,8 @@ public class ServiceClientProperty {
 
     private final boolean required;
 
+    private String requestParameterName;
+
     /**
      * Create a new ServiceClientProperty with the provided properties.
      * @param description The description of this property.
@@ -51,15 +53,15 @@ public class ServiceClientProperty {
      * @param defaultValueExpression The expression that evaluates to this property's default value.
      */
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression) {
-        this(description, type, name, readOnly, defaultValueExpression, name, JavaVisibility.Public, false);
+        this(description, type, name, readOnly, defaultValueExpression, name, JavaVisibility.Public, false, null);
     }
 
     public ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression, JavaVisibility methodVisibility) {
-        this(description, type, name, readOnly, defaultValueExpression, name, methodVisibility, false);
+        this(description, type, name, readOnly, defaultValueExpression, name, methodVisibility, false, null);
     }
 
     private ServiceClientProperty(String description, IType type, String name, boolean readOnly, String defaultValueExpression,
-                                  String accessorMethodSuffix, JavaVisibility methodVisibility, boolean required) {
+                                  String accessorMethodSuffix, JavaVisibility methodVisibility, boolean required, String requestParameterName) {
         this.description = description;
         this.type = type;
         this.name = name;
@@ -68,6 +70,7 @@ public class ServiceClientProperty {
         this.accessorMethodSuffix = accessorMethodSuffix;
         this.methodVisibility = methodVisibility;
         this.required = required;
+        this.requestParameterName = requestParameterName;
     }
 
     public final String getDescription() {
@@ -100,6 +103,13 @@ public class ServiceClientProperty {
 
     public boolean isRequired() {
         return required;
+    }
+
+    /**
+     * @return the name of this parameter when it is serialized. It could be {@code null}, if this parameter is client only.
+     */
+    public String getRequestParameterName() {
+        return requestParameterName;
     }
 
     /**
@@ -137,6 +147,7 @@ public class ServiceClientProperty {
         private String defaultValueExpression = null;
         private JavaVisibility methodVisibility = JavaVisibility.Public;
         private boolean required = false;
+        private String requestParameterName;
 
         public Builder description(String description) {
             this.description = description;
@@ -178,12 +189,17 @@ public class ServiceClientProperty {
             return this;
         }
 
+        public Builder requestParameterName(String requestParameterName) {
+            this.requestParameterName = requestParameterName;
+            return this;
+        }
+
         public ServiceClientProperty build() {
             if (accessorMethodSuffix == null) {
                 accessorMethodSuffix = name;
             }
             return new ServiceClientProperty(description, type, name, readOnly, defaultValueExpression,
-                    accessorMethodSuffix, methodVisibility, required);
+                    accessorMethodSuffix, methodVisibility, required, requestParameterName);
         }
     }
 }

@@ -35,7 +35,7 @@ public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
     }
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) {
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("bananas");
         if (bananas != null) {
             bananas.forEach(xmlWriter::writeXml);
@@ -43,7 +43,7 @@ public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
         return xmlWriter.writeEndElement();
     }
 
-    public static BananasWrapper fromXml(XmlReader xmlReader) {
+    public static BananasWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "bananas",
                 reader -> {

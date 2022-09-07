@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The DoubleWrapper model. */
 @Fluent
@@ -76,7 +77,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("field1", this.field1);
         jsonWriter.writeNumberField(
@@ -92,7 +93,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * @return An instance of DoubleWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DoubleWrapper fromJson(JsonReader jsonReader) {
+    public static DoubleWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Double field1 = null;

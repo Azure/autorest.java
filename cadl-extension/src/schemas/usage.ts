@@ -1,6 +1,4 @@
-import {
-  KnownMediaType
-} from "@azure-tools/codegen";
+import { KnownMediaType } from "@azure-tools/codegen";
 
 export enum SchemaContext {
   /** Schema is used as an input to an operation. */

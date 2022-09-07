@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Objects;
 
 /** The Basic model. */
@@ -99,7 +100,7 @@ public final class Basic implements JsonSerializable<Basic> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("id", this.id);
         jsonWriter.writeStringField("name", this.name);
@@ -114,7 +115,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Basic fromJson(JsonReader jsonReader) {
+    public static Basic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
@@ -129,7 +130,7 @@ public final class Basic implements JsonSerializable<Basic> {
                         } else if ("name".equals(fieldName)) {
                             name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = CMYKColors.fromString(reader.getString());
+                            color = reader.getNullable(enumReader -> CMYKColors.fromString(enumReader.getString()));
                         } else {
                             reader.skipChildren();
                         }
