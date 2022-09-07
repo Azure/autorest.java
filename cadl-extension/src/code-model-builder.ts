@@ -617,7 +617,7 @@ export class CodeModelBuilder {
             intrinsicModelName === "safeint"
           ) {
             // integer
-            const integerSize = (intrinsicModelName === "safeint" || intrinsicModelName.includes("int64")) ? 64 : 32;
+            const integerSize = intrinsicModelName === "safeint" || intrinsicModelName.includes("int64") ? 64 : 32;
             return this.processIntegerSchema(type, nameHint, integerSize);
           } else if (intrinsicModelName.startsWith("float")) {
             // float point
