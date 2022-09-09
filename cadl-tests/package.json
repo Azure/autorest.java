@@ -7,9 +7,9 @@
     "prettier": "prettier --config ./.prettierrc.yaml **/*.cadl"
   },
   "dependencies": {
-    "@cadl-lang/compiler": "^0.35.0",
-    "@cadl-lang/rest": "^0.17.0",
-    "@azure-tools/cadl-azure-core": "^0.7.0",
+    "@cadl-lang/compiler": "~0.35.0",
+    "@cadl-lang/rest": "~0.17.0",
+    "@azure-tools/cadl-azure-core": "~0.7.0",
     "@azure-tools/cadl-ranch": "latest",
     "@azure-tools/cadl-ranch-expect": "latest",
     "@azure-tools/cadl-ranch-specs": "latest",
