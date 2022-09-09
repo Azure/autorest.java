@@ -235,6 +235,10 @@ public class ProxyMethod {
         return getName() + "SinglePageAsync";
     }
 
+    public final String getPagingSinglePageMethodName() {
+        return getName() + "SinglePage";
+    }
+
     public final String getSimpleAsyncMethodName() {
         return getName() + "Async";
     }
@@ -325,10 +329,15 @@ public class ProxyMethod {
             return ClassType.BinaryData;
         }
 
+
         if (type instanceof GenericType) {
             GenericType genericType = (GenericType) type;
             if (genericType.getName().equals("Mono" )) {
-                return genericType.getTypeArguments()[0];
+                if (genericType.getTypeArguments()[0] == ClassType.StreamResponse) {
+                    return GenericType.Response(ClassType.BinaryData);
+                } else {
+                    return genericType.getTypeArguments()[0];
+                }
             }
             if (genericType.getName().equals("PagedFlux" )) {
                 return new GenericType("com.azure.core.util", "PagedIterable", genericType.getTypeArguments());

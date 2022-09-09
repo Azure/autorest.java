@@ -290,7 +290,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
             }
 
-            addSyncProxyMethods(proxyMethods);
+            if (settings.isSyncStackEnabled()) {
+                addSyncProxyMethods(proxyMethods);
+            }
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);
         }
@@ -360,7 +362,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if (responseBodyType.equals(ClassType.InputStream)) {
+            if (responseBodyType.equals(ClassType.BinaryData)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 IType singleValueType = GenericType.Response(ClassType.Void);
