@@ -1139,7 +1139,7 @@ export class CodeModelBuilder {
           newName = target.name + "Request";
         } else {
           // hack for other cases, mostly Page<>
-          newName = (
+          newName =
             target.name +
             target
               .templateArguments!.map((it) => {
@@ -1152,8 +1152,7 @@ export class CodeModelBuilder {
                     return "";
                 }
               })
-              .join("")
-          );
+              .join("");
         }
         this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
