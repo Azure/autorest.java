@@ -290,10 +290,26 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
             }
 
+            if (settings.isSyncStackEnabled()) {
+                addSyncProxyMethods(proxyMethods);
+            }
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
+        List<ProxyMethod> syncProxyMethods = new ArrayList<>();
+        for (ProxyMethod asyncProxyMethod : proxyMethods) {
+            if (asyncProxyMethod.getParameters()
+                    .stream()
+                    .anyMatch(param -> param.getClientType() == GenericType.FluxByteBuffer)) {
+                continue;
+            }
+            syncProxyMethods.add(asyncProxyMethod.toSync());
+        }
+        proxyMethods.addAll(syncProxyMethods);
     }
 
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
@@ -346,7 +362,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if (responseBodyType.equals(ClassType.InputStream)) {
+            if (responseBodyType.equals(ClassType.BinaryData)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 IType singleValueType = GenericType.Response(ClassType.Void);

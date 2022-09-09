@@ -18,6 +18,7 @@ import com.azure.core.http.HttpMethod;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A method within a Proxy.
@@ -96,6 +97,25 @@ public class ProxyMethod {
 
     private final String operationId;
 
+    private final boolean isSync;
+    private ProxyMethod syncProxy;
+
+    protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
+                          String urlPath, List<Integer> responseExpectedStatusCodes,
+                          ClassType unexpectedResponseExceptionType,
+                          Map<ClassType, List<Integer>> unexpectedResponseExceptionTypes,
+                          String name, List<ProxyMethodParameter> parameters,
+                          List<ProxyMethodParameter> allParameters, String description,
+                          IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
+                          boolean isResumable, Set<String> responseContentTypes,
+                          String operationId, Map<String, ProxyMethodExample> examples,
+                          List<String> specialHeaders) {
+        this(requestContentType, returnType,httpMethod,baseUrl,urlPath,responseExpectedStatusCodes,
+                unexpectedResponseExceptionType, unexpectedResponseExceptionTypes, name, parameters, allParameters,
+                description,returnValueWireType, responseBodyType, rawResponseBodyType, isResumable,
+                responseContentTypes, operationId, examples, specialHeaders, false);
+    }
+
     /**
      * Create a new RestAPIMethod with the provided properties.
      * @param requestContentType The Content-Type of the request.
@@ -123,7 +143,7 @@ public class ProxyMethod {
                           IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
                           boolean isResumable, Set<String> responseContentTypes,
                           String operationId, Map<String, ProxyMethodExample> examples,
-                          List<String> specialHeaders) {
+                          List<String> specialHeaders, boolean isSync) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -144,6 +164,7 @@ public class ProxyMethod {
         this.operationId = operationId;
         this.examples = examples;
         this.specialHeaders = specialHeaders;
+        this.isSync = isSync;
     }
 
     public final String getRequestContentType() {
@@ -214,6 +235,10 @@ public class ProxyMethod {
         return getName() + "SinglePageAsync";
     }
 
+    public final String getPagingSinglePageMethodName() {
+        return getName() + "SinglePage";
+    }
+
     public final String getSimpleAsyncMethodName() {
         return getName() + "Async";
     }
@@ -242,55 +267,88 @@ public class ProxyMethod {
         return specialHeaders;
     }
 
-    //    private MethodType _methodType = null;
-//    public final MethodType getMethodType()
-//    {
-//        if (_methodType != null)
-//        {
-//            return _methodType.getValue();
-//        }
-//        _methodType = getMethodType().Other;
-//        if (!tangible.StringHelper.isNullOrEmpty(getAutoRestMethod().MethodGroup == null ? null : (getAutoRestMethod().MethodGroup.Name == null ? null : getAutoRestMethod().MethodGroup.Name.toString())))
-//        {
-//            String autoRestMethodUrl = (new Regex("/+$")).Replace((new Regex("^/+")).Replace(getUrlPath(), ""), "");
-//            String[] autoRestMethodUrlSplits = autoRestMethodUrl.split("[/]", -1);
-//            switch (getAutoRestMethod().HttpMethod)
-//            {
-//                case getHttpMethod().Get:
-//                    if ((autoRestMethodUrlSplits.length == 5 || autoRestMethodUrlSplits.length == 7) && autoRestMethodUrlSplits[0].EqualsIgnoreCase("subscriptions") && getAutoRestMethod().ReturnType.Body.MethodHasSequenceType())
-//                    {
-//                        if (autoRestMethodUrlSplits.length == 5)
-//                        {
-//                            if (autoRestMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-//                            {
-//                                _methodType = getMethodType().ListBySubscription;
-//                            }
-//                            else
-//                            {
-//                                _methodType = getMethodType().ListByResourceGroup;
-//                            }
-//                        }
-//                        else if (autoRestMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-//                        {
-//                            _methodType = getMethodType().ListByResourceGroup;
-//                        }
-//                    }
-//                    else if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
-//                    {
-//                        _methodType = getMethodType().Get;
-//                    }
-//                    break;
-//
-//                case getHttpMethod().Delete:
-//                    if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
-//                    {
-//                        _methodType = getMethodType().Delete;
-//                    }
-//                    break;
-//            }
-//        }
-//        return _methodType.getValue();
-//    }
+    public boolean isSync() {
+        return isSync;
+    }
+    
+    public ProxyMethod toSync() {
+        if (isSync) {
+            return this;
+        }
+
+        if (this.syncProxy != null) {
+            return syncProxy;
+        }
+
+        List<ProxyMethodParameter> syncParams = this.getParameters()
+                .stream()
+                .map(this::mapToSyncParam)
+                .collect(Collectors.toList());
+
+        List<ProxyMethodParameter> allSyncParams = this.getAllParameters()
+                .stream()
+                .map(this::mapToSyncParam)
+                .collect(Collectors.toList());
+
+        this.syncProxy = new ProxyMethod.Builder()
+                .parameters(syncParams)
+                .httpMethod(this.getHttpMethod())
+                .name(this.getName() + "Sync" )
+                .description(this.getDescription())
+                .baseURL(this.getBaseUrl())
+                .operationId(this.getOperationId())
+                .isResumable(this.isResumable())
+                .examples(this.getExamples())
+                .rawResponseBodyType(mapToSyncType(this.getRawResponseBodyType()))
+                .requestContentType(this.getRequestContentType())
+                .responseBodyType(mapToSyncType(this.getResponseBodyType()))
+                .returnType(mapToSyncType(this.getReturnType()))
+                .returnValueWireType(mapToSyncType(this.getReturnValueWireType()))
+                .urlPath(this.getUrlPath())
+                .specialHeaders(this.getSpecialHeaders())
+                .unexpectedResponseExceptionType(this.getUnexpectedResponseExceptionType())
+                .unexpectedResponseExceptionTypes(this.getUnexpectedResponseExceptionTypes())
+                .allParameters(allSyncParams)
+                .responseContentTypes(this.getResponseContentTypes())
+                .responseExpectedStatusCodes(this.getResponseExpectedStatusCodes())
+                .isSync(true)
+                .build();
+        return this.syncProxy;
+    }
+
+    private ProxyMethodParameter mapToSyncParam(ProxyMethodParameter param) {
+        return param.toNewBuilder()
+                .clientType(mapToSyncType(param.getClientType()))
+                .rawType(mapToSyncType(param.getRawType()))
+                .wireType(mapToSyncType(param.getWireType()))
+                .build();
+    }
+
+    private IType mapToSyncType(IType type) {
+        if (type == GenericType.FluxByteBuffer) {
+            return ClassType.BinaryData;
+        }
+
+
+        if (type instanceof GenericType) {
+            GenericType genericType = (GenericType) type;
+            if (genericType.getName().equals("Mono" )) {
+                if (genericType.getTypeArguments()[0] == ClassType.StreamResponse) {
+                    return GenericType.Response(ClassType.BinaryData);
+                } else {
+                    return genericType.getTypeArguments()[0];
+                }
+            }
+            if (genericType.getName().equals("PagedFlux" )) {
+                return new GenericType("com.azure.core.util", "PagedIterable", genericType.getTypeArguments());
+            }
+            if (genericType.getName().equals("PollerFlux" )) {
+                return new GenericType("com.azure.core.util", "SyncPoller", genericType.getTypeArguments());
+            }
+        }
+        return type;
+    }
+
 
     /**
      * Add this property's imports to the provided ISet of imports.
@@ -356,6 +414,7 @@ public class ProxyMethod {
         protected Map<String, ProxyMethodExample> examples;
         protected String operationId;
         protected List<String> specialHeaders;
+        protected boolean isSync;
 
         /*
          * Sets the Content-Type of the request.
@@ -556,6 +615,11 @@ public class ProxyMethod {
             return this;
         }
 
+        public Builder isSync(boolean isSync) {
+            this.isSync = isSync;
+            return this;
+        }
+
         /**
          * @return an immutable ProxyMethod instance with the configurations on this builder.
          */
@@ -579,7 +643,8 @@ public class ProxyMethod {
                     responseContentTypes,
                     operationId,
                     examples,
-                    specialHeaders);
+                    specialHeaders,
+                    isSync);
         }
     }
 }

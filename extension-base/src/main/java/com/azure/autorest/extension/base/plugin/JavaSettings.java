@@ -33,7 +33,6 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
 
     private static Logger logger;
-
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -155,7 +154,8 @@ public class JavaSettings {
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
-                getBooleanValue(host, "stream-style-serialization", false)
+                getBooleanValue(host, "stream-style-serialization", false),
+                getBooleanValue(host, "enable-sync-stack", false)
             );
         }
         return instance;
@@ -248,7 +248,8 @@ public class JavaSettings {
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
         boolean genericResponseTypes,
-        boolean streamStyleSerialization) {
+        boolean streamStyleSerialization,
+        boolean isSyncStackEnabled) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -337,6 +338,7 @@ public class JavaSettings {
         this.genericResponseTypes = genericResponseTypes;
 
         this.streamStyleSerialization = streamStyleSerialization;
+        this.isSyncStackEnabled = isSyncStackEnabled;
     }
 
     private String keyCredentialHeaderName;
@@ -790,6 +792,11 @@ public class JavaSettings {
 
     public boolean isGenerateModels() {
         return generateModels;
+    }
+
+    private final boolean isSyncStackEnabled;
+    public boolean isSyncStackEnabled() {
+        return isSyncStackEnabled;
     }
 
     private final boolean clientBuilderDisabled;

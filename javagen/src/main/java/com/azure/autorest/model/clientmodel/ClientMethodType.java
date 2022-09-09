@@ -20,14 +20,15 @@ public enum ClientMethodType {
     LongRunningBeginAsync(8),
 
     SimpleSync(9),
-    SimpleAsync(10), // will not generate when sync-methods=none, will generate when sync-methods=essential
+    SimpleAsync(10), // will not generate when sync-methods=none, will generate when sync-methods=essential,
     SimpleAsyncRestResponse(11),
     SimpleSyncRestResponse(12),
 
     Resumable(13),
 
     SendRequestSync(14),
-    SendRequestAsync(15);
+    SendRequestAsync(15),
+    PagingSyncSinglePage(16);
 
     private static java.util.HashMap<Integer, ClientMethodType> mappings;
     private int intValue;

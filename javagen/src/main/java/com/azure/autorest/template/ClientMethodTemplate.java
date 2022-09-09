@@ -30,6 +30,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -482,10 +483,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                if (settings.isDataPlaneClient()) {
-                    generateProtocolPagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isSyncStackEnabled()) {
+                    if (settings.isDataPlaneClient()) {
+                        generateProtocolPagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    } else {
+                        generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    }
                 } else {
-                    generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    if (settings.isDataPlaneClient()) {
+                        generateProtocolPagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    } else {
+                        generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    }
                 }
                 break;
             case PagingAsync:
@@ -495,6 +504,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
+            case PagingSyncSinglePage:
+                if (settings.isDataPlaneClient()) {
+                    generateProtocolPagingSinglePage(clientMethod, typeBlock, restAPIMethod.toSync(), settings);
+                } else {
+                    generatePagedSinglePage(clientMethod, typeBlock, restAPIMethod.toSync(), settings);
+                }
+                break;
             case PagingAsyncSinglePage:
                 if (settings.isDataPlaneClient()) {
                     generateProtocolPagingAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
@@ -502,44 +518,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
-
-            // TODO: Simulated paging
-//            case SimulatedPagingSync:
-//                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-//                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-//                    function.line("%s page = new %s<>();", pageDetails.getPageImplType(), pageDetails.getPageImplType());
-//                    function.line("page.setItems(%s(%s).single().items());", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
-//                    function.line("page.setNextPageLink(null);");
-//                    function.returnAnonymousClass(String.format("new %s(page)", clientMethod.getReturnValue().getType()), anonymousClass -> {
-//                        anonymousClass.annotation("Override");
-//                        anonymousClass.publicMethod("{pageDetails.PageType} nextPage(String nextPageLink)", subFunction -> {
-//                            subFunction.methodReturn("null");
-//                        });
-//                    });
-//                });
-//                break;
-//
-//            case SimulatedPagingAsync:
-//                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-//                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-//                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-//                    AddValidations(function, clientMethod.getValidateExpressions(), settings);
-//                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-//                    ApplyParameterTransformations(function, clientMethod, settings);
-//                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-//
-//                    IType returnValueTypeArgumentType = ((GenericType) restAPIMethod.getReturnType()).getTypeArguments()[0];
-//                    String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-//                    function.line("return service.%s(%s)", clientMethod.getProxyMethod().getName(), restAPIMethodArgumentList);
-//                    function.indent(() -> {
-//                        function.text(".map(");
-//                        function.lambda(returnValueTypeArgumentType.toString(), "res", "res.value()");
-//                        function.line(")");
-//                        function.line(".repeat(1);");
-//                    });
-//                });
-//                break;
-
             case LongRunningAsync:
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
@@ -565,8 +543,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case SimpleSync:
+                if (settings.isSyncStackEnabled()) {
+                    generateSimpleSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
+                    generateSimplePlainSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                }
+                break;
             case SimpleSyncRestResponse:
-                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isSyncStackEnabled()) {
+                    generatePlainSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
+                    generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case SimpleAsyncRestResponse:
@@ -590,13 +578,72 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
+    protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock,
+                                               ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
+    }
+
     protected void generateProtocolPagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
+    }
+
+    protected void generateProtocolPaging(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
     protected void generateProtocolPagingAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
     }
+
+    protected void generateProtocolPagingSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        generatePagedSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
+    }
+
+    private void generatePagedSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+
+            boolean requestOptionsLocal = false;
+            if (settings.isDataPlaneClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
+            function.line(String.format("%s res = %s;", restAPIMethod.getReturnType(), serviceMethodCall));
+            function.line("return new PagedResponseBase<>(");
+            function.line("res.getRequest(),");
+            function.line("res.getStatusCode(),");
+            function.line("res.getHeaders(),");
+            if (settings.isDataPlaneClient()) {
+                function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawItemName());
+            } else {
+                function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+            }
+            if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                if (settings.isDataPlaneClient()) {
+                    function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawNextLinkName());
+                } else {
+                    function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                }
+            } else {
+                function.line("null,");
+            }
+
+            if (responseTypeHasDeserializedHeaders(clientMethod.getProxyMethod().getReturnType())) {
+                function.line("res.getDeserializedHeaders());");
+            } else {
+                function.line("null);");
+            }
+        });
+    }
+
 
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
@@ -604,6 +651,57 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
+    }
+
+    protected void generatePagingPlainSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                if (settings.isDataPlaneClient()) {
+                    function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
+                    function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+                }
+                function.line("return new PagedIterable<>(");
+
+                String nextMethodArgs = clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage");
+                String firstPageArgs = clientMethod.getArgumentList();
+                if (clientMethod.getParameters()
+                        .stream()
+                        .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
+                    firstPageArgs = firstPageArgs + ", Context.NONE";
+                }
+                String effectiveNextMethodArgs = nextMethodArgs;
+                String effectiveFirstPageArgs = firstPageArgs;
+                function.indent(() -> {
+                    function.line("() -> %s(%s),",
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs);
+                    function.line("nextLink -> %s(%s));",
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveNextMethodArgs);
+                });
+            });
+        } else {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+
+                String firstPageArgs = clientMethod.getArgumentList();
+                if (clientMethod.getParameters()
+                        .stream()
+                        .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    firstPageArgs = firstPageArgs + ", Context.NONE";
+                }
+                String effectiveFirstPageArgs = firstPageArgs;
+                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                function.line("return new PagedIterable<>(");
+                function.indent(() -> {
+                    function.line("() -> %s(%s));",
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs);
+                });
+            });
+        }
     }
 
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
@@ -665,7 +763,52 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }));
     }
 
-    protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+    private void generateSimpleSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+
+            String argumentList = clientMethod.getArgumentList();
+            argumentList = CoreUtils.isNullOrEmpty(argumentList) ? "Context.NONE" : argumentList + ", Context.NONE";
+
+            if (ClassType.StreamResponse.equals(clientMethod.getReturnValue().getType())) {
+                function.text(".flatMapMany(StreamResponse::getValue);");
+            }
+            if(clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+                function.line("%s(%s);",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                        argumentList);
+            } else {
+                function.line("return %s(%s).getValue();",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", "" ),
+                        argumentList);
+            }
+        }));
+    }
+
+    private void generateSimplePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod,
+                                           JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
+            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+
+            String argumentList = clientMethod.getArgumentList();
+            argumentList = CoreUtils.isNullOrEmpty(argumentList) ? "Context.NONE" : argumentList + ", Context.NONE";
+
+            if(clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+                function.line("%s(%s);",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                        argumentList);
+            } else {
+                function.line("return %s(%s).getValue();",
+                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", "" ),
+                        argumentList);
+            }
+        }));
+    }
+
+    protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
+                                               ProxyMethod restAPIMethod, JavaSettings settings) {
         String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
         if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
             asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
@@ -676,7 +819,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                    effectiveAsyncMethodName, clientMethod.getArgumentList());
+                        effectiveAsyncMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -688,7 +831,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                        effectiveAsyncMethodName, clientMethod.getArgumentList());
+                            effectiveAsyncMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -703,6 +846,52 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             } else {
                 function.line("%s(%s).block();", effectiveAsyncMethodName, clientMethod.getArgumentList());
+            }
+        });
+    }
+
+    protected void generatePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
+                                                ProxyMethod restAPIMethod, JavaSettings settings) {
+            String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
+            typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+
+            addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
+            addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            applyParameterTransformations(function, clientMethod, settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), false,
+                    settings);
+            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+                function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
+                        effectiveMethodName, clientMethod.getArgumentList());
+                function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
+                    javaBlock.annotation("Override");
+                    javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
+                    javaBlock.annotation("Override");
+                    javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
+                });
+                function.methodReturn("new SequenceInputStream(enumeration)");
+            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+                IType returnType = clientMethod.getReturnValue().getType();
+                if (returnType instanceof PrimitiveType) {
+                    function.line("%s value = %s(%s);", returnType.asNullable(),
+                            effectiveMethodName, clientMethod.getArgumentList());
+                    function.ifBlock("value != null", ifAction -> {
+                        ifAction.methodReturn("value");
+                    }).elseBlock(elseAction -> {
+                        if (settings.shouldClientLogger()) {
+                            elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
+                        } else {
+                            elseAction.line("throw new NullPointerException();");
+                        }
+                    });
+                } else {
+                    function.methodReturn(serviceMethodCall);
+                }
+            } else {
+                function.line("%s(%s);", effectiveMethodName, clientMethod.getArgumentList());
             }
         });
     }
