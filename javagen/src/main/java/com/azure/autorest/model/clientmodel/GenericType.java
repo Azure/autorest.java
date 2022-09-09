@@ -287,7 +287,7 @@ public class GenericType implements IType {
 
     @Override
     public final String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName,
-        String namespaceUri, String valueGetter, boolean isAttribute) {
+        String namespaceUri, String valueGetter, boolean isAttribute, boolean nameIsVariable) {
         return null;
     }
 

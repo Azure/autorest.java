@@ -135,8 +135,9 @@ public interface IType {
      * @param namespaceUri The namespace URI of the XML attribute or element, optional.
      * @param valueGetter The value getter.
      * @param isAttribute Whether an attribute is being written, if true {@code attributeOrElementName} must be set.
+     * @param nameIsVariable Whether the {@code attributeOrElementName} is a variable instead of a string.
      * @return The method call that will handle XML serialization, or null if it isn't supported directly.
      */
     String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute);
+        String valueGetter, boolean isAttribute, boolean nameIsVariable);
 }

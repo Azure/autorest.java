@@ -86,10 +86,14 @@ public final class Blobs implements XmlSerializable<Blobs> {
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("Blobs");
         if (this.blobPrefix != null) {
-            this.blobPrefix.forEach(element -> xmlWriter.writeXml(element));
+            for (BlobPrefix element : this.blobPrefix) {
+                xmlWriter.writeXml(element);
+            }
         }
         if (this.blob != null) {
-            this.blob.forEach(element -> xmlWriter.writeXml(element));
+            for (Blob element : this.blob) {
+                xmlWriter.writeXml(element);
+            }
         }
         return xmlWriter.writeEndElement();
     }

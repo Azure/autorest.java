@@ -9,11 +9,12 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 
 /** Storage Service Properties. */
 @Fluent
@@ -47,7 +48,9 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("Cors");
             if (items != null) {
-                items.forEach(xmlWriter::writeXml);
+                for (CorsRule element : items) {
+                    xmlWriter.writeXml(element);
+                }
             }
             return xmlWriter.writeEndElement();
         }

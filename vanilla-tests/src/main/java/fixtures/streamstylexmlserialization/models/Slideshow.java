@@ -136,7 +136,9 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         xmlWriter.writeStringAttribute("date", this.date);
         xmlWriter.writeStringAttribute("author", this.author);
         if (this.slides != null) {
-            this.slides.forEach(element -> xmlWriter.writeXml(element));
+            for (Slide element : this.slides) {
+                xmlWriter.writeXml(element);
+            }
         }
         return xmlWriter.writeEndElement();
     }

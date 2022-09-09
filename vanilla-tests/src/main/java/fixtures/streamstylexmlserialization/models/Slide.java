@@ -106,7 +106,9 @@ public final class Slide implements XmlSerializable<Slide> {
         xmlWriter.writeStringAttribute("type", this.type);
         xmlWriter.writeStringElement("title", this.title);
         if (this.items != null) {
-            this.items.forEach(element -> xmlWriter.writeStringElement("items", element));
+            for (String element : this.items) {
+                xmlWriter.writeStringElement("items", element);
+            }
         }
         return xmlWriter.writeEndElement();
     }

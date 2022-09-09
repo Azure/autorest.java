@@ -190,23 +190,10 @@ public class EnumType implements IType {
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute) {
+        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
         String value = "Objects.toString(" + valueGetter + ", null)";
-        if (isAttribute) {
-            return namespaceUri == null
-                ? String.format("%s.writeStringAttribute(\"%s\", %s)", xmlWriterName, attributeOrElementName, value)
-                : String.format("%s.writeStringAttribute(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
-                    attributeOrElementName, value);
-        } else {
-            if (attributeOrElementName == null) {
-                return String.format("%s.writeString(%s)", xmlWriterName, value);
-            } else {
-                return namespaceUri == null
-                    ? String.format("%s.writeStringElement(\"%s\", %s)", xmlWriterName, attributeOrElementName, value)
-                    : String.format("%s.writeStringElement(\"%s\", \"%s\", %s)", xmlWriterName, namespaceUri,
-                        attributeOrElementName, value);
-            }
-        }
+        return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeString", attributeOrElementName, namespaceUri,
+            value, isAttribute, nameIsVariable);
     }
 
     @Override

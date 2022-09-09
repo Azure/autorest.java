@@ -11,6 +11,7 @@ import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.SignedIdentifier;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.stream.XMLStreamException;
 
 /** A wrapper around List&lt;SignedIdentifier&gt; which provides top-level metadata for serialization. */
 public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIdentifiersWrapper> {
@@ -38,7 +39,9 @@ public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIde
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("SignedIdentifiers");
         if (signedIdentifiers != null) {
-            signedIdentifiers.forEach(xmlWriter::writeXml);
+            for (SignedIdentifier element : signedIdentifiers) {
+                xmlWriter.writeXml(element);
+            }
         }
         return xmlWriter.writeEndElement();
     }

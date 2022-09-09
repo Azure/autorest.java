@@ -450,11 +450,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 continue;
             }
 
-            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
-                comment -> comment.line(property.getDescription()));
-
-            addFieldAnnotations(property, classBlock, settings);
-
             String propertyName = property.getName();
             IType propertyType = property.getWireType();
 
@@ -491,6 +486,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     }
                 }
             }
+
+            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
+                comment -> comment.line(property.getDescription()));
+
+            addFieldAnnotations(property, classBlock, settings);
 
             if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
                 && settings.isStreamStyleSerialization()) {
@@ -853,7 +853,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
         boolean needsNullGuarding = wireType != ClassType.String &&
-            (wireType instanceof ClassType || wireType instanceof EnumType || wireType instanceof GenericType);
+            (wireType instanceof ArrayType || wireType instanceof ClassType || wireType instanceof EnumType || wireType instanceof GenericType);
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());

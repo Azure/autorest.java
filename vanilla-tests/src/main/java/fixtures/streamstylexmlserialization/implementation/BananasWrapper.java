@@ -11,6 +11,7 @@ import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.Banana;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.stream.XMLStreamException;
 
 /** A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization. */
 public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
@@ -38,7 +39,9 @@ public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         xmlWriter.writeStartElement("bananas");
         if (bananas != null) {
-            bananas.forEach(xmlWriter::writeXml);
+            for (Banana element : bananas) {
+                xmlWriter.writeXml(element);
+            }
         }
         return xmlWriter.writeEndElement();
     }

@@ -108,9 +108,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     @Override
     protected String addSerializationImplementations(String classSignature, ClientModel model, JavaSettings settings) {
-        // TODO (alzimmer): Once XML stream-style serialization is supported this will need to determine whether
-        //  JsonCapable and/or XmlCapable need to be added as an implemented interface.
-        if (!settings.isStreamStyleSerialization()) {
+        if (!settings.isStreamStyleSerialization() || model.isStronglyTypedHeader()) {
             return classSignature;
         }
 
@@ -167,13 +165,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writerMethod.line(writeStartElement);
 
             writerMethod.ifBlock(xmlElementNameCamelCase + " != null", ifAction -> {
-                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
-                    ifAction.line(xmlElementNameCamelCase + ".forEach(xmlWriter::writeXml);");
-                } else {
-                    String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", xmlListElementName,
-                        xmlNamespace, "element", false);
-                    ifAction.line(xmlElementNameCamelCase + ".forEach(element -> " + xmlWrite + ");");
-                }
+                String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", xmlListElementName,
+                    xmlNamespace, "element", false, false);
+                ifAction.line("for (%s element : %s) {", elementType, xmlElementNameCamelCase);
+                ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
+                ifAction.line("}");
             });
 
             writerMethod.methodReturn("xmlWriter.writeEndElement()");
@@ -216,6 +212,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     @Override
     protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+        // Early out as strongly-typed headers do their own thing.
+        if (model.isStronglyTypedHeader()) {
+            return;
+        }
+
         ClientModelPropertiesManager propertiesManager = new ClientModelPropertiesManager(model, settings);
 
         if (settings.shouldGenerateXmlSerialization() && model.getXmlName() != null) {
@@ -253,8 +254,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             ClientModelProperty additionalProperties = propertiesManager.getAdditionalProperties();
             if (additionalProperties != null) {
-                methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction ->
-                    ifAction.line(additionalProperties.getName() + ".forEach(jsonWriter::writeUntypedField);"));
+                methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
+                    ifAction.line("for (Map.Entry<String, Object> additionalProperty : %s.entrySet()) {", additionalProperties.getName());
+                    ifAction.indent(() ->
+                        ifAction.line("jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());"));
+                    ifAction.line("}");
+                });
             }
 
             methodBlock.methodReturn("jsonWriter.writeEndObject()");
@@ -1122,7 +1127,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String xmlSerializationMethodCall = wireType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
-            element.getXmlNamespace(), propertyValueGetter, element.getIsXmlAttribute());
+            element.getXmlNamespace(), propertyValueGetter, element.getIsXmlAttribute(), false);
         if (xmlSerializationMethodCall != null) {
             // XML text has special handling.
             if (element.isXmlText()) {
@@ -1137,8 +1142,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
                 String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
-                    element.getXmlNamespace(), "element", element.getIsXmlAttribute());
-                ifAction.line(propertyValueGetter + ".forEach(element -> " + xmlWrite + ");");
+                    element.getXmlNamespace(), "element", element.getIsXmlAttribute(), false);
+                ifAction.line("for (%s element : %s) {", elementType, propertyValueGetter);
+                ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
+                ifAction.line("}");
             });
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
@@ -1153,15 +1160,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         ? "xmlWriter.writeStartElement(null, \"" + element.getXmlNamespace() + "\", key);"
                         : "xmlWriter.writeStartElement(key);";
 
-                    ifAction.line(propertyValueGetter + ".forEach((key, value) -> {\n"
-                        + "%s"
-                        + "xmlWriter.writeXml(value);\n"
-                        + "xmlWriter.writeEndElement();\n"
-                        + "});", writeStartElement);
+                    ifAction.line("for (Map.Entry<String, %s> entry : %s.entrySet()) {", valueType, propertyValueGetter);
+                    ifAction.indent(() -> {
+                        ifAction.line(writeStartElement);
+                        ifAction.line("xmlWriter.writeXml(entry.getValue());");
+                        ifAction.line("xmlWriter.writeEndElement();");
+                    });
+                    ifAction.line("}");
                 } else {
-                    ifAction.line(propertyValueGetter + ".forEach((key, value) -> %s);",
-                        valueType.xmlSerializationMethodCall("xmlWriter", "key", element.getXmlNamespace(), "value",
-                            false));
+                    String xmlWrite = valueType.xmlSerializationMethodCall("xmlWriter", "entry.getKey()",
+                        element.getXmlNamespace(), "entry.getValue()", false, true);
+
+                    ifAction.line("for (Map.Entry<String, %s> entry : %s.entrySet()) {", valueType, propertyValueGetter);
+                    ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
+                    ifAction.line("}");
                 }
 
                 ifAction.line("xmlWriter.writeEndElement();");

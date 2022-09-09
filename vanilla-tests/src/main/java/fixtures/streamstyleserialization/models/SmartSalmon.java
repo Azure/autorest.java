@@ -130,7 +130,9 @@ public final class SmartSalmon extends Salmon {
         jsonWriter.writeBooleanField("iswild", iswild());
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {
-            additionalProperties.forEach(jsonWriter::writeUntypedField);
+            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
+            }
         }
         return jsonWriter.writeEndObject();
     }

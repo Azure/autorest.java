@@ -115,7 +115,9 @@ public final class Container implements XmlSerializable<Container> {
         xmlWriter.writeXml(this.properties);
         if (this.metadata != null) {
             xmlWriter.writeStartElement("Metadata");
-            this.metadata.forEach((key, value) -> xmlWriter.writeStringElement("key", value));
+            for (Map.Entry<String, String> entry : this.metadata.entrySet()) {
+                xmlWriter.writeStringElement(entry.getKey(), entry.getValue());
+            }
             xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();

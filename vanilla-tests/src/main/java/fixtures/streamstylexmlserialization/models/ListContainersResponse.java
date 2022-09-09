@@ -52,7 +52,9 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("Containers");
             if (items != null) {
-                items.forEach(xmlWriter::writeXml);
+                for (Container element : items) {
+                    xmlWriter.writeXml(element);
+                }
             }
             return xmlWriter.writeEndElement();
         }

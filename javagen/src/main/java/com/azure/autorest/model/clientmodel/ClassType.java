@@ -556,7 +556,7 @@ public class ClassType implements IType {
     @Override
     public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
         java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
-        boolean isAttribute) {
+        boolean isAttribute, boolean nameIsVariable) {
         if (isSwaggerType) {
             if (isAttribute) {
                 throw new RuntimeException("Swagger types cannot be written as attributes.");
@@ -565,25 +565,9 @@ public class ClassType implements IType {
             return java.lang.String.format("%s.writeXml(%s)", xmlWriterName, valueGetter);
         }
 
-        String value = wrapSerializationWithObjectsToString
-            ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
-        if (isAttribute) {
-            return namespaceUri == null
-                ? java.lang.String.format("%s.%sAttribute(\"%s\", %s)", xmlWriterName, serializationMethodBase,
-                    attributeOrElementName, value)
-                : java.lang.String.format("%s.%sAttribute(\"%s\", \"%s\", %s)", xmlWriterName,
-                    serializationMethodBase, namespaceUri, attributeOrElementName, value);
-        } else {
-            if (attributeOrElementName == null) {
-                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodBase, value);
-            } else {
-                return namespaceUri == null
-                    ? java.lang.String.format("%s.%sElement(\"%s\", %s)", xmlWriterName, serializationMethodBase,
-                        attributeOrElementName, value)
-                    : java.lang.String.format("%s.%sElement(\"%s\", \"%s\", %s)", xmlWriterName,
-                        serializationMethodBase, namespaceUri, attributeOrElementName, value);
-            }
-        }
+        String value = wrapSerializationWithObjectsToString ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
+        return xmlSerializationCallHelper(xmlWriterName, serializationMethodBase, attributeOrElementName, namespaceUri,
+            value, isAttribute, nameIsVariable);
     }
 
     public static class Builder {
@@ -720,5 +704,35 @@ public class ClassType implements IType {
 
         builder.append(str, last, str.length());
         return builder.toString();
+    }
+
+    static String xmlSerializationCallHelper(String xmlWriterName, String serializationMethodName,
+        String attributeOrElementName, String namespaceUri, String valueGetter, boolean isAttribute,
+        boolean nameIsVariable) {
+        String name = null;
+        if (attributeOrElementName != null) {
+            name = nameIsVariable ? attributeOrElementName : "\"" + attributeOrElementName + "\"";
+        }
+        if (isAttribute) {
+            if (namespaceUri == null) {
+                return java.lang.String.format("%s.%sAttribute(%s, %s)", xmlWriterName, serializationMethodName,
+                    name, valueGetter);
+            } else {
+                return java.lang.String.format("%s.%sAttribute(\"%s\", %s, %s)", xmlWriterName,
+                    serializationMethodName, namespaceUri, name, valueGetter);
+            }
+        } else {
+            if (name == null) {
+                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodName, valueGetter);
+            } else {
+                if (namespaceUri == null) {
+                    return java.lang.String.format("%s.%sElement(%s, %s)", xmlWriterName, serializationMethodName,
+                        name, valueGetter);
+                } else {
+                    return java.lang.String.format("%s.%sElement(\"%s\", %s, %s)", xmlWriterName,
+                        serializationMethodName, namespaceUri, name, valueGetter);
+                }
+            }
+        }
     }
 }

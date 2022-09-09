@@ -32,7 +32,9 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("GoodApples");
             if (items != null) {
-                items.forEach(element -> xmlWriter.writeStringElement("Apple", element));
+                for (String element : items) {
+                    xmlWriter.writeStringElement("Apple", element);
+                }
             }
             return xmlWriter.writeEndElement();
         }
@@ -77,7 +79,9 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
             xmlWriter.writeStartElement("BadApples");
             if (items != null) {
-                items.forEach(element -> xmlWriter.writeStringElement("Apple", element));
+                for (String element : items) {
+                    xmlWriter.writeStringElement("Apple", element);
+                }
             }
             return xmlWriter.writeEndElement();
         }

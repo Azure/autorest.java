@@ -228,26 +228,12 @@ public class PrimitiveType implements IType {
     @Override
     public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
         java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
-        boolean isAttribute) {
+        boolean isAttribute, boolean nameIsVariable) {
         String value = wrapSerializationWithObjectsToString
             ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
-        if (isAttribute) {
-            return namespaceUri == null
-                ? java.lang.String.format("%s.%sAttribute(\"%s\", %s)", xmlWriterName, serializationMethodBase,
-                    attributeOrElementName, value)
-                : java.lang.String.format("%s.%sAttribute(\"%s\", \"%s\", %s)", xmlWriterName, serializationMethodBase,
-                    namespaceUri, attributeOrElementName, value);
-        } else {
-            if (attributeOrElementName == null) {
-                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodBase, value);
-            } else {
-                return namespaceUri == null
-                    ? java.lang.String.format("%s.%sElement(\"%s\", %s)", xmlWriterName, serializationMethodBase,
-                        attributeOrElementName, value)
-                    : java.lang.String.format("%s.%sElement(\"%s\", \"%s\", %s)", xmlWriterName,
-                        serializationMethodBase, namespaceUri, attributeOrElementName, value);
-            }
-        }
+
+        return ClassType.xmlSerializationCallHelper(xmlWriterName, serializationMethodBase, attributeOrElementName,
+            namespaceUri, value, isAttribute, nameIsVariable);
     }
 
     @Override
