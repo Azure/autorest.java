@@ -223,7 +223,7 @@ public final class ResiliencyServiceDriven2Client {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
+     * I'm a new operation. Initially neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
      *
      * <p><strong>Response Body Schema</strong>
@@ -473,7 +473,7 @@ public final class ResiliencyServiceDriven2Client {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
+     * I'm a new operation. Initially neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
