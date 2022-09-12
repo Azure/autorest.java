@@ -29,6 +29,7 @@ import {
   RecordModelType,
   StringLiteral,
   Type,
+  TypeNameOptions,
   Union,
   UnionVariant,
 } from "@cadl-lang/compiler";
@@ -94,6 +95,7 @@ import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
 
 export class CodeModelBuilder {
   private program: Program;
+  private typeNameOptions: TypeNameOptions;
   private version: string;
   private baseUri: string;
   private hostParameters: Parameter[];
@@ -122,6 +124,14 @@ export class CodeModelBuilder {
         this.version = versioning.getVersions()[0].value;
       }
     }
+
+    this.typeNameOptions = {
+      // shorten type names by removing Cadl and service namespace
+      namespaceFilter(ns) {
+        const name = program1.checker.getNamespaceString(ns);
+        return name !== "Cadl" && name !== namespace;
+      },
+    };
 
     // init code model
     let title = getServiceTitle(this.program);
@@ -1104,6 +1114,8 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
+        const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
+
         // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
         const knownCoreTemplate = new Set<string>([
           "OptionalProperties",
@@ -1123,11 +1135,12 @@ export class CodeModelBuilder {
           target = target.templateArguments[0];
         }
 
+        let newName = target.name;
         if (modelUsedInCoreRequest) {
-          return target.name + "Request";
+          newName = target.name + "Request";
         } else {
           // hack for other cases, mostly Page<>
-          return (
+          newName =
             target.name +
             target
               .templateArguments!.map((it) => {
@@ -1140,9 +1153,10 @@ export class CodeModelBuilder {
                     return "";
                 }
               })
-              .join("")
-          );
+              .join("");
         }
+        this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
+        return newName;
       } else {
         return target.name;
       }

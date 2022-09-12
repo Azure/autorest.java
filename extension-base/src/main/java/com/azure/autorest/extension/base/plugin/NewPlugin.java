@@ -200,6 +200,7 @@ public abstract class NewPlugin {
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
     }
