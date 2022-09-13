@@ -37,12 +37,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the ResponseClient type. */
-@ServiceClientBuilder(serviceClients = {ResponseClient.class, ResponseAsyncClient.class})
-public final class ResponseClientBuilder
-        implements HttpTrait<ResponseClientBuilder>,
-                ConfigurationTrait<ResponseClientBuilder>,
-                EndpointTrait<ResponseClientBuilder> {
+/** A builder for creating a new instance of the ResponseOpClient type. */
+@ServiceClientBuilder(serviceClients = {ResponseOpClient.class, ResponseOpAsyncClient.class})
+public final class ResponseOpClientBuilder
+        implements HttpTrait<ResponseOpClientBuilder>,
+                ConfigurationTrait<ResponseOpClientBuilder>,
+                EndpointTrait<ResponseOpClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -51,9 +51,9 @@ public final class ResponseClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the ResponseClientBuilder. */
+    /** Create an instance of the ResponseOpClientBuilder. */
     @Generated
-    public ResponseClientBuilder() {
+    public ResponseOpClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -65,7 +65,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder pipeline(HttpPipeline pipeline) {
+    public ResponseOpClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -78,7 +78,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder httpClient(HttpClient httpClient) {
+    public ResponseOpClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -91,7 +91,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public ResponseOpClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -104,7 +104,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder clientOptions(ClientOptions clientOptions) {
+    public ResponseOpClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -117,7 +117,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder retryOptions(RetryOptions retryOptions) {
+    public ResponseOpClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public ResponseOpClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -138,7 +138,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder configuration(Configuration configuration) {
+    public ResponseOpClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -151,7 +151,7 @@ public final class ResponseClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ResponseClientBuilder endpoint(String endpoint) {
+    public ResponseOpClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -165,10 +165,10 @@ public final class ResponseClientBuilder
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the ResponseClientBuilder.
+     * @return the ResponseOpClientBuilder.
      */
     @Generated
-    public ResponseClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
+    public ResponseOpClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -182,10 +182,10 @@ public final class ResponseClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the ResponseClientBuilder.
+     * @return the ResponseOpClientBuilder.
      */
     @Generated
-    public ResponseClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public ResponseOpClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -252,22 +252,22 @@ public final class ResponseClientBuilder
     }
 
     /**
-     * Builds an instance of ResponseAsyncClient class.
+     * Builds an instance of ResponseOpAsyncClient class.
      *
-     * @return an instance of ResponseAsyncClient.
+     * @return an instance of ResponseOpAsyncClient.
      */
     @Generated
-    public ResponseAsyncClient buildAsyncClient() {
-        return new ResponseAsyncClient(buildInnerClient().getResponseOps());
+    public ResponseOpAsyncClient buildAsyncClient() {
+        return new ResponseOpAsyncClient(buildInnerClient().getResponseOps());
     }
 
     /**
-     * Builds an instance of ResponseClient class.
+     * Builds an instance of ResponseOpClient class.
      *
-     * @return an instance of ResponseClient.
+     * @return an instance of ResponseOpClient.
      */
     @Generated
-    public ResponseClient buildClient() {
-        return new ResponseClient(new ResponseAsyncClient(buildInnerClient().getResponseOps()));
+    public ResponseOpClient buildClient() {
+        return new ResponseOpClient(new ResponseOpAsyncClient(buildInnerClient().getResponseOps()));
     }
 }

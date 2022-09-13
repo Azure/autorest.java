@@ -20,7 +20,7 @@ public final class Resource {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
@@ -39,7 +39,7 @@ public final class Resource {
     @JsonCreator
     public Resource(
             @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) String id,
-            @JsonProperty(value = "name", required = true) String name,
+            @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY) String name,
             @JsonProperty(value = "type", required = true) String type) {
         this.id = id;
         this.name = name;

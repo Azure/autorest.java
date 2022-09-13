@@ -18,6 +18,7 @@ import {
   ignoreDiagnostics,
   isArrayModelType,
   isIntrinsic,
+  isKey,
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
@@ -33,7 +34,7 @@ import {
   Union,
   UnionVariant,
 } from "@cadl-lang/compiler";
-import { getDiscriminator } from "@cadl-lang/rest";
+import { getDiscriminator, getSegment } from "@cadl-lang/rest";
 import {
   getAllRoutes,
   getAuthentication,
@@ -1153,12 +1154,18 @@ export class CodeModelBuilder {
     }
   }
 
-  private isReadOnly(target: Type): boolean {
-    const visibility = getVisibility(this.program, target);
-    if (visibility) {
-      return !visibility.includes("write");
+  private isReadOnly(target: ModelProperty): boolean {
+    const key = isKey(this.program, target);
+    const segment = getSegment(this.program, target) !== undefined;
+    if (key || segment) {
+      return true;
     } else {
-      return false;
+      const visibility = getVisibility(this.program, target);
+      if (visibility) {
+        return !visibility.includes("write");
+      } else {
+        return false;
+      }
     }
   }
 

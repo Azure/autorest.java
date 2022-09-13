@@ -16,6 +16,7 @@ model Resource {
   @key
   @segment("resources")
   name: string;
+  description?: string;
   type: string;
 }
 
@@ -46,8 +47,16 @@ interface ResponseOp {
     @header("operation-location")
     operationLocation: ResourceLocation<Resource>;
   };
+}
 
-  // response of operation using Azure.Core
-  @route("/create")
-  create is ResourceCreateOrReplace<Resource>;
+// operation using Azure.Core
+interface CadlCoreOp {
+  @doc("Creates a new resource or updates an existing one.")
+  createOrUpdate is ResourceCreateOrReplace<Resource>;
+
+  @doc("Gets the details of a resource.")
+  get is ResourceRead<Resource>;
+
+  @doc("Deletes a resource.")
+  delete is ResourceDelete<Resource>;
 }
