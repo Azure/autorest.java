@@ -41,8 +41,10 @@ public final class JsonMergePatchAsyncClient {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -50,8 +52,10 @@ public final class JsonMergePatchAsyncClient {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -77,8 +81,10 @@ public final class JsonMergePatchAsyncClient {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -86,8 +92,10 @@ public final class JsonMergePatchAsyncClient {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
