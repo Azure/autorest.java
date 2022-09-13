@@ -18,7 +18,6 @@ import {
   ignoreDiagnostics,
   isArrayModelType,
   isIntrinsic,
-  isKey,
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
@@ -1155,9 +1154,9 @@ export class CodeModelBuilder {
   }
 
   private isReadOnly(target: ModelProperty): boolean {
-    const key = isKey(this.program, target);
+    // const key = isKey(this.program, target);
     const segment = getSegment(this.program, target) !== undefined;
-    if (key || segment) {
+    if (segment) {
       return true;
     } else {
       const visibility = getVisibility(this.program, target);
