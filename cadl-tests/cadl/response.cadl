@@ -20,6 +20,22 @@ model Resource {
   type: string;
 }
 
+// operation using Azure.Core
+@route("/cadl-core")
+interface CadlCoreOp {
+  @doc("Creates a new resource or updates an existing one.")
+  createOrUpdate is ResourceCreateOrReplace<Resource>;
+
+  @doc("Gets the details of a resource.")
+  get is ResourceRead<Resource>;
+
+  @doc("Deletes a resource.")
+  delete is ResourceDelete<Resource>;
+
+  @doc("Lists the existing resources.")
+  list is ResourceList<Resource>;
+}
+
 @route("/response")
 interface ResponseOp {
   // binary
@@ -47,17 +63,4 @@ interface ResponseOp {
     @header("operation-location")
     operationLocation: ResourceLocation<Resource>;
   };
-}
-
-// operation using Azure.Core
-@route("/cadl-core")
-interface CadlCoreOp {
-  @doc("Creates a new resource or updates an existing one.")
-  createOrUpdate is ResourceCreateOrReplace<Resource>;
-
-  @doc("Gets the details of a resource.")
-  get is ResourceRead<Resource>;
-
-  @doc("Deletes a resource.")
-  delete is ResourceDelete<Resource>;
 }
