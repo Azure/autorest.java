@@ -16,20 +16,19 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.response.models.Resource;
-import com.cadl.response.models.ResourceRequest;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
-@ServiceClient(builder = ResponseClientBuilder.class)
-public final class ResponseClient {
-    @Generated private final ResponseAsyncClient client;
+@ServiceClient(builder = ResponseOpClientBuilder.class)
+public final class ResponseOpClient {
+    @Generated private final ResponseOpAsyncClient client;
 
     /**
-     * Initializes an instance of ResponseClient class.
+     * Initializes an instance of ResponseOpClient class.
      *
      * @param client the async client.
      */
     @Generated
-    ResponseClient(ResponseAsyncClient client) {
+    ResponseOpClient(ResponseOpAsyncClient client) {
         this.client = client;
     }
 
@@ -64,6 +63,7 @@ public final class ResponseClient {
      * {
      *     id: String (Required)
      *     name: String (Required)
+     *     description: String (Optional)
      *     type: String (Required)
      * }
      * }</pre>
@@ -95,43 +95,6 @@ public final class ResponseClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
         return this.client.deleteWithHeadersWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Creates or replaces a Resource.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithResponse(
-            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
-        return this.client.createWithResponse(name, updateableProperties, requestOptions).block();
     }
 
     /**
@@ -185,28 +148,5 @@ public final class ResponseClient {
         // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         deleteWithHeadersWithResponse(requestOptions).getValue();
-    }
-
-    /**
-     * Creates or replaces a Resource.
-     *
-     * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource create(String name, ResourceRequest updateableProperties) {
-        // Generated convenience method for createWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions)
-                .getValue()
-                .toObject(Resource.class);
     }
 }

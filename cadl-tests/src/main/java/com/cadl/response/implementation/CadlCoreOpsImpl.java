@@ -4,13 +4,16 @@
 
 package com.cadl.response.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -27,33 +30,54 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in ResponseOps. */
-public final class ResponseOpsImpl {
+/** An instance of this class provides access to all the operations defined in CadlCoreOps. */
+public final class CadlCoreOpsImpl {
     /** The proxy service used to perform REST calls. */
-    private final ResponseOpsService service;
+    private final CadlCoreOpsService service;
 
     /** The service client containing this operation class. */
     private final ResponseClientImpl client;
 
     /**
-     * Initializes an instance of ResponseOpsImpl.
+     * Initializes an instance of CadlCoreOpsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ResponseOpsImpl(ResponseClientImpl client) {
+    CadlCoreOpsImpl(ResponseClientImpl client) {
         this.service =
-                RestProxy.create(ResponseOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+                RestProxy.create(CadlCoreOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ResponseResponseOps to be used by the proxy service to perform REST
+     * The interface defining all the services for ResponseCadlCoreOps to be used by the proxy service to perform REST
      * calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "ResponseResponseOps")
-    private interface ResponseOpsService {
-        @Get("/response/get-binary")
+    @ServiceInterface(name = "ResponseCadlCoreOps")
+    private interface CadlCoreOpsService {
+        @Put("/resources/{name}")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> createOrUpdate(
+                @HostParam("endpoint") String endpoint,
+                @PathParam("name") String name,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData updateableProperties,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/resources/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -65,31 +89,15 @@ public final class ResponseOpsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getBinary(
+        Mono<Response<BinaryData>> get(
                 @HostParam("endpoint") String endpoint,
+                @PathParam("name") String name,
+                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/response/create-with-headers")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createWithHeaders(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
-
-        @Delete("/response/delete-with-headers")
+        @Delete("/resources/{name}")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -101,59 +109,26 @@ public final class ResponseOpsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> deleteWithHeaders(
+        Mono<Response<Void>> delete(
                 @HostParam("endpoint") String endpoint,
+                @PathParam("name") String name,
+                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
 
     /**
-     * The getBinary operation.
+     * Creates a new resource or updates an existing one.
      *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getBinaryWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
-        return FluxUtil.withContext(
-                context -> service.getBinary(this.client.getEndpoint(), accept, requestOptions, context));
-    }
-
-    /**
-     * The getBinary operation.
-     *
-     * <p><strong>Response Body Schema</strong>
+     * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * {
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
      * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
-        return getBinaryWithResponseAsync(requestOptions).block();
-    }
-
-    /**
-     * The createWithHeaders operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -166,6 +141,8 @@ public final class ResponseOpsImpl {
      * }
      * }</pre>
      *
+     * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -174,14 +151,32 @@ public final class ResponseOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createWithHeadersWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
+            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.createWithHeaders(this.client.getEndpoint(), accept, requestOptions, context));
+                context ->
+                        service.createOrUpdate(
+                                this.client.getEndpoint(),
+                                name,
+                                this.client.getServiceVersion().getVersion(),
+                                accept,
+                                updateableProperties,
+                                requestOptions,
+                                context));
     }
 
     /**
-     * The createWithHeaders operation.
+     * Creates a new resource or updates an existing one.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -194,6 +189,8 @@ public final class ResponseOpsImpl {
      * }
      * }</pre>
      *
+     * @param name The name parameter.
+     * @param updateableProperties The template for adding updateable properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,13 +199,78 @@ public final class ResponseOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithHeadersWithResponse(RequestOptions requestOptions) {
-        return createWithHeadersWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> createOrUpdateWithResponse(
+            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
+        return createOrUpdateWithResponseAsync(name, updateableProperties, requestOptions).block();
     }
 
     /**
-     * The deleteWithHeaders operation.
+     * Gets the details of a resource.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the details of a resource along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getWithResponseAsync(String name, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.get(
+                                this.client.getEndpoint(),
+                                name,
+                                this.client.getServiceVersion().getVersion(),
+                                accept,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * Gets the details of a resource.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the details of a resource along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
+        return getWithResponseAsync(name, requestOptions).block();
+    }
+
+    /**
+     * Deletes a resource.
+     *
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -217,15 +279,23 @@ public final class ResponseOpsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteWithHeadersWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.deleteWithHeaders(this.client.getEndpoint(), accept, requestOptions, context));
+                context ->
+                        service.delete(
+                                this.client.getEndpoint(),
+                                name,
+                                this.client.getServiceVersion().getVersion(),
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
-     * The deleteWithHeaders operation.
+     * Deletes a resource.
      *
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -234,7 +304,7 @@ public final class ResponseOpsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
-        return deleteWithHeadersWithResponseAsync(requestOptions).block();
+    public Response<Void> deleteWithResponse(String name, RequestOptions requestOptions) {
+        return deleteWithResponseAsync(name, requestOptions).block();
     }
 }
