@@ -25,6 +25,7 @@ public class YamlPropertyTest {
 
         LoaderOptions loaderOptions = new LoaderOptions();
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
 

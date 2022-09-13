@@ -42,7 +42,7 @@ public final class RoundTripBasicAsyncClient {
      * <pre>{@code
      * {
      *     requiredString: String (Required)
-     *     requiredInt: long (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      *
@@ -51,7 +51,7 @@ public final class RoundTripBasicAsyncClient {
      * <pre>{@code
      * {
      *     requiredString: String (Required)
-     *     requiredInt: long (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      *

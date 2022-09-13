@@ -712,20 +712,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             comment.param("rawHeaders", "The raw HttpHeaders that will be used to create the property values.");
         });
         classBlock.publicConstructor(String.format("%s(HttpHeaders rawHeaders)", model.getName()), constructor -> {
+            // HeaderCollections need special handling as they may have multiple values that need to be retrieved from
+            // the raw headers.
+            List<ClientModelProperty> collectionProperties = new ArrayList<>();
             for (ClientModelProperty property : model.getProperties()) {
-                addConstructorCustomDeserialization(property, constructor);
+                if (CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+                    generateHeaderDeserializationFunction(property, constructor);
+                } else {
+                    collectionProperties.add(property);
+                }
+            }
+
+            if (!CoreUtils.isNullOrEmpty(collectionProperties)) {
+                // Bundle all collection properties into one iteration over the HttpHeaders.
+                generateHeaderCollectionDeserialization(collectionProperties, constructor);
             }
         });
-    }
-
-    private static void addConstructorCustomDeserialization(ClientModelProperty property, JavaBlock javaBlock) {
-        // HeaderCollections need special handling as they may have multiple values that need to be
-        // retrieved from the raw headers.
-        if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
-            generateHeaderCollectionDeserialization(property, javaBlock);
-        } else {
-            generateHeaderDeserializationFunction(property, javaBlock);
-        }
     }
 
     /**
@@ -807,30 +809,51 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         methodBlock.methodReturn("this");
     }
 
-    private static void generateHeaderCollectionDeserialization(ClientModelProperty property, JavaBlock block) {
-        int headerPrefixLength = property.getHeaderCollectionPrefix().length();
-        // HeaderCollections are always Maps that use String as the key.
-        MapType wireType = (MapType) property.getWireType();
-        String collectionName = property.getName() + "HeaderCollection";
+    private static void generateHeaderCollectionDeserialization(List<ClientModelProperty> properties, JavaBlock block) {
+        for (ClientModelProperty property : properties) {
+            // HeaderCollections are always Maps that use String as the key.
+            MapType wireType = (MapType) property.getWireType();
 
-        // Prefix the map with the property name for the cases where multiple header collections exist.
-        // TODO: If there are multiple header collections they can be combined into a single loop over the headers.
-        // Not a high priority as loop should be relatively cheap, and only constant time.
-        block.line("%s %s = new HashMap<>();", wireType, collectionName);
+            // Prefix the map with the property name for the cases where multiple header collections exist.
+            block.line("%s %sHeaderCollection = new HashMap<>();", wireType, property.getName());
+        }
+
         block.line();
+
         block.block("for (HttpHeader header : rawHeaders)", body -> {
-            body.ifBlock(String.format("!header.getName().startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
-                ifBlock -> ifBlock.line("continue;"));
-            body.line(collectionName + ".put(header.getName().substring(%d), header.getValue());", headerPrefixLength);
+            body.line("String headerName = header.getName();");
+            int propertiesSize = properties.size();
+            for (int i = 0; i < propertiesSize; i++) {
+                ClientModelProperty property = properties.get(i);
+                boolean needsContinue = i < propertiesSize - 1;
+                body.ifBlock(String.format("headerName.startsWith(\"%s\")", property.getHeaderCollectionPrefix()),
+                    ifBlock -> {
+                        ifBlock.line("%sHeaderCollection.put(headerName.substring(%d), header.getValue());",
+                            property.getName(), property.getHeaderCollectionPrefix().length());
+                        if (needsContinue) {
+                            ifBlock.line("continue;");
+                        }
+                    });
+            }
         });
-        block.line("this.%s = %s;", property.getName(), collectionName);
+
+        block.line();
+
+        for (ClientModelProperty property : properties) {
+            block.line("this.%s = %sHeaderCollection;", property.getName(), property.getName());
+        }
     }
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
+        boolean needsNullGuarding = wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String;
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
+        if (needsNullGuarding) {
+            javaBlock.line("String %s = %s;", property.getName(), rawHeaderAccess);
+            rawHeaderAccess = property.getName();
+        }
 
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
@@ -865,8 +888,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
-        if (wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String) {
-            javaBlock.ifBlock(String.format("%s != null", rawHeaderAccess),
+        if (needsNullGuarding) {
+            javaBlock.ifBlock(String.format("%s != null", property.getName()),
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {
             javaBlock.line("this.%s = %s;", property.getName(), setter);

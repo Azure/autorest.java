@@ -73,7 +73,7 @@ public final class AllPropertiesOptional {
      * The int property.
      */
     @JsonProperty(value = "int")
-    private Long intProperty;
+    private Integer intProperty;
 
     /*
      * The long property.
@@ -308,7 +308,7 @@ public final class AllPropertiesOptional {
      *
      * @return the intProperty value.
      */
-    public Long getIntProperty() {
+    public Integer getIntProperty() {
         return this.intProperty;
     }
 
@@ -318,7 +318,7 @@ public final class AllPropertiesOptional {
      * @param intProperty the intProperty value to set.
      * @return the AllPropertiesOptional object itself.
      */
-    public AllPropertiesOptional setIntProperty(Long intProperty) {
+    public AllPropertiesOptional setIntProperty(Integer intProperty) {
         this.intProperty = intProperty;
         return this;
     }

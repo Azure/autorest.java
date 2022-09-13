@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -14,9 +15,14 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
     private static final ConvenienceSyncMethodTemplate INSTANCE = new ConvenienceSyncMethodTemplate();
+
+    private static final String ASYNC_CLIENT_VAR_NAME = "client";
 
     protected ConvenienceSyncMethodTemplate() {
     }
@@ -33,6 +39,28 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     @Override
     protected boolean isMethodIncluded(ConvenienceMethod method) {
         return !isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod());
+    }
+
+    @Override
+    protected void writeMethodImplementation(
+            ClientMethod protocolMethod, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+
+        if (protocolMethod.getType() == ClientMethodType.PagingSync) {
+            // Call the convenience method from async client
+            // It would need rework, when underlying sync method in Impl is switched to sync protocol method
+
+            List<String> parameterNames = convenienceMethod.getMethodInputParameters().stream()
+                    .map(ClientMethodParameter::getName).collect(Collectors.toList());
+
+            String methodInvoke = String.format("%1$s.%2$s(%3$s)",
+                    ASYNC_CLIENT_VAR_NAME, convenienceMethod.getName(), String.join(", ", parameterNames));
+
+            methodInvoke = "new PagedIterable<>(" + methodInvoke + ")";
+
+            methodBlock.methodReturn(methodInvoke);
+        } else {
+            super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
+        }
     }
 
     @Override

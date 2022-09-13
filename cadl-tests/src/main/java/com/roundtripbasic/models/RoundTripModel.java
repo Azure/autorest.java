@@ -21,7 +21,7 @@ public final class RoundTripModel {
      * Required int, illustrating a value type property.
      */
     @JsonProperty(value = "requiredInt", required = true)
-    private long requiredInt;
+    private int requiredInt;
 
     /**
      * Creates an instance of RoundTripModel class.
@@ -32,7 +32,7 @@ public final class RoundTripModel {
     @JsonCreator
     public RoundTripModel(
             @JsonProperty(value = "requiredString", required = true) String requiredString,
-            @JsonProperty(value = "requiredInt", required = true) long requiredInt) {
+            @JsonProperty(value = "requiredInt", required = true) int requiredInt) {
         this.requiredString = requiredString;
         this.requiredInt = requiredInt;
     }
@@ -51,7 +51,7 @@ public final class RoundTripModel {
      *
      * @return the requiredInt value.
      */
-    public long getRequiredInt() {
+    public int getRequiredInt() {
         return this.requiredInt;
     }
 }

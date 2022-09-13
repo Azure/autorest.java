@@ -16,7 +16,7 @@ public final class CollectionsIntProperty {
      * Property
      */
     @JsonProperty(value = "property", required = true)
-    private List<Long> property;
+    private List<Integer> property;
 
     /**
      * Creates an instance of CollectionsIntProperty class.
@@ -24,7 +24,7 @@ public final class CollectionsIntProperty {
      * @param property the property value to set.
      */
     @JsonCreator
-    public CollectionsIntProperty(@JsonProperty(value = "property", required = true) List<Long> property) {
+    public CollectionsIntProperty(@JsonProperty(value = "property", required = true) List<Integer> property) {
         this.property = property;
     }
 
@@ -33,7 +33,7 @@ public final class CollectionsIntProperty {
      *
      * @return the property value.
      */
-    public List<Long> getProperty() {
+    public List<Integer> getProperty() {
         return this.property;
     }
 }

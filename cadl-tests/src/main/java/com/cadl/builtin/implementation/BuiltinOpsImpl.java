@@ -78,16 +78,17 @@ public final class BuiltinOpsImpl {
      * <pre>{@code
      * {
      *     formatString (Required): {
-     *         base64Encoded: byte[] (Required)
+     *         base64Encoded: Base64Url (Required)
      *         binary: byte[] (Required)
      *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: OffsetDateTime (Required)
+     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
      *         password: String (Required)
      *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
-     *     int: long (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
      *     long: long (Required)
      *     float: double (Required)
      *     double: double (Required)
@@ -124,16 +125,17 @@ public final class BuiltinOpsImpl {
      * <pre>{@code
      * {
      *     formatString (Required): {
-     *         base64Encoded: byte[] (Required)
+     *         base64Encoded: Base64Url (Required)
      *         binary: byte[] (Required)
      *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: OffsetDateTime (Required)
+     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
      *         password: String (Required)
      *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
-     *     int: long (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
      *     long: long (Required)
      *     float: double (Required)
      *     double: double (Required)

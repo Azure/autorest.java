@@ -75,6 +75,18 @@ public final class ResponseClientImpl {
         return this.responseOps;
     }
 
+    /** The CadlCoreOpsImpl object to access its operations. */
+    private final CadlCoreOpsImpl cadlCoreOps;
+
+    /**
+     * Gets the CadlCoreOpsImpl object to access its operations.
+     *
+     * @return the CadlCoreOpsImpl object.
+     */
+    public CadlCoreOpsImpl getCadlCoreOps() {
+        return this.cadlCoreOps;
+    }
+
     /**
      * Initializes an instance of ResponseClient client.
      *
@@ -120,5 +132,6 @@ public final class ResponseClientImpl {
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.responseOps = new ResponseOpsImpl(this);
+        this.cadlCoreOps = new CadlCoreOpsImpl(this);
     }
 }

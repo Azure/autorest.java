@@ -43,7 +43,7 @@ public final class ServerClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> statusWithResponse(long code, RequestOptions requestOptions) {
+    public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
         return this.client.statusWithResponse(code, requestOptions).block();
     }
 
@@ -60,7 +60,7 @@ public final class ServerClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void status(long code) {
+    public void status(int code) {
         // Generated convenience method for statusWithResponse
         RequestOptions requestOptions = new RequestOptions();
         statusWithResponse(code, requestOptions).getValue();

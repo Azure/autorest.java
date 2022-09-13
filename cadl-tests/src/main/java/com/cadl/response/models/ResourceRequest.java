@@ -4,13 +4,19 @@
 
 package com.cadl.response.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The template for adding updateable properties. */
-@Immutable
+@Fluent
 public final class ResourceRequest {
+    /*
+     * The description property.
+     */
+    @JsonProperty(value = "description")
+    private String description;
+
     /*
      * The type property.
      */
@@ -25,6 +31,26 @@ public final class ResourceRequest {
     @JsonCreator
     public ResourceRequest(@JsonProperty(value = "type", required = true) String type) {
         this.type = type;
+    }
+
+    /**
+     * Get the description property: The description property.
+     *
+     * @return the description value.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     *
+     * @param description the description value to set.
+     * @return the ResourceRequest object itself.
+     */
+    public ResourceRequest setDescription(String description) {
+        this.description = description;
+        return this;
     }
 
     /**

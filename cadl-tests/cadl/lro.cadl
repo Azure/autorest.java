@@ -2,6 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Cadl.Rest;
 using Azure.Core;
 
 @serviceTitle("LongRunning")
@@ -13,6 +14,7 @@ model Resource {
   id: string;
 
   @key
+  @segment("resources")
   name: string;
   type: string;
 }
@@ -20,6 +22,11 @@ model Resource {
 model ExportParams {
   @query
   projectFileVersion: string;
+}
+
+model ExportedResource {
+  id: string;
+  resourceUri: string;
 }
 
 @route("/long-running")
@@ -31,4 +38,10 @@ interface LongRunningOp {
   delete is LongRunningResourceDelete<Resource>;
 
   export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
+
+  importx is ResourceAction<
+    Resource,
+    ExportedResource,
+    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+  >;
 }

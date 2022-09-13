@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/cadl-java",
-  "version": "0.1.0-dev.5",
+  "version": "0.1.0-dev.7",
   "description": "Java client emitter for CADL compiler",
   "keywords": [
     "cadl"
@@ -36,9 +36,9 @@
     "target/azure-cadl-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@cadl-lang/compiler": "^0.34.0",
-    "@cadl-lang/rest": "^0.16.0",
-    "@cadl-lang/versioning": "^0.7.0"
+    "@cadl-lang/compiler": "~0.35.0",
+    "@cadl-lang/rest": "~0.17.0",
+    "@cadl-lang/versioning": "~0.8.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.18.2",
@@ -48,13 +48,13 @@
     "@types/js-yaml": "~4.0.1",
     "@types/mocha": "~9.1.0",
     "@types/node": "~14.0.27",
-    "@types/prettier": "^2.6.3",
+    "@types/prettier": "~2.6.3",
     "c8": "~7.11.0",
-    "eslint": "^8.12.0",
+    "eslint": "~8.12.0",
     "mocha": "~9.2.0",
     "rimraf": "~3.0.2",
     "typescript": "~4.7.2",
-    "@typescript-eslint/parser": "^5.16.0",
-    "@typescript-eslint/eslint-plugin": "^5.16.0"
+    "@typescript-eslint/parser": "~5.16.0",
+    "@typescript-eslint/eslint-plugin": "~5.16.0"
   }
 }

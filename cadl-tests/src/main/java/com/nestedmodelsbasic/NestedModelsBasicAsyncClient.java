@@ -45,22 +45,22 @@ public final class NestedModelsBasicAsyncClient {
      * {
      *     NestedInputModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -89,22 +89,22 @@ public final class NestedModelsBasicAsyncClient {
      * {
      *     NestedOutputModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -133,22 +133,22 @@ public final class NestedModelsBasicAsyncClient {
      * {
      *     NestedRoundTripModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -160,22 +160,22 @@ public final class NestedModelsBasicAsyncClient {
      * {
      *     NestedRoundTripModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -213,7 +213,7 @@ public final class NestedModelsBasicAsyncClient {
     public Mono<Void> sendNestedModel(InputModel input) {
         // Generated convenience method for sendNestedModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).then();
     }
 
     /**

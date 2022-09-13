@@ -12,6 +12,16 @@
                 "<node_internals>/**"
             ],
             "type": "node"
+        },
+        {
+            "name": "Generate code for a cadl file",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/cadl",
+            "runtimeArgs": ["cadl", "compile", "builtin.cadl"],
+            "runtimeExecutable": "npx",
+            "skipFiles": ["<node_internals>/**"],
+            "type": "pwa-node",
+            "outFiles": ["${workspaceFolder}/cadl-output"]
         }
     ]
 }

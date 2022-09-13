@@ -4,8 +4,13 @@ import { promisify } from "util";
 import { execFile } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 export async function $onEmit(program: Program) {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const moduleRoot = resolvePath(__dirname, "..", "..");
+
   const builder = new CodeModelBuilder(program);
   const codeModel = builder.build();
 
@@ -36,12 +41,12 @@ export async function $onEmit(program: Program) {
 
   program.logger.info(`Code model file written to ${codeModelFileName}`);
 
-  const jarFile = "node_modules/@azure-tools/cadl-java/target/azure-cadl-extension-jar-with-dependencies.jar";
-  program.logger.info(`Exec JAR ${jarFile}`);
+  const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
+  program.logger.info(`Exec JAR ${jarFileName}`);
 
   const output = await promisify(execFile)("java", [
     "-jar",
-    jarFile,
+    jarFileName,
     codeModelFileName,
     getNormalizedAbsolutePath(outputPath, undefined),
   ]);

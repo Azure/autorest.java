@@ -42,7 +42,7 @@ public final class CollectionsIntAsyncClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -69,7 +69,7 @@ public final class CollectionsIntAsyncClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -125,6 +125,6 @@ public final class CollectionsIntAsyncClient {
     public Mono<Void> put(CollectionsIntProperty body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }

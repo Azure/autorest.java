@@ -43,22 +43,22 @@ public final class NestedModelsBasicClient {
      * {
      *     NestedInputModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -87,22 +87,22 @@ public final class NestedModelsBasicClient {
      * {
      *     NestedOutputModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -130,22 +130,22 @@ public final class NestedModelsBasicClient {
      * {
      *     NestedRoundTripModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }
@@ -157,22 +157,22 @@ public final class NestedModelsBasicClient {
      * {
      *     NestedRoundTripModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      *     NestedSharedModel (Required): {
      *         requiredString: String (Required)
-     *         requiredInt: long (Required)
+     *         requiredInt: int (Required)
      *         requiredStringList (Required): [
      *             String (Required)
      *         ]
      *         requiredIntList (Required): [
-     *             long (Required)
+     *             int (Required)
      *         ]
      *     }
      * }

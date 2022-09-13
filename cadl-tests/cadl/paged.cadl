@@ -2,6 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Cadl.Rest;
 using Azure.Core;
 
 @serviceTitle("Paged")
@@ -9,7 +10,11 @@ using Azure.Core;
 namespace Cadl.Paged;
 
 model Resource {
+  @visibility("read")
   id: string;
+
+  @key
+  @segment("resources")
   name: string;
   type: string;
 }

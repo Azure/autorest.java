@@ -307,7 +307,7 @@ public final class EnumServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -328,7 +328,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> setIntArrayWithResponse(List<Long> intArray, RequestOptions requestOptions) {
+    public Response<BinaryData> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
         return this.client.setIntArrayWithResponse(intArray, requestOptions).block();
     }
 
@@ -633,7 +633,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+    public String setIntArray(List<Integer> intArray, List<Integer> intArrayOpt) {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
@@ -659,7 +659,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String setIntArray(List<Long> intArray) {
+    public String setIntArray(List<Integer> intArray) {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
