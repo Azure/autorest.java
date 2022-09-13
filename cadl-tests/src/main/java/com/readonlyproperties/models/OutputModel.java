@@ -5,7 +5,6 @@
 package com.readonlyproperties.models;
 
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -71,37 +70,6 @@ public final class OutputModel {
      */
     @JsonProperty(value = "optionalReadonlyIntList", access = JsonProperty.Access.WRITE_ONLY)
     private List<Integer> optionalReadonlyIntList;
-
-    /**
-     * Creates an instance of OutputModel class.
-     *
-     * @param requiredReadonlyString the requiredReadonlyString value to set.
-     * @param requiredReadonlyInt the requiredReadonlyInt value to set.
-     * @param requiredReadonlyModel the requiredReadonlyModel value to set.
-     * @param requiredReadonlyStringList the requiredReadonlyStringList value to set.
-     * @param requiredReadonlyIntList the requiredReadonlyIntList value to set.
-     */
-    @JsonCreator
-    public OutputModel(
-            @JsonProperty(value = "requiredReadonlyString", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    String requiredReadonlyString,
-            @JsonProperty(value = "requiredReadonlyInt", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    int requiredReadonlyInt,
-            @JsonProperty(value = "requiredReadonlyModel", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    ReadonlyModel requiredReadonlyModel,
-            @JsonProperty(
-                            value = "requiredReadonlyStringList",
-                            required = true,
-                            access = JsonProperty.Access.WRITE_ONLY)
-                    List<String> requiredReadonlyStringList,
-            @JsonProperty(value = "requiredReadonlyIntList", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    List<Integer> requiredReadonlyIntList) {
-        this.requiredReadonlyString = requiredReadonlyString;
-        this.requiredReadonlyInt = requiredReadonlyInt;
-        this.requiredReadonlyModel = requiredReadonlyModel;
-        this.requiredReadonlyStringList = requiredReadonlyStringList;
-        this.requiredReadonlyIntList = requiredReadonlyIntList;
-    }
 
     /**
      * Get the requiredReadonlyString property: Required string, illustrating a readonly reference type property.
