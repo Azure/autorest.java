@@ -79,7 +79,7 @@ public final class AuthenticationApiKeyAsyncClient {
     public Mono<Void> valid() {
         // Generated convenience method for validWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return validWithResponse(requestOptions).map(Response::getValue);
+        return validWithResponse(requestOptions).then();
     }
 
     /**
@@ -97,6 +97,6 @@ public final class AuthenticationApiKeyAsyncClient {
     public Mono<Void> invalid() {
         // Generated convenience method for invalidWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return invalidWithResponse(requestOptions).map(Response::getValue);
+        return invalidWithResponse(requestOptions).then();
     }
 }

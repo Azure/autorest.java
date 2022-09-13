@@ -120,6 +120,6 @@ public final class IntAsyncClient {
     public Mono<Void> put(IntProperty body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }

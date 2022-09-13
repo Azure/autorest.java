@@ -195,7 +195,7 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<Void> putAll(RequiredAndOptionalProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 
     /**
@@ -215,6 +215,6 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<Void> putRequiredOnly(RequiredAndOptionalProperty body) {
         // Generated convenience method for putRequiredOnlyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putRequiredOnlyWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putRequiredOnlyWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }

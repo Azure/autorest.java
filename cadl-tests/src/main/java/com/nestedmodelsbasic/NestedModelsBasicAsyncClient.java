@@ -213,7 +213,7 @@ public final class NestedModelsBasicAsyncClient {
     public Mono<Void> sendNestedModel(InputModel input) {
         // Generated convenience method for sendNestedModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+        return sendNestedModelWithResponse(BinaryData.fromObject(input), requestOptions).then();
     }
 
     /**

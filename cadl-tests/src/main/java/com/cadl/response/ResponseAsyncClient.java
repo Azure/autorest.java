@@ -189,7 +189,7 @@ public final class ResponseAsyncClient {
     public Mono<Void> deleteWithHeaders() {
         // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteWithHeadersWithResponse(requestOptions).map(Response::getValue);
+        return deleteWithHeadersWithResponse(requestOptions).then();
     }
 
     /**

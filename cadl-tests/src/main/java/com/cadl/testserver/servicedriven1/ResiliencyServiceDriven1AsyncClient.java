@@ -201,7 +201,7 @@ public final class ResiliencyServiceDriven1AsyncClient {
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        return headNoParamsWithResponse(requestOptions).then();
     }
 
     /**
