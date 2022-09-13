@@ -273,7 +273,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        return headNoParamsWithResponse(requestOptions).then();
     }
 
     /**
@@ -292,7 +292,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        return headNoParamsWithResponse(requestOptions).then();
     }
 
     /**
@@ -440,7 +440,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     public Mono<Void> deleteParameters() {
         // Generated convenience method for deleteParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteParametersWithResponse(requestOptions).map(Response::getValue);
+        return deleteParametersWithResponse(requestOptions).then();
     }
 
     /**

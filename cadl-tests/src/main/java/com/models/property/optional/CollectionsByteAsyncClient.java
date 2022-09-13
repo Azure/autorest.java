@@ -199,7 +199,7 @@ public final class CollectionsByteAsyncClient {
     public Mono<Void> putAll(CollectionsByteProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 
     /**
@@ -219,6 +219,6 @@ public final class CollectionsByteAsyncClient {
     public Mono<Void> putDefault(CollectionsByteProperty body) {
         // Generated convenience method for putDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }

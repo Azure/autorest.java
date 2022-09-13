@@ -47,7 +47,9 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
         String returnExpression = (methodType == ClientMethodType.PagingAsync)
                 ? "%1$s(%2$s)%3$s"
-                : "%1$s(%2$s).map(Response::getValue)%3$s";
+                : ((responseBodyType.asNullable() == ClassType.Void)
+                ? "%1$s(%2$s).then()%3$s"   // return type is Mono<Void>, Response::getValue would be null
+                : "%1$s(%2$s).map(Response::getValue)%3$s");
 
         methodBlock.methodReturn(
                 String.format(returnExpression,

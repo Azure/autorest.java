@@ -181,7 +181,7 @@ public final class ExtensibleEnumsAsyncClient {
     public Mono<Void> putKnownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 
     /**
@@ -201,6 +201,6 @@ public final class ExtensibleEnumsAsyncClient {
     public Mono<Void> putUnknownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).map(Response::getValue);
+        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }
