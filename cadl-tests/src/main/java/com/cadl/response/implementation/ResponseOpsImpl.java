@@ -110,7 +110,7 @@ public final class ResponseOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/response/{name}")
+        @Put("/response/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

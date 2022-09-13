@@ -58,7 +58,7 @@ public final class PagedOpsImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "PagedPagedOps")
     private interface PagedOpsService {
-        @Get("/paged")
+        @Get("/paged/resources")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
