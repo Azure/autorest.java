@@ -56,7 +56,7 @@ public final class CadlCoreOpsImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "ResponseCadlCoreOps")
     private interface CadlCoreOpsService {
-        @Put("/resources/{name}")
+        @Put("/cadl-core/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -77,7 +77,7 @@ public final class CadlCoreOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/resources/{name}")
+        @Get("/cadl-core/resources/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -97,7 +97,7 @@ public final class CadlCoreOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Delete("/resources/{name}")
+        @Delete("/cadl-core/resources/{name}")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

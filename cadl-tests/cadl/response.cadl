@@ -50,6 +50,7 @@ interface ResponseOp {
 }
 
 // operation using Azure.Core
+@route("/cadl-core")
 interface CadlCoreOp {
   @doc("Creates a new resource or updates an existing one.")
   createOrUpdate is ResourceCreateOrReplace<Resource>;
