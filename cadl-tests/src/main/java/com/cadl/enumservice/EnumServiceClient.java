@@ -129,7 +129,7 @@ public final class EnumServiceClient {
      * }
      * }</pre>
      *
-     * @param priority The priority parameter. Allowed values: "100", "0".
+     * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -405,7 +405,9 @@ public final class EnumServiceClient {
     public Operation setPriority(Priority priority) {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setPriorityWithResponse(priority.toString(), requestOptions).getValue().toObject(Operation.class);
+        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
+                .getValue()
+                .toObject(Operation.class);
     }
 
     /**
@@ -531,7 +533,9 @@ public final class EnumServiceClient {
         }
         return setIntEnumArrayWithResponse(
                         priorityArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
                 .getValue()
@@ -557,7 +561,9 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(
                         priorityArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
                 .getValue()
