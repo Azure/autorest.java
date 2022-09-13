@@ -105,9 +105,9 @@ public final class OdataOpsImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
      *     <tr><td>orderby</td><td>String</td><td>No</td><td>The orderBy parameter</td></tr>
-     *     <tr><td>skip</td><td>Long</td><td>No</td><td>The skip parameter</td></tr>
-     *     <tr><td>top</td><td>Long</td><td>No</td><td>The top parameter</td></tr>
-     *     <tr><td>maxpagesize</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
+     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
+     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
+     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
      *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. In the form of "," separated string.</td></tr>
      * </table>
@@ -138,7 +138,7 @@ public final class OdataOpsImpl {
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.list(this.client.getEndpoint(), accept, requestOptions, context))
                 .map(
@@ -162,9 +162,9 @@ public final class OdataOpsImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
      *     <tr><td>orderby</td><td>String</td><td>No</td><td>The orderBy parameter</td></tr>
-     *     <tr><td>skip</td><td>Long</td><td>No</td><td>The skip parameter</td></tr>
-     *     <tr><td>top</td><td>Long</td><td>No</td><td>The top parameter</td></tr>
-     *     <tr><td>maxpagesize</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
+     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
+     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
+     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
      *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. In the form of "," separated string.</td></tr>
      * </table>
@@ -215,9 +215,9 @@ public final class OdataOpsImpl {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
      *     <tr><td>orderby</td><td>String</td><td>No</td><td>The orderBy parameter</td></tr>
-     *     <tr><td>skip</td><td>Long</td><td>No</td><td>The skip parameter</td></tr>
-     *     <tr><td>top</td><td>Long</td><td>No</td><td>The top parameter</td></tr>
-     *     <tr><td>maxpagesize</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
+     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
+     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
+     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
      *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. In the form of "," separated string.</td></tr>
      *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. In the form of "," separated string.</td></tr>
      * </table>
@@ -280,7 +280,7 @@ public final class OdataOpsImpl {
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->

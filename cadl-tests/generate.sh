@@ -50,7 +50,7 @@ generate ./http/resiliency/srv-driven-2/main.cadl
 unset NAMESPACE
 for f in $(find ./http -name "*.cadl")
 do
- if [[ $(realpath $f) == *"models"* ]]; then
+ if [[ $(realpath $f) != *"resiliency"* ]]; then
    generate $f
  fi
 done

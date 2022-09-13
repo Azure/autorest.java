@@ -312,7 +312,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Long&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -333,7 +333,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntArrayWithResponse(List<Long> intArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
         return this.serviceClient.setIntArrayWithResponseAsync(intArray, requestOptions);
     }
 
@@ -648,7 +648,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> setIntArray(List<Long> intArray, List<Long> intArrayOpt) {
+    public Mono<String> setIntArray(List<Integer> intArray, List<Integer> intArrayOpt) {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
@@ -676,7 +676,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> setIntArray(List<Long> intArray) {
+    public Mono<String> setIntArray(List<Integer> intArray) {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions)

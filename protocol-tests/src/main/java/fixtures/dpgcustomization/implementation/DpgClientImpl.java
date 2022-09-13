@@ -382,7 +382,7 @@ public final class DpgClientImpl {
      *     along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getPages(this.getHost(), mode, accept, requestOptions, context))
                 .map(
@@ -647,7 +647,8 @@ public final class DpgClientImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(
+            String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context -> service.getPagesNext(nextLink, this.getHost(), accept, requestOptions, context))

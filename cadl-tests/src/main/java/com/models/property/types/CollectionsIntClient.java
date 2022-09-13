@@ -40,7 +40,7 @@ public final class CollectionsIntClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -66,7 +66,7 @@ public final class CollectionsIntClient {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>

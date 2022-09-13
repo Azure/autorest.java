@@ -22,7 +22,7 @@ public final class NestedRoundTripOnlyModel {
      * Required int, illustrating a value type property.
      */
     @JsonProperty(value = "requiredInt", required = true)
-    private long requiredInt;
+    private int requiredInt;
 
     /*
      * Required collection of strings, illustrating a collection of reference types.
@@ -34,7 +34,7 @@ public final class NestedRoundTripOnlyModel {
      * Required collection of ints, illustrating a collection of value types.
      */
     @JsonProperty(value = "requiredIntList", required = true)
-    private List<Long> requiredIntList;
+    private List<Integer> requiredIntList;
 
     /**
      * Creates an instance of NestedRoundTripOnlyModel class.
@@ -47,9 +47,9 @@ public final class NestedRoundTripOnlyModel {
     @JsonCreator
     public NestedRoundTripOnlyModel(
             @JsonProperty(value = "requiredString", required = true) String requiredString,
-            @JsonProperty(value = "requiredInt", required = true) long requiredInt,
+            @JsonProperty(value = "requiredInt", required = true) int requiredInt,
             @JsonProperty(value = "requiredStringList", required = true) List<String> requiredStringList,
-            @JsonProperty(value = "requiredIntList", required = true) List<Long> requiredIntList) {
+            @JsonProperty(value = "requiredIntList", required = true) List<Integer> requiredIntList) {
         this.requiredString = requiredString;
         this.requiredInt = requiredInt;
         this.requiredStringList = requiredStringList;
@@ -70,7 +70,7 @@ public final class NestedRoundTripOnlyModel {
      *
      * @return the requiredInt value.
      */
-    public long getRequiredInt() {
+    public int getRequiredInt() {
         return this.requiredInt;
     }
 
@@ -89,7 +89,7 @@ public final class NestedRoundTripOnlyModel {
      *
      * @return the requiredIntList value.
      */
-    public List<Long> getRequiredIntList() {
+    public List<Integer> getRequiredIntList() {
         return this.requiredIntList;
     }
 }

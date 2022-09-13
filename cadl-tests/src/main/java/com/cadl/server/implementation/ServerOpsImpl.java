@@ -66,7 +66,7 @@ public final class ServerOpsImpl {
         Mono<Response<Void>> status(
                 @HostParam("domain") String domain,
                 @HostParam("tld") String tld,
-                @PathParam("code") long code,
+                @PathParam("code") int code,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -84,7 +84,7 @@ public final class ServerOpsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> statusWithResponseAsync(long code, RequestOptions requestOptions) {
+    public Mono<Response<Void>> statusWithResponseAsync(int code, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -104,7 +104,7 @@ public final class ServerOpsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> statusWithResponse(long code, RequestOptions requestOptions) {
+    public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
         return statusWithResponseAsync(code, requestOptions).block();
     }
 }

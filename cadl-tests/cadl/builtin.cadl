@@ -12,6 +12,7 @@ model Builtin {
   string: string;
   bytes: bytes;
   int: int32;
+  safeint: safeint;
   long: int64;
   float: float32;
   double: float64;
@@ -27,9 +28,6 @@ model FormatString {
 
   @format("binary")
   binary: string;
-  // @format("date")
-  // date: string;
-
 
   @format("date-time")
   dateTime: string;
