@@ -10,15 +10,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for Priority. */
 public enum Priority {
     /** Enum value 100. */
-    HIGH("100"),
+    HIGH(100L),
 
     /** Enum value 0. */
-    LOW("0");
+    LOW(0L);
 
     /** The actual serialized value for a Priority instance. */
-    private final String value;
+    private final long value;
 
-    Priority(String value) {
+    Priority(long value) {
         this.value = value;
     }
 
@@ -29,23 +29,23 @@ public enum Priority {
      * @return the parsed Priority object, or null if unable to parse.
      */
     @JsonCreator
-    public static Priority fromString(String value) {
-        if (value == null) {
-            return null;
-        }
+    public static Priority fromLong(long value) {
         Priority[] items = Priority.values();
         for (Priority item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
+            if (item.toLong() == value) {
                 return item;
             }
         }
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * De-serializes the instance to long value.
+     *
+     * @return the long value.
+     */
     @JsonValue
-    @Override
-    public String toString() {
+    public long toLong() {
         return this.value;
     }
 }

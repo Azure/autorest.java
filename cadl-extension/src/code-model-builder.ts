@@ -719,54 +719,44 @@ export class CodeModelBuilder {
     sealed: boolean,
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type);
-    const isConstant = false; //sealed && type.members.length === 1;
-    const valueType = typeof type.members.values().next().value === "number" ? this.integerSchema : this.stringSchema;
+    const valueType =
+      typeof type.members.values().next().value.value === "number" ? this.integerSchema : this.stringSchema;
 
-    if (isConstant) {
+    const choices: ChoiceValue[] = [];
+    type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
+
+    if (sealed) {
       return this.codeModel.schemas.add(
-        new ConstantSchema(name, this.getDoc(type), {
+        new SealedChoiceSchema(name, this.getDoc(type), {
           summary: this.getSummary(type),
-          valueType: valueType,
-          value: new ConstantValue(type.members.values().next().value),
+          choiceType: valueType as any,
+          choices: choices,
+          language: {
+            default: {
+              namespace: namespace,
+            },
+            java: {
+              namespace: getJavaNamespace(namespace),
+            },
+          },
         }),
       );
     } else {
-      const choices: ChoiceValue[] = [];
-      type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
-
-      if (sealed) {
-        return this.codeModel.schemas.add(
-          new SealedChoiceSchema(name, this.getDoc(type), {
-            summary: this.getSummary(type),
-            choiceType: valueType as any,
-            choices: choices,
-            language: {
-              default: {
-                namespace: namespace,
-              },
-              java: {
-                namespace: getJavaNamespace(namespace),
-              },
+      return this.codeModel.schemas.add(
+        new ChoiceSchema(name, this.getDoc(type), {
+          summary: this.getSummary(type),
+          choiceType: valueType as any,
+          choices: choices,
+          language: {
+            default: {
+              namespace: namespace,
             },
-          }),
-        );
-      } else {
-        return this.codeModel.schemas.add(
-          new ChoiceSchema(name, this.getDoc(type), {
-            summary: this.getSummary(type),
-            choiceType: valueType as any,
-            choices: choices,
-            language: {
-              default: {
-                namespace: namespace,
-              },
-              java: {
-                namespace: getJavaNamespace(namespace),
-              },
+            java: {
+              namespace: getJavaNamespace(namespace),
             },
-          }),
-        );
-      }
+          },
+        }),
+      );
     }
   }
 
