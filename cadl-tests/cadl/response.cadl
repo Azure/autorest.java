@@ -14,6 +14,7 @@ model Resource {
   id: string;
 
   @key
+  @segment("resources")
   name: string;
   type: string;
 }

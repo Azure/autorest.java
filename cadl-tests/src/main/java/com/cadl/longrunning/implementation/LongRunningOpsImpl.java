@@ -62,7 +62,7 @@ public final class LongRunningOpsImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "LongRunningLongRunni")
     private interface LongRunningOpsService {
-        @Patch("/long-running/{name}")
+        @Patch("/long-running/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -84,7 +84,7 @@ public final class LongRunningOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/long-running/{name}")
+        @Get("/long-running/resources/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -104,7 +104,7 @@ public final class LongRunningOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Delete("/long-running/{name}")
+        @Delete("/long-running/resources/{name}")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -124,7 +124,7 @@ public final class LongRunningOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/long-running/{name}:export")
+        @Post("/long-running/resources/{name}:export")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -145,7 +145,7 @@ public final class LongRunningOpsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/long-running/{name}:importx")
+        @Post("/long-running/resources/{name}:importx")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
