@@ -36,10 +36,5 @@
       <artifactId>azure-core</artifactId>
       <version>1.32.0</version>
     </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-identity</artifactId>
-      <version>1.5.5</version>
-    </dependency>
   </dependencies>
 </project>
