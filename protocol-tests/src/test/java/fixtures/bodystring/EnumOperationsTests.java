@@ -44,7 +44,8 @@ public class EnumOperationsTests {
     public void getReferencedConstant() throws Exception {
         BinaryData res = client.getReferencedConstantWithResponse(null).getValue();
         JsonNode jsonNode = OBJECT_MAPPER.readTree(res.toBytes());
-        Assertions.assertFalse(jsonNode.has("ColorConstant"));
+        // ColorConstant=green-color is constant in RefColorConstant, service does not respond with it in JSON
+        Assertions.assertTrue(jsonNode.has("field1"));
     }
 
     @Test
