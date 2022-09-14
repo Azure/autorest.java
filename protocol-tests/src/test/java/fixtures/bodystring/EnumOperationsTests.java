@@ -1,19 +1,17 @@
 package fixtures.bodystring;
 
 import com.azure.core.util.BinaryData;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import java.io.StringReader;
-import java.util.concurrent.CountDownLatch;
-
 public class EnumOperationsTests {
     private static EnumClient client;
-    private CountDownLatch lock = new CountDownLatch(1);
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @BeforeAll
     public static void setup() {
@@ -44,17 +42,15 @@ public class EnumOperationsTests {
 
     @Test
     public void getReferencedConstant() throws Exception {
-        String res = client.getReferencedConstantWithResponse(null).getValue().toString();
-        JsonReader jsonReader = Json.createReader(new StringReader(res));
-        JsonObject result = jsonReader.readObject();
-        Assertions.assertFalse(result.containsKey("ColorConstant"));
+        BinaryData res = client.getReferencedConstantWithResponse(null).getValue();
+        JsonNode jsonNode = OBJECT_MAPPER.readTree(res.toBytes());
+        Assertions.assertFalse(jsonNode.has("ColorConstant"));
     }
 
     @Test
     public void putReferencedConstant() throws Exception {
-        JsonObject farm = Json.createObjectBuilder()
-                .add("ColorConstant", "green-color")
-                .build();
-        client.putReferencedConstantWithResponse(BinaryData.fromString(farm.toString()), null);
+        ObjectNode jsonNode = OBJECT_MAPPER.createObjectNode();
+        jsonNode.put("ColorConstant", "green-color");
+        client.putReferencedConstantWithResponse(BinaryData.fromObject(jsonNode), null);
     }
 }
