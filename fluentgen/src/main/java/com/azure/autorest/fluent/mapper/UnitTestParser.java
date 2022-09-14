@@ -20,6 +20,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
+import com.azure.core.http.HttpMethod;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -169,7 +170,10 @@ public class UnitTestParser extends ExampleParser {
         if (clientMethod.getType() == ClientMethodType.SimpleSync
                 || clientMethod.getType() == ClientMethodType.PagingSync
                 // limit the scope of LRO to status code of 200
-                || (clientMethod.getType() == ClientMethodType.LongRunningSync && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200))) {
+                || (clientMethod.getType() == ClientMethodType.LongRunningSync
+                && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
+                // also azure-core-management does not support LRO from GET
+                && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
             // generate example for the method with full parameters
             return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
         }
