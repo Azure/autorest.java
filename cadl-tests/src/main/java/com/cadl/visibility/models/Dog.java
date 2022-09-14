@@ -32,16 +32,13 @@ public final class Dog {
     /**
      * Creates an instance of Dog class.
      *
-     * @param id the id value to set.
      * @param secretName the secretName value to set.
      * @param name the name value to set.
      */
     @JsonCreator
     public Dog(
-            @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) int id,
             @JsonProperty(value = "secretName", required = true) String secretName,
             @JsonProperty(value = "name", required = true) String name) {
-        this.id = id;
         this.secretName = secretName;
         this.name = name;
     }

@@ -258,7 +258,7 @@ public class ModelExampleWriter {
 
                 StringBuilder builder = new StringBuilder();
                 if (JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
-                    List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredParentProperties(model);
+                    List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
                     List<ClientModelProperty> requiredProperties = model.getProperties().stream()
                             .filter(ClientModelProperty::isRequired)
                             .filter(property -> !property.getIsConstant())

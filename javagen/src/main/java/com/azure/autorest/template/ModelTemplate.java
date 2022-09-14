@@ -593,7 +593,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         for (ClientModelProperty property : model.getProperties()) {
             // Property isn't required and won't be bucketed into either constant or required properties.
-            if (!property.isRequired()) {
+            if (!property.isRequired() || property.getIsReadOnly()) {
                 continue;
             }
 
@@ -606,7 +606,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // Also get required properties from the super class structure.
-        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredParentProperties(model);
+        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
 
         // Description for the class is always the same, not matter whether there are required properties.
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.

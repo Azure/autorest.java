@@ -63,18 +63,6 @@ public final class ResponseClientImpl {
         return this.serializerAdapter;
     }
 
-    /** The ResponseOpsImpl object to access its operations. */
-    private final ResponseOpsImpl responseOps;
-
-    /**
-     * Gets the ResponseOpsImpl object to access its operations.
-     *
-     * @return the ResponseOpsImpl object.
-     */
-    public ResponseOpsImpl getResponseOps() {
-        return this.responseOps;
-    }
-
     /** The CadlCoreOpsImpl object to access its operations. */
     private final CadlCoreOpsImpl cadlCoreOps;
 
@@ -85,6 +73,18 @@ public final class ResponseClientImpl {
      */
     public CadlCoreOpsImpl getCadlCoreOps() {
         return this.cadlCoreOps;
+    }
+
+    /** The ResponseOpsImpl object to access its operations. */
+    private final ResponseOpsImpl responseOps;
+
+    /**
+     * Gets the ResponseOpsImpl object to access its operations.
+     *
+     * @return the ResponseOpsImpl object.
+     */
+    public ResponseOpsImpl getResponseOps() {
+        return this.responseOps;
     }
 
     /**
@@ -131,7 +131,7 @@ public final class ResponseClientImpl {
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
-        this.responseOps = new ResponseOpsImpl(this);
         this.cadlCoreOps = new CadlCoreOpsImpl(this);
+        this.responseOps = new ResponseOpsImpl(this);
     }
 }

@@ -26,14 +26,10 @@ public final class ReadDog {
     /**
      * Creates an instance of ReadDog class.
      *
-     * @param id the id value to set.
      * @param name the name value to set.
      */
     @JsonCreator
-    public ReadDog(
-            @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) int id,
-            @JsonProperty(value = "name", required = true) String name) {
-        this.id = id;
+    public ReadDog(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
     }
 
