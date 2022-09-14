@@ -628,25 +628,25 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String pageMethodName = isSync ? proxyMethod.getPagingSinglePageMethodName() : proxyMethod.getPagingAsyncSinglePageMethodName();
         ClientMethodType pageMethodType = isSync ? ClientMethodType.PagingSyncSinglePage : ClientMethodType.PagingAsyncSinglePage;
 
-        // Always create the base pageable method, only configuration here is whether only required parameters will
-        // be used by it.
-        methods.add(builder.returnValue(singlePageReturnValue)
+        builder.returnValue(singlePageReturnValue)
             .name(pageMethodName)
-            .onlyRequiredParameters(settings.getRequiredParameterClientMethods())
             .type(pageMethodType)
             .isGroupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.apply(true, false))
-            .build());
+            .methodVisibility(visibilityFunction.apply(true, false));
 
-        // Then if only required parameters was true or if Context should be included add the maximal overload.
-        if (settings.getRequiredParameterClientMethods() || settings.isContextClientMethodParameter()) {
-            if (settings.isContextClientMethodParameter()) {
-                builder.methodVisibility(visibilityFunction.apply(true, true));
-                addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
-                    singlePageReturnValue, details, contextParameter);
-            } else {
-                methods.add(builder.onlyRequiredParameters(false).build());
-            }
+        // Only generate an overload with only required parameters if it's requested.
+        if (settings.getRequiredParameterClientMethods()) {
+            methods.add(builder.onlyRequiredParameters(true).build());
+        }
+
+        // Then generate an overload with all parameters always, optionally include context.
+        builder.onlyRequiredParameters(false);
+        if (settings.isContextClientMethodParameter()) {
+            builder.methodVisibility(visibilityFunction.apply(true, true));
+            addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
+                singlePageReturnValue, details, contextParameter);
+        } else {
+            methods.add(builder.build());
         }
 
         // If this was the next method there is no further work to be done.
@@ -658,37 +658,38 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         pageMethodName = isSync ? proxyMethod.getName() : proxyMethod.getSimpleAsyncMethodName();
         pageMethodType = isSync ? ClientMethodType.PagingSync : ClientMethodType.PagingAsync;
 
-        methods.add(builder.returnValue(nextPageReturnValue)
+        builder.returnValue(nextPageReturnValue)
             .name(pageMethodName)
-            .onlyRequiredParameters(settings.getRequiredParameterClientMethods())
             .type(pageMethodType)
             .isGroupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.apply(false, false))
-            .build());
+            .methodVisibility(visibilityFunction.apply(false, false));
 
-        if (settings.getRequiredParameterClientMethods() || settings.isContextClientMethodParameter()) {
-            if (settings.isContextClientMethodParameter()) {
-                MethodPageDetails detailsWithContext = details;
-                if (nextMethods != null) {
-                    IType contextWireType = contextParameter.getWireType();
-                    nextMethod = nextMethods.stream()
-                        .filter(m -> m.getType() == nextMethodType)
-                        .filter(m -> m.getMethodParameters().stream().anyMatch(p -> contextWireType.equals(p.getClientType())))
-                        .findFirst()
-                        .orElse(null);
+        if (settings.getRequiredParameterClientMethods()) {
+            methods.add(builder.onlyRequiredParameters(true).build());
+        }
 
-                    if (nextMethod != null) {
-                        detailsWithContext = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName),
-                            pageableItemName, nextMethod, lroIntermediateType, nextLinkName, itemName);
-                    }
+        builder.onlyRequiredParameters(false);
+        if (settings.isContextClientMethodParameter()) {
+            MethodPageDetails detailsWithContext = details;
+            if (nextMethods != null) {
+                IType contextWireType = contextParameter.getWireType();
+                nextMethod = nextMethods.stream()
+                    .filter(m -> m.getType() == nextMethodType)
+                    .filter(m -> m.getMethodParameters().stream().anyMatch(p -> contextWireType.equals(p.getClientType())))
+                    .findFirst()
+                    .orElse(null);
+
+                if (nextMethod != null) {
+                    detailsWithContext = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName),
+                        pageableItemName, nextMethod, lroIntermediateType, nextLinkName, itemName);
                 }
-
-                builder.methodVisibility(visibilityFunction.apply(false, true));
-                addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
-                    nextPageReturnValue, detailsWithContext, contextParameter);
-            } else {
-                methods.add(builder.onlyRequiredParameters(false).build());
             }
+
+            builder.methodVisibility(visibilityFunction.apply(false, true));
+            addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
+                nextPageReturnValue, detailsWithContext, contextParameter);
+        } else {
+            methods.add(builder.build());
         }
     }
 
@@ -730,53 +731,55 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String methodName = isSync ? proxyMethod.getSimpleRestResponseMethodName() : proxyMethod.getSimpleAsyncRestResponseMethodName();
         ClientMethodType methodType = isSync ? ClientMethodType.SimpleSyncRestResponse : ClientMethodType.SimpleAsyncRestResponse;
 
-        // Always create the base method, only configuration here is whether only required parameters will be used by it.
-        methods.add(builder.parameters(parameters)
+        builder.parameters(parameters)
             .returnValue(responseReturnValue)
             .name(methodName)
-            .onlyRequiredParameters(settings.getRequiredParameterClientMethods())
             .type(methodType)
             .isGroupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.apply(true, false))
-            .build());
+            .methodVisibility(visibilityFunction.apply(true, false));
 
-        // Then if only required parameters was true or if Context should be included add the maximal overload.
-        if (settings.getRequiredParameterClientMethods() || settings.isContextClientMethodParameter()) {
-            if (settings.isContextClientMethodParameter()) {
-                builder.methodVisibility(visibilityFunction.apply(true, true));
-                addClientMethodWithContext(methods, builder, parameters, contextParameter);
-            } else {
-                methods.add(builder.onlyRequiredParameters(false).build());
-            }
+        // Only generate an overload with only required parameters if it's requested.
+        if (settings.getRequiredParameterClientMethods()) {
+            methods.add(builder.onlyRequiredParameters(true).build());
+        }
+
+        // Then generate an overload with all parameters always, optionally include context.
+        builder.onlyRequiredParameters(false);
+        if (settings.isContextClientMethodParameter()) {
+            builder.methodVisibility(visibilityFunction.apply(true, true));
+            addClientMethodWithContext(methods, builder, parameters, contextParameter);
+        } else {
+            methods.add(builder.build());
         }
 
         // Repeat the same but for simple returns.
         methodName = isSync ? proxyMethod.getName() : proxyMethod.getSimpleAsyncMethodName();
         methodType = isSync ? ClientMethodType.SimpleSync : ClientMethodType.SimpleAsync;
 
-        methods.add(builder.parameters(parameters)
+        builder.parameters(parameters)
             .returnValue(returnValue)
             .name(methodName)
-            .onlyRequiredParameters(settings.getRequiredParameterClientMethods())
             .type(methodType)
             .isGroupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.apply(false, false))
-            .build());
+            .methodVisibility(visibilityFunction.apply(false, false));
 
-        if (settings.getRequiredParameterClientMethods() || settings.isContextClientMethodParameter()) {
-            if (settings.isContextClientMethodParameter()) {
-                builder.methodVisibility(visibilityFunction.apply(false, true));
-                addClientMethodWithContext(methods, builder, parameters, contextParameter);
-            } else {
-                methods.add(builder.onlyRequiredParameters(false).build());
-            }
+        if (settings.getRequiredParameterClientMethods()) {
+            methods.add(builder.onlyRequiredParameters(true).build());
         }
 
-        // For protocol methods we need to add a maximal overload is a Context overload was added and the base overload
+        builder.onlyRequiredParameters(false);
+        if (settings.isContextClientMethodParameter()) {
+            builder.methodVisibility(visibilityFunction.apply(false, true));
+            addClientMethodWithContext(methods, builder, parameters, contextParameter);
+        } else {
+            methods.add(builder.build());
+        }
+
+        // For protocol methods we need to add a maximal overload if a Context overload was added and the base overload
         // only included required parameters.
         if (isProtocolMethod && settings.isContextClientMethodParameter() && settings.getRequiredParameterClientMethods()) {
             builder.methodVisibility(visibilityFunction.apply(false, false));
-            methods.add(builder.onlyRequiredParameters(false).build());
+            methods.add(builder.build());
         }
     }
 
