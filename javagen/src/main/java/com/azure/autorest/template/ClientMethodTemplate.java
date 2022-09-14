@@ -30,7 +30,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -114,7 +113,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         for (ClientMethodParameter parameter : clientMethod.getMethodParameters()) {
             // Parameter is required and will be part of the method signature.
-            if (parameter.getIsRequired()) {
+            if (parameter.isRequired()) {
                 continue;
             }
 
@@ -172,7 +171,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             // If the parameter isn't required and the client method only uses required parameters optional
             // parameters are omitted and will need to instantiated in the method.
-            boolean optionalOmitted = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            boolean optionalOmitted = clientMethod.getOnlyRequiredParameters() && !parameter.isRequired();
 
             // Optional variables and constants are always null if their wire type and client type differ and applying
             // conversions between the types is ignored.
@@ -181,13 +180,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             // Constants should be included if the parameter is a constant and it's either required or optional
             // constants aren't generated as enums.
-            boolean includeConstant = parameter.getIsConstant() &&
-                (!settings.isOptionalConstantAsEnum() || parameter.getIsRequired());
+            boolean includeConstant = parameter.isConstant() &&
+                (!settings.isOptionalConstantAsEnum() || parameter.isRequired());
 
             // Client methods only add local variable instantiations when the parameter isn't passed by the caller,
             // isn't always null, is an optional parameter that was omitted or is a constant that is either required
             // or AutoRest isn't generating with optional constant as enums.
-            if (!parameter.getFromClient()
+            if (!parameter.isFromClient()
                 && !alwaysNull
                 && ((addOptional && optionalOmitted) || (addConstant && includeConstant))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
@@ -210,7 +209,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (transformation.getParameterMappings().isEmpty()) {
                 // the case that this flattened parameter is not original parameter from any other parameters
                 ClientMethodParameter outParameter = transformation.getOutParameter();
-                if (outParameter.getIsRequired() && outParameter.getClientType() instanceof ClassType) {
+                if (outParameter.isRequired() && outParameter.getClientType() instanceof ClassType) {
                     function.line("%1$s %2$s = new %1$s();", outParameter.getClientType(), outParameter.getName());
                 } else {
                     function.line("%1$s %2$s = null;", outParameter.getClientType(), outParameter.getName());
@@ -221,12 +220,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String nullCheck = transformation.getParameterMappings().stream()
-                .filter(m -> !m.getInputParameter().getIsRequired())
+                .filter(m -> !m.getInputParameter().isRequired())
                 .map(m -> {
                     ClientMethodParameter parameter = m.getInputParameter();
 
                     String parameterName;
-                    if (!parameter.getFromClient()) {
+                    if (!parameter.isFromClient()) {
                         parameterName = parameter.getName();
                     } else {
                         parameterName = m.getInputParameterProperty().getName();
@@ -236,7 +235,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }).collect(Collectors.joining(" || "));
 
             boolean conditionalAssignment = !nullCheck.isEmpty()
-                && !transformation.getOutParameter().getIsRequired()
+                && !transformation.getOutParameter().isRequired()
                 && !clientMethod.getOnlyRequiredParameters();
 
             // Use a mutable internal variable, leave the original name for effectively final variable
@@ -274,7 +273,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     inputPath = mapping.getInputParameter().getName();
                 }
 
-                if (clientMethod.getOnlyRequiredParameters() && !mapping.getInputParameter().getIsRequired()) {
+                if (clientMethod.getOnlyRequiredParameters() && !mapping.getInputParameter().isRequired()) {
                     inputPath = "null";
                 }
 
@@ -346,7 +345,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             String parameterWireName = parameter.getParameterReferenceConverted();
 
             boolean addedConversion = false;
-            boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+            boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.isRequired();
 
             RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
             if (parameterLocation != RequestParameterLocation.BODY &&
@@ -433,8 +432,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             if (!addedConversion) {
                 function.line(parameter.convertFromClientType(parameterName, parameterWireName,
-                    clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired(),
-                    parameter.getIsConstant() || alwaysNull));
+                    clientMethod.getOnlyRequiredParameters() && !parameter.isRequired(),
+                    parameter.isConstant() || alwaysNull));
             }
         }
     }
@@ -579,7 +578,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock,
-                                               ProxyMethod restAPIMethod, JavaSettings settings) {
+        ProxyMethod restAPIMethod, JavaSettings settings) {
         generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
@@ -667,20 +666,25 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String nextMethodArgs = clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage");
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
-                        .stream()
-                        .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    .stream()
+                    .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
                     nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
-                    firstPageArgs = firstPageArgs + ", Context.NONE";
+                    if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
+                        firstPageArgs = firstPageArgs + ", Context.NONE";
+                    } else {
+                        // If there are no first page arguments don't include a leading comma.
+                        firstPageArgs = "Context.NONE";
+                    }
                 }
                 String effectiveNextMethodArgs = nextMethodArgs;
                 String effectiveFirstPageArgs = firstPageArgs;
                 function.indent(() -> {
                     function.line("() -> %s(%s),",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                            effectiveFirstPageArgs);
+                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                        effectiveFirstPageArgs);
                     function.line("nextLink -> %s(%s));",
-                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
-                            effectiveNextMethodArgs);
+                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
+                        effectiveNextMethodArgs);
                 });
             });
         } else {
@@ -688,17 +692,22 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
-                        .stream()
-                        .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
-                    firstPageArgs = firstPageArgs + ", Context.NONE";
+                    .stream()
+                    .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
+                        firstPageArgs = firstPageArgs + ", Context.NONE";
+                    } else {
+                        // If there are no first page arguments don't include a leading comma.
+                        firstPageArgs = "Context.NONE";
+                    }
                 }
                 String effectiveFirstPageArgs = firstPageArgs;
                 addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s));",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                            effectiveFirstPageArgs);
+                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                        effectiveFirstPageArgs);
                 });
             });
         }
@@ -769,46 +778,58 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
 
             String argumentList = clientMethod.getArgumentList();
-            argumentList = CoreUtils.isNullOrEmpty(argumentList) ? "Context.NONE" : argumentList + ", Context.NONE";
+            if (CoreUtils.isNullOrEmpty(argumentList)) {
+                // If there are no arguments the argument is Context.NONE
+                argumentList = "Context.NONE";
+            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                // If the arguments don't contain Context append Context.NONE
+                argumentList += ", Context.NONE";
+            }
 
             if (ClassType.StreamResponse.equals(clientMethod.getReturnValue().getType())) {
                 function.text(".flatMapMany(StreamResponse::getValue);");
             }
-            if(clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
                 function.line("%s(%s);",
-                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
-                        argumentList);
+                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    argumentList);
             } else {
                 function.line("return %s(%s).getValue();",
-                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", "" ),
-                        argumentList);
+                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    argumentList);
             }
         }));
     }
 
     private void generateSimplePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod,
-                                           JavaSettings settings) {
+        JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
 
             String argumentList = clientMethod.getArgumentList();
-            argumentList = CoreUtils.isNullOrEmpty(argumentList) ? "Context.NONE" : argumentList + ", Context.NONE";
+            if (CoreUtils.isNullOrEmpty(argumentList)) {
+                // If there are no arguments the argument is Context.NONE
+                argumentList = "Context.NONE";
+            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                // If the arguments don't contain Context append Context.NONE
+                argumentList += ", Context.NONE";
+            }
 
-            if(clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
                 function.line("%s(%s);",
-                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
-                        argumentList);
+                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    argumentList);
             } else {
                 function.line("return %s(%s).getValue();",
-                        clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", "" ),
-                        argumentList);
+                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    argumentList);
             }
         }));
     }
 
     protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
-                                               ProxyMethod restAPIMethod, JavaSettings settings) {
+        ProxyMethod restAPIMethod, JavaSettings settings) {
         String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
         if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
             asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
@@ -819,7 +840,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                        effectiveAsyncMethodName, clientMethod.getArgumentList());
+                    effectiveAsyncMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -831,7 +852,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s).block();", returnType.asNullable(),
-                            effectiveAsyncMethodName, clientMethod.getArgumentList());
+                        effectiveAsyncMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -851,10 +872,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
-                                                ProxyMethod restAPIMethod, JavaSettings settings) {
-            String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
-            typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-            typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        ProxyMethod restAPIMethod, JavaSettings settings) {
+        String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
 
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
@@ -862,10 +883,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), false,
-                    settings);
+                settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                        effectiveMethodName, clientMethod.getArgumentList());
+                    effectiveMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -877,7 +898,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s);", returnType.asNullable(),
-                            effectiveMethodName, clientMethod.getArgumentList());
+                        effectiveMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -1040,7 +1061,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 return argVal;
             })
             .collect(Collectors.toList());
-        String restAPIMethodArgumentList = String.join(", ", serviceMethodArgs);
+        String restAPIMethodArgumentList = replaceContextWithContextNone(clientMethod, String.join(", ", serviceMethodArgs));
         return String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
     }
 
@@ -1181,5 +1202,17 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });
+    }
+
+    /*
+     * If the ClientMethod doesn't have a parameter for Context the use of 'context' needs to be replaced with
+     * Context.NONE.
+     */
+    private static String replaceContextWithContextNone(ClientMethod clientMethod, String arguments) {
+        if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+            return arguments.replace("context", "Context.NONE");
+        } else {
+            return arguments;
+        }
     }
 }

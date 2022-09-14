@@ -195,7 +195,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION;
-                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient();
+                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.isConstant() || proxyMethodParameter.isFromClient();
                     if (parameterIsRequired
                             || parameterIsConstantOrFromClient
                             || parameterIsClientOrApiVersion) {

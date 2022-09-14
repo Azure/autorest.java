@@ -308,10 +308,10 @@ public class ResourceParser {
                         && !new UrlPathSegments(url).getReverseSegments().iterator().next().isParameterSegment()) {
                     // parameter from request body
                     if (method.getInnerProxyMethod().getParameters().stream()
-                            .allMatch(p -> p.getFromClient()
-                                    || !p.getIsRequired()
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.QUERY && p.getIsConstant())     // usually 'api-version' query parameter
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.HEADER && p.getIsConstant())    // usually 'accept' header
+                            .allMatch(p -> p.isFromClient()
+                                    || !p.isRequired()
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.QUERY && p.isConstant())     // usually 'api-version' query parameter
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.HEADER && p.isConstant())    // usually 'accept' header
                                     || p.getRequestParameterLocation() == RequestParameterLocation.PATH
                                     || p.getRequestParameterLocation() == RequestParameterLocation.BODY)) {
                         actionMethods.add(method);
@@ -480,16 +480,16 @@ public class ResourceParser {
                             boolean hasBodyParam = methodHasBodyParameter(method);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
-                                            && p.getIsRequired()
-                                            && !p.getFromClient() && !p.getIsConstant());
+                                            && p.isRequired()
+                                            && !p.isFromClient() && !p.isConstant());
                             boolean hasNewNonConstantPathParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.PATH
-                                            && !p.getIsConstant() && !p.getFromClient()
+                                            && !p.isConstant() && !p.isFromClient()
                                             && resourceCreate.getMethodReferences().stream().allMatch(
                                                     m -> m.getInnerProxyMethod().getParameters().stream().anyMatch(
                                                             p1 -> p1.getRequestParameterLocation() == RequestParameterLocation.PATH
                                                                     && p1.getRequestParameterName().equals(p.getRequestParameterName())
-                                                                    && p1.getIsConstant() && !p1.getFromClient())));
+                                                                    && p1.isConstant() && !p1.isFromClient())));
                             // if for update, need a body parameter
                             // if for get or delete, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
                             if ((isGetOrDelete && !hasRequiredQueryParam && !hasNewNonConstantPathParam)

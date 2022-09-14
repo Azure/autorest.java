@@ -105,7 +105,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                                 String.format("requestOptions.setBody(%s);",
                                         expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
-                        if (!parameter.getClientMethodParameter().getIsRequired()) {
+                        if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                                 writeLine.accept(ifBlock);
                             });
@@ -203,7 +203,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                 String.format("requestOptions.setHeader(%1$s, %2$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
-        if (!parameter.getClientMethodParameter().getIsRequired()) {
+        if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                 writeLine.accept(ifBlock);
             });
@@ -217,7 +217,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                 String.format("requestOptions.addQueryParam(%1$s, %2$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
-        if (!parameter.getClientMethodParameter().getIsRequired()) {
+        if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                 writeLine.accept(ifBlock);
             });
@@ -299,7 +299,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = proxyMethodParameters.stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return method.getMethodInputParameters().stream()
-                .filter(p -> !p.getIsConstant() && !p.getFromClient())
+                .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
     }
