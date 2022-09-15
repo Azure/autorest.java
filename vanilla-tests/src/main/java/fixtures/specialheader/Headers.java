@@ -27,10 +27,9 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.specialheader.models.ErrorException;
 import fixtures.specialheader.models.ProductResultValue;
-import reactor.core.publisher.Mono;
-
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Headers. */
 public final class Headers {
@@ -407,6 +406,18 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage() {
+        return paramRepeatabilityRequestPageableSinglePageAsync().block();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -447,5 +458,20 @@ public final class Headers {
                                         res.getValue().getValue(),
                                         res.getValue().getNextLink(),
                                         null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
+        return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink).block();
     }
 }

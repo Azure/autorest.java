@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -93,6 +94,38 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postModelWithResponse(String mode, BinaryData input, RequestOptions requestOptions) {
         return this.client.postModelWithResponse(mode, input, requestOptions).block();
+    }
+
+    /**
+     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     values (Optional): [
+     *          (Optional){
+     *             received: String(raw/model) (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
+     *     paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getPages(String mode, RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.getPages(mode, requestOptions));
     }
 
     /**

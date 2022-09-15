@@ -602,6 +602,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            if (!settings.isSyncStackEnabled()) {
+                function.methodReturn(String.format("%s(%s).block()", clientMethod.getPagingAsyncSinglePageMethodName(),
+                    clientMethod.getArgumentList()));
+                return;
+            }
+
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             applyParameterTransformations(function, clientMethod, settings);
@@ -883,11 +889,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         });
 
                         function.line("}).block();");
-                    } else if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.BinaryData)) {
-                        function.line("return %s(%s).flatMap(response -> new BinaryData(response.getValue())",
-                            effectiveAsyncMethodName, clientMethod.getArgumentList());
-                        function.line(".map(bd -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), bd)))");
-                        function.line(".block();");
+//                    } else if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.BinaryData)) {
+//                        function.line("return %s(%s).flatMap(response -> new BinaryData(response.getValue())",
+//                            effectiveAsyncMethodName, clientMethod.getArgumentList());
+//                        function.line(".map(bd -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), bd)))");
+//                        function.line(".block();");
                     } else {
                         function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
                     }

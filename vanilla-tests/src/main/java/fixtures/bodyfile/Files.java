@@ -21,14 +21,13 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import fixtures.bodyfile.models.ErrorException;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.nio.ByteBuffer;
 import java.util.Enumeration;
 import java.util.Iterator;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Files. */
 public final class Files {

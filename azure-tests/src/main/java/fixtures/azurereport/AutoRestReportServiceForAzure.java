@@ -26,9 +26,8 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.azurereport.models.ErrorException;
-import reactor.core.publisher.Mono;
-
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the AutoRestReportServiceForAzure type. */
 public final class AutoRestReportServiceForAzure {
