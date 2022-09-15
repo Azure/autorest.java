@@ -15,14 +15,12 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.StreamResponse;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodyfile.models.ErrorException;
-import java.nio.ByteBuffer;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.io.InputStream;
 
 /** An instance of this class provides access to all the operations defined in Files. */
 public final class Files {
@@ -52,19 +50,19 @@ public final class Files {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFile(
+        Mono<Response<InputStream>> getFile(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFileLarge(
+        Mono<Response<InputStream>> getFileLarge(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getEmptyFile(
+        Mono<Response<InputStream>> getEmptyFile(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
@@ -73,10 +71,10 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return file on successful completion of {@link Mono}.
+     * @return file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getFileWithResponseAsync() {
+    public Mono<Response<InputStream>> getFileWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -92,10 +90,10 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return file on successful completion of {@link Mono}.
+     * @return file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getFileWithResponseAsync(Context context) {
+    public Mono<Response<InputStream>> getFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -109,11 +107,11 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return file.
+     * @return file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileAsync() {
-        return getFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getFileAsync() {
+        return getFileWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -123,11 +121,11 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return file.
+     * @return file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileAsync(Context context) {
-        return getFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getFileAsync(Context context) {
+        return getFileWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -138,7 +136,7 @@ public final class Files {
      * @return file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getFileWithResponse() {
+    public Response<InputStream> getFileWithResponse() {
         return getFileWithResponseAsync().block();
     }
 
@@ -152,7 +150,7 @@ public final class Files {
      * @return file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getFileWithResponse(Context context) {
+    public Response<InputStream> getFileWithResponse(Context context) {
         return getFileWithResponseAsync(context).block();
     }
 
@@ -164,7 +162,7 @@ public final class Files {
      * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getFile() {
+    public InputStream getFile() {
         return getFileWithResponse(Context.NONE).getValue();
     }
 
@@ -178,7 +176,7 @@ public final class Files {
      * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getFile(Context context) {
+    public InputStream getFile(Context context) {
         return getFileWithResponse(context).getValue();
     }
 
@@ -187,10 +185,10 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a large file on successful completion of {@link Mono}.
+     * @return a large file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getFileLargeWithResponseAsync() {
+    public Mono<Response<InputStream>> getFileLargeWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -206,10 +204,10 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a large file on successful completion of {@link Mono}.
+     * @return a large file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getFileLargeWithResponseAsync(Context context) {
+    public Mono<Response<InputStream>> getFileLargeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -223,11 +221,11 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a large file.
+     * @return a large file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileLargeAsync() {
-        return getFileLargeWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getFileLargeAsync() {
+        return getFileLargeWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -237,11 +235,11 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a large file.
+     * @return a large file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getFileLargeAsync(Context context) {
-        return getFileLargeWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getFileLargeAsync(Context context) {
+        return getFileLargeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -252,7 +250,7 @@ public final class Files {
      * @return a large file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getFileLargeWithResponse() {
+    public Response<InputStream> getFileLargeWithResponse() {
         return getFileLargeWithResponseAsync().block();
     }
 
@@ -266,7 +264,7 @@ public final class Files {
      * @return a large file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getFileLargeWithResponse(Context context) {
+    public Response<InputStream> getFileLargeWithResponse(Context context) {
         return getFileLargeWithResponseAsync(context).block();
     }
 
@@ -278,7 +276,7 @@ public final class Files {
      * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getFileLarge() {
+    public InputStream getFileLarge() {
         return getFileLargeWithResponse(Context.NONE).getValue();
     }
 
@@ -292,7 +290,7 @@ public final class Files {
      * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getFileLarge(Context context) {
+    public InputStream getFileLarge(Context context) {
         return getFileLargeWithResponse(context).getValue();
     }
 
@@ -301,10 +299,10 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty file on successful completion of {@link Mono}.
+     * @return empty file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
+    public Mono<Response<InputStream>> getEmptyFileWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -320,10 +318,10 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty file on successful completion of {@link Mono}.
+     * @return empty file along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getEmptyFileWithResponseAsync(Context context) {
+    public Mono<Response<InputStream>> getEmptyFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -337,11 +335,11 @@ public final class Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty file.
+     * @return empty file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getEmptyFileAsync() {
-        return getEmptyFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getEmptyFileAsync() {
+        return getEmptyFileWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -351,11 +349,11 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty file.
+     * @return empty file on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
-        return getEmptyFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+    public Mono<InputStream> getEmptyFileAsync(Context context) {
+        return getEmptyFileWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -366,7 +364,7 @@ public final class Files {
      * @return empty file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getEmptyFileWithResponse() {
+    public Response<InputStream> getEmptyFileWithResponse() {
         return getEmptyFileWithResponseAsync().block();
     }
 
@@ -380,7 +378,7 @@ public final class Files {
      * @return empty file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getEmptyFileWithResponse(Context context) {
+    public Response<InputStream> getEmptyFileWithResponse(Context context) {
         return getEmptyFileWithResponseAsync(context).block();
     }
 
@@ -392,7 +390,7 @@ public final class Files {
      * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getEmptyFile() {
+    public InputStream getEmptyFile() {
         return getEmptyFileWithResponse(Context.NONE).getValue();
     }
 
@@ -406,7 +404,7 @@ public final class Files {
      * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData getEmptyFile(Context context) {
+    public InputStream getEmptyFile(Context context) {
         return getEmptyFileWithResponse(context).getValue();
     }
 }
