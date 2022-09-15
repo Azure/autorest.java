@@ -866,6 +866,31 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             elseAction.line("throw new NullPointerException();");
                         }
                     });
+                } else if (returnType instanceof GenericType) {
+                    GenericType genericType = (GenericType) returnType;
+                    if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.InputStream)) {
+                        function.line("return %s(%s).map(response -> {", effectiveAsyncMethodName, clientMethod.getArgumentList());
+                        function.indent(() -> {
+                            function.line("Iterator<ByteBufferBackedInputStream> iterator = response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();");
+                            function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
+                                javaBlock.annotation("Override");
+                                javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
+                                javaBlock.annotation("Override");
+                                javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
+                            });
+
+                            function.methodReturn("new SimpleResponse<InputStream>(response.getRequest(), response.getStatusCode(), response.getHeaders(), new SequenceInputStream(enumeration))");
+                        });
+
+                        function.line("}).block();");
+                    } else if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.BinaryData)) {
+                        function.line("return %s(%s).flatMap(response -> new BinaryData(response.getValue())",
+                            effectiveAsyncMethodName, clientMethod.getArgumentList());
+                        function.line(".map(bd -> new SimpleResponse<>(response.getRequest(), response.getStatusCode(), response.getHeaders(), bd)))");
+                        function.line(".block();");
+                    } else {
+                        function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
+                    }
                 } else {
                     function.methodReturn(String.format("%s(%s).block()", effectiveAsyncMethodName, clientMethod.getArgumentList()));
                 }

@@ -362,7 +362,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if (responseBodyType.equals(ClassType.BinaryData)) {
+            if (responseBodyType.equals(ClassType.BinaryData) || responseBodyType.equals(ClassType.InputStream)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 IType singleValueType = GenericType.Response(ClassType.Void);

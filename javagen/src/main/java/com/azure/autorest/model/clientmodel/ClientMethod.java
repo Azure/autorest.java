@@ -348,6 +348,7 @@ public class ClientMethod {
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
+        imports.add(SimpleResponse.class.getName());
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
