@@ -389,14 +389,14 @@ public class ClientModelUtil {
         return parentProperties;
     }
 
-    public static List<ClientModelProperty> getRequiredParentProperties(ClientModel model) {
+    public static List<ClientModelProperty> getRequiredWritableParentProperties(ClientModel model) {
         String lastParentName = model.getName();
         ClientModel parentModel = getClientModel(model.getParentModelName());
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             // Add the properties in inverse order as they be reverse at the end.
             List<ClientModelProperty> ctorArgs = parentModel.getProperties().stream()
-                .filter(property -> property.isRequired() && !property.getIsConstant())
+                .filter(property -> property.isRequired() && !property.getIsConstant() && !property.getIsReadOnly())
                 .collect(Collectors.toList());
 
             for (int i = ctorArgs.size() - 1; i >= 0; i--) {

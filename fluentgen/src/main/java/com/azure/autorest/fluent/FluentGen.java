@@ -278,7 +278,9 @@ public class FluentGen extends Javagen {
         if (javaSettings.isGenerateTests()) {
             // Unit tests for models
             for (ClientModel model : client.getModels()) {
-                javaPackage.addModelUnitTest(model);
+                if (!model.isStronglyTypedHeader()) {
+                    javaPackage.addModelUnitTest(model);
+                }
             }
         }
 
