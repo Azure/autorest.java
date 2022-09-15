@@ -921,7 +921,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // At this time all try-catching is for IOExceptions.
             javaBlock.decreaseIndent();
             javaBlock.line("} catch (IOException ex) {");
-            javaBlock.indent(() -> javaBlock.line("throw new UncheckedIOException(ex);"));
+            javaBlock.indent(() -> javaBlock.line("throw LOGGER.logExceptionAsError(new UncheckedIOException(ex));"));
             javaBlock.line("}");
         }
     }
