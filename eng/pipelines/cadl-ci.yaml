@@ -125,3 +125,8 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http
+          displayName: 'Cadl Ranch Coverage Report'
+          workingDirectory: ./cadl-tests
+
