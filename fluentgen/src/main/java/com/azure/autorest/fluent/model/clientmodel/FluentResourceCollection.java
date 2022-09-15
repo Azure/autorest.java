@@ -73,8 +73,9 @@ public class FluentResourceCollection {
                 .build();
 
         Set<String> existingMethodNames = this.groupClient.getClientMethods().stream()
-                .map(ClientMethod::getName)
-                .collect(Collectors.toSet());
+            .filter(m -> !m.isImplementationOnly() && m.getMethodVisibility() == JavaVisibility.Public)
+            .map(ClientMethod::getName)
+            .collect(Collectors.toSet());
 
         this.methods.addAll(this.groupClient.getClientMethods().stream()
                 .filter(m -> !m.isImplementationOnly() && m.getMethodVisibility() == JavaVisibility.Public)
@@ -102,7 +103,7 @@ public class FluentResourceCollection {
                         return method;
                     } else if ((WellKnownMethodName.DELETE.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE).equals(m.getName())
                             && m.getType() == ClientMethodType.SimpleSyncRestResponse
-                            && !existingMethodNames.contains((WellKnownMethodName.DELETE.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE))
+                            && !existingMethodNames.contains((WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE))
                             && m.getMethodParameters().size() == 3 && m.getMethodParameters().stream().limit(2).allMatch(p -> p.getClientType() == ClassType.String)) {
                         FluentCollectionMethod method = new FluentCollectionMethod(m, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE);
                         existingMethodNames.add(method.getMethodName());

@@ -275,7 +275,7 @@ public class ResourceParser {
 
         ResourceDelete resourceDelete = null;
 
-        FluentCollectionMethod method = findCollectionMethod(collection, resourceCreate, HttpMethod.DELETE, name -> name.contains("delete"));
+        FluentCollectionMethod method = findCollectionMethod(collection, resourceCreate, HttpMethod.DELETE, name -> name.equals("delete"));
         if (method != null) {
             resourceDelete = new ResourceDelete(resourceCreate.getResourceModel(), collection,
                     resourceCreate.getUrlPathSegments(), method.getInnerClientMethod().getName());

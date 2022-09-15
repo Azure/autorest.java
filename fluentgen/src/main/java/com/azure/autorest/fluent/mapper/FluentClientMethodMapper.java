@@ -31,22 +31,19 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
 
                 case SimpleAsync:
+                case SimpleSync:
                     visibility = NOT_GENERATE;
                     break;
 
                 default:
-                    visibility = super.methodVisibility(methodType, hasContextParameter, isProtocolMethod);
+                    visibility = super.methodVisibility(methodType, true, isProtocolMethod);
                     break;
             }
         } else {
-            switch (methodType) {
-                case PagingAsyncSinglePage:
-                    visibility = NOT_VISIBLE;
-                    break;
-
-                default:
-                    visibility = super.methodVisibility(methodType, hasContextParameter, isProtocolMethod);
-                    break;
+            if (methodType == ClientMethodType.PagingAsyncSinglePage || methodType == ClientMethodType.SimpleSyncRestResponse) {
+                visibility = NOT_VISIBLE;
+            } else {
+                visibility = super.methodVisibility(methodType, false, isProtocolMethod);
             }
         }
         if (JavaSettings.getInstance().isFluentLite() && !FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods()) {
