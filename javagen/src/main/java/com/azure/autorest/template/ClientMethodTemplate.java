@@ -866,7 +866,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             elseAction.line("throw new NullPointerException();");
                         }
                     });
-                } else if (returnType instanceof GenericType) {
+                } else if (returnType instanceof GenericType && !settings.isDataPlaneClient()) {
                     GenericType genericType = (GenericType) returnType;
                     if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.InputStream)) {
                         function.line("return %s(%s).map(response -> {", effectiveAsyncMethodName, clientMethod.getArgumentList());

@@ -636,23 +636,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String pageMethodName = isSync ? proxyMethod.getPagingSinglePageMethodName() : proxyMethod.getPagingAsyncSinglePageMethodName();
         ClientMethodType pageMethodType = isSync ? ClientMethodType.PagingSyncSinglePage : ClientMethodType.PagingAsyncSinglePage;
 
-        // Only generate single page methods if the method is asynchronous or sync stack is enabled.
-        if (!isSync || settings.isSyncStackEnabled()) {
-            builder.returnValue(singlePageReturnValue)
-                .onlyRequiredParameters(false)
-                .name(pageMethodName)
-                .type(pageMethodType)
-                .isGroupedParameterRequired(false)
-                .methodVisibility(visibilityFunction.apply(true, false));
+        builder.returnValue(singlePageReturnValue)
+            .onlyRequiredParameters(false)
+            .name(pageMethodName)
+            .type(pageMethodType)
+            .isGroupedParameterRequired(false)
+            .methodVisibility(visibilityFunction.apply(true, false));
 
-            // Generate an overload with all parameters always, optionally include context.
-            if (settings.isContextClientMethodParameter()) {
-                builder.methodVisibility(visibilityFunction.apply(true, true));
-                addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
-                    singlePageReturnValue, details, contextParameter);
-            } else {
-                methods.add(builder.build());
-            }
+        // Generate an overload with all parameters always, optionally include context.
+        if (settings.isContextClientMethodParameter() && !settings.isDataPlaneClient()) {
+            builder.methodVisibility(visibilityFunction.apply(true, true));
+            addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
+                singlePageReturnValue, details, contextParameter);
+        } else {
+            methods.add(builder.build());
         }
 
         // If this was the next method there is no further work to be done.
@@ -675,7 +672,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         builder.onlyRequiredParameters(false);
-        if (settings.isContextClientMethodParameter()) {
+        if (settings.isContextClientMethodParameter() && !settings.isDataPlaneClient()) {
             MethodPageDetails detailsWithContext = details;
             if (nextMethods != null) {
                 IType contextWireType = contextParameter.getWireType();
@@ -997,6 +994,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 return (methodType == ClientMethodType.SimpleAsync
                     || methodType == ClientMethodType.SimpleSync
+                    || methodType == ClientMethodType.PagingSyncSinglePage
                     || hasContextParameter)
                     ? NOT_GENERATE
                     : (methodType == ClientMethodType.PagingAsyncSinglePage) ? NOT_VISIBLE : VISIBLE;
