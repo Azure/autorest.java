@@ -636,25 +636,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String pageMethodName = isSync ? proxyMethod.getPagingSinglePageMethodName() : proxyMethod.getPagingAsyncSinglePageMethodName();
         ClientMethodType pageMethodType = isSync ? ClientMethodType.PagingSyncSinglePage : ClientMethodType.PagingAsyncSinglePage;
 
-        builder.returnValue(singlePageReturnValue)
-            .name(pageMethodName)
-            .type(pageMethodType)
-            .isGroupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.apply(true, false));
+        // Only generate single page methods if the method is asynchronous or sync stack is enabled.
+        if (!isSync || settings.isSyncStackEnabled()) {
+            builder.returnValue(singlePageReturnValue)
+                .onlyRequiredParameters(false)
+                .name(pageMethodName)
+                .type(pageMethodType)
+                .isGroupedParameterRequired(false)
+                .methodVisibility(visibilityFunction.apply(true, false));
 
-        // Only generate an overload with only required parameters if it's requested.
-        if (generateClientMethodWithOnlyRequiredParameters) {
-            methods.add(builder.onlyRequiredParameters(true).build());
-        }
-
-        // Then generate an overload with all parameters always, optionally include context.
-        builder.onlyRequiredParameters(false);
-        if (settings.isContextClientMethodParameter()) {
-            builder.methodVisibility(visibilityFunction.apply(true, true));
-            addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
-                singlePageReturnValue, details, contextParameter);
-        } else {
-            methods.add(builder.build());
+            // Generate an overload with all parameters always, optionally include context.
+            if (settings.isContextClientMethodParameter()) {
+                builder.methodVisibility(visibilityFunction.apply(true, true));
+                addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
+                    singlePageReturnValue, details, contextParameter);
+            } else {
+                methods.add(builder.build());
+            }
         }
 
         // If this was the next method there is no further work to be done.
@@ -713,8 +711,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 includesContext, isProtocolMethod);
 
         createSimpleClientMethods(settings, methods, builder, proxyMethod, parameters, false, responseReturnValue,
-            returnValue, visibilityFunction, getContextParameter(), isProtocolMethod,
-            generateClientMethodWithOnlyRequiredParameters);
+            returnValue, visibilityFunction, getContextParameter(), generateClientMethodWithOnlyRequiredParameters);
     }
 
     private void createSimpleSyncClientMethods(Operation operation, boolean isProtocolMethod, JavaSettings settings,
@@ -728,15 +725,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 includesContext, isProtocolMethod);
 
         createSimpleClientMethods(settings, methods, builder, proxyMethod, parameters, true, responseReturnValue,
-            returnValue, visibilityFunction, getContextParameter(), isProtocolMethod,
-            generateClientMethodWithOnlyRequiredParameters);
+            returnValue, visibilityFunction, getContextParameter(), generateClientMethodWithOnlyRequiredParameters);
     }
 
     private static void createSimpleClientMethods(JavaSettings settings, List<ClientMethod> methods, Builder builder,
         ProxyMethod proxyMethod, List<ClientMethodParameter> parameters, boolean isSync,
         ReturnValue responseReturnValue, ReturnValue returnValue,
         BiFunction<Boolean, Boolean, JavaVisibility> visibilityFunction, ClientMethodParameter contextParameter,
-        boolean isProtocolMethod, boolean generateClientMethodWithOnlyRequiredParameters) {
+        boolean generateClientMethodWithOnlyRequiredParameters) {
 
         String methodName = isSync ? proxyMethod.getSimpleRestResponseMethodName() : proxyMethod.getSimpleAsyncRestResponseMethodName();
         ClientMethodType methodType = isSync ? ClientMethodType.SimpleSyncRestResponse : ClientMethodType.SimpleAsyncRestResponse;
