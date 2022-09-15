@@ -182,11 +182,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null string value value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -242,10 +254,24 @@ public final class StringOperationsImpl implements StringOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNullWithResponse(String stringBody) {
+        return putNullWithResponseAsync(stringBody).block();
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNull(String stringBody) {
-        putNullAsync(stringBody).block();
+        putNullWithResponse(stringBody);
     }
 
     /**
@@ -257,7 +283,7 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNull() {
         final String stringBody = null;
-        putNullAsync(stringBody).block();
+        putNullWithResponse(stringBody);
     }
 
     /**
@@ -294,11 +320,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value '' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> getEmptyWithResponse() {
+        return getEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getEmpty() {
-        return getEmptyAsync().block();
+        return getEmptyWithResponse().getValue();
     }
 
     /**
@@ -336,10 +374,22 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyWithResponse() {
+        return putEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Set string value empty ''.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty() {
-        putEmptyAsync().block();
+        putEmptyWithResponse();
     }
 
     /**
@@ -378,11 +428,24 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> getMbcsWithResponse() {
+        return getMbcsWithResponseAsync().block();
+    }
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getMbcs() {
-        return getMbcsAsync().block();
+        return getMbcsWithResponse().getValue();
     }
 
     /**
@@ -420,10 +483,22 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMbcsWithResponse() {
+        return putMbcsWithResponseAsync().block();
+    }
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMbcs() {
-        putMbcsAsync().block();
+        putMbcsWithResponse();
     }
 
     /**
@@ -468,11 +543,26 @@ public final class StringOperationsImpl implements StringOperations {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> getWhitespaceWithResponse() {
+        return getWhitespaceWithResponseAsync().block();
+    }
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getWhitespace() {
-        return getWhitespaceAsync().block();
+        return getWhitespaceWithResponse().getValue();
     }
 
     /**
@@ -514,10 +604,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putWhitespaceWithResponse() {
+        return putWhitespaceWithResponseAsync().block();
+    }
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWhitespace() {
-        putWhitespaceAsync().block();
+        putWhitespaceWithResponse();
     }
 
     /**
@@ -555,11 +658,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> getNotProvidedWithResponse() {
+        return getNotProvidedWithResponseAsync().block();
+    }
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getNotProvided() {
-        return getNotProvidedAsync().block();
+        return getNotProvidedWithResponse().getValue();
     }
 
     /**
@@ -596,11 +711,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getBase64EncodedWithResponse() {
+        return getBase64EncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64Encoded() {
-        return getBase64EncodedAsync().block();
+        return getBase64EncodedWithResponse().getValue();
     }
 
     /**
@@ -637,11 +764,23 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getBase64UrlEncodedWithResponse() {
+        return getBase64UrlEncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getBase64UrlEncoded() {
-        return getBase64UrlEncodedAsync().block();
+        return getBase64UrlEncodedWithResponse().getValue();
     }
 
     /**
@@ -689,10 +828,24 @@ public final class StringOperationsImpl implements StringOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBase64UrlEncodedWithResponse(byte[] stringBody) {
+        return putBase64UrlEncodedWithResponseAsync(stringBody).block();
+    }
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBase64UrlEncoded(byte[] stringBody) {
-        putBase64UrlEncodedAsync(stringBody).block();
+        putBase64UrlEncodedWithResponse(stringBody);
     }
 
     /**
@@ -730,10 +883,22 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getNullBase64UrlEncodedWithResponse() {
+        return getNullBase64UrlEncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNullBase64UrlEncoded() {
-        return getNullBase64UrlEncodedAsync().block();
+        return getNullBase64UrlEncodedWithResponse().getValue();
     }
 }

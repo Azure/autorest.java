@@ -778,12 +778,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
 
             String argumentList = clientMethod.getArgumentList();
-            if (CoreUtils.isNullOrEmpty(argumentList)) {
-                // If there are no arguments the argument is Context.NONE
-                argumentList = "Context.NONE";
-            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
-                // If the arguments don't contain Context append Context.NONE
-                argumentList += ", Context.NONE";
+            if (settings.isContextClientMethodParameter()) {
+                if (CoreUtils.isNullOrEmpty(argumentList)) {
+                    // If there are no arguments the argument is Context.NONE
+                    argumentList = "Context.NONE";
+                } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    // If the arguments don't contain Context append Context.NONE
+                    argumentList += ", Context.NONE";
+                }
             }
 
             if (ClassType.StreamResponse.equals(clientMethod.getReturnValue().getType())) {
@@ -808,12 +810,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
 
             String argumentList = clientMethod.getArgumentList();
-            if (CoreUtils.isNullOrEmpty(argumentList)) {
-                // If there are no arguments the argument is Context.NONE
-                argumentList = "Context.NONE";
-            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
-                // If the arguments don't contain Context append Context.NONE
-                argumentList += ", Context.NONE";
+            if (settings.isContextClientMethodParameter()) {
+                if (CoreUtils.isNullOrEmpty(argumentList)) {
+                    // If there are no arguments the argument is Context.NONE
+                    argumentList = "Context.NONE";
+                } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    // If the arguments don't contain Context append Context.NONE
+                    argumentList += ", Context.NONE";
+                }
             }
 
             if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
@@ -1209,6 +1213,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * Context.NONE.
      */
     private static String replaceContextWithContextNone(ClientMethod clientMethod, String arguments) {
+        if (!clientMethod.getProxyMethod().isSync()) {
+            return arguments;
+        }
+
         if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
             return arguments.replace("context", "Context.NONE");
         } else {

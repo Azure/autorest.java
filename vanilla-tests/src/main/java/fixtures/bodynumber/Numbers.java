@@ -257,16 +257,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Number value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Float> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null Number value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getNull() {
-        Float value = getNullAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -303,16 +310,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid float Number value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Float> getInvalidFloatWithResponse() {
+        return getInvalidFloatWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid float Number value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid float Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getInvalidFloat() {
-        Float value = getInvalidFloatAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getInvalidFloatWithResponse().getValue();
     }
 
     /**
@@ -349,16 +363,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid double Number value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getInvalidDoubleWithResponse() {
+        return getInvalidDoubleWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid double Number value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid double Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getInvalidDouble() {
-        Double value = getInvalidDoubleAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getInvalidDoubleWithResponse().getValue();
     }
 
     /**
@@ -395,11 +416,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid decimal Number value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BigDecimal> getInvalidDecimalWithResponse() {
+        return getInvalidDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid decimal Number value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid decimal Number value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalAsync().block();
+        return getInvalidDecimalWithResponse().getValue();
     }
 
     /**
@@ -442,10 +475,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigFloatWithResponse(float numberBody) {
+        return putBigFloatWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigFloat(float numberBody) {
-        putBigFloatAsync(numberBody).block();
+        putBigFloatWithResponse(numberBody);
     }
 
     /**
@@ -482,16 +529,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big float value 3.402823e+20 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Float> getBigFloatWithResponse() {
+        return getBigFloatWithResponseAsync().block();
+    }
+
+    /**
+     * Get big float value 3.402823e+20.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big float value 3.402823e+20.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getBigFloat() {
-        Float value = getBigFloatAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getBigFloatWithResponse().getValue();
     }
 
     /**
@@ -535,10 +589,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDoubleWithResponse(double numberBody) {
+        return putBigDoubleWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDouble(double numberBody) {
-        putBigDoubleAsync(numberBody).block();
+        putBigDoubleWithResponse(numberBody);
     }
 
     /**
@@ -575,16 +643,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e+101 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getBigDoubleWithResponse() {
+        return getBigDoubleWithResponseAsync().block();
+    }
+
+    /**
+     * Get big double value 2.5976931e+101.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e+101.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDouble() {
-        Double value = getBigDoubleAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getBigDoubleWithResponse().getValue();
     }
 
     /**
@@ -623,10 +698,22 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDoublePositiveDecimalWithResponse() {
+        return putBigDoublePositiveDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Put big double value 99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoublePositiveDecimal() {
-        putBigDoublePositiveDecimalAsync().block();
+        putBigDoublePositiveDecimalWithResponse();
     }
 
     /**
@@ -664,16 +751,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 99999999.99 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getBigDoublePositiveDecimalWithResponse() {
+        return getBigDoublePositiveDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 99999999.99.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoublePositiveDecimal() {
-        Double value = getBigDoublePositiveDecimalAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getBigDoublePositiveDecimalWithResponse().getValue();
     }
 
     /**
@@ -712,10 +806,22 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDoubleNegativeDecimalWithResponse() {
+        return putBigDoubleNegativeDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoubleNegativeDecimal() {
-        putBigDoubleNegativeDecimalAsync().block();
+        putBigDoubleNegativeDecimalWithResponse();
     }
 
     /**
@@ -753,16 +859,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value -99999999.99 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getBigDoubleNegativeDecimalWithResponse() {
+        return getBigDoubleNegativeDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get big double value -99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value -99999999.99.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoubleNegativeDecimal() {
-        Double value = getBigDoubleNegativeDecimalAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getBigDoubleNegativeDecimalWithResponse().getValue();
     }
 
     /**
@@ -809,10 +922,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDecimalWithResponse(BigDecimal numberBody) {
+        return putBigDecimalWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalAsync(numberBody).block();
+        putBigDecimalWithResponse(numberBody);
     }
 
     /**
@@ -849,11 +976,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 2.5976931e+101 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BigDecimal> getBigDecimalWithResponse() {
+        return getBigDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 2.5976931e+101.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimal() {
-        return getBigDecimalAsync().block();
+        return getBigDecimalWithResponse().getValue();
     }
 
     /**
@@ -892,10 +1031,22 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDecimalPositiveDecimalWithResponse() {
+        return putBigDecimalPositiveDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Put big decimal value 99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalPositiveDecimal() {
-        putBigDecimalPositiveDecimalAsync().block();
+        putBigDecimalPositiveDecimalWithResponse();
     }
 
     /**
@@ -933,11 +1084,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 99999999.99 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BigDecimal> getBigDecimalPositiveDecimalWithResponse() {
+        return getBigDecimalPositiveDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get big decimal value 99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 99999999.99.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalAsync().block();
+        return getBigDecimalPositiveDecimalWithResponse().getValue();
     }
 
     /**
@@ -976,10 +1139,22 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBigDecimalNegativeDecimalWithResponse() {
+        return putBigDecimalNegativeDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Put big decimal value -99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalNegativeDecimal() {
-        putBigDecimalNegativeDecimalAsync().block();
+        putBigDecimalNegativeDecimalWithResponse();
     }
 
     /**
@@ -1017,11 +1192,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value -99999999.99 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BigDecimal> getBigDecimalNegativeDecimalWithResponse() {
+        return getBigDecimalNegativeDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get big decimal value -99999999.99.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value -99999999.99.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalAsync().block();
+        return getBigDecimalNegativeDecimalWithResponse().getValue();
     }
 
     /**
@@ -1065,10 +1252,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putSmallFloatWithResponse(float numberBody) {
+        return putSmallFloatWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put small float value 3.402823e-20.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallFloat(float numberBody) {
-        putSmallFloatAsync(numberBody).block();
+        putSmallFloatWithResponse(numberBody);
     }
 
     /**
@@ -1105,16 +1306,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 3.402823e-20 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getSmallFloatWithResponse() {
+        return getSmallFloatWithResponseAsync().block();
+    }
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 3.402823e-20.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallFloat() {
-        Double value = getSmallFloatAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getSmallFloatWithResponse().getValue();
     }
 
     /**
@@ -1158,10 +1366,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putSmallDoubleWithResponse(double numberBody) {
+        return putSmallDoubleWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleAsync(numberBody).block();
+        putSmallDoubleWithResponse(numberBody);
     }
 
     /**
@@ -1198,16 +1420,23 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e-101 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Double> getSmallDoubleWithResponse() {
+        return getSmallDoubleWithResponseAsync().block();
+    }
+
+    /**
+     * Get big double value 2.5976931e-101.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e-101.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallDouble() {
-        Double value = getSmallDoubleAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getSmallDoubleWithResponse().getValue();
     }
 
     /**
@@ -1254,10 +1483,24 @@ public final class Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putSmallDecimalWithResponse(BigDecimal numberBody) {
+        return putSmallDecimalWithResponseAsync(numberBody).block();
+    }
+
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody number body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalAsync(numberBody).block();
+        putSmallDecimalWithResponse(numberBody);
     }
 
     /**
@@ -1294,10 +1537,22 @@ public final class Numbers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return small decimal value 2.5976931e-101 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BigDecimal> getSmallDecimalWithResponse() {
+        return getSmallDecimalWithResponseAsync().block();
+    }
+
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return small decimal value 2.5976931e-101.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalAsync().block();
+        return getSmallDecimalWithResponse().getValue();
     }
 }

@@ -186,16 +186,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Integer> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null Int value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getNull() {
-        Integer value = getNullAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -232,16 +239,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Integer> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid Int value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getInvalid() {
-        Integer value = getInvalidAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getInvalidWithResponse().getValue();
     }
 
     /**
@@ -278,16 +292,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Integer> getOverflowInt32WithResponse() {
+        return getOverflowInt32WithResponseAsync().block();
+    }
+
+    /**
+     * Get overflow Int32 value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getOverflowInt32() {
-        Integer value = getOverflowInt32Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getOverflowInt32WithResponse().getValue();
     }
 
     /**
@@ -324,16 +345,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Integer> getUnderflowInt32WithResponse() {
+        return getUnderflowInt32WithResponseAsync().block();
+    }
+
+    /**
+     * Get underflow Int32 value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getUnderflowInt32() {
-        Integer value = getUnderflowInt32Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getUnderflowInt32WithResponse().getValue();
     }
 
     /**
@@ -370,16 +398,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Long> getOverflowInt64WithResponse() {
+        return getOverflowInt64WithResponseAsync().block();
+    }
+
+    /**
+     * Get overflow Int64 value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getOverflowInt64() {
-        Long value = getOverflowInt64Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getOverflowInt64WithResponse().getValue();
     }
 
     /**
@@ -416,16 +451,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Long> getUnderflowInt64WithResponse() {
+        return getUnderflowInt64WithResponseAsync().block();
+    }
+
+    /**
+     * Get underflow Int64 value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getUnderflowInt64() {
-        Long value = getUnderflowInt64Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getUnderflowInt64WithResponse().getValue();
     }
 
     /**
@@ -468,10 +510,24 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMax32WithResponse(int intBody) {
+        return putMax32WithResponseAsync(intBody).block();
+    }
+
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody int body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMax32(int intBody) {
-        putMax32Async(intBody).block();
+        putMax32WithResponse(intBody);
     }
 
     /**
@@ -514,10 +570,24 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMax64WithResponse(long intBody) {
+        return putMax64WithResponseAsync(intBody).block();
+    }
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody int body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMax64(long intBody) {
-        putMax64Async(intBody).block();
+        putMax64WithResponse(intBody);
     }
 
     /**
@@ -560,10 +630,24 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMin32WithResponse(int intBody) {
+        return putMin32WithResponseAsync(intBody).block();
+    }
+
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody int body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMin32(int intBody) {
-        putMin32Async(intBody).block();
+        putMin32WithResponse(intBody);
     }
 
     /**
@@ -606,10 +690,24 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMin64WithResponse(long intBody) {
+        return putMin64WithResponseAsync(intBody).block();
+    }
+
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody int body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMin64(long intBody) {
-        putMin64Async(intBody).block();
+        putMin64WithResponse(intBody);
     }
 
     /**
@@ -646,11 +744,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getUnixTimeWithResponse() {
+        return getUnixTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnixTime() {
-        return getUnixTimeAsync().block();
+        return getUnixTimeWithResponse().getValue();
     }
 
     /**
@@ -698,10 +808,24 @@ public final class Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putUnixTimeDateWithResponse(OffsetDateTime intBody) {
+        return putUnixTimeDateWithResponseAsync(intBody).block();
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody int body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUnixTimeDate(OffsetDateTime intBody) {
-        putUnixTimeDateAsync(intBody).block();
+        putUnixTimeDateWithResponse(intBody);
     }
 
     /**
@@ -738,11 +862,23 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getInvalidUnixTimeWithResponse() {
+        return getInvalidUnixTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeAsync().block();
+        return getInvalidUnixTimeWithResponse().getValue();
     }
 
     /**
@@ -779,10 +915,22 @@ public final class Ints {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getNullUnixTimeWithResponse() {
+        return getNullUnixTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNullUnixTime() {
-        return getNullUnixTimeAsync().block();
+        return getNullUnixTimeWithResponse().getValue();
     }
 }

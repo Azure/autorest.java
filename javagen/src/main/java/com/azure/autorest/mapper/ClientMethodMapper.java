@@ -745,6 +745,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // parameters, the only question is whether it will include Context.
         builder.parameters(parameters)
             .returnValue(responseReturnValue)
+            .onlyRequiredParameters(false)
             .name(methodName)
             .type(methodType)
             .isGroupedParameterRequired(false)

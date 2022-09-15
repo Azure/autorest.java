@@ -335,10 +335,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getBooleanTrueWithResponse() {
+        return getBooleanTrueWithResponseAsync().block();
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanTrue() {
-        getBooleanTrueAsync().block();
+        getBooleanTrueWithResponse();
     }
 
     /**
@@ -377,10 +389,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on path along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getBooleanFalseWithResponse() {
+        return getBooleanFalseWithResponseAsync().block();
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanFalse() {
-        getBooleanFalseAsync().block();
+        getBooleanFalseWithResponse();
     }
 
     /**
@@ -419,10 +443,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1000000' integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getIntOneMillionWithResponse() {
+        return getIntOneMillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntOneMillion() {
-        getIntOneMillionAsync().block();
+        getIntOneMillionWithResponse();
     }
 
     /**
@@ -461,10 +497,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1000000' integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getIntNegativeOneMillionWithResponse() {
+        return getIntNegativeOneMillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().block();
+        getIntNegativeOneMillionWithResponse();
     }
 
     /**
@@ -502,10 +550,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '10000000000' 64 bit integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getTenBillionWithResponse() {
+        return getTenBillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getTenBillion() {
-        getTenBillionAsync().block();
+        getTenBillionWithResponse();
     }
 
     /**
@@ -544,10 +604,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-10000000000' 64 bit integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getNegativeTenBillionWithResponse() {
+        return getNegativeTenBillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().block();
+        getNegativeTenBillionWithResponse();
     }
 
     /**
@@ -586,10 +658,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1.034E+20' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> floatScientificPositiveWithResponse() {
+        return floatScientificPositiveWithResponseAsync().block();
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().block();
+        floatScientificPositiveWithResponse();
     }
 
     /**
@@ -628,10 +712,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1.034E-20' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> floatScientificNegativeWithResponse() {
+        return floatScientificNegativeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().block();
+        floatScientificNegativeWithResponse();
     }
 
     /**
@@ -670,10 +766,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '9999999.999' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> doubleDecimalPositiveWithResponse() {
+        return doubleDecimalPositiveWithResponseAsync().block();
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().block();
+        doubleDecimalPositiveWithResponse();
     }
 
     /**
@@ -712,10 +820,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-9999999.999' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> doubleDecimalNegativeWithResponse() {
+        return doubleDecimalNegativeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().block();
+        doubleDecimalNegativeWithResponse();
     }
 
     /**
@@ -755,10 +875,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringUnicodeWithResponse() {
+        return stringUnicodeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUnicode() {
-        stringUnicodeAsync().block();
+        stringUnicodeWithResponse();
     }
 
     /**
@@ -797,10 +929,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringUrlEncodedWithResponse() {
+        return stringUrlEncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().block();
+        stringUrlEncodedWithResponse();
     }
 
     /**
@@ -845,10 +989,24 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringUrlNonEncodedWithResponse() {
+        return stringUrlNonEncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get 'begin!*'();:@&amp;=+$,end
+     *
+     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUrlNonEncoded() {
-        stringUrlNonEncodedAsync().block();
+        stringUrlNonEncodedWithResponse();
     }
 
     /**
@@ -886,10 +1044,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringEmptyWithResponse() {
+        return stringEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get ''.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringEmpty() {
-        stringEmptyAsync().block();
+        stringEmptyWithResponse();
     }
 
     /**
@@ -935,10 +1105,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (should throw) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringNullWithResponse(String stringPath) {
+        return stringNullWithResponseAsync(stringPath).block();
+    }
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringNull(String stringPath) {
-        stringNullAsync(stringPath).block();
+        stringNullWithResponse(stringPath);
     }
 
     /**
@@ -985,10 +1169,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with 'green color' in path parameter along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> enumValidWithResponse(UriColor enumPath) {
+        return enumValidWithResponseAsync(enumPath).block();
+    }
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumValid(UriColor enumPath) {
-        enumValidAsync(enumPath).block();
+        enumValidWithResponse(enumPath);
     }
 
     /**
@@ -1036,10 +1234,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (should throw on the client before the request is sent on wire) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> enumNullWithResponse(UriColor enumPath) {
+        return enumNullWithResponseAsync(enumPath).block();
+    }
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumNull(UriColor enumPath) {
-        enumNullAsync(enumPath).block();
+        enumNullWithResponse(enumPath);
     }
 
     /**
@@ -1088,10 +1300,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteMultiByteWithResponse(byte[] bytePath) {
+        return byteMultiByteWithResponseAsync(bytePath).block();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteAsync(bytePath).block();
+        byteMultiByteWithResponse(bytePath);
     }
 
     /**
@@ -1131,10 +1357,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' as byte array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteEmptyWithResponse() {
+        return byteEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteEmpty() {
-        byteEmptyAsync().block();
+        byteEmptyWithResponse();
     }
 
     /**
@@ -1182,10 +1420,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (should throw) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteNullWithResponse(byte[] bytePath) {
+        return byteNullWithResponseAsync(bytePath).block();
+    }
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull(byte[] bytePath) {
-        byteNullAsync(bytePath).block();
+        byteNullWithResponse(bytePath);
     }
 
     /**
@@ -1223,10 +1475,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01' as date along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateValidWithResponse() {
+        return dateValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateValid() {
-        dateValidAsync().block();
+        dateValidWithResponse();
     }
 
     /**
@@ -1274,10 +1538,25 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateNullWithResponse(LocalDate datePath) {
+        return dateNullWithResponseAsync(datePath).block();
+    }
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateNull(LocalDate datePath) {
-        dateNullAsync(datePath).block();
+        dateNullWithResponse(datePath);
     }
 
     /**
@@ -1316,10 +1595,22 @@ public final class Paths {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateTimeValidWithResponse() {
+        return dateTimeValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeValid() {
-        dateTimeValidAsync().block();
+        dateTimeValidWithResponse();
     }
 
     /**
@@ -1368,10 +1659,25 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath) {
+        return dateTimeNullWithResponseAsync(dateTimePath).block();
+    }
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeNull(OffsetDateTime dateTimePath) {
-        dateTimeNullAsync(dateTimePath).block();
+        dateTimeNullWithResponse(dateTimePath);
     }
 
     /**
@@ -1420,10 +1726,24 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> base64UrlWithResponse(byte[] base64UrlPath) {
+        return base64UrlWithResponseAsync(base64UrlPath).block();
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlAsync(base64UrlPath).block();
+        base64UrlWithResponse(base64UrlPath);
     }
 
     /**
@@ -1477,10 +1797,26 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath) {
+        return arrayCsvInPathWithResponseAsync(arrayPath).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathAsync(arrayPath).block();
+        arrayCsvInPathWithResponse(arrayPath);
     }
 
     /**
@@ -1530,9 +1866,23 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> unixTimeUrlWithResponse(OffsetDateTime unixTimeUrlPath) {
+        return unixTimeUrlWithResponseAsync(unixTimeUrlPath).block();
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void unixTimeUrl(OffsetDateTime unixTimeUrlPath) {
-        unixTimeUrlAsync(unixTimeUrlPath).block();
+        unixTimeUrlWithResponse(unixTimeUrlPath);
     }
 }

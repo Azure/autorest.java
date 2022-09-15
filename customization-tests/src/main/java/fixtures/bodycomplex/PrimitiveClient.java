@@ -44,12 +44,12 @@ public final class PrimitiveClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties.
+     * @return complex types with integer properties along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IntWrapper getInt() {
-        return this.serviceClient.getInt();
+    public Response<IntWrapper> getIntWithResponse() {
+        return this.serviceClient.getIntWithResponse();
     }
 
     /**
@@ -65,6 +65,65 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<IntWrapper> getIntWithResponse(Context context) {
         return this.serviceClient.getIntWithResponse(context);
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public IntWrapper getInt() {
+        return this.serviceClient.getInt();
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public IntWrapper getInt(Context context) {
+        return this.serviceClient.getInt(context);
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putIntWithResponse(IntWrapper complexBody) {
+        return this.serviceClient.putIntWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putIntWithResponse(IntWrapper complexBody, Context context) {
+        return this.serviceClient.putIntWithResponse(complexBody, context);
     }
 
     /**
@@ -89,12 +148,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntWithResponse(IntWrapper complexBody, Context context) {
-        return this.serviceClient.putIntWithResponse(complexBody, context);
+    public void putInt(IntWrapper complexBody, Context context) {
+        this.serviceClient.putInt(complexBody, context);
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LongWrapper> getLongWithResponse() {
+        return this.serviceClient.getLongWithResponse();
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LongWrapper> getLongWithResponse(Context context) {
+        return this.serviceClient.getLongWithResponse(context);
     }
 
     /**
@@ -117,12 +203,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with long properties along with {@link Response}.
+     * @return complex types with long properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LongWrapper> getLongWithResponse(Context context) {
-        return this.serviceClient.getLongWithResponse(context);
+    public LongWrapper getLong(Context context) {
+        return this.serviceClient.getLong(context);
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putLongWithResponse(LongWrapper complexBody) {
+        return this.serviceClient.putLongWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putLongWithResponse(LongWrapper complexBody, Context context) {
+        return this.serviceClient.putLongWithResponse(complexBody, context);
     }
 
     /**
@@ -147,12 +264,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongWithResponse(LongWrapper complexBody, Context context) {
-        return this.serviceClient.putLongWithResponse(complexBody, context);
+    public void putLong(LongWrapper complexBody, Context context) {
+        this.serviceClient.putLong(complexBody, context);
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<FloatWrapper> getFloatWithResponse() {
+        return this.serviceClient.getFloatWithResponse();
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<FloatWrapper> getFloatWithResponse(Context context) {
+        return this.serviceClient.getFloatWithResponse(context);
     }
 
     /**
@@ -175,12 +319,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties along with {@link Response}.
+     * @return complex types with float properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatWrapper> getFloatWithResponse(Context context) {
-        return this.serviceClient.getFloatWithResponse(context);
+    public FloatWrapper getFloat(Context context) {
+        return this.serviceClient.getFloat(context);
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putFloatWithResponse(FloatWrapper complexBody) {
+        return this.serviceClient.putFloatWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putFloatWithResponse(FloatWrapper complexBody, Context context) {
+        return this.serviceClient.putFloatWithResponse(complexBody, context);
     }
 
     /**
@@ -205,12 +380,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatWithResponse(FloatWrapper complexBody, Context context) {
-        return this.serviceClient.putFloatWithResponse(complexBody, context);
+    public void putFloat(FloatWrapper complexBody, Context context) {
+        this.serviceClient.putFloat(complexBody, context);
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DoubleWrapper> getDoubleWithResponse() {
+        return this.serviceClient.getDoubleWithResponse();
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DoubleWrapper> getDoubleWithResponse(Context context) {
+        return this.serviceClient.getDoubleWithResponse(context);
     }
 
     /**
@@ -233,12 +435,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response}.
+     * @return complex types with double properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DoubleWrapper> getDoubleWithResponse(Context context) {
-        return this.serviceClient.getDoubleWithResponse(context);
+    public DoubleWrapper getDouble(Context context) {
+        return this.serviceClient.getDouble(context);
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody) {
+        return this.serviceClient.putDoubleWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody, Context context) {
+        return this.serviceClient.putDoubleWithResponse(complexBody, context);
     }
 
     /**
@@ -263,12 +496,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody, Context context) {
-        return this.serviceClient.putDoubleWithResponse(complexBody, context);
+    public void putDouble(DoubleWrapper complexBody, Context context) {
+        this.serviceClient.putDouble(complexBody, context);
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BooleanWrapper> getBoolWithResponse() {
+        return this.serviceClient.getBoolWithResponse();
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BooleanWrapper> getBoolWithResponse(Context context) {
+        return this.serviceClient.getBoolWithResponse(context);
     }
 
     /**
@@ -291,12 +551,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with bool properties along with {@link Response}.
+     * @return complex types with bool properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BooleanWrapper> getBoolWithResponse(Context context) {
-        return this.serviceClient.getBoolWithResponse(context);
+    public BooleanWrapper getBool(Context context) {
+        return this.serviceClient.getBool(context);
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody) {
+        return this.serviceClient.putBoolWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody, Context context) {
+        return this.serviceClient.putBoolWithResponse(complexBody, context);
     }
 
     /**
@@ -321,12 +612,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody, Context context) {
-        return this.serviceClient.putBoolWithResponse(complexBody, context);
+    public void putBool(BooleanWrapper complexBody, Context context) {
+        this.serviceClient.putBool(complexBody, context);
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<StringWrapper> getStringWithResponse() {
+        return this.serviceClient.getStringWithResponse();
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<StringWrapper> getStringWithResponse(Context context) {
+        return this.serviceClient.getStringWithResponse(context);
     }
 
     /**
@@ -349,12 +667,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response}.
+     * @return complex types with string properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<StringWrapper> getStringWithResponse(Context context) {
-        return this.serviceClient.getStringWithResponse(context);
+    public StringWrapper getString(Context context) {
+        return this.serviceClient.getString(context);
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putStringWithResponse(StringWrapper complexBody) {
+        return this.serviceClient.putStringWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putStringWithResponse(StringWrapper complexBody, Context context) {
+        return this.serviceClient.putStringWithResponse(complexBody, context);
     }
 
     /**
@@ -379,12 +728,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringWithResponse(StringWrapper complexBody, Context context) {
-        return this.serviceClient.putStringWithResponse(complexBody, context);
+    public void putString(StringWrapper complexBody, Context context) {
+        this.serviceClient.putString(complexBody, context);
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DateWrapper> getDateWithResponse() {
+        return this.serviceClient.getDateWithResponse();
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DateWrapper> getDateWithResponse(Context context) {
+        return this.serviceClient.getDateWithResponse(context);
     }
 
     /**
@@ -407,12 +783,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with date properties along with {@link Response}.
+     * @return complex types with date properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DateWrapper> getDateWithResponse(Context context) {
-        return this.serviceClient.getDateWithResponse(context);
+    public DateWrapper getDate(Context context) {
+        return this.serviceClient.getDate(context);
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateWithResponse(DateWrapper complexBody) {
+        return this.serviceClient.putDateWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateWithResponse(DateWrapper complexBody, Context context) {
+        return this.serviceClient.putDateWithResponse(complexBody, context);
     }
 
     /**
@@ -437,12 +844,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateWithResponse(DateWrapper complexBody, Context context) {
-        return this.serviceClient.putDateWithResponse(complexBody, context);
+    public void putDate(DateWrapper complexBody, Context context) {
+        this.serviceClient.putDate(complexBody, context);
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DatetimeWrapper> getDateTimeWithResponse() {
+        return this.serviceClient.getDateTimeWithResponse();
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DatetimeWrapper> getDateTimeWithResponse(Context context) {
+        return this.serviceClient.getDateTimeWithResponse(context);
     }
 
     /**
@@ -465,12 +899,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response}.
+     * @return complex types with datetime properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DatetimeWrapper> getDateTimeWithResponse(Context context) {
-        return this.serviceClient.getDateTimeWithResponse(context);
+    public DatetimeWrapper getDateTime(Context context) {
+        return this.serviceClient.getDateTime(context);
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody) {
+        return this.serviceClient.putDateTimeWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody, Context context) {
+        return this.serviceClient.putDateTimeWithResponse(complexBody, context);
     }
 
     /**
@@ -495,12 +960,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody, Context context) {
-        return this.serviceClient.putDateTimeWithResponse(complexBody, context);
+    public void putDateTime(DatetimeWrapper complexBody, Context context) {
+        this.serviceClient.putDateTime(complexBody, context);
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse() {
+        return this.serviceClient.getDateTimeRfc1123WithResponse();
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse(Context context) {
+        return this.serviceClient.getDateTimeRfc1123WithResponse(context);
     }
 
     /**
@@ -523,12 +1015,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response}.
+     * @return complex types with datetimeRfc1123 properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse(Context context) {
-        return this.serviceClient.getDateTimeRfc1123WithResponse(context);
+    public Datetimerfc1123Wrapper getDateTimeRfc1123(Context context) {
+        return this.serviceClient.getDateTimeRfc1123(context);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody) {
+        return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
+        return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody, context);
     }
 
     /**
@@ -553,12 +1076,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
-        return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody, context);
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody, Context context) {
+        this.serviceClient.putDateTimeRfc1123(complexBody, context);
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DurationWrapper> getDurationWithResponse() {
+        return this.serviceClient.getDurationWithResponse();
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DurationWrapper> getDurationWithResponse(Context context) {
+        return this.serviceClient.getDurationWithResponse(context);
     }
 
     /**
@@ -581,12 +1131,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response}.
+     * @return complex types with duration properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DurationWrapper> getDurationWithResponse(Context context) {
-        return this.serviceClient.getDurationWithResponse(context);
+    public DurationWrapper getDuration(Context context) {
+        return this.serviceClient.getDuration(context);
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDurationWithResponse(DurationWrapper complexBody) {
+        return this.serviceClient.putDurationWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDurationWithResponse(DurationWrapper complexBody, Context context) {
+        return this.serviceClient.putDurationWithResponse(complexBody, context);
     }
 
     /**
@@ -611,12 +1192,39 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationWithResponse(DurationWrapper complexBody, Context context) {
-        return this.serviceClient.putDurationWithResponse(complexBody, context);
+    public void putDuration(DurationWrapper complexBody, Context context) {
+        this.serviceClient.putDuration(complexBody, context);
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ByteWrapper> getByteWithResponse() {
+        return this.serviceClient.getByteWithResponse();
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ByteWrapper> getByteWithResponse(Context context) {
+        return this.serviceClient.getByteWithResponse(context);
     }
 
     /**
@@ -639,12 +1247,43 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with byte properties along with {@link Response}.
+     * @return complex types with byte properties.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ByteWrapper> getByteWithResponse(Context context) {
-        return this.serviceClient.getByteWithResponse(context);
+    public ByteWrapper getByte(Context context) {
+        return this.serviceClient.getByte(context);
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putByteWithResponse(ByteWrapper complexBody) {
+        return this.serviceClient.putByteWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putByteWithResponse(ByteWrapper complexBody, Context context) {
+        return this.serviceClient.putByteWithResponse(complexBody, context);
     }
 
     /**
@@ -669,11 +1308,10 @@ public final class PrimitiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteWithResponse(ByteWrapper complexBody, Context context) {
-        return this.serviceClient.putByteWithResponse(complexBody, context);
+    public void putByte(ByteWrapper complexBody, Context context) {
+        this.serviceClient.putByte(complexBody, context);
     }
 }

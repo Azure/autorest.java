@@ -111,10 +111,22 @@ public final class HttpServerFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head501WithResponse() {
+        return head501WithResponseAsync().block();
+    }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head501() {
-        head501Async().block();
+        head501WithResponse();
     }
 
     /**
@@ -151,10 +163,22 @@ public final class HttpServerFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get501WithResponse() {
+        return get501WithResponseAsync().block();
+    }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get501() {
-        get501Async().block();
+        get501WithResponse();
     }
 
     /**
@@ -192,10 +216,22 @@ public final class HttpServerFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post505WithResponse() {
+        return post505WithResponseAsync().block();
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post505() {
-        post505Async().block();
+        post505WithResponse();
     }
 
     /**
@@ -233,9 +269,21 @@ public final class HttpServerFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete505WithResponse() {
+        return delete505WithResponseAsync().block();
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete505() {
-        delete505Async().block();
+        delete505WithResponse();
     }
 }

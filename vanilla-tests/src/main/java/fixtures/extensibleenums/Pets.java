@@ -111,11 +111,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return pet by id along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Pet> getByPetIdWithResponse(String petId) {
+        return getByPetIdWithResponseAsync(petId).block();
+    }
+
+    /**
+     * get pet by id.
+     *
+     * @param petId Pet id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return pet by id.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getByPetId(String petId) {
-        return getByPetIdAsync(petId).block();
+        return getByPetIdWithResponse(petId).getValue();
     }
 
     /**
@@ -174,11 +188,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Pet> addPetWithResponse(Pet petParam) {
+        return addPetWithResponseAsync(petParam).block();
+    }
+
+    /**
+     * add pet.
+     *
+     * @param petParam pet param.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet(Pet petParam) {
-        return addPetAsync(petParam).block();
+        return addPetWithResponse(petParam).getValue();
     }
 
     /**
@@ -191,6 +219,6 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet() {
         final Pet petParam = null;
-        return addPetAsync(petParam).block();
+        return addPetWithResponse(petParam).getValue();
     }
 }

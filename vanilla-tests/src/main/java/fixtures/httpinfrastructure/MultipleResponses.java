@@ -283,11 +283,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model204NoModelDefaultError200ValidWithResponse() {
+        return get200Model204NoModelDefaultError200ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError200Valid() {
-        return get200Model204NoModelDefaultError200ValidAsync().block();
+        return get200Model204NoModelDefaultError200ValidWithResponse().getValue();
     }
 
     /**
@@ -326,11 +338,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model204NoModelDefaultError204ValidWithResponse() {
+        return get200Model204NoModelDefaultError204ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError204Valid() {
-        return get200Model204NoModelDefaultError204ValidAsync().block();
+        return get200Model204NoModelDefaultError204ValidWithResponse().getValue();
     }
 
     /**
@@ -369,11 +393,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model204NoModelDefaultError201InvalidWithResponse() {
+        return get200Model204NoModelDefaultError201InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError201Invalid() {
-        return get200Model204NoModelDefaultError201InvalidAsync().block();
+        return get200Model204NoModelDefaultError201InvalidWithResponse().getValue();
     }
 
     /**
@@ -412,11 +448,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model204NoModelDefaultError202NoneWithResponse() {
+        return get200Model204NoModelDefaultError202NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 202 response with no payload:.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError202None() {
-        return get200Model204NoModelDefaultError202NoneAsync().block();
+        return get200Model204NoModelDefaultError202NoneWithResponse().getValue();
     }
 
     /**
@@ -455,11 +503,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model204NoModelDefaultError400ValidWithResponse() {
+        return get200Model204NoModelDefaultError400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError400Valid() {
-        return get200Model204NoModelDefaultError400ValidAsync().block();
+        return get200Model204NoModelDefaultError400ValidWithResponse().getValue();
     }
 
     /**
@@ -498,11 +558,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model201ModelDefaultError200ValidWithResponse() {
+        return get200Model201ModelDefaultError200ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError200Valid() {
-        return get200Model201ModelDefaultError200ValidAsync().block();
+        return get200Model201ModelDefaultError200ValidWithResponse().getValue();
     }
 
     /**
@@ -541,11 +613,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model201ModelDefaultError201ValidWithResponse() {
+        return get200Model201ModelDefaultError201ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError201Valid() {
-        return get200Model201ModelDefaultError201ValidAsync().block();
+        return get200Model201ModelDefaultError201ValidWithResponse().getValue();
     }
 
     /**
@@ -584,11 +668,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200Model201ModelDefaultError400ValidWithResponse() {
+        return get200Model201ModelDefaultError400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError400Valid() {
-        return get200Model201ModelDefaultError400ValidAsync().block();
+        return get200Model201ModelDefaultError400ValidWithResponse().getValue();
     }
 
     /**
@@ -629,11 +725,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse() {
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().block();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse().getValue();
     }
 
     /**
@@ -674,11 +782,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse() {
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().block();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse().getValue();
     }
 
     /**
@@ -719,11 +839,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse() {
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().block();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse().getValue();
     }
 
     /**
@@ -764,11 +896,23 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse() {
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().block();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse().getValue();
     }
 
     /**
@@ -806,10 +950,22 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultError202NoneWithResponse() {
+        return get202None204NoneDefaultError202NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 202 response with no payload.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneAsync().block();
+        get202None204NoneDefaultError202NoneWithResponse();
     }
 
     /**
@@ -847,10 +1003,22 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultError204NoneWithResponse() {
+        return get202None204NoneDefaultError204NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneAsync().block();
+        get202None204NoneDefaultError204NoneWithResponse();
     }
 
     /**
@@ -888,10 +1056,22 @@ public final class MultipleResponses {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultError400ValidWithResponse() {
+        return get202None204NoneDefaultError400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidAsync().block();
+        get202None204NoneDefaultError400ValidWithResponse();
     }
 
     /**
@@ -928,10 +1108,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse() {
+        return get202None204NoneDefaultNone202InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidAsync().block();
+        get202None204NoneDefaultNone202InvalidWithResponse();
     }
 
     /**
@@ -968,10 +1160,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultNone204NoneWithResponse() {
+        return get202None204NoneDefaultNone204NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneAsync().block();
+        get202None204NoneDefaultNone204NoneWithResponse();
     }
 
     /**
@@ -1008,10 +1212,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultNone400NoneWithResponse() {
+        return get202None204NoneDefaultNone400NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneAsync().block();
+        get202None204NoneDefaultNone400NoneWithResponse();
     }
 
     /**
@@ -1048,10 +1264,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse() {
+        return get202None204NoneDefaultNone400InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidAsync().block();
+        get202None204NoneDefaultNone400InvalidWithResponse();
     }
 
     /**
@@ -1089,11 +1317,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> getDefaultModelA200ValidWithResponse() {
+        return getDefaultModelA200ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200Valid() {
-        return getDefaultModelA200ValidAsync().block();
+        return getDefaultModelA200ValidWithResponse().getValue();
     }
 
     /**
@@ -1130,11 +1370,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> getDefaultModelA200NoneWithResponse() {
+        return getDefaultModelA200NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200None() {
-        return getDefaultModelA200NoneAsync().block();
+        return getDefaultModelA200NoneWithResponse().getValue();
     }
 
     /**
@@ -1172,10 +1424,22 @@ public final class MultipleResponses {
      *
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultModelA400ValidWithResponse() {
+        return getDefaultModelA400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @throws MyExceptionException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultModelA400Valid() {
-        getDefaultModelA400ValidAsync().block();
+        getDefaultModelA400ValidWithResponse();
     }
 
     /**
@@ -1212,10 +1476,22 @@ public final class MultipleResponses {
      *
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultModelA400NoneWithResponse() {
+        return getDefaultModelA400NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws MyExceptionException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultModelA400None() {
-        getDefaultModelA400NoneAsync().block();
+        getDefaultModelA400NoneWithResponse();
     }
 
     /**
@@ -1251,10 +1527,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultNone200InvalidWithResponse() {
+        return getDefaultNone200InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidAsync().block();
+        getDefaultNone200InvalidWithResponse();
     }
 
     /**
@@ -1290,10 +1578,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultNone200NoneWithResponse() {
+        return getDefaultNone200NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultNone200None() {
-        getDefaultNone200NoneAsync().block();
+        getDefaultNone200NoneWithResponse();
     }
 
     /**
@@ -1329,10 +1629,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultNone400InvalidWithResponse() {
+        return getDefaultNone400InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidAsync().block();
+        getDefaultNone400InvalidWithResponse();
     }
 
     /**
@@ -1368,10 +1680,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getDefaultNone400NoneWithResponse() {
+        return getDefaultNone400NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getDefaultNone400None() {
-        getDefaultNone400NoneAsync().block();
+        getDefaultNone400NoneWithResponse();
     }
 
     /**
@@ -1411,11 +1735,24 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA200NoneWithResponse() {
+        return get200ModelA200NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
+     * for model A.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200None() {
-        return get200ModelA200NoneAsync().block();
+        return get200ModelA200NoneWithResponse().getValue();
     }
 
     /**
@@ -1452,11 +1789,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA200ValidWithResponse() {
+        return get200ModelA200ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '200'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Valid() {
-        return get200ModelA200ValidAsync().block();
+        return get200ModelA200ValidWithResponse().getValue();
     }
 
     /**
@@ -1493,11 +1842,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA200InvalidWithResponse() {
+        return get200ModelA200InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Invalid() {
-        return get200ModelA200InvalidAsync().block();
+        return get200ModelA200InvalidWithResponse().getValue();
     }
 
     /**
@@ -1534,11 +1895,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA400NoneWithResponse() {
+        return get200ModelA400NoneWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 400 response with no payload client should treat as an http error with no error model.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400None() {
-        return get200ModelA400NoneAsync().block();
+        return get200ModelA400NoneWithResponse().getValue();
     }
 
     /**
@@ -1575,11 +1948,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA400ValidWithResponse() {
+        return get200ModelA400ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '400'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Valid() {
-        return get200ModelA400ValidAsync().block();
+        return get200ModelA400ValidWithResponse().getValue();
     }
 
     /**
@@ -1616,11 +2001,23 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA400InvalidWithResponse() {
+        return get200ModelA400InvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Invalid() {
-        return get200ModelA400InvalidAsync().block();
+        return get200ModelA400InvalidWithResponse().getValue();
     }
 
     /**
@@ -1657,10 +2054,22 @@ public final class MultipleResponses {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyException> get200ModelA202ValidWithResponse() {
+        return get200ModelA202ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Send a 202 response with payload {'statusCode': '202'}.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA202Valid() {
-        return get200ModelA202ValidAsync().block();
+        return get200ModelA202ValidWithResponse().getValue();
     }
 }

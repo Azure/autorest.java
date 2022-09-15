@@ -221,10 +221,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsHead300Response head300WithResponse() {
+        return head300WithResponseAsync().block();
+    }
+
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head300() {
-        head300Async().block();
+        head300WithResponse();
     }
 
     /**
@@ -264,8 +276,20 @@ public final class HttpRedirects {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsGet300Response get300WithResponse() {
+        return get300WithResponseAsync().block();
+    }
+
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> get300() {
-        return get300Async().block();
+        return get300WithResponse().getValue();
     }
 
     /**
@@ -302,10 +326,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsHead301Response head301WithResponse() {
+        return head301WithResponseAsync().block();
+    }
+
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head301() {
-        head301Async().block();
+        head301WithResponse();
     }
 
     /**
@@ -342,10 +378,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsGet301Response get301WithResponse() {
+        return get301WithResponseAsync().block();
+    }
+
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get301() {
-        get301Async().block();
+        get301WithResponse();
     }
 
     /**
@@ -386,10 +434,23 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPut301Response put301WithResponse() {
+        return put301WithResponseAsync().block();
+    }
+
+    /**
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
+     * return the received 301 to the caller for evaluation.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put301() {
-        put301Async().block();
+        put301WithResponse();
     }
 
     /**
@@ -426,10 +487,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsHead302Response head302WithResponse() {
+        return head302WithResponseAsync().block();
+    }
+
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head302() {
-        head302Async().block();
+        head302WithResponse();
     }
 
     /**
@@ -466,10 +539,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsGet302Response get302WithResponse() {
+        return get302WithResponseAsync().block();
+    }
+
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get302() {
-        get302Async().block();
+        get302WithResponse();
     }
 
     /**
@@ -510,10 +595,23 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPatch302Response patch302WithResponse() {
+        return patch302WithResponseAsync().block();
+    }
+
+    /**
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch302() {
-        patch302Async().block();
+        patch302WithResponse();
     }
 
     /**
@@ -554,10 +652,23 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPost303Response post303WithResponse() {
+        return post303WithResponseAsync().block();
+    }
+
+    /**
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
+     * ultimately returning a 200 status code.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post303() {
-        post303Async().block();
+        post303WithResponse();
     }
 
     /**
@@ -594,10 +705,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsHead307Response head307WithResponse() {
+        return head307WithResponseAsync().block();
+    }
+
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head307() {
-        head307Async().block();
+        head307WithResponse();
     }
 
     /**
@@ -634,10 +757,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsGet307Response get307WithResponse() {
+        return get307WithResponseAsync().block();
+    }
+
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get307() {
-        get307Async().block();
+        get307WithResponse();
     }
 
     /**
@@ -674,10 +809,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsOptions307Response options307WithResponse() {
+        return options307WithResponseAsync().block();
+    }
+
+    /**
+     * options redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options307() {
-        options307Async().block();
+        options307WithResponse();
     }
 
     /**
@@ -715,10 +862,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPut307Response put307WithResponse() {
+        return put307WithResponseAsync().block();
+    }
+
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put307() {
-        put307Async().block();
+        put307WithResponse();
     }
 
     /**
@@ -756,10 +915,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPatch307Response patch307WithResponse() {
+        return patch307WithResponseAsync().block();
+    }
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch307() {
-        patch307Async().block();
+        patch307WithResponse();
     }
 
     /**
@@ -797,10 +968,22 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsPost307Response post307WithResponse() {
+        return post307WithResponseAsync().block();
+    }
+
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post307() {
-        post307Async().block();
+        post307WithResponse();
     }
 
     /**
@@ -838,9 +1021,21 @@ public final class HttpRedirects {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public HttpRedirectsDelete307Response delete307WithResponse() {
+        return delete307WithResponseAsync().block();
+    }
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete307() {
-        delete307Async().block();
+        delete307WithResponse();
     }
 }
