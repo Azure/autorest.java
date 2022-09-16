@@ -28,11 +28,15 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -40,6 +44,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -236,7 +241,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
 
-            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            if ((settings.shouldClientSideValidations() && settings.shouldClientLogger()) || model.isStronglyTypedHeader()) {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
 
@@ -266,6 +271,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             imports.add(Base64.class.getName());
             imports.add(HashMap.class.getName());
             imports.add(HttpHeader.class.getName());
+            imports.add(UUID.class.getName());
+            imports.add(URL.class.getName());
+            imports.add(IOException.class.getName());
+            imports.add(UncheckedIOException.class.getName());
+            imports.add(ClientLogger.class.getName());
 
             // JacksonAdapter will be removed in the future once model types are converted to using stream-style
             // serialization. For now, it's needed to handle the rare scenario where the strong type is a non-Java
@@ -855,6 +865,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             rawHeaderAccess = property.getName();
         }
 
+        boolean needsTryCatch = false;
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
             setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
@@ -878,13 +889,24 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             setter = String.format("LocalDate.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Duration) {
             setter = String.format("Duration.parse(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.UUID) {
+            setter = "UUID.fromString(" + rawHeaderAccess + ")";
+        } else if (wireType == ClassType.URL) {
+            needsTryCatch = true;
+            setter = "new URL(" + rawHeaderAccess + ")";
         } else if (wireType instanceof EnumType) {
             EnumType enumType = (EnumType) wireType;
             setter = String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
             // TODO (alzimmer): Check if the wire type is a Swagger type that could use stream-style serialization.
+            needsTryCatch = true;
             setter = String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
                 property.getSerializedName(), getWireTypeJavaType(wireType));
+        }
+
+        if (needsTryCatch) {
+            javaBlock.line("try {");
+            javaBlock.increaseIndent();
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
@@ -893,6 +915,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {
             javaBlock.line("this.%s = %s;", property.getName(), setter);
+        }
+
+        if (needsTryCatch) {
+            // At this time all try-catching is for IOExceptions.
+            javaBlock.decreaseIndent();
+            javaBlock.line("} catch (IOException ex) {");
+            javaBlock.indent(() -> javaBlock.line("throw LOGGER.logExceptionAsError(new UncheckedIOException(ex));"));
+            javaBlock.line("}");
         }
     }
 
