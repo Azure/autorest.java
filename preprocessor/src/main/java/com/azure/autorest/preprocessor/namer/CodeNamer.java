@@ -195,21 +195,21 @@ public class CodeNamer {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return toPascalCase(removeInvalidCharacters(getEscapedReservedNameAndClasses(name, "Model")));
+        return getEscapedReservedNameAndClasses(toPascalCase(removeInvalidCharacters(name)), "Model");
     }
 
     public static String getParameterName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Parameter")));
+        return getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Parameter");
     }
 
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Property")));
+        return getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
     }
 
     public static String getMethodGroupName(String name) {
