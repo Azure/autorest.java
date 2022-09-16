@@ -375,7 +375,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         MethodPageDetails details = new MethodPageDetails(
                                 CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                                 pageableItemName,
-                                (nextMethods == null) ? null : nextMethods.stream().findFirst().get(),
+                                (nextMethods == null) ? null : nextMethods.stream().findFirst().orElse(null),
                                 lroIntermediateType,
                                 operation.getExtensions().getXmsPageable().getNextLinkName(),
                                 operation.getExtensions().getXmsPageable().getItemName());
