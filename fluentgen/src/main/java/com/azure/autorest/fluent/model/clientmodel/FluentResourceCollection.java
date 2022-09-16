@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -59,60 +60,72 @@ public class FluentResourceCollection {
         String baseClassName = CodeNamer.getPlural(groupClient.getClassBaseName());
 
         this.interfaceType = new ClassType.Builder()
-                .packageName(settings.getPackage(settings.getModelsSubpackage()))
-                .name(baseClassName)
-                .build();
+            .packageName(settings.getPackage(settings.getModelsSubpackage()))
+            .name(baseClassName)
+            .build();
         this.implementationType = new ClassType.Builder()
-                .packageName(settings.getPackage(settings.getImplementationSubpackage()))
-                .name(baseClassName + ModelNaming.COLLECTION_IMPL_SUFFIX)
-                .build();
+            .packageName(settings.getPackage(settings.getImplementationSubpackage()))
+            .name(baseClassName + ModelNaming.COLLECTION_IMPL_SUFFIX)
+            .build();
 
         this.innerClientType = new ClassType.Builder()
-                .packageName(settings.getPackage(settings.getFluentSubpackage()))
-                .name(groupClient.getInterfaceName())
-                .build();
+            .packageName(settings.getPackage(settings.getFluentSubpackage()))
+            .name(groupClient.getInterfaceName())
+            .build();
 
         Set<String> existingMethodNames = this.groupClient.getClientMethods().stream()
             .filter(m -> !m.isImplementationOnly() && m.getMethodVisibility() == JavaVisibility.Public)
             .map(ClientMethod::getName)
             .collect(Collectors.toSet());
 
-        this.methods.addAll(this.groupClient.getClientMethods().stream()
-                .filter(m -> !m.isImplementationOnly() && m.getMethodVisibility() == JavaVisibility.Public)
-                .filter(m -> {
-                            boolean isSyncMethod = m.getType() == ClientMethodType.SimpleSync
-                                    || m.getType() == ClientMethodType.PagingSync
-                                    || m.getType() == ClientMethodType.LongRunningSync
-                                    || m.getType() == ClientMethodType.SimpleSyncRestResponse;
-                            boolean isAsyncMethod = m.getType() == ClientMethodType.SimpleAsync
-                                    || m.getType() == ClientMethodType.PagingAsync
-                                    || m.getType() == ClientMethodType.LongRunningAsync
-                                    || m.getType() == ClientMethodType.SimpleAsyncRestResponse;
-                            // by default, only add sync methods
-                            return isSyncMethod;
-//                                    || (FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods() && isAsyncMethod);
-                        })
-                .map(m -> {
-                    // map "delete" in client to "deleteByResourceGroup" in collection
-                    if (WellKnownMethodName.DELETE.getMethodName().equals(m.getName())
-                            && (m.getType() == ClientMethodType.SimpleSync || m.getType() == ClientMethodType.LongRunningSync)
-                            && !existingMethodNames.contains(WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName())
-                            && m.getMethodParameters().size() == 2 && m.getMethodParameters().stream().allMatch(p -> p.getClientType() == ClassType.String)) {
-                        FluentCollectionMethod method = new FluentCollectionMethod(m, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName());
-                        existingMethodNames.add(method.getMethodName());
-                        return method;
-                    } else if ((WellKnownMethodName.DELETE.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE).equals(m.getName())
-                            && m.getType() == ClientMethodType.SimpleSyncRestResponse
-                            && !existingMethodNames.contains((WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE))
-                            && m.getMethodParameters().size() == 3 && m.getMethodParameters().stream().limit(2).allMatch(p -> p.getClientType() == ClassType.String)) {
-                        FluentCollectionMethod method = new FluentCollectionMethod(m, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE);
-                        existingMethodNames.add(method.getMethodName());
-                        return method;
-                    } else {
-                        return new FluentCollectionMethod(m);
-                    }
-                })
-                .collect(Collectors.toList()));
+        for (ClientMethod clientMethod : this.groupClient.getClientMethods()) {
+            if (clientMethod.isImplementationOnly() || clientMethod.getMethodVisibility() != JavaVisibility.Public) {
+                continue;
+            }
+
+            ClientMethodType methodType = clientMethod.getType();
+            boolean isSyncMethod = (methodType == ClientMethodType.SimpleSync
+                || methodType == ClientMethodType.PagingSync
+                || methodType == ClientMethodType.LongRunningSync
+                || methodType == ClientMethodType.SimpleSyncRestResponse);
+//            boolean isAsyncMethod = (methodType == ClientMethodType.SimpleAsync
+//                || methodType == ClientMethodType.PagingAsync
+//                || methodType == ClientMethodType.LongRunningAsync
+//                || methodType == ClientMethodType.SimpleAsyncRestResponse);
+
+            if (!isSyncMethod /*&& (!isAsyncMethod && FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods())*/) {
+                continue;
+            }
+
+            // map "delete" in client to "deleteByResourceGroup" in collection
+            String methodName = clientMethod.getName();
+            List<ClientMethodParameter> methodParameters = clientMethod.getMethodParameters();
+
+            FluentCollectionMethod fluentMethod;
+            if (WellKnownMethodName.DELETE.getMethodName().equals(methodName)
+                && (methodType == ClientMethodType.SimpleSync || methodType == ClientMethodType.LongRunningSync)
+                && !existingMethodNames.contains(WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName())
+                && methodParameters.size() == 2
+                && methodParameters.get(0).getClientType() == ClassType.String
+                && methodParameters.get(1).getClientType() == ClassType.String) {
+                // Transform "delete(String, String)" into "deleteByResourceGroup(String, String)"
+                fluentMethod = new FluentCollectionMethod(clientMethod, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName());
+                existingMethodNames.add(fluentMethod.getMethodName());
+            } else if ((WellKnownMethodName.DELETE.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE).equals(methodName)
+                && methodType == ClientMethodType.SimpleSyncRestResponse
+                && !existingMethodNames.contains(WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE)
+                && methodParameters.size() == 3
+                && methodParameters.get(0).getClientType() == ClassType.String
+                && methodParameters.get(1).getClientType() == ClassType.String) {
+                // Transform "deleteWithResponse(String, String, ?)" into "deleteByResourceGroupWithResponse(String, String, ?)"
+                fluentMethod = new FluentCollectionMethod(clientMethod, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE);
+                existingMethodNames.add(fluentMethod.getMethodName());
+            } else {
+                fluentMethod = new FluentCollectionMethod(clientMethod);
+            }
+
+            this.methods.add(fluentMethod);
+        }
     }
 
     public MethodGroupClient getInnerGroupClient() {

@@ -669,6 +669,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder.onlyRequiredParameters(true).build());
+        } else {
+            methods.add(builder.build());
         }
 
         builder.onlyRequiredParameters(false);
@@ -691,8 +693,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.methodVisibility(visibilityFunction.apply(false, true));
             addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
                 nextPageReturnValue, detailsWithContext, contextParameter);
-        } else {
-            methods.add(builder.build());
         }
     }
 
@@ -734,8 +734,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String methodName = isSync ? proxyMethod.getSimpleRestResponseMethodName() : proxyMethod.getSimpleAsyncRestResponseMethodName();
         ClientMethodType methodType = isSync ? ClientMethodType.SimpleSyncRestResponse : ClientMethodType.SimpleAsyncRestResponse;
 
-        // For WithResponse overloads only generate a single method, this method will always be generated with all
-        // parameters, the only question is whether it will include Context.
         builder.parameters(parameters)
             .returnValue(responseReturnValue)
             .onlyRequiredParameters(false)
@@ -747,7 +745,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // Always generate an overload of WithResponse with non-required parameters without Context.
         methods.add(builder.build());
 
-        // Then generate an overload with all parameters always, optionally include context.
         if (settings.isContextClientMethodParameter()) {
             builder.methodVisibility(visibilityFunction.apply(true, true));
             addClientMethodWithContext(methods, builder, parameters, contextParameter);
@@ -764,8 +761,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isGroupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(false, false));
 
-        // Always generate a non-WithResponse overload with non-required parameters without Context.
-        methods.add(builder.build());
+        // Generate a non-WithResponse overload with non-required parameters only if one of fluent, include Context,
+        // and only required parameters is false.
+        if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+            methods.add(builder.build());
+        }
 
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder.onlyRequiredParameters(true).build());
