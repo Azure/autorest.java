@@ -667,10 +667,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isGroupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(false, false));
 
+        methods.add(builder.build());
+
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder.onlyRequiredParameters(true).build());
-        } else {
-            methods.add(builder.build());
         }
 
         builder.onlyRequiredParameters(false);
