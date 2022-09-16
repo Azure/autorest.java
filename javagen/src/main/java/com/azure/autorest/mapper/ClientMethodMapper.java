@@ -644,13 +644,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isGroupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(true, false));
 
+        if (settings.getRequiredParameterClientMethods() || !settings.isContextClientMethodParameter()) {
+            methods.add(builder.build());
+        }
+
         // Generate an overload with all parameters always, optionally include context.
         if (settings.isContextClientMethodParameter() && !settings.isDataPlaneClient()) {
             builder.methodVisibility(visibilityFunction.apply(true, true));
             addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
                 singlePageReturnValue, details, contextParameter);
-        } else {
-            methods.add(builder.build());
         }
 
         // If this was the next method there is no further work to be done.
