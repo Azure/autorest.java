@@ -691,7 +691,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
             }
 
-            builder.methodVisibility(visibilityFunction.apply(false, true));
+            builder.methodVisibility(visibilityFunction.apply(false, true)).onlyRequiredParameters(false);
             addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
                 nextPageReturnValue, detailsWithContext, contextParameter);
         }
