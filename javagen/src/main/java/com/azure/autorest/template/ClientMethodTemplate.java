@@ -742,11 +742,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 function.line("return new PagedFlux<>(");
-                function.indent(() -> {
-                    function.line("() -> %s(%s));",
-                        clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getArgumentList());
-                });
+                function.indent(() -> function.line("() -> %s(%s));",
+                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                    clientMethod.getArgumentList()));
             });
         }
     }

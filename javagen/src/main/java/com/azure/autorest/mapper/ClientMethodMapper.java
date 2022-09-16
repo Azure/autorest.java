@@ -644,7 +644,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isGroupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(true, false));
 
-        if (settings.getRequiredParameterClientMethods() || !settings.isContextClientMethodParameter()) {
+        if (settings.getRequiredParameterClientMethods() || !settings.isContextClientMethodParameter()
+            || settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
             methods.add(builder.build());
         }
 
