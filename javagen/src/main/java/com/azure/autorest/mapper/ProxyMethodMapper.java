@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -342,7 +343,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         responseBodyType);
                 return createSingleValueAsyncReturnType(genericResponseType);
             } else {
-                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, ClientModels.getInstance().getModels(), settings);
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
