@@ -1366,12 +1366,13 @@ function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): 
 
 function getNameForTemplate(target: Type): string {
   switch (target.kind) {
-    case "Model":
+    case "Model": {
       let name = target.name;
       if (target.templateArguments) {
         name = name + target.templateArguments.map((it) => getNameForTemplate(it)).join("");
       }
       return name;
+    }
 
     case "String":
       return target.value;
