@@ -39,6 +39,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -1076,26 +1077,56 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
-    private String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod, boolean useLocalRequestOptions, JavaSettings settings) {
-        List<String> serviceMethodArgs = clientMethod.getProxyMethodArguments(settings)
-            .stream()
-            .map(argVal -> {
-                if (clientMethod.getParameters().stream().filter(param -> param.getName().equals(argVal))
-                    .anyMatch(param -> clientMethod.getMethodTransformationDetails().stream()
-                        .anyMatch(transformation -> param.getName().equals(transformation.getOutParameter().getName())))) {
-                    return argVal + "Local";
+    private static String checkAndReplaceParamNameCollision(ClientMethod clientMethod, ProxyMethod restAPIMethod,
+        boolean useLocalRequestOptions, JavaSettings settings) {
+        // Asynchronous methods will use 'FluxUtils.withContext' to infer 'Context' from the Reactor's context.
+        // Only replace 'context' with 'Context.NONE' for synchronous methods that don't have a 'Context' parameter.
+        boolean isSync = clientMethod.getProxyMethod().isSync();
+        StringBuilder builder = new StringBuilder("service.").append(restAPIMethod.getName()).append('(');
+        Map<String, ClientMethodParameter> nameToParameter = clientMethod.getParameters().stream()
+            .collect(Collectors.toMap(ClientMethodParameter::getName, Function.identity()));
+        Set<String> parametersWithTransformations = clientMethod.getMethodTransformationDetails().stream()
+            .map(transform -> transform.getOutParameter().getName())
+            .collect(Collectors.toSet());
+
+        boolean firstParameter = true;
+        for (String proxyMethodArgument : clientMethod.getProxyMethodArguments(settings)) {
+            String parameterName;
+            if (useLocalRequestOptions && "requestOptions".equals(proxyMethodArgument)) {
+                // Simple static mapping for RequestOptions when 'useLocalRequestOptions' is true.
+                parameterName = "requestOptionsLocal";
+            } else {
+                ClientMethodParameter parameter = nameToParameter.get(proxyMethodArgument);
+                if (parameter != null && parametersWithTransformations.contains(proxyMethodArgument)) {
+                    // If this ClientMethod contains the ProxyMethod parameter and it has a transformation use the
+                    // '*Local' transformed version in the service call.
+                    parameterName = proxyMethodArgument + "Local";
+                } else {
+                    if (!isSync) {
+                        // For asynchronous methods always use the argument name.
+                        parameterName = proxyMethodArgument;
+                    } else {
+                        // For synchronous methods check if this parameter is the 'Context' parameter and map to
+                        // 'Context.NONE' as synchronous methods have no way to infer 'Context'. Without doing this
+                        // mapping generated code will reference a non-existent value which won't compile.
+                        // TODO (alzimmer): If needed in the future use a more complex validation than String matching.
+                        //  It could be possible for the interface method to have another parameter called 'context'
+                        //  which isn't 'Context'. This can be done by looking for the 'ProxyMethodParameter' with the
+                        //  matching name and checking if it's the 'Context' parameter.
+                        parameterName = "context".equals(proxyMethodArgument) ? "Context.NONE" : proxyMethodArgument;
+                    }
                 }
-                return argVal;
-            })
-            .map(argVal -> {
-                if (useLocalRequestOptions && "requestOptions".equals(argVal)) {
-                    return argVal + "Local";
-                }
-                return argVal;
-            })
-            .collect(Collectors.toList());
-        String restAPIMethodArgumentList = replaceContextWithContextNone(clientMethod, String.join(", ", serviceMethodArgs));
-        return String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+            }
+
+            if (firstParameter) {
+                builder.append(parameterName);
+                firstParameter = false;
+            } else {
+                builder.append(", ").append(parameterName);
+            }
+        }
+
+        return builder.append(')').toString();
     }
 
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
@@ -1235,21 +1266,5 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });
-    }
-
-    /*
-     * If the ClientMethod doesn't have a parameter for Context the use of 'context' needs to be replaced with
-     * Context.NONE.
-     */
-    private static String replaceContextWithContextNone(ClientMethod clientMethod, String arguments) {
-        if (!clientMethod.getProxyMethod().isSync()) {
-            return arguments;
-        }
-
-        if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
-            return arguments.replace("context", "Context.NONE");
-        } else {
-            return arguments;
-        }
     }
 }
