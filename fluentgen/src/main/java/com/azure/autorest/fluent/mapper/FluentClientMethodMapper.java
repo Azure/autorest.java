@@ -23,7 +23,6 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
         if (hasContextParameter) {
             switch (methodType) {
                 case PagingAsyncSinglePage:
-                case PagingSyncSinglePage:
                 case PagingAsync:
                 case LongRunningBeginAsync:
                 case LongRunningAsync:
@@ -33,6 +32,7 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
 
                 case SimpleAsync:
                 case SimpleSync:
+                case PagingSyncSinglePage:
                     visibility = NOT_GENERATE;
                     break;
 
@@ -41,12 +41,19 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
             }
         } else {
-            if (methodType == ClientMethodType.PagingAsyncSinglePage
-                || methodType == ClientMethodType.SimpleSyncRestResponse
-                || methodType == ClientMethodType.PagingSyncSinglePage) {
-                visibility = NOT_VISIBLE;
-            } else {
-                visibility = super.methodVisibility(methodType, false, isProtocolMethod);
+            switch (methodType) {
+                case PagingAsyncSinglePage:
+                case SimpleSyncRestResponse:
+                    visibility = NOT_VISIBLE;
+                    break;
+
+                case PagingSyncSinglePage:
+                    visibility = NOT_GENERATE;
+                    break;
+
+                default:
+                    visibility = super.methodVisibility(methodType, false, isProtocolMethod);
+                    break;
             }
         }
         if (JavaSettings.getInstance().isFluentLite() && !FluentStatic.getFluentJavaSettings().isGenerateAsyncMethods()) {
