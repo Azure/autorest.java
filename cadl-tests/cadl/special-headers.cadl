@@ -1,0 +1,68 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using Azure.Core.Foundations;
+
+@serviceTitle("SpecialHeaders")
+@serviceVersion("1.0.0")
+namespace Cadl.SpecialHeaders;
+
+model Resource {
+  @visibility("read")
+  id: string;
+
+  @key
+  @segment("resources")
+  name: string;
+  description?: string;
+  type: string;
+}
+
+model SpecialHeaderParameters {
+  @header("Repeatability-Request-ID") requestId?: string,
+  @header("Repeatability-First-Sent") firstSent?: string
+}
+
+model Customizations {
+  parameters: SpecialHeaderParameters;
+}
+
+@route("/special-headers")
+interface SpecialHeadersOp {
+    @get
+    @doc("Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent")
+    get(
+      @header("Repeatability-Request-ID") requestId: string,
+      @header("Repeatability-First-Sent") firstSent?: string, 
+      @path name: string, 
+    ): Resource | ErrorResponse;
+
+    @put
+    @doc("Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent")
+    put(
+      @header("Repeatability-Request-ID") requestId?: string,
+      @header("Repeatability-First-Sent") firstSent?: string, 
+      @path name: string, 
+      @body body: Resource
+    ): Resource | ErrorResponse;
+  
+    @post
+    @doc("Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent")
+    post(
+      @header("Repeatability-Request-ID") requestId?: string,
+      @header("Repeatability-First-Sent") firstSent?: string, 
+      @path name: string,
+      @body body: Resource
+    ): Resource | ErrorResponse;
+
+    @put
+    @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
+    createLro is LongRunningResourceCreateOrUpdate<Resource, Customizations>;
+
+    @post
+    @doc("Send a pagable request with header Repeatability-Request-ID and Repeatability-First-Sent")
+    listPagable is Azure.Core.ResourceList<Resource, Customizations>;
+}
