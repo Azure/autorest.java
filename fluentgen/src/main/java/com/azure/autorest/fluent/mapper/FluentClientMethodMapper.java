@@ -25,13 +25,9 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                 case PagingAsyncSinglePage:
                 case PagingSyncSinglePage:
                 case PagingAsync:
-                case PagingSync:
                 case LongRunningBeginAsync:
-                case LongRunningBeginSync:
                 case LongRunningAsync:
-                case LongRunningSync:
                 case SimpleAsyncRestResponse:
-                case SimpleSyncRestResponse:
                     visibility = NOT_VISIBLE;
                     break;
 
