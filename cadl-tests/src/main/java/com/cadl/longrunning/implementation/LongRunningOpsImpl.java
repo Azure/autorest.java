@@ -80,7 +80,7 @@ public final class LongRunningOpsImpl {
                 @HeaderParam("content-type") String contentType,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData optionalProperties,
+                @BodyParam("application/merge-patch+json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -174,7 +174,9 @@ public final class LongRunningOpsImpl {
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -189,7 +191,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -199,7 +201,7 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -210,7 +212,7 @@ public final class LongRunningOpsImpl {
                                 contentType,
                                 this.client.getServiceVersion().getVersion(),
                                 accept,
-                                optionalProperties,
+                                resource,
                                 requestOptions,
                                 context));
     }
@@ -222,7 +224,9 @@ public final class LongRunningOpsImpl {
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -237,7 +241,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -247,10 +251,10 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateOrUpdateAsync(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
-                () -> this.createOrUpdateWithResponseAsync(name, optionalProperties, requestOptions),
+                () -> this.createOrUpdateWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
@@ -268,7 +272,9 @@ public final class LongRunningOpsImpl {
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -283,7 +289,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -293,8 +299,8 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrUpdate(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
-        return this.beginCreateOrUpdateAsync(name, optionalProperties, requestOptions).getSyncPoller();
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.beginCreateOrUpdateAsync(name, resource, requestOptions).getSyncPoller();
     }
 
     /**

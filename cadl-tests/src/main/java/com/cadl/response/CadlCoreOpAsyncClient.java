@@ -18,7 +18,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.response.implementation.CadlCoreOpsImpl;
 import com.cadl.response.models.Resource;
-import com.cadl.response.models.ResourceRequest;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResponseClient type. */
@@ -43,6 +42,8 @@ public final class CadlCoreOpAsyncClient {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
+     *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Required)
      * }
@@ -60,7 +61,7 @@ public final class CadlCoreOpAsyncClient {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -71,8 +72,8 @@ public final class CadlCoreOpAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateWithResponse(
-            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
-        return this.serviceClient.createOrUpdateWithResponseAsync(name, updateableProperties, requestOptions);
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateWithResponseAsync(name, resource, requestOptions);
     }
 
     /**
@@ -156,7 +157,7 @@ public final class CadlCoreOpAsyncClient {
      * Creates a new resource or updates an existing one.
      *
      * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -167,10 +168,10 @@ public final class CadlCoreOpAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> createOrUpdate(String name, ResourceRequest updateableProperties) {
+    public Mono<Resource> createOrUpdate(String name, Resource resource) {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateWithResponse(name, BinaryData.fromObject(updateableProperties), requestOptions)
+        return createOrUpdateWithResponse(name, BinaryData.fromObject(resource), requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
