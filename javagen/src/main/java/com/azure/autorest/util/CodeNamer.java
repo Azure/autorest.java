@@ -209,7 +209,7 @@ public class CodeNamer {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Property")));
+        return getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
     }
 
     public static String getPlural(String name) {

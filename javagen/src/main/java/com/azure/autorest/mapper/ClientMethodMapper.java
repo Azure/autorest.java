@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -843,7 +844,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                 syncReturnType);
         } else {
-            return ClientMapper.getClientResponseClassType(operation, settings);
+            return ClientMapper.getClientResponseClassType(operation, ClientModels.getInstance().getModels(), settings);
         }
     }
 
