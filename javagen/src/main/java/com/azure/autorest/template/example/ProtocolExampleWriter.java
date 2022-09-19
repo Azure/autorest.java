@@ -149,7 +149,7 @@ public class ProtocolExampleWriter {
             if (!matchRequiredParameter) {
                 // parameter in example not found in method signature, check those parameters defined in spec but was left out of method signature
 
-                method.getProxyMethod().getAllParameters().stream().filter(p -> !p.getFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
+                method.getProxyMethod().getAllParameters().stream().filter(p -> !p.isFromClient()).filter(p -> getSerializedName(p).equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     switch (p.getRequestParameterLocation()) {
                         case QUERY:
                             if (p.getCollectionFormat() != null) {
@@ -204,7 +204,7 @@ public class ProtocolExampleWriter {
                     }
                 });
 
-                method.getProxyMethod().getAllParameters().stream().filter(ProxyMethodParameter::getFromClient).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
+                method.getProxyMethod().getAllParameters().stream().filter(ProxyMethodParameter::isFromClient).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
                     String clientValue = p.getClientType()
                             .defaultValueExpression(parameterValue.getObjectValue().toString());
 

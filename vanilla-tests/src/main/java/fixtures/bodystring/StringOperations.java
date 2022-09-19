@@ -36,6 +36,16 @@ public interface StringOperations {
      *
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<String> getNullWithResponse();
+
+    /**
+     * Get null string value value.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -82,6 +92,18 @@ public interface StringOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> putNullWithResponse(String stringBody);
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     void putNull(String stringBody);
@@ -120,6 +142,16 @@ public interface StringOperations {
      *
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value '' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<String> getEmptyWithResponse();
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -144,6 +176,16 @@ public interface StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putEmptyAsync();
+
+    /**
+     * Set string value empty ''.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> putEmptyWithResponse();
 
     /**
      * Set string value empty ''.
@@ -181,6 +223,17 @@ public interface StringOperations {
      *
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<String> getMbcsWithResponse();
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -205,6 +258,16 @@ public interface StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putMbcsAsync();
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> putMbcsWithResponse();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -248,6 +311,19 @@ public interface StringOperations {
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<String> getWhitespaceWithResponse();
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
      *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -274,6 +350,17 @@ public interface StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putWhitespaceAsync();
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> putWhitespaceWithResponse();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
@@ -311,6 +398,16 @@ public interface StringOperations {
      *
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<String> getNotProvidedWithResponse();
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -341,6 +438,16 @@ public interface StringOperations {
      *
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<byte[]> getBase64EncodedWithResponse();
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -365,6 +472,16 @@ public interface StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<byte[]> getBase64UrlEncodedAsync();
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<byte[]> getBase64UrlEncodedWithResponse();
 
     /**
      * Get value that is base64url encoded.
@@ -407,6 +524,18 @@ public interface StringOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> putBase64UrlEncodedWithResponse(byte[] stringBody);
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     void putBase64UrlEncoded(byte[] stringBody);
@@ -431,6 +560,16 @@ public interface StringOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<byte[]> getNullBase64UrlEncodedAsync();
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<byte[]> getNullBase64UrlEncodedWithResponse();
 
     /**
      * Get null value that is expected to be base64url encoded.

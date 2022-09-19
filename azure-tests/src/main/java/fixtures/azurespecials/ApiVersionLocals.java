@@ -157,10 +157,11 @@ public final class ApiVersionLocals {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodLocalValid() {
-        getMethodLocalValidAsync().block();
+    public Response<Void> getMethodLocalValidWithResponse() {
+        return getMethodLocalValidWithResponseAsync().block();
     }
 
     /**
@@ -175,6 +176,30 @@ public final class ApiVersionLocals {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getMethodLocalValidWithResponse(Context context) {
         return getMethodLocalValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodLocalValid() {
+        getMethodLocalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodLocalValid(Context context) {
+        getMethodLocalValidWithResponse(context);
     }
 
     /**
@@ -273,22 +298,11 @@ public final class ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullAsync(apiVersion).block();
-    }
-
-    /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodLocalNull() {
-        final String apiVersion = null;
-        getMethodLocalNullAsync(apiVersion).block();
+    public Response<Void> getMethodLocalNullWithResponse(String apiVersion) {
+        return getMethodLocalNullWithResponseAsync(apiVersion).block();
     }
 
     /**
@@ -305,6 +319,47 @@ public final class ApiVersionLocals {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getMethodLocalNullWithResponse(String apiVersion, Context context) {
         return getMethodLocalNullWithResponseAsync(apiVersion, context).block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
+     *     parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodLocalNull(String apiVersion) {
+        getMethodLocalNullWithResponse(apiVersion, Context.NONE);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodLocalNull() {
+        final String apiVersion = null;
+        getMethodLocalNullWithResponse(apiVersion, Context.NONE);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
+     *     parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodLocalNull(String apiVersion, Context context) {
+        getMethodLocalNullWithResponse(apiVersion, context);
     }
 
     /**
@@ -379,10 +434,11 @@ public final class ApiVersionLocals {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getPathLocalValid() {
-        getPathLocalValidAsync().block();
+    public Response<Void> getPathLocalValidWithResponse() {
+        return getPathLocalValidWithResponseAsync().block();
     }
 
     /**
@@ -397,6 +453,30 @@ public final class ApiVersionLocals {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getPathLocalValidWithResponse(Context context) {
         return getPathLocalValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathLocalValid() {
+        getPathLocalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathLocalValid(Context context) {
+        getPathLocalValidWithResponse(context);
     }
 
     /**
@@ -471,10 +551,11 @@ public final class ApiVersionLocals {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with api-version modeled in the method along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getSwaggerLocalValid() {
-        getSwaggerLocalValidAsync().block();
+    public Response<Void> getSwaggerLocalValidWithResponse() {
+        return getSwaggerLocalValidWithResponseAsync().block();
     }
 
     /**
@@ -489,5 +570,29 @@ public final class ApiVersionLocals {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getSwaggerLocalValidWithResponse(Context context) {
         return getSwaggerLocalValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerLocalValid() {
+        getSwaggerLocalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerLocalValid(Context context) {
+        getSwaggerLocalValidWithResponse(context);
     }
 }

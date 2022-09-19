@@ -196,7 +196,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION;
-                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient();
+                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.isConstant() || proxyMethodParameter.isFromClient();
                     if (parameterIsRequired
                             || parameterIsConstantOrFromClient
                             || parameterIsClientOrApiVersion) {
@@ -291,10 +291,26 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
             }
 
+            if (settings.isSyncStackEnabled()) {
+                addSyncProxyMethods(proxyMethods);
+            }
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
+        List<ProxyMethod> syncProxyMethods = new ArrayList<>();
+        for (ProxyMethod asyncProxyMethod : proxyMethods) {
+            if (asyncProxyMethod.getParameters()
+                    .stream()
+                    .anyMatch(param -> param.getClientType() == GenericType.FluxByteBuffer)) {
+                continue;
+            }
+            syncProxyMethods.add(asyncProxyMethod.toSync());
+        }
+        proxyMethods.addAll(syncProxyMethods);
     }
 
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
@@ -347,7 +363,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if (responseBodyType.equals(ClassType.InputStream)) {
+            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && responseBodyType.equals(ClassType.BinaryData))
+                || responseBodyType.equals(ClassType.InputStream)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 IType singleValueType = GenericType.Response(ClassType.Void);

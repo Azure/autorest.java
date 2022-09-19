@@ -568,11 +568,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null array value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null array value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null array value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -609,11 +621,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid array [1, 2, 3 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid array [1, 2, 3.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getInvalid() {
-        return getInvalidAsync().block();
+        return getInvalidWithResponse().getValue();
     }
 
     /**
@@ -650,11 +674,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array value [] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getEmptyWithResponse() {
+        return getEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty array value [].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array value [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getEmpty() {
-        return getEmptyAsync().block();
+        return getEmptyWithResponse().getValue();
     }
 
     /**
@@ -700,10 +736,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyWithResponse(List<String> arrayBody) {
+        return putEmptyWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody The empty array value [].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(List<String> arrayBody) {
-        putEmptyAsync(arrayBody).block();
+        putEmptyWithResponse(arrayBody);
     }
 
     /**
@@ -741,11 +791,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, false, false, true] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Boolean>> getBooleanTfftWithResponse() {
+        return getBooleanTfftWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, false, false, true].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().block();
+        return getBooleanTfftWithResponse().getValue();
     }
 
     /**
@@ -792,10 +854,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBooleanTfftWithResponse(List<Boolean> arrayBody) {
+        return putBooleanTfftWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody The array value [true, false, false, true].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).block();
+        putBooleanTfftWithResponse(arrayBody);
     }
 
     /**
@@ -833,11 +909,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, null, false] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Boolean>> getBooleanInvalidNullWithResponse() {
+        return getBooleanInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, null, false].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().block();
+        return getBooleanInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -875,11 +963,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, 'boolean', false] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Boolean>> getBooleanInvalidStringWithResponse() {
+        return getBooleanInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, 'boolean', false].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().block();
+        return getBooleanInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -916,11 +1016,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getIntegerValidWithResponse() {
+        return getIntegerValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntegerValid() {
-        return getIntegerValidAsync().block();
+        return getIntegerValidWithResponse().getValue();
     }
 
     /**
@@ -967,10 +1079,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putIntegerValidWithResponse(List<Integer> arrayBody) {
+        return putIntegerValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).block();
+        putIntegerValidWithResponse(arrayBody);
     }
 
     /**
@@ -1007,11 +1133,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, null, 0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getIntInvalidNullWithResponse() {
+        return getIntInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, null, 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().block();
+        return getIntInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1049,11 +1187,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, 'integer', 0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Integer>> getIntInvalidStringWithResponse() {
+        return getIntInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, 'integer', 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().block();
+        return getIntInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1090,11 +1240,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Long>> getLongValidWithResponse() {
+        return getLongValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongValid() {
-        return getLongValidAsync().block();
+        return getLongValidWithResponse().getValue();
     }
 
     /**
@@ -1140,10 +1302,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putLongValidWithResponse(List<Long> arrayBody) {
+        return putLongValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidAsync(arrayBody).block();
+        putLongValidWithResponse(arrayBody);
     }
 
     /**
@@ -1180,11 +1356,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, null, 0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Long>> getLongInvalidNullWithResponse() {
+        return getLongInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, null, 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().block();
+        return getLongInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1221,11 +1409,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, 'integer', 0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Long>> getLongInvalidStringWithResponse() {
+        return getLongInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, 'integer', 0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().block();
+        return getLongInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1263,11 +1463,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Float>> getFloatValidWithResponse() {
+        return getFloatValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatValid() {
-        return getFloatValidAsync().block();
+        return getFloatValidWithResponse().getValue();
     }
 
     /**
@@ -1314,10 +1526,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putFloatValidWithResponse(List<Float> arrayBody) {
+        return putFloatValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatValid(List<Float> arrayBody) {
-        putFloatValidAsync(arrayBody).block();
+        putFloatValidWithResponse(arrayBody);
     }
 
     /**
@@ -1355,11 +1581,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Float>> getFloatInvalidNullWithResponse() {
+        return getFloatInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().block();
+        return getFloatInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1397,11 +1635,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Float>> getFloatInvalidStringWithResponse() {
+        return getFloatInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().block();
+        return getFloatInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1439,11 +1689,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Double>> getDoubleValidWithResponse() {
+        return getDoubleValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleValid() {
-        return getDoubleValidAsync().block();
+        return getDoubleValidWithResponse().getValue();
     }
 
     /**
@@ -1490,10 +1752,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDoubleValidWithResponse(List<Double> arrayBody) {
+        return putDoubleValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).block();
+        putDoubleValidWithResponse(arrayBody);
     }
 
     /**
@@ -1531,11 +1807,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Double>> getDoubleInvalidNullWithResponse() {
+        return getDoubleInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().block();
+        return getDoubleInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1573,11 +1861,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Double>> getDoubleInvalidStringWithResponse() {
+        return getDoubleInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().block();
+        return getDoubleInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1615,11 +1915,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<String>> getStringValidWithResponse() {
+        return getStringValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringValid() {
-        return getStringValidAsync().block();
+        return getStringValidWithResponse().getValue();
     }
 
     /**
@@ -1666,10 +1978,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putStringValidWithResponse(List<String> arrayBody) {
+        return putStringValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringValid(List<String> arrayBody) {
-        putStringValidAsync(arrayBody).block();
+        putStringValidWithResponse(arrayBody);
     }
 
     /**
@@ -1707,11 +2033,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<FooEnum>> getEnumValidWithResponse() {
+        return getEnumValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<FooEnum> getEnumValid() {
-        return getEnumValidAsync().block();
+        return getEnumValidWithResponse().getValue();
     }
 
     /**
@@ -1757,10 +2095,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEnumValidWithResponse(List<FooEnum> arrayBody) {
+        return putEnumValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEnumValid(List<FooEnum> arrayBody) {
-        putEnumValidAsync(arrayBody).block();
+        putEnumValidWithResponse(arrayBody);
     }
 
     /**
@@ -1798,11 +2150,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Enum0>> getStringEnumValidWithResponse() {
+        return getStringEnumValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Enum0> getStringEnumValid() {
-        return getStringEnumValidAsync().block();
+        return getStringEnumValidWithResponse().getValue();
     }
 
     /**
@@ -1849,10 +2213,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putStringEnumValidWithResponse(List<Enum1> arrayBody) {
+        return putStringEnumValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringEnumValid(List<Enum1> arrayBody) {
-        putStringEnumValidAsync(arrayBody).block();
+        putStringEnumValidWithResponse(arrayBody);
     }
 
     /**
@@ -1890,11 +2268,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', null, 'foo2'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<String>> getStringWithNullWithResponse() {
+        return getStringWithNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', null, 'foo2'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringWithNull() {
-        return getStringWithNullAsync().block();
+        return getStringWithNullWithResponse().getValue();
     }
 
     /**
@@ -1932,11 +2322,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', 123, 'foo2'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<String>> getStringWithInvalidWithResponse() {
+        return getStringWithInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', 123, 'foo2'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().block();
+        return getStringWithInvalidWithResponse().getValue();
     }
 
     /**
@@ -1979,11 +2381,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<UUID>> getUuidValidWithResponse() {
+        return getUuidValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<UUID> getUuidValid() {
-        return getUuidValidAsync().block();
+        return getUuidValidWithResponse().getValue();
     }
 
     /**
@@ -2035,10 +2451,26 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putUuidValidWithResponse(List<UUID> arrayBody) {
+        return putUuidValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidAsync(arrayBody).block();
+        putUuidValidWithResponse(arrayBody);
     }
 
     /**
@@ -2077,11 +2509,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<UUID>> getUuidInvalidCharsWithResponse() {
+        return getUuidInvalidCharsWithResponseAsync().block();
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsAsync().block();
+        return getUuidInvalidCharsWithResponse().getValue();
     }
 
     /**
@@ -2119,11 +2563,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<LocalDate>> getDateValidWithResponse() {
+        return getDateValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateValid() {
-        return getDateValidAsync().block();
+        return getDateValidWithResponse().getValue();
     }
 
     /**
@@ -2169,10 +2625,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateValidWithResponse(List<LocalDate> arrayBody) {
+        return putDateValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody The array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).block();
+        putDateValidWithResponse(arrayBody);
     }
 
     /**
@@ -2210,11 +2680,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2012-01-01', null, '1776-07-04'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<LocalDate>> getDateInvalidNullWithResponse() {
+        return getDateInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2012-01-01', null, '1776-07-04'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().block();
+        return getDateInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2252,11 +2734,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2011-03-22', 'date'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<LocalDate>> getDateInvalidCharsWithResponse() {
+        return getDateInvalidCharsWithResponseAsync().block();
+    }
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2011-03-22', 'date'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().block();
+        return getDateInvalidCharsWithResponse().getValue();
     }
 
     /**
@@ -2295,11 +2789,24 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<OffsetDateTime>> getDateTimeValidWithResponse() {
+        return getDateTimeValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().block();
+        return getDateTimeValidWithResponse().getValue();
     }
 
     /**
@@ -2349,10 +2856,25 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeValidWithResponse(List<OffsetDateTime> arrayBody) {
+        return putDateTimeValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+     *     '1492-10-12T10:15:01-08:00'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeValid(List<OffsetDateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).block();
+        putDateTimeValidWithResponse(arrayBody);
     }
 
     /**
@@ -2390,11 +2912,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', null] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<OffsetDateTime>> getDateTimeInvalidNullWithResponse() {
+        return getDateTimeInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', null].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().block();
+        return getDateTimeInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2432,11 +2966,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', 'date-time'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<OffsetDateTime>> getDateTimeInvalidCharsWithResponse() {
+        return getDateTimeInvalidCharsWithResponseAsync().block();
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', 'date-time'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().block();
+        return getDateTimeInvalidCharsWithResponse().getValue();
     }
 
     /**
@@ -2479,11 +3025,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<OffsetDateTime>> getDateTimeRfc1123ValidWithResponse() {
+        return getDateTimeRfc1123ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
+     * 10:15:01 GMT'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
      *     1492 10:15:01 GMT'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().block();
+        return getDateTimeRfc1123ValidWithResponse().getValue();
     }
 
     /**
@@ -2538,10 +3098,26 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeRfc1123ValidWithResponse(List<OffsetDateTime> arrayBody) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01
+     * GMT'].
+     *
+     * @param arrayBody The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Valid(List<OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).block();
+        putDateTimeRfc1123ValidWithResponse(arrayBody);
     }
 
     /**
@@ -2579,11 +3155,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Duration>> getDurationValidWithResponse() {
+        return getDurationValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Duration> getDurationValid() {
-        return getDurationValidAsync().block();
+        return getDurationValidWithResponse().getValue();
     }
 
     /**
@@ -2630,10 +3218,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDurationValidWithResponse(List<Duration> arrayBody) {
+        return putDurationValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationValid(List<Duration> arrayBody) {
-        putDurationValidAsync(arrayBody).block();
+        putDurationValidWithResponse(arrayBody);
     }
 
     /**
@@ -2672,11 +3274,24 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<byte[]>> getByteValidWithResponse() {
+        return getByteValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getByteValid() {
-        return getByteValidAsync().block();
+        return getByteValidWithResponse().getValue();
     }
 
     /**
@@ -2725,10 +3340,25 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putByteValidWithResponse(List<byte[]> arrayBody) {
+        return putByteValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in
+     *     base 64.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).block();
+        putByteValidWithResponse(arrayBody);
     }
 
     /**
@@ -2767,11 +3397,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<byte[]>> getByteInvalidNullWithResponse() {
+        return getByteInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().block();
+        return getByteInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2814,11 +3456,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     *     base64url encoded along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<byte[]>> getBase64UrlWithResponse() {
+        return getBase64UrlWithResponseAsync().block();
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     * base64url encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
      *     base64url encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getBase64Url() {
-        return getBase64UrlAsync().block();
+        return getBase64UrlWithResponse().getValue();
     }
 
     /**
@@ -2855,11 +3511,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type null value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Product>> getComplexNullWithResponse() {
+        return getComplexNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexNull() {
-        return getComplexNullAsync().block();
+        return getComplexNullWithResponse().getValue();
     }
 
     /**
@@ -2896,11 +3564,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array of complex type [] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Product>> getComplexEmptyWithResponse() {
+        return getComplexEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array of complex type [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyAsync().block();
+        return getComplexEmptyWithResponse().getValue();
     }
 
     /**
@@ -2939,11 +3619,24 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Product>> getComplexItemNullWithResponse() {
+        return getComplexItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullAsync().block();
+        return getComplexItemNullWithResponse().getValue();
     }
 
     /**
@@ -2982,11 +3675,24 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Product>> getComplexItemEmptyWithResponse() {
+        return getComplexItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().block();
+        return getComplexItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -3029,11 +3735,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     *     'string': '6'}] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Product>> getComplexValidWithResponse() {
+        return getComplexValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     * 'string': '6'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
      *     'string': '6'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexValid() {
-        return getComplexValidAsync().block();
+        return getComplexValidWithResponse().getValue();
     }
 
     /**
@@ -3088,10 +3808,26 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putComplexValidWithResponse(List<Product> arrayBody) {
+        return putComplexValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     * {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     *     {'integer': 5, 'string': '6'}].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidAsync(arrayBody).block();
+        putComplexValidWithResponse(arrayBody);
     }
 
     /**
@@ -3128,11 +3864,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<List<String>>> getArrayNullWithResponse() {
+        return getArrayNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get a null array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayNull() {
-        return getArrayNullAsync().block();
+        return getArrayNullWithResponse().getValue();
     }
 
     /**
@@ -3169,11 +3917,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<List<String>>> getArrayEmptyWithResponse() {
+        return getArrayEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an empty array [].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().block();
+        return getArrayEmptyWithResponse().getValue();
     }
 
     /**
@@ -3212,11 +3972,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<List<String>>> getArrayItemNullWithResponse() {
+        return getArrayItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().block();
+        return getArrayItemNullWithResponse().getValue();
     }
 
     /**
@@ -3255,11 +4027,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<List<String>>> getArrayItemEmptyWithResponse() {
+        return getArrayItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().block();
+        return getArrayItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -3298,11 +4082,24 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']] along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<List<String>>> getArrayValidWithResponse() {
+        return getArrayValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayValid() {
-        return getArrayValidAsync().block();
+        return getArrayValidWithResponse().getValue();
     }
 
     /**
@@ -3349,10 +4146,24 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putArrayValidWithResponse(List<List<String>> arrayBody) {
+        return putArrayValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).block();
+        putArrayValidWithResponse(arrayBody);
     }
 
     /**
@@ -3390,11 +4201,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries with value null along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Map<String, String>>> getDictionaryNullWithResponse() {
+        return getDictionaryNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().block();
+        return getDictionaryNullWithResponse().getValue();
     }
 
     /**
@@ -3433,11 +4256,23 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Map<String, String>>> getDictionaryEmptyWithResponse() {
+        return getDictionaryEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().block();
+        return getDictionaryEmptyWithResponse().getValue();
     }
 
     /**
@@ -3481,11 +4316,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Map<String, String>>> getDictionaryItemNullWithResponse() {
+        return getDictionaryItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
      *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().block();
+        return getDictionaryItemNullWithResponse().getValue();
     }
 
     /**
@@ -3529,11 +4378,25 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Map<String, String>>> getDictionaryItemEmptyWithResponse() {
+        return getDictionaryItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
      *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().block();
+        return getDictionaryItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -3578,11 +4441,26 @@ public final class Arrays {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Map<String, String>>> getDictionaryValidWithResponse() {
+        return getDictionaryValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
      *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().block();
+        return getDictionaryValidWithResponse().getValue();
     }
 
     /**
@@ -3639,9 +4517,27 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDictionaryValidWithResponse(List<Map<String, String>> arrayBody) {
+        return putDictionaryValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody An array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two',
+     *     '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).block();
+        putDictionaryValidWithResponse(arrayBody);
     }
 }

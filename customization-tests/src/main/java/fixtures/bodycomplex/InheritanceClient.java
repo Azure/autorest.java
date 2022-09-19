@@ -34,12 +34,12 @@ public final class InheritanceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that extend others.
+     * @return complex types that extend others along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Siamese getValid() {
-        return this.serviceClient.getValid();
+    public Response<Siamese> getValidWithResponse() {
+        return this.serviceClient.getValidWithResponse();
     }
 
     /**
@@ -55,6 +55,69 @@ public final class InheritanceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Siamese> getValidWithResponse(Context context) {
         return this.serviceClient.getValidWithResponse(context);
+    }
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that extend others.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Siamese getValid() {
+        return this.serviceClient.getValid();
+    }
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that extend others.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Siamese getValid(Context context) {
+        return this.serviceClient.getValid(context);
+    }
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     *     food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putValidWithResponse(Siamese complexBody) {
+        return this.serviceClient.putValidWithResponse(complexBody);
+    }
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     *     food="french fries".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putValidWithResponse(Siamese complexBody, Context context) {
+        return this.serviceClient.putValidWithResponse(complexBody, context);
     }
 
     /**
@@ -83,11 +146,10 @@ public final class InheritanceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Siamese complexBody, Context context) {
-        return this.serviceClient.putValidWithResponse(complexBody, context);
+    public void putValid(Siamese complexBody, Context context) {
+        this.serviceClient.putValid(complexBody, context);
     }
 }

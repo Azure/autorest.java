@@ -177,10 +177,25 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredWithResponse(
+            ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters).block();
+    }
+
+    /**
+     * Post a bunch of required parameters grouped.
+     *
+     * @param parameterGroupingPostRequiredParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).block();
+        postRequiredWithResponse(parameterGroupingPostRequiredParameters);
     }
 
     /**
@@ -252,10 +267,25 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalWithResponse(
+            ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
+        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters).block();
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param parameterGroupingPostOptionalParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).block();
+        postOptionalWithResponse(parameterGroupingPostOptionalParameters);
     }
 
     /**
@@ -267,7 +297,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptional() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
-        postOptionalAsync(parameterGroupingPostOptionalParameters).block();
+        postOptionalWithResponse(parameterGroupingPostOptionalParameters);
     }
 
     /**
@@ -341,11 +371,26 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postReservedWordsWithResponse(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
+        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters).block();
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postReservedWords(
             ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
-        postReservedWordsAsync(parameterGroupingPostReservedWordsParameters).block();
+        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters);
     }
 
     /**
@@ -357,7 +402,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postReservedWords() {
         final ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null;
-        postReservedWordsAsync(parameterGroupingPostReservedWordsParameters).block();
+        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters);
     }
 
     /**
@@ -457,13 +502,33 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postMultiParamGroupsWithResponse(
+            FirstParameterGroup firstParameterGroup,
+            ParameterGroupingPostMultiParamGroupsSecondParamGroup
+                    parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+        return postMultiParamGroupsWithResponseAsync(
+                        firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
+                .block();
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param firstParameterGroup Parameter group.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMultiParamGroups(
             FirstParameterGroup firstParameterGroup,
             ParameterGroupingPostMultiParamGroupsSecondParamGroup
                     parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).block();
+        postMultiParamGroupsWithResponse(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
     }
 
     /**
@@ -477,7 +542,7 @@ public final class ParameterGroupings {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup
                 parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).block();
+        postMultiParamGroupsWithResponse(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
     }
 
     /**
@@ -550,10 +615,24 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postSharedParameterGroupObjectWithResponse(FirstParameterGroup firstParameterGroup) {
+        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup).block();
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param firstParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).block();
+        postSharedParameterGroupObjectWithResponse(firstParameterGroup);
     }
 
     /**
@@ -565,7 +644,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSharedParameterGroupObject() {
         final FirstParameterGroup firstParameterGroup = null;
-        postSharedParameterGroupObjectAsync(firstParameterGroup).block();
+        postSharedParameterGroupObjectWithResponse(firstParameterGroup);
     }
 
     /**
@@ -633,10 +712,24 @@ public final class ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> groupWithConstantWithResponse(Grouper grouper) {
+        return groupWithConstantWithResponseAsync(grouper).block();
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void groupWithConstant(Grouper grouper) {
-        groupWithConstantAsync(grouper).block();
+        groupWithConstantWithResponse(grouper);
     }
 
     /**
@@ -648,6 +741,6 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void groupWithConstant() {
         final Grouper grouper = null;
-        groupWithConstantAsync(grouper).block();
+        groupWithConstantWithResponse(grouper);
     }
 }

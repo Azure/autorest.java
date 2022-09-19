@@ -405,10 +405,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getBooleanTrueWithResponse() {
+        return getBooleanTrueWithResponseAsync().block();
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanTrue() {
-        getBooleanTrueAsync().block();
+        getBooleanTrueWithResponse();
     }
 
     /**
@@ -447,10 +459,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on path along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getBooleanFalseWithResponse() {
+        return getBooleanFalseWithResponseAsync().block();
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanFalse() {
-        getBooleanFalseAsync().block();
+        getBooleanFalseWithResponse();
     }
 
     /**
@@ -508,10 +532,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on query (query string should be absent) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getBooleanNullWithResponse(Boolean boolQuery) {
+        return getBooleanNullWithResponseAsync(boolQuery).block();
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullAsync(boolQuery).block();
+        getBooleanNullWithResponse(boolQuery);
     }
 
     /**
@@ -523,7 +561,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanNull() {
         final Boolean boolQuery = null;
-        getBooleanNullAsync(boolQuery).block();
+        getBooleanNullWithResponse(boolQuery);
     }
 
     /**
@@ -562,10 +600,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1000000' integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getIntOneMillionWithResponse() {
+        return getIntOneMillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntOneMillion() {
-        getIntOneMillionAsync().block();
+        getIntOneMillionWithResponse();
     }
 
     /**
@@ -604,10 +654,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1000000' integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getIntNegativeOneMillionWithResponse() {
+        return getIntNegativeOneMillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().block();
+        getIntNegativeOneMillionWithResponse();
     }
 
     /**
@@ -664,10 +726,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null integer value (no query parameter) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getIntNullWithResponse(Integer intQuery) {
+        return getIntNullWithResponseAsync(intQuery).block();
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNull(Integer intQuery) {
-        getIntNullAsync(intQuery).block();
+        getIntNullWithResponse(intQuery);
     }
 
     /**
@@ -679,7 +755,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNull() {
         final Integer intQuery = null;
-        getIntNullAsync(intQuery).block();
+        getIntNullWithResponse(intQuery);
     }
 
     /**
@@ -718,10 +794,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '10000000000' 64 bit integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getTenBillionWithResponse() {
+        return getTenBillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getTenBillion() {
-        getTenBillionAsync().block();
+        getTenBillionWithResponse();
     }
 
     /**
@@ -760,10 +848,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-10000000000' 64 bit integer value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getNegativeTenBillionWithResponse() {
+        return getNegativeTenBillionWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().block();
+        getNegativeTenBillionWithResponse();
     }
 
     /**
@@ -820,10 +920,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'null 64 bit integer value (no query param in uri) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getLongNullWithResponse(Long longQuery) {
+        return getLongNullWithResponseAsync(longQuery).block();
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getLongNull(Long longQuery) {
-        getLongNullAsync(longQuery).block();
+        getLongNullWithResponse(longQuery);
     }
 
     /**
@@ -835,7 +949,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getLongNull() {
         final Long longQuery = null;
-        getLongNullAsync(longQuery).block();
+        getLongNullWithResponse(longQuery);
     }
 
     /**
@@ -874,10 +988,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1.034E+20' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> floatScientificPositiveWithResponse() {
+        return floatScientificPositiveWithResponseAsync().block();
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().block();
+        floatScientificPositiveWithResponse();
     }
 
     /**
@@ -916,10 +1042,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1.034E-20' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> floatScientificNegativeWithResponse() {
+        return floatScientificNegativeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().block();
+        floatScientificNegativeWithResponse();
     }
 
     /**
@@ -976,10 +1114,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> floatNullWithResponse(Float floatQuery) {
+        return floatNullWithResponseAsync(floatQuery).block();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatNull(Float floatQuery) {
-        floatNullAsync(floatQuery).block();
+        floatNullWithResponse(floatQuery);
     }
 
     /**
@@ -991,7 +1143,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatNull() {
         final Float floatQuery = null;
-        floatNullAsync(floatQuery).block();
+        floatNullWithResponse(floatQuery);
     }
 
     /**
@@ -1030,10 +1182,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '9999999.999' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> doubleDecimalPositiveWithResponse() {
+        return doubleDecimalPositiveWithResponseAsync().block();
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().block();
+        doubleDecimalPositiveWithResponse();
     }
 
     /**
@@ -1072,10 +1236,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-9999999.999' numeric value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> doubleDecimalNegativeWithResponse() {
+        return doubleDecimalNegativeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().block();
+        doubleDecimalNegativeWithResponse();
     }
 
     /**
@@ -1132,10 +1308,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> doubleNullWithResponse(Double doubleQuery) {
+        return doubleNullWithResponseAsync(doubleQuery).block();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleNull(Double doubleQuery) {
-        doubleNullAsync(doubleQuery).block();
+        doubleNullWithResponse(doubleQuery);
     }
 
     /**
@@ -1147,7 +1337,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleNull() {
         final Double doubleQuery = null;
-        doubleNullAsync(doubleQuery).block();
+        doubleNullWithResponse(doubleQuery);
     }
 
     /**
@@ -1187,10 +1377,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringUnicodeWithResponse() {
+        return stringUnicodeWithResponseAsync().block();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUnicode() {
-        stringUnicodeAsync().block();
+        stringUnicodeWithResponse();
     }
 
     /**
@@ -1229,10 +1431,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringUrlEncodedWithResponse() {
+        return stringUrlEncodedWithResponseAsync().block();
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().block();
+        stringUrlEncodedWithResponse();
     }
 
     /**
@@ -1271,10 +1485,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringEmptyWithResponse() {
+        return stringEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get ''.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringEmpty() {
-        stringEmptyAsync().block();
+        stringEmptyWithResponse();
     }
 
     /**
@@ -1330,10 +1556,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> stringNullWithResponse(String stringQuery) {
+        return stringNullWithResponseAsync(stringQuery).block();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringNull(String stringQuery) {
-        stringNullAsync(stringQuery).block();
+        stringNullWithResponse(stringQuery);
     }
 
     /**
@@ -1345,7 +1585,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringNull() {
         final String stringQuery = null;
-        stringNullAsync(stringQuery).block();
+        stringNullWithResponse(stringQuery);
     }
 
     /**
@@ -1402,10 +1642,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with query parameter 'green color' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> enumValidWithResponse(UriColor enumQuery) {
+        return enumValidWithResponseAsync(enumQuery).block();
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumValid(UriColor enumQuery) {
-        enumValidAsync(enumQuery).block();
+        enumValidWithResponse(enumQuery);
     }
 
     /**
@@ -1417,7 +1671,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumValid() {
         final UriColor enumQuery = null;
-        enumValidAsync(enumQuery).block();
+        enumValidWithResponse(enumQuery);
     }
 
     /**
@@ -1473,10 +1727,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> enumNullWithResponse(UriColor enumQuery) {
+        return enumNullWithResponseAsync(enumQuery).block();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumNull(UriColor enumQuery) {
-        enumNullAsync(enumQuery).block();
+        enumNullWithResponse(enumQuery);
     }
 
     /**
@@ -1488,7 +1756,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumNull() {
         final UriColor enumQuery = null;
-        enumNullAsync(enumQuery).block();
+        enumNullWithResponse(enumQuery);
     }
 
     /**
@@ -1547,10 +1815,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteMultiByteWithResponse(byte[] byteQuery) {
+        return byteMultiByteWithResponseAsync(byteQuery).block();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteAsync(byteQuery).block();
+        byteMultiByteWithResponse(byteQuery);
     }
 
     /**
@@ -1562,7 +1844,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte() {
         final byte[] byteQuery = new byte[0];
-        byteMultiByteAsync(byteQuery).block();
+        byteMultiByteWithResponse(byteQuery);
     }
 
     /**
@@ -1602,10 +1884,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' as byte array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteEmptyWithResponse() {
+        return byteEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteEmpty() {
-        byteEmptyAsync().block();
+        byteEmptyWithResponse();
     }
 
     /**
@@ -1664,10 +1958,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (no query parameters in uri) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> byteNullWithResponse(byte[] byteQuery) {
+        return byteNullWithResponseAsync(byteQuery).block();
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull(byte[] byteQuery) {
-        byteNullAsync(byteQuery).block();
+        byteNullWithResponse(byteQuery);
     }
 
     /**
@@ -1679,7 +1987,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull() {
         final byte[] byteQuery = new byte[0];
-        byteNullAsync(byteQuery).block();
+        byteNullWithResponse(byteQuery);
     }
 
     /**
@@ -1717,10 +2025,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01' as date along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateValidWithResponse() {
+        return dateValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateValid() {
-        dateValidAsync().block();
+        dateValidWithResponse();
     }
 
     /**
@@ -1777,10 +2097,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should result in no query parameters in uri along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateNullWithResponse(LocalDate dateQuery) {
+        return dateNullWithResponseAsync(dateQuery).block();
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateNull(LocalDate dateQuery) {
-        dateNullAsync(dateQuery).block();
+        dateNullWithResponse(dateQuery);
     }
 
     /**
@@ -1792,7 +2126,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateNull() {
         final LocalDate dateQuery = null;
-        dateNullAsync(dateQuery).block();
+        dateNullWithResponse(dateQuery);
     }
 
     /**
@@ -1831,10 +2165,22 @@ public final class Queries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateTimeValidWithResponse() {
+        return dateTimeValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeValid() {
-        dateTimeValidAsync().block();
+        dateTimeValidWithResponse();
     }
 
     /**
@@ -1892,10 +2238,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should result in no query parameters in uri along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimeQuery) {
+        return dateTimeNullWithResponseAsync(dateTimeQuery).block();
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeNull(OffsetDateTime dateTimeQuery) {
-        dateTimeNullAsync(dateTimeQuery).block();
+        dateTimeNullWithResponse(dateTimeQuery);
     }
 
     /**
@@ -1907,7 +2267,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeNull() {
         final OffsetDateTime dateTimeQuery = null;
-        dateTimeNullAsync(dateTimeQuery).block();
+        dateTimeNullWithResponse(dateTimeQuery);
     }
 
     /**
@@ -1976,10 +2336,26 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringCsvValidWithResponse(List<String> arrayQuery) {
+        return arrayStringCsvValidWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidAsync(arrayQuery).block();
+        arrayStringCsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -1991,7 +2367,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvValid() {
         final List<String> arrayQuery = null;
-        arrayStringCsvValidAsync(arrayQuery).block();
+        arrayStringCsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2055,10 +2431,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the csv-array format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringCsvNullWithResponse(List<String> arrayQuery) {
+        return arrayStringCsvNullWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullAsync(arrayQuery).block();
+        arrayStringCsvNullWithResponse(arrayQuery);
     }
 
     /**
@@ -2070,7 +2460,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvNull() {
         final List<String> arrayQuery = null;
-        arrayStringCsvNullAsync(arrayQuery).block();
+        arrayStringCsvNullWithResponse(arrayQuery);
     }
 
     /**
@@ -2134,10 +2524,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the csv-array format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringCsvEmptyWithResponse(List<String> arrayQuery) {
+        return arrayStringCsvEmptyWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyAsync(arrayQuery).block();
+        arrayStringCsvEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -2149,7 +2553,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringCsvEmpty() {
         final List<String> arrayQuery = null;
-        arrayStringCsvEmptyAsync(arrayQuery).block();
+        arrayStringCsvEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -2218,10 +2622,25 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(List<String> arrayQuery) {
+        return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringNoCollectionFormatEmpty(List<String> arrayQuery) {
-        arrayStringNoCollectionFormatEmptyAsync(arrayQuery).block();
+        arrayStringNoCollectionFormatEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -2234,7 +2653,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringNoCollectionFormatEmpty() {
         final List<String> arrayQuery = null;
-        arrayStringNoCollectionFormatEmptyAsync(arrayQuery).block();
+        arrayStringNoCollectionFormatEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -2303,10 +2722,26 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringSsvValidWithResponse(List<String> arrayQuery) {
+        return arrayStringSsvValidWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     ssv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidAsync(arrayQuery).block();
+        arrayStringSsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2318,7 +2753,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringSsvValid() {
         final List<String> arrayQuery = null;
-        arrayStringSsvValidAsync(arrayQuery).block();
+        arrayStringSsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2387,10 +2822,26 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringTsvValidWithResponse(List<String> arrayQuery) {
+        return arrayStringTsvValidWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     tsv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidAsync(arrayQuery).block();
+        arrayStringTsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2402,7 +2853,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringTsvValid() {
         final List<String> arrayQuery = null;
-        arrayStringTsvValidAsync(arrayQuery).block();
+        arrayStringTsvValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2475,10 +2926,27 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringPipesValidWithResponse(List<String> arrayQuery) {
+        return arrayStringPipesValidWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     pipes-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidAsync(arrayQuery).block();
+        arrayStringPipesValidWithResponse(arrayQuery);
     }
 
     /**
@@ -2491,6 +2959,6 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringPipesValid() {
         final List<String> arrayQuery = null;
-        arrayStringPipesValidAsync(arrayQuery).block();
+        arrayStringPipesValidWithResponse(arrayQuery);
     }
 }

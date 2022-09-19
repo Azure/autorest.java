@@ -8,6 +8,7 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import fixtures.nonstringenum.implementation.FloatOperationsImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 
@@ -23,6 +24,21 @@ public final class FloatOperationClient {
     @Generated
     FloatOperationClient(FloatOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    /**
+     * Put a float enum.
+     *
+     * @param input Input float enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putWithResponse(FloatEnum input) {
+        return this.serviceClient.putWithResponse(input);
     }
 
     /**
@@ -51,6 +67,19 @@ public final class FloatOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put() {
         return this.serviceClient.put();
+    }
+
+    /**
+     * Get a float enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a float enum along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<FloatEnum> getWithResponse() {
+        return this.serviceClient.getWithResponse();
     }
 
     /**

@@ -253,20 +253,20 @@ public class ClientMethod {
     }
 
     public final List<ClientMethodParameter> getMethodParameters() {
-        return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
+        return getParameters().stream().filter(parameter -> parameter != null && !parameter.isFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
-                .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
+                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
                 .collect(Collectors.toList());
     }
 
     private final List<ClientMethodParameter> getMethodNonConstantParameters() {
-        return getMethodParameters().stream().filter(parameter -> !parameter.getIsConstant())
-                .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
+        return getMethodParameters().stream().filter(parameter -> !parameter.isConstant())
+                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
                 .collect(Collectors.toList());
     }
 
     public final List<ClientMethodParameter> getMethodRequiredParameters() {
-        return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::getIsRequired).collect(Collectors.toList());
+        return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::isRequired).collect(Collectors.toList());
     }
 
     public final List<String> getRequiredNullableParameterExpressions() {
@@ -348,6 +348,7 @@ public class ClientMethod {
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
+        imports.add(SimpleResponse.class.getName());
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 

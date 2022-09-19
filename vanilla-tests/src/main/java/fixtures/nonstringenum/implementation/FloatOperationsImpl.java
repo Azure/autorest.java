@@ -118,11 +118,25 @@ public final class FloatOperationsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putWithResponse(FloatEnum input) {
+        return putWithResponseAsync(input).block();
+    }
+
+    /**
+     * Put a float enum.
+     *
+     * @param input Input float enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put(FloatEnum input) {
-        return putAsync(input).block();
+        return putWithResponse(input).getValue();
     }
 
     /**
@@ -135,7 +149,7 @@ public final class FloatOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put() {
         final FloatEnum input = null;
-        return putAsync(input).block();
+        return putWithResponse(input).getValue();
     }
 
     /**
@@ -172,10 +186,22 @@ public final class FloatOperationsImpl {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a float enum along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<FloatEnum> getWithResponse() {
+        return getWithResponseAsync().block();
+    }
+
+    /**
+     * Get a float enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatEnum get() {
-        return getAsync().block();
+        return getWithResponse().getValue();
     }
 }

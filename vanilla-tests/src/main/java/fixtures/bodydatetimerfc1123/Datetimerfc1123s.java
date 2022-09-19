@@ -154,11 +154,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null datetime value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null datetime value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -195,11 +207,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid datetime value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalid() {
-        return getInvalidAsync().block();
+        return getInvalidWithResponse().getValue();
     }
 
     /**
@@ -236,11 +260,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow datetime value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getOverflowWithResponse() {
+        return getOverflowWithResponseAsync().block();
+    }
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getOverflow() {
-        return getOverflowAsync().block();
+        return getOverflowWithResponse().getValue();
     }
 
     /**
@@ -277,11 +313,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow datetime value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getUnderflowWithResponse() {
+        return getUnderflowWithResponseAsync().block();
+    }
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnderflow() {
-        return getUnderflowAsync().block();
+        return getUnderflowWithResponse().getValue();
     }
 
     /**
@@ -329,10 +377,24 @@ public final class Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putUtcMaxDateTimeWithResponse(OffsetDateTime datetimeBody) {
+        return putUtcMaxDateTimeWithResponseAsync(datetimeBody).block();
+    }
+
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     *
+     * @param datetimeBody datetime body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMaxDateTime(OffsetDateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).block();
+        putUtcMaxDateTimeWithResponse(datetimeBody);
     }
 
     /**
@@ -371,11 +433,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value fri, 31 dec 9999 23:59:59 gmt along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getUtcLowercaseMaxDateTimeWithResponse() {
+        return getUtcLowercaseMaxDateTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value fri, 31 dec 9999 23:59:59 gmt.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeAsync().block();
+        return getUtcLowercaseMaxDateTimeWithResponse().getValue();
     }
 
     /**
@@ -414,11 +488,23 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getUtcUppercaseMaxDateTimeWithResponse() {
+        return getUtcUppercaseMaxDateTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeAsync().block();
+        return getUtcUppercaseMaxDateTimeWithResponse().getValue();
     }
 
     /**
@@ -466,10 +552,24 @@ public final class Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putUtcMinDateTimeWithResponse(OffsetDateTime datetimeBody) {
+        return putUtcMinDateTimeWithResponseAsync(datetimeBody).block();
+    }
+
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @param datetimeBody datetime body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMinDateTime(OffsetDateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).block();
+        putUtcMinDateTimeWithResponse(datetimeBody);
     }
 
     /**
@@ -507,10 +607,22 @@ public final class Datetimerfc1123s {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OffsetDateTime> getUtcMinDateTimeWithResponse() {
+        return getUtcMinDateTimeWithResponseAsync().block();
+    }
+
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeAsync().block();
+        return getUtcMinDateTimeWithResponse().getValue();
     }
 }

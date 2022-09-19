@@ -228,7 +228,7 @@ public class ExampleParser {
             ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
 
             if (node.getObjectValue() == null) {
-                if (methodParameter.getClientMethodParameter().getIsRequired()) {
+                if (methodParameter.getClientMethodParameter().isRequired()) {
                     LOGGER.warn("Failed to assign sample value to required parameter '{}'", methodParameter.getClientMethodParameter().getName());
                 }
             }
@@ -520,7 +520,7 @@ public class ExampleParser {
                 node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }
         } else {
-            Object exampleValue = methodParameter.getClientMethodParameter().getLocation() == RequestParameterLocation.QUERY
+            Object exampleValue = methodParameter.getClientMethodParameter().getRequestParameterLocation() == RequestParameterLocation.QUERY
                     ? parameterValue.getUnescapedQueryValue()
                     : parameterValue.getObjectValue();
             node = parseNodeFromMethodParameter(methodParameter, exampleValue);
@@ -595,7 +595,7 @@ public class ExampleParser {
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return clientMethod.getMethodParameters().stream()
                 .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
-                .filter(p -> !p.getIsConstant() && !p.getFromClient())
+                .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
     }

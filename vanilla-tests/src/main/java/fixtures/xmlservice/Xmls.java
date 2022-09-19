@@ -348,11 +348,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a complex type that has a ref to a complex type with no XML node along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<RootWithRefAndNoMeta> getComplexTypeRefNoMetaWithResponse() {
+        return getComplexTypeRefNoMetaWithResponseAsync().block();
+    }
+
+    /**
+     * Get a complex type that has a ref to a complex type with no XML node.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a complex type that has a ref to a complex type with no XML node.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RootWithRefAndNoMeta getComplexTypeRefNoMeta() {
-        return getComplexTypeRefNoMetaAsync().block();
+        return getComplexTypeRefNoMetaWithResponse().getValue();
     }
 
     /**
@@ -399,10 +411,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putComplexTypeRefNoMetaWithResponse(RootWithRefAndNoMeta model) {
+        return putComplexTypeRefNoMetaWithResponseAsync(model).block();
+    }
+
+    /**
+     * Puts a complex type that has a ref to a complex type with no XML node.
+     *
+     * @param model I am root, and I ref a model with no meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexTypeRefNoMeta(RootWithRefAndNoMeta model) {
-        putComplexTypeRefNoMetaAsync(model).block();
+        putComplexTypeRefNoMetaWithResponse(model);
     }
 
     /**
@@ -441,11 +467,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a complex type that has a ref to a complex type with XML node along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<RootWithRefAndMeta> getComplexTypeRefWithMetaWithResponse() {
+        return getComplexTypeRefWithMetaWithResponseAsync().block();
+    }
+
+    /**
+     * Get a complex type that has a ref to a complex type with XML node.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a complex type that has a ref to a complex type with XML node.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RootWithRefAndMeta getComplexTypeRefWithMeta() {
-        return getComplexTypeRefWithMetaAsync().block();
+        return getComplexTypeRefWithMetaWithResponse().getValue();
     }
 
     /**
@@ -493,10 +531,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putComplexTypeRefWithMetaWithResponse(RootWithRefAndMeta model) {
+        return putComplexTypeRefWithMetaWithResponseAsync(model).block();
+    }
+
+    /**
+     * Puts a complex type that has a ref to a complex type with XML node.
+     *
+     * @param model I am root, and I ref a model WITH meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexTypeRefWithMeta(RootWithRefAndMeta model) {
-        putComplexTypeRefWithMetaAsync(model).block();
+        putComplexTypeRefWithMetaWithResponse(model);
     }
 
     /**
@@ -533,11 +585,23 @@ public final class Xmls {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a simple XML document along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Slideshow> getSimpleWithResponse() {
+        return getSimpleWithResponseAsync().block();
+    }
+
+    /**
+     * Get a simple XML document.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a simple XML document.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Slideshow getSimple() {
-        return getSimpleAsync().block();
+        return getSimpleWithResponse().getValue();
     }
 
     /**
@@ -585,10 +649,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putSimpleWithResponse(Slideshow slideshow) {
+        return putSimpleWithResponseAsync(slideshow).block();
+    }
+
+    /**
+     * Put a simple XML document.
+     *
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSimple(Slideshow slideshow) {
-        putSimpleAsync(slideshow).block();
+        putSimpleWithResponse(slideshow);
     }
 
     /**
@@ -626,11 +704,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with multiple wrapped lists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<AppleBarrel> getWrappedListsWithResponse() {
+        return getWrappedListsWithResponseAsync().block();
+    }
+
+    /**
+     * Get an XML document with multiple wrapped lists.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an XML document with multiple wrapped lists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public AppleBarrel getWrappedLists() {
-        return getWrappedListsAsync().block();
+        return getWrappedListsWithResponse().getValue();
     }
 
     /**
@@ -679,10 +769,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putWrappedListsWithResponse(AppleBarrel wrappedLists) {
+        return putWrappedListsWithResponseAsync(wrappedLists).block();
+    }
+
+    /**
+     * Put an XML document with multiple wrapped lists.
+     *
+     * @param wrappedLists A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedLists(AppleBarrel wrappedLists) {
-        putWrappedListsAsync(wrappedLists).block();
+        putWrappedListsWithResponse(wrappedLists);
     }
 
     /**
@@ -718,10 +822,22 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return strongly-typed response headers.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public XmlsGetHeadersResponse getHeadersWithResponse() {
+        return getHeadersWithResponseAsync().block();
+    }
+
+    /**
+     * Get strongly-typed response headers.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getHeaders() {
-        getHeadersAsync().block();
+        getHeadersWithResponse();
     }
 
     /**
@@ -758,11 +874,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty list along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Slideshow> getEmptyListWithResponse() {
+        return getEmptyListWithResponseAsync().block();
+    }
+
+    /**
+     * Get an empty list.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty list.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Slideshow getEmptyList() {
-        return getEmptyListAsync().block();
+        return getEmptyListWithResponse().getValue();
     }
 
     /**
@@ -809,10 +937,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyListWithResponse(Slideshow slideshow) {
+        return putEmptyListWithResponseAsync(slideshow).block();
+    }
+
+    /**
+     * Puts an empty list.
+     *
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyList(Slideshow slideshow) {
-        putEmptyListAsync(slideshow).block();
+        putEmptyListWithResponse(slideshow);
     }
 
     /**
@@ -849,11 +991,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return some empty wrapped lists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<AppleBarrel> getEmptyWrappedListsWithResponse() {
+        return getEmptyWrappedListsWithResponseAsync().block();
+    }
+
+    /**
+     * Gets some empty wrapped lists.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return some empty wrapped lists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public AppleBarrel getEmptyWrappedLists() {
-        return getEmptyWrappedListsAsync().block();
+        return getEmptyWrappedListsWithResponse().getValue();
     }
 
     /**
@@ -901,10 +1055,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyWrappedListsWithResponse(AppleBarrel appleBarrel) {
+        return putEmptyWrappedListsWithResponseAsync(appleBarrel).block();
+    }
+
+    /**
+     * Puts some empty wrapped lists.
+     *
+     * @param appleBarrel A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyWrappedLists(AppleBarrel appleBarrel) {
-        putEmptyWrappedListsAsync(appleBarrel).block();
+        putEmptyWrappedListsWithResponse(appleBarrel);
     }
 
     /**
@@ -941,11 +1109,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a list as the root element along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Banana>> getRootListWithResponse() {
+        return getRootListWithResponseAsync().block();
+    }
+
+    /**
+     * Gets a list as the root element.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a list as the root element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getRootList() {
-        return getRootListAsync().block();
+        return getRootListWithResponse().getValue();
     }
 
     /**
@@ -993,10 +1173,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putRootListWithResponse(List<Banana> bananas) {
+        return putRootListWithResponseAsync(bananas).block();
+    }
+
+    /**
+     * Puts a list as the root element.
+     *
+     * @param bananas Array of Banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRootList(List<Banana> bananas) {
-        putRootListAsync(bananas).block();
+        putRootListWithResponse(bananas);
     }
 
     /**
@@ -1033,11 +1227,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a list with a single item along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Banana>> getRootListSingleItemWithResponse() {
+        return getRootListSingleItemWithResponseAsync().block();
+    }
+
+    /**
+     * Gets a list with a single item.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a list with a single item.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getRootListSingleItem() {
-        return getRootListSingleItemAsync().block();
+        return getRootListSingleItemWithResponse().getValue();
     }
 
     /**
@@ -1086,10 +1292,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putRootListSingleItemWithResponse(List<Banana> bananas) {
+        return putRootListSingleItemWithResponseAsync(bananas).block();
+    }
+
+    /**
+     * Puts a list with a single item.
+     *
+     * @param bananas Array of Banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRootListSingleItem(List<Banana> bananas) {
-        putRootListSingleItemAsync(bananas).block();
+        putRootListSingleItemWithResponse(bananas);
     }
 
     /**
@@ -1126,11 +1346,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty list as the root element along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<Banana>> getEmptyRootListWithResponse() {
+        return getEmptyRootListWithResponseAsync().block();
+    }
+
+    /**
+     * Gets an empty list as the root element.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty list as the root element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getEmptyRootList() {
-        return getEmptyRootListAsync().block();
+        return getEmptyRootListWithResponse().getValue();
     }
 
     /**
@@ -1179,10 +1411,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyRootListWithResponse(List<Banana> bananas) {
+        return putEmptyRootListWithResponseAsync(bananas).block();
+    }
+
+    /**
+     * Puts an empty list as the root element.
+     *
+     * @param bananas Array of Banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyRootList(List<Banana> bananas) {
-        putEmptyRootListAsync(bananas).block();
+        putEmptyRootListWithResponse(bananas);
     }
 
     /**
@@ -1220,11 +1466,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with an empty child element along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Banana> getEmptyChildElementWithResponse() {
+        return getEmptyChildElementWithResponseAsync().block();
+    }
+
+    /**
+     * Gets an XML document with an empty child element.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an XML document with an empty child element.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Banana getEmptyChildElement() {
-        return getEmptyChildElementAsync().block();
+        return getEmptyChildElementWithResponse().getValue();
     }
 
     /**
@@ -1271,10 +1529,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyChildElementWithResponse(Banana banana) {
+        return putEmptyChildElementWithResponseAsync(banana).block();
+    }
+
+    /**
+     * Puts a value with an empty child element.
+     *
+     * @param banana A banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyChildElement(Banana banana) {
-        putEmptyChildElementAsync(banana).block();
+        putEmptyChildElementWithResponse(banana);
     }
 
     /**
@@ -1312,11 +1584,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an enumeration of containers along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ListContainersResponse> listContainersWithResponse() {
+        return listContainersWithResponseAsync().block();
+    }
+
+    /**
+     * Lists containers in a storage account.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an enumeration of containers.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ListContainersResponse listContainers() {
-        return listContainersAsync().block();
+        return listContainersWithResponse().getValue();
     }
 
     /**
@@ -1356,11 +1640,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return storage service properties along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<StorageServiceProperties> getServicePropertiesWithResponse() {
+        return getServicePropertiesWithResponseAsync().block();
+    }
+
+    /**
+     * Gets storage service properties.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return storage service properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StorageServiceProperties getServiceProperties() {
-        return getServicePropertiesAsync().block();
+        return getServicePropertiesWithResponse().getValue();
     }
 
     /**
@@ -1410,10 +1706,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putServicePropertiesWithResponse(StorageServiceProperties properties) {
+        return putServicePropertiesWithResponseAsync(properties).block();
+    }
+
+    /**
+     * Puts storage service properties.
+     *
+     * @param properties Storage Service Properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putServiceProperties(StorageServiceProperties properties) {
-        putServicePropertiesAsync(properties).block();
+        putServicePropertiesWithResponse(properties);
     }
 
     /**
@@ -1452,11 +1762,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return storage ACLs for a container along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<SignedIdentifier>> getAclsWithResponse() {
+        return getAclsWithResponseAsync().block();
+    }
+
+    /**
+     * Gets storage ACLs for a container.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return storage ACLs for a container.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<SignedIdentifier> getAcls() {
-        return getAclsAsync().block();
+        return getAclsWithResponse().getValue();
     }
 
     /**
@@ -1507,10 +1829,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putAclsWithResponse(List<SignedIdentifier> properties) {
+        return putAclsWithResponseAsync(properties).block();
+    }
+
+    /**
+     * Puts storage ACLs for a container.
+     *
+     * @param properties a collection of signed identifiers.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putAcls(List<SignedIdentifier> properties) {
-        putAclsAsync(properties).block();
+        putAclsWithResponse(properties);
     }
 
     /**
@@ -1550,11 +1886,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an enumeration of blobs along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ListBlobsResponse> listBlobsWithResponse() {
+        return listBlobsWithResponseAsync().block();
+    }
+
+    /**
+     * Lists blobs in a storage container.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an enumeration of blobs.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ListBlobsResponse listBlobs() {
-        return listBlobsAsync().block();
+        return listBlobsWithResponse().getValue();
     }
 
     /**
@@ -1601,10 +1949,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> jsonInputWithResponse(JsonInput properties) {
+        return jsonInputWithResponseAsync(properties).block();
+    }
+
+    /**
+     * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
+     *
+     * @param properties The properties parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void jsonInput(JsonInput properties) {
-        jsonInputAsync(properties).block();
+        jsonInputWithResponse(properties);
     }
 
     /**
@@ -1641,11 +2003,23 @@ public final class Xmls {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<JsonOutput> jsonOutputWithResponse() {
+        return jsonOutputWithResponseAsync().block();
+    }
+
+    /**
+     * A Swagger with XML that has one operation that returns JSON. ID number 42.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public JsonOutput jsonOutput() {
-        return jsonOutputAsync().block();
+        return jsonOutputWithResponse().getValue();
     }
 
     /**
@@ -1690,11 +2064,25 @@ public final class Xmls {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     *     property being 'english' and its 'content' property being 'I am text' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ObjectWithXMsTextProperty> getXMsTextWithResponse() {
+        return getXMsTextWithResponseAsync().block();
+    }
+
+    /**
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
      *     property being 'english' and its 'content' property being 'I am text'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ObjectWithXMsTextProperty getXMsText() {
-        return getXMsTextAsync().block();
+        return getXMsTextWithResponse().getValue();
     }
 
     /**
@@ -1732,11 +2120,23 @@ public final class Xmls {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with binary property along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ModelWithByteProperty> getBytesWithResponse() {
+        return getBytesWithResponseAsync().block();
+    }
+
+    /**
+     * Get an XML document with binary property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an XML document with binary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ModelWithByteProperty getBytes() {
-        return getBytesAsync().block();
+        return getBytesWithResponse().getValue();
     }
 
     /**
@@ -1784,10 +2184,24 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBinaryWithResponse(ModelWithByteProperty slideshow) {
+        return putBinaryWithResponseAsync(slideshow).block();
+    }
+
+    /**
+     * Put an XML document with binary property.
+     *
+     * @param slideshow The slideshow parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBinary(ModelWithByteProperty slideshow) {
-        putBinaryAsync(slideshow).block();
+        putBinaryWithResponse(slideshow);
     }
 
     /**
@@ -1824,11 +2238,23 @@ public final class Xmls {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an XML document with uri property along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ModelWithUrlProperty> getUriWithResponse() {
+        return getUriWithResponseAsync().block();
+    }
+
+    /**
+     * Get an XML document with uri property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an XML document with uri property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ModelWithUrlProperty getUri() {
-        return getUriAsync().block();
+        return getUriWithResponse().getValue();
     }
 
     /**
@@ -1876,9 +2302,23 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putUriWithResponse(ModelWithUrlProperty model) {
+        return putUriWithResponseAsync(model).block();
+    }
+
+    /**
+     * Put an XML document with uri property.
+     *
+     * @param model The model parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUri(ModelWithUrlProperty model) {
-        putUriAsync(model).block();
+        putUriWithResponse(model);
     }
 }

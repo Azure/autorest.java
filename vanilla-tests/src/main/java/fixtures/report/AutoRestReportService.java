@@ -190,11 +190,26 @@ public final class AutoRestReportService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getReportWithResponse(String qualifier) {
+        return getReportWithResponseAsync(qualifier).block();
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport(String qualifier) {
-        return getReportAsync(qualifier).block();
+        return getReportWithResponse(qualifier).getValue();
     }
 
     /**
@@ -207,7 +222,7 @@ public final class AutoRestReportService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport() {
         final String qualifier = null;
-        return getReportAsync(qualifier).block();
+        return getReportWithResponse(qualifier).getValue();
     }
 
     /**
@@ -265,11 +280,26 @@ public final class AutoRestReportService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return optional test coverage report along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getOptionalReportWithResponse(String qualifier) {
+        return getOptionalReportWithResponseAsync(qualifier).block();
+    }
+
+    /**
+     * Get optional test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return optional test coverage report.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getOptionalReport(String qualifier) {
-        return getOptionalReportAsync(qualifier).block();
+        return getOptionalReportWithResponse(qualifier).getValue();
     }
 
     /**
@@ -282,6 +312,6 @@ public final class AutoRestReportService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getOptionalReport() {
         final String qualifier = null;
-        return getOptionalReportAsync(qualifier).block();
+        return getOptionalReportWithResponse(qualifier).getValue();
     }
 }

@@ -94,16 +94,23 @@ public final class HttpSuccess {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> head200WithResponse() {
+        return head200WithResponseAsync().block();
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head200() {
-        Boolean value = head200Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return head200WithResponse().getValue();
     }
 
     /**
@@ -139,16 +146,23 @@ public final class HttpSuccess {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> head204WithResponse() {
+        return head204WithResponseAsync().block();
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head204() {
-        Boolean value = head204Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return head204WithResponse().getValue();
     }
 
     /**
@@ -184,15 +198,22 @@ public final class HttpSuccess {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> head404WithResponse() {
+        return head404WithResponseAsync().block();
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {
-        Boolean value = head404Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return head404WithResponse().getValue();
     }
 }

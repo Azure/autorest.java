@@ -160,10 +160,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head408WithResponse() {
+        return head408WithResponseAsync().block();
+    }
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head408() {
-        head408Async().block();
+        head408WithResponse();
     }
 
     /**
@@ -201,10 +213,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put500WithResponse() {
+        return put500WithResponseAsync().block();
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put500() {
-        put500Async().block();
+        put500WithResponse();
     }
 
     /**
@@ -242,10 +266,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch500WithResponse() {
+        return patch500WithResponseAsync().block();
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch500() {
-        patch500Async().block();
+        patch500WithResponse();
     }
 
     /**
@@ -282,10 +318,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get502WithResponse() {
+        return get502WithResponseAsync().block();
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get502() {
-        get502Async().block();
+        get502WithResponse();
     }
 
     /**
@@ -322,16 +370,23 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> options502WithResponse() {
+        return options502WithResponseAsync().block();
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean options502() {
-        Boolean value = options502Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return options502WithResponse().getValue();
     }
 
     /**
@@ -369,10 +424,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post503WithResponse() {
+        return post503WithResponseAsync().block();
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post503() {
-        post503Async().block();
+        post503WithResponse();
     }
 
     /**
@@ -410,10 +477,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete503WithResponse() {
+        return delete503WithResponseAsync().block();
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete503() {
-        delete503Async().block();
+        delete503WithResponse();
     }
 
     /**
@@ -451,10 +530,22 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put504WithResponse() {
+        return put504WithResponseAsync().block();
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put504() {
-        put504Async().block();
+        put504WithResponse();
     }
 
     /**
@@ -492,9 +583,21 @@ public final class HttpRetries {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch504WithResponse() {
+        return patch504WithResponseAsync().block();
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch504() {
-        patch504Async().block();
+        patch504WithResponse();
     }
 }

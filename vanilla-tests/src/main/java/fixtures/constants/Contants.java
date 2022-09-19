@@ -246,10 +246,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(
+            NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
+        return putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        putNoModelAsStringNoRequiredTwoValueNoDefaultAsync(input).block();
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -261,7 +276,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueNoDefault() {
         final NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input = null;
-        putNoModelAsStringNoRequiredTwoValueNoDefaultAsync(input).block();
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -319,10 +334,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(
+            NoModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
+        return putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        putNoModelAsStringNoRequiredTwoValueDefaultAsync(input).block();
+        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -334,7 +364,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueDefault() {
         final NoModelAsStringNoRequiredTwoValueDefaultOpEnum input = null;
-        putNoModelAsStringNoRequiredTwoValueDefaultAsync(input).block();
+        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -373,10 +403,22 @@ public final class Contants {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse() {
+        return putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync().block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredOneValueNoDefault() {
-        putNoModelAsStringNoRequiredOneValueNoDefaultAsync().block();
+        putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse();
     }
 
     /**
@@ -414,10 +456,22 @@ public final class Contants {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse() {
+        return putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync().block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredOneValueDefault() {
-        putNoModelAsStringNoRequiredOneValueDefaultAsync().block();
+        putNoModelAsStringNoRequiredOneValueDefaultWithResponse();
     }
 
     /**
@@ -465,10 +519,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            NoModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
+        return putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredTwoValueNoDefault(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        putNoModelAsStringRequiredTwoValueNoDefaultAsync(input).block();
+        putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -516,10 +585,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
+            NoModelAsStringRequiredTwoValueDefaultOpEnum input) {
+        return putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        putNoModelAsStringRequiredTwoValueDefaultAsync(input).block();
+        putNoModelAsStringRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -557,10 +641,22 @@ public final class Contants {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse() {
+        return putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync().block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredOneValueNoDefault() {
-        putNoModelAsStringRequiredOneValueNoDefaultAsync().block();
+        putNoModelAsStringRequiredOneValueNoDefaultWithResponse();
     }
 
     /**
@@ -598,10 +694,22 @@ public final class Contants {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse() {
+        return putNoModelAsStringRequiredOneValueDefaultWithResponseAsync().block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredOneValueDefault() {
-        putNoModelAsStringRequiredOneValueDefaultAsync().block();
+        putNoModelAsStringRequiredOneValueDefaultWithResponse();
     }
 
     /**
@@ -659,10 +767,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(
+            ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
+        return putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueNoDefault(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        putModelAsStringNoRequiredTwoValueNoDefaultAsync(input).block();
+        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -674,7 +797,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueNoDefault() {
         final ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input = null;
-        putModelAsStringNoRequiredTwoValueNoDefaultAsync(input).block();
+        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -732,10 +855,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringNoRequiredTwoValueDefaultWithResponse(
+            ModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
+        return putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        putModelAsStringNoRequiredTwoValueDefaultAsync(input).block();
+        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -747,7 +885,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueDefault() {
         final ModelAsStringNoRequiredTwoValueDefaultOpEnum input = null;
-        putModelAsStringNoRequiredTwoValueDefaultAsync(input).block();
+        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -805,10 +943,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringNoRequiredOneValueNoDefaultWithResponse(
+            ModelAsStringNoRequiredOneValueNoDefaultOpEnum input) {
+        return putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueNoDefault(ModelAsStringNoRequiredOneValueNoDefaultOpEnum input) {
-        putModelAsStringNoRequiredOneValueNoDefaultAsync(input).block();
+        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -820,7 +973,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueNoDefault() {
         final ModelAsStringNoRequiredOneValueNoDefaultOpEnum input = null;
-        putModelAsStringNoRequiredOneValueNoDefaultAsync(input).block();
+        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -878,10 +1031,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringNoRequiredOneValueDefaultWithResponse(
+            ModelAsStringNoRequiredOneValueDefaultOpEnum input) {
+        return putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum input) {
-        putModelAsStringNoRequiredOneValueDefaultAsync(input).block();
+        putModelAsStringNoRequiredOneValueDefaultWithResponse(input);
     }
 
     /**
@@ -893,7 +1061,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueDefault() {
         final ModelAsStringNoRequiredOneValueDefaultOpEnum input = null;
-        putModelAsStringNoRequiredOneValueDefaultAsync(input).block();
+        putModelAsStringNoRequiredOneValueDefaultWithResponse(input);
     }
 
     /**
@@ -941,10 +1109,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
+            ModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
+        return putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredTwoValueNoDefault(ModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        putModelAsStringRequiredTwoValueNoDefaultAsync(input).block();
+        putModelAsStringRequiredTwoValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -991,10 +1174,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
+            ModelAsStringRequiredTwoValueDefaultOpEnum input) {
+        return putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        putModelAsStringRequiredTwoValueDefaultAsync(input).block();
+        putModelAsStringRequiredTwoValueDefaultWithResponse(input);
     }
 
     /**
@@ -1042,10 +1240,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
+            ModelAsStringRequiredOneValueNoDefaultOpEnum input) {
+        return putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultOpEnum input) {
-        putModelAsStringRequiredOneValueNoDefaultAsync(input).block();
+        putModelAsStringRequiredOneValueNoDefaultWithResponse(input);
     }
 
     /**
@@ -1092,10 +1305,25 @@ public final class Contants {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
+            ModelAsStringRequiredOneValueDefaultOpEnum input) {
+        return putModelAsStringRequiredOneValueDefaultWithResponseAsync(input).block();
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum input) {
-        putModelAsStringRequiredOneValueDefaultAsync(input).block();
+        putModelAsStringRequiredOneValueDefaultWithResponse(input);
     }
 
     /**
@@ -1138,9 +1366,21 @@ public final class Contants {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putClientConstantsWithResponse() {
+        return putClientConstantsWithResponseAsync().block();
+    }
+
+    /**
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putClientConstants() {
-        putClientConstantsAsync().block();
+        putClientConstantsWithResponse();
     }
 }

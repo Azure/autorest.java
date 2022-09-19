@@ -117,11 +117,25 @@ public final class IntsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putWithResponse(IntEnum input) {
+        return putWithResponseAsync(input).block();
+    }
+
+    /**
+     * Put an int enum.
+     *
+     * @param input Input int enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put(IntEnum input) {
-        return putAsync(input).block();
+        return putWithResponse(input).getValue();
     }
 
     /**
@@ -134,7 +148,7 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put() {
         final IntEnum input = null;
-        return putAsync(input).block();
+        return putWithResponse(input).getValue();
     }
 
     /**
@@ -171,10 +185,22 @@ public final class IntsImpl {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an int enum along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<IntEnum> getWithResponse() {
+        return getWithResponseAsync().block();
+    }
+
+    /**
+     * Get an int enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an int enum.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public IntEnum get() {
-        return getAsync().block();
+        return getWithResponse().getValue();
     }
 }

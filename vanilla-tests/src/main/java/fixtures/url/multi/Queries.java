@@ -137,10 +137,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the multi-array format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringMultiNullWithResponse(List<String> arrayQuery) {
+        return arrayStringMultiNullWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get a null array of string using the multi-array format.
+     *
+     * @param arrayQuery a null array of string using the multi-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiNull(List<String> arrayQuery) {
-        arrayStringMultiNullAsync(arrayQuery).block();
+        arrayStringMultiNullWithResponse(arrayQuery);
     }
 
     /**
@@ -152,7 +166,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiNull() {
         final List<String> arrayQuery = null;
-        arrayStringMultiNullAsync(arrayQuery).block();
+        arrayStringMultiNullWithResponse(arrayQuery);
     }
 
     /**
@@ -214,10 +228,24 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the multi-array format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringMultiEmptyWithResponse(List<String> arrayQuery) {
+        return arrayStringMultiEmptyWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an empty array [] of string using the multi-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the multi-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiEmpty(List<String> arrayQuery) {
-        arrayStringMultiEmptyAsync(arrayQuery).block();
+        arrayStringMultiEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -229,7 +257,7 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiEmpty() {
         final List<String> arrayQuery = null;
-        arrayStringMultiEmptyAsync(arrayQuery).block();
+        arrayStringMultiEmptyWithResponse(arrayQuery);
     }
 
     /**
@@ -296,10 +324,26 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
+     *     format along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> arrayStringMultiValidWithResponse(List<String> arrayQuery) {
+        return arrayStringMultiValidWithResponseAsync(arrayQuery).block();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     mult-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiValid(List<String> arrayQuery) {
-        arrayStringMultiValidAsync(arrayQuery).block();
+        arrayStringMultiValidWithResponse(arrayQuery);
     }
 
     /**
@@ -311,6 +355,6 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiValid() {
         final List<String> arrayQuery = null;
-        arrayStringMultiValidAsync(arrayQuery).block();
+        arrayStringMultiValidWithResponse(arrayQuery);
     }
 }
