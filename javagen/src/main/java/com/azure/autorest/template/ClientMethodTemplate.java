@@ -1113,7 +1113,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         //  It could be possible for the interface method to have another parameter called 'context'
                         //  which isn't 'Context'. This can be done by looking for the 'ProxyMethodParameter' with the
                         //  matching name and checking if it's the 'Context' parameter.
-                        parameterName = "context".equals(proxyMethodArgument) ? "Context.NONE" : proxyMethodArgument;
+                        parameterName = (parameter == null && "context".equals(proxyMethodArgument))
+                            ? "Context.NONE"
+                            : proxyMethodArgument;
                     }
                 }
             }
