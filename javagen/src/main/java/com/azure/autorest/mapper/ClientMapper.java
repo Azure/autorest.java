@@ -131,7 +131,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         final List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .distinct()
-                .map(m -> parseResponse(m, settings))
+                .map(m -> parseResponse(m, clientModels, settings))
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList());
@@ -417,14 +417,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return headerSchema;
     }
 
-    private ClientResponse parseResponse(Operation method, JavaSettings settings) {
+    private ClientResponse parseResponse(Operation method, List<ClientModel> models, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
         if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
 
-        ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
+        ClassType classType = ClientMapper.getClientResponseClassType(method, models, settings);
         return builder.name(classType.getName())
             .packageName(classType.getPackage())
             .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
@@ -499,13 +499,21 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return ret;
     }
 
-    static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
+    static ClassType getClientResponseClassType(Operation method, List<ClientModel> models, JavaSettings settings) {
         String name = CodeNamer.getPlural(method.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         if (settings.isCustomType(name)) {
             packageName = settings.getPackage(settings.getCustomTypesSubpackage());
         }
+
+        // deduplicate from model name
+        for (ClientModel model : models) {
+            if (model.getName().equalsIgnoreCase(name) && model.getPackage().equals(packageName)) {
+                name = name + "Response";
+            }
+        }
+
         return new ClassType.Builder().packageName(packageName).name(name).build();
     }
 }
