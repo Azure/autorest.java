@@ -15,6 +15,8 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
@@ -128,11 +130,41 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getPagesPartialUrlAsync(String accountName) {
+        return new PagedFlux<>(
+                () -> getPagesPartialUrlSinglePageAsync(accountName),
+                nextLink -> getPagesPartialUrlNextSinglePageAsync(nextLink, accountName));
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlSinglePage(String accountName) {
         return getPagesPartialUrlSinglePageAsync(accountName).block();
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagesPartialUrl(String accountName) {
+        return new PagedIterable<>(getPagesPartialUrlAsync(accountName));
     }
 
     /**
@@ -176,11 +208,41 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getPagesPartialUrlOperationAsync(String accountName) {
+        return new PagedFlux<>(
+                () -> getPagesPartialUrlOperationSinglePageAsync(accountName),
+                nextLink -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink));
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL with next operation.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlOperationSinglePage(String accountName) {
         return getPagesPartialUrlOperationSinglePageAsync(accountName).block();
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL with next operation.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagesPartialUrlOperation(String accountName) {
+        return new PagedIterable<>(getPagesPartialUrlOperationAsync(accountName));
     }
 
     /**
