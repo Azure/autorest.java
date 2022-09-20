@@ -93,6 +93,7 @@ import {
 } from "@autorest/codemodel";
 import { SchemaContext, SchemaUsage } from "./schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
+import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -328,7 +329,7 @@ export class CodeModelBuilder {
     op.responses.map((it) => this.processResponse(operation, it));
 
     this.processRouteForPaged(operation, op.responses);
-    this.processRouteForLongRunning(operation, op.responses);
+    this.processRouteForLongRunning(operation, op.operation, op.responses);
 
     operationGroup.addOperation(operation);
   }
@@ -339,18 +340,12 @@ export class CodeModelBuilder {
         const responseBody = response.responses[0].body;
         const bodyType = this.findResponseBody(responseBody.type);
         if (bodyType.kind === "Model") {
-          if (this.hasDecorator(bodyType, "$pagedResult")) {
-            const itemsProperty = Array.from(bodyType.properties.values()).find((it) =>
-              this.hasDecorator(it, "$items"),
-            );
-            const nextLinkProperty = Array.from(bodyType.properties.values()).find((it) =>
-              this.hasDecorator(it, "$nextLink"),
-            );
-
-            op.extensions = op.extensions || {};
+          const pagedResult = getPagedResult(this.program, bodyType);
+          if (pagedResult) {
+            op.extensions = op.extensions ?? {};
             op.extensions["x-ms-pageable"] = {
-              itemName: itemsProperty?.name,
-              nextLinkName: nextLinkProperty?.name,
+              itemName: pagedResult.itemsProperty?.name,
+              nextLinkName: pagedResult.nextLinkProperty?.name,
             };
 
             break;
@@ -360,12 +355,20 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRouteForLongRunning(op: CodeModelOperation, responses: HttpOperationResponse[]) {
+  private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[]) {
+    const operationLinks = getOperationLinks(this.program, operation);
+    if (operationLinks && (operationLinks.has("polling") || operationLinks.has("final"))) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
+
+      return;
+    }
+
     for (const resp of responses) {
       if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
         for (const [_, header] of Object.entries(resp.responses[0].headers)) {
-          if (this.hasDecorator(header, "$pollingLocation")) {
-            op.extensions = op.extensions || {};
+          if (isPollingLocation(this.program, header)) {
+            op.extensions = op.extensions ?? {};
             op.extensions["x-ms-long-running-operation"] = true;
 
             break;
