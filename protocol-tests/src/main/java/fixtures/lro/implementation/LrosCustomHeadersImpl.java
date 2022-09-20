@@ -263,6 +263,7 @@ public final class LrosCustomHeadersImpl {
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        this.client.getHost(),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -467,6 +468,7 @@ public final class LrosCustomHeadersImpl {
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        this.client.getHost(),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -633,6 +635,7 @@ public final class LrosCustomHeadersImpl {
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        this.client.getHost(),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -782,6 +785,7 @@ public final class LrosCustomHeadersImpl {
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        this.client.getHost(),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()

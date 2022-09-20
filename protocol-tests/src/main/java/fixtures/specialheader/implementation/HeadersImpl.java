@@ -440,6 +440,7 @@ public final class HeadersImpl {
                 () -> this.paramRepeatabilityRequestLroWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        this.client.getHost(),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
