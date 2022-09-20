@@ -4,13 +4,13 @@
 
 package com.cadl.longrunning.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The OperationStatusResourceResource model. */
-@Fluent
+@Immutable
 public final class OperationStatusResourceResource {
     /*
      * The unique ID of the operation.
@@ -43,7 +43,7 @@ public final class OperationStatusResourceResource {
      * @param status the status value to set.
      */
     @JsonCreator
-    public OperationStatusResourceResource(
+    private OperationStatusResourceResource(
             @JsonProperty(value = "id", required = true) String id,
             @JsonProperty(value = "status", required = true) OperationState status) {
         this.id = id;
@@ -75,17 +75,6 @@ public final class OperationStatusResourceResource {
      */
     public ResponseError getError() {
         return this.error;
-    }
-
-    /**
-     * Set the error property: Error object that describes the error when status is "Failed".
-     *
-     * @param error the error value to set.
-     * @return the OperationStatusResourceResource object itself.
-     */
-    public OperationStatusResourceResource setError(ResponseError error) {
-        this.error = error;
-        return this;
     }
 
     /**
