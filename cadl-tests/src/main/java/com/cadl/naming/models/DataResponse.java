@@ -56,7 +56,7 @@ public final class DataResponse {
      * @param status the status value to set.
      */
     @JsonCreator
-    public DataResponse(
+    private DataResponse(
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty(value = "data", required = true) BinaryData data,
             @JsonProperty(value = "type", required = true) TypesModel type,

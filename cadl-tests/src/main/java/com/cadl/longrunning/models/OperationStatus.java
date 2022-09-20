@@ -37,7 +37,7 @@ public final class OperationStatus {
      * @param status the status value to set.
      */
     @JsonCreator
-    public OperationStatus(
+    private OperationStatus(
             @JsonProperty(value = "id", required = true) String id,
             @JsonProperty(value = "status", required = true) OperationState status) {
         this.id = id;
@@ -69,16 +69,5 @@ public final class OperationStatus {
      */
     public ResponseError getError() {
         return this.error;
-    }
-
-    /**
-     * Set the error property: Error object that describes the error when status is "Failed".
-     *
-     * @param error the error value to set.
-     * @return the OperationStatus object itself.
-     */
-    public OperationStatus setError(ResponseError error) {
-        this.error = error;
-        return this;
     }
 }

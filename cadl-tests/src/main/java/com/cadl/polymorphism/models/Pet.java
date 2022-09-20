@@ -42,7 +42,7 @@ public class Pet {
      * @param name the name value to set.
      */
     @JsonCreator
-    public Pet(@JsonProperty(value = "name", required = true) String name) {
+    protected Pet(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
     }
 
@@ -62,16 +62,5 @@ public class Pet {
      */
     public Double getWeight() {
         return this.weight;
-    }
-
-    /**
-     * Set the weight property: The weight property.
-     *
-     * @param weight the weight value to set.
-     * @return the Pet object itself.
-     */
-    public Pet setWeight(Double weight) {
-        this.weight = weight;
-        return this;
     }
 }

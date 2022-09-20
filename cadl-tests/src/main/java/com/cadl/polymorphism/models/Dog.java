@@ -28,7 +28,7 @@ public final class Dog extends Pet {
      * @param bark the bark value to set.
      */
     @JsonCreator
-    public Dog(
+    private Dog(
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty(value = "bark", required = true) String bark) {
         super(name);
@@ -42,12 +42,5 @@ public final class Dog extends Pet {
      */
     public String getBark() {
         return this.bark;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Dog setWeight(Double weight) {
-        super.setWeight(weight);
-        return this;
     }
 }

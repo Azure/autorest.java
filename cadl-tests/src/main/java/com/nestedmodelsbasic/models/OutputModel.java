@@ -30,7 +30,7 @@ public final class OutputModel {
      * @param nestedSharedModel the nestedSharedModel value to set.
      */
     @JsonCreator
-    public OutputModel(
+    private OutputModel(
             @JsonProperty(value = "NestedOutputModel", required = true) NestedOutputOnlyModel nestedOutputModel,
             @JsonProperty(value = "NestedSharedModel", required = true) NestedRoundTripSharedModel nestedSharedModel) {
         this.nestedOutputModel = nestedOutputModel;

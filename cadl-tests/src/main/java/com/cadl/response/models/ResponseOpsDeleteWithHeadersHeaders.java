@@ -35,15 +35,4 @@ public final class ResponseOpsDeleteWithHeadersHeaders {
     public String getOperationLocation() {
         return this.operationLocation;
     }
-
-    /**
-     * Set the operationLocation property: The operation-location property.
-     *
-     * @param operationLocation the operationLocation value to set.
-     * @return the ResponseOpsDeleteWithHeadersHeaders object itself.
-     */
-    public ResponseOpsDeleteWithHeadersHeaders setOperationLocation(String operationLocation) {
-        this.operationLocation = operationLocation;
-        return this;
-    }
 }

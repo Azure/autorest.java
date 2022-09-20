@@ -28,7 +28,7 @@ public final class Cat extends Pet {
      * @param meow the meow value to set.
      */
     @JsonCreator
-    public Cat(
+    private Cat(
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty(value = "meow", required = true) int meow) {
         super(name);
@@ -42,12 +42,5 @@ public final class Cat extends Pet {
      */
     public int getMeow() {
         return this.meow;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Cat setWeight(Double weight) {
-        super.setWeight(weight);
-        return this;
     }
 }

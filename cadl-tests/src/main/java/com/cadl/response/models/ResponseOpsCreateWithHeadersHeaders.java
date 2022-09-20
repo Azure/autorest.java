@@ -35,15 +35,4 @@ public final class ResponseOpsCreateWithHeadersHeaders {
     public String getOperationLocation() {
         return this.operationLocation;
     }
-
-    /**
-     * Set the operationLocation property: The operation-location property.
-     *
-     * @param operationLocation the operationLocation value to set.
-     * @return the ResponseOpsCreateWithHeadersHeaders object itself.
-     */
-    public ResponseOpsCreateWithHeadersHeaders setOperationLocation(String operationLocation) {
-        this.operationLocation = operationLocation;
-        return this;
-    }
 }
