@@ -28,12 +28,13 @@ import {
   Program,
   RecordModelType,
   StringLiteral,
+  TemplatedTypeBase,
   Type,
   TypeNameOptions,
   Union,
   UnionVariant,
 } from "@cadl-lang/compiler";
-import { getDiscriminator, getSegment } from "@cadl-lang/rest";
+import { getDiscriminator, getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
   getAllRoutes,
   getAuthentication,
@@ -292,17 +293,38 @@ export class CodeModelBuilder {
       }),
     );
 
+    // host
     this.hostParameters.forEach((it) => operation.addParameter(it));
+    // parameters
     op.parameters.parameters.map((it) => this.processParameter(operation, it));
+    // Accept header
     this.addAcceptHeaderParameter(operation, op.responses);
+    // body
     if (op.parameters.bodyParameter) {
       this.processParameterBody(operation, op.parameters.bodyParameter);
     } else if (op.parameters.bodyType) {
-      const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+      let bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+
       if (bodyType.kind === "Model") {
+        // try use resource type as round-trip model
+        const resourceType = getResourceOperation(this.program, op.operation)?.resourceType;
+        if (resourceType && op.responses && op.responses.length > 0) {
+          const resp = op.responses[0];
+          if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+            const responseBody = resp.responses[0].body;
+            const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+            // response body type is reosurce type, and request body type (if templated) contains resource type
+            if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+              bodyType = resourceType;
+            }
+          }
+        }
+
         this.processParameterBody(operation, bodyType);
       }
     }
+
+    // responses
     op.responses.map((it) => this.processResponse(operation, it));
 
     this.processRouteForPaged(operation, op.responses);
@@ -1105,46 +1127,7 @@ export class CodeModelBuilder {
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
         const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
-
-        // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
-        const knownCoreTemplate = new Set<string>([
-          "OptionalProperties",
-          "UpdateableProperties",
-          "DefaultKeyVisibility",
-        ]);
-
-        let modelUsedInCoreRequest = false;
-        while (
-          knownCoreTemplate.has(target.name) &&
-          target.kind === "Model" &&
-          target.templateArguments &&
-          target.templateArguments.length > 0 &&
-          target.templateArguments[0].kind === "Model"
-        ) {
-          modelUsedInCoreRequest = true;
-          target = target.templateArguments[0];
-        }
-
-        let newName = target.name;
-        if (modelUsedInCoreRequest) {
-          newName = target.name + "Request";
-        } else {
-          // hack for other cases, mostly Page<>
-          newName =
-            target.name +
-            target
-              .templateArguments!.map((it) => {
-                switch (it.kind) {
-                  case "Model":
-                    return it.name;
-                  case "String":
-                    return it.value;
-                  default:
-                    return "";
-                }
-              })
-              .join("");
-        }
+        const newName = getNameForTemplate(target);
         this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
       } else {
@@ -1369,4 +1352,32 @@ function getJavaNamespace(namespace: string | undefined): string | undefined {
 
 function includeDerivedModel(model: Model): boolean {
   return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
+}
+
+function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
+  return (
+    template === target ||
+    (template.templateArguments?.some((it) =>
+      it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
+    ) ??
+      false)
+  );
+}
+
+function getNameForTemplate(target: Type): string {
+  switch (target.kind) {
+    case "Model": {
+      let name = target.name;
+      if (target.templateArguments) {
+        name = name + target.templateArguments.map((it) => getNameForTemplate(it)).join("");
+      }
+      return name;
+    }
+
+    case "String":
+      return target.value;
+
+    default:
+      return "";
+  }
 }

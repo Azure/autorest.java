@@ -80,7 +80,7 @@ public final class CadlCoreOpsImpl {
                 @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData updateableProperties,
+                @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -170,6 +170,8 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
+     *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Required)
      * }
@@ -187,7 +189,7 @@ public final class CadlCoreOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -197,7 +199,7 @@ public final class CadlCoreOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
-            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -206,7 +208,7 @@ public final class CadlCoreOpsImpl {
                                 name,
                                 this.client.getServiceVersion().getVersion(),
                                 accept,
-                                updateableProperties,
+                                resource,
                                 requestOptions,
                                 context));
     }
@@ -218,6 +220,8 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
+     *     id: String (Required)
+     *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Required)
      * }
@@ -235,7 +239,7 @@ public final class CadlCoreOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param updateableProperties The template for adding updateable properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -245,8 +249,8 @@ public final class CadlCoreOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
-            String name, BinaryData updateableProperties, RequestOptions requestOptions) {
-        return createOrUpdateWithResponseAsync(name, updateableProperties, requestOptions).block();
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return createOrUpdateWithResponseAsync(name, resource, requestOptions).block();
     }
 
     /**
