@@ -31,6 +31,9 @@ public final class Container {
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
+    /** Creates an instance of Container class. */
+    public Container() {}
+
     /**
      * Get the name property: The Name property.
      *

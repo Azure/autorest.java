@@ -16,6 +16,9 @@ public final class C {
     @JsonProperty(value = "httpCode")
     private String httpCode;
 
+    /** Creates an instance of C class. */
+    public C() {}
+
     /**
      * Get the httpCode property: The httpCode property.
      *

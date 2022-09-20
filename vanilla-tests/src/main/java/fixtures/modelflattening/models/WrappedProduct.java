@@ -16,6 +16,9 @@ public final class WrappedProduct {
     @JsonProperty(value = "value")
     private String value;
 
+    /** Creates an instance of WrappedProduct class. */
+    public WrappedProduct() {}
+
     /**
      * Get the value property: the product value.
      *

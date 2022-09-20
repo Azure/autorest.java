@@ -22,6 +22,9 @@ public final class IntWrapper {
     @JsonProperty(value = "field2")
     private Integer field2;
 
+    /** Creates an instance of IntWrapper class. */
+    public IntWrapper() {}
+
     /**
      * Get the field1 property: The field1 property.
      *

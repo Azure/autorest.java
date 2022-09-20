@@ -19,6 +19,9 @@ public final class ModelWithByteProperty {
     @JsonProperty(value = "Bytes")
     private byte[] bytes;
 
+    /** Creates an instance of ModelWithByteProperty class. */
+    public ModelWithByteProperty() {}
+
     /**
      * Get the bytes property: The Bytes property.
      *

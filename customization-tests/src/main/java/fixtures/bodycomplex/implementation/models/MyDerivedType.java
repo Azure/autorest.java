@@ -20,6 +20,9 @@ public final class MyDerivedType extends MyBaseType {
     @JsonProperty(value = "propD1")
     private String propD1;
 
+    /** Creates an instance of MyDerivedType class. */
+    public MyDerivedType() {}
+
     /**
      * Get the propD1 property: The propD1 property.
      *

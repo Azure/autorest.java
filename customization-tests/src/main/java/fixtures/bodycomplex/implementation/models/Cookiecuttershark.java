@@ -15,6 +15,9 @@ import java.util.List;
 @JsonTypeName("cookiecuttershark")
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    /** Creates an instance of Cookiecuttershark class. */
+    public Cookiecuttershark() {}
+
     /** {@inheritDoc} */
     @Override
     public Cookiecuttershark setAge(Integer age) {

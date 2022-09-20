@@ -24,6 +24,9 @@ public final class RootWithRefAndMeta {
     @JsonProperty(value = "Something")
     private String something;
 
+    /** Creates an instance of RootWithRefAndMeta class. */
+    public RootWithRefAndMeta() {}
+
     /**
      * Get the refToModel property: XML will use XMLComplexTypeWithMeta.
      *

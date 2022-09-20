@@ -16,6 +16,9 @@ public final class OperationResult {
     @JsonProperty(value = "status")
     private OperationResultStatus status;
 
+    /** Creates an instance of OperationResult class. */
+    public OperationResult() {}
+
     /**
      * Get the status property: The status of the request.
      *

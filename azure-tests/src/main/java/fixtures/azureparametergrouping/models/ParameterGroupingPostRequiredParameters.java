@@ -34,6 +34,9 @@ public final class ParameterGroupingPostRequiredParameters {
     @JsonProperty(value = "body", required = true)
     private int body;
 
+    /** Creates an instance of ParameterGroupingPostRequiredParameters class. */
+    public ParameterGroupingPostRequiredParameters() {}
+
     /**
      * Get the customHeader property: The customHeader property.
      *

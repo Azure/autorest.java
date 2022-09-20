@@ -16,6 +16,9 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault {
     @JsonProperty(value = "parameter")
     private String parameter = "value1";
 
+    /** Creates an instance of NoModelAsStringNoRequiredOneValueNoDefault class. */
+    public NoModelAsStringNoRequiredOneValueNoDefault() {}
+
     /**
      * Get the parameter property: The parameter property.
      *

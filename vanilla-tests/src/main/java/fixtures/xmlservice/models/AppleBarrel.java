@@ -48,6 +48,9 @@ public final class AppleBarrel {
     @JsonProperty(value = "BadApples")
     private BadApplesWrapper badApples;
 
+    /** Creates an instance of AppleBarrel class. */
+    public AppleBarrel() {}
+
     /**
      * Get the goodApples property: The GoodApples property.
      *

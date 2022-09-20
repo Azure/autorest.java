@@ -16,6 +16,9 @@ public final class StringWrapper {
     @JsonProperty(value = "value", required = true)
     private String value;
 
+    /** Creates an instance of StringWrapper class. */
+    public StringWrapper() {}
+
     /**
      * Get the value property: The value property.
      *

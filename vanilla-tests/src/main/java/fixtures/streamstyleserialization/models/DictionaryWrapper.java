@@ -19,6 +19,9 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
      */
     private Map<String, String> defaultProgram;
 
+    /** Creates an instance of DictionaryWrapper class. */
+    public DictionaryWrapper() {}
+
     /**
      * Get the defaultProgram property: Dictionary of &lt;string&gt;.
      *

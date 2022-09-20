@@ -17,6 +17,9 @@ public final class LoadBalancer {
     @JsonProperty(value = "properties")
     private LoadBalancerPropertiesFormat innerProperties;
 
+    /** Creates an instance of LoadBalancer class. */
+    public LoadBalancer() {}
+
     /**
      * Get the innerProperties property: Properties of load balancer.
      *

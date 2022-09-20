@@ -37,6 +37,9 @@ public class FlattenedProduct extends Resource {
     @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
+    /** Creates an instance of FlattenedProduct class. */
+    public FlattenedProduct() {}
+
     /**
      * Get the pName property: The p.name property.
      *

@@ -63,6 +63,9 @@ public final class StorageServiceProperties {
     @JsonProperty(value = "DeleteRetentionPolicy")
     private RetentionPolicy deleteRetentionPolicy;
 
+    /** Creates an instance of StorageServiceProperties class. */
+    public StorageServiceProperties() {}
+
     /**
      * Get the logging property: Azure Analytics Logging settings.
      *

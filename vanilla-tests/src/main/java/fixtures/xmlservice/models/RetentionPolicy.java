@@ -25,6 +25,9 @@ public final class RetentionPolicy {
     @JsonProperty(value = "Days")
     private Integer days;
 
+    /** Creates an instance of RetentionPolicy class. */
+    public RetentionPolicy() {}
+
     /**
      * Get the enabled property: Indicates whether a retention policy is enabled for the storage service.
      *

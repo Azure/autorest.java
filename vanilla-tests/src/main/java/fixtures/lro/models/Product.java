@@ -25,6 +25,9 @@ public class Product extends Resource {
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private ProductPropertiesProvisioningStateValues provisioningStateValues;
 
+    /** Creates an instance of Product class. */
+    public Product() {}
+
     /**
      * Get the provisioningState property: The provisioningState property.
      *

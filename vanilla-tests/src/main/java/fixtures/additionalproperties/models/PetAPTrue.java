@@ -38,6 +38,9 @@ public class PetAPTrue {
      */
     @JsonIgnore private Map<String, Object> additionalProperties;
 
+    /** Creates an instance of PetAPTrue class. */
+    public PetAPTrue() {}
+
     /**
      * Get the id property: The id property.
      *

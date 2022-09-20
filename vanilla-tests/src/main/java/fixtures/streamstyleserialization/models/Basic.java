@@ -28,6 +28,9 @@ public final class Basic implements JsonSerializable<Basic> {
      */
     private CMYKColors color;
 
+    /** Creates an instance of Basic class. */
+    public Basic() {}
+
     /**
      * Get the id property: Basic Id.
      *
