@@ -16,8 +16,6 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
@@ -392,37 +390,11 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Object> paramRepeatabilityRequestPageableAsync() {
-        return new PagedFlux<>(
-                () -> paramRepeatabilityRequestPageableSinglePageAsync(),
-                nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage() {
         return paramRepeatabilityRequestPageableSinglePageAsync().block();
-    }
-
-    /**
-     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Object> paramRepeatabilityRequestPageable() {
-        return new PagedIterable<>(paramRepeatabilityRequestPageableAsync());
     }
 
     /**

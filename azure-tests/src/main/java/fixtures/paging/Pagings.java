@@ -17,8 +17,6 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
@@ -461,36 +459,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getNoItemNamePagesAsync() {
-        return new PagedFlux<>(
-                () -> getNoItemNamePagesSinglePageAsync(), nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that must return result of the default 'value' node.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesSinglePage() {
         return getNoItemNamePagesSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that must return result of the default 'value' node.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getNoItemNamePages() {
-        return new PagedIterable<>(getNoItemNamePagesAsync());
     }
 
     /**
@@ -524,35 +497,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getNullNextLinkNamePagesAsync() {
-        return new PagedFlux<>(() -> getNullNextLinkNamePagesSinglePageAsync());
-    }
-
-    /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNullNextLinkNamePagesSinglePage() {
         return getNullNextLinkNamePagesSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getNullNextLinkNamePages() {
-        return new PagedIterable<>(getNullNextLinkNamePagesAsync());
     }
 
     /**
@@ -586,36 +535,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getSinglePagesAsync() {
-        return new PagedFlux<>(
-                () -> getSinglePagesSinglePageAsync(), nextLink -> getSinglePagesNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that finishes on the first call without a nextlink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesSinglePage() {
         return getSinglePagesSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that finishes on the first call without a nextlink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getSinglePages() {
-        return new PagedIterable<>(getSinglePagesAsync());
     }
 
     /**
@@ -651,38 +575,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> firstResponseEmptyAsync() {
-        return new PagedFlux<>(
-                () -> firstResponseEmptySinglePageAsync(), nextLink -> firstResponseEmptyNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> firstResponseEmptySinglePage() {
         return firstResponseEmptySinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> firstResponseEmpty() {
-        return new PagedIterable<>(firstResponseEmptyAsync());
     }
 
     /**
@@ -739,78 +636,12 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesAsync(
-            String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
-                nextLink ->
-                        getMultiplePagesNextSinglePageAsync(nextLink, clientRequestId, pagingGetMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesAsync() {
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
-        return new PagedFlux<>(
-                () -> getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
-                nextLink ->
-                        getMultiplePagesNextSinglePageAsync(nextLink, clientRequestId, pagingGetMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesSinglePage(
             String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).block();
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePages(
-            String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePages() {
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
-        return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
     }
 
     /**
@@ -854,43 +685,11 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getWithQueryParamsAsync(int requiredQueryParameter) {
-        return new PagedFlux<>(
-                () -> getWithQueryParamsSinglePageAsync(requiredQueryParameter),
-                nextLink -> nextOperationWithQueryParamsSinglePageAsync());
-    }
-
-    /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getWithQueryParamsSinglePage(int requiredQueryParameter) {
         return getWithQueryParamsSinglePageAsync(requiredQueryParameter).block();
-    }
-
-    /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter) {
-        return new PagedIterable<>(getWithQueryParamsAsync(requiredQueryParameter));
     }
 
     /**
@@ -930,71 +729,11 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> duplicateParamsAsync(String filter) {
-        return new PagedFlux<>(
-                () -> duplicateParamsSinglePageAsync(filter), nextLink -> duplicateParamsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> duplicateParamsAsync() {
-        final String filter = null;
-        return new PagedFlux<>(
-                () -> duplicateParamsSinglePageAsync(filter), nextLink -> duplicateParamsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @param filter OData filter options. Pass in 'foo'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> duplicateParamsSinglePage(String filter) {
         return duplicateParamsSinglePageAsync(filter).block();
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @param filter OData filter options. Pass in 'foo'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> duplicateParams(String filter) {
-        return new PagedIterable<>(duplicateParamsAsync(filter));
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> duplicateParams() {
-        final String filter = null;
-        return new PagedIterable<>(duplicateParamsAsync(filter));
     }
 
     /**
@@ -1030,37 +769,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> pageWithMaxPageSizeAsync() {
-        return new PagedFlux<>(
-                () -> pageWithMaxPageSizeSinglePageAsync(),
-                nextLink -> pageWithMaxPageSizeNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Paging with max page size. We don't want to.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> pageWithMaxPageSizeSinglePage() {
         return pageWithMaxPageSizeSinglePageAsync().block();
-    }
-
-    /**
-     * Paging with max page size. We don't want to.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> pageWithMaxPageSize() {
-        return new PagedIterable<>(pageWithMaxPageSizeAsync());
     }
 
     /**
@@ -1159,80 +872,12 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getOdataMultiplePagesAsync(
-            String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return new PagedFlux<>(
-                () -> getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
-                nextLink ->
-                        getOdataMultiplePagesNextSinglePageAsync(
-                                nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getOdataMultiplePagesAsync() {
-        final String clientRequestId = null;
-        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
-        return new PagedFlux<>(
-                () -> getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
-                nextLink ->
-                        getOdataMultiplePagesNextSinglePageAsync(
-                                nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getOdataMultiplePagesSinglePage(
             String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).block();
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getOdataMultiplePages(
-            String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions));
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getOdataMultiplePages() {
-        final String clientRequestId = null;
-        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
-        return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions));
     }
 
     /**
@@ -1292,50 +937,6 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
-        return new PagedFlux<>(
-                () ->
-                        getMultiplePagesWithOffsetSinglePageAsync(
-                                pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
-                nextLink ->
-                        getMultiplePagesWithOffsetNextSinglePageAsync(
-                                nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
-        final String clientRequestId = null;
-        return new PagedFlux<>(
-                () ->
-                        getMultiplePagesWithOffsetSinglePageAsync(
-                                pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
-                nextLink ->
-                        getMultiplePagesWithOffsetNextSinglePageAsync(
-                                nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1343,40 +944,6 @@ public final class Pagings {
             PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId)
                 .block();
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesWithOffset(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
-        return new PagedIterable<>(
-                getMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesWithOffset(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
-        final String clientRequestId = null;
-        return new PagedIterable<>(
-                getMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
     }
 
     /**
@@ -1413,39 +980,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesRetryFirstAsync() {
-        return new PagedFlux<>(
-                () -> getMultiplePagesRetryFirstSinglePageAsync(),
-                nextLink -> getMultiplePagesRetryFirstNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetryFirstSinglePage() {
         return getMultiplePagesRetryFirstSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesRetryFirst() {
-        return new PagedIterable<>(getMultiplePagesRetryFirstAsync());
     }
 
     /**
@@ -1482,39 +1021,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesRetrySecondAsync() {
-        return new PagedFlux<>(
-                () -> getMultiplePagesRetrySecondSinglePageAsync(),
-                nextLink -> getMultiplePagesRetrySecondNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetrySecondSinglePage() {
         return getMultiplePagesRetrySecondSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesRetrySecond() {
-        return new PagedIterable<>(getMultiplePagesRetrySecondAsync());
     }
 
     /**
@@ -1548,37 +1059,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getSinglePagesFailureAsync() {
-        return new PagedFlux<>(
-                () -> getSinglePagesFailureSinglePageAsync(),
-                nextLink -> getSinglePagesFailureNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that receives a 400 on the first call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesFailureSinglePage() {
         return getSinglePagesFailureSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that receives a 400 on the first call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getSinglePagesFailure() {
-        return new PagedIterable<>(getSinglePagesFailureAsync());
     }
 
     /**
@@ -1612,37 +1097,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesFailureAsync() {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFailureSinglePageAsync(),
-                nextLink -> getMultiplePagesFailureNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that receives a 400 on the second call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureSinglePage() {
         return getMultiplePagesFailureSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that receives a 400 on the second call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesFailure() {
-        return new PagedIterable<>(getMultiplePagesFailureAsync());
     }
 
     /**
@@ -1677,37 +1136,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesFailureUriAsync() {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFailureUriSinglePageAsync(),
-                nextLink -> getMultiplePagesFailureUriNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that receives an invalid nextLink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureUriSinglePage() {
         return getMultiplePagesFailureUriSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that receives an invalid nextLink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesFailureUri() {
-        return new PagedIterable<>(getMultiplePagesFailureUriAsync());
     }
 
     /**
@@ -1757,43 +1190,11 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesFragmentNextLinkAsync(String apiVersion, String tenant) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant),
-                nextLink -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink));
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFragmentNextLinkSinglePage(String apiVersion, String tenant) {
         return getMultiplePagesFragmentNextLinkSinglePageAsync(apiVersion, tenant).block();
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesFragmentNextLink(String apiVersion, String tenant) {
-        return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant));
     }
 
     /**
@@ -1843,44 +1244,12 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesFragmentWithGroupingNextLinkAsync(
-            CustomParameterGroup customParameterGroup) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup),
-                nextLink -> nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup));
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * @param customParameterGroup Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(
             CustomParameterGroup customParameterGroup) {
         return getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup).block();
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * @param customParameterGroup Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesFragmentWithGroupingNextLink(
-            CustomParameterGroup customParameterGroup) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup));
     }
 
     /**
@@ -1937,80 +1306,12 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesLROAsync(
-            String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
-        return new PagedFlux<>(
-                () -> getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLroOptions),
-                nextLink ->
-                        getMultiplePagesLRONextSinglePageAsync(
-                                nextLink, clientRequestId, pagingGetMultiplePagesLroOptions));
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesLROAsync() {
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null;
-        return new PagedFlux<>(
-                () -> getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLroOptions),
-                nextLink ->
-                        getMultiplePagesLRONextSinglePageAsync(
-                                nextLink, clientRequestId, pagingGetMultiplePagesLroOptions));
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesLROSinglePage(
             String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
         return getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLroOptions).block();
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesLRO(
-            String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
-        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions));
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesLRO() {
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null;
-        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions));
     }
 
     /**
@@ -2049,38 +1350,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> appendApiVersionAsync() {
-        return new PagedFlux<>(
-                () -> appendApiVersionSinglePageAsync(), nextLink -> appendApiVersionNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> appendApiVersionSinglePage() {
         return appendApiVersionSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> appendApiVersion() {
-        return new PagedIterable<>(appendApiVersionAsync());
     }
 
     /**
@@ -2119,38 +1393,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> replaceApiVersionAsync() {
-        return new PagedFlux<>(
-                () -> replaceApiVersionSinglePageAsync(), nextLink -> replaceApiVersionNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionSinglePage() {
         return replaceApiVersionSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> replaceApiVersion() {
-        return new PagedIterable<>(replaceApiVersionAsync());
     }
 
     /**
@@ -2305,37 +1552,11 @@ public final class Pagings {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getPagingModelWithItemNameWithXMSClientNameAsync() {
-        return new PagedFlux<>(
-                () -> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(),
-                nextLink -> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameSinglePage() {
         return getPagingModelWithItemNameWithXMSClientNameSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getPagingModelWithItemNameWithXMSClientName() {
-        return new PagedIterable<>(getPagingModelWithItemNameWithXMSClientNameAsync());
     }
 
     /**

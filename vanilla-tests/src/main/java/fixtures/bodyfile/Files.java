@@ -118,7 +118,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
-        return getFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getFileWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync(Context context) {
-        return getFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getFileWithResponseAsync(context).flatMapMany(Response::getValue);
     }
 
     /**
@@ -278,7 +278,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
-        return getFileLargeWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getFileLargeWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -292,7 +292,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync(Context context) {
-        return getFileLargeWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getFileLargeWithResponseAsync(context).flatMapMany(Response::getValue);
     }
 
     /**
@@ -438,7 +438,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
-        return getEmptyFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getEmptyFileWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -452,7 +452,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
-        return getEmptyFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getEmptyFileWithResponseAsync(context).flatMapMany(Response::getValue);
     }
 
     /**
