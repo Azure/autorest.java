@@ -810,7 +810,7 @@ public class JavaSettings {
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
-                return "new DefaultPollingStrategy<>({httpPipeline}, null, {context})";
+                return "new DefaultPollingStrategy<>({httpPipeline}, {endpoint}, null, {context})";
             } else {
                 return strategy;
             }
