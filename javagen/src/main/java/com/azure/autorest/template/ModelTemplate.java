@@ -854,7 +854,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
-        boolean needsNullGuarding = wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String;
+        boolean needsNullGuarding = (wireType instanceof ClassType && wireType != ClassType.String)
+            || wireType instanceof ArrayType;
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
