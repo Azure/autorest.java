@@ -106,7 +106,7 @@ export class CodeModelBuilder {
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
 
-  private specialHeaderNames = ["Repeatability-Request-ID", "Repeatability-First-Sent"]
+  private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
   public constructor(program1: Program) {
     this.program = program1;
@@ -388,10 +388,10 @@ export class CodeModelBuilder {
     if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
-    } else if (this.containsIgnoreCase(this.specialHeaderNames, param.name)) {
+    } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
-      if (!this.containsIgnoreCase(op.specialHeaders, param.name)) {
+      if (!containsIgnoreCase(op.specialHeaders, param.name)) {
         op.specialHeaders.push(param.name);
       }
     } else {
@@ -1184,10 +1184,6 @@ export class CodeModelBuilder {
     return hasConvenienceMethod;
   }
 
-  private containsIgnoreCase(stringList: string[], str: string) {
-    return stringList && str ? stringList.findIndex(s => s.toLowerCase() === str.toLowerCase()) != -1 : false;
-  }
-
   private _stringSchema?: StringSchema;
   get stringSchema(): StringSchema {
     return (
@@ -1395,4 +1391,8 @@ function getNameForTemplate(target: Type): string {
     default:
       return "";
   }
+}
+
+function containsIgnoreCase(stringList: string[], str: string) {
+  return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
 }

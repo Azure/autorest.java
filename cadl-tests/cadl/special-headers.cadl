@@ -61,8 +61,4 @@ interface SpecialHeadersOp {
     @put
     @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
     createLro is LongRunningResourceCreateOrUpdate<Resource, Customizations>;
-
-    @post
-    @doc("Send a pagable request with header Repeatability-Request-ID and Repeatability-First-Sent")
-    listPagable is Azure.Core.ResourceList<Resource, Customizations>;
 }

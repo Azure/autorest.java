@@ -12,7 +12,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -217,38 +216,6 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * Send a pagable request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> listPagable(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.listPagable(requestOptions));
-    }
-
-    /**
      * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
      *
      * @param name The name parameter.
@@ -308,22 +275,5 @@ public final class SpecialHeadersClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue().toObject(Resource.class);
-    }
-
-    /**
-     * Send a pagable request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Resource> listPagable() {
-        // Generated convenience method for listPagable
-        return new PagedIterable<>(client.listPagable());
     }
 }
