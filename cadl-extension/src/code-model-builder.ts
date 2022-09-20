@@ -106,6 +106,8 @@ export class CodeModelBuilder {
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
 
+  private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+
   public constructor(program1: Program) {
     this.program = program1;
     const serviceNamespace = getServiceNamespace(this.program);
@@ -386,6 +388,12 @@ export class CodeModelBuilder {
     if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
+    } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
+      // special headers
+      op.specialHeaders = op.specialHeaders ?? [];
+      if (!containsIgnoreCase(op.specialHeaders, param.name)) {
+        op.specialHeaders.push(param.name);
+      }
     } else {
       const schema = this.processSchema(param.param.type, param.param.name);
       const nullable = this.isNullableType(param.param.type);
@@ -1383,4 +1391,8 @@ function getNameForTemplate(target: Type): string {
     default:
       return "";
   }
+}
+
+function containsIgnoreCase(stringList: string[], str: string) {
+  return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
 }
