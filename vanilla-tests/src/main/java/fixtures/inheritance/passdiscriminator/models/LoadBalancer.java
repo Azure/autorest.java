@@ -19,6 +19,9 @@ public class LoadBalancer {
     @JsonProperty(value = "properties.backendAddressPools")
     private List<BackendAddressPool> backendAddressPools;
 
+    /** Creates an instance of LoadBalancer class. */
+    public LoadBalancer() {}
+
     /**
      * Get the backendAddressPools property: Collection of backend address pools used by a load balancer.
      *

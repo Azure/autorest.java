@@ -4,11 +4,11 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Error model. */
-@Fluent
+@Immutable
 public final class Error {
     /*
      * The status property.

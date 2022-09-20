@@ -28,6 +28,9 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      */
     private String nullProperty;
 
+    /** Creates an instance of StringWrapper class. */
+    public StringWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

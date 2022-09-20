@@ -22,6 +22,9 @@ public final class PagingGetOdataMultiplePagesOptions {
     @JsonProperty(value = "timeout")
     private Integer timeout;
 
+    /** Creates an instance of PagingGetOdataMultiplePagesOptions class. */
+    public PagingGetOdataMultiplePagesOptions() {}
+
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
      *

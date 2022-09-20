@@ -23,6 +23,9 @@ public class Cat extends Pet {
      */
     private List<Dog> hates;
 
+    /** Creates an instance of Cat class. */
+    public Cat() {}
+
     /**
      * Get the color property: The color property.
      *

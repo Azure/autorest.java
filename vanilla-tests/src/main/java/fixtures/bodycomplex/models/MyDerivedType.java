@@ -4,7 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /** The MyDerivedType model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("Kind1")
-@Fluent
+@Immutable
 public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.

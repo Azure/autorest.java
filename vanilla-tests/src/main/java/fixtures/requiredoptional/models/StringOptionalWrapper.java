@@ -16,6 +16,9 @@ public final class StringOptionalWrapper {
     @JsonProperty(value = "value")
     private String value;
 
+    /** Creates an instance of StringOptionalWrapper class. */
+    public StringOptionalWrapper() {}
+
     /**
      * Get the value property: The value property.
      *

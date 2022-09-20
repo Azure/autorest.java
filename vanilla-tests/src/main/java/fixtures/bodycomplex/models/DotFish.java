@@ -4,7 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("DotFish")
 @JsonSubTypes({@JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)})
 @JsonFlatten
-@Fluent
+@Immutable
 public class DotFish {
     /*
      * The species property.

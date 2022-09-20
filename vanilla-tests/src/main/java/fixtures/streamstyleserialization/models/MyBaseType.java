@@ -23,6 +23,9 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      */
     private String propBH1;
 
+    /** Creates an instance of MyBaseType class. */
+    public MyBaseType() {}
+
     /**
      * Get the propB1 property: The propB1 property.
      *

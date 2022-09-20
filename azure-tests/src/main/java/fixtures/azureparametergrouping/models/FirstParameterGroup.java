@@ -22,6 +22,9 @@ public final class FirstParameterGroup {
     @JsonProperty(value = "query-one")
     private Integer queryOne;
 
+    /** Creates an instance of FirstParameterGroup class. */
+    public FirstParameterGroup() {}
+
     /**
      * Get the headerOne property: The header-one property.
      *

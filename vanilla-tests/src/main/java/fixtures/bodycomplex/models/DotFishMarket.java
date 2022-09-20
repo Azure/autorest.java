@@ -4,12 +4,12 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The DotFishMarket model. */
-@Fluent
+@Immutable
 public final class DotFishMarket {
     /*
      * The sampleSalmon property.

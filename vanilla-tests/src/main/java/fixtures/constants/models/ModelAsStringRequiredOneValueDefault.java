@@ -16,6 +16,9 @@ public final class ModelAsStringRequiredOneValueDefault {
     @JsonProperty(value = "parameter", required = true)
     private ModelAsStringRequiredOneValueDefaultEnum parameter = ModelAsStringRequiredOneValueDefaultEnum.VALUE1;
 
+    /** Creates an instance of ModelAsStringRequiredOneValueDefault class. */
+    public ModelAsStringRequiredOneValueDefault() {}
+
     /**
      * Get the parameter property: The parameter property.
      *

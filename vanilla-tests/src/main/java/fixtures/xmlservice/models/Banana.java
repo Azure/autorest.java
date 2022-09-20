@@ -31,6 +31,9 @@ public final class Banana {
     @JsonProperty(value = "expiration")
     private OffsetDateTime expiration;
 
+    /** Creates an instance of Banana class. */
+    public Banana() {}
+
     /**
      * Get the name property: The name property.
      *

@@ -24,6 +24,9 @@ public class SubProduct extends SubResource {
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private SubProductPropertiesProvisioningStateValues provisioningStateValues;
 
+    /** Creates an instance of SubProduct class. */
+    public SubProduct() {}
+
     /**
      * Get the provisioningState property: The provisioningState property.
      *

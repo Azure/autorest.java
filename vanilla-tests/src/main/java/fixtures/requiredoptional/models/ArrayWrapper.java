@@ -17,6 +17,9 @@ public final class ArrayWrapper {
     @JsonProperty(value = "value", required = true)
     private List<String> value;
 
+    /** Creates an instance of ArrayWrapper class. */
+    public ArrayWrapper() {}
+
     /**
      * Get the value property: The value property.
      *
