@@ -4,7 +4,7 @@
 
 package com.cadl.optional.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /** The AllPropertiesOptional model. */
-@Fluent
+@Immutable
 public final class AllPropertiesOptional {
     /*
      * The boolean property.

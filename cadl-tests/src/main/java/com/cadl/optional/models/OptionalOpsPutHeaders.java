@@ -4,12 +4,12 @@
 
 package com.cadl.optional.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The OptionalOpsPutHeaders model. */
-@Fluent
+@Immutable
 public final class OptionalOpsPutHeaders {
     /*
      * The header-required property.

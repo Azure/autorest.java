@@ -4,13 +4,13 @@
 
 package com.cadl.odata.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Paged collection of Resource items. */
-@Fluent
+@Immutable
 public final class PagedResource {
     /*
      * The Resource items on this page

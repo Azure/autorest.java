@@ -4,7 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /** The Dog model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("dog")
-@Fluent
+@Immutable
 public final class Dog extends Pet {
     /*
      * The bark property.

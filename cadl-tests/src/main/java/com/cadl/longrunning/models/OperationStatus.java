@@ -4,13 +4,13 @@
 
 package com.cadl.longrunning.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Status monitor resource for long running operations. */
-@Fluent
+@Immutable
 public final class OperationStatus {
     /*
      * The unique ID of the operation.

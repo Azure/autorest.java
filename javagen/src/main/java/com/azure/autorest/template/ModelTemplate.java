@@ -102,7 +102,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addClassLevelAnnotations(model, javaFile, settings);
 
         // Add Fluent or Immutable based on whether the model has any setters.
-        addFluentOrImmutableAnnotation(model, javaFile, propertyReferences, settings);
+        addFluentOrImmutableAnnotation(model, immutableOutputModel, propertyReferences, javaFile, settings);
 
         // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
@@ -428,13 +428,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Adds Fluent or Immutable based on whether model has any setters.
      * @param model The client model.
-     * @param javaFile The Java class file.
+     * @param immutableOutputModel The model is treated as immutable, as it is output only.
      * @param propertyReferences The client model property reference.
+     * @param javaFile The Java class file.
      * @param settings Autorest generation settings.
      */
-    private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
-                                                List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
-        boolean fluent = Stream
+    private void addFluentOrImmutableAnnotation(ClientModel model, boolean immutableOutputModel,
+                                                List<ClientModelPropertyReference> propertyReferences, JavaFile javaFile, JavaSettings settings) {
+        boolean fluent = !immutableOutputModel && Stream
                 .concat(model.getProperties().stream(), propertyReferences.stream())
                 .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
 
