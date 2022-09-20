@@ -22,6 +22,9 @@ public final class FloatWrapper {
     @JsonProperty(value = "field2")
     private Float field2;
 
+    /** Creates an instance of FloatWrapper class. */
+    public FloatWrapper() {}
+
     /**
      * Get the field1 property: The field1 property.
      *

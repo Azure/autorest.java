@@ -22,6 +22,9 @@ public final class ReadonlyObj {
     @JsonProperty(value = "size")
     private Integer size;
 
+    /** Creates an instance of ReadonlyObj class. */
+    public ReadonlyObj() {}
+
     /**
      * Get the id property: The id property.
      *

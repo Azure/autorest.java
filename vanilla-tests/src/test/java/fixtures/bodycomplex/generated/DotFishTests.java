@@ -17,11 +17,4 @@ public final class DotFishTests {
                         .toObject(DotFish.class);
         Assertions.assertEquals("gejspodmailzyde", model.getSpecies());
     }
-
-    @Test
-    public void testSerialize() {
-        DotFish model = new DotFish().setSpecies("gejspodmailzyde");
-        model = BinaryData.fromObject(model).toObject(DotFish.class);
-        Assertions.assertEquals("gejspodmailzyde", model.getSpecies());
-    }
 }

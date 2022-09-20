@@ -20,6 +20,9 @@ public final class MyDerivedType extends MyBaseType {
     @JsonProperty(value = "propD1")
     private String propD1;
 
+    /** Creates an instance of MyDerivedType class. */
+    private MyDerivedType() {}
+
     /**
      * Get the propD1 property: The propD1 property.
      *
@@ -27,31 +30,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public String getPropD1() {
         return this.propD1;
-    }
-
-    /**
-     * Set the propD1 property: The propD1 property.
-     *
-     * @param propD1 the propD1 value to set.
-     * @return the MyDerivedType object itself.
-     */
-    public MyDerivedType setPropD1(String propD1) {
-        this.propD1 = propD1;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyDerivedType setPropB1(String propB1) {
-        super.setPropB1(propB1);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MyDerivedType setPropBH1(String propBH1) {
-        super.setPropBH1(propBH1);
-        return this;
     }
 
     /**

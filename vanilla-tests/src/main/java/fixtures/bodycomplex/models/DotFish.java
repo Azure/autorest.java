@@ -28,6 +28,9 @@ public class DotFish {
     @JsonProperty(value = "species")
     private String species;
 
+    /** Creates an instance of DotFish class. */
+    protected DotFish() {}
+
     /**
      * Get the species property: The species property.
      *
@@ -35,17 +38,6 @@ public class DotFish {
      */
     public String getSpecies() {
         return this.species;
-    }
-
-    /**
-     * Set the species property: The species property.
-     *
-     * @param species the species value to set.
-     * @return the DotFish object itself.
-     */
-    public DotFish setSpecies(String species) {
-        this.species = species;
-        return this;
     }
 
     /**

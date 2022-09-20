@@ -35,6 +35,9 @@ public final class DotFishMarket {
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
+    /** Creates an instance of DotFishMarket class. */
+    private DotFishMarket() {}
+
     /**
      * Get the sampleSalmon property: The sampleSalmon property.
      *
@@ -42,17 +45,6 @@ public final class DotFishMarket {
      */
     public DotSalmon getSampleSalmon() {
         return this.sampleSalmon;
-    }
-
-    /**
-     * Set the sampleSalmon property: The sampleSalmon property.
-     *
-     * @param sampleSalmon the sampleSalmon value to set.
-     * @return the DotFishMarket object itself.
-     */
-    public DotFishMarket setSampleSalmon(DotSalmon sampleSalmon) {
-        this.sampleSalmon = sampleSalmon;
-        return this;
     }
 
     /**
@@ -65,17 +57,6 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the salmons property: The salmons property.
-     *
-     * @param salmons the salmons value to set.
-     * @return the DotFishMarket object itself.
-     */
-    public DotFishMarket setSalmons(List<DotSalmon> salmons) {
-        this.salmons = salmons;
-        return this;
-    }
-
-    /**
      * Get the sampleFish property: The sampleFish property.
      *
      * @return the sampleFish value.
@@ -85,34 +66,12 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleFish property: The sampleFish property.
-     *
-     * @param sampleFish the sampleFish value to set.
-     * @return the DotFishMarket object itself.
-     */
-    public DotFishMarket setSampleFish(DotFish sampleFish) {
-        this.sampleFish = sampleFish;
-        return this;
-    }
-
-    /**
      * Get the fishes property: The fishes property.
      *
      * @return the fishes value.
      */
     public List<DotFish> getFishes() {
         return this.fishes;
-    }
-
-    /**
-     * Set the fishes property: The fishes property.
-     *
-     * @param fishes the fishes value to set.
-     * @return the DotFishMarket object itself.
-     */
-    public DotFishMarket setFishes(List<DotFish> fishes) {
-        this.fishes = fishes;
-        return this;
     }
 
     /**
