@@ -38,10 +38,13 @@ interface LongRunningOp {
 
   get is ResourceRead<Resource>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   delete is LongRunningResourceDelete<Resource>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   importx is ResourceAction<
     Resource,
     ExportedResource,
