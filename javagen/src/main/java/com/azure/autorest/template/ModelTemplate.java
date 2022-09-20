@@ -91,7 +91,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
             comment -> comment.description(model.getDescription()));
 
-        boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
+        final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
+        final boolean immutableOutputModel = settings.isOutputModelImmutable()
+                && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
 
         // Handle adding annotations if the model is polymorphic.
         handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
@@ -130,7 +132,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addProperties(model, classBlock, settings);
 
-            addModelConstructor(model, settings, classBlock);
+            JavaVisibility modelConstructorVisibility =
+                    immutableOutputModel
+                            ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
+                            : JavaVisibility.Public;
+            addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
                 // For now, don't add a getter if the property is a polymorphic discriminator and stream-style
@@ -138,6 +144,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
                     continue;
                 }
+
+                final boolean propertyIsReadOnly = immutableOutputModel || property.getIsReadOnly();
 
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
@@ -150,14 +158,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
-                if (!property.getIsReadOnly()) {
+                if (!propertyIsReadOnly) {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
 
-                if (ClientModelUtil.hasSetter(property, settings)) {
+                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
@@ -183,21 +191,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
-                propertyReferences);
-            for (ClientModelPropertyAccess parentProperty : settersToOverride) {
-                classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%s %s(%s %s)",
-                        model.getName(),
-                        parentProperty.getSetterName(),
-                        parentProperty.getClientType(),
-                        parentProperty.getName()),
-                    methodBlock -> {
-                        methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
-                            parentProperty.getName()));
-                        methodBlock.methodReturn("this");
-                    });
+            if (!immutableOutputModel) {
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+                        propertyReferences);
+                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                                    model.getName(),
+                                    parentProperty.getSetterName(),
+                                    parentProperty.getClientType(),
+                                    parentProperty.getName()),
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
+                                        parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
+                }
             }
 
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
@@ -207,6 +217,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyClientType = property.getClientType();
+                    final boolean propertyIsReadOnly = immutableOutputModel || property.getIsReadOnly();
 
                     if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
                         // since the property to flattened client model is optional, the flattened property should be optional
@@ -226,7 +237,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     });
 
                     // setter
-                    if (!property.getIsReadOnly()) {
+                    if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
                         classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
@@ -584,10 +595,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Adds the model constructor to the Java class file.
      *
      * @param model The model.
+     * @param constructorVisibility The visibility of constructor.
      * @param settings AutoRest settings.
      * @param classBlock The Java class file.
      */
-    private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock) {
+    private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings, JavaClass classBlock) {
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
         if (model.isStronglyTypedHeader()) {
@@ -663,11 +675,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
         }
 
-        // If there are no constructor properties or constant properties don't add the constructor.
-        if (constructorProperties.length() == 0 && constantProperties.isEmpty()) {
-            return;
-        }
-
         // Add the Javadocs for the constructor.
         classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
 
@@ -677,8 +684,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonCreator");
         }
 
+        // If immutableOutputModel, make the constructor private, so that adding required properties, or changing model to input-output will not have breaking changes.
+        // For user in test, they will need to mock the class.
+
         // If constructorProperties empty this just becomes an empty constructor.
-        classBlock.publicConstructor(model.getName() + "(" + constructorProperties + ")", constructor -> {
+        classBlock.constructor(constructorVisibility, model.getName() + "(" + constructorProperties + ")", constructor -> {
             // If there are super class properties, call super() first.
             if (superProperties.length() > 0) {
                 constructor.line("super(" + superProperties + ");");

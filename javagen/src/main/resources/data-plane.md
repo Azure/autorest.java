@@ -19,4 +19,6 @@ polling: {}
 models-subpackage: implementation.models
 client-logger: true
 required-fields-as-ctor-args: true
+generic-response-type: true
+output-model-immutable: true
 ```
