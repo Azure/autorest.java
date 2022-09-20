@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.longrunning.models.OperationStatusResourceResource;
 import com.cadl.longrunning.models.Resource;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
@@ -31,6 +32,36 @@ public final class LongRunningClient {
     @Generated
     LongRunningClient(LongRunningAsyncClient client) {
         this.client = client;
+    }
+
+    /**
+     * Get a OperationStatusResource.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     operationId: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param operationId The operationId parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return a OperationStatusResource along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> statusMonitorWithResponse(
+            String name, String operationId, RequestOptions requestOptions) {
+        return this.client.statusMonitorWithResponse(name, operationId, requestOptions).block();
     }
 
     /**
@@ -171,6 +202,29 @@ public final class LongRunningClient {
     public SyncPoller<BinaryData, BinaryData> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.client.beginImportx(name, exportedResource, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Get a OperationStatusResource.
+     *
+     * @param name The name parameter.
+     * @param operationId The operationId parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a OperationStatusResource.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public OperationStatusResourceResource statusMonitor(String name, String operationId) {
+        // Generated convenience method for statusMonitorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return statusMonitorWithResponse(name, operationId, requestOptions)
+                .getValue()
+                .toObject(OperationStatusResourceResource.class);
     }
 
     /**

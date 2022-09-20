@@ -31,17 +31,35 @@ model ExportedResource {
 
 @route("/long-running")
 interface LongRunningOp {
+  statusMonitor is CustomCore.PollingOperation<Resource>;
+
+  @pollingOperation(LongRunningOp.statusMonitor)
   createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
 
   get is ResourceRead<Resource>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   delete is LongRunningResourceDelete<Resource>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
 
+  @pollingOperation(LongRunningOp.statusMonitor)
   importx is ResourceAction<
     Resource,
     ExportedResource,
     Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
   >;
+}
+
+namespace CustomCore {
+  @parentResource(T)
+  @resource("operations")
+  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
+    @key
+    operationId: string;
+  }
+
+  @route("operations")
+  op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 }
