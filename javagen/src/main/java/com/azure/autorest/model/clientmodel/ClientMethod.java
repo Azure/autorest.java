@@ -12,11 +12,12 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
@@ -348,6 +349,7 @@ public class ClientMethod {
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
+        imports.add(Response.class.getName());
         imports.add(SimpleResponse.class.getName());
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
@@ -380,12 +382,11 @@ public class ClientMethod {
                 imports.add("java.util.Iterator");
             }
 
-            if (settings.getAddContextParameter()
-                    && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                    && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
-                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+            // Add FluxUtil as an import if this is an asynchronous method and the last parameter isn't the Context
+            // parameter.
+            if (proxyMethod != null && !proxyMethod.isSync()
+                && (CoreUtils.isNullOrEmpty(parameters)
+                    || parameters.get(parameters.size() - 1) != ClientMethodParameter.CONTEXT_PARAMETER)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
 

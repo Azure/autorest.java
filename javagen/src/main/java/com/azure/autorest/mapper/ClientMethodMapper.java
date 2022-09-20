@@ -841,6 +841,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (isProtocolMethod || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
+
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                 syncReturnType);
         } else {
@@ -1013,6 +1014,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
+            // Don't generate PagedFlux or PagedIterable methods without Context.
+            if ((methodType == ClientMethodType.PagingSync || methodType == ClientMethodType.PagingAsync)
+                && !hasContextParameter) {
+                return NOT_GENERATE;
+            }
+
             return VISIBLE;
         }
     }

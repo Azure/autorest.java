@@ -766,7 +766,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.indent(() -> {
                 if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
-                    function.text(".flatMapMany(StreamResponse::getValue);");
+                    // Previously this used StreamResponse::getValue, but it isn't guaranteed that the return is
+                    // StreamResponse, instead use Response::getValue as StreamResponse is just a fancier
+                    // Response<Flux<ByteBuffer>>.
+                    function.text(".flatMapMany(Response::getValue);");
                 } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
                     !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
                     function.text(".flatMap(res -> Mono.justOrEmpty(res.getValue()));");
