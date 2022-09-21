@@ -21,6 +21,7 @@ import {
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
+  isUnknownType,
   Model,
   ModelProperty,
   NumericLiteral,
@@ -599,6 +600,13 @@ export class CodeModelBuilder {
 
   private processSchemaImpl(type: Type, nameHint: string): Schema {
     switch (type.kind) {
+      case "Intrinsic":
+        if (isUnknownType(type)) {
+          return this.processAnySchema(type, nameHint);
+        } else {
+          throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+        }
+
       case "String":
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
@@ -678,6 +686,14 @@ export class CodeModelBuilder {
         }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
+  }
+
+  private processAnySchema(type: Model, name: string): AnySchema {
+    return this.codeModel.schemas.add(
+      new AnySchema(this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
   }
 
   private processStringSchema(type: Model, name: string): StringSchema {
