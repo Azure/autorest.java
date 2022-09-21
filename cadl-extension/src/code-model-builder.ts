@@ -680,7 +680,7 @@ export class CodeModelBuilder {
         } else if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
         } else if (isRecordModelType(this.program, type)) {
-          return this.processMapSchema(type, nameHint);
+          return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
@@ -746,7 +746,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
+  private processDictionarySchema(type: RecordModelType, name: string): DictionarySchema {
     const dictSchema = new DictionarySchema<any>(name, this.getDoc(type), null, {
       summary: this.getSummary(type),
     });
