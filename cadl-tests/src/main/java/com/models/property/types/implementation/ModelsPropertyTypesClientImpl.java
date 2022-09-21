@@ -194,6 +194,18 @@ public final class ModelsPropertyTypesClientImpl {
         return this.collectionsModels;
     }
 
+    /** The DictionaryStringsImpl object to access its operations. */
+    private final DictionaryStringsImpl dictionaryStrings;
+
+    /**
+     * Gets the DictionaryStringsImpl object to access its operations.
+     *
+     * @return the DictionaryStringsImpl object.
+     */
+    public DictionaryStringsImpl getDictionaryStrings() {
+        return this.dictionaryStrings;
+    }
+
     /** Initializes an instance of ModelsPropertyTypesClient client. */
     public ModelsPropertyTypesClientImpl() {
         this(
@@ -234,5 +246,6 @@ public final class ModelsPropertyTypesClientImpl {
         this.collectionsStrings = new CollectionsStringsImpl(this);
         this.collectionsInts = new CollectionsIntsImpl(this);
         this.collectionsModels = new CollectionsModelsImpl(this);
+        this.dictionaryStrings = new DictionaryStringsImpl(this);
     }
 }

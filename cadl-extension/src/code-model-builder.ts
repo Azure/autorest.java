@@ -16,11 +16,13 @@ import {
   getSummary,
   getVisibility,
   ignoreDiagnostics,
+  IntrinsicType,
   isArrayModelType,
   isIntrinsic,
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
+  isUnknownType,
   Model,
   ModelProperty,
   NumericLiteral,
@@ -599,6 +601,13 @@ export class CodeModelBuilder {
 
   private processSchemaImpl(type: Type, nameHint: string): Schema {
     switch (type.kind) {
+      case "Intrinsic":
+        if (isUnknownType(type)) {
+          return this.processAnySchema(type, nameHint);
+        } else {
+          throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+        }
+
       case "String":
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
@@ -672,12 +681,20 @@ export class CodeModelBuilder {
         } else if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
         } else if (isRecordModelType(this.program, type)) {
-          return this.processMapSchema(type, nameHint);
+          return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
+  }
+
+  private processAnySchema(type: IntrinsicType, name: string): AnySchema {
+    return this.codeModel.schemas.add(
+      new AnySchema(this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
   }
 
   private processStringSchema(type: Model, name: string): StringSchema {
@@ -730,12 +747,10 @@ export class CodeModelBuilder {
     );
   }
 
-  private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
-    const dictSchema = this.codeModel.schemas.add(
-      new DictionarySchema<any>(name, this.getDoc(type), null, {
-        summary: this.getSummary(type),
-      }),
-    );
+  private processDictionarySchema(type: RecordModelType, name: string): DictionarySchema {
+    const dictSchema = new DictionarySchema<any>(name, this.getDoc(type), null, {
+      summary: this.getSummary(type),
+    });
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
