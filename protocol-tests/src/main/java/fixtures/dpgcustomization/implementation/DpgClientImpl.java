@@ -522,7 +522,7 @@ public final class DpgClientImpl {
                 () -> this.lroWithResponseAsync(mode, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
-                        this.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -587,7 +587,7 @@ public final class DpgClientImpl {
                 () -> this.lroWithResponseAsync(mode, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
-                        this.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()

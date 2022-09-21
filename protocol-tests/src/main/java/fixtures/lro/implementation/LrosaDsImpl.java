@@ -652,7 +652,7 @@ public final class LrosaDsImpl {
                 () -> this.putNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -848,7 +848,7 @@ public final class LrosaDsImpl {
                 () -> this.putNonRetry201Creating400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1048,7 +1048,7 @@ public final class LrosaDsImpl {
                 () -> this.putNonRetry201Creating400InvalidJsonWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1246,7 +1246,7 @@ public final class LrosaDsImpl {
                 () -> this.putAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1351,7 +1351,7 @@ public final class LrosaDsImpl {
                 () -> this.deleteNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1409,7 +1409,7 @@ public final class LrosaDsImpl {
                 () -> this.delete202NonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1469,7 +1469,7 @@ public final class LrosaDsImpl {
                 () -> this.deleteAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1584,7 +1584,7 @@ public final class LrosaDsImpl {
                 () -> this.postNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1726,7 +1726,7 @@ public final class LrosaDsImpl {
                 () -> this.post202NonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1870,7 +1870,7 @@ public final class LrosaDsImpl {
                 () -> this.postAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2053,7 +2053,7 @@ public final class LrosaDsImpl {
                 () -> this.putError201NoProvisioningStatePayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2255,7 +2255,7 @@ public final class LrosaDsImpl {
                 () -> this.putAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2461,7 +2461,7 @@ public final class LrosaDsImpl {
                 () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2567,7 +2567,7 @@ public final class LrosaDsImpl {
                 () -> this.delete204SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2630,7 +2630,7 @@ public final class LrosaDsImpl {
                 () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2745,7 +2745,7 @@ public final class LrosaDsImpl {
                 () -> this.post202NoLocationWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2893,7 +2893,7 @@ public final class LrosaDsImpl {
                 () -> this.postAsyncRelativeRetryNoPayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3073,7 +3073,7 @@ public final class LrosaDsImpl {
                 () -> this.put200InvalidJsonWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3275,7 +3275,7 @@ public final class LrosaDsImpl {
                 () -> this.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3480,7 +3480,7 @@ public final class LrosaDsImpl {
                 () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3589,7 +3589,7 @@ public final class LrosaDsImpl {
                 () -> this.delete202RetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3653,7 +3653,7 @@ public final class LrosaDsImpl {
                 () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3719,7 +3719,7 @@ public final class LrosaDsImpl {
                 () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3837,7 +3837,7 @@ public final class LrosaDsImpl {
                 () -> this.post202RetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3985,7 +3985,7 @@ public final class LrosaDsImpl {
                 () -> this.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -4136,7 +4136,7 @@ public final class LrosaDsImpl {
                 () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getHost(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
