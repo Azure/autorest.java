@@ -62,12 +62,12 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.interfaceName(interfaceName);
         String className = interfaceName;
         if (settings.isFluent()) {
-            if (settings.shouldGenerateClientAsImpl()) {
+            if (settings.isGenerateClientAsImpl()) {
                 className += "ClientImpl";
             } else {
                 className += "Client";
             }
-        } else if (settings.shouldGenerateClientAsImpl()) {
+        } else if (settings.isGenerateClientAsImpl()) {
             className += "Impl";
         }
         builder.className(className);
@@ -95,25 +95,25 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
-        if (settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (settings.isFluent() && settings.isGenerateClientInterfaces()) {
             interfaceName += "Client";
             builder.interfaceName(interfaceName);
         }
 
-        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
+        builder.variableType(settings.isGenerateClientInterfaces() ? interfaceName : className);
 
         List<String> implementedInterfaces = new ArrayList<>();
-        if (settings.shouldGenerateClientInterfaces()) {
+        if (settings.isGenerateClientInterfaces()) {
             implementedInterfaces.add(interfaceName);
         }
         builder.implementedInterfaces(implementedInterfaces);
 
         String packageName;
         if (settings.isFluent()) {
-            packageName = settings.getPackage(settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : settings.getFluentSubpackage());
+            packageName = settings.getPackage(settings.isGenerateClientAsImpl() ? settings.getImplementationSubpackage() : settings.getFluentSubpackage());
         } else {
             boolean isCustomType = settings.isCustomType(className);
-            packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+            packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.isGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
         }
         builder.packageName(packageName);
 

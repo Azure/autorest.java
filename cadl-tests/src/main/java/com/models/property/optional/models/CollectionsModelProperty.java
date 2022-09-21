@@ -17,6 +17,9 @@ public final class CollectionsModelProperty {
     @JsonProperty(value = "property")
     private List<StringProperty> property;
 
+    /** Creates an instance of CollectionsModelProperty class. */
+    public CollectionsModelProperty() {}
+
     /**
      * Get the property property: Property.
      *

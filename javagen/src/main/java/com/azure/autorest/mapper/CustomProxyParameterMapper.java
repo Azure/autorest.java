@@ -38,8 +38,8 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         ProxyMethodParameter.Builder builder = new ProxyMethodParameter.Builder()
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
                 .name(parameter.getLanguage().getJava().getName())
-                .isRequired(parameter.isRequired())
-                .isNullable(parameter.isNullable());
+                .required(parameter.isRequired())
+                .nullable(parameter.isNullable());
 
         String headerCollectionPrefix = null;
         if (parameter.getExtensions() != null && parameter.getExtensions().getXmsHeaderCollectionPrefix() != null) {
@@ -71,7 +71,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
         builder.fromClient(parameterIsServiceClientProperty);
 
-        if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
+        if (wireType instanceof ListType && settings.isGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = CodeNamer
                     .toPascalCase(parameterJvWireType.getSerialization().getXml().getName() +
@@ -109,7 +109,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         }
 
         if (parameter.getSchema() instanceof ConstantSchema){
-            builder.isConstant(true);
+            builder.constant(true);
             Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
             builder.defaultValue(objValue == null ? null : String.valueOf(objValue));
         }

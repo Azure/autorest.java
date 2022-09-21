@@ -56,19 +56,19 @@ public class ModelProperty {
     }
 
     public boolean isConstant() {
-        return property.getIsConstant();
+        return property.isConstant();
     }
 
     public boolean isReadOnly() {
-        return property.getIsReadOnly();
+        return property.isReadOnly();
     }
 
     public boolean isReadOnlyForCreate() {
-        return property.getIsReadOnlyForCreate();
+        return property.isReadOnlyForCreate();
     }
 
     public boolean isReadOnlyForUpdate() {
-        return property.getIsReadOnlyForUpdate();
+        return property.isReadOnlyForUpdate();
     }
 
     public String getSerializedName() {

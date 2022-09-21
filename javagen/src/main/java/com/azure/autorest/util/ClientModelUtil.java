@@ -168,7 +168,7 @@ public class ClientModelUtil {
     public static String getClientImplementClassName(String serviceClientInterfaceName) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientClassName = serviceClientInterfaceName;
-        if (settings.shouldGenerateClientAsImpl()) {
+        if (settings.isGenerateClientAsImpl()) {
             serviceClientClassName += "Impl";
         }
         return serviceClientClassName;
@@ -205,8 +205,8 @@ public class ClientModelUtil {
         JavaSettings settings = JavaSettings.getInstance();
         StringBuilder builderSuffix = new StringBuilder();
         if (!settings.isFluent()
-                && settings.shouldGenerateClientAsImpl()
-                && !settings.shouldGenerateSyncAsyncClients()
+                && settings.isGenerateClientAsImpl()
+                && !settings.isGenerateSyncAsyncClients()
                 && !settings.isDataPlaneClient()) {
             builderSuffix.append("Impl");
         }
@@ -217,7 +217,7 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if ((settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) && !settings.isFluent()) {
+        if ((settings.isGenerateSyncAsyncClients() || settings.isDataPlaneClient()) && !settings.isFluent()) {
             builderPackage = settings.getPackage();
         } else if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -227,9 +227,9 @@ public class ClientModelUtil {
 
     public static String getServiceClientPackageName(String serviceClientClassName) {
         JavaSettings settings = JavaSettings.getInstance();
-        String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
+        String subpackage = settings.isGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
         if (settings.isFluent()) {
-            if (settings.shouldGenerateSyncAsyncClients() || settings.shouldGenerateClientInterfaces()) {
+            if (settings.isGenerateSyncAsyncClients() || settings.isGenerateClientInterfaces()) {
                 subpackage = settings.getImplementationSubpackage();
             } else {
                 subpackage = settings.getFluentSubpackage();
@@ -394,7 +394,7 @@ public class ClientModelUtil {
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             // Add the properties in inverse order as they be reverse at the end.
             List<ClientModelProperty> ctorArgs = parentModel.getProperties().stream()
-                .filter(property -> property.isRequired() && !property.getIsConstant() && !property.getIsReadOnly())
+                .filter(property -> property.isRequired() && !property.isConstant() && !property.isReadOnly())
                 .collect(Collectors.toList());
 
             for (int i = ctorArgs.size() - 1; i >= 0; i--) {
@@ -434,7 +434,7 @@ public class ClientModelUtil {
     }
 
     private static boolean isReadOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
-        return property.getIsReadOnly()
+        return property.isReadOnly()
                 || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
     }
 }

@@ -145,7 +145,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     continue;
                 }
 
-                final boolean propertyIsReadOnly = immutableOutputModel || property.getIsReadOnly();
+                final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
@@ -217,7 +217,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyClientType = property.getClientType();
-                    final boolean propertyIsReadOnly = immutableOutputModel || property.getIsReadOnly();
+                    final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                     if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
                         // since the property to flattened client model is optional, the flattened property should be optional
@@ -252,7 +252,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
 
-            if ((settings.shouldClientSideValidations() && settings.shouldClientLogger()) || model.isStronglyTypedHeader()) {
+            if ((settings.isClientSideValidations() && settings.isUseClientLogger()) || model.isStronglyTypedHeader()) {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
 
@@ -267,7 +267,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         //
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+        if (settings.isClientSideValidations() && settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
@@ -353,7 +353,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
         boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
         // Model isn't polymorphic, no work to do here.
-        if (!model.getIsPolymorphic()) {
+        if (!model.isPolymorphic()) {
             return;
         }
 
@@ -410,7 +410,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings Autorest generation settings.
      */
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
-        if (settings.shouldGenerateXmlSerialization()) {
+        if (settings.isGenerateXmlSerialization()) {
             if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
                     model.getXmlName(), model.getXmlNamespace()));
@@ -473,7 +473,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()) {
                 // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
                 // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
                 // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
@@ -509,8 +509,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             IType propertyType = property.getWireType();
 
             String fieldSignature;
-            if (settings.shouldGenerateXmlSerialization()) {
-                if (property.getIsXmlWrapper()) {
+            if (settings.isGenerateXmlSerialization()) {
+                if (property.isXmlWrapper()) {
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
@@ -568,21 +568,21 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
             classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
+        } else if (settings.isGenerateXmlSerialization() && property.isXmlAttribute()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+        } else if (settings.isGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
-        } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+        } else if (settings.isGenerateXmlSerialization() && property.isXmlText()) {
             classBlock.annotation("JacksonXmlText");
         } else if (property.isAdditionalProperties()) {
             classBlock.annotation("JsonIgnore");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
+        } else if (settings.isGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
             classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
         } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
             classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
         }
 
-        if (!settings.shouldGenerateXmlSerialization() &&
+        if (!settings.isGenerateXmlSerialization() &&
             !property.isAdditionalProperties()
             && property.getClientType() instanceof MapType
             && settings.isFluent()) {
@@ -614,12 +614,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         for (ClientModelProperty property : model.getProperties()) {
             // Property isn't required and won't be bucketed into either constant or required properties.
-            if (!property.isRequired() || property.getIsReadOnly()) {
+            if (!property.isRequired() || property.isReadOnly()) {
                 continue;
             }
 
             // Bucket into constant or required properties based on whether the property is constant.
-            if (property.getIsConstant()) {
+            if (property.isConstant()) {
                 constantProperties.add(property);
             } else {
                 requiredProperties.add(property);
@@ -768,7 +768,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()
+            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()
                 && (property.getWireType() instanceof IterableType)) {
                 methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
                     ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
@@ -817,7 +817,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 .elseBlock(elseBlock ->
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()) {
                 methodBlock.line("this.%s = new %s(%s);", property.getName(),
                     getPropertyXmlWrapperClassName(property), expression);
             } else {
@@ -951,7 +951,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
-        if (settings.shouldClientSideValidations()) {
+        if (settings.isClientSideValidations()) {
             boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
             // javadoc
@@ -970,10 +970,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
                 for (ClientModelProperty property : model.getProperties()) {
                     String validation = property.getClientType().validate(getGetterName(model, property) + "()");
-                    if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
+                    if (property.isRequired() && !property.isReadOnly() && !property.isConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
-                            if (settings.shouldClientLogger()) {
+                            if (settings.isUseClientLogger()) {
                                 ifBlock.line(String.format(
                                     "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%s));",
                                     errorMessage));

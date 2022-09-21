@@ -58,14 +58,14 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
     protected com.azure.autorest.model.clientmodel.ClientMethodParameter createSerializerAdapterParameter() {
         return  new com.azure.autorest.model.clientmodel.ClientMethodParameter.Builder()
                 .description("The serializer to serialize an object into a string")
-                .isFinal(false)
+                .finalParameter(false)
                 .wireType(com.azure.autorest.model.clientmodel.ClassType.AndroidJacksonSerder)
                 .name("jacksonSerder")
-                .isRequired(true)
-                .isConstant(false)
+                .required(true)
+                .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
                         ? java.util.Arrays.asList(ClassType.NonNull)
                         : new java.util.ArrayList<>())
                 .build();

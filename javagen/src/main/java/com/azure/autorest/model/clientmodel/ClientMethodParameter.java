@@ -20,11 +20,11 @@ public class ClientMethodParameter extends MethodParameter {
             .wireType(ClassType.Context)
             .name("context")
             .annotations(Collections.emptyList())
-            .isConstant(false)
+            .constant(false)
             .defaultValue(null)
             .fromClient(false)
-            .isFinal(false)
-            .isRequired(false)
+            .finalParameter(false)
+            .required(false)
             .build();
 
     public static final ClientMethodParameter HTTP_REQUEST_PARAMETER = new ClientMethodParameter.Builder()
@@ -32,11 +32,11 @@ public class ClientMethodParameter extends MethodParameter {
             .wireType(ClassType.HttpRequest)
             .name("httpRequest")
             .annotations(Collections.emptyList())
-            .isConstant(false)
+            .constant(false)
             .defaultValue(null)
             .fromClient(false)
-            .isFinal(false)
-            .isRequired(true)
+            .finalParameter(false)
+            .required(true)
             .build();
 
     /**
@@ -69,7 +69,7 @@ public class ClientMethodParameter extends MethodParameter {
         this.annotations = annotations;
     }
 
-    public final boolean getIsFinal() {
+    public final boolean isFinal() {
         return isFinal;
     }
 
@@ -86,11 +86,11 @@ public class ClientMethodParameter extends MethodParameter {
                 .fromClient(this.isFromClient())
                 .annotations(this.getAnnotations())
                 .defaultValue(this.getDefaultValue())
-                .isConstant(this.isConstant())
+                .constant(this.isConstant())
                 .description(this.getDescription())
                 .name(this.getName())
-                .isFinal(this.getIsFinal())
-                .isRequired(this.isRequired())
+                .finalParameter(this.isFinal())
+                .required(this.isRequired())
                 .location(this.getRequestParameterLocation())
                 .rawType(this.getRawType())
                 .wireType(this.getWireType());
@@ -102,7 +102,7 @@ public class ClientMethodParameter extends MethodParameter {
      */
     public final String getDeclaration() {
         return getAnnotations().stream().map(annotation -> "@" + annotation.getName()).collect(Collectors.joining(""))
-            + (getIsFinal() ? "final " : "") + String.format("%1$s %2$s", getClientType(), getName());
+            + (isFinal() ? "final " : "") + String.format("%1$s %2$s", getClientType(), getName());
     }
 
     /**
@@ -145,7 +145,7 @@ public class ClientMethodParameter extends MethodParameter {
          * @param isFinal whether this parameter is final
          * @return the Builder itself
          */
-        public Builder isFinal(boolean isFinal) {
+        public Builder finalParameter(boolean isFinal) {
             this.isFinal = isFinal;
             return this;
         }
@@ -185,7 +185,7 @@ public class ClientMethodParameter extends MethodParameter {
          * @param isRequired whether this parameter is required
          * @return the Builder itself
          */
-        public Builder isRequired(boolean isRequired) {
+        public Builder required(boolean isRequired) {
             this.isRequired = isRequired;
             return this;
         }
@@ -195,7 +195,7 @@ public class ClientMethodParameter extends MethodParameter {
          * @param isConstant whether this parameter has a constant value
          * @return the Builder itself
          */
-        public Builder isConstant(boolean isConstant) {
+        public Builder constant(boolean isConstant) {
             this.isConstant = isConstant;
             return this;
         }

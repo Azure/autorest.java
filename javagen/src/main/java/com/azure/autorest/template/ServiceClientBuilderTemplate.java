@@ -71,7 +71,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         ArrayList<ServiceClientProperty> commonProperties = addCommonClientProperties(settings, serviceClient.getSecurityInfo());
 
         String buildReturnType;
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (!settings.isFluent() && settings.isGenerateClientInterfaces()) {
             buildReturnType = serviceClient.getInterfaceName();
         } else {
             buildReturnType = serviceClient.getClassName();
@@ -97,7 +97,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
         StringBuilder builderTypes = new StringBuilder();
         builderTypes.append("{");
-        if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+        if (JavaSettings.getInstance().isGenerateSyncAsyncClients()) {
             List<AsyncSyncClient> clients = new ArrayList<>(syncClients);
             if (!settings.isFluentLite()) {
                 clients.addAll(asyncClients);
@@ -231,7 +231,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             String buildMethodName = this.primaryBuildMethodName(settings);
 
-            JavaVisibility visibility = settings.shouldGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
+            JavaVisibility visibility = settings.isGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
             // build method
             classBlock.javadocComment(comment ->
@@ -303,7 +303,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo());
             }
 
-            if (JavaSettings.getInstance().shouldGenerateSyncAsyncClients()) {
+            if (JavaSettings.getInstance().isGenerateSyncAsyncClients()) {
                 if (!settings.isFluentLite()) {
                     for (AsyncSyncClient asyncClient : asyncClients) {
                         final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
@@ -576,7 +576,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
      * @return The name of build method.
      */
     protected String primaryBuildMethodName(JavaSettings settings) {
-        return settings.shouldGenerateSyncAsyncClients()
+        return settings.isGenerateSyncAsyncClients()
                 ? "buildInnerClient"
                 : "buildClient";
     }

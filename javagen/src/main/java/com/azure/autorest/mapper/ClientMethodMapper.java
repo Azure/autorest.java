@@ -290,8 +290,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .wireType(ClassType.RequestOptions)
                         .name("requestOptions")
                         .location(RequestParameterLocation.NONE)
-                        .isConstant(false)
-                        .isRequired(true)
+                        .constant(false)
+                        .required(true)
                         .fromClient(false)
                         .annotations(Collections.emptyList())
                         .build();
@@ -357,7 +357,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
                         .onlyRequiredParameters(false)
                         .type(ClientMethodType.SimpleAsyncRestResponse)
-                        .isGroupedParameterRequired(false)
+                        .groupedParameterRequired(false)
                         .methodVisibility(simpleAsyncMethodVisibility)
                         .build());
 
@@ -417,7 +417,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .name(proxyMethod.getSimpleAsyncMethodName())
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.LongRunningAsync)
-                                .isGroupedParameterRequired(false)
+                                .groupedParameterRequired(false)
                                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, false, isProtocolMethod))
                                 .build());
 
@@ -441,7 +441,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                 .name(proxyMethod.getName())
                                 .onlyRequiredParameters(false)
                                 .type(ClientMethodType.LongRunningSync)
-                                .isGroupedParameterRequired(false)
+                                .groupedParameterRequired(false)
                                 .build());
 
                             if (generateClientMethodWithOnlyRequiredParameters) {
@@ -641,7 +641,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .onlyRequiredParameters(false)
             .name(pageMethodName)
             .type(pageMethodType)
-            .isGroupedParameterRequired(false)
+            .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(true, false));
 
         if (settings.getRequiredParameterClientMethods() || !settings.isContextClientMethodParameter()
@@ -668,7 +668,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         builder.returnValue(nextPageReturnValue)
             .name(pageMethodName)
             .type(pageMethodType)
-            .isGroupedParameterRequired(false)
+            .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(false, false));
 
         if (!isSync || !settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
@@ -746,7 +746,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .onlyRequiredParameters(false)
             .name(methodName)
             .type(methodType)
-            .isGroupedParameterRequired(false)
+            .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(true, false));
 
         // Always generate an overload of WithResponse with non-required parameters without Context.
@@ -765,7 +765,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .returnValue(returnValue)
             .name(methodName)
             .type(methodType)
-            .isGroupedParameterRequired(false)
+            .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(false, false));
 
         // Generate a non-WithResponse overload with non-required parameters only if one of fluent, include Context,
@@ -802,7 +802,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .name(asyncMethodName)
                 .onlyRequiredParameters(false)
                 .type(ClientMethodType.LongRunningBeginAsync)
-                .isGroupedParameterRequired(false)
+                .groupedParameterRequired(false)
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, false, isProtocolMethod))
                 .build());
 
@@ -819,7 +819,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .name(syncMethodName)
                 .onlyRequiredParameters(false)
                 .type(ClientMethodType.LongRunningBeginSync)
-                .isGroupedParameterRequired(false)
+                .groupedParameterRequired(false)
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, false, isProtocolMethod))
                 .build());
 
@@ -1034,7 +1034,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .name(proxyMethodName)
             .onlyRequiredParameters(false)
             .type(clientMethodType)
-            .isGroupedParameterRequired(false)
+            .groupedParameterRequired(false)
             .methodPageDetails(details)
             .build());
         // reset the parameters to original params

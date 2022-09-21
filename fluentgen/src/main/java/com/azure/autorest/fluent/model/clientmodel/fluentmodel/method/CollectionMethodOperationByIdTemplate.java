@@ -57,11 +57,11 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                 .description("the resource ID.")
                 .wireType(ClassType.String)
                 .annotations(new ArrayList<>())
-                .isConstant(false)
+                .constant(false)
                 .defaultValue(null)
                 .fromClient(false)
-                .isFinal(false)
-                .isRequired(true)
+                .finalParameter(false)
+                .required(true)
                 .build());
         if (includeContextParameter) {
             // optional parameters

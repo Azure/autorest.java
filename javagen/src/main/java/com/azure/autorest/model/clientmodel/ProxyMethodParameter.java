@@ -95,7 +95,7 @@ public class ProxyMethodParameter extends MethodParameter {
         return alreadyEncoded;
     }
 
-    public final boolean getIsNullable() {
+    public final boolean isNullable() {
         return isNullable;
     }
 
@@ -190,10 +190,10 @@ public class ProxyMethodParameter extends MethodParameter {
             .explode(this.getExplode())
             .fromClient(this.isFromClient())
             .headerCollectionPrefix(this.getHeaderCollectionPrefix())
-            .isConstant(this.isConstant())
-            .isNullable(this.getIsNullable())
+            .constant(this.isConstant())
+            .nullable(this.isNullable())
             .name(this.getName())
-            .isRequired(this.isRequired())
+            .required(this.isRequired())
             .origin(this.getOrigin())
             .parameterReference(this.getParameterReference())
             .rawType(this.getRawType())
@@ -318,7 +318,7 @@ public class ProxyMethodParameter extends MethodParameter {
          * @param isConstant whether or not this parameter is a constant value
          * @return the Builder itself
          */
-        public Builder isConstant(boolean isConstant) {
+        public Builder constant(boolean isConstant) {
             this.isConstant = isConstant;
             return this;
         }
@@ -329,7 +329,7 @@ public class ProxyMethodParameter extends MethodParameter {
          * @param isRequired whether or not this parameter is required
          * @return the Builder itself
          */
-        public Builder isRequired(boolean isRequired) {
+        public Builder required(boolean isRequired) {
             this.isRequired = isRequired;
             return this;
         }
@@ -340,7 +340,7 @@ public class ProxyMethodParameter extends MethodParameter {
          * @param isNullable whether or not this parameter is nullable
          * @return the Builder itself
          */
-        public Builder isNullable(boolean isNullable) {
+        public Builder nullable(boolean isNullable) {
             this.isNullable = isNullable;
             return this;
         }
