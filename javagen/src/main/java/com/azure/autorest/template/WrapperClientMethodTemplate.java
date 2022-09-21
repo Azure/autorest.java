@@ -37,7 +37,9 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
     public void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        if (clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage) return;
+        if (clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage || clientMethod.getType() == ClientMethodType.PagingSyncSinglePage) {
+            return;
+        }
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
         if (settings.isDataPlaneClient()) {

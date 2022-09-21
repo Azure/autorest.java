@@ -69,7 +69,7 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-te
 call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true
 
 rem Azure
-call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1 --generate-sync-async-clients --context-client-method-parameter
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-paging.json --namespace=fixtures.custombaseuri.paging --payload-flattening-threshold=1
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-special-properties.json --namespace=fixtures.azurespecials --payload-flattening-threshold=1 --context-client-method-parameter
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1
