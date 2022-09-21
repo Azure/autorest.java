@@ -44,7 +44,7 @@ public class NamingConflictResolver {
             }
 
             methodGroupNamesLowerCase.add(newMethodGroupName.toLowerCase(Locale.ROOT));
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
                 methodGroupNamesLowerCase.add((newMethodGroupName + "Client").toLowerCase(Locale.ROOT));
             }
         });

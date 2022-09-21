@@ -96,7 +96,7 @@ public class ModelExampleUtil {
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
-                if (model.getIsPolymorphic()) {
+                if (model.isPolymorphic()) {
                     // polymorphic, need to get the correct subclass from discriminator
                     String serializedName = model.getPolymorphicDiscriminator();
                     List<String> jsonPropertyNames = Collections.singletonList(serializedName);

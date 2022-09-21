@@ -77,9 +77,9 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
                 .requestParameterLocation(RequestParameterLocation.NONE)
                 .requestParameterName("callback")
                 .alreadyEncoded(true)
-                .isConstant(false)
-                .isRequired(false)
-                .isNullable(false)
+                .constant(false)
+                .required(false)
+                .nullable(false)
                 .fromClient(false)
                 .parameterReference("callback")
                 .build();

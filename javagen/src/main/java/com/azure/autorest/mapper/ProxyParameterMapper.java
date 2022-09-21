@@ -40,8 +40,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         Builder builder = createProxyMethodParameterBuilder()
                 .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
                 .name(name)
-                .isRequired(parameter.isRequired())
-                .isNullable(parameter.isNullable())
+                .required(parameter.isRequired())
+                .nullable(parameter.isNullable())
                 .origin(ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()));
 
         String headerCollectionPrefix = null;
@@ -70,7 +70,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.clientType(clientType);
 
-        if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
+        if (wireType instanceof ListType && settings.isGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = CodeNamer
                 .toPascalCase(parameterJvWireType.getSerialization().getXml().getName() +
@@ -101,7 +101,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
 
         if (parameter.getSchema() instanceof ConstantSchema){
-            builder.isConstant(true);
+            builder.constant(true);
             Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
             builder.defaultValue(objValue == null ? null : String.valueOf(objValue));
         }

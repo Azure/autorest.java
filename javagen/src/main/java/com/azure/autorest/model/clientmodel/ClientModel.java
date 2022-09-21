@@ -144,7 +144,7 @@ public class ClientModel {
         return description;
     }
 
-    public final boolean getIsPolymorphic() {
+    public final boolean isPolymorphic() {
         return isPolymorphic;
     }
 
@@ -238,7 +238,7 @@ public class ClientModel {
 
         imports.addAll(getImports());
 
-        if (getIsPolymorphic()) {
+        if (isPolymorphic()) {
             imports.add("com.fasterxml.jackson.annotation.JsonTypeInfo");
             imports.add("com.fasterxml.jackson.annotation.JsonTypeName");
 
@@ -249,7 +249,7 @@ public class ClientModel {
         }
 
         for (ClientModelProperty property : getProperties()) {
-            property.addImportsTo(imports, settings.shouldGenerateXmlSerialization());
+            property.addImportsTo(imports, settings.isGenerateXmlSerialization());
         }
     }
 
@@ -329,7 +329,7 @@ public class ClientModel {
          * @param isPolymorphic whether this model has model types that derive from it
          * @return the Builder itself
          */
-        public Builder isPolymorphic(boolean isPolymorphic) {
+        public Builder polymorphic(boolean isPolymorphic) {
             this.isPolymorphic = isPolymorphic;
             return this;
         }

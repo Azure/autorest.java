@@ -60,16 +60,16 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         if (settings.isFluentPremium()) {
             serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
         }
-        if (settings.shouldGenerateClientInterfaces()) {
+        if (settings.isGenerateClientInterfaces()) {
             serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
 
         Set<String> imports = new HashSet<String>();
-        if (settings.shouldClientLogger()) {
+        if (settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
-        if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients()) {
+        if (settings.isFluent() && !settings.isGenerateSyncAsyncClients()) {
             addServiceClientAnnotationImport(imports);
             imports.add(String.format("%1$s.%2$s",
                 ClientModelUtil.getServiceClientBuilderPackageName(serviceClient),
@@ -92,7 +92,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
             String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
             comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClientTypeName));
         });
-        if (settings.isFluent() && !settings.shouldGenerateSyncAsyncClients() && !settings.clientBuilderDisabled()) {
+        if (settings.isFluent() && !settings.isGenerateSyncAsyncClients() && !settings.clientBuilderDisabled()) {
             javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
                 serviceClient.getInterfaceName() + ClientModelUtil.getBuilderSuffix()));
         }
@@ -287,7 +287,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
             this.writeAdditionalClassBlock(classBlock);
 
-            if (settings.shouldClientLogger()) {
+            if (settings.isUseClientLogger()) {
                 TemplateUtil.addClientLogger(classBlock, serviceClient.getClassName(), javaFile.getContents());
             }
         });

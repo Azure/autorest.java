@@ -58,7 +58,7 @@ public class ModelTestCaseUtil {
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
-        if (model.getIsPolymorphic()) {
+        if (model.isPolymorphic()) {
             addForProperty(jsonObject,
                     model.getPolymorphicDiscriminator(), model.getNeedsFlatten(),
                     model.getSerializedName());
@@ -161,7 +161,7 @@ public class ModelTestCaseUtil {
     private static void addForProperty(int depth, Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
         Object value = null;
-        if (property.getIsConstant()) {
+        if (property.isConstant()) {
             // TODO (weidxu): skip for now, as the property.getDefaultValue() is the code, not the raw data
             //value = property.getDefaultValue();
             return;

@@ -22,15 +22,15 @@ public interface ClientModelPropertyAccess {
 
     IType getWireType();
 
-    boolean getIsReadOnly();
+    boolean isReadOnly();
 
-    boolean getIsReadOnlyForCreate();
+    boolean isReadOnlyForCreate();
 
-    boolean getIsReadOnlyForUpdate();
+    boolean isReadOnlyForUpdate();
 
     boolean isRequired();
 
-    boolean getIsConstant();
+    boolean isConstant();
 
     void addImportsTo(Set<String> imports, boolean shouldGenerateXmlSerialization);
 }

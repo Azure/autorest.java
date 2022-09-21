@@ -66,7 +66,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      */
     protected static void addValidations(JavaBlock function, List<String> expressionsToCheck,
         Map<String, String> validateExpressions, JavaSettings settings) {
-        if (!settings.shouldClientSideValidations()) {
+        if (!settings.isClientSideValidations()) {
             return;
         }
 
@@ -156,7 +156,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         boolean addConstant, boolean ignoreParameterNeedConvert) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
-            if (parameter.getIsNullable()) {
+            if (parameter.isNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
             IType parameterClientType = parameter.getClientType();
@@ -322,7 +322,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
 
-            if (parameter.getIsNullable()) {
+            if (parameter.isNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
 
@@ -423,7 +423,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
 
-            if (settings.shouldGenerateXmlSerialization()
+            if (settings.isGenerateXmlSerialization()
                 && parameterClientType instanceof ListType
                 && (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                 function.line("%s %s = new %s(%s);", parameter.getWireType(), parameterWireName,
@@ -868,7 +868,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
-                        if (settings.shouldClientLogger()) {
+                        if (settings.isUseClientLogger()) {
                             elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");
@@ -939,7 +939,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
-                        if (settings.shouldClientLogger()) {
+                        if (settings.isUseClientLogger()) {
                             elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");

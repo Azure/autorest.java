@@ -460,7 +460,7 @@ public class JavaSettings {
 
     private boolean regeneratePom;
 
-    public final boolean shouldRegeneratePom() {
+    public final boolean isRegeneratePom() {
         return regeneratePom;
     }
 
@@ -517,7 +517,7 @@ public class JavaSettings {
 
     private boolean shouldGenerateXmlSerialization;
 
-    public final boolean shouldGenerateXmlSerialization() {
+    public final boolean isGenerateXmlSerialization() {
         return shouldGenerateXmlSerialization;
     }
 
@@ -526,13 +526,13 @@ public class JavaSettings {
      */
     private boolean nonNullAnnotations;
 
-    public final boolean shouldNonNullAnnotations() {
+    public final boolean isNonNullAnnotations() {
         return nonNullAnnotations;
     }
 
     private boolean clientSideValidations;
 
-    public final boolean shouldClientSideValidations() {
+    public final boolean isClientSideValidations() {
         return clientSideValidations;
     }
 
@@ -550,7 +550,7 @@ public class JavaSettings {
      */
     private boolean generateClientInterfaces;
 
-    public final boolean shouldGenerateClientInterfaces() {
+    public final boolean isGenerateClientInterfaces() {
         return generateClientInterfaces;
     }
 
@@ -559,7 +559,7 @@ public class JavaSettings {
      */
     private boolean generateClientAsImpl;
 
-    public final boolean shouldGenerateClientAsImpl() {
+    public final boolean isGenerateClientAsImpl() {
         return generateClientAsImpl;
     }
 
@@ -629,7 +629,7 @@ public class JavaSettings {
 
     private boolean generateSyncAsyncClients;
 
-    public final boolean shouldGenerateSyncAsyncClients() {
+    public final boolean isGenerateSyncAsyncClients() {
         return generateSyncAsyncClients;
     }
 
@@ -711,7 +711,7 @@ public class JavaSettings {
 
     private boolean clientLogger;
 
-    public final boolean shouldClientLogger() {
+    public final boolean isUseClientLogger() {
         return clientLogger;
     }
 
@@ -750,7 +750,7 @@ public class JavaSettings {
 
     private final boolean useIterable;
 
-    public boolean shouldUseIterable() {
+    public boolean isUseIterable() {
         return useIterable;
     }
 

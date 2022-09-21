@@ -274,7 +274,7 @@ public class ClientMethod {
         return requiredNullableParameterExpressions;
     }
 
-    public final boolean getIsGroupedParameterRequired() {
+    public final boolean isGroupedParameterRequired() {
         return isGroupedParameterRequired;
     }
 
@@ -298,7 +298,7 @@ public class ClientMethod {
         List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter -> {
             String parameterName = parameter.getParameterReference();
             IType parameterWireType = parameter.getWireType();
-            if (parameter.getIsNullable()) {
+            if (parameter.isNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
             IType parameterClientType = parameter.getClientType();
@@ -593,7 +593,7 @@ public class ClientMethod {
          * @param isGroupedParameterRequired the parameter that needs to transformed before pagination
          * @return the Builder itself
          */
-        public Builder isGroupedParameterRequired(boolean isGroupedParameterRequired) {
+        public Builder groupedParameterRequired(boolean isGroupedParameterRequired) {
             this.isGroupedParameterRequired = isGroupedParameterRequired;
             return this;
         }
