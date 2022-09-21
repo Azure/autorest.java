@@ -35,6 +35,9 @@ public final class DotFishMarket {
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
+    /** Creates an instance of DotFishMarket class. */
+    public DotFishMarket() {}
+
     /**
      * Get the sampleSalmon property: The sampleSalmon property.
      *

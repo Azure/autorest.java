@@ -42,6 +42,9 @@ public class Fish {
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
+    /** Creates an instance of Fish class. */
+    public Fish() {}
+
     /**
      * Get the species property: The species property.
      *

@@ -33,6 +33,9 @@ public class Salmon extends Fish {
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
+    /** Creates an instance of Salmon class. */
+    public Salmon() {}
+
     /**
      * Get the location property: The location property.
      *

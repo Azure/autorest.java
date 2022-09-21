@@ -4,7 +4,7 @@
 
 package com.cadl.optional.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /** The AllPropertiesOptional model. */
-@Fluent
+@Immutable
 public final class AllPropertiesOptional {
     /*
      * The boolean property.
@@ -123,6 +123,9 @@ public final class AllPropertiesOptional {
     @JsonProperty(value = "immutable")
     private ImmutableModel immutable;
 
+    /** Creates an instance of AllPropertiesOptional class. */
+    private AllPropertiesOptional() {}
+
     /**
      * Get the booleanProperty property: The boolean property.
      *
@@ -130,17 +133,6 @@ public final class AllPropertiesOptional {
      */
     public Boolean isBooleanProperty() {
         return this.booleanProperty;
-    }
-
-    /**
-     * Set the booleanProperty property: The boolean property.
-     *
-     * @param booleanProperty the booleanProperty value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBooleanProperty(Boolean booleanProperty) {
-        this.booleanProperty = booleanProperty;
-        return this;
     }
 
     /**
@@ -153,34 +145,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the booleanNullable property: The booleanNullable property.
-     *
-     * @param booleanNullable the booleanNullable value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBooleanNullable(Boolean booleanNullable) {
-        this.booleanNullable = booleanNullable;
-        return this;
-    }
-
-    /**
      * Get the booleanRequired property: The booleanRequired property.
      *
      * @return the booleanRequired value.
      */
     public Boolean isBooleanRequired() {
         return this.booleanRequired;
-    }
-
-    /**
-     * Set the booleanRequired property: The booleanRequired property.
-     *
-     * @param booleanRequired the booleanRequired value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBooleanRequired(Boolean booleanRequired) {
-        this.booleanRequired = booleanRequired;
-        return this;
     }
 
     /**
@@ -193,34 +163,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the booleanRequiredNullable property: The booleanRequiredNullable property.
-     *
-     * @param booleanRequiredNullable the booleanRequiredNullable value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBooleanRequiredNullable(Boolean booleanRequiredNullable) {
-        this.booleanRequiredNullable = booleanRequiredNullable;
-        return this;
-    }
-
-    /**
      * Get the string property: The string property.
      *
      * @return the string value.
      */
     public String getString() {
         return this.string;
-    }
-
-    /**
-     * Set the string property: The string property.
-     *
-     * @param string the string value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setString(String string) {
-        this.string = string;
-        return this;
     }
 
     /**
@@ -233,34 +181,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the stringNullable property: The stringNullable property.
-     *
-     * @param stringNullable the stringNullable value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setStringNullable(String stringNullable) {
-        this.stringNullable = stringNullable;
-        return this;
-    }
-
-    /**
      * Get the stringRequired property: The stringRequired property.
      *
      * @return the stringRequired value.
      */
     public String getStringRequired() {
         return this.stringRequired;
-    }
-
-    /**
-     * Set the stringRequired property: The stringRequired property.
-     *
-     * @param stringRequired the stringRequired value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setStringRequired(String stringRequired) {
-        this.stringRequired = stringRequired;
-        return this;
     }
 
     /**
@@ -273,34 +199,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the stringRequiredNullable property: The stringRequiredNullable property.
-     *
-     * @param stringRequiredNullable the stringRequiredNullable value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setStringRequiredNullable(String stringRequiredNullable) {
-        this.stringRequiredNullable = stringRequiredNullable;
-        return this;
-    }
-
-    /**
      * Get the bytes property: The bytes property.
      *
      * @return the bytes value.
      */
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
-    }
-
-    /**
-     * Set the bytes property: The bytes property.
-     *
-     * @param bytes the bytes value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBytes(byte[] bytes) {
-        this.bytes = CoreUtils.clone(bytes);
-        return this;
     }
 
     /**
@@ -313,34 +217,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the intProperty property: The int property.
-     *
-     * @param intProperty the intProperty value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setIntProperty(Integer intProperty) {
-        this.intProperty = intProperty;
-        return this;
-    }
-
-    /**
      * Get the longProperty property: The long property.
      *
      * @return the longProperty value.
      */
     public Long getLongProperty() {
         return this.longProperty;
-    }
-
-    /**
-     * Set the longProperty property: The long property.
-     *
-     * @param longProperty the longProperty value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setLongProperty(Long longProperty) {
-        this.longProperty = longProperty;
-        return this;
     }
 
     /**
@@ -353,34 +235,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the floatProperty property: The float property.
-     *
-     * @param floatProperty the floatProperty value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setFloatProperty(Double floatProperty) {
-        this.floatProperty = floatProperty;
-        return this;
-    }
-
-    /**
      * Get the doubleProperty property: The double property.
      *
      * @return the doubleProperty value.
      */
     public Double getDoubleProperty() {
         return this.doubleProperty;
-    }
-
-    /**
-     * Set the doubleProperty property: The double property.
-     *
-     * @param doubleProperty the doubleProperty value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setDoubleProperty(Double doubleProperty) {
-        this.doubleProperty = doubleProperty;
-        return this;
     }
 
     /**
@@ -393,34 +253,12 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the duration property: The duration property.
-     *
-     * @param duration the duration value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setDuration(Duration duration) {
-        this.duration = duration;
-        return this;
-    }
-
-    /**
      * Get the dateTime property: The dateTime property.
      *
      * @return the dateTime value.
      */
     public OffsetDateTime getDateTime() {
         return this.dateTime;
-    }
-
-    /**
-     * Set the dateTime property: The dateTime property.
-     *
-     * @param dateTime the dateTime value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setDateTime(OffsetDateTime dateTime) {
-        this.dateTime = dateTime;
-        return this;
     }
 
     /**
@@ -433,17 +271,6 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the stringList property: The stringList property.
-     *
-     * @param stringList the stringList value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setStringList(List<String> stringList) {
-        this.stringList = stringList;
-        return this;
-    }
-
-    /**
      * Get the bytesDict property: The bytesDict property.
      *
      * @return the bytesDict value.
@@ -453,33 +280,11 @@ public final class AllPropertiesOptional {
     }
 
     /**
-     * Set the bytesDict property: The bytesDict property.
-     *
-     * @param bytesDict the bytesDict value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setBytesDict(Map<String, byte[]> bytesDict) {
-        this.bytesDict = bytesDict;
-        return this;
-    }
-
-    /**
      * Get the immutable property: The immutable property.
      *
      * @return the immutable value.
      */
     public ImmutableModel getImmutable() {
         return this.immutable;
-    }
-
-    /**
-     * Set the immutable property: The immutable property.
-     *
-     * @param immutable the immutable value to set.
-     * @return the AllPropertiesOptional object itself.
-     */
-    public AllPropertiesOptional setImmutable(ImmutableModel immutable) {
-        this.immutable = immutable;
-        return this;
     }
 }

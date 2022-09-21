@@ -22,6 +22,9 @@ public final class CustomParameterGroup {
     @JsonProperty(value = "tenant", required = true)
     private String tenant;
 
+    /** Creates an instance of CustomParameterGroup class. */
+    public CustomParameterGroup() {}
+
     /**
      * Get the apiVersion property: Sets the api version to use.
      *

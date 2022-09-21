@@ -35,6 +35,9 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     @JsonProperty(value = "allOf")
     private List<String> allOf;
 
+    /** Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class. */
+    public MetricAlertSingleResourceMultipleMetricCriteria() {}
+
     /**
      * Get the odataType property: specifies the type of the alert criteria.
      *

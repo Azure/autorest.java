@@ -35,6 +35,9 @@ public final class PetAPInProperties {
     @JsonProperty(value = "additionalProperties")
     private Map<String, Float> additionalProperties;
 
+    /** Creates an instance of PetAPInProperties class. */
+    public PetAPInProperties() {}
+
     /**
      * Get the id property: The id property.
      *

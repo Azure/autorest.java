@@ -28,6 +28,9 @@ public final class Basic {
     @JsonProperty(value = "color")
     private CMYKColors color;
 
+    /** Creates an instance of Basic class. */
+    public Basic() {}
+
     /**
      * Get the id property: Basic Id.
      *

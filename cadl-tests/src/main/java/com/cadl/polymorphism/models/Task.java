@@ -18,4 +18,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("Task")
 @JsonSubTypes({@JsonSubTypes.Type(name = "EntityRecognition", value = EntityTask.class)})
 @Immutable
-public class Task {}
+public class Task {
+    /** Creates an instance of Task class. */
+    public Task() {}
+}

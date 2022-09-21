@@ -4,12 +4,12 @@
 
 package com.cadl.optional.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The OptionalOpsPutHeaders model. */
-@Fluent
+@Immutable
 public final class OptionalOpsPutHeaders {
     /*
      * The header-required property.
@@ -44,33 +44,11 @@ public final class OptionalOpsPutHeaders {
     }
 
     /**
-     * Set the headerRequired property: The header-required property.
-     *
-     * @param headerRequired the headerRequired value to set.
-     * @return the OptionalOpsPutHeaders object itself.
-     */
-    public OptionalOpsPutHeaders setHeaderRequired(String headerRequired) {
-        this.headerRequired = headerRequired;
-        return this;
-    }
-
-    /**
      * Get the headerOptional property: The header-optional property.
      *
      * @return the headerOptional value.
      */
     public String getHeaderOptional() {
         return this.headerOptional;
-    }
-
-    /**
-     * Set the headerOptional property: The header-optional property.
-     *
-     * @param headerOptional the headerOptional value to set.
-     * @return the OptionalOpsPutHeaders object itself.
-     */
-    public OptionalOpsPutHeaders setHeaderOptional(String headerOptional) {
-        this.headerOptional = headerOptional;
-        return this;
     }
 }

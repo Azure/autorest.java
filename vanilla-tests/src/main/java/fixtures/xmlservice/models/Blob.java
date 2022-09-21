@@ -43,6 +43,9 @@ public final class Blob {
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
+    /** Creates an instance of Blob class. */
+    public Blob() {}
+
     /**
      * Get the name property: The Name property.
      *

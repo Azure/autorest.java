@@ -61,6 +61,9 @@ public final class ListBlobsResponse {
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
+    /** Creates an instance of ListBlobsResponse class. */
+    public ListBlobsResponse() {}
+
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.
      *

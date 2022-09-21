@@ -59,6 +59,9 @@ public final class FlattenParameterGroup {
     @JsonProperty(value = "@odata.value")
     private String odataValue;
 
+    /** Creates an instance of FlattenParameterGroup class. */
+    public FlattenParameterGroup() {}
+
     /**
      * Get the name property: Product name with value 'groupproduct'.
      *

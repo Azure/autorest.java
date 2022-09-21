@@ -22,6 +22,9 @@ public final class BooleanWrapper {
     @JsonProperty(value = "field_false")
     private Boolean fieldFalse;
 
+    /** Creates an instance of BooleanWrapper class. */
+    public BooleanWrapper() {}
+
     /**
      * Get the fieldTrue property: The field_true property.
      *

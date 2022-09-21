@@ -4,7 +4,7 @@
 
 package fixtures.requiredfieldsascotrargstransformation.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 
 /** The TransformationAsRequiredFields model. */
-@Fluent
+@Immutable
 public class TransformationAsRequiredFields {
     /*
      * The rfc1123NonRequired property.
@@ -61,7 +61,7 @@ public class TransformationAsRequiredFields {
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      */
     @JsonCreator
-    public TransformationAsRequiredFields(
+    protected TransformationAsRequiredFields(
             @JsonProperty(value = "rfc1123Required", required = true) OffsetDateTime rfc1123Required,
             @JsonProperty(value = "nameRequired", required = true) String nameRequired,
             @JsonProperty(value = "urlBase64EncodedRequired", required = true) byte[] urlBase64EncodedRequired,
@@ -85,21 +85,6 @@ public class TransformationAsRequiredFields {
             return null;
         }
         return this.rfc1123NonRequired.getDateTime();
-    }
-
-    /**
-     * Set the rfc1123NonRequired property: The rfc1123NonRequired property.
-     *
-     * @param rfc1123NonRequired the rfc1123NonRequired value to set.
-     * @return the TransformationAsRequiredFields object itself.
-     */
-    public TransformationAsRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
-        if (rfc1123NonRequired == null) {
-            this.rfc1123NonRequired = null;
-        } else {
-            this.rfc1123NonRequired = new DateTimeRfc1123(rfc1123NonRequired);
-        }
-        return this;
     }
 
     /**

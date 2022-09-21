@@ -16,6 +16,9 @@ public class Pet {
     @JsonProperty(value = "name", required = true)
     private String name;
 
+    /** Creates an instance of Pet class. */
+    public Pet() {}
+
     /**
      * Get the name property: The name property.
      *

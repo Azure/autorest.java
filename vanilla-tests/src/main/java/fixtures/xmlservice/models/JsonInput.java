@@ -18,6 +18,9 @@ public final class JsonInput {
     @JsonProperty(value = "id")
     private Integer id;
 
+    /** Creates an instance of JsonInput class. */
+    public JsonInput() {}
+
     /**
      * Get the id property: The id property.
      *

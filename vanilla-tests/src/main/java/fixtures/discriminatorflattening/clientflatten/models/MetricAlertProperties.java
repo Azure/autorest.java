@@ -16,6 +16,9 @@ public final class MetricAlertProperties {
     @JsonProperty(value = "criteria", required = true)
     private MetricAlertCriteria criteria;
 
+    /** Creates an instance of MetricAlertProperties class. */
+    public MetricAlertProperties() {}
+
     /**
      * Get the criteria property: defines the specific alert criteria information.
      *

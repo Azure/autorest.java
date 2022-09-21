@@ -26,6 +26,9 @@ public final class ApplicationPackageReference {
     @JsonProperty(value = "version")
     private String version;
 
+    /** Creates an instance of ApplicationPackageReference class. */
+    public ApplicationPackageReference() {}
+
     /**
      * Get the id property: The ID of the application package to install. This must be inside the same batch account as
      * the pool. This can either be a reference to a specific version or the default version if one exists.

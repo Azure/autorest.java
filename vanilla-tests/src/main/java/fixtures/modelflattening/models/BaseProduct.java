@@ -23,6 +23,9 @@ public class BaseProduct {
     @JsonProperty(value = "base_product_description")
     private String description;
 
+    /** Creates an instance of BaseProduct class. */
+    public BaseProduct() {}
+
     /**
      * Get the productId property: Unique identifier representing a specific product for a given latitude &amp;
      * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.

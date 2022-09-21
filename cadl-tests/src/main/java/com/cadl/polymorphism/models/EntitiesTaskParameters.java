@@ -16,6 +16,9 @@ public final class EntitiesTaskParameters extends Parameter {
     @JsonProperty(value = "entity")
     private String entity;
 
+    /** Creates an instance of EntitiesTaskParameters class. */
+    public EntitiesTaskParameters() {}
+
     /**
      * Get the entity property: The entity property.
      *

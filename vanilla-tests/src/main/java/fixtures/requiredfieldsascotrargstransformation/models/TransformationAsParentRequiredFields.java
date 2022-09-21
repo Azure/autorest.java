@@ -4,14 +4,14 @@
 
 package fixtures.requiredfieldsascotrargstransformation.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The TransformationAsParentRequiredFields model. */
-@Fluent
+@Immutable
 public final class TransformationAsParentRequiredFields extends TransformationAsRequiredFields {
     /*
      * The rfc1123RequiredChild property.
@@ -36,7 +36,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * @param rfc1123RequiredChild the rfc1123RequiredChild value to set.
      */
     @JsonCreator
-    public TransformationAsParentRequiredFields(
+    private TransformationAsParentRequiredFields(
             @JsonProperty(value = "rfc1123Required", required = true) OffsetDateTime rfc1123Required,
             @JsonProperty(value = "nameRequired", required = true) String nameRequired,
             @JsonProperty(value = "urlBase64EncodedRequired", required = true) byte[] urlBase64EncodedRequired,
@@ -69,28 +69,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             return null;
         }
         return this.rfc1123NonRequiredChild.getDateTime();
-    }
-
-    /**
-     * Set the rfc1123NonRequiredChild property: The rfc1123NonRequiredChild property.
-     *
-     * @param rfc1123NonRequiredChild the rfc1123NonRequiredChild value to set.
-     * @return the TransformationAsParentRequiredFields object itself.
-     */
-    public TransformationAsParentRequiredFields setRfc1123NonRequiredChild(OffsetDateTime rfc1123NonRequiredChild) {
-        if (rfc1123NonRequiredChild == null) {
-            this.rfc1123NonRequiredChild = null;
-        } else {
-            this.rfc1123NonRequiredChild = new DateTimeRfc1123(rfc1123NonRequiredChild);
-        }
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public TransformationAsParentRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
-        super.setRfc1123NonRequired(rfc1123NonRequired);
-        return this;
     }
 
     /**

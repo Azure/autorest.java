@@ -22,6 +22,9 @@ public final class SampleResourceGroup {
     @JsonProperty(value = "location")
     private String location;
 
+    /** Creates an instance of SampleResourceGroup class. */
+    public SampleResourceGroup() {}
+
     /**
      * Get the name property: resource group name 'testgroup101'.
      *

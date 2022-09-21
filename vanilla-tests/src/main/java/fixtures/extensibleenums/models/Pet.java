@@ -28,6 +28,9 @@ public final class Pet {
     @JsonProperty(value = "IntEnum", required = true)
     private IntEnum intEnum;
 
+    /** Creates an instance of Pet class. */
+    public Pet() {}
+
     /**
      * Get the name property: name.
      *

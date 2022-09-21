@@ -17,6 +17,9 @@ public final class CollectionsByteProperty {
     @JsonProperty(value = "property")
     private List<byte[]> property;
 
+    /** Creates an instance of CollectionsByteProperty class. */
+    public CollectionsByteProperty() {}
+
     /**
      * Get the property property: Property.
      *
