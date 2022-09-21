@@ -951,10 +951,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
-        String endpoint = clientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.URI)
-                .findFirst().map(p -> p.getParameterReference()).orElse(null);
-
+        String endpoint = "null";
+        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            endpoint = clientMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> "endpoint".equals(p.getName()) && p.getFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                    .findFirst().map(p -> p.getParameterReference())
+                    .map(endpointReference -> clientMethod.getProxyMethod().getBaseUrl().replace("{endpoint}", endpointReference)).orElse("null");
+        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
             .replace("{endpoint}", endpoint)
