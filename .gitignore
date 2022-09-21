@@ -80,6 +80,7 @@ protocol-sdk-integration-tests/sdk
 !protocol-sdk-integration-tests/sdk/parents
 
 cadl-tests/cadl-output
+cadl-ranch-coverage.json
 
 # Coverage report
 /coverage/
