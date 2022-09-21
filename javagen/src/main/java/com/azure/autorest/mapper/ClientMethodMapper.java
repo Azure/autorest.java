@@ -671,7 +671,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .isGroupedParameterRequired(false)
             .methodVisibility(visibilityFunction.apply(false, false));
 
-        methods.add(builder.build());
+        if (!isSync || !settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+            // in sync API, if context parameter is required, that method will do the overload with max parameters
+            methods.add(builder.build());
+        }
 
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder.onlyRequiredParameters(true).build());
@@ -1015,12 +1018,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
-            // Don't generate PagedFlux or PagedIterable methods without Context if Context methods are being generated.
-            if ((methodType == ClientMethodType.PagingSync || methodType == ClientMethodType.PagingAsync)
-                && !hasContextParameter && settings.isContextClientMethodParameter()) {
-                return NOT_GENERATE;
-            }
-
             return VISIBLE;
         }
     }
