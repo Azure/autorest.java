@@ -801,11 +801,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
             if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
                 function.line("%s(%s);",
-                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
             } else {
                 function.line("return %s(%s).getValue();",
-                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
             }
         }));
@@ -830,11 +830,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
                 function.line("%s(%s);",
-                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
             } else {
                 function.line("return %s(%s).getValue();",
-                    clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName().replace("Async", ""),
+                    clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
             }
         }));
