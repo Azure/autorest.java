@@ -37,6 +37,7 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
 import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
@@ -380,6 +381,11 @@ public class RuntimeTests {
         assertMethodExist(StorageAccounts.class, "getByResourceGroup", "String", "String");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
         assertMethodExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
+
+        // pageable API
+        assertMethodExist(BlobContainers.class, "list", "String", "String");
+        assertMethodNotExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude");
+        assertMethodExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude", "Context");
     }
 
     private static void assertMethodNotExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
