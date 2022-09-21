@@ -841,6 +841,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (isProtocolMethod || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
+
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                 syncReturnType);
         } else {
@@ -986,7 +987,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return method visibility, null if do not generate.
      */
     protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter, boolean isProtocolMethod) {
-        if (JavaSettings.getInstance().isDataPlaneClient()) {
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.isDataPlaneClient()) {
             if (isProtocolMethod) {
                 /*
                 Rule for DPG protocol method
@@ -1013,6 +1015,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
+            // Don't generate PagedFlux or PagedIterable methods without Context if Context methods are being generated.
+            if ((methodType == ClientMethodType.PagingSync || methodType == ClientMethodType.PagingAsync)
+                && !hasContextParameter && settings.isContextClientMethodParameter()) {
+                return NOT_GENERATE;
+            }
+
             return VISIBLE;
         }
     }

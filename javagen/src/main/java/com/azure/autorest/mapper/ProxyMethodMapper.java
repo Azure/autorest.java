@@ -354,12 +354,17 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             if (settings.isGenericResponseTypes()) {
+                // If the response body type is InputStream it needs to be converted to Flux<ByteBuffer> to be
+                // asynchronous, unless this is sync-stack.
+                if (responseBodyType == ClassType.InputStream && !settings.isSyncStackEnabled()) {
+                    responseBodyType = GenericType.FluxByteBuffer;
+                }
                 IType genericResponseType = GenericType.RestResponse(
-                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                        responseBodyType);
+                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
                 return createSingleValueAsyncReturnType(genericResponseType);
             } else {
-                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, ClientModels.getInstance().getModels(), settings);
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation,
+                    ClientModels.getInstance().getModels(), settings);
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {

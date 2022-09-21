@@ -51,6 +51,11 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     visibility = NOT_GENERATE;
                     break;
 
+                case PagingSync:
+                case PagingAsync:
+                    visibility = VISIBLE;
+                    break;
+
                 default:
                     visibility = super.methodVisibility(methodType, false, isProtocolMethod);
                     break;

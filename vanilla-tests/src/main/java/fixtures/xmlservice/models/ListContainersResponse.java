@@ -40,9 +40,6 @@ public final class ListContainersResponse {
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
-    /*
-     * The Containers property.
-     */
     private static final class ContainersWrapper {
         @JacksonXmlProperty(localName = "Container")
         private final List<Container> items;
@@ -53,6 +50,9 @@ public final class ListContainersResponse {
         }
     }
 
+    /*
+     * The Containers property.
+     */
     @JsonProperty(value = "Containers")
     private ContainersWrapper containers;
 

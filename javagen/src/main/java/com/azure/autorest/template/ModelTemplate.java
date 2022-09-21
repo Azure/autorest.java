@@ -460,10 +460,38 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 continue;
             }
 
-            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
-                comment -> comment.line(property.getDescription()));
+            String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+                // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
+                // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
+                // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
+                // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
+                // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
+                // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
+                // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
+                // XML node name if the class doesn't have a root name annotation which results in an addition XML level
+                // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
+                // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
+                // the element name but this breaks down in cases where the same element name is used in two different
+                // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
+                // block lists.
+                classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass -> {
+                    IType propertyClientType = property.getWireType().getClientType();
 
-            addFieldAnnotations(property, classBlock, settings);
+                    String listElementName = property.getXmlListElementName();
+                    String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
+                        ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
+                        : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
+
+                    innerClass.annotation(jacksonAnnotation);
+                    innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
+
+                    innerClass.annotation("JsonCreator");
+                    innerClass.privateConstructor(
+                        xmlWrapperClassName + "(@" + jacksonAnnotation + " " + propertyClientType + " items)",
+                        constructor -> constructor.line("this.items = items;"));
+                });
+            }
 
             String propertyName = property.getName();
             IType propertyType = property.getWireType();
@@ -471,7 +499,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             String fieldSignature;
             if (settings.shouldGenerateXmlSerialization()) {
                 if (property.getIsXmlWrapper()) {
-                    String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
@@ -493,6 +520,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
+            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
+                comment -> comment.line(property.getDescription()));
+
+            addFieldAnnotations(property, classBlock, settings);
+
             if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
                 && settings.isStreamStyleSerialization()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
@@ -510,40 +542,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings Autorest generation settings.
      */
     protected void addFieldAnnotations(ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
-        String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-
-        if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
-            // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
-            // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
-            // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
-            // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
-            // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
-            // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
-            // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
-            // XML node name if the class doesn't have a root name annotation which results in an addition XML level
-            // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
-            // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
-            // the element name but this breaks down in cases where the same element name is used in two different
-            // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
-            // block lists.
-            classBlock.privateStaticFinalClass(xmlWrapperClassName, innerClass -> {
-                IType propertyClientType = property.getWireType().getClientType();
-
-                String listElementName = property.getXmlListElementName();
-                String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
-                    ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
-                    : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
-
-                innerClass.annotation(jacksonAnnotation);
-                innerClass.privateFinalMemberVariable(propertyClientType.toString(), "items");
-
-                innerClass.annotation("JsonCreator");
-                innerClass.privateConstructor(
-                    xmlWrapperClassName + "(@" + jacksonAnnotation + " " + propertyClientType + " items)",
-                    constructor -> constructor.line("this.items = items;"));
-            });
-        }
-
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
             classBlock.annotation("JsonFlatten");
         }
@@ -856,7 +854,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
-        boolean needsNullGuarding = wireType.deserializationNeedsNullGuarding() && wireType != ClassType.String;
+        boolean needsNullGuarding = (wireType instanceof ClassType && wireType != ClassType.String)
+            || wireType instanceof ArrayType;
 
         // No matter the wire type the rawHeaders will need to be accessed.
         String rawHeaderAccess = String.format("rawHeaders.getValue(\"%s\")", property.getSerializedName());
