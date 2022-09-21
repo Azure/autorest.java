@@ -30,7 +30,7 @@ public final class BinaryData {
      * @param data the data value to set.
      */
     @JsonCreator
-    public BinaryData(@JsonProperty(value = "data", required = true) byte[] data) {
+    private BinaryData(@JsonProperty(value = "data", required = true) byte[] data) {
         this.data = data;
     }
 

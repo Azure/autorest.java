@@ -16,6 +16,9 @@ public final class MetricAlertResource {
     @JsonProperty(value = "properties", required = true)
     private MetricAlertProperties innerProperties = new MetricAlertProperties();
 
+    /** Creates an instance of MetricAlertResource class. */
+    public MetricAlertResource() {}
+
     /**
      * Get the innerProperties property: The alert rule properties of the resource.
      *

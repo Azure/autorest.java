@@ -71,6 +71,9 @@ public final class OutputModel {
     @JsonProperty(value = "optionalReadonlyIntList", access = JsonProperty.Access.WRITE_ONLY)
     private List<Integer> optionalReadonlyIntList;
 
+    /** Creates an instance of OutputModel class. */
+    private OutputModel() {}
+
     /**
      * Get the requiredReadonlyString property: Required string, illustrating a readonly reference type property.
      *

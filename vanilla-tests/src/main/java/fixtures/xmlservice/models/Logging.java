@@ -42,6 +42,9 @@ public final class Logging {
     @JsonProperty(value = "RetentionPolicy", required = true)
     private RetentionPolicy retentionPolicy;
 
+    /** Creates an instance of Logging class. */
+    public Logging() {}
+
     /**
      * Get the version property: The version of Storage Analytics to configure.
      *

@@ -18,6 +18,9 @@ public class VirtualMachineScaleSet {
     @JsonProperty(value = "properties.virtualMachineProfile")
     private VirtualMachineScaleSetVMProfile virtualMachineProfile;
 
+    /** Creates an instance of VirtualMachineScaleSet class. */
+    public VirtualMachineScaleSet() {}
+
     /**
      * Get the virtualMachineProfile property: The virtual machine profile.
      *

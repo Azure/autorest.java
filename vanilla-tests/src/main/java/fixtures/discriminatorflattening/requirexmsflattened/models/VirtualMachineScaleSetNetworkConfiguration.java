@@ -24,6 +24,9 @@ public class VirtualMachineScaleSetNetworkConfiguration {
     @JsonProperty(value = "properties.primary")
     private Boolean primary;
 
+    /** Creates an instance of VirtualMachineScaleSetNetworkConfiguration class. */
+    public VirtualMachineScaleSetNetworkConfiguration() {}
+
     /**
      * Get the name property: The network configuration name.
      *

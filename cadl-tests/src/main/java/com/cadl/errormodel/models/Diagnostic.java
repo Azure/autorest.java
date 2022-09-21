@@ -31,7 +31,7 @@ public final class Diagnostic {
      * @param error the error value to set.
      */
     @JsonCreator
-    public Diagnostic(
+    private Diagnostic(
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty(value = "error", required = true) ResponseError error) {
         this.name = name;

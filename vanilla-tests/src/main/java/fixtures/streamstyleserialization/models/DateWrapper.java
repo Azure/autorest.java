@@ -24,6 +24,9 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      */
     private LocalDate leap;
 
+    /** Creates an instance of DateWrapper class. */
+    public DateWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

@@ -155,7 +155,8 @@ public class JavaSettings {
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
                 getBooleanValue(host, "stream-style-serialization", false),
-                getBooleanValue(host, "enable-sync-stack", false)
+                getBooleanValue(host, "enable-sync-stack", false),
+                getBooleanValue(host, "output-model-immutable", false)
             );
         }
         return instance;
@@ -249,7 +250,8 @@ public class JavaSettings {
         boolean handlePartialUpdate,
         boolean genericResponseTypes,
         boolean streamStyleSerialization,
-        boolean isSyncStackEnabled) {
+        boolean isSyncStackEnabled,
+        boolean outputModelImmutable) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -339,6 +341,8 @@ public class JavaSettings {
 
         this.streamStyleSerialization = streamStyleSerialization;
         this.isSyncStackEnabled = isSyncStackEnabled;
+
+        this.outputModelImmutable = outputModelImmutable;
     }
 
     private String keyCredentialHeaderName;
@@ -803,6 +807,12 @@ public class JavaSettings {
 
     public boolean clientBuilderDisabled() {
         return clientBuilderDisabled;
+    }
+
+    private final boolean outputModelImmutable;
+
+    public boolean isOutputModelImmutable() {
+        return outputModelImmutable;
     }
 
     public static class PollingDetails {

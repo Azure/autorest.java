@@ -18,6 +18,9 @@ public class MetricAlertResource {
     @JsonProperty(value = "properties.criteria", required = true)
     private MetricAlertCriteria criteria;
 
+    /** Creates an instance of MetricAlertResource class. */
+    public MetricAlertResource() {}
+
     /**
      * Get the criteria property: defines the specific alert criteria information.
      *

@@ -16,6 +16,9 @@ public final class Kitten extends Cat {
     @JsonProperty(value = "eatsMiceYet")
     private Boolean eatsMiceYet;
 
+    /** Creates an instance of Kitten class. */
+    public Kitten() {}
+
     /**
      * Get the eatsMiceYet property: The eatsMiceYet property.
      *

@@ -41,6 +41,12 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
     private String status;
 
     /**
+     * Creates an instance of
+     * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
+     */
+    public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {}
+
+    /**
      * Get the petType property: Can take a value of dog, or cat, or fish.
      *
      * @return the petType value.

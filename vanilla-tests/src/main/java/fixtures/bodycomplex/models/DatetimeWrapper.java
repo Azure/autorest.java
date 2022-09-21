@@ -23,6 +23,9 @@ public final class DatetimeWrapper {
     @JsonProperty(value = "now")
     private OffsetDateTime now;
 
+    /** Creates an instance of DatetimeWrapper class. */
+    public DatetimeWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

@@ -112,7 +112,7 @@ public final class Builtin {
      * @param bytesDict the bytesDict value to set.
      */
     @JsonCreator
-    public Builtin(
+    private Builtin(
             @JsonProperty(value = "formatString", required = true) FormatString formatString,
             @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
             @JsonProperty(value = "string", required = true) String string,

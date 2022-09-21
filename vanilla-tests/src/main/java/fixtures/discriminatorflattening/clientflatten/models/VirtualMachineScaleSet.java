@@ -16,6 +16,9 @@ public final class VirtualMachineScaleSet {
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetProperties innerProperties;
 
+    /** Creates an instance of VirtualMachineScaleSet class. */
+    public VirtualMachineScaleSet() {}
+
     /**
      * Get the innerProperties property: Describes the properties of a Virtual Machine Scale Set.
      *

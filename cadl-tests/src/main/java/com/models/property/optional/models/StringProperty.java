@@ -16,6 +16,9 @@ public final class StringProperty {
     @JsonProperty(value = "property")
     private String property;
 
+    /** Creates an instance of StringProperty class. */
+    public StringProperty() {}
+
     /**
      * Get the property property: Property.
      *

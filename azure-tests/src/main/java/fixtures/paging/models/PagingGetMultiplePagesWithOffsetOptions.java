@@ -28,6 +28,9 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     @JsonProperty(value = "timeout")
     private Integer timeout;
 
+    /** Creates an instance of PagingGetMultiplePagesWithOffsetOptions class. */
+    public PagingGetMultiplePagesWithOffsetOptions() {}
+
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
      *

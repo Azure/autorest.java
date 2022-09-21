@@ -16,6 +16,9 @@ public class MyException {
     @JsonProperty(value = "statusCode")
     private String statusCode;
 
+    /** Creates an instance of MyException class. */
+    public MyException() {}
+
     /**
      * Get the statusCode property: The statusCode property.
      *

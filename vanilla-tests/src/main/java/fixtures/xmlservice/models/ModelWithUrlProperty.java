@@ -19,6 +19,9 @@ public final class ModelWithUrlProperty {
     @JsonProperty(value = "Url")
     private URL url;
 
+    /** Creates an instance of ModelWithUrlProperty class. */
+    public ModelWithUrlProperty() {}
+
     /**
      * Get the url property: The Url property.
      *
