@@ -747,11 +747,9 @@ export class CodeModelBuilder {
   }
 
   private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
-    const dictSchema = this.codeModel.schemas.add(
-      new DictionarySchema<any>(name, this.getDoc(type), null, {
-        summary: this.getSummary(type),
-      }),
-    );
+    const dictSchema = new DictionarySchema<any>(name, this.getDoc(type), null, {
+      summary: this.getSummary(type),
+    });
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
