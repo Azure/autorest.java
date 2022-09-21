@@ -16,6 +16,7 @@ import {
   getSummary,
   getVisibility,
   ignoreDiagnostics,
+  IntrinsicType,
   isArrayModelType,
   isIntrinsic,
   isRecordModelType,
@@ -688,7 +689,7 @@ export class CodeModelBuilder {
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
-  private processAnySchema(type: Model, name: string): AnySchema {
+  private processAnySchema(type: IntrinsicType, name: string): AnySchema {
     return this.codeModel.schemas.add(
       new AnySchema(this.getDoc(type), {
         summary: this.getSummary(type),
