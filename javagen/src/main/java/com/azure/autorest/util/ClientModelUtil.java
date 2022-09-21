@@ -12,7 +12,6 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
@@ -96,7 +95,6 @@ public class ClientModelUtil {
                                         String methodName = cMethods.iterator().next().getProxyMethod().getName();
                                         methodGroupClient.getClientMethods().stream()
                                                 .filter(m -> methodName.equals(m.getProxyMethod().getName()))
-                                                .filter(m -> m.getType() != ClientMethodType.PagingAsyncSinglePage)
                                                 .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
                                     }
                                 });

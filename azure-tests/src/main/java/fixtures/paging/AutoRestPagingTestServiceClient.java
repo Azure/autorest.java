@@ -10,7 +10,6 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.util.Context;
 import fixtures.paging.implementation.PagingsImpl;
 import fixtures.paging.models.CustomParameterGroup;
@@ -33,34 +32,6 @@ public final class AutoRestPagingTestServiceClient {
     @Generated
     AutoRestPagingTestServiceClient(PagingsImpl serviceClient) {
         this.serviceClient = serviceClient;
-    }
-
-    /**
-     * A paging operation that must return result of the default 'value' node.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNoItemNamePagesSinglePage() {
-        return this.serviceClient.getNoItemNamePagesSinglePage();
-    }
-
-    /**
-     * A paging operation that must return result of the default 'value' node.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNoItemNamePagesSinglePage(Context context) {
-        return this.serviceClient.getNoItemNamePagesSinglePage(context);
     }
 
     /**
@@ -96,34 +67,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNullNextLinkNamePagesSinglePage() {
-        return this.serviceClient.getNullNextLinkNamePagesSinglePage();
-    }
-
-    /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNullNextLinkNamePagesSinglePage(Context context) {
-        return this.serviceClient.getNullNextLinkNamePagesSinglePage(context);
-    }
-
-    /**
-     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -145,34 +88,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNullNextLinkNamePages(Context context) {
         return this.serviceClient.getNullNextLinkNamePages(context);
-    }
-
-    /**
-     * A paging operation that finishes on the first call without a nextlink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesSinglePage() {
-        return this.serviceClient.getSinglePagesSinglePage();
-    }
-
-    /**
-     * A paging operation that finishes on the first call without a nextlink.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesSinglePage(Context context) {
-        return this.serviceClient.getSinglePagesSinglePage(context);
     }
 
     /**
@@ -209,36 +124,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> firstResponseEmptySinglePage() {
-        return this.serviceClient.firstResponseEmptySinglePage();
-    }
-
-    /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> firstResponseEmptySinglePage(Context context) {
-        return this.serviceClient.firstResponseEmptySinglePage(context);
-    }
-
-    /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -261,41 +146,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> firstResponseEmpty(Context context) {
         return this.serviceClient.firstResponseEmpty(context);
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesSinglePage(
-            String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return this.serviceClient.getMultiplePagesSinglePage(clientRequestId, pagingGetMultiplePagesOptions);
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesSinglePage(
-            String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, Context context) {
-        return this.serviceClient.getMultiplePagesSinglePage(clientRequestId, pagingGetMultiplePagesOptions, context);
     }
 
     /**
@@ -354,39 +204,6 @@ public final class AutoRestPagingTestServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getWithQueryParamsSinglePage(int requiredQueryParameter) {
-        return this.serviceClient.getWithQueryParamsSinglePage(requiredQueryParameter);
-    }
-
-    /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getWithQueryParamsSinglePage(int requiredQueryParameter, Context context) {
-        return this.serviceClient.getWithQueryParamsSinglePage(requiredQueryParameter, context);
-    }
-
-    /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
-     *
-     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -410,39 +227,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter, Context context) {
         return this.serviceClient.getWithQueryParams(requiredQueryParameter, context);
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @param filter OData filter options. Pass in 'foo'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> duplicateParamsSinglePage(String filter) {
-        return this.serviceClient.duplicateParamsSinglePage(filter);
-    }
-
-    /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
-     *
-     * @param filter OData filter options. Pass in 'foo'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> duplicateParamsSinglePage(String filter, Context context) {
-        return this.serviceClient.duplicateParamsSinglePage(filter, context);
     }
 
     /**
@@ -497,34 +281,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> pageWithMaxPageSizeSinglePage() {
-        return this.serviceClient.pageWithMaxPageSizeSinglePage();
-    }
-
-    /**
-     * Paging with max page size. We don't want to.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> pageWithMaxPageSizeSinglePage(Context context) {
-        return this.serviceClient.pageWithMaxPageSizeSinglePage(context);
-    }
-
-    /**
-     * Paging with max page size. We don't want to.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -546,72 +302,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> pageWithMaxPageSize(Context context) {
         return this.serviceClient.pageWithMaxPageSize(context);
-    }
-
-    /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextOperationWithQueryParamsSinglePage() {
-        return this.serviceClient.nextOperationWithQueryParamsSinglePage();
-    }
-
-    /**
-     * Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextOperationWithQueryParamsSinglePage(Context context) {
-        return this.serviceClient.nextOperationWithQueryParamsSinglePage(context);
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getOdataMultiplePagesSinglePage(
-            String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return this.serviceClient.getOdataMultiplePagesSinglePage(clientRequestId, pagingGetOdataMultiplePagesOptions);
-    }
-
-    /**
-     * A paging operation that includes a nextLink in odata format that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getOdataMultiplePagesSinglePage(
-            String clientRequestId,
-            PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions,
-            Context context) {
-        return this.serviceClient.getOdataMultiplePagesSinglePage(
-                clientRequestId, pagingGetOdataMultiplePagesOptions, context);
     }
 
     /**
@@ -662,45 +352,6 @@ public final class AutoRestPagingTestServiceClient {
             PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions,
             Context context) {
         return this.serviceClient.getOdataMultiplePages(clientRequestId, pagingGetOdataMultiplePagesOptions, context);
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesWithOffsetSinglePage(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
-        return this.serviceClient.getMultiplePagesWithOffsetSinglePage(
-                pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesWithOffsetSinglePage(
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions,
-            String clientRequestId,
-            Context context) {
-        return this.serviceClient.getMultiplePagesWithOffsetSinglePage(
-                pagingGetMultiplePagesWithOffsetOptions, clientRequestId, context);
     }
 
     /**
@@ -763,36 +414,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetryFirstSinglePage() {
-        return this.serviceClient.getMultiplePagesRetryFirstSinglePage();
-    }
-
-    /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetryFirstSinglePage(Context context) {
-        return this.serviceClient.getMultiplePagesRetryFirstSinglePage(context);
-    }
-
-    /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -815,36 +436,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesRetryFirst(Context context) {
         return this.serviceClient.getMultiplePagesRetryFirst(context);
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetrySecondSinglePage() {
-        return this.serviceClient.getMultiplePagesRetrySecondSinglePage();
-    }
-
-    /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetrySecondSinglePage(Context context) {
-        return this.serviceClient.getMultiplePagesRetrySecondSinglePage(context);
     }
 
     /**
@@ -882,34 +473,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesFailureSinglePage() {
-        return this.serviceClient.getSinglePagesFailureSinglePage();
-    }
-
-    /**
-     * A paging operation that receives a 400 on the first call.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesFailureSinglePage(Context context) {
-        return this.serviceClient.getSinglePagesFailureSinglePage(context);
-    }
-
-    /**
-     * A paging operation that receives a 400 on the first call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -931,34 +494,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesFailure(Context context) {
         return this.serviceClient.getSinglePagesFailure(context);
-    }
-
-    /**
-     * A paging operation that receives a 400 on the second call.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureSinglePage() {
-        return this.serviceClient.getMultiplePagesFailureSinglePage();
-    }
-
-    /**
-     * A paging operation that receives a 400 on the second call.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureSinglePage(Context context) {
-        return this.serviceClient.getMultiplePagesFailureSinglePage(context);
     }
 
     /**
@@ -994,34 +529,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureUriSinglePage() {
-        return this.serviceClient.getMultiplePagesFailureUriSinglePage();
-    }
-
-    /**
-     * A paging operation that receives an invalid nextLink.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureUriSinglePage(Context context) {
-        return this.serviceClient.getMultiplePagesFailureUriSinglePage(context);
-    }
-
-    /**
-     * A paging operation that receives an invalid nextLink.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -1043,40 +550,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFailureUri(Context context) {
         return this.serviceClient.getMultiplePagesFailureUri(context);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFragmentNextLinkSinglePage(String apiVersion, String tenant) {
-        return this.serviceClient.getMultiplePagesFragmentNextLinkSinglePage(apiVersion, tenant);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFragmentNextLinkSinglePage(
-            String apiVersion, String tenant, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentNextLinkSinglePage(apiVersion, tenant, context);
     }
 
     /**
@@ -1119,39 +592,6 @@ public final class AutoRestPagingTestServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(
-            CustomParameterGroup customParameterGroup) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkSinglePage(customParameterGroup);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * @param customParameterGroup Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(
-            CustomParameterGroup customParameterGroup, Context context) {
-        return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLinkSinglePage(customParameterGroup, context);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
-     *
-     * @param customParameterGroup Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -1176,44 +616,6 @@ public final class AutoRestPagingTestServiceClient {
     public PagedIterable<Product> getMultiplePagesFragmentWithGroupingNextLink(
             CustomParameterGroup customParameterGroup, Context context) {
         return this.serviceClient.getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, context);
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesLROSinglePage(
-            String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
-        return this.serviceClient.getMultiplePagesLROSinglePage(clientRequestId, pagingGetMultiplePagesLroOptions);
-    }
-
-    /**
-     * A long-running paging operation that includes a nextLink that has 10 pages.
-     *
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesLROSinglePage(
-            String clientRequestId,
-            PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions,
-            Context context) {
-        return this.serviceClient.getMultiplePagesLROSinglePage(
-                clientRequestId, pagingGetMultiplePagesLroOptions, context);
     }
 
     /**
@@ -1272,36 +674,6 @@ public final class AutoRestPagingTestServiceClient {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> appendApiVersionSinglePage() {
-        return this.serviceClient.appendApiVersionSinglePage();
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> appendApiVersionSinglePage(Context context) {
-        return this.serviceClient.appendApiVersionSinglePage(context);
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
@@ -1324,36 +696,6 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> appendApiVersion(Context context) {
         return this.serviceClient.appendApiVersion(context);
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> replaceApiVersionSinglePage() {
-        return this.serviceClient.replaceApiVersionSinglePage();
-    }
-
-    /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> replaceApiVersionSinglePage(Context context) {
-        return this.serviceClient.replaceApiVersionSinglePage(context);
     }
 
     /**
@@ -1387,105 +729,6 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @param nextLink Next link for list operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextFragmentSinglePage(String apiVersion, String tenant, String nextLink) {
-        return this.serviceClient.nextFragmentSinglePage(apiVersion, tenant, nextLink);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param apiVersion Sets the api version to use.
-     * @param tenant Sets the tenant to use.
-     * @param nextLink Next link for list operation.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextFragmentSinglePage(
-            String apiVersion, String tenant, String nextLink, Context context) {
-        return this.serviceClient.nextFragmentSinglePage(apiVersion, tenant, nextLink, context);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param nextLink Next link for list operation.
-     * @param customParameterGroup Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextFragmentWithGroupingSinglePage(
-            String nextLink, CustomParameterGroup customParameterGroup) {
-        return this.serviceClient.nextFragmentWithGroupingSinglePage(nextLink, customParameterGroup);
-    }
-
-    /**
-     * A paging operation that doesn't return a full URL, just a fragment.
-     *
-     * @param nextLink Next link for list operation.
-     * @param customParameterGroup Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> nextFragmentWithGroupingSinglePage(
-            String nextLink, CustomParameterGroup customParameterGroup, Context context) {
-        return this.serviceClient.nextFragmentWithGroupingSinglePage(nextLink, customParameterGroup, context);
-    }
-
-    /**
-     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameSinglePage() {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameSinglePage();
-    }
-
-    /**
-     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameSinglePage(Context context) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameSinglePage(context);
-    }
-
-    /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1511,617 +754,5 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagingModelWithItemNameWithXMSClientName(Context context) {
         return this.serviceClient.getPagingModelWithItemNameWithXMSClientName(context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNoItemNamePagesNextSinglePage(String nextLink) {
-        return this.serviceClient.getNoItemNamePagesNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getNoItemNamePagesNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getNoItemNamePagesNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesNextSinglePage(String nextLink) {
-        return this.serviceClient.getSinglePagesNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getSinglePagesNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> firstResponseEmptyNextSinglePage(String nextLink) {
-        return this.serviceClient.firstResponseEmptyNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> firstResponseEmptyNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.firstResponseEmptyNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesNextSinglePage(
-            String nextLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return this.serviceClient.getMultiplePagesNextSinglePage(
-                nextLink, clientRequestId, pagingGetMultiplePagesOptions);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesNextSinglePage(
-            String nextLink,
-            String clientRequestId,
-            PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions,
-            Context context) {
-        return this.serviceClient.getMultiplePagesNextSinglePage(
-                nextLink, clientRequestId, pagingGetMultiplePagesOptions, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> duplicateParamsNextSinglePage(String nextLink) {
-        return this.serviceClient.duplicateParamsNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> duplicateParamsNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.duplicateParamsNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> pageWithMaxPageSizeNextSinglePage(String nextLink) {
-        return this.serviceClient.pageWithMaxPageSizeNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> pageWithMaxPageSizeNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.pageWithMaxPageSizeNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getOdataMultiplePagesNextSinglePage(
-            String nextLink,
-            String clientRequestId,
-            PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return this.serviceClient.getOdataMultiplePagesNextSinglePage(
-                nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetOdataMultiplePagesOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getOdataMultiplePagesNextSinglePage(
-            String nextLink,
-            String clientRequestId,
-            PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions,
-            Context context) {
-        return this.serviceClient.getOdataMultiplePagesNextSinglePage(
-                nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesWithOffsetNextSinglePage(
-            String nextLink,
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions,
-            String clientRequestId) {
-        return this.serviceClient.getMultiplePagesWithOffsetNextSinglePage(
-                nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesWithOffsetNextSinglePage(
-            String nextLink,
-            PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions,
-            String clientRequestId,
-            Context context) {
-        return this.serviceClient.getMultiplePagesWithOffsetNextSinglePage(
-                nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetryFirstNextSinglePage(String nextLink) {
-        return this.serviceClient.getMultiplePagesRetryFirstNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetryFirstNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getMultiplePagesRetryFirstNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetrySecondNextSinglePage(String nextLink) {
-        return this.serviceClient.getMultiplePagesRetrySecondNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesRetrySecondNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getMultiplePagesRetrySecondNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesFailureNextSinglePage(String nextLink) {
-        return this.serviceClient.getSinglePagesFailureNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getSinglePagesFailureNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getSinglePagesFailureNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureNextSinglePage(String nextLink) {
-        return this.serviceClient.getMultiplePagesFailureNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getMultiplePagesFailureNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureUriNextSinglePage(String nextLink) {
-        return this.serviceClient.getMultiplePagesFailureUriNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesFailureUriNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.getMultiplePagesFailureUriNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesLRONextSinglePage(
-            String nextLink,
-            String clientRequestId,
-            PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
-        return this.serviceClient.getMultiplePagesLRONextSinglePage(
-                nextLink, clientRequestId, pagingGetMultiplePagesLroOptions);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param clientRequestId The clientRequestId parameter.
-     * @param pagingGetMultiplePagesLroOptions Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getMultiplePagesLRONextSinglePage(
-            String nextLink,
-            String clientRequestId,
-            PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions,
-            Context context) {
-        return this.serviceClient.getMultiplePagesLRONextSinglePage(
-                nextLink, clientRequestId, pagingGetMultiplePagesLroOptions, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> appendApiVersionNextSinglePage(String nextLink) {
-        return this.serviceClient.appendApiVersionNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> appendApiVersionNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.appendApiVersionNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> replaceApiVersionNextSinglePage(String nextLink) {
-        return this.serviceClient.replaceApiVersionNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> replaceApiVersionNextSinglePage(String nextLink, Context context) {
-        return this.serviceClient.replaceApiVersionNextSinglePage(nextLink, context);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameNextSinglePage(String nextLink) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameNextSinglePage(nextLink);
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameNextSinglePage(
-            String nextLink, Context context) {
-        return this.serviceClient.getPagingModelWithItemNameWithXMSClientNameNextSinglePage(nextLink, context);
     }
 }
