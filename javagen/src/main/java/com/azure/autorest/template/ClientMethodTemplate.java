@@ -1243,7 +1243,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String endpoint = "null";
         if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
             endpoint = clientMethod.getProxyMethod().getParameters().stream()
-                    .filter(p -> "endpoint".equals(p.getName()) && p.getFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                    .filter(p -> "endpoint".equals(p.getName()) && p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
                     .findFirst()
                     .map(p -> String.format("%1$s.replace(%2$s, %3$s)",
                             ClassType.String.defaultValueExpression(clientMethod.getProxyMethod().getBaseUrl()),
