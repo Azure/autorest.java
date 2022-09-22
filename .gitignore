@@ -86,3 +86,4 @@ cadl-tests/cadl-output
 
 # language server
 postprocessor/jdt-language-server
+/cadl-tests/cadl-ranch-coverage-java.json
