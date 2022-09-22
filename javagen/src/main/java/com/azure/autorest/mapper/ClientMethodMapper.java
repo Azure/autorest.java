@@ -778,7 +778,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             methods.add(builder.onlyRequiredParameters(true).build());
         }
 
-        if (settings.isContextClientMethodParameter()) {
+        if (settings.isSyncStackEnabled() && settings.isContextClientMethodParameter()) {
             builder.methodVisibility(visibilityFunction.apply(false, true)).onlyRequiredParameters(false);
             addClientMethodWithContext(methods, builder, parameters, contextParameter);
         }
@@ -1018,6 +1018,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
+            if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSyncRestResponse && settings.isContextClientMethodParameter() && !hasContextParameter) {
+                return NOT_GENERATE;
+            }
             return VISIBLE;
         }
     }
