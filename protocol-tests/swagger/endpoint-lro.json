@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Long-running Operation Test Service",
+    "description": "Long-running Operation for AutoRest",
+    "version": "1.0.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{Endpoint}/resource",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "Endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
+  "host": "localhost:3000",
+  "schemes": ["http"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/lro/put/200/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put200Succeeded",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
+        "tags": ["LRO Operations"],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "204": {
+            "description": "Final response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "type": "string"
+            },
+            "provisioningStateValues": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "canceled",
+                "Accepted",
+                "Creating",
+                "Created",
+                "Updating",
+                "Updated",
+                "Deleting",
+                "Deleted",
+                "OK"
+              ],
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1240,8 +1240,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
+        String endpoint = "null";
+        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            endpoint = clientMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> "endpoint".equals(p.getName()) && p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                    .findFirst()
+                    .map(p -> String.format("%1$s.replace(%2$s, %3$s)",
+                            ClassType.String.defaultValueExpression(clientMethod.getProxyMethod().getBaseUrl()),
+                            ClassType.String.defaultValueExpression('{' + p.getRequestParameterName() + '}'),
+                            p.getParameterReference()
+                    ))
+                    .orElse("null");
+        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+            .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())

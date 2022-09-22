@@ -538,6 +538,7 @@ public final class SpecialHeadersOpsImpl {
                 () -> this.createLroWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
