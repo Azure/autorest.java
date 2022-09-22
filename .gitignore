@@ -81,10 +81,10 @@ protocol-sdk-integration-tests/sdk
 
 cadl-tests/cadl-output
 cadl-ranch-coverage.json
+/cadl-tests/cadl-ranch-coverage-java.json
 
 # Coverage report
 /coverage/
 
 # language server
 postprocessor/jdt-language-server
-/cadl-tests/cadl-ranch-coverage-java.json
