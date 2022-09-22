@@ -23,6 +23,9 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      */
     private Boolean fieldFalse;
 
+    /** Creates an instance of BooleanWrapper class. */
+    public BooleanWrapper() {}
+
     /**
      * Get the fieldTrue property: The field_true property.
      *

@@ -36,7 +36,7 @@ public final class Dog {
      * @param name the name value to set.
      */
     @JsonCreator
-    public Dog(
+    private Dog(
             @JsonProperty(value = "secretName", required = true) String secretName,
             @JsonProperty(value = "name", required = true) String name) {
         this.secretName = secretName;

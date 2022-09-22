@@ -16,6 +16,9 @@ public final class Product {
     @JsonProperty(value = "properties")
     private ProductProperties properties;
 
+    /** Creates an instance of Product class. */
+    public Product() {}
+
     /**
      * Get the properties property: The properties property.
      *

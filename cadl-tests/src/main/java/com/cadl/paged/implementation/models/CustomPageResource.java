@@ -4,14 +4,14 @@
 
 package com.cadl.paged.implementation.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.cadl.paged.models.Resource;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** Paged collection of Resource items. */
-@Fluent
+@Immutable
 public final class CustomPageResource {
     /*
      * The Resource items on this page
@@ -31,7 +31,7 @@ public final class CustomPageResource {
      * @param value the value value to set.
      */
     @JsonCreator
-    public CustomPageResource(@JsonProperty(value = "value", required = true) List<Resource> value) {
+    private CustomPageResource(@JsonProperty(value = "value", required = true) List<Resource> value) {
         this.value = value;
     }
 
@@ -51,16 +51,5 @@ public final class CustomPageResource {
      */
     public String getNextLink() {
         return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: The link to the next page of items.
-     *
-     * @param nextLink the nextLink value to set.
-     * @return the CustomPageResource object itself.
-     */
-    public CustomPageResource setNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 }

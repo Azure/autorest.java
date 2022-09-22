@@ -100,16 +100,23 @@ public final class HttpFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getEmptyErrorWithResponse() {
+        return getEmptyErrorWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError() {
-        Boolean value = getEmptyErrorAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getEmptyErrorWithResponse().getValue();
     }
 
     /**
@@ -146,16 +153,23 @@ public final class HttpFailures {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getNoModelErrorWithResponse() {
+        return getNoModelErrorWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty error form server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError() {
-        Boolean value = getNoModelErrorAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getNoModelErrorWithResponse().getValue();
     }
 
     /**
@@ -192,15 +206,22 @@ public final class HttpFailures {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty response from server along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getNoModelEmptyWithResponse() {
+        return getNoModelEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty response from server.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty response from server.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty() {
-        Boolean value = getNoModelEmptyAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getNoModelEmptyWithResponse().getValue();
     }
 }

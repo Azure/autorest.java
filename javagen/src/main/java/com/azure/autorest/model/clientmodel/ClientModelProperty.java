@@ -165,7 +165,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         return annotationArguments;
     }
 
-    public final boolean getIsXmlAttribute() {
+    public final boolean isXmlAttribute() {
         return isXmlAttribute;
     }
 
@@ -181,7 +181,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         return serializedName;
     }
 
-    public final boolean getIsXmlWrapper() {
+    public final boolean isXmlWrapper() {
         return isXmlWrapper;
     }
 
@@ -197,7 +197,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         return clientType;
     }
 
-    public final boolean getIsConstant() {
+    public final boolean isConstant() {
         return isConstant;
     }
 
@@ -205,15 +205,15 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         return defaultValue;
     }
 
-    public final boolean getIsReadOnly() {
+    public final boolean isReadOnly() {
         return isReadOnly;
     }
 
-    public final boolean getIsReadOnlyForCreate() {
+    public final boolean isReadOnlyForCreate() {
         return isReadOnly || (this.getMutabilities() != null && !this.getMutabilities().contains(Mutability.CREATE));
     }
 
-    public final boolean getIsReadOnlyForUpdate() {
+    public final boolean isReadOnlyForUpdate() {
         return isReadOnly || (this.getMutabilities() != null && !this.getMutabilities().contains(Mutability.UPDATE));
     }
 
@@ -293,7 +293,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
 
         if (shouldGenerateXmlSerialization) {
             imports.add(JacksonXmlRootElement.class.getName());
-            if (getIsXmlWrapper()) {
+            if (isXmlWrapper()) {
                 imports.add(JacksonXmlProperty.class.getName());
             }
             if (isXmlText()) {
@@ -383,7 +383,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isXmlAttribute whether this property is an attribute when serialized to XML
          * @return the Builder itself
          */
-        public Builder isXmlAttribute(boolean isXmlAttribute) {
+        public Builder xmlAttribute(boolean isXmlAttribute) {
             this.isXmlAttribute = isXmlAttribute;
             return this;
         }
@@ -423,7 +423,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isXmlWrapper whether this property is a container
          * @return the Builder itself
          */
-        public Builder isXmlWrapper(boolean isXmlWrapper) {
+        public Builder xmlWrapper(boolean isXmlWrapper) {
             this.isXmlWrapper = isXmlWrapper;
             return this;
         }
@@ -463,7 +463,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isConstant whether this property has a constant value
          * @return the Builder itself
          */
-        public Builder isConstant(boolean isConstant) {
+        public Builder constant(boolean isConstant) {
             this.isConstant = isConstant;
             return this;
         }
@@ -483,7 +483,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isReadOnly whether this property's value can be changed by the client library
          * @return the Builder itself
          */
-        public Builder isReadOnly(boolean isReadOnly) {
+        public Builder readOnly(boolean isReadOnly) {
             this.isReadOnly = isReadOnly;
             return this;
         }
@@ -493,7 +493,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isRequired whether this property is required
          * @return the Builder itself
          */
-        public Builder isRequired(boolean isRequired) {
+        public Builder required(boolean isRequired) {
             this.isRequired = isRequired;
             return this;
         }
@@ -513,7 +513,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isAdditionalProperties whether this property contain the additional properties
          * @return the Builder itself
          */
-        public Builder isAdditionalProperties(boolean isAdditionalProperties) {
+        public Builder additionalProperties(boolean isAdditionalProperties) {
             this.isAdditionalProperties = isAdditionalProperties;
             return this;
         }
@@ -571,7 +571,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          * @param isXmlText Whether this property uses the value of an XML tag.
          * @return the Builder itself
          */
-        public Builder isXmlText(boolean isXmlText) {
+        public Builder xmlText(boolean isXmlText) {
             this.isXmlText = isXmlText;
             return this;
         }

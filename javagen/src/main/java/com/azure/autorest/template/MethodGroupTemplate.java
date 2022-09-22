@@ -35,7 +35,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
-        if (settings.shouldClientLogger()) {
+        if (settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
@@ -87,7 +87,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
             writeAdditionalClassBlock(classBlock);
 
-            if (settings.shouldClientLogger()) {
+            if (settings.isUseClientLogger()) {
                 TemplateUtil.addClientLogger(classBlock, methodGroupClient.getClassName(), javaFile.getContents());
             }
         });

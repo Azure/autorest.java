@@ -112,11 +112,23 @@ public final class DurationOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Duration> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null duration value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -163,10 +175,24 @@ public final class DurationOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putPositiveDurationWithResponse(Duration durationBody) {
+        return putPositiveDurationWithResponseAsync(durationBody).block();
+    }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody duration body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putPositiveDuration(Duration durationBody) {
-        putPositiveDurationAsync(durationBody).block();
+        putPositiveDurationWithResponse(durationBody);
     }
 
     /**
@@ -203,11 +229,23 @@ public final class DurationOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Duration> getPositiveDurationWithResponse() {
+        return getPositiveDurationWithResponseAsync().block();
+    }
+
+    /**
+     * Get a positive duration value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getPositiveDuration() {
-        return getPositiveDurationAsync().block();
+        return getPositiveDurationWithResponse().getValue();
     }
 
     /**
@@ -244,10 +282,22 @@ public final class DurationOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Duration> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getInvalid() {
-        return getInvalidAsync().block();
+        return getInvalidWithResponse().getValue();
     }
 }

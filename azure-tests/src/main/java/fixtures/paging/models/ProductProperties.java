@@ -22,6 +22,9 @@ public final class ProductProperties {
     @JsonProperty(value = "name")
     private String name;
 
+    /** Creates an instance of ProductProperties class. */
+    public ProductProperties() {}
+
     /**
      * Get the id property: The id property.
      *

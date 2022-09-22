@@ -128,18 +128,18 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
     }
 
     @Override
-    public boolean getIsReadOnly() {
-        return (targetProperty != null && targetProperty.getIsReadOnly()) || referenceProperty.getIsReadOnly();
+    public boolean isReadOnly() {
+        return (targetProperty != null && targetProperty.isReadOnly()) || referenceProperty.isReadOnly();
     }
 
     @Override
-    public boolean getIsReadOnlyForCreate() {
-        return (targetProperty != null && targetProperty.getIsReadOnly()) || referenceProperty.getIsReadOnlyForCreate();
+    public boolean isReadOnlyForCreate() {
+        return (targetProperty != null && targetProperty.isReadOnly()) || referenceProperty.isReadOnlyForCreate();
     }
 
     @Override
-    public boolean getIsReadOnlyForUpdate() {
-        return (targetProperty != null && targetProperty.getIsReadOnly()) || referenceProperty.getIsReadOnlyForUpdate();
+    public boolean isReadOnlyForUpdate() {
+        return (targetProperty != null && targetProperty.isReadOnly()) || referenceProperty.isReadOnlyForUpdate();
     }
 
     @Override
@@ -148,9 +148,9 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
     }
 
     @Override
-    public boolean getIsConstant() {
+    public boolean isConstant() {
         // could we have the whole flattened model as constant?
-        return referenceProperty.getIsConstant();
+        return referenceProperty.isConstant();
     }
 
     @Override

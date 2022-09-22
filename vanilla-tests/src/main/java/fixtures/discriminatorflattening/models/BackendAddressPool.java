@@ -18,6 +18,9 @@ public final class BackendAddressPool {
     @JsonProperty(value = "properties.location")
     private String location;
 
+    /** Creates an instance of BackendAddressPool class. */
+    public BackendAddressPool() {}
+
     /**
      * Get the location property: The location of the backend address pool.
      *

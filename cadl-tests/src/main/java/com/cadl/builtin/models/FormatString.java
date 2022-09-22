@@ -55,7 +55,7 @@ public final class FormatString {
      * @param password the password value to set.
      */
     @JsonCreator
-    public FormatString(
+    private FormatString(
             @JsonProperty(value = "base64Encoded", required = true) byte[] base64Encoded,
             @JsonProperty(value = "binary", required = true) byte[] binary,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,

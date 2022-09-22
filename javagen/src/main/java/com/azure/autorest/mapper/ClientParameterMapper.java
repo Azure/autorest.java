@@ -40,7 +40,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         JavaSettings settings = JavaSettings.getInstance();
         ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()
                 .name(name)
-                .isRequired(parameter.isRequired())
+                .required(parameter.isRequired())
                 .fromClient(parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT);
         if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null) {
             builder.location(parameter.getProtocol().getHttp().getIn());
@@ -57,7 +57,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         }
         builder.wireType(wireType);
 
-        builder.annotations(settings.shouldNonNullAnnotations() && parameter.isRequired() ?
+        builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
             Collections.singletonList(ClassType.NonNull) : new ArrayList<>());
 
         boolean isConstant = false;
@@ -67,7 +67,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
             defaultValue = objValue == null ? null : String.valueOf(objValue);
         }
-        builder.isConstant(isConstant).defaultValue(defaultValue);
+        builder.constant(isConstant).defaultValue(defaultValue);
 
         builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
         return builder.build();

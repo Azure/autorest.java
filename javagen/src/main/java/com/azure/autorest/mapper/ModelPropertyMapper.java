@@ -40,8 +40,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         ClientModelProperty.Builder builder = new ClientModelProperty.Builder()
                 .name(property.getLanguage().getJava().getName())
-                .isRequired(property.isRequired())
-                .isReadOnly(property.isReadOnly());
+                .required(property.isRequired())
+                .readOnly(property.isReadOnly());
 
 
         String description;
@@ -98,7 +98,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
         builder.serializedName(serializedName.toString());
         if (serializedName.toString().isEmpty() && "additionalProperties".equals(property.getLanguage().getJava().getName())) {
-            builder.isAdditionalProperties(true);
+            builder.additionalProperties(true);
         }
 
         XmlSerlializationFormat xmlSerlializationFormat = null;
@@ -121,10 +121,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;
         builder.xmlName(xmlParamName)
-                .isXmlWrapper(isXmlWrapper)
-                .isXmlAttribute(isXmlAttribute)
+                .xmlWrapper(isXmlWrapper)
+                .xmlAttribute(isXmlAttribute)
                 .xmlNamespace(xmlNamespace)
-                .isXmlText(isXmlText);
+                .xmlText(isXmlText);
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
@@ -169,7 +169,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         if (property.getSchema() instanceof ConstantSchema) {
             Object objValue = ((ConstantSchema) property.getSchema()).getValue().getValue();
-            builder.isConstant(true);
+            builder.constant(true);
             builder.defaultValue(objValue == null ? null : propertyClientType.defaultValueExpression(String.valueOf(objValue)));
         }
 

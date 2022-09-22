@@ -23,6 +23,9 @@ public final class OdataProductResult {
     @JsonProperty(value = "odata.nextLink")
     private String odataNextLink;
 
+    /** Creates an instance of OdataProductResult class. */
+    public OdataProductResult() {}
+
     /**
      * Get the values property: The values property.
      *

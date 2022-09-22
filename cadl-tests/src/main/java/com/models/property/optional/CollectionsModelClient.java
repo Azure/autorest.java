@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.models.property.optional.models.CollectionsByteProperty;
+import com.models.property.optional.models.CollectionsModelProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
 @ServiceClient(builder = CollectionsModelClientBuilder.class)
@@ -40,7 +40,9 @@ public final class CollectionsModelClient {
      * <pre>{@code
      * {
      *     property (Optional): [
-     *         byte[] (Optional)
+     *          (Optional){
+     *             property: String (Optional)
+     *         }
      *     ]
      * }
      * }</pre>
@@ -66,7 +68,9 @@ public final class CollectionsModelClient {
      * <pre>{@code
      * {
      *     property (Optional): [
-     *         byte[] (Optional)
+     *          (Optional){
+     *             property: String (Optional)
+     *         }
      *     ]
      * }
      * }</pre>
@@ -92,12 +96,14 @@ public final class CollectionsModelClient {
      * <pre>{@code
      * {
      *     property (Optional): [
-     *         byte[] (Optional)
+     *          (Optional){
+     *             property: String (Optional)
+     *         }
      *     ]
      * }
      * }</pre>
      *
-     * @param body Model with collection bytes properties.
+     * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,12 +125,14 @@ public final class CollectionsModelClient {
      * <pre>{@code
      * {
      *     property (Optional): [
-     *         byte[] (Optional)
+     *          (Optional){
+     *             property: String (Optional)
+     *         }
      *     ]
      * }
      * }</pre>
      *
-     * @param body Model with collection bytes properties.
+     * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -150,10 +158,10 @@ public final class CollectionsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public CollectionsByteProperty getAll() {
+    public CollectionsModelProperty getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAllWithResponse(requestOptions).getValue().toObject(CollectionsByteProperty.class);
+        return getAllWithResponse(requestOptions).getValue().toObject(CollectionsModelProperty.class);
     }
 
     /**
@@ -168,16 +176,16 @@ public final class CollectionsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public CollectionsByteProperty getDefault() {
+    public CollectionsModelProperty getDefault() {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getDefaultWithResponse(requestOptions).getValue().toObject(CollectionsByteProperty.class);
+        return getDefaultWithResponse(requestOptions).getValue().toObject(CollectionsModelProperty.class);
     }
 
     /**
      * Put a body with all properties present.
      *
-     * @param body Model with collection bytes properties.
+     * @param body Model with collection models properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -187,7 +195,7 @@ public final class CollectionsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putAll(CollectionsByteProperty body) {
+    public void putAll(CollectionsModelProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putAllWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
@@ -196,7 +204,7 @@ public final class CollectionsModelClient {
     /**
      * Put a body with default properties.
      *
-     * @param body Model with collection bytes properties.
+     * @param body Model with collection models properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -206,7 +214,7 @@ public final class CollectionsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDefault(CollectionsByteProperty body) {
+    public void putDefault(CollectionsModelProperty body) {
         // Generated convenience method for putDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).getValue();

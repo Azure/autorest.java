@@ -38,7 +38,7 @@ public final class PartialUpdateModel {
      * @param bytes the bytes value to set.
      */
     @JsonCreator
-    public PartialUpdateModel(
+    private PartialUpdateModel(
             @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
             @JsonProperty(value = "string", required = true) String string,
             @JsonProperty(value = "bytes", required = true) byte[] bytes) {

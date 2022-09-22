@@ -38,6 +38,9 @@ public class Shark extends Fish {
     @JsonProperty(value = "birthday", required = true)
     private OffsetDateTime birthday;
 
+    /** Creates an instance of Shark class. */
+    public Shark() {}
+
     /**
      * Get the age property: The age property.
      *

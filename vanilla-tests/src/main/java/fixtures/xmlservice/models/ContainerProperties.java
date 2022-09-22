@@ -50,6 +50,9 @@ public final class ContainerProperties {
     @JsonProperty(value = "PublicAccess")
     private PublicAccessType publicAccess;
 
+    /** Creates an instance of ContainerProperties class. */
+    public ContainerProperties() {}
+
     /**
      * Get the lastModified property: The Last-Modified property.
      *

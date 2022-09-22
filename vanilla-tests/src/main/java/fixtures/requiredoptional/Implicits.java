@@ -181,10 +181,24 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getRequiredPathWithResponse(String pathParameter) {
+        return getRequiredPathWithResponseAsync(pathParameter).block();
+    }
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @param pathParameter The pathParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredPath(String pathParameter) {
-        getRequiredPathAsync(pathParameter).block();
+        getRequiredPathWithResponse(pathParameter);
     }
 
     /**
@@ -241,10 +255,24 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalQueryWithResponse(String queryParameter) {
+        return putOptionalQueryWithResponseAsync(queryParameter).block();
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @param queryParameter The queryParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryAsync(queryParameter).block();
+        putOptionalQueryWithResponse(queryParameter);
     }
 
     /**
@@ -256,7 +284,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalQuery() {
         final String queryParameter = null;
-        putOptionalQueryAsync(queryParameter).block();
+        putOptionalQueryWithResponse(queryParameter);
     }
 
     /**
@@ -313,10 +341,24 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalHeaderWithResponse(String queryParameter) {
+        return putOptionalHeaderWithResponseAsync(queryParameter).block();
+    }
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @param queryParameter The queryParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderAsync(queryParameter).block();
+        putOptionalHeaderWithResponse(queryParameter);
     }
 
     /**
@@ -328,7 +370,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalHeader() {
         final String queryParameter = null;
-        putOptionalHeaderAsync(queryParameter).block();
+        putOptionalHeaderWithResponse(queryParameter);
     }
 
     /**
@@ -385,10 +427,24 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalBodyWithResponse(String bodyParameter) {
+        return putOptionalBodyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyAsync(bodyParameter).block();
+        putOptionalBodyWithResponse(bodyParameter);
     }
 
     /**
@@ -400,7 +456,7 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBody() {
         final String bodyParameter = null;
-        putOptionalBodyAsync(bodyParameter).block();
+        putOptionalBodyWithResponse(bodyParameter);
     }
 
     /**
@@ -464,10 +520,25 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -480,7 +551,7 @@ public final class Implicits {
     public void putOptionalBinaryBody() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -529,10 +600,25 @@ public final class Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalBinaryBodyWithResponse(BinaryData bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -577,10 +663,22 @@ public final class Implicits {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getRequiredGlobalPathWithResponse() {
+        return getRequiredGlobalPathWithResponseAsync().block();
+    }
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredGlobalPath() {
-        getRequiredGlobalPathAsync().block();
+        getRequiredGlobalPathWithResponse();
     }
 
     /**
@@ -625,10 +723,22 @@ public final class Implicits {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getRequiredGlobalQueryWithResponse() {
+        return getRequiredGlobalQueryWithResponseAsync().block();
+    }
+
+    /**
+     * Test implicitly required query parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredGlobalQuery() {
-        getRequiredGlobalQueryAsync().block();
+        getRequiredGlobalQueryWithResponse();
     }
 
     /**
@@ -668,9 +778,21 @@ public final class Implicits {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getOptionalGlobalQueryWithResponse() {
+        return getOptionalGlobalQueryWithResponseAsync().block();
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getOptionalGlobalQuery() {
-        getOptionalGlobalQueryAsync().block();
+        getOptionalGlobalQueryWithResponse();
     }
 }

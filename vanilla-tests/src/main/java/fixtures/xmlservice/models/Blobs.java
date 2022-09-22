@@ -26,6 +26,9 @@ public final class Blobs {
     @JsonProperty("Blob")
     private List<Blob> blob = new ArrayList<>();
 
+    /** Creates an instance of Blobs class. */
+    public Blobs() {}
+
     /**
      * Get the blobPrefix property: The BlobPrefix property.
      *

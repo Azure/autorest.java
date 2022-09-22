@@ -127,11 +127,11 @@ public final class ReadonlypropertiesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties.
+     * @return complex types that have readonly properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ReadonlyObj getValid() {
-        return getValidAsync().block();
+    public Response<ReadonlyObj> getValidWithResponse() {
+        return getValidWithResponseAsync().block();
     }
 
     /**
@@ -146,6 +146,32 @@ public final class ReadonlypropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ReadonlyObj> getValidWithResponse(Context context) {
         return getValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReadonlyObj getValid() {
+        return getValidWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that have readonly properties.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReadonlyObj getValid(Context context) {
+        return getValidWithResponse(context).getValue();
     }
 
     /**
@@ -215,10 +241,11 @@ public final class ReadonlypropertiesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ReadonlyObj complexBody) {
-        putValidAsync(complexBody).block();
+    public Response<Void> putValidWithResponse(ReadonlyObj complexBody) {
+        return putValidWithResponseAsync(complexBody).block();
     }
 
     /**
@@ -234,5 +261,32 @@ public final class ReadonlypropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
         return putValidWithResponseAsync(complexBody, context).block();
+    }
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody The complexBody parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(ReadonlyObj complexBody) {
+        putValidWithResponse(complexBody, Context.NONE);
+    }
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody The complexBody parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(ReadonlyObj complexBody, Context context) {
+        putValidWithResponse(complexBody, context);
     }
 }

@@ -24,6 +24,9 @@ public final class ObjectWithXMsTextProperty {
      */
     @JacksonXmlText private String content;
 
+    /** Creates an instance of ObjectWithXMsTextProperty class. */
+    public ObjectWithXMsTextProperty() {}
+
     /**
      * Get the language property: Returned value should be 'english'.
      *

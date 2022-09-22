@@ -16,11 +16,13 @@ import {
   getSummary,
   getVisibility,
   ignoreDiagnostics,
+  IntrinsicType,
   isArrayModelType,
   isIntrinsic,
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
+  isUnknownType,
   Model,
   ModelProperty,
   NumericLiteral,
@@ -28,12 +30,13 @@ import {
   Program,
   RecordModelType,
   StringLiteral,
+  TemplatedTypeBase,
   Type,
   TypeNameOptions,
   Union,
   UnionVariant,
 } from "@cadl-lang/compiler";
-import { getDiscriminator, getSegment } from "@cadl-lang/rest";
+import { getDiscriminator, getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
   getAllRoutes,
   getAuthentication,
@@ -92,6 +95,7 @@ import {
 } from "@autorest/codemodel";
 import { SchemaContext, SchemaUsage } from "./schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
+import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -103,6 +107,8 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
+
+  private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
   public constructor(program1: Program) {
     this.program = program1;
@@ -292,21 +298,42 @@ export class CodeModelBuilder {
       }),
     );
 
+    // host
     this.hostParameters.forEach((it) => operation.addParameter(it));
+    // parameters
     op.parameters.parameters.map((it) => this.processParameter(operation, it));
+    // Accept header
     this.addAcceptHeaderParameter(operation, op.responses);
+    // body
     if (op.parameters.bodyParameter) {
       this.processParameterBody(operation, op.parameters.bodyParameter);
     } else if (op.parameters.bodyType) {
-      const bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+      let bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+
       if (bodyType.kind === "Model") {
+        // try use resource type as round-trip model
+        const resourceType = getResourceOperation(this.program, op.operation)?.resourceType;
+        if (resourceType && op.responses && op.responses.length > 0) {
+          const resp = op.responses[0];
+          if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+            const responseBody = resp.responses[0].body;
+            const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+            // response body type is reosurce type, and request body type (if templated) contains resource type
+            if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+              bodyType = resourceType;
+            }
+          }
+        }
+
         this.processParameterBody(operation, bodyType);
       }
     }
+
+    // responses
     op.responses.map((it) => this.processResponse(operation, it));
 
     this.processRouteForPaged(operation, op.responses);
-    this.processRouteForLongRunning(operation, op.responses);
+    this.processRouteForLongRunning(operation, op.operation, op.responses);
 
     operationGroup.addOperation(operation);
   }
@@ -317,18 +344,12 @@ export class CodeModelBuilder {
         const responseBody = response.responses[0].body;
         const bodyType = this.findResponseBody(responseBody.type);
         if (bodyType.kind === "Model") {
-          if (this.hasDecorator(bodyType, "$pagedResult")) {
-            const itemsProperty = Array.from(bodyType.properties.values()).find((it) =>
-              this.hasDecorator(it, "$items"),
-            );
-            const nextLinkProperty = Array.from(bodyType.properties.values()).find((it) =>
-              this.hasDecorator(it, "$nextLink"),
-            );
-
-            op.extensions = op.extensions || {};
+          const pagedResult = getPagedResult(this.program, bodyType);
+          if (pagedResult) {
+            op.extensions = op.extensions ?? {};
             op.extensions["x-ms-pageable"] = {
-              itemName: itemsProperty?.name,
-              nextLinkName: nextLinkProperty?.name,
+              itemName: pagedResult.itemsProperty?.name,
+              nextLinkName: pagedResult.nextLinkProperty?.name,
             };
 
             break;
@@ -338,12 +359,20 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRouteForLongRunning(op: CodeModelOperation, responses: HttpOperationResponse[]) {
+  private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[]) {
+    const operationLinks = getOperationLinks(this.program, operation);
+    if (operationLinks && (operationLinks.has("polling") || operationLinks.has("final"))) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
+
+      return;
+    }
+
     for (const resp of responses) {
       if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
         for (const [_, header] of Object.entries(resp.responses[0].headers)) {
-          if (this.hasDecorator(header, "$pollingLocation")) {
-            op.extensions = op.extensions || {};
+          if (isPollingLocation(this.program, header)) {
+            op.extensions = op.extensions ?? {};
             op.extensions["x-ms-long-running-operation"] = true;
 
             break;
@@ -361,6 +390,12 @@ export class CodeModelBuilder {
     if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
+    } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
+      // special headers
+      op.specialHeaders = op.specialHeaders ?? [];
+      if (!containsIgnoreCase(op.specialHeaders, param.name)) {
+        op.specialHeaders.push(param.name);
+      }
     } else {
       const schema = this.processSchema(param.param.type, param.param.name);
       const nullable = this.isNullableType(param.param.type);
@@ -566,6 +601,13 @@ export class CodeModelBuilder {
 
   private processSchemaImpl(type: Type, nameHint: string): Schema {
     switch (type.kind) {
+      case "Intrinsic":
+        if (isUnknownType(type)) {
+          return this.processAnySchema(type, nameHint);
+        } else {
+          throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+        }
+
       case "String":
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
@@ -639,12 +681,20 @@ export class CodeModelBuilder {
         } else if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
         } else if (isRecordModelType(this.program, type)) {
-          return this.processMapSchema(type, nameHint);
+          return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
+  }
+
+  private processAnySchema(type: IntrinsicType, name: string): AnySchema {
+    return this.codeModel.schemas.add(
+      new AnySchema(this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
   }
 
   private processStringSchema(type: Model, name: string): StringSchema {
@@ -697,12 +747,10 @@ export class CodeModelBuilder {
     );
   }
 
-  private processMapSchema(type: RecordModelType, name: string): DictionarySchema {
-    const dictSchema = this.codeModel.schemas.add(
-      new DictionarySchema<any>(name, this.getDoc(type), null, {
-        summary: this.getSummary(type),
-      }),
-    );
+  private processDictionarySchema(type: RecordModelType, name: string): DictionarySchema {
+    const dictSchema = new DictionarySchema<any>(name, this.getDoc(type), null, {
+      summary: this.getSummary(type),
+    });
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
@@ -1105,46 +1153,7 @@ export class CodeModelBuilder {
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
         const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
-
-        // hack for cadl-azure-core ResourceCreateOrUpdateModel or ResourceCreateOrReplaceModel
-        const knownCoreTemplate = new Set<string>([
-          "OptionalProperties",
-          "UpdateableProperties",
-          "DefaultKeyVisibility",
-        ]);
-
-        let modelUsedInCoreRequest = false;
-        while (
-          knownCoreTemplate.has(target.name) &&
-          target.kind === "Model" &&
-          target.templateArguments &&
-          target.templateArguments.length > 0 &&
-          target.templateArguments[0].kind === "Model"
-        ) {
-          modelUsedInCoreRequest = true;
-          target = target.templateArguments[0];
-        }
-
-        let newName = target.name;
-        if (modelUsedInCoreRequest) {
-          newName = target.name + "Request";
-        } else {
-          // hack for other cases, mostly Page<>
-          newName =
-            target.name +
-            target
-              .templateArguments!.map((it) => {
-                switch (it.kind) {
-                  case "Model":
-                    return it.name;
-                  case "String":
-                    return it.value;
-                  default:
-                    return "";
-                }
-              })
-              .join("");
-        }
+        const newName = getNameForTemplate(target);
         this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
       } else {
@@ -1369,4 +1378,36 @@ function getJavaNamespace(namespace: string | undefined): string | undefined {
 
 function includeDerivedModel(model: Model): boolean {
   return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
+}
+
+function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
+  return (
+    template === target ||
+    (template.templateArguments?.some((it) =>
+      it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
+    ) ??
+      false)
+  );
+}
+
+function getNameForTemplate(target: Type): string {
+  switch (target.kind) {
+    case "Model": {
+      let name = target.name;
+      if (target.templateArguments) {
+        name = name + target.templateArguments.map((it) => getNameForTemplate(it)).join("");
+      }
+      return name;
+    }
+
+    case "String":
+      return target.value;
+
+    default:
+      return "";
+  }
+}
+
+function containsIgnoreCase(stringList: string[], str: string) {
+  return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
 }

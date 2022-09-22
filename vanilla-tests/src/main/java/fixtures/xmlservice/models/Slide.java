@@ -33,6 +33,9 @@ public final class Slide {
     @JsonProperty("item")
     private List<String> items = new ArrayList<>();
 
+    /** Creates an instance of Slide class. */
+    public Slide() {}
+
     /**
      * Get the type property: The type property.
      *

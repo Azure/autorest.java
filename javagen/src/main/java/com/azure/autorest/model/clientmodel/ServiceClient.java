@@ -218,7 +218,7 @@ public class ServiceClient {
                 constructor.addImportsTo(imports, includeImplementationImports);
             }
 
-            if (!settings.shouldGenerateClientInterfaces()) {
+            if (!settings.isGenerateClientInterfaces()) {
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
                     imports.add(String.format("%1$s.%2$s", methodGroupClient.getPackage(), methodGroupClient.getClassName()));
                 }
@@ -232,7 +232,7 @@ public class ServiceClient {
         }
 
         if (includeBuilderImports || includeImplementationImports) {
-            if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+            if (!settings.isFluent() && settings.isGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
                     imports.add(String.format("%1$s.%2$s", settings.getPackage(), methodGroupClient.getInterfaceName()));

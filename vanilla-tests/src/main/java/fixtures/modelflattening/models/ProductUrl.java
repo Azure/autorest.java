@@ -16,6 +16,9 @@ public final class ProductUrl extends GenericUrl {
     @JsonProperty(value = "@odata.value")
     private String odataValue;
 
+    /** Creates an instance of ProductUrl class. */
+    public ProductUrl() {}
+
     /**
      * Get the odataValue property: URL value.
      *

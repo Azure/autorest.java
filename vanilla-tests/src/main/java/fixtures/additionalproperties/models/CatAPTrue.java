@@ -16,6 +16,9 @@ public final class CatAPTrue extends PetAPTrue {
     @JsonProperty(value = "friendly")
     private Boolean friendly;
 
+    /** Creates an instance of CatAPTrue class. */
+    public CatAPTrue() {}
+
     /**
      * Get the friendly property: The friendly property.
      *

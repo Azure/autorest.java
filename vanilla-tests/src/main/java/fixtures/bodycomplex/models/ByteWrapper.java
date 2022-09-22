@@ -17,6 +17,9 @@ public final class ByteWrapper {
     @JsonProperty(value = "field")
     private byte[] field;
 
+    /** Creates an instance of ByteWrapper class. */
+    public ByteWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

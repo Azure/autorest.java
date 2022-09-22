@@ -17,6 +17,9 @@ public final class Dog extends Pet {
      */
     private String food;
 
+    /** Creates an instance of Dog class. */
+    public Dog() {}
+
     /**
      * Get the food property: The food property.
      *

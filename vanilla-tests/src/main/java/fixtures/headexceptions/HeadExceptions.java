@@ -94,10 +94,22 @@ public final class HeadExceptions {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head200WithResponse() {
+        return head200WithResponseAsync().block();
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head200() {
-        head200Async().block();
+        head200WithResponse();
     }
 
     /**
@@ -133,10 +145,22 @@ public final class HeadExceptions {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head204WithResponse() {
+        return head204WithResponseAsync().block();
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head204() {
-        head204Async().block();
+        head204WithResponse();
     }
 
     /**
@@ -172,9 +196,21 @@ public final class HeadExceptions {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head404WithResponse() {
+        return head404WithResponseAsync().block();
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head404() {
-        head404Async().block();
+        head404WithResponse();
     }
 }

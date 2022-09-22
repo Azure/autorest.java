@@ -24,6 +24,9 @@ public final class Datetimerfc1123Wrapper {
     @JsonProperty(value = "now")
     private DateTimeRfc1123 now;
 
+    /** Creates an instance of Datetimerfc1123Wrapper class. */
+    public Datetimerfc1123Wrapper() {}
+
     /**
      * Get the field property: The field property.
      *

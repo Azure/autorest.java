@@ -22,6 +22,9 @@ public final class ParameterGroupingPostOptionalParameters {
     @JsonProperty(value = "query")
     private Integer query;
 
+    /** Creates an instance of ParameterGroupingPostOptionalParameters class. */
+    public ParameterGroupingPostOptionalParameters() {}
+
     /**
      * Get the customHeader property: The customHeader property.
      *

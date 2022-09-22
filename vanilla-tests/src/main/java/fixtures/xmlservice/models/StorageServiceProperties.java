@@ -34,9 +34,6 @@ public final class StorageServiceProperties {
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
 
-    /*
-     * The set of CORS rules.
-     */
     private static final class CorsWrapper {
         @JacksonXmlProperty(localName = "CorsRule")
         private final List<CorsRule> items;
@@ -47,6 +44,9 @@ public final class StorageServiceProperties {
         }
     }
 
+    /*
+     * The set of CORS rules.
+     */
     @JsonProperty(value = "Cors")
     private CorsWrapper cors;
 
@@ -62,6 +62,9 @@ public final class StorageServiceProperties {
      */
     @JsonProperty(value = "DeleteRetentionPolicy")
     private RetentionPolicy deleteRetentionPolicy;
+
+    /** Creates an instance of StorageServiceProperties class. */
+    public StorageServiceProperties() {}
 
     /**
      * Get the logging property: Azure Analytics Logging settings.

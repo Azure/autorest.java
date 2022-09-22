@@ -89,10 +89,22 @@ public final class Flattencomplexes {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MyBaseType> getValidWithResponse() {
+        return getValidWithResponseAsync().block();
+    }
+
+    /**
+     * The getValid operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValid() {
-        return getValidAsync().block();
+        return getValidWithResponse().getValue();
     }
 }

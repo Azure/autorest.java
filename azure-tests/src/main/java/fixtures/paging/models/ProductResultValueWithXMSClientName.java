@@ -23,6 +23,9 @@ public final class ProductResultValueWithXMSClientName {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
+    /** Creates an instance of ProductResultValueWithXMSClientName class. */
+    public ProductResultValueWithXMSClientName() {}
+
     /**
      * Get the indexes property: The values property.
      *

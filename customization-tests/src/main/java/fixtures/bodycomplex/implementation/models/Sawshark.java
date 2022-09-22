@@ -23,6 +23,9 @@ public final class Sawshark extends Shark {
     @JsonProperty(value = "picture")
     private byte[] picture;
 
+    /** Creates an instance of Sawshark class. */
+    public Sawshark() {}
+
     /**
      * Get the picture property: The picture property.
      *

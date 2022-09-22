@@ -162,10 +162,30 @@ public final class Formdataurlencodeds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> updatePetWithFormWithResponse(
+            int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
+        return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status).block();
+    }
+
+    /**
+     * Updates a pet in the store with form data.
+     *
+     * @param petId ID of pet that needs to be updated.
+     * @param petType Can take a value of dog, or cat, or fish.
+     * @param petFood Can take a value of meat, or fish, or plant.
+     * @param petAge How many years is it old?.
+     * @param name Updated name of the pet.
+     * @param status Updated status of the pet.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void updatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
-        updatePetWithFormAsync(petId, petType, petFood, petAge, name, status).block();
+        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status);
     }
 
     /**
@@ -183,7 +203,7 @@ public final class Formdataurlencodeds {
     public void updatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge) {
         final String name = null;
         final String status = null;
-        updatePetWithFormAsync(petId, petType, petFood, petAge, name, status).block();
+        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status);
     }
 
     /**
@@ -241,9 +261,25 @@ public final class Formdataurlencodeds {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> partialConstantBodyWithResponse(String serviceParam, String accessToken) {
+        return partialConstantBodyWithResponseAsync(serviceParam, accessToken).block();
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void partialConstantBody(String serviceParam, String accessToken) {
-        partialConstantBodyAsync(serviceParam, accessToken).block();
+        partialConstantBodyWithResponse(serviceParam, accessToken);
     }
 }

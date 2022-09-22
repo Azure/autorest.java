@@ -532,11 +532,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null dictionary value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -573,11 +585,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getEmptyWithResponse() {
+        return getEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty dictionary value {}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getEmpty() {
-        return getEmptyAsync().block();
+        return getEmptyWithResponse().getValue();
     }
 
     /**
@@ -623,10 +647,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptyWithResponse(Map<String, String> arrayBody) {
+        return putEmptyWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value empty {}.
+     *
+     * @param arrayBody The empty dictionary value {}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyAsync(arrayBody).block();
+        putEmptyWithResponse(arrayBody);
     }
 
     /**
@@ -663,11 +701,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getNullValueWithResponse() {
+        return getNullValueWithResponseAsync().block();
+    }
+
+    /**
+     * Get Dictionary with null value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullValue() {
-        return getNullValueAsync().block();
+        return getNullValueWithResponse().getValue();
     }
 
     /**
@@ -704,11 +754,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getNullKeyWithResponse() {
+        return getNullKeyWithResponseAsync().block();
+    }
+
+    /**
+     * Get Dictionary with null key.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null key.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullKey() {
-        return getNullKeyAsync().block();
+        return getNullKeyWithResponse().getValue();
     }
 
     /**
@@ -745,11 +807,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getEmptyStringKeyWithResponse() {
+        return getEmptyStringKeyWithResponseAsync().block();
+    }
+
+    /**
+     * Get Dictionary with key as empty string.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with key as empty string.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyAsync().block();
+        return getEmptyStringKeyWithResponse().getValue();
     }
 
     /**
@@ -786,11 +860,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid Dictionary value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Dictionary value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getInvalid() {
-        return getInvalidAsync().block();
+        return getInvalidWithResponse().getValue();
     }
 
     /**
@@ -829,11 +915,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Boolean>> getBooleanTfftWithResponse() {
+        return getBooleanTfftWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().block();
+        return getBooleanTfftWithResponse().getValue();
     }
 
     /**
@@ -880,10 +978,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody) {
+        return putBooleanTfftWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).block();
+        putBooleanTfftWithResponse(arrayBody);
     }
 
     /**
@@ -921,11 +1033,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false } along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Boolean>> getBooleanInvalidNullWithResponse() {
+        return getBooleanInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": null, "2": false }.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().block();
+        return getBooleanInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -964,11 +1088,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Boolean>> getBooleanInvalidStringWithResponse() {
+        return getBooleanInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().block();
+        return getBooleanInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1006,11 +1142,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getIntegerValidWithResponse() {
+        return getIntegerValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidAsync().block();
+        return getIntegerValidWithResponse().getValue();
     }
 
     /**
@@ -1057,10 +1205,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putIntegerValidWithResponse(Map<String, Integer> arrayBody) {
+        return putIntegerValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).block();
+        putIntegerValidWithResponse(arrayBody);
     }
 
     /**
@@ -1098,11 +1260,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getIntInvalidNullWithResponse() {
+        return getIntInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().block();
+        return getIntInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1140,11 +1314,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Integer>> getIntInvalidStringWithResponse() {
+        return getIntInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().block();
+        return getIntInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1182,11 +1368,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Long>> getLongValidWithResponse() {
+        return getLongValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongValid() {
-        return getLongValidAsync().block();
+        return getLongValidWithResponse().getValue();
     }
 
     /**
@@ -1232,10 +1430,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putLongValidWithResponse(Map<String, Long> arrayBody) {
+        return putLongValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidAsync(arrayBody).block();
+        putLongValidWithResponse(arrayBody);
     }
 
     /**
@@ -1273,11 +1485,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Long>> getLongInvalidNullWithResponse() {
+        return getLongInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": null, "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().block();
+        return getLongInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1315,11 +1539,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Long>> getLongInvalidStringWithResponse() {
+        return getLongInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().block();
+        return getLongInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1357,11 +1593,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Float>> getFloatValidWithResponse() {
+        return getFloatValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
-        return getFloatValidAsync().block();
+        return getFloatValidWithResponse().getValue();
     }
 
     /**
@@ -1408,10 +1656,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putFloatValidWithResponse(Map<String, Float> arrayBody) {
+        return putFloatValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatValid(Map<String, Float> arrayBody) {
-        putFloatValidAsync(arrayBody).block();
+        putFloatValidWithResponse(arrayBody);
     }
 
     /**
@@ -1449,11 +1711,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Float>> getFloatInvalidNullWithResponse() {
+        return getFloatInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().block();
+        return getFloatInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1491,11 +1765,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Float>> getFloatInvalidStringWithResponse() {
+        return getFloatInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().block();
+        return getFloatInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1533,11 +1819,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Double>> getDoubleValidWithResponse() {
+        return getDoubleValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidAsync().block();
+        return getDoubleValidWithResponse().getValue();
     }
 
     /**
@@ -1584,10 +1882,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDoubleValidWithResponse(Map<String, Double> arrayBody) {
+        return putDoubleValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).block();
+        putDoubleValidWithResponse(arrayBody);
     }
 
     /**
@@ -1625,11 +1937,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Double>> getDoubleInvalidNullWithResponse() {
+        return getDoubleInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().block();
+        return getDoubleInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -1667,11 +1991,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Double>> getDoubleInvalidStringWithResponse() {
+        return getDoubleInvalidStringWithResponseAsync().block();
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().block();
+        return getDoubleInvalidStringWithResponse().getValue();
     }
 
     /**
@@ -1709,11 +2045,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getStringValidWithResponse() {
+        return getStringValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringValid() {
-        return getStringValidAsync().block();
+        return getStringValidWithResponse().getValue();
     }
 
     /**
@@ -1760,10 +2108,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putStringValidWithResponse(Map<String, String> arrayBody) {
+        return putStringValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidAsync(arrayBody).block();
+        putStringValidWithResponse(arrayBody);
     }
 
     /**
@@ -1801,11 +2163,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getStringWithNullWithResponse() {
+        return getStringWithNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullAsync().block();
+        return getStringWithNullWithResponse().getValue();
     }
 
     /**
@@ -1843,11 +2217,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, String>> getStringWithInvalidWithResponse() {
+        return getStringWithInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().block();
+        return getStringWithInvalidWithResponse().getValue();
     }
 
     /**
@@ -1886,11 +2272,24 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, LocalDate>> getDateValidWithResponse() {
+        return getDateValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidAsync().block();
+        return getDateValidWithResponse().getValue();
     }
 
     /**
@@ -1936,10 +2335,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateValidWithResponse(Map<String, LocalDate> arrayBody) {
+        return putDateValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).block();
+        putDateValidWithResponse(arrayBody);
     }
 
     /**
@@ -1978,11 +2391,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, LocalDate>> getDateInvalidNullWithResponse() {
+        return getDateInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().block();
+        return getDateInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2020,11 +2445,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, LocalDate>> getDateInvalidCharsWithResponse() {
+        return getDateInvalidCharsWithResponseAsync().block();
+    }
+
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().block();
+        return getDateInvalidCharsWithResponse().getValue();
     }
 
     /**
@@ -2067,11 +2504,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, OffsetDateTime>> getDateTimeValidWithResponse() {
+        return getDateTimeValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      *     "1492-10-12T10:15:01-08:00"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().block();
+        return getDateTimeValidWithResponse().getValue();
     }
 
     /**
@@ -2124,10 +2575,26 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
+        return putDateTimeValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeValid(Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).block();
+        putDateTimeValidWithResponse(arrayBody);
     }
 
     /**
@@ -2165,11 +2632,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidNullWithResponse() {
+        return getDateTimeInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().block();
+        return getDateTimeInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2208,11 +2687,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidCharsWithResponse() {
+        return getDateTimeInvalidCharsWithResponseAsync().block();
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().block();
+        return getDateTimeInvalidCharsWithResponse().getValue();
     }
 
     /**
@@ -2256,11 +2747,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidWithResponse() {
+        return getDateTimeRfc1123ValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().block();
+        return getDateTimeRfc1123ValidWithResponse().getValue();
     }
 
     /**
@@ -2318,10 +2823,26 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
+     * "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Valid(Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).block();
+        putDateTimeRfc1123ValidWithResponse(arrayBody);
     }
 
     /**
@@ -2360,11 +2881,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Duration>> getDurationValidWithResponse() {
+        return getDurationValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {
-        return getDurationValidAsync().block();
+        return getDurationValidWithResponse().getValue();
     }
 
     /**
@@ -2411,10 +2944,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDurationValidWithResponse(Map<String, Duration> arrayBody) {
+        return putDurationValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationValid(Map<String, Duration> arrayBody) {
-        putDurationValidAsync(arrayBody).block();
+        putDurationValidWithResponse(arrayBody);
     }
 
     /**
@@ -2457,11 +3004,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     *     encoded in base64 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, byte[]>> getByteValidWithResponse() {
+        return getByteValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     * encoded in base64.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      *     encoded in base64.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteValid() {
-        return getByteValidAsync().block();
+        return getByteValidWithResponse().getValue();
     }
 
     /**
@@ -2513,10 +3074,26 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putByteValidWithResponse(Map<String, byte[]> arrayBody) {
+        return putByteValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
+     * elementencoded in base 64.
+     *
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
+     *     each elementencoded in base 64.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).block();
+        putByteValidWithResponse(arrayBody);
     }
 
     /**
@@ -2555,11 +3132,24 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, byte[]>> getByteInvalidNullWithResponse() {
+        return getByteInvalidNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().block();
+        return getByteInvalidNullWithResponse().getValue();
     }
 
     /**
@@ -2602,11 +3192,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
+     *     "Lorem ipsum"} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, byte[]>> getBase64UrlWithResponse() {
+        return getBase64UrlWithResponseAsync().block();
+    }
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+     * ipsum"}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
      *     "Lorem ipsum"}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlAsync().block();
+        return getBase64UrlWithResponse().getValue();
     }
 
     /**
@@ -2644,11 +3248,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Widget>> getComplexNullWithResponse() {
+        return getComplexNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get dictionary of complex type null value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type null value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullAsync().block();
+        return getComplexNullWithResponse().getValue();
     }
 
     /**
@@ -2685,11 +3301,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Widget>> getComplexEmptyWithResponse() {
+        return getComplexEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty dictionary of complex type {}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary of complex type {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyAsync().block();
+        return getComplexEmptyWithResponse().getValue();
     }
 
     /**
@@ -2732,11 +3360,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
+     *     {"integer": 5, "string": "6"}} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Widget>> getComplexItemNullWithResponse() {
+        return getComplexItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
      *     {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullAsync().block();
+        return getComplexItemNullWithResponse().getValue();
     }
 
     /**
@@ -2779,11 +3421,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
+     *     5, "string": "6"}} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Widget>> getComplexItemEmptyWithResponse() {
+        return getComplexItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
      *     5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().block();
+        return getComplexItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -2826,11 +3482,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
+     *     "2": {"integer": 5, "string": "6"}} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Widget>> getComplexValidWithResponse() {
+        return getComplexValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+     * {"integer": 5, "string": "6"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
      *     "2": {"integer": 5, "string": "6"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidAsync().block();
+        return getComplexValidWithResponse().getValue();
     }
 
     /**
@@ -2892,10 +3562,26 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putComplexValidWithResponse(Map<String, Widget> arrayBody) {
+        return putComplexValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
+     * "4"}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
+     *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidAsync(arrayBody).block();
+        putComplexValidWithResponse(arrayBody);
     }
 
     /**
@@ -2932,11 +3618,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, List<String>>> getArrayNullWithResponse() {
+        return getArrayNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get a null array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullAsync().block();
+        return getArrayNullWithResponse().getValue();
     }
 
     /**
@@ -2973,11 +3671,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, List<String>>> getArrayEmptyWithResponse() {
+        return getArrayEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an empty dictionary {}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty dictionary {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().block();
+        return getArrayEmptyWithResponse().getValue();
     }
 
     /**
@@ -3016,11 +3726,24 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, List<String>>> getArrayItemNullWithResponse() {
+        return getArrayItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().block();
+        return getArrayItemNullWithResponse().getValue();
     }
 
     /**
@@ -3059,11 +3782,24 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, List<String>>> getArrayItemEmptyWithResponse() {
+        return getArrayItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().block();
+        return getArrayItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -3102,11 +3838,24 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} along
+     *     with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, List<String>>> getArrayValidWithResponse() {
+        return getArrayValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidAsync().block();
+        return getArrayValidWithResponse().getValue();
     }
 
     /**
@@ -3153,10 +3902,24 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putArrayValidWithResponse(Map<String, List<String>> arrayBody) {
+        return putArrayValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).block();
+        putArrayValidWithResponse(arrayBody);
     }
 
     /**
@@ -3194,11 +3957,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Map<String, String>>> getDictionaryNullWithResponse() {
+        return getDictionaryNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries with value null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().block();
+        return getDictionaryNullWithResponse().getValue();
     }
 
     /**
@@ -3237,11 +4012,23 @@ public final class DictionariesImpl {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Map<String, String>>> getDictionaryEmptyWithResponse() {
+        return getDictionaryEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().block();
+        return getDictionaryEmptyWithResponse().getValue();
     }
 
     /**
@@ -3286,11 +4073,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Map<String, String>>> getDictionaryItemNullWithResponse() {
+        return getDictionaryItemNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().block();
+        return getDictionaryItemNullWithResponse().getValue();
     }
 
     /**
@@ -3335,11 +4136,25 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Map<String, String>>> getDictionaryItemEmptyWithResponse() {
+        return getDictionaryItemEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().block();
+        return getDictionaryItemEmptyWithResponse().getValue();
     }
 
     /**
@@ -3384,11 +4199,26 @@ public final class DictionariesImpl {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, Map<String, String>>> getDictionaryValidWithResponse() {
+        return getDictionaryValidWithResponseAsync().block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
      *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().block();
+        return getDictionaryValidWithResponse().getValue();
     }
 
     /**
@@ -3448,9 +4278,28 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDictionaryValidWithResponse(Map<String, Map<String, String>> arrayBody) {
+        return putDictionaryValidWithResponseAsync(arrayBody).block();
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
+     *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
+     *     "9": "nine"}}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).block();
+        putDictionaryValidWithResponse(arrayBody);
     }
 }

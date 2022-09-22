@@ -124,16 +124,23 @@ public final class Bools {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getTrueWithResponse() {
+        return getTrueWithResponseAsync().block();
+    }
+
+    /**
+     * Get true Boolean value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getTrue() {
-        Boolean value = getTrueAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getTrueWithResponse().getValue();
     }
 
     /**
@@ -176,10 +183,24 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putTrueWithResponse(boolean boolBody) {
+        return putTrueWithResponseAsync(boolBody).block();
+    }
+
+    /**
+     * Set Boolean value true.
+     *
+     * @param boolBody The boolBody parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putTrue(boolean boolBody) {
-        putTrueAsync(boolBody).block();
+        putTrueWithResponse(boolBody);
     }
 
     /**
@@ -216,16 +237,23 @@ public final class Bools {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getFalseWithResponse() {
+        return getFalseWithResponseAsync().block();
+    }
+
+    /**
+     * Get false Boolean value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getFalse() {
-        Boolean value = getFalseAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getFalseWithResponse().getValue();
     }
 
     /**
@@ -268,10 +296,24 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putFalseWithResponse(boolean boolBody) {
+        return putFalseWithResponseAsync(boolBody).block();
+    }
+
+    /**
+     * Set Boolean value false.
+     *
+     * @param boolBody The boolBody parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFalse(boolean boolBody) {
-        putFalseAsync(boolBody).block();
+        putFalseWithResponse(boolBody);
     }
 
     /**
@@ -308,16 +350,23 @@ public final class Bools {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null Boolean value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNull() {
-        Boolean value = getNullAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -354,15 +403,22 @@ public final class Bools {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getInvalid() {
-        Boolean value = getInvalidAsync().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return getInvalidWithResponse().getValue();
     }
 }

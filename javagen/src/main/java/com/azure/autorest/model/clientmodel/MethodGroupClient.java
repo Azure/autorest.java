@@ -134,7 +134,7 @@ public class MethodGroupClient {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
+        if (!settings.isFluent() && settings.isGenerateClientInterfaces()) {
             imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
         }
 
@@ -147,7 +147,7 @@ public class MethodGroupClient {
             ClassType proxyType = getProxyClassType();
             imports.add(proxyType.getFullName());
 
-            if (settings.shouldGenerateClientInterfaces()) {
+            if (settings.isGenerateClientInterfaces()) {
                 String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
                 imports.add(String.format("%1$s.%2$s", interfacePackage, this.getInterfaceName()));
             }

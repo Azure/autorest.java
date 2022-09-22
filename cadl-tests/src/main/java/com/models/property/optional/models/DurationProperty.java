@@ -17,6 +17,9 @@ public final class DurationProperty {
     @JsonProperty(value = "property")
     private OffsetDateTime property;
 
+    /** Creates an instance of DurationProperty class. */
+    public DurationProperty() {}
+
     /**
      * Get the property property: Property.
      *

@@ -201,10 +201,11 @@ public final class SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodPathValid(String unencodedPathParam) {
-        getMethodPathValidAsync(unencodedPathParam).block();
+    public Response<Void> getMethodPathValidWithResponse(String unencodedPathParam) {
+        return getMethodPathValidWithResponseAsync(unencodedPathParam).block();
     }
 
     /**
@@ -220,6 +221,33 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getMethodPathValidWithResponse(String unencodedPathParam, Context context) {
         return getMethodPathValidWithResponseAsync(unencodedPathParam, context).block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodPathValid(String unencodedPathParam) {
+        getMethodPathValidWithResponse(unencodedPathParam, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodPathValid(String unencodedPathParam, Context context) {
+        getMethodPathValidWithResponse(unencodedPathParam, context);
     }
 
     /**
@@ -310,10 +338,11 @@ public final class SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getPathValid(String unencodedPathParam) {
-        getPathValidAsync(unencodedPathParam).block();
+    public Response<Void> getPathValidWithResponse(String unencodedPathParam) {
+        return getPathValidWithResponseAsync(unencodedPathParam).block();
     }
 
     /**
@@ -329,6 +358,33 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getPathValidWithResponse(String unencodedPathParam, Context context) {
         return getPathValidWithResponseAsync(unencodedPathParam, context).block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathValid(String unencodedPathParam) {
+        getPathValidWithResponse(unencodedPathParam, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathValid(String unencodedPathParam, Context context) {
+        getPathValidWithResponse(unencodedPathParam, context);
     }
 
     /**
@@ -405,10 +461,11 @@ public final class SkipUrlEncodings {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded path parameter with value 'path1/path2/path3' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getSwaggerPathValid() {
-        getSwaggerPathValidAsync().block();
+    public Response<Void> getSwaggerPathValidWithResponse() {
+        return getSwaggerPathValidWithResponseAsync().block();
     }
 
     /**
@@ -423,6 +480,30 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getSwaggerPathValidWithResponse(Context context) {
         return getSwaggerPathValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerPathValid() {
+        getSwaggerPathValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerPathValid(Context context) {
+        getSwaggerPathValidWithResponse(context);
     }
 
     /**
@@ -510,10 +591,12 @@ public final class SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3' along with {@link
+     *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodQueryValid(String q1) {
-        getMethodQueryValidAsync(q1).block();
+    public Response<Void> getMethodQueryValidWithResponse(String q1) {
+        return getMethodQueryValidWithResponseAsync(q1).block();
     }
 
     /**
@@ -530,6 +613,33 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getMethodQueryValidWithResponse(String q1, Context context) {
         return getMethodQueryValidWithResponseAsync(q1, context).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodQueryValid(String q1) {
+        getMethodQueryValidWithResponse(q1, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodQueryValid(String q1, Context context) {
+        getMethodQueryValidWithResponse(q1, context);
     }
 
     /**
@@ -622,22 +732,11 @@ public final class SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodQueryNull(String q1) {
-        getMethodQueryNullAsync(q1).block();
-    }
-
-    /**
-     * Get method with unencoded query parameter with value null.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodQueryNull() {
-        final String q1 = null;
-        getMethodQueryNullAsync(q1).block();
+    public Response<Void> getMethodQueryNullWithResponse(String q1) {
+        return getMethodQueryNullWithResponseAsync(q1).block();
     }
 
     /**
@@ -653,6 +752,45 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getMethodQueryNullWithResponse(String q1, Context context) {
         return getMethodQueryNullWithResponseAsync(q1, context).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodQueryNull(String q1) {
+        getMethodQueryNullWithResponse(q1, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodQueryNull() {
+        final String q1 = null;
+        getMethodQueryNullWithResponse(q1, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getMethodQueryNull(String q1, Context context) {
+        getMethodQueryNullWithResponse(q1, context);
     }
 
     /**
@@ -740,10 +878,12 @@ public final class SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3' along with {@link
+     *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getPathQueryValid(String q1) {
-        getPathQueryValidAsync(q1).block();
+    public Response<Void> getPathQueryValidWithResponse(String q1) {
+        return getPathQueryValidWithResponseAsync(q1).block();
     }
 
     /**
@@ -760,6 +900,33 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getPathQueryValidWithResponse(String q1, Context context) {
         return getPathQueryValidWithResponseAsync(q1, context).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathQueryValid(String q1) {
+        getPathQueryValidWithResponse(q1, Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getPathQueryValid(String q1, Context context) {
+        getPathQueryValidWithResponse(q1, context);
     }
 
     /**
@@ -836,10 +1003,12 @@ public final class SkipUrlEncodings {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3' along with {@link
+     *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getSwaggerQueryValid() {
-        getSwaggerQueryValidAsync().block();
+    public Response<Void> getSwaggerQueryValidWithResponse() {
+        return getSwaggerQueryValidWithResponseAsync().block();
     }
 
     /**
@@ -855,5 +1024,29 @@ public final class SkipUrlEncodings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getSwaggerQueryValidWithResponse(Context context) {
         return getSwaggerQueryValidWithResponseAsync(context).block();
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerQueryValid() {
+        getSwaggerQueryValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getSwaggerQueryValid(Context context) {
+        getSwaggerQueryValidWithResponse(context);
     }
 }

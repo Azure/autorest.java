@@ -160,24 +160,11 @@ public final class Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).block();
-    }
-
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getWithFilter() {
-        final String filter = null;
-        final Integer top = null;
-        final String orderby = null;
-        getWithFilterAsync(filter, top, orderby).block();
+    public Response<Void> getWithFilterWithResponse(String filter, Integer top, String orderby) {
+        return getWithFilterWithResponseAsync(filter, top, orderby).block();
     }
 
     /**
@@ -195,5 +182,50 @@ public final class Odatas {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithFilterWithResponse(String filter, Integer top, String orderby, Context context) {
         return getWithFilterWithResponseAsync(filter, top, orderby, context).block();
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getWithFilter(String filter, Integer top, String orderby) {
+        getWithFilterWithResponse(filter, top, orderby, Context.NONE);
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getWithFilter() {
+        final String filter = null;
+        final Integer top = null;
+        final String orderby = null;
+        getWithFilterWithResponse(filter, top, orderby, Context.NONE);
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getWithFilter(String filter, Integer top, String orderby, Context context) {
+        getWithFilterWithResponse(filter, top, orderby, context);
     }
 }

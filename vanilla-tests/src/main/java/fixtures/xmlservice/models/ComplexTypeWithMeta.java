@@ -18,6 +18,9 @@ public final class ComplexTypeWithMeta {
     @JsonProperty(value = "ID")
     private String id;
 
+    /** Creates an instance of ComplexTypeWithMeta class. */
+    public ComplexTypeWithMeta() {}
+
     /**
      * Get the id property: The id of the res.
      *

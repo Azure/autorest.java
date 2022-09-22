@@ -16,6 +16,9 @@ public final class NoModelAsStringRequiredTwoValueNoDefault {
     @JsonProperty(value = "parameter", required = true)
     private NoModelAsStringRequiredTwoValueNoDefaultEnum parameter;
 
+    /** Creates an instance of NoModelAsStringRequiredTwoValueNoDefault class. */
+    public NoModelAsStringRequiredTwoValueNoDefault() {}
+
     /**
      * Get the parameter property: The parameter property.
      *

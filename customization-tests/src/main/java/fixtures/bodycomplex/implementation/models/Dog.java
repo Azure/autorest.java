@@ -16,6 +16,9 @@ public final class Dog extends Pet {
     @JsonProperty(value = "food")
     private String food;
 
+    /** Creates an instance of Dog class. */
+    public Dog() {}
+
     /**
      * Get the food property: The food property.
      *

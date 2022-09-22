@@ -275,10 +275,24 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putArrayWithResponse(List<Resource> resourceArray) {
+        return putArrayWithResponseAsync(resourceArray).block();
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).block();
+        putArrayWithResponse(resourceArray);
     }
 
     /**
@@ -290,7 +304,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArray() {
         final List<Resource> resourceArray = null;
-        putArrayAsync(resourceArray).block();
+        putArrayWithResponse(resourceArray);
     }
 
     /**
@@ -326,11 +340,23 @@ public final class AutoRestResourceFlatteningTestService {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<FlattenedProduct>> getArrayWithResponse() {
+        return getArrayWithResponseAsync().block();
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<FlattenedProduct> getArray() {
-        return getArrayAsync().block();
+        return getArrayWithResponse().getValue();
     }
 
     /**
@@ -392,10 +418,25 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putWrappedArrayWithResponse(List<WrappedProduct> resourceArray) {
+        return putWrappedArrayWithResponseAsync(resourceArray).block();
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
+     * @param resourceArray External Resource as an Array to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
-        putWrappedArrayAsync(resourceArray).block();
+        putWrappedArrayWithResponse(resourceArray);
     }
 
     /**
@@ -408,7 +449,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedArray() {
         final List<WrappedProduct> resourceArray = null;
-        putWrappedArrayAsync(resourceArray).block();
+        putWrappedArrayWithResponse(resourceArray);
     }
 
     /**
@@ -447,11 +488,24 @@ public final class AutoRestResourceFlatteningTestService {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<List<ProductWrapper>> getWrappedArrayWithResponse() {
+        return getWrappedArrayWithResponseAsync().block();
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<ProductWrapper> getWrappedArray() {
-        return getWrappedArrayAsync().block();
+        return getWrappedArrayWithResponse().getValue();
     }
 
     /**
@@ -517,10 +571,24 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putDictionaryWithResponse(Map<String, FlattenedProduct> resourceDictionary) {
+        return putDictionaryWithResponseAsync(resourceDictionary).block();
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).block();
+        putDictionaryWithResponse(resourceDictionary);
     }
 
     /**
@@ -532,7 +600,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionary() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
-        putDictionaryAsync(resourceDictionary).block();
+        putDictionaryWithResponse(resourceDictionary);
     }
 
     /**
@@ -568,11 +636,23 @@ public final class AutoRestResourceFlatteningTestService {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Map<String, FlattenedProduct>> getDictionaryWithResponse() {
+        return getDictionaryWithResponseAsync().block();
+    }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryAsync().block();
+        return getDictionaryWithResponse().getValue();
     }
 
     /**
@@ -631,10 +711,24 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putResourceCollectionWithResponse(ResourceCollection resourceComplexObject) {
+        return putResourceCollectionWithResponseAsync(resourceComplexObject).block();
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).block();
+        putResourceCollectionWithResponse(resourceComplexObject);
     }
 
     /**
@@ -646,7 +740,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putResourceCollection() {
         final ResourceCollection resourceComplexObject = null;
-        putResourceCollectionAsync(resourceComplexObject).block();
+        putResourceCollectionWithResponse(resourceComplexObject);
     }
 
     /**
@@ -683,11 +777,23 @@ public final class AutoRestResourceFlatteningTestService {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ResourceCollection> getResourceCollectionWithResponse() {
+        return getResourceCollectionWithResponseAsync().block();
+    }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionAsync().block();
+        return getResourceCollectionWithResponse().getValue();
     }
 
     /**
@@ -746,11 +852,25 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<SimpleProduct> putSimpleProductWithResponse(SimpleProduct simpleBodyProduct) {
+        return putSimpleProductWithResponseAsync(simpleBodyProduct).block();
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductAsync(simpleBodyProduct).block();
+        return putSimpleProductWithResponse(simpleBodyProduct).getValue();
     }
 
     /**
@@ -763,7 +883,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProduct() {
         final SimpleProduct simpleBodyProduct = null;
-        return putSimpleProductAsync(simpleBodyProduct).block();
+        return putSimpleProductWithResponse(simpleBodyProduct).getValue();
     }
 
     /**
@@ -878,6 +998,34 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<SimpleProduct> postFlattenedSimpleProductWithResponse(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
+            String genericValue,
+            String odataValue) {
+        return postFlattenedSimpleProductWithResponseAsync(
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
+                .block();
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
+     * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
+     * @param genericValue Generic URL value.
+     * @param odataValue URL value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -888,9 +1036,9 @@ public final class AutoRestResourceFlatteningTestService {
             SimpleProductPropertiesMaxProductCapacity capacity,
             String genericValue,
             String odataValue) {
-        return postFlattenedSimpleProductAsync(
+        return postFlattenedSimpleProductWithResponse(
                         productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
-                .block();
+                .getValue();
     }
 
     /**
@@ -910,9 +1058,9 @@ public final class AutoRestResourceFlatteningTestService {
         final SimpleProductPropertiesMaxProductCapacity capacity = null;
         final String genericValue = null;
         final String odataValue = null;
-        return postFlattenedSimpleProductAsync(
+        return postFlattenedSimpleProductWithResponse(
                         productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
-                .block();
+                .getValue();
     }
 
     /**
@@ -972,10 +1120,25 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<SimpleProduct> putSimpleProductWithGroupingWithResponse(
+            FlattenParameterGroup flattenParameterGroup) {
+        return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup).block();
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingAsync(flattenParameterGroup).block();
+        return putSimpleProductWithGroupingWithResponse(flattenParameterGroup).getValue();
     }
 }

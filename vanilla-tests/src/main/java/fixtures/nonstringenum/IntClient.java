@@ -8,6 +8,7 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.rest.Response;
 import fixtures.nonstringenum.implementation.IntsImpl;
 import fixtures.nonstringenum.models.IntEnum;
 
@@ -23,6 +24,21 @@ public final class IntClient {
     @Generated
     IntClient(IntsImpl serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    /**
+     * Put an int enum.
+     *
+     * @param input Input int enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putWithResponse(IntEnum input) {
+        return this.serviceClient.putWithResponse(input);
     }
 
     /**
@@ -51,6 +67,19 @@ public final class IntClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put() {
         return this.serviceClient.put();
+    }
+
+    /**
+     * Get an int enum.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an int enum along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<IntEnum> getWithResponse() {
+        return this.serviceClient.getWithResponse();
     }
 
     /**

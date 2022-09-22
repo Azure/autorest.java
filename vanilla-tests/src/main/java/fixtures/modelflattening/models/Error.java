@@ -28,6 +28,9 @@ public final class Error {
     @JsonProperty(value = "parentError")
     private Error parentError;
 
+    /** Creates an instance of Error class. */
+    public Error() {}
+
     /**
      * Get the status property: The status property.
      *

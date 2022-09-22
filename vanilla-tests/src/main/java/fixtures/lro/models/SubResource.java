@@ -16,6 +16,9 @@ public class SubResource {
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
+    /** Creates an instance of SubResource class. */
+    public SubResource() {}
+
     /**
      * Get the id property: Sub Resource Id.
      *

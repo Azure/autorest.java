@@ -62,6 +62,27 @@ public final class LongRunningOpsImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "LongRunningLongRunni")
     private interface LongRunningOpsService {
+        @Get("/long-running/resources/{name}/operations/{operationId}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> statusMonitor(
+                @HostParam("endpoint") String endpoint,
+                @PathParam("name") String name,
+                @PathParam("operationId") String operationId,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Patch("/long-running/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
@@ -80,7 +101,7 @@ public final class LongRunningOpsImpl {
                 @HeaderParam("content-type") String contentType,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData optionalProperties,
+                @BodyParam("application/merge-patch+json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -168,13 +189,83 @@ public final class LongRunningOpsImpl {
     }
 
     /**
+     * Get a OperationStatusResource.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     operationId: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param operationId The operationId parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return a OperationStatusResource along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> statusMonitorWithResponseAsync(
+            String name, String operationId, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.statusMonitor(
+                                this.client.getEndpoint(),
+                                name,
+                                operationId,
+                                this.client.getServiceVersion().getVersion(),
+                                accept,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * Get a OperationStatusResource.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     operationId: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param operationId The operationId parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return a OperationStatusResource along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> statusMonitorWithResponse(
+            String name, String operationId, RequestOptions requestOptions) {
+        return statusMonitorWithResponseAsync(name, operationId, requestOptions).block();
+    }
+
+    /**
      * Creates or updates a Resource asynchronously.
      *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -189,7 +280,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -199,7 +290,7 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         return FluxUtil.withContext(
@@ -210,7 +301,7 @@ public final class LongRunningOpsImpl {
                                 contentType,
                                 this.client.getServiceVersion().getVersion(),
                                 accept,
-                                optionalProperties,
+                                resource,
                                 requestOptions,
                                 context));
     }
@@ -222,7 +313,9 @@ public final class LongRunningOpsImpl {
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -237,7 +330,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -247,10 +340,10 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateOrUpdateAsync(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
-                () -> this.createOrUpdateWithResponseAsync(name, optionalProperties, requestOptions),
+                () -> this.createOrUpdateWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
@@ -268,7 +361,9 @@ public final class LongRunningOpsImpl {
      *
      * <pre>{@code
      * {
-     *     type: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -283,7 +378,7 @@ public final class LongRunningOpsImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param optionalProperties The template for adding optional properties.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -293,8 +388,8 @@ public final class LongRunningOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrUpdate(
-            String name, BinaryData optionalProperties, RequestOptions requestOptions) {
-        return this.beginCreateOrUpdateAsync(name, optionalProperties, requestOptions).getSyncPoller();
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.beginCreateOrUpdateAsync(name, resource, requestOptions).getSyncPoller();
     }
 
     /**

@@ -71,7 +71,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                             .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
-            builder.isPolymorphic(isPolymorphic);
+            builder.polymorphic(isPolymorphic);
 
             HashSet<String> modelImports = new HashSet<>();
 
@@ -122,7 +122,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             if (!compositeTypeProperties.isEmpty()) {
-                if (settings.shouldGenerateXmlSerialization()) {
+                if (settings.isGenerateXmlSerialization()) {
                     modelImports.add(JacksonXmlRootElement.class.getName());
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
@@ -390,19 +390,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             .name(discriminatorProperty.getName())
             .description(discriminatorProperty.getDescription())
             .annotationArguments(annotationArgumentsMapper.apply(discriminatorProperty.getAnnotationArguments()))
-            .isXmlAttribute(discriminatorProperty.getIsXmlAttribute())
+            .xmlAttribute(discriminatorProperty.isXmlAttribute())
             .xmlName(discriminatorProperty.getXmlName())
             .serializedName(serializedName)
-            .isXmlWrapper(discriminatorProperty.getIsXmlWrapper())
+            .xmlWrapper(discriminatorProperty.isXmlWrapper())
             .xmlListElementName(discriminatorProperty.getXmlListElementName())
             .wireType(discriminatorProperty.getWireType())
             .clientType(discriminatorProperty.getClientType())
-            .isConstant(discriminatorProperty.getIsConstant())
+            .constant(discriminatorProperty.isConstant())
             .defaultValue(discriminatorProperty.getClientType().defaultValueExpression(compositeType.getDiscriminatorValue()))
-            .isReadOnly(true)
-            .isRequired(false)
+            .readOnly(true)
+            .required(false)
             .headerCollectionPrefix(discriminatorProperty.getHeaderCollectionPrefix())
-            .isAdditionalProperties(discriminatorProperty.isAdditionalProperties())
+            .additionalProperties(discriminatorProperty.isAdditionalProperties())
             .xmlNamespace(discriminatorProperty.getXmlNamespace())
             .mutabilities(discriminatorProperty.getMutabilities())
             .needsFlatten(discriminatorProperty.getNeedsFlatten())

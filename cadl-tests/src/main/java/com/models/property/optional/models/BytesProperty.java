@@ -17,6 +17,9 @@ public final class BytesProperty {
     @JsonProperty(value = "property")
     private byte[] property;
 
+    /** Creates an instance of BytesProperty class. */
+    public BytesProperty() {}
+
     /**
      * Get the property property: Property.
      *

@@ -17,6 +17,9 @@ public final class AvailabilitySetUpdateParameters {
     @JsonProperty(value = "tags", required = true)
     private Map<String, String> tags;
 
+    /** Creates an instance of AvailabilitySetUpdateParameters class. */
+    public AvailabilitySetUpdateParameters() {}
+
     /**
      * Get the tags property: A description about the set of tags.
      *

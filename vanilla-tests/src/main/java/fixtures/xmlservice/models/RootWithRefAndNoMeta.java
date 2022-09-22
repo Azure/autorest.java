@@ -24,6 +24,9 @@ public final class RootWithRefAndNoMeta {
     @JsonProperty(value = "Something")
     private String something;
 
+    /** Creates an instance of RootWithRefAndNoMeta class. */
+    public RootWithRefAndNoMeta() {}
+
     /**
      * Get the refToModel property: XML will use RefToModel.
      *

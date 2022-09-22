@@ -13,150 +13,78 @@ import java.util.Set;
 /**
  * A parameter for a ProxyMethod.
  */
-public class ProxyMethodParameter {
-    /**
-     * Get the description of this parameter.
-     */
-    private String description;
-    /**
-     * Get the raw type of this parameter. Result of SchemaMapper.
-     */
-    private IType rawType;
-    /**
-     * Get the type of this parameter.
-     */
-    private IType wireType;
-    /**
-     * Get the type of this parameter.
-     */
-    private IType clientType;
-    /**
-     * Get the name of this parameter when it is used as a variable.
-     */
-    private String name;
-    /**
-     * Get the location within the REST API method's URL where this parameter will be added.
-     */
-    private RequestParameterLocation requestParameterLocation = RequestParameterLocation.values()[0];
+public class ProxyMethodParameter extends MethodParameter {
     /**
      * Get the name of this parameter when it is serialized.
      */
-    private String requestParameterName;
+    private final String requestParameterName;
     /**
-     * Whether or not the value of this parameter will already be encoded (and can therefore be skipped when other parameters' values are being encoded.
+     * Whether the value of this parameter will already be encoded (and can therefore be skipped when other
+     * parameters' values are being encoded.
      */
-    private boolean alreadyEncoded;
+    private final boolean alreadyEncoded;
     /**
-     * Get whether or not this parameter is a constant value.
+     * Whether this parameter is nullable.
      */
-    private boolean isConstant;
-    /**
-     * Get whether or not this parameter is required.
-     */
-    private boolean isRequired;
-    /**
-     * Whether or not this parameter is nullable.
-     */
-    private boolean isNullable;
-    /**
-     * Whether or not this parameter's value comes from a ServiceClientProperty.
-     */
-    private boolean fromClient;
+    private final boolean isNullable;
     /**
      * The x-ms-header-collection-prefix extension value.
      */
-    private String headerCollectionPrefix;
+    private final String headerCollectionPrefix;
     /**
      * The reference to this parameter from a caller.
      */
-    private String parameterReference;
-    /**
-     * Get the description of this parameter.
-     */
-    private String defaultValue;
+    private final String parameterReference;
     /**
      * The collection format if the parameter is a list type.
      */
-    private CollectionFormat collectionFormat;
+    private final CollectionFormat collectionFormat;
     /**
      * The explode if the parameter is a list type.
      */
-    private boolean explode;
+    private final boolean explode;
 
-    private ParameterSynthesizedOrigin origin;
+    private final ParameterSynthesizedOrigin origin;
 
     /**
      * Create a new RestAPIParameter based on the provided properties.
+     *
      * @param description The description of this parameter.
      * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param wireType The type of this parameter.
      * @param clientType The type of this parameter users interact with.
      * @param name The name of this parameter when it is used as a variable.
-     * @param requestParameterLocation The location within the REST API method's HttpRequest where this parameter will be added.
+     * @param requestParameterLocation The location within the REST API method's HttpRequest where this parameter will
+     * be added.
      * @param requestParameterName The name of the HttpRequest's parameter to substitute with this parameter's value.
-     * @param alreadyEncoded Whether or not the value of this parameter will already be encoded (and can therefore be skipped when other parameters' values are being encoded.
-     * @param isConstant Whether or not this parameter is a constant value.
-     * @param isRequired Whether or not this parameter is required.
-     * @param isNullable Whether or not this parameter is nullable.
-     * @param fromClient Whether or not this parameter's value comes from a ServiceClientProperty.
+     * @param alreadyEncoded Whether the value of this parameter will already be encoded (and can therefore be
+     * skipped when other parameters' values are being encoded.
+     * @param isConstant Whether this parameter is a constant value.
+     * @param isRequired Whether this parameter is required.
+     * @param isNullable Whether this parameter is nullable.
+     * @param fromClient Whether this parameter's value comes from a ServiceClientProperty.
      * @param headerCollectionPrefix The x-ms-header-collection-prefix extension value.
      * @param parameterReference The reference to this parameter from a caller.
      * @param defaultValue The default value of the parameter.
      * @param collectionFormat The collection format if the parameter is a list type.
-     * @param explode Whether arrays and objects should generate separate parameters for each array item or object property.
+     * @param explode Whether arrays and objects should generate separate parameters for each array item or object
+     * property.
      */
     protected ProxyMethodParameter(String description, IType rawType, IType wireType, IType clientType, String name,
-                                   RequestParameterLocation requestParameterLocation,
-                                   String requestParameterName, boolean alreadyEncoded, boolean isConstant,
-                                   boolean isRequired, boolean isNullable, boolean fromClient,
-                                   String headerCollectionPrefix, String parameterReference, String defaultValue,
-                                   CollectionFormat collectionFormat, boolean explode, ParameterSynthesizedOrigin origin) {
-        this.description = description;
-        this.rawType = rawType;
-        this.wireType = wireType;
-        this.clientType = clientType;
-        this.name = name;
-        this.requestParameterLocation = requestParameterLocation;
+        RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded,
+        boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix,
+        String parameterReference, String defaultValue, CollectionFormat collectionFormat, boolean explode,
+        ParameterSynthesizedOrigin origin) {
+        super(description, wireType, rawType, clientType, name, requestParameterLocation, isConstant, isRequired,
+            fromClient, defaultValue);
         this.requestParameterName = requestParameterName;
         this.alreadyEncoded = alreadyEncoded;
-        this.isConstant = isConstant;
-        this.isRequired = isRequired;
         this.isNullable = isNullable;
-        this.fromClient = fromClient;
         this.headerCollectionPrefix = headerCollectionPrefix;
         this.parameterReference = parameterReference;
         this.collectionFormat = collectionFormat;
         this.explode = explode;
-        this.defaultValue = defaultValue;
         this.origin = origin;
-    }
-
-    public final String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public final String getDescription() {
-        return description;
-    }
-
-    public final IType getRawType() {
-        return rawType;
-    }
-
-    public final IType getWireType() {
-        return wireType;
-    }
-
-    public final IType getClientType() {
-        return clientType;
-    }
-
-    public final String getName() {
-        return name;
-    }
-
-    public final RequestParameterLocation getRequestParameterLocation() {
-        return requestParameterLocation;
     }
 
     public final String getRequestParameterName() {
@@ -167,20 +95,8 @@ public class ProxyMethodParameter {
         return alreadyEncoded;
     }
 
-    public final boolean getIsConstant() {
-        return isConstant;
-    }
-
-    public final boolean getIsRequired() {
-        return isRequired;
-    }
-
-    public final boolean getIsNullable() {
+    public final boolean isNullable() {
         return isNullable;
-    }
-
-    public final boolean getFromClient() {
-        return fromClient;
     }
 
     public final String getHeaderCollectionPrefix() {
@@ -224,7 +140,7 @@ public class ProxyMethodParameter {
         if (alwaysNull) {
             return String.format("%1$s %2$s = null;", getWireType(), target);
         }
-        if (getIsRequired() || alwaysNonNull) {
+        if (isRequired() || alwaysNonNull) {
             return String.format("%1$s %2$s = %3$s;", getWireType(), target, getWireType().convertFromClientType(source));
         } else {
             return String.format("%1$s %2$s = %3$s == null ? null : %4$s;", getWireType(), target, source, getWireType().convertFromClientType(source));
@@ -233,8 +149,10 @@ public class ProxyMethodParameter {
 
     /**
      * Add this property's imports to the provided ISet of imports.
+     *
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether or not to include imports that are only necessary for method
+     * implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (getRequestParameterLocation() != RequestParameterLocation.NONE/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
@@ -259,28 +177,29 @@ public class ProxyMethodParameter {
 
     /**
      * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     *
      * @return A new builder instance initialized with properties values of this instance.
      */
     public ProxyMethodParameter.Builder toNewBuilder() {
         return new ProxyMethodParameter.Builder()
-                .clientType(this.getClientType())
-                .alreadyEncoded(this.getAlreadyEncoded())
-                .collectionFormat(this.getCollectionFormat())
-                .defaultValue(this.getDefaultValue())
-                .description(this.getDescription())
-                .explode(this.getExplode())
-                .fromClient(this.getFromClient())
-                .headerCollectionPrefix(this.getHeaderCollectionPrefix())
-                .isConstant(this.getIsConstant())
-                .isNullable(this.getIsNullable())
-                .name(this.getName())
-                .isRequired(this.getIsRequired())
-                .origin(this.getOrigin())
-                .parameterReference(this.getParameterReference())
-                .rawType(this.getRawType())
-                .requestParameterLocation(this.getRequestParameterLocation())
-                .requestParameterName(this.getRequestParameterName())
-                .wireType(this.getWireType());
+            .clientType(this.getClientType())
+            .alreadyEncoded(this.getAlreadyEncoded())
+            .collectionFormat(this.getCollectionFormat())
+            .defaultValue(this.getDefaultValue())
+            .description(this.getDescription())
+            .explode(this.getExplode())
+            .fromClient(this.isFromClient())
+            .headerCollectionPrefix(this.getHeaderCollectionPrefix())
+            .constant(this.isConstant())
+            .nullable(this.isNullable())
+            .name(this.getName())
+            .required(this.isRequired())
+            .origin(this.getOrigin())
+            .parameterReference(this.getParameterReference())
+            .rawType(this.getRawType())
+            .requestParameterLocation(this.getRequestParameterLocation())
+            .requestParameterName(this.getRequestParameterName())
+            .wireType(this.getWireType());
     }
 
     public static class Builder {
@@ -305,6 +224,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the description of this parameter.
+         *
          * @param description the description of this parameter
          * @return the Builder itself
          */
@@ -315,6 +235,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the raw type of this parameter. Result of SchemaMapper.
+         *
          * @param rawType the raw type of this parameter
          * @return the Builder itself
          */
@@ -325,6 +246,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the type of this parameter.
+         *
          * @param wireType the type of this parameter
          * @return the Builder itself
          */
@@ -335,6 +257,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the type of this parameter.
+         *
          * @param clientType the type of this parameter
          * @return the Builder itself
          */
@@ -345,6 +268,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the name of this parameter when it is used as a variable.
+         *
          * @param name the name of this parameter when it is used as a variable
          * @return the Builder itself
          */
@@ -355,7 +279,9 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the location within the REST API method's URL where this parameter will be added.
-         * @param requestParameterLocation the location within the REST API method's URL where this parameter will be added
+         *
+         * @param requestParameterLocation the location within the REST API method's URL where this parameter will be
+         * added
          * @return the Builder itself
          */
         public Builder requestParameterLocation(RequestParameterLocation requestParameterLocation) {
@@ -365,6 +291,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the name of this parameter when it is serialized.
+         *
          * @param requestParameterName the name of this parameter when it is serialized
          * @return the Builder itself
          */
@@ -374,7 +301,9 @@ public class ProxyMethodParameter {
         }
 
         /**
-         * Sets whether or not the value of this parameter will already be encoded (and can therefore be skipped when other parameters' values are being encoded.
+         * Sets whether or not the value of this parameter will already be encoded (and can therefore be skipped when
+         * other parameters' values are being encoded.
+         *
          * @param alreadyEncoded whether or not the value of this parameter will already be encoded
          * @return the Builder itself
          */
@@ -385,36 +314,40 @@ public class ProxyMethodParameter {
 
         /**
          * Sets whether or not this parameter is a constant value.
+         *
          * @param isConstant whether or not this parameter is a constant value
          * @return the Builder itself
          */
-        public Builder isConstant(boolean isConstant) {
+        public Builder constant(boolean isConstant) {
             this.isConstant = isConstant;
             return this;
         }
 
         /**
          * Sets whether or not this parameter is required.
+         *
          * @param isRequired whether or not this parameter is required
          * @return the Builder itself
          */
-        public Builder isRequired(boolean isRequired) {
+        public Builder required(boolean isRequired) {
             this.isRequired = isRequired;
             return this;
         }
 
         /**
          * Sets whether or not this parameter is nullable.
+         *
          * @param isNullable whether or not this parameter is nullable
          * @return the Builder itself
          */
-        public Builder isNullable(boolean isNullable) {
+        public Builder nullable(boolean isNullable) {
             this.isNullable = isNullable;
             return this;
         }
 
         /**
          * Sets whether or not this parameter's value comes from a ServiceClientProperty.
+         *
          * @param fromClient whether or not this parameter's value comes from a ServiceClientProperty
          * @return the Builder itself
          */
@@ -425,6 +358,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the x-ms-header-collection-prefix extension value.
+         *
          * @param headerCollectionPrefix the x-ms-header-collection-prefix extension value
          * @return the Builder itself
          */
@@ -435,6 +369,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the reference to this parameter from a caller.
+         *
          * @param parameterReference the reference to this parameter from a caller
          * @return the Builder itself
          */
@@ -445,6 +380,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the description of this parameter.
+         *
          * @param defaultValue the description of this parameter
          * @return the Builder itself
          */
@@ -455,6 +391,7 @@ public class ProxyMethodParameter {
 
         /**
          * Sets the collection format if the parameter is a list type.
+         *
          * @param collectionFormat the collection format if the parameter is a list type
          * @return the Builder itself
          */
@@ -462,9 +399,10 @@ public class ProxyMethodParameter {
             this.collectionFormat = collectionFormat;
             return this;
         }
-        
+
         /**
          * Sets the explode if the parameter is a list type.
+         *
          * @param explode the explode if the parameter is a list type
          * @return the Builder itself
          */
@@ -486,23 +424,23 @@ public class ProxyMethodParameter {
 
         public ProxyMethodParameter build() {
             return new ProxyMethodParameter(description,
-                    rawType,
-                    wireType,
-                    clientType,
-                    name,
-                    requestParameterLocation,
-                    requestParameterName,
-                    alreadyEncoded,
-                    isConstant,
-                    isRequired,
-                    isNullable,
-                    fromClient,
-                    headerCollectionPrefix,
-                    parameterReference,
-                    defaultValue,
-                    collectionFormat,
-                    explode,
-                    origin);
+                rawType,
+                wireType,
+                clientType,
+                name,
+                requestParameterLocation,
+                requestParameterName,
+                alreadyEncoded,
+                isConstant,
+                isRequired,
+                isNullable,
+                fromClient,
+                headerCollectionPrefix,
+                parameterReference,
+                defaultValue,
+                collectionFormat,
+                explode,
+                origin);
         }
     }
 }

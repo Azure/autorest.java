@@ -88,10 +88,22 @@ public final class MetricAlerts {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the metric alert resource along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<MetricAlertResource> getWithResponse() {
+        return getWithResponseAsync().block();
+    }
+
+    /**
+     * Retrieve an alert rule definition.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MetricAlertResource get() {
-        return getAsync().block();
+        return getWithResponse().getValue();
     }
 }
