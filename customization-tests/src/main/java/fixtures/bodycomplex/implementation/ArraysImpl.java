@@ -132,32 +132,6 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getValidAsync(Context context) {
-        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get complex types with array property.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
-    }
-
-    /**
-     * Get complex types with array property.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -175,20 +149,6 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getValid() {
         return getValidWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getValid(Context context) {
-        return getValidWithResponse(context).getValue();
     }
 
     /**
@@ -248,37 +208,6 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(ArrayWrapper complexBody, Context context) {
-        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(ArrayWrapper complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -298,21 +227,6 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(ArrayWrapper complexBody) {
         putValidWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ArrayWrapper complexBody, Context context) {
-        putValidWithResponse(complexBody, context);
     }
 
     /**
@@ -364,32 +278,6 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getEmptyAsync(Context context) {
-        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getEmptyWithResponse() {
-        return getEmptyWithResponseAsync().block();
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -407,20 +295,6 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getEmpty() {
         return getEmptyWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getEmpty(Context context) {
-        return getEmptyWithResponse(context).getValue();
     }
 
     /**
@@ -476,35 +350,6 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(ArrayWrapper complexBody, Context context) {
-        return putEmptyWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptyWithResponse(ArrayWrapper complexBody) {
-        return putEmptyWithResponseAsync(complexBody).block();
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -523,20 +368,6 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(ArrayWrapper complexBody) {
         putEmptyWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(ArrayWrapper complexBody, Context context) {
-        putEmptyWithResponse(complexBody, context);
     }
 
     /**
@@ -589,34 +420,6 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getNotProvidedAsync(Context context) {
-        return getNotProvidedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     *     Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getNotProvidedWithResponse() {
-        return getNotProvidedWithResponseAsync().block();
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property while server doesn't provide a response payload along with {@link
      *     Response}.
      */
@@ -635,19 +438,5 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getNotProvided() {
         return getNotProvidedWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getNotProvided(Context context) {
-        return getNotProvidedWithResponse(context).getValue();
     }
 }
