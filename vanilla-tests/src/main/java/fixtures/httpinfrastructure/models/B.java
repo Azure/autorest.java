@@ -16,6 +16,9 @@ public final class B extends MyException {
     @JsonProperty(value = "textStatusCode")
     private String textStatusCode;
 
+    /** Creates an instance of B class. */
+    public B() {}
+
     /**
      * Get the textStatusCode property: The textStatusCode property.
      *

@@ -12,7 +12,6 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 
 public class AndroidClientMethodMapper extends ClientMethodMapper {
@@ -23,11 +22,11 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
             .wireType(ClassType.AndroidContext)
             .name("context")
             .annotations(new java.util.ArrayList<>())
-            .isConstant(false)
+            .constant(false)
             .defaultValue(null)
             .fromClient(false)
-            .isFinal(false)
-            .isRequired(false)
+            .finalParameter(false)
+            .required(false)
             .build();
 
     protected AndroidClientMethodMapper() {

@@ -233,11 +233,23 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Horse> getHorseWithResponse() {
+        return getHorseWithResponseAsync().block();
+    }
+
+    /**
+     * Get a horse with name 'Fred' and isAShowHorse true.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Horse getHorse() {
-        return getHorseAsync().block();
+        return getHorseWithResponse().getValue();
     }
 
     /**
@@ -284,11 +296,25 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putHorseWithResponse(Horse horse) {
+        return putHorseWithResponseAsync(horse).block();
+    }
+
+    /**
+     * Put a horse with name 'General' and isAShowHorse false.
+     *
+     * @param horse Put a horse with name 'General' and isAShowHorse false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putHorse(Horse horse) {
-        return putHorseAsync(horse).block();
+        return putHorseWithResponse(horse).getValue();
     }
 
     /**
@@ -324,11 +350,23 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a pet with name 'Peanut' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Pet> getPetWithResponse() {
+        return getPetWithResponseAsync().block();
+    }
+
+    /**
+     * Get a pet with name 'Peanut'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getPet() {
-        return getPetAsync().block();
+        return getPetWithResponse().getValue();
     }
 
     /**
@@ -375,11 +413,25 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putPetWithResponse(Pet pet) {
+        return putPetWithResponseAsync(pet).block();
+    }
+
+    /**
+     * Put a pet with name 'Butter'.
+     *
+     * @param pet Put a pet with name 'Butter'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putPet(Pet pet) {
-        return putPetAsync(pet).block();
+        return putPetWithResponse(pet).getValue();
     }
 
     /**
@@ -416,11 +468,23 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a feline where meows and hisses are true along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Feline> getFelineWithResponse() {
+        return getFelineWithResponseAsync().block();
+    }
+
+    /**
+     * Get a feline where meows and hisses are true.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a feline where meows and hisses are true.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Feline getFeline() {
-        return getFelineAsync().block();
+        return getFelineWithResponse().getValue();
     }
 
     /**
@@ -467,11 +531,25 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putFelineWithResponse(Feline feline) {
+        return putFelineWithResponseAsync(feline).block();
+    }
+
+    /**
+     * Put a feline who hisses and doesn't meow.
+     *
+     * @param feline Put a feline who hisses and doesn't meow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putFeline(Feline feline) {
-        return putFelineAsync(feline).block();
+        return putFelineWithResponse(feline).getValue();
     }
 
     /**
@@ -509,11 +587,23 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Cat> getCatWithResponse() {
+        return getCatWithResponseAsync().block();
+    }
+
+    /**
+     * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Cat getCat() {
-        return getCatAsync().block();
+        return getCatWithResponse().getValue();
     }
 
     /**
@@ -560,11 +650,25 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putCatWithResponse(Cat cat) {
+        return putCatWithResponseAsync(cat).block();
+    }
+
+    /**
+     * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     *
+     * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putCat(Cat cat) {
-        return putCatAsync(cat).block();
+        return putCatWithResponse(cat).getValue();
     }
 
     /**
@@ -602,11 +706,24 @@ public final class MultipleInheritanceServiceClient {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
+     *     with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Kitten> getKittenWithResponse() {
+        return getKittenWithResponseAsync().block();
+    }
+
+    /**
+     * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Kitten getKitten() {
-        return getKittenAsync().block();
+        return getKittenWithResponse().getValue();
     }
 
     /**
@@ -653,10 +770,24 @@ public final class MultipleInheritanceServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<String> putKittenWithResponse(Kitten kitten) {
+        return putKittenWithResponseAsync(kitten).block();
+    }
+
+    /**
+     * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     *
+     * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putKitten(Kitten kitten) {
-        return putKittenAsync(kitten).block();
+        return putKittenWithResponse(kitten).getValue();
     }
 }

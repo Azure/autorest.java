@@ -30,7 +30,10 @@ public final class LrosaDsPostNonRetry400Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsPostNonRetry400Headers(HttpHeaders rawHeaders) {
-        this.retryAfter = Integer.parseInt(rawHeaders.getValue("Retry-After"));
+        String retryAfter = rawHeaders.getValue("Retry-After");
+        if (retryAfter != null) {
+            this.retryAfter = Integer.parseInt(retryAfter);
+        }
         this.location = rawHeaders.getValue("Location");
     }
 

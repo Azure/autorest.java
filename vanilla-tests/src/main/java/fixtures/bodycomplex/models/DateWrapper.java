@@ -23,6 +23,9 @@ public final class DateWrapper {
     @JsonProperty(value = "leap")
     private LocalDate leap;
 
+    /** Creates an instance of DateWrapper class. */
+    public DateWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

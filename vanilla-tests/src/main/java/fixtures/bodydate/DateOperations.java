@@ -138,11 +138,23 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null date value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null date value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -179,11 +191,23 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid date value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getInvalidDateWithResponse() {
+        return getInvalidDateWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid date value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getInvalidDate() {
-        return getInvalidDateAsync().block();
+        return getInvalidDateWithResponse().getValue();
     }
 
     /**
@@ -220,11 +244,23 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow date value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getOverflowDateWithResponse() {
+        return getOverflowDateWithResponseAsync().block();
+    }
+
+    /**
+     * Get overflow date value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getOverflowDate() {
-        return getOverflowDateAsync().block();
+        return getOverflowDateWithResponse().getValue();
     }
 
     /**
@@ -261,11 +297,23 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow date value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getUnderflowDateWithResponse() {
+        return getUnderflowDateWithResponseAsync().block();
+    }
+
+    /**
+     * Get underflow date value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateAsync().block();
+        return getUnderflowDateWithResponse().getValue();
     }
 
     /**
@@ -311,10 +359,24 @@ public final class DateOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMaxDateWithResponse(LocalDate dateBody) {
+        return putMaxDateWithResponseAsync(dateBody).block();
+    }
+
+    /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody date body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateAsync(dateBody).block();
+        putMaxDateWithResponse(dateBody);
     }
 
     /**
@@ -351,11 +413,23 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max date value 9999-12-31 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getMaxDateWithResponse() {
+        return getMaxDateWithResponseAsync().block();
+    }
+
+    /**
+     * Get max date value 9999-12-31.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMaxDate() {
-        return getMaxDateAsync().block();
+        return getMaxDateWithResponse().getValue();
     }
 
     /**
@@ -401,10 +475,24 @@ public final class DateOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putMinDateWithResponse(LocalDate dateBody) {
+        return putMinDateWithResponseAsync(dateBody).block();
+    }
+
+    /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody date body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMinDate(LocalDate dateBody) {
-        putMinDateAsync(dateBody).block();
+        putMinDateWithResponse(dateBody);
     }
 
     /**
@@ -441,10 +529,22 @@ public final class DateOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min date value 0000-01-01 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<LocalDate> getMinDateWithResponse() {
+        return getMinDateWithResponseAsync().block();
+    }
+
+    /**
+     * Get min date value 0000-01-01.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMinDate() {
-        return getMinDateAsync().block();
+        return getMinDateWithResponse().getValue();
     }
 }

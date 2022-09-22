@@ -16,6 +16,9 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     @JsonProperty(value = "foo-client-request-id", required = true)
     private String fooClientRequestId;
 
+    /** Creates an instance of HeaderCustomNamedRequestIdParamGroupingParameters class. */
+    public HeaderCustomNamedRequestIdParamGroupingParameters() {}
+
     /**
      * Get the fooClientRequestId property: The fooRequestId.
      *

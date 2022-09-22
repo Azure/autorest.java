@@ -30,6 +30,9 @@ public final class ResourceCollection {
     @JsonProperty(value = "dictionaryofresources")
     private Map<String, FlattenedProduct> dictionaryofresources;
 
+    /** Creates an instance of ResourceCollection class. */
+    public ResourceCollection() {}
+
     /**
      * Get the productresource property: Flattened product.
      *

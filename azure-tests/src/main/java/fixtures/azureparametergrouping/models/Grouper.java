@@ -22,6 +22,9 @@ public final class Grouper {
     @JsonProperty(value = "groupedParameter")
     private String groupedParameter;
 
+    /** Creates an instance of Grouper class. */
+    public Grouper() {}
+
     /**
      * Get the groupedConstant property: A grouped parameter that is a constant.
      *

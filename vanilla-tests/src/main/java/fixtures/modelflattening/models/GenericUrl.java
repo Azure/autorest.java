@@ -16,6 +16,9 @@ public class GenericUrl {
     @JsonProperty(value = "generic_value")
     private String genericValue;
 
+    /** Creates an instance of GenericUrl class. */
+    public GenericUrl() {}
+
     /**
      * Get the genericValue property: Generic URL value.
      *

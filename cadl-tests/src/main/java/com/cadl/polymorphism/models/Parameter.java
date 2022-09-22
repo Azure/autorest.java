@@ -8,4 +8,7 @@ import com.azure.core.annotation.Immutable;
 
 /** The Parameter model. */
 @Immutable
-public class Parameter {}
+public class Parameter {
+    /** Creates an instance of Parameter class. */
+    public Parameter() {}
+}

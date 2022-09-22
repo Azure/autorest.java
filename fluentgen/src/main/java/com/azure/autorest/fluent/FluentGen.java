@@ -209,7 +209,7 @@ public class FluentGen extends Javagen {
         javaPackage
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                         client.getServiceClient());
-        if (javaSettings.shouldGenerateClientInterfaces()) {
+        if (javaSettings.isGenerateClientInterfaces()) {
             javaPackage
                     .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
@@ -233,7 +233,7 @@ public class FluentGen extends Javagen {
         // Method group
         for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
             javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-            if (javaSettings.shouldGenerateClientInterfaces()) {
+            if (javaSettings.isGenerateClientInterfaces()) {
                 javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
             }
         }
@@ -330,7 +330,7 @@ public class FluentGen extends Javagen {
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
 
             // POM
-            if (javaSettings.shouldRegeneratePom()) {
+            if (javaSettings.isRegeneratePom()) {
                 Pom pom = new FluentPomMapper().map(project);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }

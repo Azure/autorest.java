@@ -41,6 +41,9 @@ public final class Sku {
     @JsonProperty(value = "testString", access = JsonProperty.Access.WRITE_ONLY)
     private String testString = "test string";
 
+    /** Creates an instance of Sku class. */
+    public Sku() {}
+
     /**
      * Get the family property: SKU family name.
      *

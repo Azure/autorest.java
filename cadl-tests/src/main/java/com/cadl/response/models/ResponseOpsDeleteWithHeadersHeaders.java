@@ -4,12 +4,12 @@
 
 package com.cadl.response.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ResponseOpsDeleteWithHeadersHeaders model. */
-@Fluent
+@Immutable
 public final class ResponseOpsDeleteWithHeadersHeaders {
     /*
      * The operation-location property.
@@ -34,16 +34,5 @@ public final class ResponseOpsDeleteWithHeadersHeaders {
      */
     public String getOperationLocation() {
         return this.operationLocation;
-    }
-
-    /**
-     * Set the operationLocation property: The operation-location property.
-     *
-     * @param operationLocation the operationLocation value to set.
-     * @return the ResponseOpsDeleteWithHeadersHeaders object itself.
-     */
-    public ResponseOpsDeleteWithHeadersHeaders setOperationLocation(String operationLocation) {
-        this.operationLocation = operationLocation;
-        return this;
     }
 }

@@ -22,6 +22,9 @@ public final class ParameterGroupingPostReservedWordsParameters {
     @JsonProperty(value = "accept")
     private String accept;
 
+    /** Creates an instance of ParameterGroupingPostReservedWordsParameters class. */
+    public ParameterGroupingPostReservedWordsParameters() {}
+
     /**
      * Get the from property: 'from' is a reserved word. Pass in 'bob' to pass.
      *

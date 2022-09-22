@@ -22,6 +22,9 @@ public final class Widget {
     @JsonProperty(value = "string")
     private String string;
 
+    /** Creates an instance of Widget class. */
+    public Widget() {}
+
     /**
      * Get the integer property: The integer property.
      *

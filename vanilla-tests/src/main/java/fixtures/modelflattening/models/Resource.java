@@ -41,6 +41,9 @@ public class Resource {
     @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
+    /** Creates an instance of Resource class. */
+    public Resource() {}
+
     /**
      * Get the id property: Resource Id.
      *

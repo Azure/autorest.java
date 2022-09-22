@@ -39,6 +39,9 @@ public final class Slideshow {
     @JsonProperty("slide")
     private List<Slide> slides = new ArrayList<>();
 
+    /** Creates an instance of Slideshow class. */
+    public Slideshow() {}
+
     /**
      * Get the title property: The title property.
      *

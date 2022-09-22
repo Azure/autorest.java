@@ -155,11 +155,23 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> paramRepeatabilityRequestWithResponse() {
+        return paramRepeatabilityRequestWithResponseAsync().block();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequest() {
-        return paramRepeatabilityRequestAsync().block();
+        return paramRepeatabilityRequestWithResponse().getValue();
     }
 
     /**
@@ -205,11 +217,23 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> paramRepeatabilityRequestPutWithResponse() {
+        return paramRepeatabilityRequestPutWithResponseAsync().block();
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestPut() {
-        return paramRepeatabilityRequestPutAsync().block();
+        return paramRepeatabilityRequestPutWithResponse().getValue();
     }
 
     /**
@@ -247,11 +271,23 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> paramRepeatabilityRequestGetWithResponse() {
+        return paramRepeatabilityRequestGetWithResponseAsync().block();
+    }
+
+    /**
+     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestGet() {
-        return paramRepeatabilityRequestGetAsync().block();
+        return paramRepeatabilityRequestGetWithResponse().getValue();
     }
 
     /**
@@ -297,11 +333,23 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Object> paramRepeatabilityRequestLROWithResponse() {
+        return paramRepeatabilityRequestLROWithResponseAsync().block();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestLRO() {
-        return paramRepeatabilityRequestLROAsync().block();
+        return paramRepeatabilityRequestLROWithResponse().getValue();
     }
 
     /**
@@ -358,6 +406,18 @@ public final class Headers {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage() {
+        return paramRepeatabilityRequestPageableSinglePageAsync().block();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -398,5 +458,20 @@ public final class Headers {
                                         res.getValue().getValue(),
                                         res.getValue().getNextLink(),
                                         null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
+        return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink).block();
     }
 }

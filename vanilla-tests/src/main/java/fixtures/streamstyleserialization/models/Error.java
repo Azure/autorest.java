@@ -23,6 +23,9 @@ public final class Error implements JsonSerializable<Error> {
      */
     private String message;
 
+    /** Creates an instance of Error class. */
+    public Error() {}
+
     /**
      * Get the status property: The status property.
      *

@@ -100,7 +100,7 @@ public class Androidgen extends Javagen {
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
                 javaPackage
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
@@ -122,7 +122,7 @@ public class Androidgen extends Javagen {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
                         methodGroupClient);
-                if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }

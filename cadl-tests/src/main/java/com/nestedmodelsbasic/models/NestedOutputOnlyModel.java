@@ -45,7 +45,7 @@ public final class NestedOutputOnlyModel {
      * @param requiredIntList the requiredIntList value to set.
      */
     @JsonCreator
-    public NestedOutputOnlyModel(
+    private NestedOutputOnlyModel(
             @JsonProperty(value = "requiredString", required = true) String requiredString,
             @JsonProperty(value = "requiredInt", required = true) int requiredInt,
             @JsonProperty(value = "requiredStringList", required = true) List<String> requiredStringList,

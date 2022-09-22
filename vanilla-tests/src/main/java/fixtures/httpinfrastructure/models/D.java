@@ -16,6 +16,9 @@ public final class D {
     @JsonProperty(value = "httpStatusCode")
     private String httpStatusCode;
 
+    /** Creates an instance of D class. */
+    public D() {}
+
     /**
      * Get the httpStatusCode property: The httpStatusCode property.
      *

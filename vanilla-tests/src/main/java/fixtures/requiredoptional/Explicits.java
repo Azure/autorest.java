@@ -363,10 +363,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -379,7 +394,7 @@ public final class Explicits {
     public void putOptionalBinaryBody() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -428,10 +443,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putOptionalBinaryBodyWithResponse(BinaryData bodyParameter, Long contentLength) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyAsync(bodyParameter, contentLength).block();
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -484,10 +514,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putRequiredBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, long contentLength) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRequiredBinaryBody(Flux<ByteBuffer> bodyParameter, long contentLength) {
-        putRequiredBinaryBodyAsync(bodyParameter, contentLength).block();
+        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -539,10 +584,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putRequiredBinaryBodyWithResponse(BinaryData bodyParameter, long contentLength) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRequiredBinaryBody(BinaryData bodyParameter, long contentLength) {
-        putRequiredBinaryBodyAsync(bodyParameter, contentLength).block();
+        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength);
     }
 
     /**
@@ -586,10 +646,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredIntegerParameterWithResponse(int bodyParameter) {
+        return postRequiredIntegerParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerParameter(int bodyParameter) {
-        postRequiredIntegerParameterAsync(bodyParameter).block();
+        postRequiredIntegerParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -646,10 +720,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalIntegerParameterWithResponse(Integer bodyParameter) {
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterAsync(bodyParameter).block();
+        postOptionalIntegerParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -661,7 +749,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerParameter() {
         final Integer bodyParameter = null;
-        postOptionalIntegerParameterAsync(bodyParameter).block();
+        postOptionalIntegerParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -713,10 +801,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredIntegerPropertyWithResponse(IntWrapper bodyParameter) {
+        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        postRequiredIntegerPropertyAsync(bodyParameter).block();
+        postRequiredIntegerPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -776,10 +879,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalIntegerPropertyWithResponse(IntOptionalWrapper bodyParameter) {
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyAsync(bodyParameter).block();
+        postOptionalIntegerPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -791,7 +908,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerProperty() {
         final IntOptionalWrapper bodyParameter = null;
-        postOptionalIntegerPropertyAsync(bodyParameter).block();
+        postOptionalIntegerPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -838,10 +955,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredIntegerHeaderWithResponse(int headerParameter) {
+        return postRequiredIntegerHeaderWithResponseAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerHeader(int headerParameter) {
-        postRequiredIntegerHeaderAsync(headerParameter).block();
+        postRequiredIntegerHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -898,10 +1030,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalIntegerHeaderWithResponse(Integer headerParameter) {
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderAsync(headerParameter).block();
+        postOptionalIntegerHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -913,7 +1059,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerHeader() {
         final Integer headerParameter = null;
-        postOptionalIntegerHeaderAsync(headerParameter).block();
+        postOptionalIntegerHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -960,10 +1106,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredStringParameterWithResponse(String bodyParameter) {
+        return postRequiredStringParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringParameter(String bodyParameter) {
-        postRequiredStringParameterAsync(bodyParameter).block();
+        postRequiredStringParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1020,10 +1180,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalStringParameterWithResponse(String bodyParameter) {
+        return postOptionalStringParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterAsync(bodyParameter).block();
+        postOptionalStringParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1035,7 +1209,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringParameter() {
         final String bodyParameter = null;
-        postOptionalStringParameterAsync(bodyParameter).block();
+        postOptionalStringParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1087,10 +1261,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredStringPropertyWithResponse(StringWrapper bodyParameter) {
+        return postRequiredStringPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringProperty(StringWrapper bodyParameter) {
-        postRequiredStringPropertyAsync(bodyParameter).block();
+        postRequiredStringPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1150,10 +1339,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalStringPropertyWithResponse(StringOptionalWrapper bodyParameter) {
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyAsync(bodyParameter).block();
+        postOptionalStringPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1165,7 +1368,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringProperty() {
         final StringOptionalWrapper bodyParameter = null;
-        postOptionalStringPropertyAsync(bodyParameter).block();
+        postOptionalStringPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1216,10 +1419,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredStringHeaderWithResponse(String headerParameter) {
+        return postRequiredStringHeaderWithResponseAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringHeader(String headerParameter) {
-        postRequiredStringHeaderAsync(headerParameter).block();
+        postRequiredStringHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -1276,10 +1494,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalStringHeaderWithResponse(String bodyParameter) {
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderAsync(bodyParameter).block();
+        postOptionalStringHeaderWithResponse(bodyParameter);
     }
 
     /**
@@ -1291,7 +1523,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringHeader() {
         final String bodyParameter = null;
-        postOptionalStringHeaderAsync(bodyParameter).block();
+        postOptionalStringHeaderWithResponse(bodyParameter);
     }
 
     /**
@@ -1343,10 +1575,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredClassParameterWithResponse(Product bodyParameter) {
+        return postRequiredClassParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredClassParameter(Product bodyParameter) {
-        postRequiredClassParameterAsync(bodyParameter).block();
+        postRequiredClassParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1406,10 +1653,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalClassParameterWithResponse(Product bodyParameter) {
+        return postOptionalClassParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterAsync(bodyParameter).block();
+        postOptionalClassParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1421,7 +1682,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassParameter() {
         final Product bodyParameter = null;
-        postOptionalClassParameterAsync(bodyParameter).block();
+        postOptionalClassParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1473,10 +1734,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredClassPropertyWithResponse(ClassWrapper bodyParameter) {
+        return postRequiredClassPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredClassProperty(ClassWrapper bodyParameter) {
-        postRequiredClassPropertyAsync(bodyParameter).block();
+        postRequiredClassPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1536,10 +1812,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalClassPropertyWithResponse(ClassOptionalWrapper bodyParameter) {
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyAsync(bodyParameter).block();
+        postOptionalClassPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1551,7 +1841,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassProperty() {
         final ClassOptionalWrapper bodyParameter = null;
-        postOptionalClassPropertyAsync(bodyParameter).block();
+        postOptionalClassPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1598,10 +1888,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredArrayParameterWithResponse(List<String> bodyParameter) {
+        return postRequiredArrayParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter Array of PostContentSchemaItem.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayParameter(List<String> bodyParameter) {
-        postRequiredArrayParameterAsync(bodyParameter).block();
+        postRequiredArrayParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1658,10 +1962,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalArrayParameterWithResponse(List<String> bodyParameter) {
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter Array of String.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterAsync(bodyParameter).block();
+        postOptionalArrayParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1673,7 +1991,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayParameter() {
         final List<String> bodyParameter = null;
-        postOptionalArrayParameterAsync(bodyParameter).block();
+        postOptionalArrayParameterWithResponse(bodyParameter);
     }
 
     /**
@@ -1725,10 +2043,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredArrayPropertyWithResponse(ArrayWrapper bodyParameter) {
+        return postRequiredArrayPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        postRequiredArrayPropertyAsync(bodyParameter).block();
+        postRequiredArrayPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1788,10 +2121,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalArrayPropertyWithResponse(ArrayOptionalWrapper bodyParameter) {
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).block();
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyAsync(bodyParameter).block();
+        postOptionalArrayPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1803,7 +2150,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayProperty() {
         final ArrayOptionalWrapper bodyParameter = null;
-        postOptionalArrayPropertyAsync(bodyParameter).block();
+        postOptionalArrayPropertyWithResponse(bodyParameter);
     }
 
     /**
@@ -1858,10 +2205,25 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postRequiredArrayHeaderWithResponse(List<String> headerParameter) {
+        return postRequiredArrayHeaderWithResponseAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter Array of Post0ItemsItem.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayHeader(List<String> headerParameter) {
-        postRequiredArrayHeaderAsync(headerParameter).block();
+        postRequiredArrayHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -1926,10 +2288,24 @@ public final class Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> postOptionalArrayHeaderWithResponse(List<String> headerParameter) {
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter).block();
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter Array of String.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderAsync(headerParameter).block();
+        postOptionalArrayHeaderWithResponse(headerParameter);
     }
 
     /**
@@ -1941,6 +2317,6 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayHeader() {
         final List<String> headerParameter = null;
-        postOptionalArrayHeaderAsync(headerParameter).block();
+        postOptionalArrayHeaderWithResponse(headerParameter);
     }
 }

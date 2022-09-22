@@ -33,7 +33,6 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
 
     private static Logger logger;
-
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -155,7 +154,9 @@ public class JavaSettings {
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
-                getBooleanValue(host, "stream-style-serialization", false)
+                getBooleanValue(host, "stream-style-serialization", false),
+                getBooleanValue(host, "enable-sync-stack", false),
+                getBooleanValue(host, "output-model-immutable", false)
             );
         }
         return instance;
@@ -248,7 +249,9 @@ public class JavaSettings {
         Map<Integer, String> httpStatusCodeToExceptionTypeMapping,
         boolean handlePartialUpdate,
         boolean genericResponseTypes,
-        boolean streamStyleSerialization) {
+        boolean streamStyleSerialization,
+        boolean isSyncStackEnabled,
+        boolean outputModelImmutable) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -337,6 +340,9 @@ public class JavaSettings {
         this.genericResponseTypes = genericResponseTypes;
 
         this.streamStyleSerialization = streamStyleSerialization;
+        this.isSyncStackEnabled = isSyncStackEnabled;
+
+        this.outputModelImmutable = outputModelImmutable;
     }
 
     private String keyCredentialHeaderName;
@@ -458,7 +464,7 @@ public class JavaSettings {
 
     private boolean regeneratePom;
 
-    public final boolean shouldRegeneratePom() {
+    public final boolean isRegeneratePom() {
         return regeneratePom;
     }
 
@@ -515,7 +521,7 @@ public class JavaSettings {
 
     private boolean shouldGenerateXmlSerialization;
 
-    public final boolean shouldGenerateXmlSerialization() {
+    public final boolean isGenerateXmlSerialization() {
         return shouldGenerateXmlSerialization;
     }
 
@@ -524,13 +530,13 @@ public class JavaSettings {
      */
     private boolean nonNullAnnotations;
 
-    public final boolean shouldNonNullAnnotations() {
+    public final boolean isNonNullAnnotations() {
         return nonNullAnnotations;
     }
 
     private boolean clientSideValidations;
 
-    public final boolean shouldClientSideValidations() {
+    public final boolean isClientSideValidations() {
         return clientSideValidations;
     }
 
@@ -548,7 +554,7 @@ public class JavaSettings {
      */
     private boolean generateClientInterfaces;
 
-    public final boolean shouldGenerateClientInterfaces() {
+    public final boolean isGenerateClientInterfaces() {
         return generateClientInterfaces;
     }
 
@@ -557,7 +563,7 @@ public class JavaSettings {
      */
     private boolean generateClientAsImpl;
 
-    public final boolean shouldGenerateClientAsImpl() {
+    public final boolean isGenerateClientAsImpl() {
         return generateClientAsImpl;
     }
 
@@ -627,7 +633,7 @@ public class JavaSettings {
 
     private boolean generateSyncAsyncClients;
 
-    public final boolean shouldGenerateSyncAsyncClients() {
+    public final boolean isGenerateSyncAsyncClients() {
         return generateSyncAsyncClients;
     }
 
@@ -709,7 +715,7 @@ public class JavaSettings {
 
     private boolean clientLogger;
 
-    public final boolean shouldClientLogger() {
+    public final boolean isUseClientLogger() {
         return clientLogger;
     }
 
@@ -748,7 +754,7 @@ public class JavaSettings {
 
     private final boolean useIterable;
 
-    public boolean shouldUseIterable() {
+    public boolean isUseIterable() {
         return useIterable;
     }
 
@@ -792,10 +798,21 @@ public class JavaSettings {
         return generateModels;
     }
 
+    private final boolean isSyncStackEnabled;
+    public boolean isSyncStackEnabled() {
+        return isSyncStackEnabled;
+    }
+
     private final boolean clientBuilderDisabled;
 
     public boolean clientBuilderDisabled() {
         return clientBuilderDisabled;
+    }
+
+    private final boolean outputModelImmutable;
+
+    public boolean isOutputModelImmutable() {
+        return outputModelImmutable;
     }
 
     public static class PollingDetails {

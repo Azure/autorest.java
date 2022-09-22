@@ -35,7 +35,7 @@ public final class Resource {
      * @param type the type value to set.
      */
     @JsonCreator
-    public Resource(@JsonProperty(value = "type", required = true) String type) {
+    private Resource(@JsonProperty(value = "type", required = true) String type) {
         this.type = type;
     }
 

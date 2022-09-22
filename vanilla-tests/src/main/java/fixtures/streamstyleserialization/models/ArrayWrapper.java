@@ -19,6 +19,9 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      */
     private List<String> array;
 
+    /** Creates an instance of ArrayWrapper class. */
+    public ArrayWrapper() {}
+
     /**
      * Get the array property: The array property.
      *

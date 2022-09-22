@@ -108,8 +108,8 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
         }
         final String patchClassNameWithBaseType = classNameWithBaseType + "Patch";
 
-        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())
-                || propertyReferences.stream().anyMatch(p -> !p.getIsReadOnly())) {
+        if (model.getProperties().stream().anyMatch(p -> !p.isReadOnly())
+                || propertyReferences.stream().anyMatch(p -> !p.isReadOnly())) {
             javaFile.annotation("Fluent");
         }
 
@@ -124,7 +124,7 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                 JavaVisibility methodVisibility = property.getClientFlatten() ? JavaVisibility.Private : JavaVisibility.Public;
 
                 // setter
-                if (!property.getIsReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
+                if (!property.isReadOnly() && !(settings.isRequiredFieldsAsConstructorArgs() && property.isRequired()) && methodVisibility == JavaVisibility.Public) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     IType setterPropertyType = ClientModelUtil.isClientModel(property.getWireType()) ? new ClassType.Builder().packageName(((ClassType) property.getWireType()).getPackage()).name(((ClassType) property.getWireType()).getName() + "Patch").build() : property.getWireType();

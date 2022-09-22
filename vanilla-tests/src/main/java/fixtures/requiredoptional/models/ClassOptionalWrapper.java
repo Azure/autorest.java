@@ -16,6 +16,9 @@ public final class ClassOptionalWrapper {
     @JsonProperty(value = "value")
     private Product value;
 
+    /** Creates an instance of ClassOptionalWrapper class. */
+    public ClassOptionalWrapper() {}
+
     /**
      * Get the value property: The value property.
      *

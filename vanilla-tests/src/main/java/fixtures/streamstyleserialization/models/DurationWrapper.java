@@ -19,6 +19,9 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      */
     private Duration field;
 
+    /** Creates an instance of DurationWrapper class. */
+    public DurationWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

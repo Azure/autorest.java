@@ -50,6 +50,9 @@ public final class PetAPInPropertiesWithAPString {
      */
     @JsonIgnore private Map<String, String> additionalProperties;
 
+    /** Creates an instance of PetAPInPropertiesWithAPString class. */
+    public PetAPInPropertiesWithAPString() {}
+
     /**
      * Get the id property: The id property.
      *

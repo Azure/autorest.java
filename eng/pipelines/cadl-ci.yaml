@@ -110,7 +110,7 @@ jobs:
           command: install
 
       - script: |
-          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ &
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
         displayName: 'Start Cadl Ranch Test Server'
         workingDirectory: ./cadl-tests
 
@@ -126,7 +126,12 @@ jobs:
           publishJUnitResults: false
 
       - script: |
-          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http || echo "cadl ranch tests not fully covered"
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java.json
         displayName: 'Cadl Ranch Coverage Report'
         workingDirectory: ./cadl-tests
+        continueOnError: true
+
+      - publish: $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json
+        artifact: CoverageReport
+        displayName: 'Publish Cadl Ranch Coverage Report'
 

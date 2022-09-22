@@ -24,6 +24,9 @@ public final class ProductResult {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
+    /** Creates an instance of ProductResult class. */
+    public ProductResult() {}
+
     /**
      * Get the values property: The values property.
      *

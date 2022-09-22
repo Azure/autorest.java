@@ -37,7 +37,7 @@ public class ArrayMapper implements IMapper<ArraySchema, IType> {
         IType mappedType = Mappers.getSchemaMapper().map(sequenceType.getElementType());
 
         // Choose IterableType or ListType depending on whether arrays should use Iterable.
-        arrayType = JavaSettings.getInstance().shouldUseIterable()
+        arrayType = JavaSettings.getInstance().isUseIterable()
             ? new IterableType(mappedType)
             : new ListType(mappedType);
 

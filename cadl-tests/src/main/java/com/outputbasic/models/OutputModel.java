@@ -30,7 +30,7 @@ public final class OutputModel {
      * @param requiredInt the requiredInt value to set.
      */
     @JsonCreator
-    public OutputModel(
+    private OutputModel(
             @JsonProperty(value = "requiredString", required = true) String requiredString,
             @JsonProperty(value = "requiredInt", required = true) int requiredInt) {
         this.requiredString = requiredString;

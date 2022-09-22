@@ -22,6 +22,9 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetNetworkConfigurationProperties innerProperties;
 
+    /** Creates an instance of VirtualMachineScaleSetNetworkConfiguration class. */
+    public VirtualMachineScaleSetNetworkConfiguration() {}
+
     /**
      * Get the name property: The network configuration name.
      *

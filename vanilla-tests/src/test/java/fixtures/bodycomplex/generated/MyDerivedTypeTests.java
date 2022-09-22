@@ -19,12 +19,4 @@ public final class MyDerivedTypeTests {
         Assertions.assertEquals("wyiftyhxhur", model.getPropB1());
         Assertions.assertEquals("gphuticndvka", model.getPropD1());
     }
-
-    @Test
-    public void testSerialize() {
-        MyDerivedType model = new MyDerivedType().setPropB1("wyiftyhxhur").setPropD1("gphuticndvka");
-        model = BinaryData.fromObject(model).toObject(MyDerivedType.class);
-        Assertions.assertEquals("wyiftyhxhur", model.getPropB1());
-        Assertions.assertEquals("gphuticndvka", model.getPropD1());
-    }
 }

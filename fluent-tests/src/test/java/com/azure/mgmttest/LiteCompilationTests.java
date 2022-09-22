@@ -23,12 +23,15 @@ import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
 import com.azure.mgmtlitetest.storage.models.Kind;
+import com.azure.mgmtlitetest.storage.models.ListContainersInclude;
 import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
+import com.azure.mgmtlitetest.storage.models.StorageAccountExpand;
 import com.azure.mgmtlitetest.storage.models.StorageAccountListKeysResult;
 import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParameters;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
@@ -153,5 +156,21 @@ public class LiteCompilationTests {
         labDetails.value();
         labDetails.currencyTotalAllocatedBudgetCurrency();
         labDetails.valueTotalAllocatedBudgetValue();
+    }
+
+    public void testOverload() {
+        // simple API
+        StorageAccounts storageAccounts = mock(StorageAccounts.class);
+        // minimum parameters
+        storageAccounts.getByResourceGroup(anyString(), anyString());
+        // maximum parameters
+        storageAccounts.getByResourceGroupWithResponse(anyString(), anyString(), StorageAccountExpand.BLOB_RESTORE_STATUS, Context.NONE);
+
+        // pageable API
+        BlobContainers blobContainers = mock(BlobContainers.class);
+        // minimum parameters
+        blobContainers.list(anyString(), anyString());
+        // maximum parameters
+        blobContainers.list(anyString(), anyString(), anyString(), anyString(), ListContainersInclude.DELETED, Context.NONE);
     }
 }

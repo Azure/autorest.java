@@ -22,6 +22,9 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     @JsonProperty(value = "query-two")
     private Integer queryTwo;
 
+    /** Creates an instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup class. */
+    public ParameterGroupingPostMultiParamGroupsSecondParamGroup() {}
+
     /**
      * Get the headerTwo property: The header-two property.
      *

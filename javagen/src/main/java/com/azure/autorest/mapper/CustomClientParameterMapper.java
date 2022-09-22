@@ -36,7 +36,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         JavaSettings settings = JavaSettings.getInstance();
         ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()
                 .name(name)
-                .isRequired(parameter.isRequired())
+                .required(parameter.isRequired())
                 .fromClient(parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT);
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
@@ -52,7 +52,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         }
         builder.wireType(wireType);
 
-        builder.annotations(settings.shouldNonNullAnnotations() && parameter.isRequired() ?
+        builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
             Collections.singletonList(ClassType.NonNull) : new ArrayList<>());
 
         boolean isConstant = false;
@@ -62,7 +62,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
             Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
             defaultValue = objValue == null ? null : String.valueOf(objValue);
         }
-        builder.isConstant(isConstant).defaultValue(defaultValue);
+        builder.constant(isConstant).defaultValue(defaultValue);
 
         if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
             String description = parameter.getSchema().getLanguage().getDefault().getDescription();

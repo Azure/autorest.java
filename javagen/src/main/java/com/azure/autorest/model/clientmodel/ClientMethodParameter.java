@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 /**
  * A parameter for a method.
  */
-public class ClientMethodParameter {
+public class ClientMethodParameter extends MethodParameter {
 
     public static final ClientMethodParameter CONTEXT_PARAMETER = new ClientMethodParameter.Builder()
             .description("The context to associate with this operation.")
             .wireType(ClassType.Context)
             .name("context")
             .annotations(Collections.emptyList())
-            .isConstant(false)
+            .constant(false)
             .defaultValue(null)
             .fromClient(false)
-            .isFinal(false)
-            .isRequired(false)
+            .finalParameter(false)
+            .required(false)
             .build();
 
     public static final ClientMethodParameter HTTP_REQUEST_PARAMETER = new ClientMethodParameter.Builder()
@@ -32,131 +32,49 @@ public class ClientMethodParameter {
             .wireType(ClassType.HttpRequest)
             .name("httpRequest")
             .annotations(Collections.emptyList())
-            .isConstant(false)
+            .constant(false)
             .defaultValue(null)
             .fromClient(false)
-            .isFinal(false)
-            .isRequired(true)
+            .finalParameter(false)
+            .required(true)
             .build();
 
     /**
-     * The description of this parameter.
+     * Whether this parameter is final.
      */
-    private String description;
-    /**
-     * Whether or not this parameter is final.
-     */
-    private boolean isFinal;
-    /**
-     * The type of this parameter.
-     */
-    private IType wireType;
-    /**
-     * The raw type of this parameter. In low-level mode, wireType might be BinaryData. Result of SchemaMapper.
-     */
-    private IType rawType;
-    /**
-     * The name of this parameter.
-     */
-    private String name;
-    /**
-     * Whether or not this parameter is required.
-     */
-    private boolean isRequired;
-    /**
-     * Whether or not this parameter has a constant value.
-     */
-    private boolean isConstant;
-    /**
-     * Whether or not this parameter is from a client property.
-     */
-    private boolean fromClient;
-    /**
-     * The default value for the parameter.
-     */
-    private String defaultValue;
+    private final boolean isFinal;
     /**
      * The annotations that should be part of this Parameter's declaration.
      */
-    private List<ClassType> annotations;
-
-    private RequestParameterLocation location;
+    private final List<ClassType> annotations;
 
     /**
      * Create a new Parameter with the provided properties.
      * @param description The description of this parameter.
-     * @param isFinal Whether or not this parameter is final.
+     * @param isFinal Whether this parameter is final.
      * @param wireType The type of this parameter.
      * @param rawType The raw type of this parameter. Result of SchemaMapper.
      * @param name The name of this parameter.
-     * @param isRequired Whether or not this parameter is required.
-     * @param isConstant Whether or not this parameter has a constant value.
-     * @param fromClient Whether or not this parameter is from a client property.
+     * @param isRequired Whether this parameter is required.
+     * @param isConstant Whether this parameter has a constant value.
+     * @param fromClient Whether this parameter is from a client property.
      * @param annotations The annotations that should be part of this Parameter's declaration.
      */
-    private ClientMethodParameter(String description, boolean isFinal, IType wireType, IType rawType, String name, boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations, RequestParameterLocation location) {
-        this.description = description;
+    private ClientMethodParameter(String description, boolean isFinal, IType wireType, IType rawType, String name,
+        boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations,
+        RequestParameterLocation location) {
+        super(description, wireType, rawType, wireType.getClientType(), name, location, isConstant, isRequired,
+            fromClient, defaultValue);
         this.isFinal = isFinal;
-        this.wireType = wireType;
-        this.rawType = rawType;
-        this.name = name;
-        this.isRequired = isRequired;
-        this.isConstant = isConstant;
-        this.fromClient = fromClient;
-        this.defaultValue = defaultValue;
         this.annotations = annotations;
-        this.location = location;
     }
 
-    public final String getDescription() {
-        return description;
-    }
-
-    public final boolean getIsFinal() {
+    public final boolean isFinal() {
         return isFinal;
-    }
-
-    /**
-     * The type of this parameter.
-     */
-    public final IType getClientType() {
-        return getWireType().getClientType();
-    }
-
-    public final IType getWireType() {
-        return wireType;
-    }
-
-    public final IType getRawType() {
-        return rawType;
-    }
-
-    public final String getName() {
-        return name;
-    }
-
-    public final boolean getIsRequired() {
-        return isRequired;
-    }
-
-    public final boolean getIsConstant() {
-        return isConstant;
-    }
-
-    public final boolean getFromClient() {
-        return fromClient;
-    }
-
-    public final String getDefaultValue() {
-        return defaultValue;
     }
 
     public final List<ClassType> getAnnotations() {
         return annotations;
-    }
-
-    public final RequestParameterLocation getLocation() {
-        return location;
     }
 
     /**
@@ -165,15 +83,15 @@ public class ClientMethodParameter {
      */
     public ClientMethodParameter.Builder toNewBuilder() {
         return new ClientMethodParameter.Builder()
-                .fromClient(this.getFromClient())
+                .fromClient(this.isFromClient())
                 .annotations(this.getAnnotations())
                 .defaultValue(this.getDefaultValue())
-                .isConstant(this.getIsConstant())
+                .constant(this.isConstant())
                 .description(this.getDescription())
                 .name(this.getName())
-                .isFinal(this.getIsFinal())
-                .isRequired(this.getIsRequired())
-                .location(this.getLocation())
+                .finalParameter(this.isFinal())
+                .required(this.isRequired())
+                .location(this.getRequestParameterLocation())
                 .rawType(this.getRawType())
                 .wireType(this.getWireType());
     }
@@ -183,13 +101,14 @@ public class ClientMethodParameter {
      * The full declaration of this parameter as it appears in a method signature.
      */
     public final String getDeclaration() {
-        return getAnnotations().stream().map((ClassType annotation) -> String.format("@%1$s ", annotation.getName())).collect(Collectors.joining("")) + (getIsFinal() ? "final " : "") + String.format("%1$s %2$s", getClientType(), getName());
+        return getAnnotations().stream().map(annotation -> "@" + annotation.getName()).collect(Collectors.joining(""))
+            + (isFinal() ? "final " : "") + String.format("%1$s %2$s", getClientType(), getName());
     }
 
     /**
      * Add this parameter's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         for (ClassType annotation : getAnnotations()) {
@@ -222,11 +141,11 @@ public class ClientMethodParameter {
         }
 
         /**
-         * Sets whether or not this parameter is final.
-         * @param isFinal whether or not this parameter is final
+         * Sets whether this parameter is final.
+         * @param isFinal whether this parameter is final
          * @return the Builder itself
          */
-        public Builder isFinal(boolean isFinal) {
+        public Builder finalParameter(boolean isFinal) {
             this.isFinal = isFinal;
             return this;
         }
@@ -262,28 +181,28 @@ public class ClientMethodParameter {
         }
 
         /**
-         * Sets whether or not this parameter is required.
-         * @param isRequired whether or not this parameter is required
+         * Sets whether this parameter is required.
+         * @param isRequired whether this parameter is required
          * @return the Builder itself
          */
-        public Builder isRequired(boolean isRequired) {
+        public Builder required(boolean isRequired) {
             this.isRequired = isRequired;
             return this;
         }
 
         /**
-         * Sets whether or not this parameter has a constant value.
-         * @param isConstant whether or not this parameter has a constant value
+         * Sets whether this parameter has a constant value.
+         * @param isConstant whether this parameter has a constant value
          * @return the Builder itself
          */
-        public Builder isConstant(boolean isConstant) {
+        public Builder constant(boolean isConstant) {
             this.isConstant = isConstant;
             return this;
         }
 
         /**
-         * Sets whether or not this parameter is from a client property.
-         * @param fromClient whether or not this parameter is from a client property
+         * Sets whether this parameter is from a client property.
+         * @param fromClient whether this parameter is from a client property
          * @return the Builder itself
          */
         public Builder fromClient(boolean fromClient) {
