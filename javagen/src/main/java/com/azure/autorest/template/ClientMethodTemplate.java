@@ -75,14 +75,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         Set<String> expressionsToCheckSet = new LinkedHashSet<>(expressionsToCheck);
 
         for (String expressionToCheck : expressionsToCheckSet) {
+            String exceptionExpression = String.format("new IllegalArgumentException(\"Parameter %s is required and cannot be null.\")", expressionToCheck);
+
             // TODO (alzimmer): Determine if the assumption being made here are always true.
             // 1. Assumes that the expression is nullable.
             // 2. Assumes that the client method returns a reactive response.
             // 3. Assumes that the reactive response is a Mono.
-            JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
-                // TODO (alzimmer): Need to discuss if this can be changed to the more appropriate NullPointerException.
-                ifBlock.line("return Mono.error(new IllegalArgumentException(\"Parameter %s is required and "
-                    + "cannot be null.\"));", expressionToCheck));
+            // TODO (alzimmer): Need to discuss if this can be changed to the more appropriate NullPointerException.
+            JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock -> {
+                if (JavaSettings.getInstance().isSyncStackEnabled()) {
+                    if (settings.isUseClientLogger()) {
+                        ifBlock.line("throw LOGGER.logExceptionAsError(%s);", exceptionExpression);
+                    } else {
+                        ifBlock.line("throw %s;", exceptionExpression);
+                    }
+                } else {
+                    ifBlock.methodReturn(String.format("Mono.error(%s)", exceptionExpression));
+                }
+            });
 
             String potentialValidateExpression = validateExpressions.get(expressionToCheck);
             if (potentialValidateExpression != null) {
