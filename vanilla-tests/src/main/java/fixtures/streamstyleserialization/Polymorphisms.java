@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.DotFish;
 import fixtures.streamstyleserialization.models.DotFishMarket;
 import fixtures.streamstyleserialization.models.ErrorException;
@@ -58,10 +59,25 @@ public final class Polymorphisms {
         Mono<Response<Fish>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/polymorphism/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Fish> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Fish complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/polymorphism/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Fish complexBody,
                 @HeaderParam("Accept") String accept,
@@ -73,10 +89,22 @@ public final class Polymorphisms {
         Mono<Response<DotFish>> getDotSyntax(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/polymorphism/dotsyntax")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DotFish> getDotSyntaxSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DotFishMarket>> getComposedWithDiscriminator(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/complex/polymorphism/composedWithDiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DotFishMarket> getComposedWithDiscriminatorSync(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
@@ -85,16 +113,37 @@ public final class Polymorphisms {
         Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/polymorphism/composedWithoutDiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DotFishMarket> getComposedWithoutDiscriminatorSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Salmon>> getComplicated(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/polymorphism/complicated")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Salmon> getComplicatedSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplicated(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Salmon complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/polymorphism/complicated")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putComplicatedSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Salmon complexBody,
                 @HeaderParam("Accept") String accept,
@@ -109,10 +158,28 @@ public final class Polymorphisms {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Put("/complex/polymorphism/missingdiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Salmon> putMissingDiscriminatorSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Salmon complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValidMissingRequired(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Fish complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/polymorphism/missingrequired/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidMissingRequiredSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Fish complexBody,
                 @HeaderParam("Accept") String accept,
@@ -129,7 +196,7 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -156,8 +223,13 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Fish> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<Fish> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -168,8 +240,8 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Fish getValid() {
-        return getValidWithResponse().getValue();
+    public Fish getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
 
     /**
@@ -189,11 +261,12 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -235,8 +308,19 @@ public final class Polymorphisms {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Fish complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
+    public Response<Void> putValidSyncWithResponse(Fish complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -253,8 +337,8 @@ public final class Polymorphisms {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Fish complexBody) {
-        putValidWithResponse(complexBody);
+    public void putValidSync(Fish complexBody) {
+        putValidSyncWithResponse(complexBody);
     }
 
     /**
@@ -268,7 +352,7 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -295,8 +379,13 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DotFish> getDotSyntaxWithResponse() {
-        return getDotSyntaxWithResponseAsync().block();
+    public Response<DotFish> getDotSyntaxSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDotSyntaxSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -307,8 +396,8 @@ public final class Polymorphisms {
      * @return complex types that are polymorphic, JSON key contains a dot.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DotFish getDotSyntax() {
-        return getDotSyntaxWithResponse().getValue();
+    public DotFish getDotSyntaxSync() {
+        return getDotSyntaxSyncWithResponse().getValue();
     }
 
     /**
@@ -323,7 +412,7 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -355,8 +444,13 @@ public final class Polymorphisms {
      *     with discriminator specified along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DotFishMarket> getComposedWithDiscriminatorWithResponse() {
-        return getComposedWithDiscriminatorWithResponseAsync().block();
+    public Response<DotFishMarket> getComposedWithDiscriminatorSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComposedWithDiscriminatorSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -369,8 +463,8 @@ public final class Polymorphisms {
      *     with discriminator specified.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DotFishMarket getComposedWithDiscriminator() {
-        return getComposedWithDiscriminatorWithResponse().getValue();
+    public DotFishMarket getComposedWithDiscriminatorSync() {
+        return getComposedWithDiscriminatorSyncWithResponse().getValue();
     }
 
     /**
@@ -385,7 +479,7 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -417,8 +511,13 @@ public final class Polymorphisms {
      *     without discriminator specified on wire along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DotFishMarket> getComposedWithoutDiscriminatorWithResponse() {
-        return getComposedWithoutDiscriminatorWithResponseAsync().block();
+    public Response<DotFishMarket> getComposedWithoutDiscriminatorSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComposedWithoutDiscriminatorSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -431,8 +530,8 @@ public final class Polymorphisms {
      *     without discriminator specified on wire.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DotFishMarket getComposedWithoutDiscriminator() {
-        return getComposedWithoutDiscriminatorWithResponse().getValue();
+    public DotFishMarket getComposedWithoutDiscriminatorSync() {
+        return getComposedWithoutDiscriminatorSyncWithResponse().getValue();
     }
 
     /**
@@ -446,7 +545,7 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -475,8 +574,13 @@ public final class Polymorphisms {
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Salmon> getComplicatedWithResponse() {
-        return getComplicatedWithResponseAsync().block();
+    public Response<Salmon> getComplicatedSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplicatedSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -488,8 +592,8 @@ public final class Polymorphisms {
      *     properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Salmon getComplicated() {
-        return getComplicatedWithResponse().getValue();
+    public Salmon getComplicatedSync() {
+        return getComplicatedSyncWithResponse().getValue();
     }
 
     /**
@@ -504,11 +608,12 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -541,8 +646,19 @@ public final class Polymorphisms {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplicatedWithResponse(Salmon complexBody) {
-        return putComplicatedWithResponseAsync(complexBody).block();
+    public Response<Void> putComplicatedSyncWithResponse(Salmon complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putComplicatedSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -554,8 +670,8 @@ public final class Polymorphisms {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putComplicated(Salmon complexBody) {
-        putComplicatedWithResponse(complexBody);
+    public void putComplicatedSync(Salmon complexBody) {
+        putComplicatedSyncWithResponse(complexBody);
     }
 
     /**
@@ -570,11 +686,12 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -607,8 +724,19 @@ public final class Polymorphisms {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Salmon> putMissingDiscriminatorWithResponse(Salmon complexBody) {
-        return putMissingDiscriminatorWithResponseAsync(complexBody).block();
+    public Response<Salmon> putMissingDiscriminatorSyncWithResponse(Salmon complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putMissingDiscriminatorSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -621,8 +749,8 @@ public final class Polymorphisms {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Salmon putMissingDiscriminator(Salmon complexBody) {
-        return putMissingDiscriminatorWithResponse(complexBody).getValue();
+    public Salmon putMissingDiscriminatorSync(Salmon complexBody) {
+        return putMissingDiscriminatorSyncWithResponse(complexBody).getValue();
     }
 
     /**
@@ -642,11 +770,12 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -689,8 +818,19 @@ public final class Polymorphisms {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidMissingRequiredWithResponse(Fish complexBody) {
-        return putValidMissingRequiredWithResponseAsync(complexBody).block();
+    public Response<Void> putValidMissingRequiredSyncWithResponse(Fish complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidMissingRequiredSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -707,7 +847,9 @@ public final class Polymorphisms {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidMissingRequired(Fish complexBody) {
-        putValidMissingRequiredWithResponse(complexBody);
+    public void putValidMissingRequiredSync(Fish complexBody) {
+        putValidMissingRequiredSyncWithResponse(complexBody);
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Polymorphisms.class);
 }

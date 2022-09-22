@@ -18,6 +18,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
@@ -53,6 +54,12 @@ public final class Flattencomplexes {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<MyBaseType>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/complex/flatten/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<MyBaseType> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -65,7 +72,7 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -92,8 +99,13 @@ public final class Flattencomplexes {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<MyBaseType> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<MyBaseType> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -104,7 +116,9 @@ public final class Flattencomplexes {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public MyBaseType getValid() {
-        return getValidWithResponse().getValue();
+    public MyBaseType getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Flattencomplexes.class);
 }

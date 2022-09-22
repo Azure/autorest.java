@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.ErrorException;
 import fixtures.streamstyleserialization.models.Siamese;
 import reactor.core.publisher.Mono;
@@ -55,10 +56,25 @@ public final class Inheritances {
         Mono<Response<Siamese>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/inheritance/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Siamese> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Siamese complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/inheritance/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Siamese complexBody,
                 @HeaderParam("Accept") String accept,
@@ -75,7 +91,7 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -102,8 +118,13 @@ public final class Inheritances {
      * @return complex types that extend others along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Siamese> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<Siamese> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -114,8 +135,8 @@ public final class Inheritances {
      * @return complex types that extend others.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Siamese getValid() {
-        return getValidWithResponse().getValue();
+    public Siamese getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
 
     /**
@@ -132,11 +153,12 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -172,8 +194,19 @@ public final class Inheritances {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Siamese complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
+    public Response<Void> putValidSyncWithResponse(Siamese complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -187,7 +220,9 @@ public final class Inheritances {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Siamese complexBody) {
-        putValidWithResponse(complexBody);
+    public void putValidSync(Siamese complexBody) {
+        putValidSyncWithResponse(complexBody);
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Inheritances.class);
 }

@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.BooleanWrapper;
 import fixtures.streamstyleserialization.models.ByteWrapper;
 import fixtures.streamstyleserialization.models.DateWrapper;
@@ -65,10 +66,25 @@ public final class Primitives {
         Mono<Response<IntWrapper>> getInt(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/integer")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<IntWrapper> getIntSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putInt(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") IntWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/integer")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putIntSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") IntWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -80,10 +96,25 @@ public final class Primitives {
         Mono<Response<LongWrapper>> getLong(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<LongWrapper> getLongSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLong(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") LongWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putLongSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") LongWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -95,10 +126,25 @@ public final class Primitives {
         Mono<Response<FloatWrapper>> getFloat(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/float")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<FloatWrapper> getFloatSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloat(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") FloatWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/float")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putFloatSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") FloatWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -110,10 +156,25 @@ public final class Primitives {
         Mono<Response<DoubleWrapper>> getDouble(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/double")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DoubleWrapper> getDoubleSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDouble(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DoubleWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/double")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putDoubleSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DoubleWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -125,10 +186,25 @@ public final class Primitives {
         Mono<Response<BooleanWrapper>> getBool(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/bool")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<BooleanWrapper> getBoolSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBool(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BooleanWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/bool")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putBoolSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BooleanWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -140,10 +216,25 @@ public final class Primitives {
         Mono<Response<StringWrapper>> getString(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<StringWrapper> getStringSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putString(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") StringWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putStringSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") StringWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -155,10 +246,25 @@ public final class Primitives {
         Mono<Response<DateWrapper>> getDate(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/date")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DateWrapper> getDateSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDate(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DateWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/date")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putDateSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DateWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -170,10 +276,25 @@ public final class Primitives {
         Mono<Response<DatetimeWrapper>> getDateTime(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/datetime")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DatetimeWrapper> getDateTimeSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTime(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DatetimeWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/datetime")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putDateTimeSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DatetimeWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -185,10 +306,25 @@ public final class Primitives {
         Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Datetimerfc1123Wrapper> getDateTimeRfc1123Sync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") Datetimerfc1123Wrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putDateTimeRfc1123Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") Datetimerfc1123Wrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -200,10 +336,25 @@ public final class Primitives {
         Mono<Response<DurationWrapper>> getDuration(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/duration")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<DurationWrapper> getDurationSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDuration(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") DurationWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/duration")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putDurationSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") DurationWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -215,10 +366,25 @@ public final class Primitives {
         Mono<Response<ByteWrapper>> getByte(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/primitive/byte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<ByteWrapper> getByteSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putByte(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") ByteWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/primitive/byte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putByteSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ByteWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -236,7 +402,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -263,8 +429,13 @@ public final class Primitives {
      * @return complex types with integer properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<IntWrapper> getIntWithResponse() {
-        return getIntWithResponseAsync().block();
+    public Response<IntWrapper> getIntSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -275,8 +446,8 @@ public final class Primitives {
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IntWrapper getInt() {
-        return getIntWithResponse().getValue();
+    public IntWrapper getIntSync() {
+        return getIntSyncWithResponse().getValue();
     }
 
     /**
@@ -291,11 +462,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -327,8 +499,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntWithResponse(IntWrapper complexBody) {
-        return putIntWithResponseAsync(complexBody).block();
+    public Response<Void> putIntSyncWithResponse(IntWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putIntSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -340,8 +523,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putInt(IntWrapper complexBody) {
-        putIntWithResponse(complexBody);
+    public void putIntSync(IntWrapper complexBody) {
+        putIntSyncWithResponse(complexBody);
     }
 
     /**
@@ -354,7 +537,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<LongWrapper>> getLongWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -381,8 +564,13 @@ public final class Primitives {
      * @return complex types with long properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LongWrapper> getLongWithResponse() {
-        return getLongWithResponseAsync().block();
+    public Response<LongWrapper> getLongSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -393,8 +581,8 @@ public final class Primitives {
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public LongWrapper getLong() {
-        return getLongWithResponse().getValue();
+    public LongWrapper getLongSync() {
+        return getLongSyncWithResponse().getValue();
     }
 
     /**
@@ -409,11 +597,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -445,8 +634,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongWithResponse(LongWrapper complexBody) {
-        return putLongWithResponseAsync(complexBody).block();
+    public Response<Void> putLongSyncWithResponse(LongWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putLongSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -458,8 +658,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLong(LongWrapper complexBody) {
-        putLongWithResponse(complexBody);
+    public void putLongSync(LongWrapper complexBody) {
+        putLongSyncWithResponse(complexBody);
     }
 
     /**
@@ -472,7 +672,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -499,8 +699,13 @@ public final class Primitives {
      * @return complex types with float properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatWrapper> getFloatWithResponse() {
-        return getFloatWithResponseAsync().block();
+    public Response<FloatWrapper> getFloatSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -511,8 +716,8 @@ public final class Primitives {
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public FloatWrapper getFloat() {
-        return getFloatWithResponse().getValue();
+    public FloatWrapper getFloatSync() {
+        return getFloatSyncWithResponse().getValue();
     }
 
     /**
@@ -527,11 +732,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -563,8 +769,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatWithResponse(FloatWrapper complexBody) {
-        return putFloatWithResponseAsync(complexBody).block();
+    public Response<Void> putFloatSyncWithResponse(FloatWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putFloatSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -576,8 +793,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloat(FloatWrapper complexBody) {
-        putFloatWithResponse(complexBody);
+    public void putFloatSync(FloatWrapper complexBody) {
+        putFloatSyncWithResponse(complexBody);
     }
 
     /**
@@ -591,7 +808,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -618,8 +835,13 @@ public final class Primitives {
      * @return complex types with double properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DoubleWrapper> getDoubleWithResponse() {
-        return getDoubleWithResponseAsync().block();
+    public Response<DoubleWrapper> getDoubleSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -630,8 +852,8 @@ public final class Primitives {
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DoubleWrapper getDouble() {
-        return getDoubleWithResponse().getValue();
+    public DoubleWrapper getDoubleSync() {
+        return getDoubleSyncWithResponse().getValue();
     }
 
     /**
@@ -646,11 +868,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -682,8 +905,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody) {
-        return putDoubleWithResponseAsync(complexBody).block();
+    public Response<Void> putDoubleSyncWithResponse(DoubleWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDoubleSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -695,8 +929,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDouble(DoubleWrapper complexBody) {
-        putDoubleWithResponse(complexBody);
+    public void putDoubleSync(DoubleWrapper complexBody) {
+        putDoubleSyncWithResponse(complexBody);
     }
 
     /**
@@ -709,7 +943,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BooleanWrapper>> getBoolWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -736,8 +970,13 @@ public final class Primitives {
      * @return complex types with bool properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BooleanWrapper> getBoolWithResponse() {
-        return getBoolWithResponseAsync().block();
+    public Response<BooleanWrapper> getBoolSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBoolSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -748,8 +987,8 @@ public final class Primitives {
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BooleanWrapper getBool() {
-        return getBoolWithResponse().getValue();
+    public BooleanWrapper getBoolSync() {
+        return getBoolSyncWithResponse().getValue();
     }
 
     /**
@@ -764,11 +1003,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -800,8 +1040,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody) {
-        return putBoolWithResponseAsync(complexBody).block();
+    public Response<Void> putBoolSyncWithResponse(BooleanWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putBoolSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -813,8 +1064,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBool(BooleanWrapper complexBody) {
-        putBoolWithResponse(complexBody);
+    public void putBoolSync(BooleanWrapper complexBody) {
+        putBoolSyncWithResponse(complexBody);
     }
 
     /**
@@ -828,7 +1079,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -855,8 +1106,13 @@ public final class Primitives {
      * @return complex types with string properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<StringWrapper> getStringWithResponse() {
-        return getStringWithResponseAsync().block();
+    public Response<StringWrapper> getStringSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -867,8 +1123,8 @@ public final class Primitives {
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public StringWrapper getString() {
-        return getStringWithResponse().getValue();
+    public StringWrapper getStringSync() {
+        return getStringSyncWithResponse().getValue();
     }
 
     /**
@@ -883,11 +1139,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -919,8 +1176,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringWithResponse(StringWrapper complexBody) {
-        return putStringWithResponseAsync(complexBody).block();
+    public Response<Void> putStringSyncWithResponse(StringWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putStringSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -932,8 +1200,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putString(StringWrapper complexBody) {
-        putStringWithResponse(complexBody);
+    public void putStringSync(StringWrapper complexBody) {
+        putStringSyncWithResponse(complexBody);
     }
 
     /**
@@ -946,7 +1214,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DateWrapper>> getDateWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -973,8 +1241,13 @@ public final class Primitives {
      * @return complex types with date properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DateWrapper> getDateWithResponse() {
-        return getDateWithResponseAsync().block();
+    public Response<DateWrapper> getDateSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -985,8 +1258,8 @@ public final class Primitives {
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DateWrapper getDate() {
-        return getDateWithResponse().getValue();
+    public DateWrapper getDateSync() {
+        return getDateSyncWithResponse().getValue();
     }
 
     /**
@@ -1001,11 +1274,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1037,8 +1311,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateWithResponse(DateWrapper complexBody) {
-        return putDateWithResponseAsync(complexBody).block();
+    public Response<Void> putDateSyncWithResponse(DateWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDateSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -1050,8 +1335,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDate(DateWrapper complexBody) {
-        putDateWithResponse(complexBody);
+    public void putDateSync(DateWrapper complexBody) {
+        putDateSyncWithResponse(complexBody);
     }
 
     /**
@@ -1065,7 +1350,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -1092,8 +1377,13 @@ public final class Primitives {
      * @return complex types with datetime properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DatetimeWrapper> getDateTimeWithResponse() {
-        return getDateTimeWithResponseAsync().block();
+    public Response<DatetimeWrapper> getDateTimeSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -1104,8 +1394,8 @@ public final class Primitives {
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DatetimeWrapper getDateTime() {
-        return getDateTimeWithResponse().getValue();
+    public DatetimeWrapper getDateTimeSync() {
+        return getDateTimeSyncWithResponse().getValue();
     }
 
     /**
@@ -1120,11 +1410,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1157,8 +1448,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody) {
-        return putDateTimeWithResponseAsync(complexBody).block();
+    public Response<Void> putDateTimeSyncWithResponse(DatetimeWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDateTimeSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -1170,8 +1472,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeWithResponse(complexBody);
+    public void putDateTimeSync(DatetimeWrapper complexBody) {
+        putDateTimeSyncWithResponse(complexBody);
     }
 
     /**
@@ -1185,7 +1487,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -1212,8 +1514,13 @@ public final class Primitives {
      * @return complex types with datetimeRfc1123 properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse() {
-        return getDateTimeRfc1123WithResponseAsync().block();
+    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123SyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123Sync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -1224,8 +1531,8 @@ public final class Primitives {
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123WithResponse().getValue();
+    public Datetimerfc1123Wrapper getDateTimeRfc1123Sync() {
+        return getDateTimeRfc1123SyncWithResponse().getValue();
     }
 
     /**
@@ -1240,11 +1547,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1277,8 +1585,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody).block();
+    public Response<Void> putDateTimeRfc1123SyncWithResponse(Datetimerfc1123Wrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDateTimeRfc1123Sync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -1290,8 +1609,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123WithResponse(complexBody);
+    public void putDateTimeRfc1123Sync(Datetimerfc1123Wrapper complexBody) {
+        putDateTimeRfc1123SyncWithResponse(complexBody);
     }
 
     /**
@@ -1305,7 +1624,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -1332,8 +1651,13 @@ public final class Primitives {
      * @return complex types with duration properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DurationWrapper> getDurationWithResponse() {
-        return getDurationWithResponseAsync().block();
+    public Response<DurationWrapper> getDurationSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDurationSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -1344,8 +1668,8 @@ public final class Primitives {
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DurationWrapper getDuration() {
-        return getDurationWithResponse().getValue();
+    public DurationWrapper getDurationSync() {
+        return getDurationSyncWithResponse().getValue();
     }
 
     /**
@@ -1360,11 +1684,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1397,8 +1722,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationWithResponse(DurationWrapper complexBody) {
-        return putDurationWithResponseAsync(complexBody).block();
+    public Response<Void> putDurationSyncWithResponse(DurationWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDurationSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -1410,8 +1746,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDuration(DurationWrapper complexBody) {
-        putDurationWithResponse(complexBody);
+    public void putDurationSync(DurationWrapper complexBody) {
+        putDurationSyncWithResponse(complexBody);
     }
 
     /**
@@ -1424,7 +1760,7 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ByteWrapper>> getByteWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -1451,8 +1787,13 @@ public final class Primitives {
      * @return complex types with byte properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ByteWrapper> getByteWithResponse() {
-        return getByteWithResponseAsync().block();
+    public Response<ByteWrapper> getByteSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByteSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -1463,8 +1804,8 @@ public final class Primitives {
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ByteWrapper getByte() {
-        return getByteWithResponse().getValue();
+    public ByteWrapper getByteSync() {
+        return getByteSyncWithResponse().getValue();
     }
 
     /**
@@ -1479,11 +1820,12 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1515,8 +1857,19 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteWithResponse(ByteWrapper complexBody) {
-        return putByteWithResponseAsync(complexBody).block();
+    public Response<Void> putByteSyncWithResponse(ByteWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putByteSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -1528,7 +1881,9 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByte(ByteWrapper complexBody) {
-        putByteWithResponse(complexBody);
+    public void putByteSync(ByteWrapper complexBody) {
+        putByteSyncWithResponse(complexBody);
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Primitives.class);
 }
