@@ -770,7 +770,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // Generate a non-WithResponse overload with non-required parameters only if one of fluent, include Context,
         // and only required parameters is false.
-        if (!settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
+        if (!isSync || !settings.isFluent() || !settings.isContextClientMethodParameter() || !generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder.build());
         }
 
