@@ -6,11 +6,11 @@
     "version": "1.0.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "https://{Endpoint}/resource",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
+        "name": "Endpoint",
         "description": "The communication resource, for example https://my-resource.communication.azure.com",
         "required": true,
         "type": "string",

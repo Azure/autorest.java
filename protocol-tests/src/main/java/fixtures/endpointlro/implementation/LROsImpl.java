@@ -52,7 +52,7 @@ public final class LROsImpl {
      * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy
      * service to perform REST calls.
      */
-    @Host("{endpoint}")
+    @Host("https://{Endpoint}/resource")
     @ServiceInterface(name = "AutoRestLongRunningO")
     private interface LROsService {
         @Put("/lro/put/200/succeeded")
@@ -68,7 +68,7 @@ public final class LROsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200Succeeded(
-                @HostParam("endpoint") String endpoint,
+                @HostParam("Endpoint") String endpoint,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -174,7 +174,7 @@ public final class LROsImpl {
                 () -> this.put200SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        this.client.getEndpoint(),
+                        "https://{Endpoint}/resource".replace("{Endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
