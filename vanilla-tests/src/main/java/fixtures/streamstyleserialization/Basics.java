@@ -20,6 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.Basic;
 import fixtures.streamstyleserialization.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -55,10 +56,26 @@ public final class Basics {
         Mono<Response<Basic>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/basic/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Basic> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @BodyParam("application/json") Basic complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/basic/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @QueryParam("api-version") String apiVersion,
                 @BodyParam("application/json") Basic complexBody,
@@ -71,10 +88,22 @@ public final class Basics {
         Mono<Response<Basic>> getInvalid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/basic/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Basic> getInvalidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getEmpty(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/complex/basic/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Basic> getEmptySync(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/null")
@@ -83,10 +112,22 @@ public final class Basics {
         Mono<Response<Basic>> getNull(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/basic/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Basic> getNullSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getNotProvided(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/complex/basic/notprovided")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Basic> getNotProvidedSync(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
@@ -101,7 +142,7 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -128,8 +169,13 @@ public final class Basics {
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<Basic> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -140,8 +186,8 @@ public final class Basics {
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getValid() {
-        return getValidWithResponse().getValue();
+    public Basic getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
 
     /**
@@ -156,11 +202,12 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -195,8 +242,20 @@ public final class Basics {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Basic complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
+    public Response<Void> putValidSyncWithResponse(Basic complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(
+                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -208,8 +267,8 @@ public final class Basics {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Basic complexBody) {
-        putValidWithResponse(complexBody);
+    public void putValidSync(Basic complexBody) {
+        putValidSyncWithResponse(complexBody);
     }
 
     /**
@@ -223,7 +282,7 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -250,8 +309,13 @@ public final class Basics {
      * @return a basic complex type that is invalid for the local strong type along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<Basic> getInvalidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -262,8 +326,8 @@ public final class Basics {
      * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getInvalid() {
-        return getInvalidWithResponse().getValue();
+    public Basic getInvalidSync() {
+        return getInvalidSyncWithResponse().getValue();
     }
 
     /**
@@ -276,7 +340,7 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -303,8 +367,13 @@ public final class Basics {
      * @return a basic complex type that is empty along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getEmptyWithResponse() {
-        return getEmptyWithResponseAsync().block();
+    public Response<Basic> getEmptySyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -315,8 +384,8 @@ public final class Basics {
      * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getEmpty() {
-        return getEmptyWithResponse().getValue();
+    public Basic getEmptySync() {
+        return getEmptySyncWithResponse().getValue();
     }
 
     /**
@@ -330,7 +399,7 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -357,8 +426,13 @@ public final class Basics {
      * @return a basic complex type whose properties are null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<Basic> getNullSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNullSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -369,8 +443,8 @@ public final class Basics {
      * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNull() {
-        return getNullWithResponse().getValue();
+    public Basic getNullSync() {
+        return getNullSyncWithResponse().getValue();
     }
 
     /**
@@ -384,7 +458,7 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -412,8 +486,13 @@ public final class Basics {
      * @return a basic complex type while the server doesn't provide a response payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNotProvidedWithResponse() {
-        return getNotProvidedWithResponseAsync().block();
+    public Response<Basic> getNotProvidedSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -424,7 +503,9 @@ public final class Basics {
      * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNotProvided() {
-        return getNotProvidedWithResponse().getValue();
+    public Basic getNotProvidedSync() {
+        return getNotProvidedSyncWithResponse().getValue();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Basics.class);
 }

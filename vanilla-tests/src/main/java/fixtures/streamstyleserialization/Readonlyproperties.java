@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.ErrorException;
 import fixtures.streamstyleserialization.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
@@ -56,10 +57,25 @@ public final class Readonlyproperties {
         Mono<Response<ReadonlyObj>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/readonlyproperty/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<ReadonlyObj> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") ReadonlyObj complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/readonlyproperty/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ReadonlyObj complexBody,
                 @HeaderParam("Accept") String accept,
@@ -77,7 +93,7 @@ public final class Readonlyproperties {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -104,8 +120,13 @@ public final class Readonlyproperties {
      * @return complex types that have readonly properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ReadonlyObj> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<ReadonlyObj> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
     }
 
     /**
@@ -116,8 +137,8 @@ public final class Readonlyproperties {
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ReadonlyObj getValid() {
-        return getValidWithResponse().getValue();
+    public ReadonlyObj getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
 
     /**
@@ -132,11 +153,12 @@ public final class Readonlyproperties {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -168,8 +190,19 @@ public final class Readonlyproperties {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(ReadonlyObj complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
+    public Response<Void> putValidSyncWithResponse(ReadonlyObj complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
     }
 
     /**
@@ -181,7 +214,9 @@ public final class Readonlyproperties {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ReadonlyObj complexBody) {
-        putValidWithResponse(complexBody);
+    public void putValidSync(ReadonlyObj complexBody) {
+        putValidSyncWithResponse(complexBody);
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Readonlyproperties.class);
 }
