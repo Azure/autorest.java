@@ -346,6 +346,7 @@ public final class LongRunningOpsImpl {
                 () -> this.createOrUpdateWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -517,6 +518,7 @@ public final class LongRunningOpsImpl {
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -599,6 +601,7 @@ public final class LongRunningOpsImpl {
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -691,6 +694,7 @@ public final class LongRunningOpsImpl {
                 () -> this.importxWithResponseAsync(name, exportedResource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.client.getEndpoint()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
