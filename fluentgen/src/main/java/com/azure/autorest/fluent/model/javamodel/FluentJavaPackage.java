@@ -114,7 +114,7 @@ public class FluentJavaPackage extends JavaPackage {
 
         String className = unitTest.getResourceCollection().getInterfaceType().getName()
                 + CodeNamer.toPascalCase(unitTest.getCollectionMethod().getMethodName())
-                + "Tests";
+                + "MockTests";
         JavaFile javaFile = getJavaFileFactory().createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
         FluentMethodTestTemplate.ClientMethodInfo info = new FluentMethodTestTemplate.ClientMethodInfo(
                 className, unitTest);
