@@ -171,6 +171,21 @@ public final class SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMethodGlobalValidAsync(Context context) {
+        return postMethodGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -188,6 +203,20 @@ public final class SubscriptionInCredentials {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMethodGlobalValid() {
         postMethodGlobalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postMethodGlobalValid(Context context) {
+        postMethodGlobalValidWithResponse(context);
     }
 
     /**
@@ -262,6 +291,21 @@ public final class SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMethodGlobalNullAsync(Context context) {
+        return postMethodGlobalNullWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
+     * client-side validation should prevent you from making this call.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -279,6 +323,20 @@ public final class SubscriptionInCredentials {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMethodGlobalNull() {
         postMethodGlobalNullWithResponse(Context.NONE);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
+     * client-side validation should prevent you from making this call.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postMethodGlobalNull(Context context) {
+        postMethodGlobalNullWithResponse(context);
     }
 
     /**
@@ -358,6 +416,21 @@ public final class SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMethodGlobalNotProvidedValidAsync(Context context) {
+        return postMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -375,6 +448,20 @@ public final class SubscriptionInCredentials {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postMethodGlobalNotProvidedValid() {
         postMethodGlobalNotProvidedValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postMethodGlobalNotProvidedValid(Context context) {
+        postMethodGlobalNotProvidedValidWithResponse(context);
     }
 
     /**
@@ -449,6 +536,21 @@ public final class SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postPathGlobalValidAsync(Context context) {
+        return postPathGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -466,6 +568,20 @@ public final class SubscriptionInCredentials {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postPathGlobalValid() {
         postPathGlobalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postPathGlobalValid(Context context) {
+        postPathGlobalValidWithResponse(context);
     }
 
     /**
@@ -540,6 +656,21 @@ public final class SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postSwaggerGlobalValidAsync(Context context) {
+        return postSwaggerGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -557,5 +688,19 @@ public final class SubscriptionInCredentials {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSwaggerGlobalValid() {
         postSwaggerGlobalValidWithResponse(Context.NONE);
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
+     * '1234-5678-9012-3456' to succeed.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postSwaggerGlobalValid(Context context) {
+        postSwaggerGlobalValidWithResponse(context);
     }
 }

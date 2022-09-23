@@ -128,6 +128,20 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Flux<ByteBuffer> getFileAsync(Context context) {
+        return getFileWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -168,6 +182,20 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFile() {
         return getFileWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public InputStream getFile(Context context) {
+        return getFileWithResponse(context).getValue();
     }
 
     /**
@@ -225,6 +253,20 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Flux<ByteBuffer> getFileLargeAsync(Context context) {
+        return getFileLargeWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -265,6 +307,20 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
         return getFileLargeWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public InputStream getFileLarge(Context context) {
+        return getFileLargeWithResponse(context).getValue();
     }
 
     /**
@@ -322,6 +378,20 @@ public final class Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
+        return getEmptyFileWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -362,5 +432,19 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getEmptyFile() {
         return getEmptyFileWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public InputStream getEmptyFile(Context context) {
+        return getEmptyFileWithResponse(context).getValue();
     }
 }

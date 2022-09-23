@@ -778,7 +778,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             methods.add(builder.onlyRequiredParameters(true).build());
         }
 
-        if (settings.isSyncStackEnabled() && settings.isContextClientMethodParameter()) {
+        if (settings.isContextClientMethodParameter()) {
             builder.methodVisibility(visibilityFunction.apply(false, true)).onlyRequiredParameters(false);
             addClientMethodWithContext(methods, builder, parameters, contextParameter);
         }

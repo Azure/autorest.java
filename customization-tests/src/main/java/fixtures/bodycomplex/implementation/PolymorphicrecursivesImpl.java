@@ -116,6 +116,21 @@ public final class PolymorphicrecursivesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Fish> getValidAsync(Context context) {
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -133,6 +148,20 @@ public final class PolymorphicrecursivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
         return getValidWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getValid(Context context) {
+        return getValidWithResponse(context).getValue();
     }
 
     /**
@@ -212,6 +241,27 @@ public final class PolymorphicrecursivesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(Fish complexBody, Context context) {
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
+     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
+     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
+     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
+     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
+     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
+     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -236,5 +286,25 @@ public final class PolymorphicrecursivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Fish complexBody) {
         putValidWithResponse(complexBody, Context.NONE);
+    }
+
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
+     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
+     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
+     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
+     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
+     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
+     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(Fish complexBody, Context context) {
+        putValidWithResponse(complexBody, context);
     }
 }

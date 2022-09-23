@@ -145,6 +145,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getTrueAsync(Context context) {
+        return getTrueWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get true Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -162,6 +176,20 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getTrue() {
         return getTrueWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get true Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getTrue(Context context) {
+        return getTrueWithResponse(context).getValue();
     }
 
     /**
@@ -221,6 +249,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putTrueAsync(Context context) {
+        return putTrueWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set Boolean value true.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -237,6 +279,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putTrue() {
         putTrueWithResponse(Context.NONE);
+    }
+
+    /**
+     * Set Boolean value true.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putTrue(Context context) {
+        putTrueWithResponse(context);
     }
 
     /**
@@ -294,6 +349,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getFalseAsync(Context context) {
+        return getFalseWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get false Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -311,6 +380,20 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getFalse() {
         return getFalseWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get false Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getFalse(Context context) {
+        return getFalseWithResponse(context).getValue();
     }
 
     /**
@@ -370,6 +453,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFalseAsync(Context context) {
+        return putFalseWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set Boolean value false.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -386,6 +483,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFalse() {
         putFalseWithResponse(Context.NONE);
+    }
+
+    /**
+     * Set Boolean value false.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putFalse(Context context) {
+        putFalseWithResponse(context);
     }
 
     /**
@@ -443,6 +553,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -460,6 +584,20 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNull() {
         return getNullWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get null Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getNull(Context context) {
+        return getNullWithResponse(context).getValue();
     }
 
     /**
@@ -517,6 +655,20 @@ public final class Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -534,5 +686,19 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getInvalid() {
         return getInvalidWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Boolean value.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getInvalid(Context context) {
+        return getInvalidWithResponse(context).getValue();
     }
 }
