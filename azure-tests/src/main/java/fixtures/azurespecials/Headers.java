@@ -159,20 +159,6 @@ public final class Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersCustomNamedRequestIdResponse customNamedRequestIdWithResponse(String fooClientRequestId) {
-        return customNamedRequestIdWithResponseAsync(fooClientRequestId).block();
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -317,23 +303,6 @@ public final class Headers {
      * group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersCustomNamedRequestIdParamGroupingResponse customNamedRequestIdParamGroupingWithResponse(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        return customNamedRequestIdParamGroupingWithResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-                .block();
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
-     * group.
-     *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -461,20 +430,6 @@ public final class Headers {
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, Context context) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context)
                 .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersCustomNamedRequestIdHeadResponse customNamedRequestIdHeadWithResponse(String fooClientRequestId) {
-        return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId).block();
     }
 
     /**

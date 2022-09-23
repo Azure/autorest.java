@@ -155,18 +155,6 @@ public final class ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in global settings along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getMethodGlobalValidWithResponse() {
-        return getMethodGlobalValidWithResponseAsync().block();
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -268,18 +256,6 @@ public final class ApiVersionDefaults {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getMethodGlobalNotProvidedValidAsync(Context context) {
         return getMethodGlobalNotProvidedValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in global settings along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getMethodGlobalNotProvidedValidWithResponse() {
-        return getMethodGlobalNotProvidedValidWithResponseAsync().block();
     }
 
     /**
@@ -390,18 +366,6 @@ public final class ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in global settings along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getPathGlobalValidWithResponse() {
-        return getPathGlobalValidWithResponseAsync().block();
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -502,18 +466,6 @@ public final class ApiVersionDefaults {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getSwaggerGlobalValidAsync(Context context) {
         return getSwaggerGlobalValidWithResponseAsync(context).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in global settings along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getSwaggerGlobalValidWithResponse() {
-        return getSwaggerGlobalValidWithResponseAsync().block();
     }
 
     /**

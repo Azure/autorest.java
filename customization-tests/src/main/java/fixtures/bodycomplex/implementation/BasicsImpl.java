@@ -149,18 +149,6 @@ public final class BasicsImpl {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
-    }
-
-    /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -265,20 +253,6 @@ public final class BasicsImpl {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Basic complexBody) {
-        return putValidWithResponseAsync(complexBody).block();
-    }
-
-    /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -376,18 +350,6 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is invalid for the local strong type along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
-    }
-
-    /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -477,18 +439,6 @@ public final class BasicsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getEmptyAsync(Context context) {
         return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get a basic complex type that is empty.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is empty along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getEmptyWithResponse() {
-        return getEmptyWithResponseAsync().block();
     }
 
     /**
@@ -590,18 +540,6 @@ public final class BasicsImpl {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type whose properties are null along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
-    }
-
-    /**
-     * Get a basic complex type whose properties are null.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -695,18 +633,6 @@ public final class BasicsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync(Context context) {
         return getNotProvidedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type while the server doesn't provide a response payload along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNotProvidedWithResponse() {
-        return getNotProvidedWithResponseAsync().block();
     }
 
     /**

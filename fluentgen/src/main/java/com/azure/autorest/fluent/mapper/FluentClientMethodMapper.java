@@ -43,10 +43,10 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
         } else {
             switch (methodType) {
                 case PagingAsyncSinglePage:
-                case SimpleSyncRestResponse:
                     visibility = NOT_VISIBLE;
                     break;
 
+                case SimpleSyncRestResponse:
                 case PagingSyncSinglePage:
                     visibility = NOT_GENERATE;
                     break;

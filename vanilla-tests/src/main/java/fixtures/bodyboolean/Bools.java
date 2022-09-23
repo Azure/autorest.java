@@ -155,18 +155,6 @@ public final class Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getTrueWithResponse() {
-        return getTrueWithResponseAsync().block();
-    }
-
-    /**
-     * Get true Boolean value.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -271,18 +259,6 @@ public final class Bools {
     /**
      * Set Boolean value true.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putTrueWithResponse() {
-        return putTrueWithResponseAsync().block();
-    }
-
-    /**
-     * Set Boolean value true.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -378,18 +354,6 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getFalseAsync(Context context) {
         return getFalseWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get false Boolean value.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return false Boolean value along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getFalseWithResponse() {
-        return getFalseWithResponseAsync().block();
     }
 
     /**
@@ -499,18 +463,6 @@ public final class Bools {
     /**
      * Set Boolean value false.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFalseWithResponse() {
-        return putFalseWithResponseAsync().block();
-    }
-
-    /**
-     * Set Boolean value false.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -606,18 +558,6 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNullAsync(Context context) {
         return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get null Boolean value.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null Boolean value along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
     }
 
     /**
@@ -720,18 +660,6 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getInvalidAsync(Context context) {
         return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Get invalid Boolean value.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid Boolean value along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
     }
 
     /**

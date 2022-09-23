@@ -663,7 +663,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
@@ -858,7 +858,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
@@ -922,7 +922,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         ProxyMethod restAPIMethod, JavaSettings settings) {
         String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
 
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);

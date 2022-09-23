@@ -138,41 +138,6 @@ public final class Files {
     /**
      * Get file.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return file along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<InputStream> getFileWithResponse() {
-        return getFileWithResponseAsync()
-                .map(
-                        response -> {
-                            Iterator<ByteBufferBackedInputStream> iterator =
-                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
-                            Enumeration<InputStream> enumeration =
-                                    new Enumeration<InputStream>() {
-                                        @Override
-                                        public boolean hasMoreElements() {
-                                            return iterator.hasNext();
-                                        }
-
-                                        @Override
-                                        public InputStream nextElement() {
-                                            return iterator.next();
-                                        }
-                                    };
-                            return new SimpleResponse<InputStream>(
-                                    response.getRequest(),
-                                    response.getStatusCode(),
-                                    response.getHeaders(),
-                                    new SequenceInputStream(enumeration));
-                        })
-                .block();
-    }
-
-    /**
-     * Get file.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -298,41 +263,6 @@ public final class Files {
     /**
      * Get a large file.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a large file along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<InputStream> getFileLargeWithResponse() {
-        return getFileLargeWithResponseAsync()
-                .map(
-                        response -> {
-                            Iterator<ByteBufferBackedInputStream> iterator =
-                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
-                            Enumeration<InputStream> enumeration =
-                                    new Enumeration<InputStream>() {
-                                        @Override
-                                        public boolean hasMoreElements() {
-                                            return iterator.hasNext();
-                                        }
-
-                                        @Override
-                                        public InputStream nextElement() {
-                                            return iterator.next();
-                                        }
-                                    };
-                            return new SimpleResponse<InputStream>(
-                                    response.getRequest(),
-                                    response.getStatusCode(),
-                                    response.getHeaders(),
-                                    new SequenceInputStream(enumeration));
-                        })
-                .block();
-    }
-
-    /**
-     * Get a large file.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -453,41 +383,6 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
         return getEmptyFileWithResponseAsync(context).flatMapMany(Response::getValue);
-    }
-
-    /**
-     * Get empty file.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty file along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<InputStream> getEmptyFileWithResponse() {
-        return getEmptyFileWithResponseAsync()
-                .map(
-                        response -> {
-                            Iterator<ByteBufferBackedInputStream> iterator =
-                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
-                            Enumeration<InputStream> enumeration =
-                                    new Enumeration<InputStream>() {
-                                        @Override
-                                        public boolean hasMoreElements() {
-                                            return iterator.hasNext();
-                                        }
-
-                                        @Override
-                                        public InputStream nextElement() {
-                                            return iterator.next();
-                                        }
-                                    };
-                            return new SimpleResponse<InputStream>(
-                                    response.getRequest(),
-                                    response.getStatusCode(),
-                                    response.getHeaders(),
-                                    new SequenceInputStream(enumeration));
-                        })
-                .block();
     }
 
     /**

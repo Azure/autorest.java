@@ -51,6 +51,7 @@ import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
 import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
+import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
@@ -380,12 +381,25 @@ public class RuntimeTests {
         // simple API
         assertMethodExist(StorageAccounts.class, "getByResourceGroup", "String", "String");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
         assertMethodExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
 
         // pageable API
         assertMethodExist(BlobContainers.class, "list", "String", "String");
         assertMethodNotExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude");
         assertMethodExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude", "Context");
+
+        // sync API in premium
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
+
+        // async API in premium
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupAsync", "String", "String");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupAsync", "String", "String", "StorageAccountExpand");
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand", "Context");
     }
 
     private static void assertMethodNotExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
