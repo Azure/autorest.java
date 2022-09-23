@@ -4,21 +4,25 @@
 package com.models.property.types;
 
 import com.models.property.types.models.DurationProperty;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 class DurationOperationClientTest {
 
     DurationOperationClient client = new DurationOperationClientBuilder().buildClient();
 
-    @Disabled("cadl-ranch definition error")
     @Test
     void get() {
         DurationProperty durationProperty = client.get();
+        Assertions.assertEquals("PT2974H14M12.011S", durationProperty.getProperty().toString());
     }
 
-    @Disabled("cadl-ranch definition error")
     @Test
     void put() {
+        Duration duration = Duration.parse("PT2974H14M12.011S");
+        DurationProperty property = new DurationProperty(duration);
+        client.put(property);
     }
 }

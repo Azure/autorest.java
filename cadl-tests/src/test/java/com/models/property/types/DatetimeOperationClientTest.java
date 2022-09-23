@@ -16,7 +16,6 @@ class DatetimeOperationClientTest {
     @Test
     void get() {
         DatetimeProperty datetimeProperty = client.get();
-        System.out.println(datetimeProperty);
         Assertions.assertEquals("2022-08-26T18:38Z", datetimeProperty.getProperty().toString());
     }
 
