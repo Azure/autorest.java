@@ -8,8 +8,6 @@ import com.models.property.types.models.InnerExtensibleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ExtensibleEnumClientTest {
 
     ExtensibleEnumClient client = new ExtensibleEnumClientBuilder().buildClient();
