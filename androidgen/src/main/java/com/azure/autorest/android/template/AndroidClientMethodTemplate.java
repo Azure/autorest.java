@@ -160,7 +160,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
     protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             function.line("return %s(%s).thenApply(response -> response.getValue());", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
         }));
     }
@@ -174,7 +174,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
             } else {

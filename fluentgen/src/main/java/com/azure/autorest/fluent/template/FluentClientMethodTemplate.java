@@ -230,7 +230,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent(() -> {
                 function.line(".last()");
@@ -263,7 +263,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             if (mergeContextParameter) {
                 function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
             }
@@ -281,7 +281,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent((() -> {
                 function.text(".getSyncPoller();");
