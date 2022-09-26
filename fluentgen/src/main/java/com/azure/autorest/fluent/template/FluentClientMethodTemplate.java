@@ -8,6 +8,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
@@ -227,14 +228,30 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
+            function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent(() -> {
                 function.line(".last()");
                 function.line(String.format(".flatMap(%s::getLroFinalResultOrError);", clientMethod.getClientReference()));
             });
         });
+    }
+
+    @Override
+    protected void generateLongRunningSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        super.generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+//        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+//        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+//        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+//            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+//            if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+//                function.methodReturn(String.format("%s(%s).block()", asyncMethodName, clientMethod.getArgumentList()));
+//            } else {
+//                function.line("%s(%s).block();", asyncMethodName, clientMethod.getArgumentList());
+//            }
+//        });
     }
 
     @Override
@@ -262,9 +279,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
+            function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent((() -> {
                 function.text(".getSyncPoller();");
             }));
