@@ -619,7 +619,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String pageMethodName = isSync ? proxyMethod.getPagingSinglePageMethodName() : proxyMethod.getPagingAsyncSinglePageMethodName();
         ClientMethodType pageMethodType = isSync ? ClientMethodType.PagingSyncSinglePage : ClientMethodType.PagingAsyncSinglePage;
 
-        // Only generate maximum overload of PagingSinglePage API, and it should not be exposed to user.
+        // Only generate maximum overload of Paging###SinglePage API, and it should not be exposed to user.
 
         builder.returnValue(singlePageReturnValue)
             .onlyRequiredParameters(false)
@@ -628,13 +628,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false));
 
-        if (!settings.isContextClientMethodParameter() || settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
-            // TODO (weidxu): remove after delete isContextClientMethodParameter()
+        if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
             methods.add(builder.build());
         }
 
-        // Generate an overload with all parameters always, optionally include context.
-        if (settings.isContextClientMethodParameter() && !settings.isDataPlaneClient()) {
+        // Generate an overload with all parameters, optionally include context.
+        if (settings.isContextClientMethodParameter()) {
             builder.methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, true));
             addClientMethodWithContext(methods, builder, parameters, pageMethodType, pageMethodName,
                 singlePageReturnValue, details, contextParameter);
