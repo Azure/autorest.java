@@ -528,8 +528,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
+
             case LongRunningAsync:
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
+
+            case LongRunningSync:
+                generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginAsync:
@@ -542,10 +547,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             case LongRunningBeginSync:
                 generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
-                break;
-
-            case LongRunningSync:
-                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
@@ -1189,6 +1190,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param settings java settings
      */
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    /**
+     * Extension to write LRO sync client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
+    protected void generateLongRunningSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
 
     }
 

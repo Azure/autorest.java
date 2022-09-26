@@ -382,19 +382,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
                     }
 
-                    addLroMethods(operation, builder, methods,
+                    createLroMethods(operation, builder, methods,
                         "begin" + CodeNamer.toPascalCase(proxyMethod.getSimpleAsyncMethodName()),
                         "begin" + CodeNamer.toPascalCase(proxyMethod.getName()),
                         parameters, returnTypeHolder.syncReturnType, methodPollingDetails, isProtocolMethod,
                         generateOnlyRequiredParameters, defaultOverloadType, settings);
 
                     if (dpgMethodPollingDetailsWithModel != null) {
+                        // additional LRO method for data-plane, with intermediate/final type, for convenience of grow-up
+                        // it is public in implementation, but not exposed in wrapper client
+
                         ImplementationDetails.Builder implDetailsBuilder = new ImplementationDetails.Builder().implementationOnly(true);
 
                         builder = builder.implementationDetails(implDetailsBuilder.build());
 
                         String modelSuffix = "WithModel";
-                        addLroMethods(operation, builder, methods,
+                        createLroMethods(operation, builder, methods,
                             "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix + "Async"),
                             "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
                             parameters, returnTypeHolder.syncReturnType, dpgMethodPollingDetailsWithModel, isProtocolMethod,
@@ -403,38 +406,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         builder = builder.implementationDetails(implDetailsBuilder.implementationOnly(false).build());
                     }
 
-                    if (settings.isFluent()) {
-                        // special handling for fluent, as they provide wrapper for LRO final result
-
-                        // async
-                        methods.add(builder
-                            .returnValue(createLongRunningAsyncReturnValue(operation, returnTypeHolder.asyncReturnType, returnTypeHolder.syncReturnType))
-                            .name(proxyMethod.getSimpleAsyncMethodName())
-                            .onlyRequiredParameters(true)
-                            .type(ClientMethodType.LongRunningAsync)
-                            .groupedParameterRequired(false)
-                            .onlyRequiredParameters(true)
-                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, MethodOverloadType.OVERLOAD_MINIMUM, false, isProtocolMethod))
-                            .build());
-
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningAsync, defaultOverloadType, true, isProtocolMethod)),
-                            parameters, getContextParameter(isProtocolMethod));
-
-                        methods.add(builder
-                            .returnValue(createLongRunningSyncReturnValue(operation, returnTypeHolder.syncReturnType))
-                            .name(proxyMethod.getName())
-                            .onlyRequiredParameters(true)
-                            .type(ClientMethodType.LongRunningSync)
-                            .groupedParameterRequired(false)
-                            .onlyRequiredParameters(true)
-                            .methodVisibility(methodVisibility(ClientMethodType.LongRunningSync, MethodOverloadType.OVERLOAD_MINIMUM, false, isProtocolMethod))
-                            .build());
-
-                        addClientMethodWithContext(methods,
-                            builder.methodVisibility(methodVisibility(ClientMethodType.LongRunningSync, defaultOverloadType, true, isProtocolMethod)),
-                            parameters, getContextParameter(isProtocolMethod));
-                    }
+                    this.createAdditionalLroMethods(operation, builder, methods, isProtocolMethod,
+                        returnTypeHolder.asyncReturnType, returnTypeHolder.syncReturnType, proxyMethod, parameters,
+                        generateOnlyRequiredParameters, defaultOverloadType);
                 } else {
                     // If the ProxyMethod is synchronous perform a complete generation of synchronous simple APIs.
                     if (proxyMethod.isSync()) {
@@ -773,7 +747,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .build();
     }
 
-    private void addLroMethods(Operation operation, ClientMethod.Builder builder, List<ClientMethod> methods,
+    /**
+     * Extension point of additional methods for LRO.
+     */
+    protected void createAdditionalLroMethods(
+        Operation operation, ClientMethod.Builder builder, List<ClientMethod> methods,
+        boolean isProtocolMethod, IType asyncReturnType, IType syncReturnType,
+        ProxyMethod proxyMethod, List<ClientMethodParameter> parameters,
+        boolean generateClientMethodWithOnlyRequiredParameters, MethodOverloadType defaultOverloadType) {
+
+    }
+
+    private void createLroMethods(
+        Operation operation, ClientMethod.Builder builder, List<ClientMethod> methods,
         String asyncMethodName, String syncMethodName, List<ClientMethodParameter> parameters, IType syncReturnType,
         MethodPollingDetails methodPollingDetails, boolean isProtocolMethod,
         boolean generateClientMethodWithOnlyRequiredParameters, MethodOverloadType defaultOverloadType, JavaSettings settings) {
@@ -990,7 +976,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             this.value = value;
         }
 
-        int value() {
+        public int value() {
             return value;
         }
     }
@@ -1074,7 +1060,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return isProtocolMethod ? ClientMethodParameter.REQUEST_OPTIONS : ClientMethodParameter.CONTEXT_PARAMETER;
     }
 
-    private static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
+    protected static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
         List<ClientMethodParameter> parameters, ClientMethodParameter contextParameter) {
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
         withContextParameters.add(contextParameter);
