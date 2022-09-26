@@ -266,7 +266,7 @@ public class RuntimeTests {
 
             storageManager.storageAccounts().deleteById(storageAccount.id());
         } finally {
-            resourceManager.resourceGroups().delete(rgName);
+            resourceManager.resourceGroups().deleteByResourceGroup(rgName);
         }
     }
 
