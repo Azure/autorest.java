@@ -23,7 +23,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = contextInParameters(clientMethod);
+        boolean addContextParameter = !contextInParameters(clientMethod);
         boolean mergeContextParameter = contextInParameters(clientMethod);
         boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
@@ -196,7 +196,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = contextInParameters(clientMethod);
+        boolean addContextParameter = !contextInParameters(clientMethod);
         boolean mergeContextParameter = contextInParameters(clientMethod);
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
