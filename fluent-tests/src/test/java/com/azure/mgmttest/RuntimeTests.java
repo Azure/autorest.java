@@ -52,6 +52,7 @@ import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
 import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
+import com.azure.mgmttest.storage.implementation.StorageAccountsClientImpl;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
@@ -381,6 +382,7 @@ public class RuntimeTests {
         // simple API
         assertMethodExist(StorageAccounts.class, "getByResourceGroup", "String", "String");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand", "Context");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
         assertMethodExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
 
@@ -388,6 +390,20 @@ public class RuntimeTests {
         assertMethodExist(BlobContainers.class, "list", "String", "String");
         assertMethodNotExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude");
         assertMethodExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude", "Context");
+
+        // LRO API
+        // activation method
+        assertMethodExist(StorageAccountsClientImpl.class, "createWithResponseAsync", "String", "String", "StorageAccountCreateParameters");
+        // begin LRO method
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreateAsync", "String", "String", "StorageAccountCreateParameters");
+        assertMethodNotExist(StorageAccountsClientImpl.class, "beginCreateAsync", "String", "String", "StorageAccountCreateParameters", "Context");
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreate", "String", "String", "StorageAccountCreateParameters");
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreate", "String", "String", "StorageAccountCreateParameters", "Context");
+        // wrapper method for begin LRO method
+        assertMethodExist(StorageAccountsClientImpl.class, "createAsync", "String", "String", "StorageAccountCreateParameters");
+        assertMethodNotExist(StorageAccountsClientImpl.class, "createAsync", "String", "String", "StorageAccountCreateParameters", "Context");
+        assertMethodExist(StorageAccountsClientImpl.class, "create", "String", "String", "StorageAccountCreateParameters");
+        assertMethodExist(StorageAccountsClientImpl.class, "create", "String", "String", "StorageAccountCreateParameters", "Context");
 
         // sync API in premium
         assertMethodExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String");
