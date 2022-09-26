@@ -20,12 +20,10 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
-import com.azure.json.JsonProviders;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.azure.xml.XmlProviders;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -70,7 +68,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             imports.add(QName.class.getName());
             imports.add(XMLStreamException.class.getName());
 
-            imports.add(XmlProviders.class.getName());
             imports.add(XmlSerializable.class.getName());
             imports.add(XmlWriter.class.getName());
             imports.add(XmlReader.class.getName());
@@ -78,7 +75,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else {
             imports.add(IOException.class.getName());
 
-            imports.add(JsonProviders.class.getName());
             imports.add(JsonSerializable.class.getName());
             imports.add(JsonWriter.class.getName());
             imports.add(JsonReader.class.getName());
