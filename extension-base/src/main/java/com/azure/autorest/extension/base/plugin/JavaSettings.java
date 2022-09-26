@@ -621,7 +621,7 @@ public class JavaSettings {
      */
     private boolean addContextParameter;
 
-    public final boolean getAddContextParameter() {
+    public final boolean isAddContextParameter() {
         return addContextParameter;
     }
 

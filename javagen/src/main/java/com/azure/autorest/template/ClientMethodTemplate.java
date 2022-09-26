@@ -1030,7 +1030,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.getAddContextParameter()) {
+            if (settings.isAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.line(String.format("return %s", serviceMethodCall));
                 } else {
@@ -1160,7 +1160,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.getAddContextParameter()) {
+            if (settings.isAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);
                 } else {

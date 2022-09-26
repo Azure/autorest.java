@@ -18,7 +18,12 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected JavaVisibility methodVisibility(ClientMethodType methodType, boolean hasContextParameter, boolean isProtocolMethod) {
+    protected JavaVisibility methodVisibility(
+            ClientMethodType methodType,
+            MethodOverloadType methodOverloadType,
+            boolean hasContextParameter,
+            boolean isProtocolMethod) {
+
         JavaVisibility visibility;
         if (hasContextParameter) {
             switch (methodType) {
@@ -37,7 +42,7 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
 
                 default:
-                    visibility = super.methodVisibility(methodType, true, isProtocolMethod);
+                    visibility = super.methodVisibility(methodType, methodOverloadType, true, isProtocolMethod);
                     break;
             }
         } else {
@@ -52,7 +57,7 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
 
                 default:
-                    visibility = super.methodVisibility(methodType, false, isProtocolMethod);
+                    visibility = super.methodVisibility(methodType, methodOverloadType, false, isProtocolMethod);
                     break;
             }
         }

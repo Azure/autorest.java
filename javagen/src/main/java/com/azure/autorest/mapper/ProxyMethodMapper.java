@@ -234,7 +234,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 parameters.add(requestOptions);
             }
 
-            if (settings.getAddContextParameter()) {
+            if (settings.isAddContextParameter()) {
                 ClassType contextClassType = getContextClass();
                 ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
                         .description("The context to associate with this operation.")

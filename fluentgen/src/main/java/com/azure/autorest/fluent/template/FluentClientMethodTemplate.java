@@ -23,8 +23,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean addContextParameter = contextInParameters(clientMethod);
+        boolean mergeContextParameter = contextInParameters(clientMethod);
         boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
         String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());
@@ -196,8 +196,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean addContextParameter = contextInParameters(clientMethod);
+        boolean mergeContextParameter = contextInParameters(clientMethod);
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
@@ -239,7 +239,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean mergeContextParameter = contextInParameters(clientMethod);
         String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());;
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
