@@ -71,6 +71,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -422,7 +423,7 @@ public class RuntimeTests {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
-            if (methodName.equals(method.getName())) {
+            if (methodName.equals(method.getName()) && Modifier.isPublic(method.getModifiers())) {
                 if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
                     if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
                         Assertions.fail("Method should not exist: " + method);
@@ -437,7 +438,7 @@ public class RuntimeTests {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
-            if (methodName.equals(method.getName())) {
+            if (methodName.equals(method.getName()) && Modifier.isPublic(method.getModifiers())) {
                 if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
                     if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
                         found = true;
