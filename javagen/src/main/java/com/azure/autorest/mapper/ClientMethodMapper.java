@@ -814,6 +814,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
     }
 
+    private ClientMethodParameter getContextParameter() {
+        return new ClientMethodParameter.Builder()
+                .description("The context to associate with this operation.")
+                .wireType(this.getContextType())
+                .name("context")
+                .location(RequestParameterLocation.NONE)
+                .annotations(Collections.emptyList())
+                .constant(false)
+                .defaultValue(null)
+                .fromClient(false)
+                .finalParameter(false)
+                .required(false)
+                .build();
+    }
+
     protected IType getContextType() {
         return ClassType.Context;
     }
@@ -1058,7 +1073,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected ClientMethodParameter getContextParameter(boolean isProtocolMethod) {
-        return isProtocolMethod ? ClientMethodParameter.REQUEST_OPTIONS : ClientMethodParameter.CONTEXT_PARAMETER;
+        return isProtocolMethod
+            ? ClientMethodParameter.REQUEST_OPTIONS_PARAMETER
+            : getContextParameter();
     }
 
     protected static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
