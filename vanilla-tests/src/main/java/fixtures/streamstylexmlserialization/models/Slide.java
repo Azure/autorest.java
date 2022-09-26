@@ -9,11 +9,12 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 
 /** A slide in a slideshow. */
 @Fluent
@@ -127,15 +128,13 @@ public final class Slide implements XmlSerializable<Slide> {
         return xmlReader.readObject(
                 "slide",
                 reader -> {
-                    String type = null;
+                    String type = reader.getStringAttribute(null, "type");
                     String title = null;
                     List<String> items = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
 
-                        if ("type".equals(fieldName.getLocalPart())) {
-                            type = reader.getStringElement();
-                        } else if ("title".equals(fieldName.getLocalPart())) {
+                        if ("title".equals(fieldName.getLocalPart())) {
                             title = reader.getStringElement();
                         } else if ("items".equals(fieldName.getLocalPart())) {
                             if (items == null) {

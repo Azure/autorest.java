@@ -271,8 +271,8 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
         return xmlReader.readObject(
                 "EnumerationResults",
                 reader -> {
-                    String serviceEndpoint = null;
-                    String containerName = null;
+                    String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+                    String containerName = reader.getStringAttribute(null, "ContainerName");
                     String prefix = null;
                     String marker = null;
                     int maxResults = 0;
@@ -282,11 +282,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
 
-                        if ("ServiceEndpoint".equals(fieldName.getLocalPart())) {
-                            serviceEndpoint = reader.getStringElement();
-                        } else if ("ContainerName".equals(fieldName.getLocalPart())) {
-                            containerName = reader.getStringElement();
-                        } else if ("Prefix".equals(fieldName.getLocalPart())) {
+                        if ("Prefix".equals(fieldName.getLocalPart())) {
                             prefix = reader.getStringElement();
                         } else if ("Marker".equals(fieldName.getLocalPart())) {
                             marker = reader.getStringElement();

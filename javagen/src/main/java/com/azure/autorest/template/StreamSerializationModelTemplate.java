@@ -613,7 +613,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs());
+            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs(),
+                false);
 
             // Add the outermost while loop to read the JSON object.
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
@@ -733,15 +734,24 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager The property manager for the model.
      */
     private static void initializeLocalVariables(JavaBlock methodBlock,
-        ClientModelPropertiesManager propertiesManager, boolean requiredFieldsAsConstructorArgs) {
-        propertiesManager.getSuperRequiredProperties()
-            .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-        propertiesManager.getSuperSetterProperties()
-            .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-        propertiesManager.getRequiredProperties()
-            .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-        propertiesManager.getSetterProperties()
-            .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+        ClientModelPropertiesManager propertiesManager, boolean requiredFieldsAsConstructorArgs, boolean isXml) {
+        if (isXml) {
+            // XML only needs to initialize the XML element properties. XML attribute properties are initialized with
+            // their XML value.
+            propertiesManager.getXmlElements()
+                .stream()
+                .filter(property -> !property.isXmlText()) // XML text is also handled specially.
+                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+        } else {
+            propertiesManager.getSuperRequiredProperties()
+                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+            propertiesManager.getSuperSetterProperties()
+                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+            propertiesManager.getRequiredProperties()
+                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+            propertiesManager.getSetterProperties()
+                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+        }
 
         if (propertiesManager.getAdditionalProperties() != null) {
             initializeLocalVariable(methodBlock, propertiesManager.getAdditionalProperties(),
@@ -1383,8 +1393,28 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Add the deserialization logic.
         methodBlock.indent(() -> {
+            // Read the XML attribute properties first.
+            for (ClientModelProperty attribute : propertiesManager.getXmlAttributes()) {
+                methodBlock.line("%s %s = %s;", attribute.getClientType(), attribute.getName(),
+                    getSimpleXmlDeserialization(attribute.getWireType(), attribute.getClientType(), "reader",
+                        attribute.getXmlName(), attribute.getXmlNamespace()));
+            }
+
+            // Read the XML text next.
+            propertiesManager.getXmlElements().stream()
+                .filter(ClientModelProperty::isXmlText)
+                .forEach(text -> methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(),
+                    getSimpleXmlDeserialization(text.getWireType(), text.getClientType(), "reader", null, null)));
+
+            // Model only had XML attributes and XML text, no need to create the reader loop.
+            if (CoreUtils.isNullOrEmpty(propertiesManager.getXmlElements())
+                || propertiesManager.getXmlElements().stream().allMatch(ClientModelProperty::isXmlText)) {
+                return;
+            }
+
             // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs());
+            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs(),
+                true);
 
             // Add the outermost while loop to read the JSON object.
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
@@ -1409,13 +1439,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
 
                 // Loop over all properties and generate their deserialization handling.
-                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getSuperRequiredProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getSuperSetterProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getRequiredProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getSetterProperties(), whileBlock,
+                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getXmlElements(), whileBlock,
                     ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties

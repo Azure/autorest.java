@@ -7,9 +7,7 @@ package fixtures.complexstreamstylexmlserialization.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /** The BlobName model. */
@@ -94,19 +92,8 @@ public final class BlobName implements XmlSerializable<BlobName> {
         return xmlReader.readObject(
                 "BlobName",
                 reader -> {
-                    Boolean encoded = null;
-                    String content = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
-
-                        if ("Encoded".equals(fieldName.getLocalPart())) {
-                            encoded = reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("content".equals(fieldName.getLocalPart())) {
-                            content = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                    Boolean encoded = reader.getNullableAttribute(null, "Encoded", Boolean::parseBoolean);
+                    String content = reader.getStringElement();
                     BlobName deserializedValue = new BlobName();
                     deserializedValue.encoded = encoded;
                     deserializedValue.content = content;

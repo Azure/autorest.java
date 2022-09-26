@@ -7,9 +7,7 @@ package fixtures.streamstylexmlserialization.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /** Contans property. */
@@ -94,19 +92,8 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
         return xmlReader.readObject(
                 "Data",
                 reader -> {
-                    String language = null;
-                    String content = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
-
-                        if ("language".equals(fieldName.getLocalPart())) {
-                            language = reader.getStringElement();
-                        } else if ("content".equals(fieldName.getLocalPart())) {
-                            content = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                    String language = reader.getStringAttribute(null, "language");
+                    String content = reader.getStringElement();
                     ObjectWithXMsTextProperty deserializedValue = new ObjectWithXMsTextProperty();
                     deserializedValue.language = language;
                     deserializedValue.content = content;

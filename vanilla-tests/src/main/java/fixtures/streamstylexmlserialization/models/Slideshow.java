@@ -157,20 +157,14 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         return xmlReader.readObject(
                 "slideshow",
                 reader -> {
-                    String title = null;
-                    String date = null;
-                    String author = null;
+                    String title = reader.getStringAttribute(null, "title");
+                    String date = reader.getStringAttribute(null, "date");
+                    String author = reader.getStringAttribute(null, "author");
                     List<Slide> slides = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
 
-                        if ("title".equals(fieldName.getLocalPart())) {
-                            title = reader.getStringElement();
-                        } else if ("date".equals(fieldName.getLocalPart())) {
-                            date = reader.getStringElement();
-                        } else if ("author".equals(fieldName.getLocalPart())) {
-                            author = reader.getStringElement();
-                        } else if ("slides".equals(fieldName.getLocalPart())) {
+                        if ("slides".equals(fieldName.getLocalPart())) {
                             if (slides == null) {
                                 slides = new LinkedList<>();
                             }

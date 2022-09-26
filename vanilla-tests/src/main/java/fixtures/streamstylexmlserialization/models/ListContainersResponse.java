@@ -9,11 +9,12 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 
 /** An enumeration of containers. */
 @Fluent
@@ -260,7 +261,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         return xmlReader.readObject(
                 "EnumerationResults",
                 reader -> {
-                    String serviceEndpoint = null;
+                    String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
                     String prefix = null;
                     String marker = null;
                     int maxResults = 0;
@@ -269,9 +270,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
 
-                        if ("ServiceEndpoint".equals(fieldName.getLocalPart())) {
-                            serviceEndpoint = reader.getStringElement();
-                        } else if ("Prefix".equals(fieldName.getLocalPart())) {
+                        if ("Prefix".equals(fieldName.getLocalPart())) {
                             prefix = reader.getStringElement();
                         } else if ("Marker".equals(fieldName.getLocalPart())) {
                             marker = reader.getStringElement();
