@@ -82,7 +82,9 @@ public class Androidgen extends Javagen {
             };
 
             LoaderOptions loaderOptions = new LoaderOptions();
+            loaderOptions.setCodePointLimit(50 * 1024 * 1024);
             loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+            loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
             Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
             CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
@@ -98,7 +100,7 @@ public class Androidgen extends Javagen {
                     .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                             client.getServiceClient());
 
-            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
                 javaPackage
                         .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
@@ -120,7 +122,7 @@ public class Androidgen extends Javagen {
             for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
                 javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
                         methodGroupClient);
-                if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
                     javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
             }

@@ -13,7 +13,9 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.http.rest.StreamResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -116,7 +118,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
-        return getFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getFileWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -130,7 +132,44 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync(Context context) {
-        return getFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getFileWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<InputStream> getFileWithResponse(Context context) {
+        return getFileWithResponseAsync(context)
+                .map(
+                        response -> {
+                            Iterator<ByteBufferBackedInputStream> iterator =
+                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
+                            Enumeration<InputStream> enumeration =
+                                    new Enumeration<InputStream>() {
+                                        @Override
+                                        public boolean hasMoreElements() {
+                                            return iterator.hasNext();
+                                        }
+
+                                        @Override
+                                        public InputStream nextElement() {
+                                            return iterator.next();
+                                        }
+                                    };
+                            return new SimpleResponse<InputStream>(
+                                    response.getRequest(),
+                                    response.getStatusCode(),
+                                    response.getHeaders(),
+                                    new SequenceInputStream(enumeration));
+                        })
+                .block();
     }
 
     /**
@@ -142,21 +181,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFile() {
-        Iterator<ByteBufferBackedInputStream> iterator =
-                getFileAsync().map(ByteBufferBackedInputStream::new).toStream().iterator();
-        Enumeration<InputStream> enumeration =
-                new Enumeration<InputStream>() {
-                    @Override
-                    public boolean hasMoreElements() {
-                        return iterator.hasNext();
-                    }
-
-                    @Override
-                    public InputStream nextElement() {
-                        return iterator.next();
-                    }
-                };
-        return new SequenceInputStream(enumeration);
+        return getFileWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -169,8 +194,8 @@ public final class Files {
      * @return file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public StreamResponse getFileWithResponse(Context context) {
-        return getFileWithResponseAsync(context).block();
+    public InputStream getFile(Context context) {
+        return getFileWithResponse(context).getValue();
     }
 
     /**
@@ -218,7 +243,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
-        return getFileLargeWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getFileLargeWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -232,7 +257,44 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync(Context context) {
-        return getFileLargeWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getFileLargeWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<InputStream> getFileLargeWithResponse(Context context) {
+        return getFileLargeWithResponseAsync(context)
+                .map(
+                        response -> {
+                            Iterator<ByteBufferBackedInputStream> iterator =
+                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
+                            Enumeration<InputStream> enumeration =
+                                    new Enumeration<InputStream>() {
+                                        @Override
+                                        public boolean hasMoreElements() {
+                                            return iterator.hasNext();
+                                        }
+
+                                        @Override
+                                        public InputStream nextElement() {
+                                            return iterator.next();
+                                        }
+                                    };
+                            return new SimpleResponse<InputStream>(
+                                    response.getRequest(),
+                                    response.getStatusCode(),
+                                    response.getHeaders(),
+                                    new SequenceInputStream(enumeration));
+                        })
+                .block();
     }
 
     /**
@@ -244,21 +306,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
-        Iterator<ByteBufferBackedInputStream> iterator =
-                getFileLargeAsync().map(ByteBufferBackedInputStream::new).toStream().iterator();
-        Enumeration<InputStream> enumeration =
-                new Enumeration<InputStream>() {
-                    @Override
-                    public boolean hasMoreElements() {
-                        return iterator.hasNext();
-                    }
-
-                    @Override
-                    public InputStream nextElement() {
-                        return iterator.next();
-                    }
-                };
-        return new SequenceInputStream(enumeration);
+        return getFileLargeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -271,8 +319,8 @@ public final class Files {
      * @return a large file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public StreamResponse getFileLargeWithResponse(Context context) {
-        return getFileLargeWithResponseAsync(context).block();
+    public InputStream getFileLarge(Context context) {
+        return getFileLargeWithResponse(context).getValue();
     }
 
     /**
@@ -320,7 +368,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
-        return getEmptyFileWithResponseAsync().flatMapMany(StreamResponse::getValue);
+        return getEmptyFileWithResponseAsync().flatMapMany(Response::getValue);
     }
 
     /**
@@ -334,7 +382,44 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
-        return getEmptyFileWithResponseAsync(context).flatMapMany(StreamResponse::getValue);
+        return getEmptyFileWithResponseAsync(context).flatMapMany(Response::getValue);
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<InputStream> getEmptyFileWithResponse(Context context) {
+        return getEmptyFileWithResponseAsync(context)
+                .map(
+                        response -> {
+                            Iterator<ByteBufferBackedInputStream> iterator =
+                                    response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();
+                            Enumeration<InputStream> enumeration =
+                                    new Enumeration<InputStream>() {
+                                        @Override
+                                        public boolean hasMoreElements() {
+                                            return iterator.hasNext();
+                                        }
+
+                                        @Override
+                                        public InputStream nextElement() {
+                                            return iterator.next();
+                                        }
+                                    };
+                            return new SimpleResponse<InputStream>(
+                                    response.getRequest(),
+                                    response.getStatusCode(),
+                                    response.getHeaders(),
+                                    new SequenceInputStream(enumeration));
+                        })
+                .block();
     }
 
     /**
@@ -346,21 +431,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getEmptyFile() {
-        Iterator<ByteBufferBackedInputStream> iterator =
-                getEmptyFileAsync().map(ByteBufferBackedInputStream::new).toStream().iterator();
-        Enumeration<InputStream> enumeration =
-                new Enumeration<InputStream>() {
-                    @Override
-                    public boolean hasMoreElements() {
-                        return iterator.hasNext();
-                    }
-
-                    @Override
-                    public InputStream nextElement() {
-                        return iterator.next();
-                    }
-                };
-        return new SequenceInputStream(enumeration);
+        return getEmptyFileWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -373,7 +444,7 @@ public final class Files {
      * @return empty file.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public StreamResponse getEmptyFileWithResponse(Context context) {
-        return getEmptyFileWithResponseAsync(context).block();
+    public InputStream getEmptyFile(Context context) {
+        return getEmptyFileWithResponse(context).getValue();
     }
 }

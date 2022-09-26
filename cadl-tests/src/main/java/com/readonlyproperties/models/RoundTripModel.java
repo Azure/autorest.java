@@ -5,7 +5,6 @@
 package com.readonlyproperties.models;
 
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public final class RoundTripModel {
      * Required int, illustrating a readonly value type property.
      */
     @JsonProperty(value = "requiredReadonlyInt", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private long requiredReadonlyInt;
+    private int requiredReadonlyInt;
 
     /*
      * Optional string, illustrating a readonly reference type property.
@@ -34,7 +33,7 @@ public final class RoundTripModel {
      * Optional int, illustrating a readonly value type property.
      */
     @JsonProperty(value = "optionalReadonlyInt", access = JsonProperty.Access.WRITE_ONLY)
-    private Long optionalReadonlyInt;
+    private Integer optionalReadonlyInt;
 
     /*
      * Required readonly model.
@@ -58,7 +57,7 @@ public final class RoundTripModel {
      * Required readonly int collection.
      */
     @JsonProperty(value = "requiredReadonlyIntList", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private List<Long> requiredReadonlyIntList;
+    private List<Integer> requiredReadonlyIntList;
 
     /*
      * Optional readonly string collection.
@@ -70,38 +69,10 @@ public final class RoundTripModel {
      * Optional readonly int collection.
      */
     @JsonProperty(value = "optionalReadonlyIntList", access = JsonProperty.Access.WRITE_ONLY)
-    private List<Long> optionalReadonlyIntList;
+    private List<Integer> optionalReadonlyIntList;
 
-    /**
-     * Creates an instance of RoundTripModel class.
-     *
-     * @param requiredReadonlyString the requiredReadonlyString value to set.
-     * @param requiredReadonlyInt the requiredReadonlyInt value to set.
-     * @param requiredReadonlyModel the requiredReadonlyModel value to set.
-     * @param requiredReadonlyStringList the requiredReadonlyStringList value to set.
-     * @param requiredReadonlyIntList the requiredReadonlyIntList value to set.
-     */
-    @JsonCreator
-    public RoundTripModel(
-            @JsonProperty(value = "requiredReadonlyString", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    String requiredReadonlyString,
-            @JsonProperty(value = "requiredReadonlyInt", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    long requiredReadonlyInt,
-            @JsonProperty(value = "requiredReadonlyModel", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    ReadonlyModel requiredReadonlyModel,
-            @JsonProperty(
-                            value = "requiredReadonlyStringList",
-                            required = true,
-                            access = JsonProperty.Access.WRITE_ONLY)
-                    List<String> requiredReadonlyStringList,
-            @JsonProperty(value = "requiredReadonlyIntList", required = true, access = JsonProperty.Access.WRITE_ONLY)
-                    List<Long> requiredReadonlyIntList) {
-        this.requiredReadonlyString = requiredReadonlyString;
-        this.requiredReadonlyInt = requiredReadonlyInt;
-        this.requiredReadonlyModel = requiredReadonlyModel;
-        this.requiredReadonlyStringList = requiredReadonlyStringList;
-        this.requiredReadonlyIntList = requiredReadonlyIntList;
-    }
+    /** Creates an instance of RoundTripModel class. */
+    public RoundTripModel() {}
 
     /**
      * Get the requiredReadonlyString property: Required string, illustrating a readonly reference type property.
@@ -117,7 +88,7 @@ public final class RoundTripModel {
      *
      * @return the requiredReadonlyInt value.
      */
-    public long getRequiredReadonlyInt() {
+    public int getRequiredReadonlyInt() {
         return this.requiredReadonlyInt;
     }
 
@@ -135,7 +106,7 @@ public final class RoundTripModel {
      *
      * @return the optionalReadonlyInt value.
      */
-    public Long getOptionalReadonlyInt() {
+    public Integer getOptionalReadonlyInt() {
         return this.optionalReadonlyInt;
     }
 
@@ -171,7 +142,7 @@ public final class RoundTripModel {
      *
      * @return the requiredReadonlyIntList value.
      */
-    public List<Long> getRequiredReadonlyIntList() {
+    public List<Integer> getRequiredReadonlyIntList() {
         return this.requiredReadonlyIntList;
     }
 
@@ -189,7 +160,7 @@ public final class RoundTripModel {
      *
      * @return the optionalReadonlyIntList value.
      */
-    public List<Long> getOptionalReadonlyIntList() {
+    public List<Integer> getOptionalReadonlyIntList() {
         return this.optionalReadonlyIntList;
     }
 }

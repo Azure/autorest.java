@@ -116,11 +116,23 @@ public final class ByteOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null byte value along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getNullWithResponse() {
+        return getNullWithResponseAsync().block();
+    }
+
+    /**
+     * Get null byte value.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null byte value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNull() {
-        return getNullAsync().block();
+        return getNullWithResponse().getValue();
     }
 
     /**
@@ -157,11 +169,23 @@ public final class ByteOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty byte value '' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getEmptyWithResponse() {
+        return getEmptyWithResponseAsync().block();
+    }
+
+    /**
+     * Get empty byte value ''.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty byte value ''.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getEmpty() {
-        return getEmptyAsync().block();
+        return getEmptyWithResponse().getValue();
     }
 
     /**
@@ -199,11 +223,23 @@ public final class ByteOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getNonAsciiWithResponse() {
+        return getNonAsciiWithResponseAsync().block();
+    }
+
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getNonAscii() {
-        return getNonAsciiAsync().block();
+        return getNonAsciiWithResponse().getValue();
     }
 
     /**
@@ -249,10 +285,24 @@ public final class ByteOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNonAsciiWithResponse(byte[] byteBody) {
+        return putNonAsciiWithResponseAsync(byteBody).block();
+    }
+
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNonAscii(byte[] byteBody) {
-        putNonAsciiAsync(byteBody).block();
+        putNonAsciiWithResponse(byteBody);
     }
 
     /**
@@ -289,10 +339,22 @@ public final class ByteOperations {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid byte value ':::SWAGGER::::' along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<byte[]> getInvalidWithResponse() {
+        return getInvalidWithResponseAsync().block();
+    }
+
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid byte value ':::SWAGGER::::'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public byte[] getInvalid() {
-        return getInvalidAsync().block();
+        return getInvalidWithResponse().getValue();
     }
 }

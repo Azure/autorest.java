@@ -145,7 +145,9 @@ public class Javagen extends NewPlugin {
         };
 
         LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
         return newYaml.loadAs(file, CodeModel.class);
     }
@@ -158,7 +160,7 @@ public class Javagen extends NewPlugin {
             .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                 client.getServiceClient());
 
-        if (settings.shouldGenerateClientInterfaces()) {
+        if (settings.isGenerateClientInterfaces()) {
             javaPackage
                 .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
@@ -184,7 +186,7 @@ public class Javagen extends NewPlugin {
         // Method group
         for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
             javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-            if (settings.shouldGenerateClientInterfaces()) {
+            if (settings.isGenerateClientInterfaces()) {
                 javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
             }
         }
@@ -259,7 +261,7 @@ public class Javagen extends NewPlugin {
             javaPackage.addModuleInfo(client.getModuleInfo());
 
             // POM
-            if (settings.shouldRegeneratePom()) {
+            if (settings.isRegeneratePom()) {
                 Pom pom = new PomMapper().map(project);
                 javaPackage.addPom("pom.xml", pom);
             }

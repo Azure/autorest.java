@@ -7,7 +7,6 @@ package com.readonlyproperties;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
-import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,9 +39,7 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the ReadonlyPropertiesClient type. */
 @ServiceClientBuilder(serviceClients = {ReadonlyPropertiesClient.class, ReadonlyPropertiesAsyncClient.class})
 public final class ReadonlyPropertiesClientBuilder
-        implements HttpTrait<ReadonlyPropertiesClientBuilder>,
-                ConfigurationTrait<ReadonlyPropertiesClientBuilder>,
-                EndpointTrait<ReadonlyPropertiesClientBuilder> {
+        implements HttpTrait<ReadonlyPropertiesClientBuilder>, ConfigurationTrait<ReadonlyPropertiesClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -144,19 +141,6 @@ public final class ReadonlyPropertiesClientBuilder
     }
 
     /*
-     * The service endpoint
-     */
-    @Generated private String endpoint;
-
-    /** {@inheritDoc}. */
-    @Generated
-    @Override
-    public ReadonlyPropertiesClientBuilder endpoint(String endpoint) {
-        this.endpoint = endpoint;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -182,8 +166,7 @@ public final class ReadonlyPropertiesClientBuilder
     private ReadonlyPropertiesClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ReadonlyPropertiesClientImpl client =
-                new ReadonlyPropertiesClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new ReadonlyPropertiesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 

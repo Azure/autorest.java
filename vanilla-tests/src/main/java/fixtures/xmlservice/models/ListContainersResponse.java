@@ -40,10 +40,6 @@ public final class ListContainersResponse {
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
-    /*
-     * The Containers property.
-     */
-    @JsonProperty(value = "Containers")
     private static final class ContainersWrapper {
         @JacksonXmlProperty(localName = "Container")
         private final List<Container> items;
@@ -54,6 +50,10 @@ public final class ListContainersResponse {
         }
     }
 
+    /*
+     * The Containers property.
+     */
+    @JsonProperty(value = "Containers")
     private ContainersWrapper containers;
 
     /*
@@ -61,6 +61,9 @@ public final class ListContainersResponse {
      */
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
+
+    /** Creates an instance of ListContainersResponse class. */
+    public ListContainersResponse() {}
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.

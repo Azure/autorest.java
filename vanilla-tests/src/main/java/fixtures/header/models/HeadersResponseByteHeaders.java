@@ -26,7 +26,10 @@ public final class HeadersResponseByteHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
-        this.value = Base64.getDecoder().decode(rawHeaders.getValue("value"));
+        String value = rawHeaders.getValue("value");
+        if (value != null) {
+            this.value = Base64.getDecoder().decode(value);
+        }
     }
 
     /**

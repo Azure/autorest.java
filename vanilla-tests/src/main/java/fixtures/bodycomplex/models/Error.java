@@ -4,11 +4,11 @@
 
 package fixtures.bodycomplex.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Error model. */
-@Fluent
+@Immutable
 public final class Error {
     /*
      * The status property.
@@ -22,6 +22,9 @@ public final class Error {
     @JsonProperty(value = "message")
     private String message;
 
+    /** Creates an instance of Error class. */
+    private Error() {}
+
     /**
      * Get the status property: The status property.
      *
@@ -32,34 +35,12 @@ public final class Error {
     }
 
     /**
-     * Set the status property: The status property.
-     *
-     * @param status the status value to set.
-     * @return the Error object itself.
-     */
-    public Error setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    /**
      * Get the message property: The message property.
      *
      * @return the message value.
      */
     public String getMessage() {
         return this.message;
-    }
-
-    /**
-     * Set the message property: The message property.
-     *
-     * @param message the message value to set.
-     * @return the Error object itself.
-     */
-    public Error setMessage(String message) {
-        this.message = message;
-        return this;
     }
 
     /**

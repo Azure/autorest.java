@@ -67,22 +67,27 @@ javagen/*.yaml
 *.log.gz
 *.tgz
 
-# Generated code for tests #
-fluent-tests/src/main/java/com/azure/mgmttest/**
-fluent-tests/src/main/java/com/azure/mgmtlitetest/**
-fluent-tests/src/main/java/module-info.java
-fluent-tests/src/samples/**
-fluent-tests/pom_generated_*.xml
+# Generated code for tests
+/fluent-tests/src/main/java/com/azure/mgmttest/
+/fluent-tests/src/main/java/com/azure/mgmtlitetest/
+/fluent-tests/src/main/java/module-info.java
+/fluent-tests/src/samples/
+/fluent-tests/src/test/java/com/azure/mgmtlitetest/**/generated/
+/fluent-tests/src/test/resources/mockito-extensions/
+/fluent-tests/pom_generated_*.xml
 
-protocol-tests/src/main/java/module-info.java
+/protocol-tests/src/main/java/module-info.java
 
-protocol-sdk-integration-tests/sdk
-!protocol-sdk-integration-tests/sdk/parents
+/protocol-sdk-integration-tests/sdk/
+!/protocol-sdk-integration-tests/sdk/parents/
 
-cadl-tests/cadl-output
+# Cadl output
+/cadl-tests/cadl-output/
+/cadl-tests/cadl-ranch-coverage.json
+/cadl-tests/cadl-ranch-coverage-java.json
 
 # Coverage report
 /coverage/
 
-# language server
-postprocessor/jdt-language-server
+# Language server
+/postprocessor/jdt-language-server/

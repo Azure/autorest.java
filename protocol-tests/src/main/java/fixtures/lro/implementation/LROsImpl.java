@@ -980,6 +980,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -1179,6 +1180,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -1375,6 +1377,7 @@ public final class LROsImpl {
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -1575,6 +1578,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -1773,6 +1777,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -1918,6 +1923,7 @@ public final class LROsImpl {
                 () -> this.post202ListWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2090,6 +2096,7 @@ public final class LROsImpl {
                 () -> this.put200SucceededNoStateWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2288,6 +2295,7 @@ public final class LROsImpl {
                 () -> this.put202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2488,6 +2496,7 @@ public final class LROsImpl {
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -2690,6 +2699,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -2890,6 +2900,7 @@ public final class LROsImpl {
                 () -> this.put201CreatingFailed200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3092,6 +3103,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -3290,6 +3302,7 @@ public final class LROsImpl {
                 () -> this.putNoHeaderInRetryWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3490,6 +3503,7 @@ public final class LROsImpl {
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -3692,6 +3706,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -3892,6 +3907,7 @@ public final class LROsImpl {
                 () -> this.putAsyncRetryFailedWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -4094,6 +4110,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -4293,6 +4310,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -4453,6 +4471,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -4593,6 +4612,7 @@ public final class LROsImpl {
                 () -> this.putAsyncNonResourceWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -4746,6 +4766,7 @@ public final class LROsImpl {
                 () -> this.putSubResourceWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -4906,6 +4927,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5041,6 +5063,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5162,6 +5185,7 @@ public final class LROsImpl {
                 () -> this.deleteProvisioning202DeletingFailed200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -5285,6 +5309,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5362,6 +5387,7 @@ public final class LROsImpl {
                 () -> this.delete204SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -5457,6 +5483,7 @@ public final class LROsImpl {
                 () -> this.delete202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -5572,6 +5599,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5650,6 +5678,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5709,6 +5738,7 @@ public final class LROsImpl {
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -5770,6 +5800,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5829,6 +5860,7 @@ public final class LROsImpl {
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -5890,6 +5922,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -5949,6 +5982,7 @@ public final class LROsImpl {
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -6027,6 +6061,7 @@ public final class LROsImpl {
                 () -> this.post200WithPayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -6152,6 +6187,7 @@ public final class LROsImpl {
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -6333,6 +6369,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -6479,6 +6516,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -6596,6 +6634,7 @@ public final class LROsImpl {
                 () -> this.postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -6716,6 +6755,7 @@ public final class LROsImpl {
                 () -> this.postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -6890,6 +6930,7 @@ public final class LROsImpl {
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
@@ -7092,6 +7133,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -7257,6 +7299,7 @@ public final class LROsImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
@@ -7403,6 +7446,7 @@ public final class LROsImpl {
                 () -> this.postAsyncRetrycanceledWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
+                        null,
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()

@@ -132,11 +132,24 @@ public final class EnumsImpl implements Enums {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Colors> getNotExpandableWithResponse() {
+        return getNotExpandableWithResponseAsync().block();
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getNotExpandable() {
-        return getNotExpandableAsync().block();
+        return getNotExpandableWithResponse().getValue();
     }
 
     /**
@@ -183,10 +196,24 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putNotExpandableWithResponse(Colors stringBody) {
+        return putNotExpandableWithResponseAsync(stringBody).block();
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableAsync(stringBody).block();
+        putNotExpandableWithResponse(stringBody);
     }
 
     /**
@@ -225,11 +252,24 @@ public final class EnumsImpl implements Enums {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Colors> getReferencedWithResponse() {
+        return getReferencedWithResponseAsync().block();
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getReferenced() {
-        return getReferencedAsync().block();
+        return getReferencedWithResponse().getValue();
     }
 
     /**
@@ -276,10 +316,24 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putReferencedWithResponse(Colors enumStringBody) {
+        return putReferencedWithResponseAsync(enumStringBody).block();
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody enum string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(Colors enumStringBody) {
-        putReferencedAsync(enumStringBody).block();
+        putReferencedWithResponse(enumStringBody);
     }
 
     /**
@@ -317,11 +371,23 @@ public final class EnumsImpl implements Enums {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value 'green-color' from the constant along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<RefColorConstant> getReferencedConstantWithResponse() {
+        return getReferencedConstantWithResponseAsync().block();
+    }
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value 'green-color' from the constant.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantAsync().block();
+        return getReferencedConstantWithResponse().getValue();
     }
 
     /**
@@ -370,9 +436,23 @@ public final class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putReferencedConstantWithResponse(RefColorConstant enumStringBody) {
+        return putReferencedConstantWithResponseAsync(enumStringBody).block();
+    }
+
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody enum string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantAsync(enumStringBody).block();
+        putReferencedConstantWithResponse(enumStringBody);
     }
 }

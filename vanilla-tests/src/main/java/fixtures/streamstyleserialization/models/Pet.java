@@ -24,6 +24,9 @@ public class Pet implements JsonSerializable<Pet> {
      */
     private String name;
 
+    /** Creates an instance of Pet class. */
+    public Pet() {}
+
     /**
      * Get the id property: The id property.
      *

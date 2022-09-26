@@ -41,7 +41,7 @@ public final class VisibilityOpClient {
      *
      * <pre>{@code
      * {
-     *     id: long (Required)
+     *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
@@ -76,7 +76,7 @@ public final class VisibilityOpClient {
      *
      * <pre>{@code
      * {
-     *     id: long (Required)
+     *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
@@ -103,7 +103,7 @@ public final class VisibilityOpClient {
      *
      * <pre>{@code
      * {
-     *     id: long (Required)
+     *     id: int (Required)
      *     name: String (Required)
      * }
      * }</pre>
@@ -112,7 +112,7 @@ public final class VisibilityOpClient {
      *
      * <pre>{@code
      * {
-     *     id: long (Required)
+     *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }

@@ -12,11 +12,12 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
+import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 
 import java.time.OffsetDateTime;
@@ -253,27 +254,27 @@ public class ClientMethod {
     }
 
     public final List<ClientMethodParameter> getMethodParameters() {
-        return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
+        return getParameters().stream().filter(parameter -> parameter != null && !parameter.isFromClient() &&
                 parameter.getName() != null && !parameter.getName().trim().isEmpty())
-                .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
+                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
                 .collect(Collectors.toList());
     }
 
     private final List<ClientMethodParameter> getMethodNonConstantParameters() {
-        return getMethodParameters().stream().filter(parameter -> !parameter.getIsConstant())
-                .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
+        return getMethodParameters().stream().filter(parameter -> !parameter.isConstant())
+                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
                 .collect(Collectors.toList());
     }
 
     public final List<ClientMethodParameter> getMethodRequiredParameters() {
-        return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::getIsRequired).collect(Collectors.toList());
+        return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::isRequired).collect(Collectors.toList());
     }
 
     public final List<String> getRequiredNullableParameterExpressions() {
         return requiredNullableParameterExpressions;
     }
 
-    public final boolean getIsGroupedParameterRequired() {
+    public final boolean isGroupedParameterRequired() {
         return isGroupedParameterRequired;
     }
 
@@ -297,7 +298,7 @@ public class ClientMethod {
         List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter -> {
             String parameterName = parameter.getParameterReference();
             IType parameterWireType = parameter.getWireType();
-            if (parameter.getIsNullable()) {
+            if (parameter.isNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
             IType parameterClientType = parameter.getClientType();
@@ -348,6 +349,8 @@ public class ClientMethod {
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
+        imports.add(Response.class.getName());
+        imports.add(SimpleResponse.class.getName());
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
@@ -379,12 +382,11 @@ public class ClientMethod {
                 imports.add("java.util.Iterator");
             }
 
-            if (settings.getAddContextParameter()
-                    && !(!settings.getRequiredParameterClientMethods() && settings.isContextClientMethodParameter()
-                    && SyncMethodsGeneration.NONE.equals(settings.getSyncMethods()))
-                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
-                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
-                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+            // Add FluxUtil as an import if this is an asynchronous method and the last parameter isn't the Context
+            // parameter.
+            if (proxyMethod != null && !proxyMethod.isSync()
+                && (CoreUtils.isNullOrEmpty(parameters)
+                    || parameters.get(parameters.size() - 1) != ClientMethodParameter.CONTEXT_PARAMETER)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
 
@@ -591,7 +593,7 @@ public class ClientMethod {
          * @param isGroupedParameterRequired the parameter that needs to transformed before pagination
          * @return the Builder itself
          */
-        public Builder isGroupedParameterRequired(boolean isGroupedParameterRequired) {
+        public Builder groupedParameterRequired(boolean isGroupedParameterRequired) {
             this.isGroupedParameterRequired = isGroupedParameterRequired;
             return this;
         }

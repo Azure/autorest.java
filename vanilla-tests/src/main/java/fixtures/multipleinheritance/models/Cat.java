@@ -28,6 +28,9 @@ public class Cat extends Pet {
     @JsonProperty(value = "hisses")
     private Boolean hisses;
 
+    /** Creates an instance of Cat class. */
+    public Cat() {}
+
     /**
      * Get the likesMilk property: The likesMilk property.
      *

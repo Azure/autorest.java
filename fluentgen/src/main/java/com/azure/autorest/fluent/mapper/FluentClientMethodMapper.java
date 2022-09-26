@@ -31,11 +31,13 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     break;
 
                 case SimpleAsync:
+                case SimpleSync:
+                case PagingSyncSinglePage:
                     visibility = NOT_GENERATE;
                     break;
 
                 default:
-                    visibility = super.methodVisibility(methodType, hasContextParameter, isProtocolMethod);
+                    visibility = super.methodVisibility(methodType, true, isProtocolMethod);
                     break;
             }
         } else {
@@ -44,8 +46,13 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
                     visibility = NOT_VISIBLE;
                     break;
 
+                case SimpleSyncRestResponse:
+                case PagingSyncSinglePage:
+                    visibility = NOT_GENERATE;
+                    break;
+
                 default:
-                    visibility = super.methodVisibility(methodType, hasContextParameter, isProtocolMethod);
+                    visibility = super.methodVisibility(methodType, false, isProtocolMethod);
                     break;
             }
         }

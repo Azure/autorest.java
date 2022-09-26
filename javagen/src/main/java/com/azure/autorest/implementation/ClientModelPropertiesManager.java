@@ -88,7 +88,7 @@ public final class ClientModelPropertiesManager {
             possibleReaderFieldNameVariableNames.remove(property.getName());
             possibleXmlNameVariableNames.remove(property.getName());
 
-            if (property.getIsXmlAttribute()) {
+            if (property.isXmlAttribute()) {
                 xmlAttributes.add(property);
             } else {
                 xmlElements.add(property);
@@ -119,7 +119,7 @@ public final class ClientModelPropertiesManager {
             possibleReaderFieldNameVariableNames.remove(property.getName());
             possibleXmlNameVariableNames.remove(property.getName());
 
-            if (property.getIsXmlAttribute()) {
+            if (property.isXmlAttribute()) {
                 xmlAttributes.add(property);
             } else {
                 xmlElements.add(property);

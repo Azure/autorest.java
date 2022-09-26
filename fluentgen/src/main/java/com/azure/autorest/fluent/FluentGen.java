@@ -167,7 +167,9 @@ public class FluentGen extends Javagen {
             }
         };
         LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
         CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
         return codeModel;
@@ -207,7 +209,7 @@ public class FluentGen extends Javagen {
         javaPackage
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                         client.getServiceClient());
-        if (javaSettings.shouldGenerateClientInterfaces()) {
+        if (javaSettings.isGenerateClientInterfaces()) {
             javaPackage
                     .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
@@ -231,7 +233,7 @@ public class FluentGen extends Javagen {
         // Method group
         for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
             javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-            if (javaSettings.shouldGenerateClientInterfaces()) {
+            if (javaSettings.isGenerateClientInterfaces()) {
                 javaPackage.addMethodGroupInterface(interfacePackage, methodGroupClient.getInterfaceName(), methodGroupClient);
             }
         }
@@ -277,7 +279,9 @@ public class FluentGen extends Javagen {
         if (javaSettings.isGenerateTests()) {
             // Unit tests for models
             for (ClientModel model : client.getModels()) {
-                javaPackage.addModelUnitTest(model);
+                if (!model.isStronglyTypedHeader()) {
+                    javaPackage.addModelUnitTest(model);
+                }
             }
         }
 
@@ -326,7 +330,7 @@ public class FluentGen extends Javagen {
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
 
             // POM
-            if (javaSettings.shouldRegeneratePom()) {
+            if (javaSettings.isRegeneratePom()) {
                 Pom pom = new FluentPomMapper().map(project);
                 javaPackage.addPom(fluentJavaSettings.getPomFilename(), pom);
             }

@@ -441,6 +441,7 @@ public final class HeadersImpl {
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
                         null,
+                        null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),

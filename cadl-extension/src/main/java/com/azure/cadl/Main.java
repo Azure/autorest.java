@@ -144,7 +144,9 @@ public class Main {
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
         CodeModel codeModel = yamlMapper.loadAs(file, CodeModel.class);

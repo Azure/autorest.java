@@ -28,11 +28,15 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -40,6 +44,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -86,7 +91,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
             comment -> comment.description(model.getDescription()));
 
-        boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
+        final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
+        final boolean immutableOutputModel = settings.isOutputModelImmutable()
+                && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
 
         // Handle adding annotations if the model is polymorphic.
         handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
@@ -95,7 +102,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addClassLevelAnnotations(model, javaFile, settings);
 
         // Add Fluent or Immutable based on whether the model has any setters.
-        addFluentOrImmutableAnnotation(model, javaFile, propertyReferences, settings);
+        addFluentOrImmutableAnnotation(model, immutableOutputModel, propertyReferences, javaFile, settings);
 
         // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
@@ -125,7 +132,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addProperties(model, classBlock, settings);
 
-            addModelConstructor(model, settings, classBlock);
+            JavaVisibility modelConstructorVisibility =
+                    immutableOutputModel
+                            ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
+                            : JavaVisibility.Public;
+            addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
                 // For now, don't add a getter if the property is a polymorphic discriminator and stream-style
@@ -133,6 +144,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
                     continue;
                 }
+
+                final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
@@ -145,14 +158,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
-                if (!property.getIsReadOnly()) {
+                if (!propertyIsReadOnly) {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
 
-                if (ClientModelUtil.hasSetter(property, settings)) {
+                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
@@ -178,21 +191,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
-                propertyReferences);
-            for (ClientModelPropertyAccess parentProperty : settersToOverride) {
-                classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%s %s(%s %s)",
-                        model.getName(),
-                        parentProperty.getSetterName(),
-                        parentProperty.getClientType(),
-                        parentProperty.getName()),
-                    methodBlock -> {
-                        methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
-                            parentProperty.getName()));
-                        methodBlock.methodReturn("this");
-                    });
+            if (!immutableOutputModel) {
+                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+                        propertyReferences);
+                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%s %s(%s %s)",
+                                    model.getName(),
+                                    parentProperty.getSetterName(),
+                                    parentProperty.getClientType(),
+                                    parentProperty.getName()),
+                            methodBlock -> {
+                                methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
+                                        parentProperty.getName()));
+                                methodBlock.methodReturn("this");
+                            });
+                }
             }
 
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
@@ -202,6 +217,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyClientType = property.getClientType();
+                    final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                     if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
                         // since the property to flattened client model is optional, the flattened property should be optional
@@ -221,7 +237,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     });
 
                     // setter
-                    if (!property.getIsReadOnly()) {
+                    if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
                         classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
@@ -236,7 +252,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addPropertyValidations(classBlock, model, settings);
 
-            if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+            if ((settings.isClientSideValidations() && settings.isUseClientLogger()) || model.isStronglyTypedHeader()) {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
 
@@ -251,7 +267,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         //
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
-        if (settings.shouldClientSideValidations() && settings.shouldClientLogger()) {
+        if (settings.isClientSideValidations() && settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
         }
 
@@ -266,6 +282,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             imports.add(Base64.class.getName());
             imports.add(HashMap.class.getName());
             imports.add(HttpHeader.class.getName());
+            imports.add(UUID.class.getName());
+            imports.add(URL.class.getName());
+            imports.add(IOException.class.getName());
+            imports.add(UncheckedIOException.class.getName());
+            imports.add(ClientLogger.class.getName());
 
             // JacksonAdapter will be removed in the future once model types are converted to using stream-style
             // serialization. For now, it's needed to handle the rare scenario where the strong type is a non-Java
@@ -332,7 +353,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
         boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
         // Model isn't polymorphic, no work to do here.
-        if (!model.getIsPolymorphic()) {
+        if (!model.isPolymorphic()) {
             return;
         }
 
@@ -389,7 +410,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings Autorest generation settings.
      */
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
-        if (settings.shouldGenerateXmlSerialization()) {
+        if (settings.isGenerateXmlSerialization()) {
             if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
                     model.getXmlName(), model.getXmlNamespace()));
@@ -407,13 +428,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Adds Fluent or Immutable based on whether model has any setters.
      * @param model The client model.
-     * @param javaFile The Java class file.
+     * @param immutableOutputModel The model is treated as immutable, as it is output only.
      * @param propertyReferences The client model property reference.
+     * @param javaFile The Java class file.
      * @param settings Autorest generation settings.
      */
-    private void addFluentOrImmutableAnnotation(ClientModel model, JavaFile javaFile,
-                                                List<ClientModelPropertyReference> propertyReferences, JavaSettings settings) {
-        boolean fluent = Stream
+    private void addFluentOrImmutableAnnotation(ClientModel model, boolean immutableOutputModel,
+                                                List<ClientModelPropertyReference> propertyReferences, JavaFile javaFile, JavaSettings settings) {
+        boolean fluent = !immutableOutputModel && Stream
                 .concat(model.getProperties().stream(), propertyReferences.stream())
                 .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
 
@@ -454,8 +476,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             IType propertyType = property.getWireType();
 
             String fieldSignature;
-            if (settings.shouldGenerateXmlSerialization()) {
-                if (property.getIsXmlWrapper()) {
+            if (settings.isGenerateXmlSerialization()) {
+                if (property.isXmlWrapper()) {
                     String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
 
                     String wrapperClassDefinition = xmlWrapperClassName;
@@ -554,21 +576,21 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
             classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getIsXmlAttribute()) {
+        } else if (settings.isGenerateXmlSerialization() && property.isXmlAttribute()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+        } else if (settings.isGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
-        } else if (settings.shouldGenerateXmlSerialization() && property.isXmlText()) {
+        } else if (settings.isGenerateXmlSerialization() && property.isXmlText()) {
             classBlock.annotation("JacksonXmlText");
         } else if (property.isAdditionalProperties()) {
             classBlock.annotation("JsonIgnore");
-        } else if (settings.shouldGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.getIsXmlWrapper()) {
+        } else if (settings.isGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
             classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
         } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
             classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
         }
 
-        if (!settings.shouldGenerateXmlSerialization() &&
+        if (!settings.isGenerateXmlSerialization() &&
             !property.isAdditionalProperties()
             && property.getClientType() instanceof MapType
             && settings.isFluent()) {
@@ -580,10 +602,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Adds the model constructor to the Java class file.
      *
      * @param model The model.
+     * @param constructorVisibility The visibility of constructor.
      * @param settings AutoRest settings.
      * @param classBlock The Java class file.
      */
-    private void addModelConstructor(ClientModel model, JavaSettings settings, JavaClass classBlock) {
+    private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings, JavaClass classBlock) {
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
         if (model.isStronglyTypedHeader()) {
@@ -599,12 +622,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         for (ClientModelProperty property : model.getProperties()) {
             // Property isn't required and won't be bucketed into either constant or required properties.
-            if (!property.isRequired()) {
+            if (!property.isRequired() || property.isReadOnly()) {
                 continue;
             }
 
             // Bucket into constant or required properties based on whether the property is constant.
-            if (property.getIsConstant()) {
+            if (property.isConstant()) {
                 constantProperties.add(property);
             } else {
                 requiredProperties.add(property);
@@ -612,7 +635,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // Also get required properties from the super class structure.
-        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredParentProperties(model);
+        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
 
         // Description for the class is always the same, not matter whether there are required properties.
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.
@@ -659,11 +682,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
         }
 
-        // If there are no constructor properties or constant properties don't add the constructor.
-        if (constructorProperties.length() == 0 && constantProperties.isEmpty()) {
-            return;
-        }
-
         // Add the Javadocs for the constructor.
         classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
 
@@ -673,8 +691,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonCreator");
         }
 
+        // If immutableOutputModel, make the constructor private, so that adding required properties, or changing model to input-output will not have breaking changes.
+        // For user in test, they will need to mock the class.
+
         // If constructorProperties empty this just becomes an empty constructor.
-        classBlock.publicConstructor(model.getName() + "(" + constructorProperties + ")", constructor -> {
+        classBlock.constructor(constructorVisibility, model.getName() + "(" + constructorProperties + ")", constructor -> {
             // If there are super class properties, call super() first.
             if (superProperties.length() > 0) {
                 constructor.line("super(" + superProperties + ");");
@@ -755,7 +776,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()
+            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()
                 && (property.getWireType() instanceof IterableType)) {
                 methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
                     ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
@@ -804,7 +825,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 .elseBlock(elseBlock ->
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
-            if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper()) {
+            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()) {
                 methodBlock.line("this.%s = new %s(%s);", property.getName(),
                     getPropertyXmlWrapperClassName(property), expression);
             } else {
@@ -862,6 +883,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             rawHeaderAccess = property.getName();
         }
 
+        boolean needsTryCatch = false;
         String setter;
         if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
             setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
@@ -885,13 +907,24 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             setter = String.format("LocalDate.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.Duration) {
             setter = String.format("Duration.parse(%s)", rawHeaderAccess);
+        } else if (wireType == ClassType.UUID) {
+            setter = "UUID.fromString(" + rawHeaderAccess + ")";
+        } else if (wireType == ClassType.URL) {
+            needsTryCatch = true;
+            setter = "new URL(" + rawHeaderAccess + ")";
         } else if (wireType instanceof EnumType) {
             EnumType enumType = (EnumType) wireType;
             setter = String.format("%s.%s(%s)", enumType.getName(), enumType.getFromJsonMethodName(), rawHeaderAccess);
         } else {
             // TODO (alzimmer): Check if the wire type is a Swagger type that could use stream-style serialization.
+            needsTryCatch = true;
             setter = String.format("JacksonAdapter.createDefaultSerializerAdapter().deserializeHeader(rawHeaders.get(\"%s\"), %s)",
                 property.getSerializedName(), getWireTypeJavaType(wireType));
+        }
+
+        if (needsTryCatch) {
+            javaBlock.line("try {");
+            javaBlock.increaseIndent();
         }
 
         // String is special as the setter is null safe for it, unlike other nullable types.
@@ -900,6 +933,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), setter));
         } else {
             javaBlock.line("this.%s = %s;", property.getName(), setter);
+        }
+
+        if (needsTryCatch) {
+            // At this time all try-catching is for IOExceptions.
+            javaBlock.decreaseIndent();
+            javaBlock.line("} catch (IOException ex) {");
+            javaBlock.indent(() -> javaBlock.line("throw LOGGER.logExceptionAsError(new UncheckedIOException(ex));"));
+            javaBlock.line("}");
         }
     }
 
@@ -918,7 +959,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
-        if (settings.shouldClientSideValidations()) {
+        if (settings.isClientSideValidations()) {
             boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
             // javadoc
@@ -937,10 +978,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
                 for (ClientModelProperty property : model.getProperties()) {
                     String validation = property.getClientType().validate(getGetterName(model, property) + "()");
-                    if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
+                    if (property.isRequired() && !property.isReadOnly() && !property.isConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
-                            if (settings.shouldClientLogger()) {
+                            if (settings.isUseClientLogger()) {
                                 ifBlock.line(String.format(
                                     "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%s));",
                                     errorMessage));

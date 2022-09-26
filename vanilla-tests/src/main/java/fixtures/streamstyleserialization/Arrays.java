@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.ArrayWrapper;
 import fixtures.streamstyleserialization.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -54,10 +55,25 @@ public final class Arrays {
         Mono<Response<ArrayWrapper>> getValid(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/array/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<ArrayWrapper> getValidSync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") ArrayWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Put("/complex/array/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") ArrayWrapper complexBody,
                 @HeaderParam("Accept") String accept,
@@ -69,6 +85,12 @@ public final class Arrays {
         Mono<Response<ArrayWrapper>> getEmpty(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Get("/complex/array/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<ArrayWrapper> getEmptySync(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Put("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -78,10 +100,25 @@ public final class Arrays {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Put("/complex/array/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<Void> putEmptySync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") ArrayWrapper complexBody,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ArrayWrapper>> getNotProvided(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/complex/array/notprovided")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Response<ArrayWrapper> getNotProvidedSync(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
     }
 
@@ -95,7 +132,7 @@ public final class Arrays {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -119,11 +156,28 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ArrayWrapper> getValidSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
+    }
+
+    /**
+     * Get complex types with array property.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getValid() {
-        return getValidAsync().block();
+    public ArrayWrapper getValidSync() {
+        return getValidSyncWithResponse().getValue();
     }
 
     /**
@@ -139,11 +193,12 @@ public final class Arrays {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -174,10 +229,36 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ArrayWrapper complexBody) {
-        putValidAsync(complexBody).block();
+    public Response<Void> putValidSyncWithResponse(ArrayWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
+    }
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
+     *     jumps over the lazy dog".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValidSync(ArrayWrapper complexBody) {
+        putValidSyncWithResponse(complexBody);
     }
 
     /**
@@ -191,7 +272,7 @@ public final class Arrays {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -215,11 +296,28 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property which is empty along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ArrayWrapper> getEmptySyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, Context.NONE);
+    }
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getEmpty() {
-        return getEmptyAsync().block();
+    public ArrayWrapper getEmptySync() {
+        return getEmptySyncWithResponse().getValue();
     }
 
     /**
@@ -234,11 +332,12 @@ public final class Arrays {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -267,10 +366,35 @@ public final class Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyAsync(complexBody).block();
+    public Response<Void> putEmptySyncWithResponse(ArrayWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putEmptySync(this.client.getHost(), complexBody, accept, Context.NONE);
+    }
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putEmptySync(ArrayWrapper complexBody) {
+        putEmptySyncWithResponse(complexBody);
     }
 
     /**
@@ -284,7 +408,7 @@ public final class Arrays {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
+            throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
@@ -309,10 +433,30 @@ public final class Arrays {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with array property while server doesn't provide a response payload along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<ArrayWrapper> getNotProvidedSyncWithResponse() {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, Context.NONE);
+    }
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getNotProvided() {
-        return getNotProvidedAsync().block();
+    public ArrayWrapper getNotProvidedSync() {
+        return getNotProvidedSyncWithResponse().getValue();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Arrays.class);
 }

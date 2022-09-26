@@ -31,6 +31,7 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AutoRestPagingTestService type. */
-@ServiceClientBuilder(serviceClients = {AutoRestPagingTestService.class})
+@ServiceClientBuilder(
+        serviceClients = {AutoRestPagingTestServiceClient.class, AutoRestPagingTestServiceAsyncClient.class})
 public final class AutoRestPagingTestServiceBuilder
         implements HttpTrait<AutoRestPagingTestServiceBuilder>, ConfigurationTrait<AutoRestPagingTestServiceBuilder> {
     @Generated private static final String SDK_NAME = "name";
@@ -210,19 +212,19 @@ public final class AutoRestPagingTestServiceBuilder
     }
 
     /**
-     * Builds an instance of AutoRestPagingTestService with the provided parameters.
+     * Builds an instance of AutoRestPagingTestServiceImpl with the provided parameters.
      *
-     * @return an instance of AutoRestPagingTestService.
+     * @return an instance of AutoRestPagingTestServiceImpl.
      */
     @Generated
-    public AutoRestPagingTestService buildClient() {
+    private AutoRestPagingTestServiceImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         String localApiVersion = (apiVersion != null) ? apiVersion : "1.0.0";
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestPagingTestService client =
-                new AutoRestPagingTestService(localPipeline, localSerializerAdapter, localHost, localApiVersion);
+        AutoRestPagingTestServiceImpl client =
+                new AutoRestPagingTestServiceImpl(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 
@@ -269,5 +271,25 @@ public final class AutoRestPagingTestServiceBuilder
                         .clientOptions(clientOptions)
                         .build();
         return httpPipeline;
+    }
+
+    /**
+     * Builds an instance of AutoRestPagingTestServiceAsyncClient class.
+     *
+     * @return an instance of AutoRestPagingTestServiceAsyncClient.
+     */
+    @Generated
+    public AutoRestPagingTestServiceAsyncClient buildAsyncClient() {
+        return new AutoRestPagingTestServiceAsyncClient(buildInnerClient().getPagings());
+    }
+
+    /**
+     * Builds an instance of AutoRestPagingTestServiceClient class.
+     *
+     * @return an instance of AutoRestPagingTestServiceClient.
+     */
+    @Generated
+    public AutoRestPagingTestServiceClient buildClient() {
+        return new AutoRestPagingTestServiceClient(buildInnerClient().getPagings());
     }
 }

@@ -4,12 +4,12 @@
 
 package com.cadl.response.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Resource model. */
-@Immutable
+@Fluent
 public final class Resource {
     /*
      * The id property.
@@ -20,8 +20,14 @@ public final class Resource {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
+
+    /*
+     * The description property.
+     */
+    @JsonProperty(value = "description")
+    private String description;
 
     /*
      * The type property.
@@ -32,17 +38,10 @@ public final class Resource {
     /**
      * Creates an instance of Resource class.
      *
-     * @param id the id value to set.
-     * @param name the name value to set.
      * @param type the type value to set.
      */
     @JsonCreator
-    public Resource(
-            @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY) String id,
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "type", required = true) String type) {
-        this.id = id;
-        this.name = name;
+    public Resource(@JsonProperty(value = "type", required = true) String type) {
         this.type = type;
     }
 
@@ -62,6 +61,26 @@ public final class Resource {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Get the description property: The description property.
+     *
+     * @return the description value.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     *
+     * @param description the description value to set.
+     * @return the Resource object itself.
+     */
+    public Resource setDescription(String description) {
+        this.description = description;
+        return this;
     }
 
     /**

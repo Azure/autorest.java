@@ -153,10 +153,27 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getEmptyWithResponse(String vault, String secret, String keyName, String keyVersion) {
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion).block();
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyAsync(vault, secret, keyName, keyVersion).block();
+        getEmptyWithResponse(vault, secret, keyName, keyVersion);
     }
 
     /**
@@ -172,6 +189,6 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String vault, String secret, String keyName) {
         final String keyVersion = null;
-        getEmptyAsync(vault, secret, keyName, keyVersion).block();
+        getEmptyWithResponse(vault, secret, keyName, keyVersion);
     }
 }

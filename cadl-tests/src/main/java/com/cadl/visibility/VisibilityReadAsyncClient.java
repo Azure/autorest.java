@@ -41,7 +41,7 @@ public final class VisibilityReadAsyncClient {
      *
      * <pre>{@code
      * {
-     *     id: long (Required)
+     *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }

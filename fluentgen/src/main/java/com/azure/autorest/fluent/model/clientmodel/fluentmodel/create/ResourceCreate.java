@@ -314,7 +314,7 @@ public class ResourceCreate extends ResourceOperation {
                 .filter(m -> parameterName.equals(m.getRequestParameterName()))
                 .findFirst();
         if (resourceNamePathParameter.isPresent()) {
-            return resourceNamePathParameter.get().getIsConstant() || resourceNamePathParameter.get().getFromClient();
+            return resourceNamePathParameter.get().isConstant() || resourceNamePathParameter.get().isFromClient();
         } else {
             throw new IllegalStateException(String.format("Resource name parameter not found in proxy method %1$s, name segment %2$s",
                     proxyMethod.getName(), parameterName));

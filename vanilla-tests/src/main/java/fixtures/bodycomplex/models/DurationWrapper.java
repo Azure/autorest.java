@@ -17,6 +17,9 @@ public final class DurationWrapper {
     @JsonProperty(value = "field")
     private Duration field;
 
+    /** Creates an instance of DurationWrapper class. */
+    public DurationWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

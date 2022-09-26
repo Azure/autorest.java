@@ -4,7 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /** The Cat model. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("cat")
-@Fluent
+@Immutable
 public final class Cat extends Pet {
     /*
      * The meow property.
      */
     @JsonProperty(value = "meow", required = true)
-    private long meow;
+    private int meow;
 
     /**
      * Creates an instance of Cat class.
@@ -28,9 +28,9 @@ public final class Cat extends Pet {
      * @param meow the meow value to set.
      */
     @JsonCreator
-    public Cat(
+    private Cat(
             @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "meow", required = true) long meow) {
+            @JsonProperty(value = "meow", required = true) int meow) {
         super(name);
         this.meow = meow;
     }
@@ -40,14 +40,7 @@ public final class Cat extends Pet {
      *
      * @return the meow value.
      */
-    public long getMeow() {
+    public int getMeow() {
         return this.meow;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Cat setWeight(Double weight) {
-        super.setWeight(weight);
-        return this;
     }
 }

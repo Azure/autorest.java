@@ -94,7 +94,7 @@ public final class CollectionsIntsImpl {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -121,7 +121,7 @@ public final class CollectionsIntsImpl {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -146,7 +146,7 @@ public final class CollectionsIntsImpl {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>
@@ -173,7 +173,7 @@ public final class CollectionsIntsImpl {
      * <pre>{@code
      * {
      *     property (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      * }
      * }</pre>

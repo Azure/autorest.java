@@ -12,10 +12,9 @@ RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 RMDIR /S /Q "src\samples"
 
 SET AUTOREST_CORE_VERSION=3.8.4
-SET MODELERFOUR_ARGUMENTS=--modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true
-SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ %MODELERFOUR_ARGUMENTS% --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
+SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
 SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
-SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --generate-samples
+SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --generate-samples --generate-tests
 
 REM fluent premium
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources

@@ -15,30 +15,34 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class PagingTests {
-    private static AutoRestPagingTestService client;
+    private static AutoRestPagingTestServiceClient client;
+    private static AutoRestPagingTestServiceAsyncClient asyncClient;
 
     @BeforeAll
     public static void setup() {
         client = new AutoRestPagingTestServiceBuilder()
                 .buildClient();
+
+        asyncClient = new AutoRestPagingTestServiceBuilder()
+                .buildAsyncClient();
     }
 
     @Test
     public void getSinglePages() throws Exception {
-        PagedIterable<Product> response = client.getPagings().getSinglePages();
+        PagedIterable<Product> response = client.getSinglePages();
         Assertions.assertEquals(1, response.stream().count());
     }
 
     @Test
     public void getMultiplePages() throws Exception {
-        List<Product> response = client.getPagings().getMultiplePages(null, null)
+        List<Product> response = client.getMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
     public void getOdataMultiplePages() throws Exception {
-        List<Product> response = client.getPagings().getOdataMultiplePages(null, null)
+        List<Product> response = client.getOdataMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
@@ -47,7 +51,7 @@ public class PagingTests {
     public void getMultiplePagesWithOffset() throws Exception {
         PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.setOffset(100);
-        List<Product> response = client.getPagings().getMultiplePagesWithOffset(options, "client-id")
+        List<Product> response = client.getMultiplePagesWithOffset(options, "client-id")
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
         Assertions.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
@@ -56,7 +60,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        client.getPagings().getMultiplePagesAsync("client-id", null)
+        asyncClient.getMultiplePages("client-id", null)
                 .doOnError(throwable -> Assertions.fail(throwable.getMessage()))
                 .doOnComplete(lock::countDown)
                 .blockLast();
@@ -66,14 +70,14 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
-        List<Product> response = client.getPagings().getMultiplePagesRetryFirst()
+        List<Product> response = client.getMultiplePagesRetryFirst()
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
-        List<Product> response = client.getPagings().getMultiplePagesRetrySecond()
+        List<Product> response = client.getMultiplePagesRetrySecond()
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
@@ -81,7 +85,7 @@ public class PagingTests {
     @Test
     public void getSinglePagesFailure() throws Exception {
         try {
-            List<Product> response = client.getPagings().getSinglePagesFailure()
+            List<Product> response = client.getSinglePagesFailure()
                     .stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (HttpResponseException ex) {
@@ -92,7 +96,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            List<Product> response = client.getPagings().getMultiplePagesFailure()
+            List<Product> response = client.getMultiplePagesFailure()
                     .stream().collect(Collectors.toList());
             response.size();
             Assertions.fail();
@@ -104,7 +108,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailureUri() {
         try {
-            client.getPagings().getMultiplePagesFailureUri().stream().collect(Collectors.toList());
+            client.getMultiplePagesFailureUri().stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (Exception e) {
             Assertions.assertTrue(e instanceof HttpResponseException);
@@ -115,50 +119,50 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFragmentNextLink() throws Exception {
-        PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentNextLink("1.6", "test_user");
+        PagedIterable<Product> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user");
         Assertions.assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
-        PagedIterable<Product> response = client.getPagings().getMultiplePagesFragmentWithGroupingNextLink(
+        PagedIterable<Product> response = client.getMultiplePagesFragmentWithGroupingNextLink(
                 new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
         Assertions.assertEquals(10, response.stream().count());
     }
 
     @Test
     public void getNoItemNamePages() {
-        long count = client.getPagings().getNoItemNamePages().stream().count();
+        long count = client.getNoItemNamePages().stream().count();
         Assertions.assertEquals(1, count);
     }
 
     @Test
     public void getNullNextLinkNamePages() {
-        long count = client.getPagings().getNullNextLinkNamePages().stream().count();
+        long count = client.getNullNextLinkNamePages().stream().count();
         Assertions.assertEquals(1, count);
     }
 
     @Test
     public void getWithQueryParams() {
-        long count = client.getPagings().getWithQueryParams(100).stream().count();
+        long count = client.getWithQueryParams(100).stream().count();
         Assertions.assertEquals(2, count);
     }
 
     @Test
     public void getPagingModelWithItemNameWithXMSClientName() {
-        long count = client.getPagings().getPagingModelWithItemNameWithXMSClientName().stream().count();
+        long count = client.getPagingModelWithItemNameWithXMSClientName().stream().count();
         Assertions.assertEquals(1, count);
     }
 
     @Test
     public void firstResponseEmpty() {
-        long count = client.getPagings().firstResponseEmpty().stream().count();
+        long count = client.firstResponseEmpty().stream().count();
         Assertions.assertEquals(1, count);
     }
 
 //    @Test
 //    public void duplicateParams() {
-//        long count = client.getPagings().duplicateParams("foo").stream().count();
+//        long count = client.duplicateParams("foo").stream().count();
 //        Assertions.assertTrue(count >= 1);
 //    }
 

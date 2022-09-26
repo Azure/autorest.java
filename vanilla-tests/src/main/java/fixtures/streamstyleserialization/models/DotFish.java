@@ -19,6 +19,9 @@ public class DotFish implements JsonSerializable<DotFish> {
      */
     private String species;
 
+    /** Creates an instance of DotFish class. */
+    public DotFish() {}
+
     /**
      * Get the species property: The species property.
      *

@@ -23,6 +23,7 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUp
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.template.prototype.MethodTemplate;
@@ -308,10 +309,10 @@ public class ResourceParser {
                         && !new UrlPathSegments(url).getReverseSegments().iterator().next().isParameterSegment()) {
                     // parameter from request body
                     if (method.getInnerProxyMethod().getParameters().stream()
-                            .allMatch(p -> p.getFromClient()
-                                    || !p.getIsRequired()
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.QUERY && p.getIsConstant())     // usually 'api-version' query parameter
-                                    || (p.getRequestParameterLocation() == RequestParameterLocation.HEADER && p.getIsConstant())    // usually 'accept' header
+                            .allMatch(p -> p.isFromClient()
+                                    || !p.isRequired()
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.QUERY && p.isConstant())     // usually 'api-version' query parameter
+                                    || (p.getRequestParameterLocation() == RequestParameterLocation.HEADER && p.isConstant())    // usually 'accept' header
                                     || p.getRequestParameterLocation() == RequestParameterLocation.PATH
                                     || p.getRequestParameterLocation() == RequestParameterLocation.BODY)) {
                         actionMethods.add(method);
@@ -480,16 +481,16 @@ public class ResourceParser {
                             boolean hasBodyParam = methodHasBodyParameter(method);
                             boolean hasRequiredQueryParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
-                                            && p.getIsRequired()
-                                            && !p.getFromClient() && !p.getIsConstant());
+                                            && p.isRequired()
+                                            && !p.isFromClient() && !p.isConstant());
                             boolean hasNewNonConstantPathParam = method.getInnerProxyMethod().getParameters().stream()
                                     .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.PATH
-                                            && !p.getIsConstant() && !p.getFromClient()
+                                            && !p.isConstant() && !p.isFromClient()
                                             && resourceCreate.getMethodReferences().stream().allMatch(
                                                     m -> m.getInnerProxyMethod().getParameters().stream().anyMatch(
                                                             p1 -> p1.getRequestParameterLocation() == RequestParameterLocation.PATH
                                                                     && p1.getRequestParameterName().equals(p.getRequestParameterName())
-                                                                    && p1.getIsConstant() && !p1.getFromClient())));
+                                                                    && p1.isConstant() && !p1.isFromClient())));
                             // if for update, need a body parameter
                             // if for get or delete, do not allow required query parameter (that not from client, and not constant), since it cannot be deduced from resource id
                             if ((isGetOrDelete && !hasRequiredQueryParam && !hasNewNonConstantPathParam)
@@ -505,18 +506,46 @@ public class ResourceParser {
     }
 
     private static List<FluentCollectionMethod> collectMethodReferences(FluentResourceCollection collection, String methodName) {
-        return collection.getMethods().stream()
-                .filter(m -> m.getInnerClientMethod().getName().equals(methodName)
-                        || (m.getInnerClientMethod().getType() == ClientMethodType.SimpleSyncRestResponse && m.getInnerClientMethod().getName().equals(methodName + Utils.METHOD_POSTFIX_WITH_RESPONSE)))
-                .filter(m -> m.getInnerProxyMethod().getHttpMethod() == HttpMethod.GET
-                        || m.getInnerProxyMethod().getHttpMethod() == HttpMethod.DELETE
-                        || methodHasBodyParameter(m))
-                .collect(Collectors.toList());
+        // The matching method could already contain the postfix, so we need to create both the WithResponse and
+        // non-WithResponse matches.
+        String nonWithResponseMatch;
+        String withResponseMatch;
+        if (methodName.endsWith(Utils.METHOD_POSTFIX_WITH_RESPONSE)) {
+            withResponseMatch = methodName;
+            nonWithResponseMatch = methodName.substring(0, methodName.length() - Utils.METHOD_POSTFIX_WITH_RESPONSE.length());
+        } else {
+            nonWithResponseMatch = methodName;
+            withResponseMatch = methodName + Utils.METHOD_POSTFIX_WITH_RESPONSE;
+        }
+
+        List<FluentCollectionMethod> collectionMethods = new ArrayList<>();
+        for (FluentCollectionMethod fluentMethod : collection.getMethods()) {
+            ClientMethod innerMethod = fluentMethod.getInnerClientMethod();
+            String innerName = innerMethod.getName();
+            HttpMethod httpMethod = fluentMethod.getInnerProxyMethod().getHttpMethod();
+
+            // Check for the method name matching the non-WithResponse match or the method being a WithResponse method
+            // and matching the WithResponse match.
+            if (!innerName.equals(nonWithResponseMatch)
+                && !(innerMethod.getType() == ClientMethodType.SimpleSyncRestResponse && innerName.equals(withResponseMatch))) {
+                continue;
+            }
+
+            // Check for the HTTP method being either GET or DELETE and the method having a body parameter.
+            if (httpMethod != HttpMethod.GET && httpMethod != HttpMethod.DELETE && !methodHasBodyParameter(fluentMethod)) {
+                continue;
+            }
+
+            collectionMethods.add(fluentMethod);
+        }
+
+        return collectionMethods;
     }
 
     private static boolean methodHasBodyParameter(FluentCollectionMethod method) {
+        // Previous it filtered on isClientModel but filter on parameter location as that's the cheaper check.
         return method.getInnerProxyMethod().getParameters().stream()
-                .filter(p -> ClientModelUtil.isClientModel(p.getClientType()))
-                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY);
+            .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY)
+            .anyMatch(p -> ClientModelUtil.isClientModel(p.getClientType()));
     }
 }

@@ -22,6 +22,9 @@ public final class Sku {
     @JsonProperty(value = "id")
     private String id;
 
+    /** Creates an instance of Sku class. */
+    public Sku() {}
+
     /**
      * Get the name property: The name property.
      *

@@ -262,11 +262,26 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Product> validationOfMethodParametersWithResponse(String resourceGroupName, int id) {
+        return validationOfMethodParametersWithResponseAsync(resourceGroupName, id).block();
+    }
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersAsync(resourceGroupName, id).block();
+        return validationOfMethodParametersWithResponse(resourceGroupName, id).getValue();
     }
 
     /**
@@ -353,11 +368,27 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Product> validationOfBodyWithResponse(String resourceGroupName, int id, Product body) {
+        return validationOfBodyWithResponseAsync(resourceGroupName, id, body).block();
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body The product documentation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyAsync(resourceGroupName, id, body).block();
+        return validationOfBodyWithResponse(resourceGroupName, id, body).getValue();
     }
 
     /**
@@ -373,7 +404,7 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfBody(String resourceGroupName, int id) {
         final Product body = null;
-        return validationOfBodyAsync(resourceGroupName, id, body).block();
+        return validationOfBodyWithResponse(resourceGroupName, id, body).getValue();
     }
 
     /**
@@ -409,10 +440,22 @@ public final class AutoRestValidationTest {
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getWithConstantInPathWithResponse() {
+        return getWithConstantInPathWithResponseAsync().block();
+    }
+
+    /**
+     * The getWithConstantInPath operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getWithConstantInPath() {
-        getWithConstantInPathAsync().block();
+        getWithConstantInPathWithResponse();
     }
 
     /**
@@ -472,11 +515,25 @@ public final class AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Product> postWithConstantInBodyWithResponse(Product body) {
+        return postWithConstantInBodyWithResponseAsync(body).block();
+    }
+
+    /**
+     * The postWithConstantInBody operation.
+     *
+     * @param body The product documentation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyAsync(body).block();
+        return postWithConstantInBodyWithResponse(body).getValue();
     }
 
     /**
@@ -489,6 +546,6 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product postWithConstantInBody() {
         final Product body = null;
-        return postWithConstantInBodyAsync(body).block();
+        return postWithConstantInBodyWithResponse(body).getValue();
     }
 }

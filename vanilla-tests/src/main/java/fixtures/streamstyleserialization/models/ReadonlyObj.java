@@ -24,6 +24,9 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      */
     private Integer size;
 
+    /** Creates an instance of ReadonlyObj class. */
+    public ReadonlyObj() {}
+
     /**
      * Get the id property: The id property.
      *

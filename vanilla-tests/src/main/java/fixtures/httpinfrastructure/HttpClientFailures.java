@@ -257,10 +257,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head400WithResponse() {
+        return head400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head400() {
-        head400Async().block();
+        head400WithResponse();
     }
 
     /**
@@ -297,10 +309,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get400WithResponse() {
+        return get400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get400() {
-        get400Async().block();
+        get400WithResponse();
     }
 
     /**
@@ -337,10 +361,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> options400WithResponse() {
+        return options400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options400() {
-        options400Async().block();
+        options400WithResponse();
     }
 
     /**
@@ -378,10 +414,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put400WithResponse() {
+        return put400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put400() {
-        put400Async().block();
+        put400WithResponse();
     }
 
     /**
@@ -419,10 +467,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch400WithResponse() {
+        return patch400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch400() {
-        patch400Async().block();
+        patch400WithResponse();
     }
 
     /**
@@ -460,10 +520,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post400WithResponse() {
+        return post400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post400() {
-        post400Async().block();
+        post400WithResponse();
     }
 
     /**
@@ -501,10 +573,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete400WithResponse() {
+        return delete400WithResponseAsync().block();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete400() {
-        delete400Async().block();
+        delete400WithResponse();
     }
 
     /**
@@ -541,10 +625,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head401WithResponse() {
+        return head401WithResponseAsync().block();
+    }
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head401() {
-        head401Async().block();
+        head401WithResponse();
     }
 
     /**
@@ -581,10 +677,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get402WithResponse() {
+        return get402WithResponseAsync().block();
+    }
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get402() {
-        get402Async().block();
+        get402WithResponse();
     }
 
     /**
@@ -621,10 +729,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> options403WithResponse() {
+        return options403WithResponseAsync().block();
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options403() {
-        options403Async().block();
+        options403WithResponse();
     }
 
     /**
@@ -661,10 +781,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get403WithResponse() {
+        return get403WithResponseAsync().block();
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get403() {
-        get403Async().block();
+        get403WithResponse();
     }
 
     /**
@@ -702,10 +834,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put404WithResponse() {
+        return put404WithResponseAsync().block();
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put404() {
-        put404Async().block();
+        put404WithResponse();
     }
 
     /**
@@ -743,10 +887,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch405WithResponse() {
+        return patch405WithResponseAsync().block();
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch405() {
-        patch405Async().block();
+        patch405WithResponse();
     }
 
     /**
@@ -784,10 +940,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post406WithResponse() {
+        return post406WithResponseAsync().block();
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post406() {
-        post406Async().block();
+        post406WithResponse();
     }
 
     /**
@@ -825,10 +993,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete407WithResponse() {
+        return delete407WithResponseAsync().block();
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete407() {
-        delete407Async().block();
+        delete407WithResponse();
     }
 
     /**
@@ -866,10 +1046,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put409WithResponse() {
+        return put409WithResponseAsync().block();
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put409() {
-        put409Async().block();
+        put409WithResponse();
     }
 
     /**
@@ -906,10 +1098,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head410WithResponse() {
+        return head410WithResponseAsync().block();
+    }
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head410() {
-        head410Async().block();
+        head410WithResponse();
     }
 
     /**
@@ -946,10 +1150,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get411WithResponse() {
+        return get411WithResponseAsync().block();
+    }
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get411() {
-        get411Async().block();
+        get411WithResponse();
     }
 
     /**
@@ -986,10 +1202,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> options412WithResponse() {
+        return options412WithResponseAsync().block();
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options412() {
-        options412Async().block();
+        options412WithResponse();
     }
 
     /**
@@ -1026,10 +1254,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get412WithResponse() {
+        return get412WithResponseAsync().block();
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get412() {
-        get412Async().block();
+        get412WithResponse();
     }
 
     /**
@@ -1067,10 +1307,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put413WithResponse() {
+        return put413WithResponseAsync().block();
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put413() {
-        put413Async().block();
+        put413WithResponse();
     }
 
     /**
@@ -1108,10 +1360,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch414WithResponse() {
+        return patch414WithResponseAsync().block();
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch414() {
-        patch414Async().block();
+        patch414WithResponse();
     }
 
     /**
@@ -1149,10 +1413,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post415WithResponse() {
+        return post415WithResponseAsync().block();
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post415() {
-        post415Async().block();
+        post415WithResponse();
     }
 
     /**
@@ -1189,10 +1465,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> get416WithResponse() {
+        return get416WithResponseAsync().block();
+    }
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get416() {
-        get416Async().block();
+        get416WithResponse();
     }
 
     /**
@@ -1230,10 +1518,22 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete417WithResponse() {
+        return delete417WithResponseAsync().block();
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete417() {
-        delete417Async().block();
+        delete417WithResponse();
     }
 
     /**
@@ -1270,9 +1570,21 @@ public final class HttpClientFailures {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head429WithResponse() {
+        return head429WithResponseAsync().block();
+    }
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head429() {
-        head429Async().block();
+        head429WithResponse();
     }
 }

@@ -26,6 +26,9 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      */
     private OffsetDateTime now;
 
+    /** Creates an instance of DatetimeWrapper class. */
+    public DatetimeWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

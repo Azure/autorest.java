@@ -154,11 +154,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<PetAPTrue> createAPTrueWithResponse(PetAPTrue createParameters) {
+        return createAPTrueWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPTrue createAPTrue(PetAPTrue createParameters) {
-        return createAPTrueAsync(createParameters).block();
+        return createAPTrueWithResponse(createParameters).getValue();
     }
 
     /**
@@ -208,11 +222,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<CatAPTrue> createCatAPTrueWithResponse(CatAPTrue createParameters) {
+        return createCatAPTrueWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a CatAPTrue which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CatAPTrue createCatAPTrue(CatAPTrue createParameters) {
-        return createCatAPTrueAsync(createParameters).block();
+        return createCatAPTrueWithResponse(createParameters).getValue();
     }
 
     /**
@@ -262,11 +290,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<PetAPObject> createAPObjectWithResponse(PetAPObject createParameters) {
+        return createAPObjectWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPObject createAPObject(PetAPObject createParameters) {
-        return createAPObjectAsync(createParameters).block();
+        return createAPObjectWithResponse(createParameters).getValue();
     }
 
     /**
@@ -316,11 +358,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<PetAPString> createAPStringWithResponse(PetAPString createParameters) {
+        return createAPStringWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPString createAPString(PetAPString createParameters) {
-        return createAPStringAsync(createParameters).block();
+        return createAPStringWithResponse(createParameters).getValue();
     }
 
     /**
@@ -370,11 +426,25 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<PetAPInProperties> createAPInPropertiesWithResponse(PetAPInProperties createParameters) {
+        return createAPInPropertiesWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInProperties createAPInProperties(PetAPInProperties createParameters) {
-        return createAPInPropertiesAsync(createParameters).block();
+        return createAPInPropertiesWithResponse(createParameters).getValue();
     }
 
     /**
@@ -429,11 +499,26 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<PetAPInPropertiesWithAPString> createAPInPropertiesWithAPStringWithResponse(
+            PetAPInPropertiesWithAPString createParameters) {
+        return createAPInPropertiesWithAPStringWithResponseAsync(createParameters).block();
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInPropertiesWithAPString createAPInPropertiesWithAPString(
             PetAPInPropertiesWithAPString createParameters) {
-        return createAPInPropertiesWithAPStringAsync(createParameters).block();
+        return createAPInPropertiesWithAPStringWithResponse(createParameters).getValue();
     }
 }

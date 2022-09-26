@@ -33,6 +33,7 @@ import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -236,11 +237,16 @@ public class JavaPackage {
     }
 
     public void addModelUnitTest(ClientModel model) {
-        String className = model.getName() + "Tests";
-        JavaFile javaFile = javaFileFactory.createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
-        ModelTestTemplate.getInstance().write(model, javaFile);
-        this.checkDuplicateFile(javaFile.getFilePath());
-        javaFiles.add(javaFile);
+        try {
+            String className = model.getName() + "Tests";
+            JavaFile javaFile = javaFileFactory.createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
+            ModelTestTemplate.getInstance().write(model, javaFile);
+            this.checkDuplicateFile(javaFile.getFilePath());
+            javaFiles.add(javaFile);
+        } catch (PossibleCredentialException e) {
+            // skip this test file
+            logger.warn("Skip unit test for model '{}', caused by key '{}'", model.getName(), e.getKeyName());
+        }
     }
 
     public void addReadmeMarkdown(Project project) {

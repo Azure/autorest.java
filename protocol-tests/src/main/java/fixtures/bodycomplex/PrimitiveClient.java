@@ -448,8 +448,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     *     field: DateTimeRfc1123 (Optional)
+     *     now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      *
@@ -473,8 +473,8 @@ public final class PrimitiveClient {
      *
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     *     field: DateTimeRfc1123 (Optional)
+     *     now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      *

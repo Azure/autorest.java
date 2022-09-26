@@ -124,10 +124,27 @@ public final class AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> updateWithResponse(
+            String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
+        return updateWithResponseAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags).block();
+    }
+
+    /**
+     * Updates the tags for an availability set.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
+     * @param availabilitySetUpdateParametersTags A description about the set of tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void update(
             String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
-        updateAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags).block();
+        updateWithResponse(resourceGroupName, avset, availabilitySetUpdateParametersTags);
     }
 }

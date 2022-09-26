@@ -22,6 +22,9 @@ public class Feline {
     @JsonProperty(value = "hisses")
     private Boolean hisses;
 
+    /** Creates an instance of Feline class. */
+    public Feline() {}
+
     /**
      * Get the meows property: The meows property.
      *

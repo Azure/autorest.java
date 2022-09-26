@@ -22,6 +22,9 @@ public final class CloudError {
     @JsonProperty(value = "message")
     private String message;
 
+    /** Creates an instance of CloudError class. */
+    public CloudError() {}
+
     /**
      * Get the code property: The code property.
      *

@@ -32,6 +32,21 @@ public final class PolymorphicrecursiveClient {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types that are polymorphic and have recursive references along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Fish> getValidWithResponse(Context context) {
+        return this.serviceClient.getValidWithResponse(context);
+    }
+
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
@@ -49,12 +64,34 @@ public final class PolymorphicrecursiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references along with {@link Response}.
+     * @return complex types that are polymorphic and have recursive references.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Fish> getValidWithResponse(Context context) {
-        return this.serviceClient.getValidWithResponse(context);
+    public Fish getValid(Context context) {
+        return this.serviceClient.getValid(context);
+    }
+
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
+     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
+     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
+     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
+     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
+     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
+     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
+        return this.serviceClient.putValidWithResponse(complexBody, context);
     }
 
     /**
@@ -91,11 +128,10 @@ public final class PolymorphicrecursiveClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
-        return this.serviceClient.putValidWithResponse(complexBody, context);
+    public void putValid(Fish complexBody, Context context) {
+        this.serviceClient.putValid(complexBody, context);
     }
 }

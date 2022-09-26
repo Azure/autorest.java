@@ -228,7 +228,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
+     * I'm a new operation. Initially neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
      *
      * <p><strong>Response Body Schema</strong>
@@ -273,7 +273,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        return headNoParamsWithResponse(requestOptions).then();
     }
 
     /**
@@ -292,7 +292,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).map(Response::getValue);
+        return headNoParamsWithResponse(requestOptions).then();
     }
 
     /**
@@ -440,7 +440,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     public Mono<Void> deleteParameters() {
         // Generated convenience method for deleteParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteParametersWithResponse(requestOptions).map(Response::getValue);
+        return deleteParametersWithResponse(requestOptions).then();
     }
 
     /**
@@ -497,7 +497,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
+     * I'm a new operation. Initially neither path or method exist for this operation. After evolution, this is a new
      * method in a new path.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.

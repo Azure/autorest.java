@@ -67,14 +67,15 @@ public class FluentMapper {
             fluentClient.getExamples().addAll(examples);
         }
 
-        // live tests
         if (JavaSettings.getInstance().isGenerateTests()) {
+            // live tests
             fluentClient.getLiveTests().addAll(
                     client.getLiveTests()
                             .stream()
                             .map(liveTests -> FluentLiveTestsMapper.getInstance().map(liveTests, fluentClient, codeModel, fluentJavaSettings))
                             .collect(Collectors.toList()));
 
+            // mock API tests
             UnitTestParser unitTestParser = new UnitTestParser();
             fluentClient.getUnitTests().addAll(
                     fluentClient.getResourceCollections().stream()

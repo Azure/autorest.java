@@ -17,8 +17,8 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_P
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-array.json --namespace=fixtures.bodyarray
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.json --namespace=fixtures.bodyboolean --context-client-method-parameter --client-logger
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks
-call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --client-logger --generate-tests
-call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.streamstyleserialization --stream-style-serialization --required-fields-as-ctor-args --client-logger --pass-discriminator-to-child-deserialization
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --client-logger --output-model-immutable --generate-tests
+call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-complex.json --namespace=fixtures.streamstyleserialization --enable-sync-stack --stream-style-serialization --required-fields-as-ctor-args --client-logger --pass-discriminator-to-child-deserialization
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-file.json --namespace=fixtures.bodyfile --context-client-method-parameter
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/body-string.json --namespace=fixtures.bodystring --generate-client-interfaces
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl.json --namespace=fixtures.custombaseuri
@@ -68,10 +68,10 @@ call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-te
 call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexstreamstylexmlserialization --stream-style-serialization --enable-xml
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo
 call :log-and-call-autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader
-call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true
+call :log_and_call_autorest autorest %VANILLA_ARGUMENTS% --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable
 
 rem Azure
-call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1
+call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/paging.json --namespace=fixtures.paging --payload-flattening-threshold=1 --generate-sync-async-clients --context-client-method-parameter
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/custom-baseUrl-paging.json --namespace=fixtures.custombaseuri.paging --payload-flattening-threshold=1
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-special-properties.json --namespace=fixtures.azurespecials --payload-flattening-threshold=1 --context-client-method-parameter
 call :log-and-call-autorest autorest %AZURE_ARGUMENTS% --input-file=%SWAGGER_PATH%/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1
@@ -105,6 +105,7 @@ call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/multi-media-types.json --namespace=fixtures.multimediatypes
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/required-optional-body.json --namespace=fixtures.requiredoptionalbody
 call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/enums.json --namespace=fixtures.enums
+call :log-and-call-autorest autorest %PROTOCOL_ARGUMENTS% --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro
 call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/dpg-customization.md
 call :log-and-call-autorest autorest --version=%AUTOREST_CORE_VERSION% --use=./ protocol-tests/swagger/custom-http-exception-mapping.md
 mkdir protocol-tests\src\main\java\fixtures\headexceptions\models

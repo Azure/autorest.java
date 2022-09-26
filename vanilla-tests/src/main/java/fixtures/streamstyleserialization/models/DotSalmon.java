@@ -28,6 +28,9 @@ public class DotSalmon extends DotFish {
      */
     private Boolean iswild;
 
+    /** Creates an instance of DotSalmon class. */
+    public DotSalmon() {}
+
     /**
      * Get the location property: The location property.
      *

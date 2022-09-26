@@ -23,7 +23,7 @@ public final class Message {
      * @param message the message value to set.
      */
     @JsonCreator
-    public Message(@JsonProperty(value = "message", required = true) String message) {
+    private Message(@JsonProperty(value = "message", required = true) String message) {
         this.message = message;
     }
 

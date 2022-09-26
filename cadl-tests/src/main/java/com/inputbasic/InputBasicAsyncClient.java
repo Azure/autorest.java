@@ -42,7 +42,7 @@ public final class InputBasicAsyncClient {
      * <pre>{@code
      * {
      *     requiredString: String (Required)
-     *     requiredInt: long (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      *
@@ -77,6 +77,6 @@ public final class InputBasicAsyncClient {
     public Mono<Void> getModel(InputModel input) {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).map(Response::getValue);
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).then();
     }
 }

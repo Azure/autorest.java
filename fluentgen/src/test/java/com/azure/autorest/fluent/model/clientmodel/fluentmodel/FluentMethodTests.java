@@ -141,7 +141,7 @@ public class FluentMethodTests {
         String methodContent = TestUtils.getMethodTemplateContent(deleteByIdMethod);
 
         Assertions.assertTrue(methodContent.contains("void deleteById(String id)"));
-        Assertions.assertTrue(methodContent.contains("this.deleteWithResponse(resourceGroupName, lockName, Context.NONE)"));
+        Assertions.assertTrue(methodContent.contains("this.deleteByResourceGroupWithResponse(resourceGroupName, lockName, Context.NONE)"));
     }
 
     @Test

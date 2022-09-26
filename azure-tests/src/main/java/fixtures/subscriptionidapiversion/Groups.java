@@ -118,10 +118,24 @@ public final class Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<SampleResourceGroup> getSampleResourceGroupWithResponse(String resourceGroupName) {
+        return getSampleResourceGroupWithResponseAsync(resourceGroupName).block();
+    }
+
+    /**
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     *
+     * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupAsync(resourceGroupName).block();
+        return getSampleResourceGroupWithResponse(resourceGroupName).getValue();
     }
 }

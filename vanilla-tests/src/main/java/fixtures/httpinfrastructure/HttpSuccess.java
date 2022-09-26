@@ -244,10 +244,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head200WithResponse() {
+        return head200WithResponseAsync().block();
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head200() {
-        head200Async().block();
+        head200WithResponse();
     }
 
     /**
@@ -284,16 +296,23 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 200 success along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> get200WithResponse() {
+        return get200WithResponseAsync().block();
+    }
+
+    /**
+     * Get 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 200 success.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200() {
-        Boolean value = get200Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return get200WithResponse().getValue();
     }
 
     /**
@@ -330,16 +349,23 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> options200WithResponse() {
+        return options200WithResponseAsync().block();
+    }
+
+    /**
+     * Options 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean options200() {
-        Boolean value = options200Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return options200WithResponse().getValue();
     }
 
     /**
@@ -377,10 +403,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put200WithResponse() {
+        return put200WithResponseAsync().block();
+    }
+
+    /**
+     * Put boolean value true returning 200 success.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put200() {
-        put200Async().block();
+        put200WithResponse();
     }
 
     /**
@@ -418,10 +456,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch200WithResponse() {
+        return patch200WithResponseAsync().block();
+    }
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch200() {
-        patch200Async().block();
+        patch200WithResponse();
     }
 
     /**
@@ -459,10 +509,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post200WithResponse() {
+        return post200WithResponseAsync().block();
+    }
+
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post200() {
-        post200Async().block();
+        post200WithResponse();
     }
 
     /**
@@ -500,10 +562,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete200WithResponse() {
+        return delete200WithResponseAsync().block();
+    }
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete200() {
-        delete200Async().block();
+        delete200WithResponse();
     }
 
     /**
@@ -541,10 +615,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put201WithResponse() {
+        return put201WithResponseAsync().block();
+    }
+
+    /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put201() {
-        put201Async().block();
+        put201WithResponse();
     }
 
     /**
@@ -582,10 +668,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post201WithResponse() {
+        return post201WithResponseAsync().block();
+    }
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post201() {
-        post201Async().block();
+        post201WithResponse();
     }
 
     /**
@@ -623,10 +721,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put202WithResponse() {
+        return put202WithResponseAsync().block();
+    }
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put202() {
-        put202Async().block();
+        put202WithResponse();
     }
 
     /**
@@ -664,10 +774,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch202WithResponse() {
+        return patch202WithResponseAsync().block();
+    }
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch202() {
-        patch202Async().block();
+        patch202WithResponse();
     }
 
     /**
@@ -705,10 +827,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post202WithResponse() {
+        return post202WithResponseAsync().block();
+    }
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post202() {
-        post202Async().block();
+        post202WithResponse();
     }
 
     /**
@@ -746,10 +880,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete202WithResponse() {
+        return delete202WithResponseAsync().block();
+    }
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete202() {
-        delete202Async().block();
+        delete202WithResponse();
     }
 
     /**
@@ -786,10 +932,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> head204WithResponse() {
+        return head204WithResponseAsync().block();
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head204() {
-        head204Async().block();
+        head204WithResponse();
     }
 
     /**
@@ -827,10 +985,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> put204WithResponse() {
+        return put204WithResponseAsync().block();
+    }
+
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put204() {
-        put204Async().block();
+        put204WithResponse();
     }
 
     /**
@@ -868,10 +1038,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> patch204WithResponse() {
+        return patch204WithResponseAsync().block();
+    }
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch204() {
-        patch204Async().block();
+        patch204WithResponse();
     }
 
     /**
@@ -909,10 +1091,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> post204WithResponse() {
+        return post204WithResponseAsync().block();
+    }
+
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post204() {
-        post204Async().block();
+        post204WithResponse();
     }
 
     /**
@@ -950,10 +1144,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> delete204WithResponse() {
+        return delete204WithResponseAsync().block();
+    }
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete204() {
-        delete204Async().block();
+        delete204WithResponse();
     }
 
     /**
@@ -990,15 +1196,22 @@ public final class HttpSuccess {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> head404WithResponse() {
+        return head404WithResponseAsync().block();
+    }
+
+    /**
+     * Return 404 status code.
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {
-        Boolean value = head404Async().block();
-        if (value != null) {
-            return value;
-        } else {
-            throw new NullPointerException();
-        }
+        return head404WithResponse().getValue();
     }
 }

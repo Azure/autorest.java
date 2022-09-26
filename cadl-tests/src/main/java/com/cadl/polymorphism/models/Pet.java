@@ -4,7 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     @JsonSubTypes.Type(name = "cat", value = Cat.class),
     @JsonSubTypes.Type(name = "dog", value = Dog.class)
 })
-@Fluent
+@Immutable
 public class Pet {
     /*
      * The name property.
@@ -42,7 +42,7 @@ public class Pet {
      * @param name the name value to set.
      */
     @JsonCreator
-    public Pet(@JsonProperty(value = "name", required = true) String name) {
+    protected Pet(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
     }
 
@@ -62,16 +62,5 @@ public class Pet {
      */
     public Double getWeight() {
         return this.weight;
-    }
-
-    /**
-     * Set the weight property: The weight property.
-     *
-     * @param weight the weight value to set.
-     * @return the Pet object itself.
-     */
-    public Pet setWeight(Double weight) {
-        this.weight = weight;
-        return this;
     }
 }

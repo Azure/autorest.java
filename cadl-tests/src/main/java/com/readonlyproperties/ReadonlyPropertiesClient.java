@@ -41,9 +41,9 @@ public final class ReadonlyPropertiesClient {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -52,13 +52,13 @@ public final class ReadonlyPropertiesClient {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -84,9 +84,9 @@ public final class ReadonlyPropertiesClient {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -95,13 +95,13 @@ public final class ReadonlyPropertiesClient {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -111,9 +111,9 @@ public final class ReadonlyPropertiesClient {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -122,13 +122,13 @@ public final class ReadonlyPropertiesClient {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>

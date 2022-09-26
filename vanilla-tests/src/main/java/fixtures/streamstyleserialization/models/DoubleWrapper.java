@@ -24,6 +24,9 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      */
     private Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
+    /** Creates an instance of DoubleWrapper class. */
+    public DoubleWrapper() {}
+
     /**
      * Get the field1 property: The field1 property.
      *

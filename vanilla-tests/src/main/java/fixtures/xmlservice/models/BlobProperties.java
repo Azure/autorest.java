@@ -182,6 +182,9 @@ public final class BlobProperties {
     @JsonProperty(value = "ArchiveStatus")
     private ArchiveStatus archiveStatus;
 
+    /** Creates an instance of BlobProperties class. */
+    public BlobProperties() {}
+
     /**
      * Get the lastModified property: The Last-Modified property.
      *

@@ -17,6 +17,9 @@ public final class NoModelAsStringNoRequiredTwoValueDefault {
     private NoModelAsStringNoRequiredTwoValueDefaultEnum parameter =
             NoModelAsStringNoRequiredTwoValueDefaultEnum.VALUE1;
 
+    /** Creates an instance of NoModelAsStringNoRequiredTwoValueDefault class. */
+    public NoModelAsStringNoRequiredTwoValueDefault() {}
+
     /**
      * Get the parameter property: The parameter property.
      *

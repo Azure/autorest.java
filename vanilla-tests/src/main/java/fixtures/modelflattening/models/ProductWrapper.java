@@ -18,6 +18,9 @@ public class ProductWrapper {
     @JsonProperty(value = "property.value")
     private String value;
 
+    /** Creates an instance of ProductWrapper class. */
+    public ProductWrapper() {}
+
     /**
      * Get the value property: the product value.
      *

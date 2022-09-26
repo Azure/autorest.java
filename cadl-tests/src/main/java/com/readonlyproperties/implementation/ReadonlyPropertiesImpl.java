@@ -9,7 +9,6 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -51,7 +50,7 @@ public final class ReadonlyPropertiesImpl {
      * The interface defining all the services for ReadonlyPropertiesReadonlyProperties to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("{endpoint}")
+    @Host("http://localhost:3000")
     @ServiceInterface(name = "ReadonlyPropertiesRe")
     private interface ReadonlyPropertiesService {
         @Get("/readonly-properties/models")
@@ -67,10 +66,7 @@ public final class ReadonlyPropertiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOptionalPropertyModel(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/readonly-properties/models")
         @ExpectedResponses({200})
@@ -85,7 +81,6 @@ public final class ReadonlyPropertiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setOptionalPropertyModel(
-                @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -100,9 +95,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -111,13 +106,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -133,9 +128,7 @@ public final class ReadonlyPropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalPropertyModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getOptionalPropertyModel(this.client.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getOptionalPropertyModel(accept, requestOptions, context));
     }
 
     /**
@@ -146,9 +139,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -157,13 +150,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -188,9 +181,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -199,13 +192,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -215,9 +208,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -226,13 +219,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -251,9 +244,7 @@ public final class ReadonlyPropertiesImpl {
             BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.setOptionalPropertyModel(
-                                this.client.getEndpoint(), accept, input, requestOptions, context));
+                context -> service.setOptionalPropertyModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -264,9 +255,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -275,13 +266,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>
@@ -291,9 +282,9 @@ public final class ReadonlyPropertiesImpl {
      * <pre>{@code
      * {
      *     requiredReadonlyString: String (Required)
-     *     requiredReadonlyInt: long (Required)
+     *     requiredReadonlyInt: int (Required)
      *     optionalReadonlyString: String (Optional)
-     *     optionalReadonlyInt: Long (Optional)
+     *     optionalReadonlyInt: Integer (Optional)
      *     requiredReadonlyModel (Required): {
      *         requiredString: String (Required)
      *     }
@@ -302,13 +293,13 @@ public final class ReadonlyPropertiesImpl {
      *         String (Required)
      *     ]
      *     requiredReadonlyIntList (Required): [
-     *         long (Required)
+     *         int (Required)
      *     ]
      *     optionalReadonlyStringList (Optional): [
      *         String (Optional)
      *     ]
      *     optionalReadonlyIntList (Optional): [
-     *         long (Optional)
+     *         int (Optional)
      *     ]
      * }
      * }</pre>

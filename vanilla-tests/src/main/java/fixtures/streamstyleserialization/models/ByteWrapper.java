@@ -20,6 +20,9 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
      */
     private byte[] field;
 
+    /** Creates an instance of ByteWrapper class. */
+    public ByteWrapper() {}
+
     /**
      * Get the field property: The field property.
      *

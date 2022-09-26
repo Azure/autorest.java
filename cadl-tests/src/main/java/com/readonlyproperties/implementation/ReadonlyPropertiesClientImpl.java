@@ -14,18 +14,6 @@ import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the ReadonlyPropertiesClient type. */
 public final class ReadonlyPropertiesClientImpl {
-    /** Server parameter. */
-    private final String endpoint;
-
-    /**
-     * Gets Server parameter.
-     *
-     * @return the endpoint value.
-     */
-    public String getEndpoint() {
-        return this.endpoint;
-    }
-
     /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
@@ -62,28 +50,22 @@ public final class ReadonlyPropertiesClientImpl {
         return this.readonlyProperties;
     }
 
-    /**
-     * Initializes an instance of ReadonlyPropertiesClient client.
-     *
-     * @param endpoint Server parameter.
-     */
-    public ReadonlyPropertiesClientImpl(String endpoint) {
+    /** Initializes an instance of ReadonlyPropertiesClient client. */
+    public ReadonlyPropertiesClientImpl() {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+                JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of ReadonlyPropertiesClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
      */
-    public ReadonlyPropertiesClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+    public ReadonlyPropertiesClientImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
@@ -91,13 +73,10 @@ public final class ReadonlyPropertiesClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
      */
-    public ReadonlyPropertiesClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public ReadonlyPropertiesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
-        this.endpoint = endpoint;
         this.readonlyProperties = new ReadonlyPropertiesImpl(this);
     }
 }

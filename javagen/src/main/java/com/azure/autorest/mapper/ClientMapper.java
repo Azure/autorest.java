@@ -131,7 +131,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         final List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .distinct()
-                .map(m -> parseResponse(m, settings))
+                .map(m -> parseResponse(m, clientModels, settings))
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList());
@@ -147,9 +147,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         // package info
         Map<String, PackageInfo> packageInfos = new HashMap<>();
-        if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
+        if (settings.isGenerateClientInterfaces() || !settings.isGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
-                || settings.isFluent() || settings.shouldGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
+                || settings.isFluent() || settings.isGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                 settings.getPackage(),
                 String.format("Package containing the classes for %s.\n%s", serviceClientName,
@@ -182,7 +182,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         } else {
-            if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
+            if (settings.isGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
                     && !settings.getImplementationSubpackage().isEmpty()) {
 
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
@@ -221,7 +221,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        if (settings.shouldGenerateSyncAsyncClients()) {
+        if (settings.isGenerateSyncAsyncClients()) {
             ClientModelUtil.getAsyncSyncClients(codeModel, serviceClient, asyncClients, syncClients);
         }
         builder.syncClients(syncClients);
@@ -233,7 +233,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             String builderSuffix = ClientModelUtil.getBuilderSuffix();
             String builderName = serviceClient.getInterfaceName() + builderSuffix;
             String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
-            if (settings.shouldGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
+            if (settings.isGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
                 // service client builder per service client
                 for (int i = 0; i < asyncClients.size(); ++i) {
                     AsyncSyncClient asyncClient = asyncClients.get(i);
@@ -327,7 +327,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {
         List<XmlSequenceWrapper> xmlSequenceWrappers = new ArrayList<>();
         JavaSettings settings = JavaSettings.getInstance();
-        if (settings.shouldGenerateXmlSerialization()) {
+        if (settings.isGenerateXmlSerialization()) {
             List<Operation> allMethods = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
@@ -417,14 +417,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return headerSchema;
     }
 
-    private ClientResponse parseResponse(Operation method, JavaSettings settings) {
+    private ClientResponse parseResponse(Operation method, List<ClientModel> models, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
         if (headerSchema == null || settings.isGenericResponseTypes()) {
             return null;
         }
 
-        ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
+        ClassType classType = ClientMapper.getClientResponseClassType(method, models, settings);
         return builder.name(classType.getName())
             .packageName(classType.getPackage())
             .description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()))
@@ -499,13 +499,21 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return ret;
     }
 
-    static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
+    static ClassType getClientResponseClassType(Operation method, List<ClientModel> models, JavaSettings settings) {
         String name = CodeNamer.getPlural(method.getOperationGroup().getLanguage().getJava().getName())
                 + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         if (settings.isCustomType(name)) {
             packageName = settings.getPackage(settings.getCustomTypesSubpackage());
         }
+
+        // deduplicate from model name
+        for (ClientModel model : models) {
+            if (model.getName().equalsIgnoreCase(name) && model.getPackage().equals(packageName)) {
+                name = name + "Response";
+            }
+        }
+
         return new ClassType.Builder().packageName(packageName).name(name).build();
     }
 }

@@ -80,6 +80,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
+|`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
 
 ## Settings for minimal data-plane clients
 
@@ -358,13 +359,10 @@ help-content:
         description: \[COMMA,SEPARATED,STRINGS] Specifies a list of files to put in the package specified in `--custom-types-subpackage`.
       - key: custom-types-subpackage
         type: string
-        description: The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage** You can set this lue to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.
+        description: The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage** You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.
       - key: client-type-prefix
         type: string
         description: The prefix that will be added to each generated client type.
-      - key: data-plane
-        type: bool
-        description: Indicates whether to generate clients and methods as protocol(low level) clients and methods. Default is false.
       - key: client-flattened-annotation-target
         type: string
         description: \[TYPE,FIELD] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
@@ -382,7 +380,10 @@ help-content:
         description: Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).
       - key: partial-update
         type: bool
-        description: Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.
+        description: Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class. Default is false.
+      - key: output-model-immutable
+        type: bool
+        description: Indicates that output-only models be generated as immutable, and without public constructor. Default is false.
       - key: data-plane
         type: bool
         description:  Indicates whether to generate code for minimal clients. Default is false.

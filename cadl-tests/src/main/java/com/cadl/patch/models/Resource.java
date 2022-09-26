@@ -12,6 +12,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Resource {
     /*
+     * The id property.
+     */
+    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    private String id;
+
+    /*
      * The name property.
      */
     @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
@@ -23,15 +29,29 @@ public final class Resource {
     @JsonProperty(value = "description")
     private String description;
 
+    /*
+     * The type property.
+     */
+    @JsonProperty(value = "type", required = true)
+    private String type;
+
     /**
      * Creates an instance of Resource class.
      *
-     * @param name the name value to set.
+     * @param type the type value to set.
      */
     @JsonCreator
-    public Resource(
-            @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY) String name) {
-        this.name = name;
+    public Resource(@JsonProperty(value = "type", required = true) String type) {
+        this.type = type;
+    }
+
+    /**
+     * Get the id property: The id property.
+     *
+     * @return the id value.
+     */
+    public String getId() {
+        return this.id;
     }
 
     /**
@@ -61,5 +81,14 @@ public final class Resource {
     public Resource setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    /**
+     * Get the type property: The type property.
+     *
+     * @return the type value.
+     */
+    public String getType() {
+        return this.type;
     }
 }

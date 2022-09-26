@@ -92,7 +92,7 @@ public final class IntsImpl {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *
@@ -116,7 +116,7 @@ public final class IntsImpl {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *
@@ -139,7 +139,7 @@ public final class IntsImpl {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *
@@ -164,7 +164,7 @@ public final class IntsImpl {
      *
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      *

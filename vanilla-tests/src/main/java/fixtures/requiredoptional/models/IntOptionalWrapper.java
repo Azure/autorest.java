@@ -16,6 +16,9 @@ public final class IntOptionalWrapper {
     @JsonProperty(value = "value")
     private Integer value;
 
+    /** Creates an instance of IntOptionalWrapper class. */
+    public IntOptionalWrapper() {}
+
     /**
      * Get the value property: The value property.
      *

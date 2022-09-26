@@ -66,7 +66,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     @Override
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
-        if (settings.shouldGenerateXmlSerialization() && model.getXmlName() != null) {
+        if (settings.isGenerateXmlSerialization() && model.getXmlName() != null) {
             imports.add(QName.class.getName());
             imports.add(XMLStreamException.class.getName());
 
@@ -112,7 +112,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return classSignature;
         }
 
-        String interfaceName = (settings.shouldGenerateXmlSerialization() && model.getXmlName() != null)
+        String interfaceName = (settings.isGenerateXmlSerialization() && model.getXmlName() != null)
             ? XmlSerializable.class.getSimpleName()
             : JsonSerializable.class.getSimpleName();
 
@@ -219,7 +219,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         ClientModelPropertiesManager propertiesManager = new ClientModelPropertiesManager(model, settings);
 
-        if (settings.shouldGenerateXmlSerialization() && model.getXmlName() != null) {
+        if (settings.isGenerateXmlSerialization() && model.getXmlName() != null) {
             writeToXml(classBlock, propertiesManager);
             writeFromXml(classBlock, model, propertiesManager, settings);
         } else {
@@ -1064,7 +1064,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaSettings settings, boolean fromSuper) {
         // If the property is defined in a super class or doesn't match the wire type use the setter as this will
         // be able to set the value in the super class definition or handle converting the wire type.
-        if (fromSuper || property.getWireType() != property.getClientType() || property.getIsXmlWrapper()) {
+        if (fromSuper || property.getWireType() != property.getClientType() || property.isXmlWrapper()) {
             methodBlock.line("deserializedValue." + property.getSetterName() + "(" + property.getName() + ");");
         } else {
             methodBlock.line("deserializedValue." + property.getName() + " = " + property.getName() + ";");
@@ -1119,7 +1119,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String propertyValueGetter = "this." + element.getName();
 
         // XML wrappers implement XmlSerializable and always use writeXml, check for this first as it's an early out.
-        if (element.getIsXmlWrapper()) {
+        if (element.isXmlWrapper()) {
             methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
             return;
         }
@@ -1127,7 +1127,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String xmlSerializationMethodCall = wireType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
-            element.getXmlNamespace(), propertyValueGetter, element.getIsXmlAttribute(), false);
+            element.getXmlNamespace(), propertyValueGetter, element.isXmlAttribute(), false);
         if (xmlSerializationMethodCall != null) {
             // XML text has special handling.
             if (element.isXmlText()) {
@@ -1142,7 +1142,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
                 String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
-                    element.getXmlNamespace(), "element", element.getIsXmlAttribute(), false);
+                    element.getXmlNamespace(), "element", element.isXmlAttribute(), false);
                 ifAction.line("for (%s element : %s) {", elementType, propertyValueGetter);
                 ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
                 ifAction.line("}");

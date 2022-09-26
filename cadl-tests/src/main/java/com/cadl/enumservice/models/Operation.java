@@ -49,7 +49,7 @@ public final class Operation {
      * @param color the color value to set.
      */
     @JsonCreator
-    public Operation(
+    private Operation(
             @JsonProperty(value = "name", required = true) Name name,
             @JsonProperty(value = "priority", required = true) Priority priority,
             @JsonProperty(value = "color", required = true) ColorModel color) {

@@ -17,9 +17,11 @@ import com.azure.core.util.DateTimeRfc1123;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -58,7 +60,7 @@ public class ModelTestCaseUtil {
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
-        if (model.getIsPolymorphic()) {
+        if (model.isPolymorphic()) {
             addForProperty(jsonObject,
                     model.getPolymorphicDiscriminator(), model.getNeedsFlatten(),
                     model.getSerializedName());
@@ -161,7 +163,7 @@ public class ModelTestCaseUtil {
     private static void addForProperty(int depth, Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
         Object value = null;
-        if (property.getIsConstant()) {
+        if (property.isConstant()) {
             // TODO (weidxu): skip for now, as the property.getDefaultValue() is the code, not the raw data
             //value = property.getDefaultValue();
             return;
@@ -192,6 +194,8 @@ public class ModelTestCaseUtil {
 
     @SuppressWarnings("unchecked")
     private static void addToJsonObject(Map<String, Object> jsonObject, List<String> serializedNames, Object value) {
+        checkCredential(serializedNames);
+
         if (serializedNames.size() == 1) {
             jsonObject.put(serializedNames.iterator().next(), value);
         } else {
@@ -207,6 +211,24 @@ public class ModelTestCaseUtil {
                 Map<String, Object> nextJsonObject = new LinkedHashMap<>();
                 jsonObject.put(serializedName, nextJsonObject);
                 addToJsonObject(nextJsonObject, serializedNames, value);
+            }
+        }
+    }
+
+    private static final List<String> POSSIBLE_CREDENTIAL_KEY = Arrays.asList(
+            "key",
+            "code",
+            "credential",
+            "token"
+    );
+
+    private static void checkCredential(List<String> serializedNames) {
+        for (String keyName : serializedNames) {
+            String keyNameLower = keyName.toLowerCase(Locale.ROOT);
+            for (String key : POSSIBLE_CREDENTIAL_KEY) {
+                if (keyNameLower.contains(key)) {
+                    throw new PossibleCredentialException(keyName);
+                }
             }
         }
     }

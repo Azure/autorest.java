@@ -146,6 +146,20 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlSinglePage(String accountName) {
+        return getPagesPartialUrlSinglePageAsync(accountName).block();
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -210,6 +224,20 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlOperationSinglePage(String accountName) {
+        return getPagesPartialUrlOperationSinglePageAsync(accountName).block();
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL with next operation.
+     *
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -257,6 +285,21 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that combines custom url, paging and partial URL.
+     *
+     * @param accountName Account Name.
+     * @param nextLink Next link for the list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(String accountName, String nextLink) {
+        return getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink).block();
+    }
+
+    /**
      * Get the next page of items.
      *
      * @param nextLink The URL to get the next list of items
@@ -293,5 +336,21 @@ public final class Pagings {
                                         res.getValue().getValues(),
                                         res.getValue().getNextLink(),
                                         null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param accountName Account Name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlNextSinglePage(String nextLink, String accountName) {
+        return getPagesPartialUrlNextSinglePageAsync(nextLink, accountName).block();
     }
 }

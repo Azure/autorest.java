@@ -18,6 +18,9 @@ public final class JsonOutput {
     @JsonProperty(value = "id")
     private Integer id;
 
+    /** Creates an instance of JsonOutput class. */
+    public JsonOutput() {}
+
     /**
      * Get the id property: The id property.
      *

@@ -37,6 +37,7 @@ import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
 import com.azure.mgmtlitetest.storage.models.BlobContainer;
+import com.azure.mgmtlitetest.storage.models.BlobContainers;
 import com.azure.mgmtlitetest.storage.models.BlobServiceProperties;
 import com.azure.mgmtlitetest.storage.models.DeleteRetentionPolicy;
 import com.azure.mgmtlitetest.storage.models.Kind;
@@ -45,10 +46,12 @@ import com.azure.mgmtlitetest.storage.models.PublicAccess;
 import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
+import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
 import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
+import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
@@ -66,6 +69,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -369,5 +374,64 @@ public class RuntimeTests {
         return MediaServicesManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
+    }
+
+    @Test
+    public void testOverload() {
+        // simple API
+        assertMethodExist(StorageAccounts.class, "getByResourceGroup", "String", "String");
+        assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
+        assertMethodExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
+
+        // pageable API
+        assertMethodExist(BlobContainers.class, "list", "String", "String");
+        assertMethodNotExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude");
+        assertMethodExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude", "Context");
+
+        // sync API in premium
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
+
+        // async API in premium
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupAsync", "String", "String");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupAsync", "String", "String", "StorageAccountExpand");
+        assertMethodExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand", "Context");
+    }
+
+    private static void assertMethodNotExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+        String parametersSignature = String.join(",", parameterTypeSimpleNames);
+        Method[] methods = clazz.getDeclaredMethods();
+        for(Method method : methods) {
+            if (methodName.equals(method.getName())) {
+                if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
+                    if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
+                        Assertions.fail("Method should not exist: " + method);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void assertMethodExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+        boolean found = false;
+        String parametersSignature = String.join(",", parameterTypeSimpleNames);
+        Method[] methods = clazz.getDeclaredMethods();
+        for(Method method : methods) {
+            if (methodName.equals(method.getName())) {
+                if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
+                    if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
+                        found = true;
+                    }
+                }
+            }
+        }
+
+        if (!found) {
+            Assertions.fail("Method should exist: " + clazz.getName() + " " + methodName + "(" + parametersSignature + ")");
+        }
     }
 }

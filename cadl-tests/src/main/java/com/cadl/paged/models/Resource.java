@@ -14,13 +14,13 @@ public final class Resource {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
@@ -32,17 +32,10 @@ public final class Resource {
     /**
      * Creates an instance of Resource class.
      *
-     * @param id the id value to set.
-     * @param name the name value to set.
      * @param type the type value to set.
      */
     @JsonCreator
-    public Resource(
-            @JsonProperty(value = "id", required = true) String id,
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "type", required = true) String type) {
-        this.id = id;
-        this.name = name;
+    private Resource(@JsonProperty(value = "type", required = true) String type) {
         this.type = type;
     }
 

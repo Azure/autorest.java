@@ -22,6 +22,9 @@ public final class OperationResult {
     @JsonProperty(value = "error")
     private OperationResultError error;
 
+    /** Creates an instance of OperationResult class. */
+    public OperationResult() {}
+
     /**
      * Get the status property: The status of the request.
      *

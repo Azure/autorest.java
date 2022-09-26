@@ -53,7 +53,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     .filter(p -> RequestParameterLocation.HEADER.equals(p.getRequestParameterLocation()))
                     // ignore if synthesized by modelerfour and is constant
                     // we would want user to provide a correct "content-type" if it is not a constant
-                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE || !p.getIsConstant())
+                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE || !p.isConstant())
                     .collect(Collectors.toList());
             if (!headerParameters.isEmpty() && hasParametersToPrintInJavadoc(headerParameters)) {
                 optionalParametersJavadoc("Header Parameters", headerParameters, commentBlock);
@@ -65,7 +65,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
             boolean isBodyParamRequired = clientMethod.getProxyMethod().getAllParameters()
                     .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                            .map(ProxyMethodParameter::getIsRequired).findFirst().orElse(false);
+                            .map(ProxyMethodParameter::isRequired).findFirst().orElse(false);
 
             clientMethod.getProxyMethod().getAllParameters()
                     .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
@@ -121,13 +121,13 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         commentBlock.line(String.format("    <caption>%s</caption>", title));
         commentBlock.line("    <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>");
         for (ProxyMethodParameter parameter : parameters) {
-            boolean parameterIsConstantOrFromClient = parameter.getIsConstant() || parameter.getFromClient();
-            if (!parameter.getIsRequired() && !parameterIsConstantOrFromClient) {
+            boolean parameterIsConstantOrFromClient = parameter.isConstant() || parameter.isFromClient();
+            if (!parameter.isRequired() && !parameterIsConstantOrFromClient) {
                 commentBlock.line(String.format(
                         "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                         parameter.getRequestParameterName(),
                         CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
-                        parameter.getIsRequired() ? "Yes" : "No",
+                        parameter.isRequired() ? "Yes" : "No",
                         parameterDescriptionOrDefault(parameter)));
             }
 
@@ -137,8 +137,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static boolean hasParametersToPrintInJavadoc(List<ProxyMethodParameter> parameters) {
         return parameters.stream().anyMatch(parameter -> {
-            boolean parameterIsConstantOrFromClient = parameter.getIsConstant() || parameter.getFromClient();
-            boolean parameterIsRequired = parameter.getIsRequired();
+            boolean parameterIsConstantOrFromClient = parameter.isConstant() || parameter.isFromClient();
+            boolean parameterIsRequired = parameter.isRequired();
             return !parameterIsRequired && !parameterIsConstantOrFromClient;
         });
     }
@@ -180,7 +180,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             List<ClientModelProperty> properties = new ArrayList<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties) {
-                bodySchemaJavadoc(property.getClientType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
+                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {

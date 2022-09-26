@@ -24,6 +24,9 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
      */
     private Long field2;
 
+    /** Creates an instance of LongWrapper class. */
+    public LongWrapper() {}
+
     /**
      * Get the field1 property: The field1 property.
      *

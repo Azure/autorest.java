@@ -24,6 +24,9 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      */
     private Integer field2;
 
+    /** Creates an instance of IntWrapper class. */
+    public IntWrapper() {}
+
     /**
      * Get the field1 property: The field1 property.
      *

@@ -4,6 +4,8 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
@@ -20,6 +22,9 @@ import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
+import com.azure.autorest.util.PossibleCredentialException;
+import com.azure.core.http.HttpMethod;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 public class UnitTestParser extends ExampleParser {
+
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), UnitTestParser.class);
 
     public List<FluentMethodUnitTest> parseResourceCollectionForUnitTest(FluentResourceCollection resourceCollection) {
         List<FluentMethodUnitTest> fluentMethodUnitTests = new ArrayList<>();
@@ -50,22 +57,26 @@ public class UnitTestParser extends ExampleParser {
     private static FluentMethodUnitTest parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
         FluentMethodUnitTest unitTest = null;
 
-        List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
-        for (FluentCollectionMethod collectionMethod : collectionMethods) {
-            ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (requiresExample(clientMethod)) {
-                List<MethodParameter> methodParameters = getParameters(clientMethod);
-                MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
-                ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
-                FluentResourceCreateExample resourceCreateExample =
-                        parseResourceCreate(collection, resourceCreate, proxyMethodExample, methodParameters, requestBodyParameter);
+        try {
+            List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
+            for (FluentCollectionMethod collectionMethod : collectionMethods) {
+                ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
+                if (requiresExample(clientMethod)) {
+                    List<MethodParameter> methodParameters = getParameters(clientMethod);
+                    MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
+                    ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
+                    FluentResourceCreateExample resourceCreateExample =
+                            parseResourceCreate(collection, resourceCreate, proxyMethodExample, methodParameters, requestBodyParameter);
 
-                ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-                unitTest = new FluentMethodUnitTest(resourceCreateExample, collection, collectionMethod,
-                        responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
+                    ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
+                    unitTest = new FluentMethodUnitTest(resourceCreateExample, collection, collectionMethod,
+                            responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
 
-                break;
+                    break;
+                }
             }
+        } catch (PossibleCredentialException e) {
+            LOGGER.warn("Skip unit test for resource '{}', caused by key '{}'", resourceCreate.getResourceModel().getInnerModel().getName(), e.getKeyName());
         }
         return unitTest;
     }
@@ -73,16 +84,20 @@ public class UnitTestParser extends ExampleParser {
     private static FluentMethodUnitTest parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
         FluentMethodUnitTest unitTest = null;
 
-        ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-        if (requiresExample(clientMethod)) {
-            List<MethodParameter> methodParameters = getParameters(clientMethod);
-            ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
-            FluentCollectionMethodExample collectionMethodExample =
-                    parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
+        try {
+            ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
+            if (requiresExample(clientMethod)) {
+                List<MethodParameter> methodParameters = getParameters(clientMethod);
+                ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
+                FluentCollectionMethodExample collectionMethodExample =
+                        parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
 
-            ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-            unitTest = new FluentMethodUnitTest(collectionMethodExample, collection, collectionMethod,
-                    responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
+                ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
+                unitTest = new FluentMethodUnitTest(collectionMethodExample, collection, collectionMethod,
+                        responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
+            }
+        } catch (PossibleCredentialException e) {
+            LOGGER.warn("Skip unit test for method '{}', caused by key '{}'", collectionMethod.getMethodName(), e.getKeyName());
         }
         return unitTest;
     }
@@ -169,7 +184,10 @@ public class UnitTestParser extends ExampleParser {
         if (clientMethod.getType() == ClientMethodType.SimpleSync
                 || clientMethod.getType() == ClientMethodType.PagingSync
                 // limit the scope of LRO to status code of 200
-                || (clientMethod.getType() == ClientMethodType.LongRunningSync && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200))) {
+                || (clientMethod.getType() == ClientMethodType.LongRunningSync
+                && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
+                // also azure-core-management does not support LRO from GET
+                && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
             // generate example for the method with full parameters
             return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
         }

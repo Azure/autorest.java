@@ -19,7 +19,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -87,7 +86,9 @@ public class MockPreprocessor extends Preprocessor {
             }
         };
         LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
         return newYaml.dump(codeModel);
     }

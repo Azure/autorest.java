@@ -28,6 +28,9 @@ public final class Error {
     @JsonProperty(value = "fields")
     private String fields;
 
+    /** Creates an instance of Error class. */
+    public Error() {}
+
     /**
      * Get the code property: The code property.
      *

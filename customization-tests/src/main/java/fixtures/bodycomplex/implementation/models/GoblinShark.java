@@ -28,6 +28,9 @@ public final class GoblinShark extends Shark {
     @JsonProperty(value = "color")
     private GoblinSharkColor color;
 
+    /** Creates an instance of Goblinshark class. */
+    public GoblinShark() {}
+
     /**
      * Get the jawsize property: The jawsize property.
      *

@@ -16,6 +16,9 @@ public final class BackendAddressPool {
     @JsonProperty(value = "properties")
     private BackendAddressPoolPropertiesFormat innerProperties;
 
+    /** Creates an instance of BackendAddressPool class. */
+    public BackendAddressPool() {}
+
     /**
      * Get the innerProperties property: Properties of load balancer backend address pool.
      *

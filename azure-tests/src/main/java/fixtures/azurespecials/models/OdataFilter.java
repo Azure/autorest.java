@@ -22,6 +22,9 @@ public final class OdataFilter {
     @JsonProperty(value = "name")
     private String name;
 
+    /** Creates an instance of OdataFilter class. */
+    public OdataFilter() {}
+
     /**
      * Get the id property: The id property.
      *

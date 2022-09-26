@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -195,7 +196,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     final boolean parameterIsRequired = parameter.isRequired();
                     final boolean parameterIsClientOrApiVersion = ClientModelUtil.getClientDefaultValueOrConstantValue(parameter) != null
                             && ParameterSynthesizedOrigin.fromValue(parameter.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION;
-                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.getIsConstant() || proxyMethodParameter.getFromClient();
+                    final boolean parameterIsConstantOrFromClient = proxyMethodParameter.isConstant() || proxyMethodParameter.isFromClient();
                     if (parameterIsRequired
                             || parameterIsConstantOrFromClient
                             || parameterIsClientOrApiVersion) {
@@ -222,9 +223,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .requestParameterLocation(RequestParameterLocation.NONE)
                         .requestParameterName("requestOptions")
                         .alreadyEncoded(true)
-                        .isConstant(false)
-                        .isRequired(false)
-                        .isNullable(false)
+                        .constant(false)
+                        .required(false)
+                        .nullable(false)
                         .fromClient(false)
                         .parameterReference("requestOptions")
                         .origin(ParameterSynthesizedOrigin.REQUEST_OPTIONS)
@@ -243,9 +244,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         .requestParameterLocation(RequestParameterLocation.NONE)
                         .requestParameterName("context")
                         .alreadyEncoded(true)
-                        .isConstant(false)
-                        .isRequired(false)
-                        .isNullable(false)
+                        .constant(false)
+                        .required(false)
+                        .nullable(false)
                         .fromClient(false)
                         .parameterReference("context")
                         .origin(ParameterSynthesizedOrigin.CONTEXT)
@@ -290,10 +291,26 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
             }
 
+            if (settings.isSyncStackEnabled()) {
+                addSyncProxyMethods(proxyMethods);
+            }
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
+        List<ProxyMethod> syncProxyMethods = new ArrayList<>();
+        for (ProxyMethod asyncProxyMethod : proxyMethods) {
+            if (asyncProxyMethod.getParameters()
+                    .stream()
+                    .anyMatch(param -> param.getClientType() == GenericType.FluxByteBuffer)) {
+                continue;
+            }
+            syncProxyMethods.add(asyncProxyMethod.toSync());
+        }
+        proxyMethods.addAll(syncProxyMethods);
     }
 
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
@@ -337,16 +354,22 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             if (settings.isGenericResponseTypes()) {
+                // If the response body type is InputStream it needs to be converted to Flux<ByteBuffer> to be
+                // asynchronous, unless this is sync-stack.
+                if (responseBodyType == ClassType.InputStream && !settings.isSyncStackEnabled()) {
+                    responseBodyType = GenericType.FluxByteBuffer;
+                }
                 IType genericResponseType = GenericType.RestResponse(
-                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
-                        responseBodyType == ClassType.InputStream ? GenericType.FluxByteBuffer : responseBodyType);
+                    Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
                 return createSingleValueAsyncReturnType(genericResponseType);
             } else {
-                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+                ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation,
+                    ClientModels.getInstance().getModels(), settings);
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if (responseBodyType.equals(ClassType.InputStream)) {
+            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && responseBodyType.equals(ClassType.BinaryData))
+                || responseBodyType.equals(ClassType.InputStream)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 IType singleValueType = GenericType.Response(ClassType.Void);
@@ -659,8 +682,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                                 .wireType(ClassType.String)
                                 .clientType(ClassType.String)
                                 .requestParameterLocation(RequestParameterLocation.HEADER)
-                                .isRequired(false)
-                                .isNullable(true)
+                                .required(false)
+                                .nullable(true)
                                 .fromClient(false);
                         return builder;
                     };
