@@ -52,7 +52,7 @@ jobs:
         displayName: 'Generate Code'
         inputs:
           pwsh: true
-          filePath: /Generate.ps1
+          filePath: Generate.ps1
 
       - script: |
           git status
