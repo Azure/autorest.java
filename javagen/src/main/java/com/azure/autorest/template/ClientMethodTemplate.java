@@ -1220,6 +1220,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String pollingStrategy = getPollingStrategy(clientMethod, contextParam);
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -1283,6 +1284,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
             function.methodReturn(String.format("this.%sAsync(%s).getSyncPoller()",
                 clientMethod.getName(), clientMethod.getArgumentList()));
         });

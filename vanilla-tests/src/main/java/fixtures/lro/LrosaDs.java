@@ -367,6 +367,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry400WithResponseAsync(product),
@@ -428,6 +429,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400() {
+        final Product product = null;
         return this.beginPutNonRetry400Async(product).getSyncPoller();
     }
 
@@ -525,6 +527,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400WithResponseAsync(product),
@@ -586,6 +589,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400() {
+        final Product product = null;
         return this.beginPutNonRetry201Creating400Async(product).getSyncPoller();
     }
 
@@ -685,6 +689,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400InvalidJsonWithResponseAsync(product),
@@ -747,6 +752,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson() {
+        final Product product = null;
         return this.beginPutNonRetry201Creating400InvalidJsonAsync(product).getSyncPoller();
     }
 
@@ -849,6 +855,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetry400WithResponseAsync(product),
@@ -913,6 +920,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetry400Async(product).getSyncPoller();
     }
 
@@ -1343,6 +1351,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postNonRetry400WithResponseAsync(product),
@@ -1404,6 +1413,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400() {
+        final Product product = null;
         return this.beginPostNonRetry400Async(product).getSyncPoller();
     }
 
@@ -1502,6 +1512,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NonRetry400WithResponseAsync(product),
@@ -1563,6 +1574,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400() {
+        final Product product = null;
         return this.beginPost202NonRetry400Async(product).getSyncPoller();
     }
 
@@ -1665,6 +1677,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetry400WithResponseAsync(product),
@@ -1729,6 +1742,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400() {
+        final Product product = null;
         return this.beginPostAsyncRelativeRetry400Async(product).getSyncPoller();
     }
 
@@ -1829,6 +1843,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putError201NoProvisioningStatePayloadWithResponseAsync(product),
@@ -1891,6 +1906,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload() {
+        final Product product = null;
         return this.beginPutError201NoProvisioningStatePayloadAsync(product).getSyncPoller();
     }
 
@@ -1998,6 +2014,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusWithResponseAsync(product),
@@ -2065,6 +2082,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetryNoStatusAsync(product).getSyncPoller();
     }
 
@@ -2175,6 +2193,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(product),
@@ -2243,6 +2262,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).getSyncPoller();
     }
 
@@ -2566,6 +2586,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoLocationWithResponseAsync(product),
@@ -2627,6 +2648,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation() {
+        final Product product = null;
         return this.beginPost202NoLocationAsync(product).getSyncPoller();
     }
 
@@ -2734,6 +2756,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryNoPayloadWithResponseAsync(product),
@@ -2802,6 +2825,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload() {
+        final Product product = null;
         return this.beginPostAsyncRelativeRetryNoPayloadAsync(product).getSyncPoller();
     }
 
@@ -2901,6 +2925,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200InvalidJsonAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200InvalidJsonWithResponseAsync(product),
@@ -2962,6 +2987,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson() {
+        final Product product = null;
         return this.beginPut200InvalidJsonAsync(product).getSyncPoller();
     }
 
@@ -3065,6 +3091,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(product),
@@ -3129,6 +3156,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
     }
 
@@ -3239,6 +3267,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product),
@@ -3307,6 +3336,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
 
@@ -3761,6 +3791,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202RetryInvalidHeaderWithResponseAsync(product),
@@ -3825,6 +3856,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader() {
+        final Product product = null;
         return this.beginPost202RetryInvalidHeaderAsync(product).getSyncPoller();
     }
 
@@ -3930,6 +3962,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(product),
@@ -3995,6 +4028,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader() {
+        final Product product = null;
         return this.beginPostAsyncRelativeRetryInvalidHeaderAsync(product).getSyncPoller();
     }
 
@@ -4106,6 +4140,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(product),
@@ -4174,6 +4209,7 @@ public final class LrosaDs {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling() {
+        final Product product = null;
         return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).getSyncPoller();
     }
 

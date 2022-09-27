@@ -192,6 +192,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetrySucceededAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(product),
@@ -262,6 +263,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRetrySucceeded() {
+        final Product product = null;
         return this.beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
@@ -374,6 +376,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
@@ -444,6 +447,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut201CreatingSucceeded200() {
+        final Product product = null;
         return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
 
@@ -553,6 +557,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
@@ -620,6 +625,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200() {
+        final Product product = null;
         return this.beginPost202Retry200Async(product).getSyncPoller();
     }
 
@@ -733,6 +739,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrySucceededAsync() {
+        final Product product = null;
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(product),
@@ -803,6 +810,7 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded() {
+        final Product product = null;
         return this.beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
