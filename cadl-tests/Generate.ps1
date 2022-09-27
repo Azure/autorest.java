@@ -14,7 +14,7 @@ function Generate($CadlFile) {
       Remove-Item ./cadl-output/src/samples -Recurse -Force
   }
 
-  Copy-Item -Path ./cadl-output/src -Destination ./ -Force
+  Copy-Item -Path ./cadl-output/src -Destination ./ -Recurse -Force
 
   Remove-Item ./cadl-output -Recurse -Force
 }
@@ -24,7 +24,7 @@ function Generate($CadlFile) {
 New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force
 
 if (Test-Path ./src/main/java/com/cadl/partialupdate) {
-    Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Force
+    Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
 }
 
 if (Test-Path ./src/main) {
@@ -47,11 +47,11 @@ foreach ($cadlFile in (Get-Item ./cadl/*.cadl -Exclude "*partialupdate*")) {
 
 #partial update test
 cadl compile ./cadl/partialupdate.cadl --outputPath=./existingcode/
-Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Force
+Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
-Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Force
+Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
 $env:NAMESPACE = "com.cadl.testserver.servicedriven1"
 generate ./http/resiliency/srv-driven-1/main.cadl
