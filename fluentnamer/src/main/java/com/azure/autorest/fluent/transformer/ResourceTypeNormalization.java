@@ -20,6 +20,7 @@ import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.IterableStream;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Normalizes the base resource types based on its base type and properties.
@@ -240,7 +242,7 @@ class ResourceTypeNormalization {
         switch (type) {
             case SUB_RESOURCE:
             {
-                List<Property> extraProperties = parentType.getProperties().stream()
+                List<Property> extraProperties = getDeclaredProperties(parentType).stream()
                         .filter(p -> !SUB_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
@@ -249,13 +251,13 @@ class ResourceTypeNormalization {
             }
             case PROXY_RESOURCE:
             {
-                List<Property> extraProperties = parentType.getProperties().stream()
+                List<Property> extraProperties = getDeclaredProperties(parentType).stream()
                         .filter(p -> !PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !hasProperty(compositeType, p))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
-                List<Property> mutableProperties = parentType.getProperties().stream()
+                List<Property> mutableProperties = getDeclaredProperties(parentType).stream()
                         .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
                         .filter(p -> !hasProperty(compositeType, p))
@@ -265,14 +267,14 @@ class ResourceTypeNormalization {
             }
             case RESOURCE:
             {
-                List<Property> extraProperties = parentType.getProperties().stream()
+                List<Property> extraProperties = getDeclaredProperties(parentType).stream()
                         .filter(p -> !RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !hasProperty(compositeType, p))    // avoid conflict with property in this type
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
                 // extra 2 properties in Resource is defined as mutable. So only check for properties in ProxyResource.
-                List<Property> mutableProperties = parentType.getProperties().stream()
+                List<Property> mutableProperties = getDeclaredProperties(parentType).stream()
                         .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
                         .filter(p -> !hasProperty(compositeType, p))
@@ -303,6 +305,18 @@ class ResourceTypeNormalization {
 
             LOGGER.info("Change parent from '{}' to '{}', for '{}'", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
         }
+    }
+
+    /*
+     * Recursively get all properties and all its parents' properties.
+     */
+    private static List<Property> getDeclaredProperties(ObjectSchema parentType) {
+        return parentType == null
+            ? Collections.emptyList()
+            : Stream.concat(
+                parentType.getProperties().stream(),
+                getDeclaredProperties(getObjectParent(parentType).orElse(null)).stream()
+            ).collect(Collectors.toList());
     }
 
     private static void addDummyParentType(ObjectSchema compositeType, ObjectSchema parentType) {
