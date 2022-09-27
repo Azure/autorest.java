@@ -6,7 +6,7 @@ package com.models.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.time.Duration;
 
 /** Model with a duration property. */
 @Fluent
@@ -15,7 +15,7 @@ public final class DurationProperty {
      * Property
      */
     @JsonProperty(value = "property")
-    private OffsetDateTime property;
+    private Duration property;
 
     /** Creates an instance of DurationProperty class. */
     public DurationProperty() {}
@@ -25,7 +25,7 @@ public final class DurationProperty {
      *
      * @return the property value.
      */
-    public OffsetDateTime getProperty() {
+    public Duration getProperty() {
         return this.property;
     }
 
@@ -35,7 +35,7 @@ public final class DurationProperty {
      * @param property the property value to set.
      * @return the DurationProperty object itself.
      */
-    public DurationProperty setProperty(OffsetDateTime property) {
+    public DurationProperty setProperty(Duration property) {
         this.property = property;
         return this;
     }

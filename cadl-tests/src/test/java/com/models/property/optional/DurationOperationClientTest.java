@@ -3,12 +3,13 @@
 
 package com.models.property.optional;
 
+
 import com.models.property.optional.models.DurationProperty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Disabled("cadl-ranch definition error")
+import java.time.Duration;
+
 class DurationOperationClientTest {
 
     DurationOperationClient client = new DurationOperationClientBuilder().buildClient();
@@ -27,16 +28,15 @@ class DurationOperationClientTest {
 
     @Test
     void putAll() {
-//        Duration duration = Duration.parse("PT2974H14M12.011S");
-//        DurationProperty property = new DurationProperty();
-//        property.setProperty(duration);
-//        client.putAll(property);
+        Duration duration = Duration.parse("PT2974H14M12.011S");
+        DurationProperty property = new DurationProperty();
+        property.setProperty(duration);
+        client.putAll(property);
     }
 
     @Test
     void putDefault() {
-//        DurationProperty property = new DurationProperty();
-//        property.setProperty(duration);
-//        client.putAll(property);
+        DurationProperty property = new DurationProperty();
+        client.putDefault(property);
     }
 }
