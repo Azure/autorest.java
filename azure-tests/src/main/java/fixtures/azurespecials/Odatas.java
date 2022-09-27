@@ -196,20 +196,4 @@ public final class Odatas {
         final String orderby = null;
         getWithFilterWithResponse(filter, top, orderby, Context.NONE);
     }
-
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
-     * @param top The top parameter with value 10.
-     * @param orderby The orderby parameter with value id.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getWithFilter(String filter, Integer top, String orderby, Context context) {
-        getWithFilterWithResponse(filter, top, orderby, context);
-    }
 }

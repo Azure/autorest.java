@@ -58,21 +58,6 @@ public final class BasicClient {
     }
 
     /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getValid(Context context) {
-        return this.serviceClient.getValid(context);
-    }
-
-    /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -100,21 +85,6 @@ public final class BasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Basic complexBody) {
         this.serviceClient.putValid(complexBody);
-    }
-
-    /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Basic complexBody, Context context) {
-        this.serviceClient.putValid(complexBody, context);
     }
 
     /**
@@ -146,21 +116,6 @@ public final class BasicClient {
     }
 
     /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is invalid for the local strong type.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getInvalid(Context context) {
-        return this.serviceClient.getInvalid(context);
-    }
-
-    /**
      * Get a basic complex type that is empty.
      *
      * @param context The context to associate with this operation.
@@ -186,21 +141,6 @@ public final class BasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getEmpty() {
         return this.serviceClient.getEmpty();
-    }
-
-    /**
-     * Get a basic complex type that is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is empty.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getEmpty(Context context) {
-        return this.serviceClient.getEmpty(context);
     }
 
     /**
@@ -232,21 +172,6 @@ public final class BasicClient {
     }
 
     /**
-     * Get a basic complex type whose properties are null.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type whose properties are null.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNull(Context context) {
-        return this.serviceClient.getNull(context);
-    }
-
-    /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param context The context to associate with this operation.
@@ -272,20 +197,5 @@ public final class BasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNotProvided() {
         return this.serviceClient.getNotProvided();
-    }
-
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type while the server doesn't provide a response payload.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNotProvided(Context context) {
-        return this.serviceClient.getNotProvided(context);
     }
 }
