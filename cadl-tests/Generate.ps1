@@ -60,7 +60,10 @@ $env:NAMESPACE = "com.cadl.testserver.servicedriven2"
 generate ./http/resiliency/srv-driven-2/main.cadl
 
 $env:NAMESPACE = ''
-foreach ($cadlFile in (Get-Item ./http/* -Filter "*.cadl" -Exclude "*resiliency*")) {
-    generate $cadlFile
+foreach ($cadlFile in (Get-ChildItem ./http -Filter "*.cadl" -File -Name -Recurse)) {
+    if ($cadlFile -contains "resiliency") {
+        continue
+    }
+    generate "./http/$cadlFile"
 }
 Remove-Item ./http -Recurse -Force
