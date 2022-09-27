@@ -213,16 +213,15 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             String name = deduplicateMethodName(operationName, parameters, requestContentType, methodSignatures);
             builder.name(name);
 
+            if (settings.isDataPlaneClient()) {
+                ProxyMethodParameter requestOptions = ProxyMethodParameter.REQUEST_OPTIONS_PARAMETER;
+                allParameters.add(requestOptions);
+                parameters.add(requestOptions);
+            }
             if (settings.isAddContextParameter()) {
-                if (settings.isDataPlaneClient()) {
-                    ProxyMethodParameter requestOptions = ProxyMethodParameter.REQUEST_OPTIONS_PARAMETER;
-                    allParameters.add(requestOptions);
-                    parameters.add(requestOptions);
-                } else {
-                    ProxyMethodParameter contextParameter = getContextParameter();
-                    allParameters.add(contextParameter);
-                    parameters.add(contextParameter);
-                }
+                ProxyMethodParameter contextParameter = getContextParameter();
+                allParameters.add(contextParameter);
+                parameters.add(contextParameter);
             }
             appendCallbackParameter(parameters, responseBodyType);
             builder.allParameters(allParameters);
