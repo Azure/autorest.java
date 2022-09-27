@@ -41,7 +41,6 @@ rm -rf ./existingcode
 # run cadl ranch tests sources
 cp -rf node_modules/@azure-tools/cadl-ranch-specs/http .
 
-unset NAMESPACE
 for f in $(find ./http -name "*.cadl")
 do
    generate $f
