@@ -10,16 +10,16 @@ npm pack
 # re-install
 Set-Location ../cadl-tests/
 if (Test-Path node_modules) {
-  Remove-Item node_modules -Recurse -Force
+    Remove-Item node_modules -Recurse -Force
 }
 
 if (Test-Path package-lock.json) {
-  Remove-Item package-lock.json
+    Remove-Item package-lock.json
 }
 
 npm install
 
 # delete output
 if (Test-Path cadl-output) {
-  Remove-Item cadl-output -Recurse -Force
+    Remove-Item cadl-output -Recurse -Force
 }

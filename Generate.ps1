@@ -126,7 +126,7 @@ Generate -Arguments "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/end
 Generate -Arguments "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md"
 Generate -Arguments "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
 New-Item ./protocol-tests/src/main/java/fixtures/headexceptions/models -ItemType Directory -Force
-Move-Item -Path ./protocol-tests/swagger/CustomizedException.java -Destination ./protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java -Force
+Copy-Item -Path ./protocol-tests/swagger/CustomizedException.java -Destination ./protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java -Force
 Remove-Item ./protocol-tests/src/main/java/module-info.java -Force
 
 # Protocol resilience
