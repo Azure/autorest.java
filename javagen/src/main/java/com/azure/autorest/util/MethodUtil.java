@@ -129,6 +129,9 @@ public class MethodUtil {
                     }
                 }
                 selectedRequest = request;
+
+                operation.setRequests(new ArrayList<>());
+                operation.getRequests().add(selectedRequest);
                 break;
             }
         }
@@ -136,8 +139,8 @@ public class MethodUtil {
     }
 
     /**
-     * @param request   the request to put contentType on
-     * @param operation
+     * @param request the request to put contentType on
+     * @param operation the operation
      * @return the created content type parameter
      */
     public static Parameter createContentTypeParameter(Request request, Operation operation) {

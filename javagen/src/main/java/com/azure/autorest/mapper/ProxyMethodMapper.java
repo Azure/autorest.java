@@ -34,7 +34,6 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -132,13 +131,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
         builder.responseContentTypes(responseContentTypes);
 
-        // DPG client only requires one request per operation
         List<Request> requests = operation.getRequests();
-        if (settings.isDataPlaneClient()) {
-            Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
-            requests = Collections.singletonList(selectedRequest);
-        }
-
         // Used to deduplicate method with same signature.
         // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
         Set<List<String>> methodSignatures = new HashSet<>();
