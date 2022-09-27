@@ -41,7 +41,7 @@ $env:GENERATE_CONVENIENCE_METHODS = "true"
 $env:PARTIAL_UPDATE = "true"
 
 #run other local tests except partial update
-foreach ($cadlFile in (Get-Item ./cadl/*.cadl -Exclude "*partialupdate*")) {
+foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
     generate $cadlFile
 }
 
@@ -60,7 +60,7 @@ $env:NAMESPACE = "com.cadl.testserver.servicedriven2"
 generate ./http/resiliency/srv-driven-2/main.cadl
 
 $env:NAMESPACE = ''
-foreach ($cadlFile in (Get-Item ./http/*.cadl -Exclude "*resiliency*")) {
+foreach ($cadlFile in (Get-Item ./http/* -Filter "*.cadl" -Exclude "*resiliency*")) {
     generate $cadlFile
 }
 Remove-Item ./http -Recurse -Force
