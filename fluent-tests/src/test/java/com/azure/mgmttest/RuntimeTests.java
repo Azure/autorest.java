@@ -52,6 +52,7 @@ import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
 import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
+import com.azure.mgmttest.storage.implementation.StorageAccountsClientImpl;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
 import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
@@ -70,6 +71,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -266,7 +268,7 @@ public class RuntimeTests {
 
             storageManager.storageAccounts().deleteById(storageAccount.id());
         } finally {
-            resourceManager.resourceGroups().delete(rgName);
+            resourceManager.resourceGroups().deleteByResourceGroup(rgName);
         }
     }
 
@@ -381,6 +383,7 @@ public class RuntimeTests {
         // simple API
         assertMethodExist(StorageAccounts.class, "getByResourceGroup", "String", "String");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand");
+        assertMethodNotExist(StorageAccounts.class, "getByResourceGroup", "String", "String", "StorageAccountExpand", "Context");
         assertMethodNotExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand");
         assertMethodExist(StorageAccounts.class, "getByResourceGroupWithResponse", "String", "String", "StorageAccountExpand", "Context");
 
@@ -388,6 +391,20 @@ public class RuntimeTests {
         assertMethodExist(BlobContainers.class, "list", "String", "String");
         assertMethodNotExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude");
         assertMethodExist(BlobContainers.class, "list", "String", "String", "String", "String", "ListContainersInclude", "Context");
+
+        // LRO API
+        // activation method
+        assertMethodExist(StorageAccountsClientImpl.class, "createWithResponseAsync", "String", "String", "StorageAccountCreateParameters");
+        // begin LRO method
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreateAsync", "String", "String", "StorageAccountCreateParameters");
+        assertMethodNotExist(StorageAccountsClientImpl.class, "beginCreateAsync", "String", "String", "StorageAccountCreateParameters", "Context");
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreate", "String", "String", "StorageAccountCreateParameters");
+        assertMethodExist(StorageAccountsClientImpl.class, "beginCreate", "String", "String", "StorageAccountCreateParameters", "Context");
+        // wrapper method for begin LRO method
+        assertMethodExist(StorageAccountsClientImpl.class, "createAsync", "String", "String", "StorageAccountCreateParameters");
+        assertMethodNotExist(StorageAccountsClientImpl.class, "createAsync", "String", "String", "StorageAccountCreateParameters", "Context");
+        assertMethodExist(StorageAccountsClientImpl.class, "create", "String", "String", "StorageAccountCreateParameters");
+        assertMethodExist(StorageAccountsClientImpl.class, "create", "String", "String", "StorageAccountCreateParameters", "Context");
 
         // sync API in premium
         assertMethodExist(StorageAccountsClient.class, "getByResourceGroup", "String", "String");
@@ -406,7 +423,7 @@ public class RuntimeTests {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
-            if (methodName.equals(method.getName())) {
+            if (methodName.equals(method.getName()) && Modifier.isPublic(method.getModifiers())) {
                 if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
                     if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
                         Assertions.fail("Method should not exist: " + method);
@@ -421,7 +438,7 @@ public class RuntimeTests {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
-            if (methodName.equals(method.getName())) {
+            if (methodName.equals(method.getName()) && Modifier.isPublic(method.getModifiers())) {
                 if (method.getParameterTypes().length == parameterTypeSimpleNames.length) {
                     if (parametersSignature.equals(Arrays.stream(method.getParameterTypes()).map(Class::getSimpleName).collect(Collectors.joining(",")))) {
                         found = true;

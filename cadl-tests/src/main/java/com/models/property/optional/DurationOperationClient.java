@@ -39,7 +39,7 @@ public final class DurationOperationClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -63,7 +63,7 @@ public final class DurationOperationClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -87,7 +87,7 @@ public final class DurationOperationClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -112,7 +112,7 @@ public final class DurationOperationClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *

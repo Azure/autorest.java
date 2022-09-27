@@ -10,6 +10,7 @@ REM re-generate code
 RMDIR /S /Q "src\main\java\com\azure\mgmttest"
 RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 RMDIR /S /Q "src\samples"
+RMDIR /S /Q "src\test\java\com\azure\mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.8.4
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL

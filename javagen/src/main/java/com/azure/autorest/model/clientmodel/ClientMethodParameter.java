@@ -41,13 +41,13 @@ public class ClientMethodParameter extends MethodParameter {
             .required(true)
             .build();
 
-    public static final ClientMethodParameter REQUEST_OPTIONS = new ClientMethodParameter.Builder()
+    public static final ClientMethodParameter REQUEST_OPTIONS_PARAMETER = new ClientMethodParameter.Builder()
             .description("The options to configure the HTTP request before HTTP client sends it.")
             .wireType(ClassType.RequestOptions)
             .name("requestOptions")
             .location(RequestParameterLocation.NONE)
             .constant(false)
-            .required(true)
+            .required(false)
             .fromClient(false)
             .annotations(Collections.emptyList())
             .build();

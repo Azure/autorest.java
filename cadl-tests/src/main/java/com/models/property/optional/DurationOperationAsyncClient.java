@@ -41,7 +41,7 @@ public final class DurationOperationAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -66,7 +66,7 @@ public final class DurationOperationAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -91,7 +91,7 @@ public final class DurationOperationAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
@@ -116,7 +116,7 @@ public final class DurationOperationAsyncClient {
      *
      * <pre>{@code
      * {
-     *     property: OffsetDateTime (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      *
