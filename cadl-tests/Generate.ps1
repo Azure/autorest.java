@@ -61,7 +61,7 @@ generate ./http/resiliency/srv-driven-2/main.cadl
 
 $env:NAMESPACE = ''
 foreach ($cadlFile in (Get-ChildItem ./http -Filter "*.cadl" -File -Name -Recurse)) {
-    if ($cadlFile -contains "resiliency") {
+    if ($cadlFile -like "*resiliency*") {
         continue
     }
     generate "./http/$cadlFile"
