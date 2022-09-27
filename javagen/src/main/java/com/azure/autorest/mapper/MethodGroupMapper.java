@@ -86,7 +86,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
             if (settings.isDataPlaneClient()) {
-                MethodUtil.tryMergeBinaryRequests(method.getRequests(), method);
+                MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
             }
             restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
         }

@@ -111,11 +111,13 @@ public class MethodUtil {
 
     /**
      * Find the first request consumes binary type, if no binary request, return the first request in requests.
-     * If the selected binary request does not have content-type parameter, we will add one for it
+     * If the selected binary request does not have content-type parameter, we will add one for it.
+     * Update operation with the result requests list.
+     * 
      * @param requests a list of requests
      * @return the first request consumes binary type, if no binary request, return the first request in requests
      */
-    public static Request tryMergeBinaryRequests(List<Request> requests, Operation operation) {
+    public static Request tryMergeBinaryRequestsAndUpdateOperation(List<Request> requests, Operation operation) {
         Request selectedRequest = requests.get(0);
         for (Request request : requests) {
             if (request.getProtocol().getHttp().getKnownMediaType() != null

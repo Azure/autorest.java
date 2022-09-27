@@ -94,7 +94,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation method : codeModelRestAPIMethods) {
                 if (settings.isDataPlaneClient()) {
-                    MethodUtil.tryMergeBinaryRequests(method.getRequests(), method);
+                    MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
                 }
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
             }
