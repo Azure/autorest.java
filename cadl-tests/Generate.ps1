@@ -19,10 +19,21 @@ function Generate($CadlFile) {
   Remove-Item ./cadl-output -Recurse -Force
 }
 
-New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory
-Move-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Force
-Remove-Item ./src/main -Recurse -Force
-Remove-Item ./cadl-output -Recurse -Force
+./Setup.ps1
+
+New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force
+
+if (Test-Path ./src/main/java/com/cadl/partialupdate) {
+  Move-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Force
+}
+
+if (Test-Path ./src/main) {
+  Remove-Item ./src/main -Recurse -Force
+}
+
+if (Test-Path ./cadl-output) {
+  Remove-Item ./cadl-output -Recurse -Force
+}
 
 # enable convenience methods for tests
 $env:GENERATE_MODELS = "true"

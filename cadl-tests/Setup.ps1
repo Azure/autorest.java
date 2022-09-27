@@ -4,8 +4,8 @@ Set-Location ../cadl-extension/
 # Remove-Item package-lock.json
 npm install
 npm run build
-npm run client
-npm package
+npm run lint
+npm pack
 
 # re-install
 Set-Location ../cadl-tests/
