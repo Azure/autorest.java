@@ -20,7 +20,6 @@ import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.IterableStream;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
