@@ -87,7 +87,7 @@ jobs:
         displayName: 'Generate Code'
         inputs:
           pwsh: true
-          filePath: Generate.ps1
+          filePath: /cadl-tests/Generate.ps1
           workingDirectory: ./cadl-tests
 
       - task: Npm@1

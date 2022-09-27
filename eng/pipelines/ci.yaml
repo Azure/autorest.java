@@ -48,9 +48,11 @@ jobs:
           npm install
         displayName: 'Prepare Environment for Generation'
 
-      - script: |
-          ./generate
+      - task: PowerShell@2
         displayName: 'Generate Code'
+        inputs:
+          pwsh: true
+          filePath: /Generate.ps1
 
       - script: |
           git status
