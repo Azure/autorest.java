@@ -276,7 +276,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 final MethodOverloadType defaultOverloadType = hasNonRequiredParameters(parameters) ? MethodOverloadType.OVERLOAD_MAXIMUM : MethodOverloadType.OVERLOAD_MINIMUM_MAXIMUM;
-                final boolean generateOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && defaultOverloadType == MethodOverloadType.OVERLOAD_MAXIMUM;
+                final boolean generateOnlyRequiredParameters = settings.isRequiredParameterClientMethods() && defaultOverloadType == MethodOverloadType.OVERLOAD_MAXIMUM;
 
                 builder.parameters(parameters)
                     .requiredNullableParameterExpressions(requiredParameterExpressions)

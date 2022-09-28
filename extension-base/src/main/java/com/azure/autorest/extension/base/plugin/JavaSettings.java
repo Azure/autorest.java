@@ -612,7 +612,7 @@ public class JavaSettings {
      */
     private boolean requiredParameterClientMethods;
 
-    public final boolean getRequiredParameterClientMethods() {
+    public final boolean isRequiredParameterClientMethods() {
         return requiredParameterClientMethods;
     }
 
