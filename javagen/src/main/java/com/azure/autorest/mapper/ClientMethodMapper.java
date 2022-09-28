@@ -1120,6 +1120,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
             resultType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
         }
+        // azure-core wants poll response to be non-null
+        if (resultType == ClassType.Void) {
+            resultType = ClassType.BinaryData;
+        }
 
         return resultType;
     }
