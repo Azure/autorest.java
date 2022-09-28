@@ -372,39 +372,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     MethodPollingDetails methodPollingDetails = null;
                     MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
 
-                    if (operation.getOperationLinks() != null) {
-                        IType intermediateType = null;
-                        IType finalType = null;
+                    if (pollingDetails != null) {
+                        // try operationLinks from Cadl
+                        methodPollingDetails = methodPollingDetailsFromOperationLinks(operation, pollingDetails, settings);
 
-                        OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
-                        OperationLink finalOperationLink = operation.getOperationLinks().get("final");
-
-                        if (pollingOperationLink != null) {
-                            intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
-                        }
-                        if (finalOperationLink != null) {
-                            finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
-                        }
-                        if (intermediateType != null && finalType == null) {
-                            // use result of this LRO
-                            finalType = SchemaUtil.getOperationResponseType(operation, settings);
-                        }
-
-                        if (intermediateType != null && finalType != null) {
+                        // fallback to JavaSettings.PollingDetails
+                        if (methodPollingDetails == null) {
                             methodPollingDetails = new MethodPollingDetails(
-                                pollingDetails.getStrategy(),
-                                intermediateType,
-                                finalType,
-                                pollingDetails.getPollIntervalInSeconds());
+                                    pollingDetails.getStrategy(),
+                                    getPollingIntermediateType(pollingDetails, returnTypeHolder.syncReturnType),
+                                    getPollingFinalType(pollingDetails, returnTypeHolder.syncReturnType),
+                                    pollingDetails.getPollIntervalInSeconds());
                         }
-                    }
-
-                    if (pollingDetails != null && methodPollingDetails == null) {
-                        methodPollingDetails = new MethodPollingDetails(
-                            pollingDetails.getStrategy(),
-                            getPollingIntermediateType(pollingDetails, returnTypeHolder.syncReturnType),
-                            getPollingFinalType(pollingDetails, returnTypeHolder.syncReturnType),
-                            pollingDetails.getPollIntervalInSeconds());
                     }
 
                     if (methodPollingDetails != null && isProtocolMethod &&
@@ -1210,6 +1189,50 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             description = description.substring(0, 1).toLowerCase() + description.substring(1);
         }
         return description;
+    }
+
+    private static MethodPollingDetails methodPollingDetailsFromOperationLinks(
+            Operation operation,
+            JavaSettings.PollingDetails pollingDetails,
+            JavaSettings settings) {
+
+        if (operation.getOperationLinks() == null || pollingDetails == null) {
+            return null;
+        }
+
+        MethodPollingDetails methodPollingDetails = null;
+        if (operation.getOperationLinks() != null) {
+            // Only Cadl would have operationLinks
+            // If operationLinks is provided, it will override JavaSettings.PollingDetails
+
+            IType intermediateType = null;
+            IType finalType = null;
+
+            OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
+            OperationLink finalOperationLink = operation.getOperationLinks().get("final");
+
+            if (pollingOperationLink != null) {
+                // type from polling operation
+                intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
+            }
+            if (finalOperationLink != null) {
+                // type from final operation
+                finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
+            }
+            if (intermediateType != null && finalType == null) {
+                // fallback to use response of this LRO as final type
+                finalType = SchemaUtil.getOperationResponseType(operation, settings);
+            }
+
+            if (intermediateType != null && finalType != null) {
+                methodPollingDetails = new MethodPollingDetails(
+                        pollingDetails.getStrategy(),
+                        intermediateType,
+                        finalType,
+                        pollingDetails.getPollIntervalInSeconds());
+            }
+        }
+        return methodPollingDetails;
     }
 
     private static final class ReturnTypeHolder {
