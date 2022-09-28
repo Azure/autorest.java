@@ -369,16 +369,18 @@ export class CodeModelBuilder {
       op.operationLinks = {};
 
       for (const [linkType, linkOperation] of operationLinks) {
-        // Cadl requires linked operation written before
-        const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
-        // parameters of operation link
-        if (linkOperation.parameters) {
-          opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
-        }
-        op.operationLinks[linkType] = opLink;
-
         if (linkType === "polling" || linkType === "final") {
           pollingFoundInOperationLinks = true;
+        }
+
+        if (linkOperation.linkedOperation) {
+          // Cadl requires linked operation written before
+          const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
+          // parameters of operation link
+          if (linkOperation.parameters) {
+            opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
+          }
+          op.operationLinks[linkType] = opLink;
         }
       }
     }
