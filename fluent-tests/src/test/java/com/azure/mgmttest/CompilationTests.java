@@ -10,6 +10,7 @@ import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
+import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
@@ -109,6 +110,13 @@ public class CompilationTests {
 
         ExtendedProductInner extendedProduct = mock(ExtendedProductInner.class);
         extendedProduct.uri();
+    }
+
+    public void testProxyResourceOverride() {
+        EndpointInner endpointInner = new EndpointInner();
+        endpointInner.withType(endpointInner.type());
+        endpointInner.withId(endpointInner.id());
+        endpointInner.withName(endpointInner.name());
     }
 
 //    public void testIntEnum() {
