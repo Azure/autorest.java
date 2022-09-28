@@ -397,10 +397,6 @@ export class CodeModelBuilder {
     }
   }
 
-  private hasDecorator(type: DecoratedType, name: string): boolean {
-    return type.decorators.find((it) => it.decorator.name === name) !== undefined;
-  }
-
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (param.name.toLowerCase() === "api-version") {
       const parameter = this.apiVersionParameter;
@@ -1195,7 +1191,7 @@ export class CodeModelBuilder {
   private isConvenienceMethod(op: OperationDetails) {
     // check @convenienceMethod
     let hasConvenienceMethod =
-      this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
+      hasDecorator(op.operation, "$convenienceMethod") || hasDecorator(op.container, "$convenienceMethod");
     if (!hasConvenienceMethod) {
       // check @extension with x-ms-convenient-api=true
       const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
@@ -1425,4 +1421,8 @@ function getNameForTemplate(target: Type): string {
 
 function containsIgnoreCase(stringList: string[], str: string) {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
+}
+
+function hasDecorator(type: DecoratedType, name: string): boolean {
+  return type.decorators.find((it) => it.decorator.name === name) !== undefined;
 }
