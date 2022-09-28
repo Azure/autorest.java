@@ -53,17 +53,7 @@ Remove-Item ./existingcode -Recurse -Force
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-$env:NAMESPACE = "com.cadl.testserver.servicedriven1"
-generate ./http/resiliency/srv-driven-1/main.cadl
-
-$env:NAMESPACE = "com.cadl.testserver.servicedriven2"
-generate ./http/resiliency/srv-driven-2/main.cadl
-
-$env:NAMESPACE = ''
 foreach ($cadlFile in (Get-ChildItem ./http -Filter "*.cadl" -File -Name -Recurse)) {
-    if ($cadlFile -like "*resiliency*") {
-        continue
-    }
     generate "./http/$cadlFile"
 }
 Remove-Item ./http -Recurse -Force
