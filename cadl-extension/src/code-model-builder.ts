@@ -93,8 +93,8 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
 } from "@autorest/codemodel";
-import { SchemaContext, SchemaUsage } from "./schemas/usage.js";
-import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
+import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
+import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
 
 export class CodeModelBuilder {
