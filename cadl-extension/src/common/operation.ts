@@ -7,6 +7,7 @@ import {
   ImplementationLocation,
   Response,
   SchemaType,
+  Schema,
 } from "@autorest/codemodel";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
@@ -48,7 +49,19 @@ export interface Operation extends Aspect {
   profile?: Record<string, ApiVersion>;
 
   /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
-  operationLinks?: Record<string, Operation>;
+  operationLinks?: Record<string, OperationLink>;
+}
+
+export class OperationLink {
+  constructor(operation: Operation) {
+    this.operation = operation;
+  }
+
+  /** the operation */
+  operation: Operation;
+
+  /** the parameters as Schema */
+  parameters?: Schema;
 }
 
 export interface Request extends Metadata {

@@ -91,7 +91,7 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
 } from "@autorest/codemodel";
-import { Operation as CodeModelOperation, Request } from "./common/operation.js";
+import { Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
@@ -370,7 +370,12 @@ export class CodeModelBuilder {
 
       for (const [linkType, linkOperation] of operationLinks) {
         // Cadl requires linked operation written before
-        op.operationLinks[linkType] = this.operationCache.get(linkOperation.linkedOperation)!;
+        const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
+        // parameters of operation link
+        if (linkOperation.parameters) {
+          opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
+        }
+        op.operationLinks[linkType] = opLink;
 
         if (linkType === "polling" || linkType === "final") {
           pollingFoundInOperationLinks = true;
