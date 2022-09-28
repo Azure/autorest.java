@@ -7,6 +7,7 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.OperationLink;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
@@ -370,25 +371,53 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     MethodPollingDetails methodPollingDetails = null;
                     MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
-                    if (pollingDetails != null) {
+
+                    if (operation.getOperationLinks() != null) {
+                        IType intermediateType = null;
+                        IType finalType = null;
+
+                        OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
+                        OperationLink finalOperationLink = operation.getOperationLinks().get("final");
+
+                        if (pollingOperationLink != null) {
+                            intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
+                        }
+                        if (finalOperationLink != null) {
+                            finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
+                        }
+                        if (intermediateType != null && finalType == null) {
+                            // use result of this LRO
+                            finalType = SchemaUtil.getOperationResponseType(operation, settings);
+                        }
+
+                        if (intermediateType != null && finalType != null) {
+                            methodPollingDetails = new MethodPollingDetails(
+                                pollingDetails.getStrategy(),
+                                intermediateType,
+                                finalType,
+                                pollingDetails.getPollIntervalInSeconds());
+                        }
+                    }
+
+                    if (pollingDetails != null && methodPollingDetails == null) {
                         methodPollingDetails = new MethodPollingDetails(
                             pollingDetails.getStrategy(),
                             getPollingIntermediateType(pollingDetails, returnTypeHolder.syncReturnType),
                             getPollingFinalType(pollingDetails, returnTypeHolder.syncReturnType),
                             pollingDetails.getPollIntervalInSeconds());
+                    }
 
-                        if (isProtocolMethod &&
-                            !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
-                                && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
-                            // a new method to be added as implementation only (not exposed to client) for developer
-                            dpgMethodPollingDetailsWithModel = methodPollingDetails;
+                    if (methodPollingDetails != null && isProtocolMethod &&
+                        !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
+                            && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
+                        // a new method to be added as implementation only (not exposed to client) for developer
+                        dpgMethodPollingDetailsWithModel = methodPollingDetails;
 
-                            // DPG keep the method with BinaryData
-                            methodPollingDetails = new MethodPollingDetails(
-                                dpgMethodPollingDetailsWithModel.getPollingStrategy(),
-                                ClassType.BinaryData, ClassType.BinaryData,
-                                dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
-                        }
+                        // DPG keep the method with BinaryData
+                        methodPollingDetails = new MethodPollingDetails(
+                            dpgMethodPollingDetailsWithModel.getPollingStrategy(),
+                            ClassType.BinaryData, ClassType.BinaryData,
+                            dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
                     }
 
                     addLroMethods(operation, builder, methods,
@@ -1111,10 +1140,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 finalTypePackage = JavaSettings.getInstance().getPackage();
             }
             resultType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
-        }
-        // azure-core wants poll response to be non-null
-        if (resultType == ClassType.Void) {
-            resultType = ClassType.BinaryData;
         }
 
         return resultType;
