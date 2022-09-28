@@ -46,6 +46,9 @@ export interface Operation extends Aspect {
 
   /** the apiVersion to use for a given profile name */
   profile?: Record<string, ApiVersion>;
+
+  /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
+  operationLinks?: Record<string, Operation>;
 }
 
 export interface Request extends Metadata {
