@@ -83,10 +83,12 @@ jobs:
           npm install -g @cadl-lang/compiler
         displayName: 'Install Cadl'
 
-      - script: |
-          bash ./generate.sh
+      - task: PowerShell@2
         displayName: 'Generate Code'
-        workingDirectory: ./cadl-tests
+        inputs:
+          pwsh: true
+          filePath: cadl-tests/Generate.ps1
+          workingDirectory: ./cadl-tests
 
       - task: Npm@1
         displayName: 'Check-Format Cadl Tests'
