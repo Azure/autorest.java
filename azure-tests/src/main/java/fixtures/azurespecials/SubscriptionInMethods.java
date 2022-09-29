@@ -195,21 +195,6 @@ public final class SubscriptionInMethods {
     }
 
     /**
-     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
-     * succeed.
-     *
-     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postMethodLocalValid(String subscriptionId, Context context) {
-        postMethodLocalValidWithResponse(subscriptionId, context);
-    }
-
-    /**
      * POST method with subscriptionId modeled in the method. pass in subscription id = null, client-side validation
      * should prevent you from making this call.
      *
@@ -325,22 +310,6 @@ public final class SubscriptionInMethods {
     }
 
     /**
-     * POST method with subscriptionId modeled in the method. pass in subscription id = null, client-side validation
-     * should prevent you from making this call.
-     *
-     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should
-     *     prvenet the call.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postMethodLocalNull(String subscriptionId, Context context) {
-        postMethodLocalNullWithResponse(subscriptionId, context);
-    }
-
-    /**
      * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
      * succeed.
      *
@@ -453,21 +422,6 @@ public final class SubscriptionInMethods {
      * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
      * succeed.
      *
-     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postPathLocalValid(String subscriptionId, Context context) {
-        postPathLocalValidWithResponse(subscriptionId, context);
-    }
-
-    /**
-     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
-     * succeed.
-     *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -571,20 +525,5 @@ public final class SubscriptionInMethods {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSwaggerLocalValid(String subscriptionId) {
         postSwaggerLocalValidWithResponse(subscriptionId, Context.NONE);
-    }
-
-    /**
-     * POST method with subscriptionId modeled in the method. pass in subscription id = '1234-5678-9012-3456' to
-     * succeed.
-     *
-     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postSwaggerLocalValid(String subscriptionId, Context context) {
-        postSwaggerLocalValidWithResponse(subscriptionId, context);
     }
 }

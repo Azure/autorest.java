@@ -113,11 +113,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      *
      * @param function The client method code block.
      * @param clientMethod The client method.
-     * @param proxyMethodAndConstantParameters Proxy method constant parameters.
-     * @param settings AutoRest generation settings.
      */
-    protected static void addOptionalVariables(JavaBlock function, ClientMethod clientMethod,
-        List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+    protected static void addOptionalVariables(JavaBlock function, ClientMethod clientMethod) {
         if (!clientMethod.getOnlyRequiredParameters()) {
             return;
         }
@@ -528,8 +525,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     generatePagedAsyncSinglePage(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
+
             case LongRunningAsync:
                 generateLongRunningAsync(clientMethod, typeBlock, restAPIMethod, settings);
+                break;
+
+            case LongRunningSync:
+                generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginAsync:
@@ -542,10 +544,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             case LongRunningBeginSync:
                 generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
-                break;
-
-            case LongRunningSync:
-                generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case Resumable:
@@ -664,7 +662,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
     }
@@ -673,7 +671,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod);
                 if (settings.isDataPlaneClient()) {
                     function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
                     function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
@@ -719,7 +717,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     }
                 }
                 String effectiveFirstPageArgs = firstPageArgs;
-                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
                     function.line("() -> %s(%s));",
@@ -734,7 +732,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod);
                 if (settings.isDataPlaneClient()) {
                     function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
                     function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
@@ -751,7 +749,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                addOptionalVariables(function, clientMethod);
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> function.line("() -> %s(%s));",
                     clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
@@ -772,7 +770,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.indent(() -> {
                 if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
@@ -793,7 +791,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     private void generateSimpleSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
             if (settings.isContextClientMethodParameter()) {
@@ -825,7 +823,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
             if (settings.isContextClientMethodParameter()) {
@@ -859,7 +857,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                     effectiveAsyncMethodName, clientMethod.getArgumentList());
@@ -1030,7 +1028,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.getAddContextParameter()) {
+            if (settings.isAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.line(String.format("return %s", serviceMethodCall));
                 } else {
@@ -1160,7 +1158,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.getAddContextParameter()) {
+            if (settings.isAddContextParameter()) {
                 if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
                     function.methodReturn(serviceMethodCall);
                 } else {
@@ -1193,6 +1191,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     /**
+     * Extension to write LRO sync client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
+    protected void generateLongRunningSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+
+    }
+
+    /**
      * Extension to write LRO begin async client method.
      *
      * @param clientMethod client method
@@ -1210,6 +1220,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String pollingStrategy = getPollingStrategy(clientMethod, contextParam);
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -1230,6 +1241,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String pollingStrategy = getPollingStrategy(clientMethod, contextParam);
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -1272,6 +1284,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
             function.methodReturn(String.format("this.%sAsync(%s).getSyncPoller()",
                 clientMethod.getName(), clientMethod.getArgumentList()));
         });

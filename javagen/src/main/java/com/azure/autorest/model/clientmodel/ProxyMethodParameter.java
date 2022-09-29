@@ -14,6 +14,23 @@ import java.util.Set;
  * A parameter for a ProxyMethod.
  */
 public class ProxyMethodParameter extends MethodParameter {
+
+    public static final ProxyMethodParameter REQUEST_OPTIONS_PARAMETER = new ProxyMethodParameter.Builder()
+            .description("The options to configure the HTTP request before HTTP client sends it.")
+            .wireType(ClassType.RequestOptions)
+            .clientType(ClassType.RequestOptions)
+            .name("requestOptions")
+            .requestParameterLocation(RequestParameterLocation.NONE)
+            .requestParameterName("requestOptions")
+            .alreadyEncoded(true)
+            .constant(false)
+            .required(false)
+            .nullable(false)
+            .fromClient(false)
+            .parameterReference("requestOptions")
+            .origin(ParameterSynthesizedOrigin.REQUEST_OPTIONS)
+            .build();
+
     /**
      * Get the name of this parameter when it is serialized.
      */

@@ -42,7 +42,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
     }
 
     @Override
-    protected ClientMethodParameter getContextParameter() {
+    protected ClientMethodParameter getContextParameter(boolean isProtocolMethod) {
         return ANDROID_CONTEXT_PARAM;
     }
 

@@ -612,7 +612,7 @@ public class JavaSettings {
      */
     private boolean requiredParameterClientMethods;
 
-    public final boolean getRequiredParameterClientMethods() {
+    public final boolean isRequiredParameterClientMethods() {
         return requiredParameterClientMethods;
     }
 
@@ -621,7 +621,7 @@ public class JavaSettings {
      */
     private boolean addContextParameter;
 
-    public final boolean getAddContextParameter() {
+    public final boolean isAddContextParameter() {
         return addContextParameter;
     }
 

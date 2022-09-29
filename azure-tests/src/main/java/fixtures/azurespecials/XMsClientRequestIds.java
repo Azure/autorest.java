@@ -156,19 +156,6 @@ public final class XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get(Context context) {
-        getWithResponse(context);
-    }
-
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
      * @param xMsClientRequestId This should appear as a method parameter, use value
      *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -280,20 +267,5 @@ public final class XMsClientRequestIds {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void paramGet(String xMsClientRequestId) {
         paramGetWithResponse(xMsClientRequestId, Context.NONE);
-    }
-
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
-     * @param xMsClientRequestId This should appear as a method parameter, use value
-     *     '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramGet(String xMsClientRequestId, Context context) {
-        paramGetWithResponse(xMsClientRequestId, context);
     }
 }
