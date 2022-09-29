@@ -397,7 +397,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             dpgMethodPollingDetailsWithModel.getPollingStrategy(),
                             ClassType.BinaryData,
                             // if model says final type is Void, then it is Void
-                            (dpgMethodPollingDetailsWithModel.getFinalType().asNullable() == ClassType.Void) ? ClassType.Void : ClassType.BinaryData,
+                            (dpgMethodPollingDetailsWithModel.getFinalType().asNullable() == ClassType.Void) ? PrimitiveType.Void : ClassType.BinaryData,
                             dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
                     }
 
