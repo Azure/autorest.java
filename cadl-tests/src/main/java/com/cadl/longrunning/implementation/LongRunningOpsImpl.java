@@ -33,7 +33,6 @@ import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
-import com.cadl.longrunning.models.OperationStatus;
 import com.cadl.longrunning.models.OperationStatusResourceResource;
 import com.cadl.longrunning.models.Resource;
 import java.time.Duration;
@@ -602,7 +601,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link PollerFlux} for polling of status monitor resource for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsync(String name, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsync(String name, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
@@ -614,7 +613,7 @@ public final class LongRunningOpsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -639,7 +638,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link SyncPoller} for polling of status monitor resource for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete(String name, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
         return this.beginDeleteAsync(name, requestOptions).getSyncPoller();
     }
 
@@ -665,7 +664,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link PollerFlux} for polling of status monitor resource for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResourceResource, OperationStatus> beginDeleteWithModelAsync(
+    public PollerFlux<OperationStatusResourceResource, Void> beginDeleteWithModelAsync(
             String name, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -678,7 +677,7 @@ public final class LongRunningOpsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(OperationStatusResourceResource.class),
-                TypeReference.createInstance(OperationStatus.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -703,7 +702,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link SyncPoller} for polling of status monitor resource for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResourceResource, OperationStatus> beginDeleteWithModel(
+    public SyncPoller<OperationStatusResourceResource, Void> beginDeleteWithModel(
             String name, RequestOptions requestOptions) {
         return this.beginDeleteWithModelAsync(name, requestOptions).getSyncPoller();
     }
@@ -749,7 +748,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginExportAsync(
+    public PollerFlux<BinaryData, Void> beginExportAsync(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -762,7 +761,7 @@ public final class LongRunningOpsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -778,7 +777,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginExport(
+    public SyncPoller<BinaryData, Void> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.beginExportAsync(name, projectFileVersion, requestOptions).getSyncPoller();
     }
@@ -889,7 +888,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginImportxAsync(
+    public PollerFlux<BinaryData, Void> beginImportxAsync(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -902,7 +901,7 @@ public final class LongRunningOpsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -927,7 +926,7 @@ public final class LongRunningOpsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginImportx(
+    public SyncPoller<BinaryData, Void> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.beginImportxAsync(name, exportedResource, requestOptions).getSyncPoller();
     }

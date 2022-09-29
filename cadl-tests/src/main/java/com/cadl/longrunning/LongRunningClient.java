@@ -153,7 +153,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete(String name, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
         return this.client.beginDelete(name, requestOptions).getSyncPoller();
     }
 
@@ -171,7 +171,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginExport(
+    public SyncPoller<BinaryData, Void> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.client.beginExport(name, projectFileVersion, requestOptions).getSyncPoller();
     }
@@ -199,7 +199,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginImportx(
+    public SyncPoller<BinaryData, Void> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.client.beginImportx(name, exportedResource, requestOptions).getSyncPoller();
     }
