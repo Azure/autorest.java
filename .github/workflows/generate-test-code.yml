@@ -26,8 +26,9 @@ jobs:
           npm pack
 
       - name: Generate code
+        shell: pwsh
         run: |
-          ./generate
+          ./Generate.ps1
 
       - name: Commit generated code
         run: |
