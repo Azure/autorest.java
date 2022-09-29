@@ -185,20 +185,6 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void customNamedRequestId(String fooClientRequestId, Context context) {
-        customNamedRequestIdWithResponse(fooClientRequestId, context);
-    }
-
-    /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
      *
@@ -334,23 +320,6 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
-     * group.
-     *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void customNamedRequestIdParamGrouping(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
-            Context context) {
-        customNamedRequestIdParamGroupingWithResponse(headerCustomNamedRequestIdParamGroupingParameters, context);
-    }
-
-    /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
@@ -460,20 +429,5 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
         return customNamedRequestIdHeadWithResponse(fooClientRequestId, Context.NONE).getValue();
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean customNamedRequestIdHead(String fooClientRequestId, Context context) {
-        return customNamedRequestIdHeadWithResponse(fooClientRequestId, context).getValue();
     }
 }

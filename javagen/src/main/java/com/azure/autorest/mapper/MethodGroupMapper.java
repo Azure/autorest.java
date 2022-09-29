@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,6 +85,9 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
+            if (settings.isDataPlaneClient()) {
+                MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
+            }
             restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
         }
         proxyBuilder.methods(restAPIMethods);

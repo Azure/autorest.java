@@ -18,6 +18,10 @@ public final class SubProductInner extends SubResource {
     @JsonProperty(value = "properties")
     private SubProductProperties innerProperties;
 
+    /** Creates an instance of SubProductInner class. */
+    public SubProductInner() {
+    }
+
     /**
      * Get the innerProperties property: The properties property.
      *

@@ -434,20 +434,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header value "User-Agent": "overwrite".
-     *
-     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramExistingKey(String userAgent, Context context) {
-        paramExistingKeyWithResponse(userAgent, context);
-    }
-
-    /**
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -532,19 +518,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseExistingKey() {
         responseExistingKeyWithResponse(Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "User-Agent": "overwrite".
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseExistingKey(Context context) {
-        responseExistingKeyWithResponse(context);
     }
 
     /**
@@ -651,20 +624,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header value "Content-Type": "text/html".
-     *
-     * @param contentType Send a post request with header value "Content-Type": "text/html".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramProtectedKey(String contentType, Context context) {
-        paramProtectedKeyWithResponse(contentType, context);
-    }
-
-    /**
      * Get a response with header value "Content-Type": "text/html".
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -749,19 +708,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseProtectedKey() {
         responseProtectedKeyWithResponse(Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "Content-Type": "text/html".
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseProtectedKey(Context context) {
-        responseProtectedKeyWithResponse(context);
     }
 
     /**
@@ -874,21 +820,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 1 or -2.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramInteger(String scenario, int value, Context context) {
-        paramIntegerWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -989,20 +920,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseInteger(String scenario) {
         responseIntegerWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "value": 1 or -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseInteger(String scenario, Context context) {
-        responseIntegerWithResponse(scenario, context);
     }
 
     /**
@@ -1121,22 +1038,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
-     * -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 105 or -2.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramLong(String scenario, long value, Context context) {
-        paramLongWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -1236,20 +1137,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseLong(String scenario) {
         responseLongWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "value": 105 or -2.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseLong(String scenario, Context context) {
-        responseLongWithResponse(scenario, context);
     }
 
     /**
@@ -1368,22 +1255,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
-     * -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 0.07 or -3.0.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramFloat(String scenario, float value, Context context) {
-        paramFloatWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -1483,20 +1354,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseFloat(String scenario) {
         responseFloatWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "value": 0.07 or -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseFloat(String scenario, Context context) {
-        responseFloatWithResponse(scenario, context);
     }
 
     /**
@@ -1615,22 +1472,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
-     * -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param value Send a post request with header values 7e120 or -3.0.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDouble(String scenario, double value, Context context) {
-        paramDoubleWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
@@ -1731,20 +1572,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDouble(String scenario) {
         responseDoubleWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "value": 7e120 or -3.0.
-     *
-     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDouble(String scenario, Context context) {
-        responseDoubleWithResponse(scenario, context);
     }
 
     /**
@@ -1857,21 +1684,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
-     * @param scenario Send a post request with header values "scenario": "true" or "false".
-     * @param value Send a post request with header values true or false.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramBool(String scenario, boolean value, Context context) {
-        paramBoolWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
@@ -1971,20 +1783,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseBool(String scenario) {
         responseBoolWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header value "value": true or false.
-     *
-     * @param scenario Send a post request with header values "scenario": "true" or "false".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseBool(String scenario, Context context) {
-        responseBoolWithResponse(scenario, context);
     }
 
     /**
@@ -2134,22 +1932,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
-     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramString(String scenario, String value, Context context) {
-        paramStringWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
@@ -2254,20 +2036,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseString(String scenario) {
         responseStringWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseString(String scenario, Context context) {
-        responseStringWithResponse(scenario, context);
     }
 
     /**
@@ -2392,22 +2160,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
-     * "0001-01-01".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDate(String scenario, LocalDate value, Context context) {
-        paramDateWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -2507,20 +2259,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDate(String scenario) {
         responseDateWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDate(String scenario, Context context) {
-        responseDateWithResponse(scenario, context);
     }
 
     /**
@@ -2645,22 +2383,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
-     * "value": "0001-01-01T00:00:00Z".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDatetime(String scenario, OffsetDateTime value, Context context) {
-        paramDatetimeWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -2765,20 +2487,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDatetime(String scenario) {
         responseDatetimeWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDatetime(String scenario, Context context) {
-        responseDatetimeWithResponse(scenario, context);
     }
 
     /**
@@ -2938,23 +2646,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
-     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
-     *     GMT".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDatetimeRfc1123(String scenario, OffsetDateTime value, Context context) {
-        paramDatetimeRfc1123WithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
@@ -3061,20 +2752,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDatetimeRfc1123(String scenario) {
         responseDatetimeRfc1123WithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDatetimeRfc1123(String scenario, Context context) {
-        responseDatetimeRfc1123WithResponse(scenario, context);
     }
 
     /**
@@ -3193,21 +2870,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param value Send a post request with header values "P123DT22H14M12.011S".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDuration(String scenario, Duration value, Context context) {
-        paramDurationWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -3308,20 +2970,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDuration(String scenario) {
         responseDurationWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "P123DT22H14M12.011S".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDuration(String scenario, Context context) {
-        responseDurationWithResponse(scenario, context);
     }
 
     /**
@@ -3442,21 +3090,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramByte(String scenario, byte[] value, Context context) {
-        paramByteWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -3556,20 +3189,6 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseByte(String scenario) {
         responseByteWithResponse(scenario, Context.NONE);
-    }
-
-    /**
-     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseByte(String scenario, Context context) {
-        responseByteWithResponse(scenario, context);
     }
 
     /**
@@ -3711,21 +3330,6 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param value Send a post request with header values 'GREY'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramEnum(String scenario, GreyscaleColors value, Context context) {
-        paramEnumWithResponse(scenario, value, context);
-    }
-
-    /**
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
@@ -3828,20 +3432,6 @@ public final class Headers {
     }
 
     /**
-     * Get a response with header values "GREY" or null.
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseEnum(String scenario, Context context) {
-        responseEnumWithResponse(scenario, context);
-    }
-
-    /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3926,18 +3516,5 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void customRequestId() {
         customRequestIdWithResponse(Context.NONE);
-    }
-
-    /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void customRequestId(Context context) {
-        customRequestIdWithResponse(context);
     }
 }

@@ -25,6 +25,7 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -91,8 +92,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             .findFirst().get().getRequests().get(0)
                             .getProtocol().getHttp().getUri());
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
-            for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
-                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
+            for (Operation method : codeModelRestAPIMethods) {
+                if (settings.isDataPlaneClient()) {
+                    MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
+                }
+                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
             }
             proxyBuilder.methods(restAPIMethods);
             proxy = proxyBuilder.build();

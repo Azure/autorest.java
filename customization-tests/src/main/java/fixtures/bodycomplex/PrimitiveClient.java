@@ -68,21 +68,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Get complex types with integer properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public IntWrapper getInt(Context context) {
-        return this.serviceClient.getInt(context);
-    }
-
-    /**
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
@@ -113,21 +98,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putInt(IntWrapper complexBody, Context context) {
-        this.serviceClient.putInt(complexBody, context);
-    }
-
-    /**
      * Get complex types with long properties.
      *
      * @param context The context to associate with this operation.
@@ -153,21 +123,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LongWrapper getLong() {
         return this.serviceClient.getLong();
-    }
-
-    /**
-     * Get complex types with long properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with long properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public LongWrapper getLong(Context context) {
-        return this.serviceClient.getLong(context);
     }
 
     /**
@@ -201,21 +156,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLong(LongWrapper complexBody, Context context) {
-        this.serviceClient.putLong(complexBody, context);
-    }
-
-    /**
      * Get complex types with float properties.
      *
      * @param context The context to associate with this operation.
@@ -241,21 +181,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatWrapper getFloat() {
         return this.serviceClient.getFloat();
-    }
-
-    /**
-     * Get complex types with float properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public FloatWrapper getFloat(Context context) {
-        return this.serviceClient.getFloat(context);
     }
 
     /**
@@ -289,21 +214,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloat(FloatWrapper complexBody, Context context) {
-        this.serviceClient.putFloat(complexBody, context);
-    }
-
-    /**
      * Get complex types with double properties.
      *
      * @param context The context to associate with this operation.
@@ -329,21 +239,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DoubleWrapper getDouble() {
         return this.serviceClient.getDouble();
-    }
-
-    /**
-     * Get complex types with double properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DoubleWrapper getDouble(Context context) {
-        return this.serviceClient.getDouble(context);
     }
 
     /**
@@ -377,21 +272,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDouble(DoubleWrapper complexBody, Context context) {
-        this.serviceClient.putDouble(complexBody, context);
-    }
-
-    /**
      * Get complex types with bool properties.
      *
      * @param context The context to associate with this operation.
@@ -417,21 +297,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanWrapper getBool() {
         return this.serviceClient.getBool();
-    }
-
-    /**
-     * Get complex types with bool properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with bool properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BooleanWrapper getBool(Context context) {
-        return this.serviceClient.getBool(context);
     }
 
     /**
@@ -465,21 +330,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBool(BooleanWrapper complexBody, Context context) {
-        this.serviceClient.putBool(complexBody, context);
-    }
-
-    /**
      * Get complex types with string properties.
      *
      * @param context The context to associate with this operation.
@@ -505,21 +355,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StringWrapper getString() {
         return this.serviceClient.getString();
-    }
-
-    /**
-     * Get complex types with string properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public StringWrapper getString(Context context) {
-        return this.serviceClient.getString(context);
     }
 
     /**
@@ -553,21 +388,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putString(StringWrapper complexBody, Context context) {
-        this.serviceClient.putString(complexBody, context);
-    }
-
-    /**
      * Get complex types with date properties.
      *
      * @param context The context to associate with this operation.
@@ -593,21 +413,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DateWrapper getDate() {
         return this.serviceClient.getDate();
-    }
-
-    /**
-     * Get complex types with date properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with date properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DateWrapper getDate(Context context) {
-        return this.serviceClient.getDate(context);
     }
 
     /**
@@ -641,21 +446,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDate(DateWrapper complexBody, Context context) {
-        this.serviceClient.putDate(complexBody, context);
-    }
-
-    /**
      * Get complex types with datetime properties.
      *
      * @param context The context to associate with this operation.
@@ -681,21 +471,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DatetimeWrapper getDateTime() {
         return this.serviceClient.getDateTime();
-    }
-
-    /**
-     * Get complex types with datetime properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DatetimeWrapper getDateTime(Context context) {
-        return this.serviceClient.getDateTime(context);
     }
 
     /**
@@ -729,21 +504,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTime(DatetimeWrapper complexBody, Context context) {
-        this.serviceClient.putDateTime(complexBody, context);
-    }
-
-    /**
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param context The context to associate with this operation.
@@ -769,21 +529,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
         return this.serviceClient.getDateTimeRfc1123();
-    }
-
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Datetimerfc1123Wrapper getDateTimeRfc1123(Context context) {
-        return this.serviceClient.getDateTimeRfc1123(context);
     }
 
     /**
@@ -817,21 +562,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody, Context context) {
-        this.serviceClient.putDateTimeRfc1123(complexBody, context);
-    }
-
-    /**
      * Get complex types with duration properties.
      *
      * @param context The context to associate with this operation.
@@ -857,21 +587,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationWrapper getDuration() {
         return this.serviceClient.getDuration();
-    }
-
-    /**
-     * Get complex types with duration properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DurationWrapper getDuration(Context context) {
-        return this.serviceClient.getDuration(context);
     }
 
     /**
@@ -905,21 +620,6 @@ public final class PrimitiveClient {
     }
 
     /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDuration(DurationWrapper complexBody, Context context) {
-        this.serviceClient.putDuration(complexBody, context);
-    }
-
-    /**
      * Get complex types with byte properties.
      *
      * @param context The context to associate with this operation.
@@ -945,21 +645,6 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ByteWrapper getByte() {
         return this.serviceClient.getByte();
-    }
-
-    /**
-     * Get complex types with byte properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with byte properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ByteWrapper getByte(Context context) {
-        return this.serviceClient.getByte(context);
     }
 
     /**
@@ -990,20 +675,5 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(ByteWrapper complexBody) {
         this.serviceClient.putByte(complexBody);
-    }
-
-    /**
-     * Put complex types with byte properties.
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByte(ByteWrapper complexBody, Context context) {
-        this.serviceClient.putByte(complexBody, context);
     }
 }

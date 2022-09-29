@@ -23,6 +23,10 @@ public final class ProductProperties {
     @JsonProperty(value = "provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private ProductPropertiesProvisioningStateValues provisioningStateValues;
 
+    /** Creates an instance of ProductProperties class. */
+    public ProductProperties() {
+    }
+
     /**
      * Get the provisioningState property: The provisioningState property.
      *
