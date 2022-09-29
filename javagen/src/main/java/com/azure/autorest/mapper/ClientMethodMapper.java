@@ -1224,8 +1224,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
             }
             if (intermediateType != null && finalType == null) {
-                // fallback to use response of this LRO as final type
-                finalType = SchemaUtil.getOperationResponseType(operation, settings);
+                if (!CoreUtils.isNullOrEmpty(operation.getRequests())
+                    && operation.getRequests().get(0).getProtocol() != null
+                    && operation.getRequests().get(0).getProtocol().getHttp() != null
+                    && HttpMethod.DELETE.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                    // DELETE would not have final response as resource is deleted
+                    finalType = ClassType.Void;
+                } else {
+                    // fallback to use response of this LRO as final type
+                    finalType = SchemaUtil.getOperationResponseType(operation, settings);
+                }
             }
 
             if (intermediateType != null && finalType != null) {
