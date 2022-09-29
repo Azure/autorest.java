@@ -395,7 +395,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         // DPG keep the method with BinaryData
                         methodPollingDetails = new MethodPollingDetails(
                             dpgMethodPollingDetailsWithModel.getPollingStrategy(),
-                            ClassType.BinaryData, ClassType.BinaryData,
+                            ClassType.BinaryData,
+                            // if model says final type is Void, then it is Void
+                            (dpgMethodPollingDetailsWithModel.getFinalType().asNullable() == ClassType.Void) ? ClassType.Void : ClassType.BinaryData,
                             dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
                     }
 
@@ -1229,7 +1231,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     && operation.getRequests().get(0).getProtocol().getHttp() != null
                     && HttpMethod.DELETE.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
                     // DELETE would not have final response as resource is deleted
-                    finalType = ClassType.Void;
+                    finalType = PrimitiveType.Void;
                 } else {
                     // fallback to use response of this LRO as final type
                     finalType = SchemaUtil.getOperationResponseType(operation, settings);
@@ -1238,10 +1240,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             if (intermediateType != null && finalType != null) {
                 methodPollingDetails = new MethodPollingDetails(
-                        pollingDetails.getStrategy(),
-                        intermediateType,
-                        finalType,
-                        pollingDetails.getPollIntervalInSeconds());
+                    pollingDetails.getStrategy(),
+                    intermediateType,
+                    finalType,
+                    pollingDetails.getPollIntervalInSeconds());
             }
         }
         return methodPollingDetails;
