@@ -136,4 +136,4 @@ jobs:
       - publish: $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json
         artifact: CoverageReport
         displayName: 'Publish Cadl Ranch Coverage Report'
-
+        continueOnError: true
