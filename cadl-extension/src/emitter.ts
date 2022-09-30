@@ -12,9 +12,7 @@ export interface EmitterOptions {}
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
   additionalProperties: true,
-  properties: {
-      "generate-convenience-methods": { type: "boolean", nullable: true },
-  },
+  properties: {},
   required: [],
 };
 
