@@ -1,2 +1,4 @@
 emitters:
-  '@azure-tools/cadl-java': true
+  '@azure-tools/cadl-java':
+    generate-models: true
+    partial-update: true

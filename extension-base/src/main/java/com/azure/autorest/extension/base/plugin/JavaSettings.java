@@ -93,11 +93,15 @@ public class JavaSettings {
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
+            CadlSettings.Builder cadlSettingsBuilder = CadlSettings.newBuilder();
+            loadStringSetting("output-folder", cadlSettingsBuilder::outputFolder);
+
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
                 host.getValue(new TypeReference<Map<String, Object>>() {
                 }.getType(), "modelerfour"),
+                cadlSettingsBuilder.build(),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
@@ -195,6 +199,7 @@ public class JavaSettings {
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
+        CadlSettings cadlSettings,
         boolean azure,
         boolean sdkIntegration,
         String fluent,
@@ -255,6 +260,7 @@ public class JavaSettings {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
+        this.cadlSettings = cadlSettings;
         this.azure = azure;
         this.sdkIntegration = sdkIntegration;
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
@@ -450,6 +456,12 @@ public class JavaSettings {
 
     public AutorestSettings getAutorestSettings() {
         return autorestSettings;
+    }
+
+    private final CadlSettings cadlSettings;
+
+    public CadlSettings getCadlSettings() {
+        return cadlSettings;
     }
 
     public Map<String, Object> getSimpleJavaSettings() {

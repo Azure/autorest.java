@@ -13,8 +13,6 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -33,22 +32,14 @@ public class CadlPlugin extends Javagen {
     private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
 
     public static class Options {
-        private String namespace;
-        private String outputFolder;
-        private String serviceName;
+        private final Map<String, Object> emitterOptions = new HashMap<>();
 
-        public Options setNamespace(String namespace) {
-            this.namespace = namespace;
-            return this;
-        }
+        public Options() {}
 
-        public Options setOutputFolder(String outputFolder) {
-            this.outputFolder = outputFolder;
-            return this;
-        }
-
-        public Options setServiceName(String serviceName) {
-            this.serviceName = serviceName;
+        public Options withEmitterOptions(Map<String, Object> emitterOptions) {
+            if (emitterOptions != null) {
+                this.emitterOptions.putAll(emitterOptions);
+            }
             return this;
         }
     }
@@ -77,24 +68,26 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File parentFile = new File(fileName).getParentFile();
+        File outputFile = Paths.get(JavaSettings.getInstance().getCadlSettings().getOutputFolder(), fileName).toAbsolutePath().toFile();
+        File parentFile = outputFile.getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
         }
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(outputFile)) {
             writer.write(content);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        LOGGER.info("Write file: {}", fileName);
+        LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
     public String handlePartialUpdate(String filePath, String generatedContent) {
         if (filePath.endsWith(".java")) { // only handle for .java file
             // check if existingFile exists, if not, no need to handle partial update
-            if (Files.exists(Paths.get(filePath))) {
+            Path absoluteFilePath = Paths.get(JavaSettings.getInstance().getCadlSettings().getOutputFolder(), filePath);
+            if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath));
                     String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                     return updatedContent;
                 } catch (Exception e) {
@@ -130,10 +123,6 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
-
-        SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
-
-        SETTINGS_MAP.put("partial-update", Configuration.getGlobalConfiguration().get("PARTIAL_UPDATE", false));
     }
 
     public static class MockConnection extends Connection {
@@ -145,14 +134,15 @@ public class CadlPlugin extends Javagen {
 
     public CadlPlugin(Options options) {
         super(new MockConnection(), "dummy", "dummy");
-        SETTINGS_MAP.put("namespace", options.namespace);
-        if (!CoreUtils.isNullOrEmpty(options.outputFolder)) {
-            SETTINGS_MAP.put("output-folder", options.outputFolder);
-        }
-        if (!CoreUtils.isNullOrEmpty(options.serviceName)) {
-            SETTINGS_MAP.put("service-name", options.serviceName);
-        }
+        options.emitterOptions.forEach((key, value) -> {
+            if (value != null && !"".equals(value)) {
+                SETTINGS_MAP.put(key, value);
+            }
+        });
+
         JavaSettingsAccessor.setHost(this);
+        LOGGER.info("Output folder: {}", JavaSettings.getInstance().getCadlSettings().getOutputFolder());
+        LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
 
         Mappers.setFactory(new CadlMapperFactory());
     }
