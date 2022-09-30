@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -76,7 +77,30 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             // Response body
             IType responseBodyType;
             if (JavaSettings.getInstance().isDataPlaneClient()) {
-                responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                // special handling for paging method
+                if (clientMethod.getType() == ClientMethodType.PagingSync || clientMethod.getType() == ClientMethodType.PagingAsync || clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage || clientMethod.getType() == ClientMethodType.PagingSyncSinglePage) {
+                    String itemName = clientMethod.getMethodPageDetails().getItemName();
+                    // rawResponseType has properties: 'value' and 'nextLink'
+                    IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                    ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
+                    List<ClientModelProperty> properties = new ArrayList<>();
+                    traverseProperties(model, properties);
+                    responseBodyType = properties.stream()
+                            .filter(property -> property.getName().equals(itemName))
+                            .map(clientModelProperty -> clientModelProperty.getClientType())
+                            .map(valueListType -> {
+                                // value type is List<T>, we need to get the typeArguments
+                                IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
+                                if (listTypeArgs.length > 0) {
+                                   return listTypeArgs[0];
+                                } else {
+                                    return null;
+                                }
+                            })
+                            .findFirst().orElse(null);
+                } else {
+                    responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                }
             } else {
                 responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
             }
