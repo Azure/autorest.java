@@ -498,12 +498,7 @@ public final class HeadersImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     value (Optional): [
-     *         Object (Optional)
-     *     ]
-     *     nextLink: String (Optional)
-     * }
+     * Object
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -553,12 +548,7 @@ public final class HeadersImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     value (Optional): [
-     *         Object (Optional)
-     *     ]
-     *     nextLink: String (Optional)
-     * }
+     * Object
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -597,12 +587,7 @@ public final class HeadersImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     value (Optional): [
-     *         Object (Optional)
-     *     ]
-     *     nextLink: String (Optional)
-     * }
+     * Object
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -623,12 +608,7 @@ public final class HeadersImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     value (Optional): [
-     *         Object (Optional)
-     *     ]
-     *     nextLink: String (Optional)
-     * }
+     * Object
      * }</pre>
      *
      * @param nextLink The URL to get the next list of items
