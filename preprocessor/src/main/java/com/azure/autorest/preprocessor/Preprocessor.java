@@ -37,9 +37,15 @@ import java.util.stream.Collectors;
 
 public class Preprocessor extends NewPlugin {
   private final Logger logger = new PluginLogger(this, Preprocessor.class);
+  protected static Preprocessor instance;
 
   public Preprocessor(Connection connection, String plugin, String sessionId) {
     super(connection, plugin, sessionId);
+    instance = this;
+  }
+
+  public static Preprocessor getPluginInstance() {
+    return instance;
   }
 
   @Override
