@@ -104,14 +104,9 @@ public final class PagedOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -152,14 +147,9 @@ public final class PagedOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -189,14 +179,9 @@ public final class PagedOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -219,14 +204,9 @@ public final class PagedOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *
