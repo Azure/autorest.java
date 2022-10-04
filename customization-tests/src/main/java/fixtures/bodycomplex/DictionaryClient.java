@@ -58,21 +58,6 @@ public final class DictionaryClient {
     }
 
     /**
-     * Get complex types with dictionary property.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getValid(Context context) {
-        return this.serviceClient.getValid(context);
-    }
-
-    /**
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
@@ -105,22 +90,6 @@ public final class DictionaryClient {
     }
 
     /**
-     * Put complex types with dictionary property.
-     *
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(DictionaryWrapper complexBody, Context context) {
-        this.serviceClient.putValid(complexBody, context);
-    }
-
-    /**
      * Get complex types with dictionary property which is empty.
      *
      * @param context The context to associate with this operation.
@@ -146,21 +115,6 @@ public final class DictionaryClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmpty() {
         return this.serviceClient.getEmpty();
-    }
-
-    /**
-     * Get complex types with dictionary property which is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is empty.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getEmpty(Context context) {
-        return this.serviceClient.getEmpty(context);
     }
 
     /**
@@ -194,21 +148,6 @@ public final class DictionaryClient {
     }
 
     /**
-     * Put complex types with dictionary property which is empty.
-     *
-     * @param complexBody Please put an empty dictionary.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(DictionaryWrapper complexBody, Context context) {
-        this.serviceClient.putEmpty(complexBody, context);
-    }
-
-    /**
      * Get complex types with dictionary property which is null.
      *
      * @param context The context to associate with this operation.
@@ -234,21 +173,6 @@ public final class DictionaryClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNull() {
         return this.serviceClient.getNull();
-    }
-
-    /**
-     * Get complex types with dictionary property which is null.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getNull(Context context) {
-        return this.serviceClient.getNull(context);
     }
 
     /**
@@ -278,20 +202,5 @@ public final class DictionaryClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvided() {
         return this.serviceClient.getNotProvided();
-    }
-
-    /**
-     * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getNotProvided(Context context) {
-        return this.serviceClient.getNotProvided(context);
     }
 }

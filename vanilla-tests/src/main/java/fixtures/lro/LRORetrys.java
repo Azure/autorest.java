@@ -201,6 +201,31 @@ public final class LRORetrys {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async() {
+        final Product product = null;
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.put201CreatingSucceeded200WithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -236,6 +261,21 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut201CreatingSucceeded200(Product product) {
+        return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPut201CreatingSucceeded200() {
+        final Product product = null;
         return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
 
@@ -339,6 +379,31 @@ public final class LRORetrys {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRelativeRetrySucceededAsync() {
+        final Product product = null;
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.putAsyncRelativeRetrySucceededWithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                TypeReference.createInstance(Product.class),
+                TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -374,6 +439,21 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetrySucceeded(Product product) {
+        return this.beginPutAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRelativeRetrySucceeded() {
+        final Product product = null;
         return this.beginPutAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
     }
 
@@ -825,6 +905,30 @@ public final class LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
      * 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async() {
+        final Product product = null;
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.post202Retry200WithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -859,6 +963,20 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(Product product) {
+        return this.beginPost202Retry200Async(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200() {
+        final Product product = null;
         return this.beginPost202Retry200Async(product).getSyncPoller();
     }
 
@@ -961,6 +1079,31 @@ public final class LRORetrys {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceededAsync() {
+        final Product product = null;
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.postAsyncRelativeRetrySucceededWithResponseAsync(product),
+                new ChainedPollingStrategy<>(
+                        java.util.Arrays.asList(
+                                new OperationResourcePollingStrategy<>(
+                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
+                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
+                                new StatusCheckPollingStrategy<>())),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -997,6 +1140,21 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(Product product) {
+        return this.beginPostAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded() {
+        final Product product = null;
         return this.beginPostAsyncRelativeRetrySucceededAsync(product).getSyncPoller();
     }
 

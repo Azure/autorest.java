@@ -34,7 +34,6 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -132,13 +131,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
         builder.responseContentTypes(responseContentTypes);
 
-        // DPG client only requires one request per operation
         List<Request> requests = operation.getRequests();
-        if (settings.isDataPlaneClient()) {
-            Request selectedRequest = MethodUtil.tryMergeBinaryRequests(requests, operation);
-            requests = Collections.singletonList(selectedRequest);
-        }
-
         // Used to deduplicate method with same signature.
         // E.g. one request takes "application/json" and another takes "text/plain", which both are String type
         Set<List<String>> methodSignatures = new HashSet<>();
@@ -213,44 +206,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             String name = deduplicateMethodName(operationName, parameters, requestContentType, methodSignatures);
             builder.name(name);
 
-            // RequestOptions
             if (settings.isDataPlaneClient()) {
-                ProxyMethodParameter requestOptions = new ProxyMethodParameter.Builder()
-                        .description("The options to configure the HTTP request before HTTP client sends it")
-                        .wireType(ClassType.RequestOptions)
-                        .clientType(ClassType.RequestOptions)
-                        .name("requestOptions")
-                        .requestParameterLocation(RequestParameterLocation.NONE)
-                        .requestParameterName("requestOptions")
-                        .alreadyEncoded(true)
-                        .constant(false)
-                        .required(false)
-                        .nullable(false)
-                        .fromClient(false)
-                        .parameterReference("requestOptions")
-                        .origin(ParameterSynthesizedOrigin.REQUEST_OPTIONS)
-                        .build();
+                ProxyMethodParameter requestOptions = ProxyMethodParameter.REQUEST_OPTIONS_PARAMETER;
                 allParameters.add(requestOptions);
                 parameters.add(requestOptions);
             }
-
-            if (settings.getAddContextParameter()) {
-                ClassType contextClassType = getContextClass();
-                ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
-                        .description("The context to associate with this operation.")
-                        .wireType(contextClassType)
-                        .clientType(contextClassType)
-                        .name("context")
-                        .requestParameterLocation(RequestParameterLocation.NONE)
-                        .requestParameterName("context")
-                        .alreadyEncoded(true)
-                        .constant(false)
-                        .required(false)
-                        .nullable(false)
-                        .fromClient(false)
-                        .parameterReference("context")
-                        .origin(ParameterSynthesizedOrigin.CONTEXT)
-                        .build();
+            if (settings.isAddContextParameter()) {
+                ProxyMethodParameter contextParameter = getContextParameter();
                 allParameters.add(contextParameter);
                 parameters.add(contextParameter);
             }
@@ -318,6 +280,25 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 && operation.getOperationGroup().getLanguage() != null
                 && operation.getOperationGroup().getLanguage().getDefault() != null
                 && !CoreUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName());
+    }
+
+    private ProxyMethodParameter getContextParameter() {
+        return new ProxyMethodParameter.Builder()
+                .description("The context to associate with this operation.")
+                .wireType(getContextClass())
+                .clientType(getContextClass())
+                .name("context")
+                .requestParameterLocation(RequestParameterLocation.NONE)
+                .requestParameterName("context")
+                .alreadyEncoded(true)
+                .constant(false)
+                .required(false)
+                .nullable(false)
+                .fromClient(false)
+                .parameterReference("context")
+                .origin(ParameterSynthesizedOrigin.CONTEXT)
+                .build();
+
     }
 
     protected ClassType getContextClass() {

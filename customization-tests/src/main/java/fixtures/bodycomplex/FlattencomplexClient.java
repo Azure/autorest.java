@@ -56,19 +56,4 @@ public final class FlattencomplexClient {
     public MyBaseType getValid() {
         return this.serviceClient.getValid();
     }
-
-    /**
-     * The getValid operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public MyBaseType getValid(Context context) {
-        return this.serviceClient.getValid(context);
-    }
 }

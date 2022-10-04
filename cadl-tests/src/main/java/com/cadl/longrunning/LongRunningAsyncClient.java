@@ -155,7 +155,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete(String name, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteAsync(name, requestOptions);
     }
 
@@ -173,7 +173,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginExport(
+    public PollerFlux<BinaryData, Void> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.serviceClient.beginExportAsync(name, projectFileVersion, requestOptions);
     }
@@ -201,7 +201,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginImportx(
+    public PollerFlux<BinaryData, Void> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.serviceClient.beginImportxAsync(name, exportedResource, requestOptions);
     }

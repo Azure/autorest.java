@@ -179,20 +179,6 @@ public final class Bools {
     }
 
     /**
-     * Get true Boolean value.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getTrue(Context context) {
-        return getTrueWithResponse(context).getValue();
-    }
-
-    /**
      * Set Boolean value true.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -282,19 +268,6 @@ public final class Bools {
     }
 
     /**
-     * Set Boolean value true.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putTrue(Context context) {
-        putTrueWithResponse(context);
-    }
-
-    /**
      * Get false Boolean value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -380,20 +353,6 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getFalse() {
         return getFalseWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get false Boolean value.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return false Boolean value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getFalse(Context context) {
-        return getFalseWithResponse(context).getValue();
     }
 
     /**
@@ -486,19 +445,6 @@ public final class Bools {
     }
 
     /**
-     * Set Boolean value false.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFalse(Context context) {
-        putFalseWithResponse(context);
-    }
-
-    /**
      * Get null Boolean value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -587,20 +533,6 @@ public final class Bools {
     }
 
     /**
-     * Get null Boolean value.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null Boolean value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getNull(Context context) {
-        return getNullWithResponse(context).getValue();
-    }
-
-    /**
      * Get invalid Boolean value.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -686,19 +618,5 @@ public final class Bools {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getInvalid() {
         return getInvalidWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get invalid Boolean value.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid Boolean value.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean getInvalid(Context context) {
-        return getInvalidWithResponse(context).getValue();
     }
 }

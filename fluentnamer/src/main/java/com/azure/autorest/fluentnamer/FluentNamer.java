@@ -6,11 +6,11 @@ package com.azure.autorest.fluentnamer;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FluentNamer extends NewPlugin {
+public class FluentNamer extends Preprocessor {
 
     private final Logger logger = new PluginLogger(this, FluentNamer.class);
     private static FluentNamer instance;
@@ -39,6 +39,7 @@ public class FluentNamer extends NewPlugin {
                        String sessionId) {
         super(connection, plugin, sessionId);
         instance = this;
+        Preprocessor.instance = this;
     }
 
     public static FluentNamer getPluginInstance() {
