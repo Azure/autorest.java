@@ -20,10 +20,7 @@ public class ModelUtilTests {
     // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        CadlPlugin.Options options = new CadlPlugin.Options().withEmitterOptions(
-                new HashMap<String, Object>() {{
-                    this.put("namespace", "com.azure.client");
-                }});
+        CadlPlugin.Options options = new CadlPlugin.Options().setNamespace("com.azure.client");
         CadlPlugin plugin = new CadlPlugin(options);
     }
 

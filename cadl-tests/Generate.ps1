@@ -36,6 +36,7 @@ if (Test-Path ./cadl-output) {
 }
 
 # enable convenience methods for tests
+$env:GENERATE_MODELS = "true"
 $env:GENERATE_CONVENIENCE_METHODS = "true"
 
 #run other local tests except partial update

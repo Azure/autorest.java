@@ -115,6 +115,7 @@ public class Main {
     }
 
     private static CadlPlugin.Options loadCadlOptions(String[] args, CodeModel codeModel) {
+        // output-folder
         String outputFolder = "cadl-tests/cadl-output/";
 
         if (args.length >= 2) {
@@ -127,6 +128,46 @@ public class Main {
         final String outputFolderFinal = outputFolder;
 
         String emitterOptionsJson = Configuration.getGlobalConfiguration().get("emitterOptions");
+        Map<String, Object> emitterOptions = parseJsonAsMap(emitterOptionsJson);
+
+        if (emitterOptions != null) {
+            // namespace
+            String namespace = getNonEmptyStringOrNull(emitterOptions, "namespace");
+            if (CoreUtils.isNullOrEmpty(namespace)) {
+                if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+                    namespace = codeModel.getLanguage().getJava().getNamespace();
+                }
+            }
+
+            // service-name
+            String serviceName = getNonEmptyStringOrNull(emitterOptions, "service-name");
+
+            // partial-update
+            Boolean partialUpdate = getBoolean(emitterOptions, "partial-update");
+
+            return new CadlPlugin.Options()
+                    .setNamespace(namespace)
+                    .setOutputFolder(outputFolderFinal)
+                    .setServiceName(serviceName)
+                    .setPartialUpdate(partialUpdate);
+        } else {
+            return new CadlPlugin.Options();
+        }
+    }
+
+    private static Boolean getBoolean(Map<String, Object> emitterOptions, String key) {
+        final Object result = emitterOptions.get(key);
+        if (result != null) {
+            if (result instanceof Boolean) {
+                return (Boolean) result;
+            } else if (result instanceof String) {
+                return Boolean.valueOf((String) result);
+            }
+        }
+        return null;
+    }
+
+    private static Map<String, Object> parseJsonAsMap(String emitterOptionsJson) {
         Map<String, Object> emitterOptions = new HashMap<>();
         if (!CoreUtils.isNullOrEmpty(emitterOptionsJson)) {
             try {
@@ -135,13 +176,15 @@ public class Main {
                 LOGGER.info("Read emitter options failed, emitter options json: {}", emitterOptionsJson);
             }
         }
-        if (!emitterOptions.containsKey("namespace")) {
-            if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
-                emitterOptions.put("namespace", codeModel.getLanguage().getJava().getNamespace());
-            }
+        return emitterOptions;
+    }
+
+    private static String getNonEmptyStringOrNull(Map<String, Object> emitterOptions, String key) {
+        final Object result = emitterOptions.get(key);
+        if (result != null && !"".equals(result)) {
+            return result.toString();
         }
-        emitterOptions.put("output-folder", outputFolderFinal);
-        return new CadlPlugin.Options().withEmitterOptions(emitterOptions);
+        return null;
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {

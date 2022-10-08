@@ -13,12 +13,20 @@ import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
-export interface EmitterOptions {}
+export interface EmitterOptions {
+  "namespace": string;
+  "service-name": string;
+  "partial-update": boolean;
+}
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
-  additionalProperties: true,
-  properties: {},
+  additionalProperties: false,
+  properties: {
+    "namespace": { type: "string", nullable: true },
+    "service-name": { type: "string", nullable: true },
+    "partial-update": { type: "boolean", nullable: true },
+  },
   required: [],
 };
 
