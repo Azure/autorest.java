@@ -1,4 +1,10 @@
-import { resolvePath, getNormalizedAbsolutePath, Program, JSONSchemaType, createCadlLibrary, } from "@cadl-lang/compiler";
+import {
+  resolvePath,
+  getNormalizedAbsolutePath,
+  Program,
+  JSONSchemaType,
+  createCadlLibrary,
+} from "@cadl-lang/compiler";
 import { dump } from "js-yaml";
 import { promisify } from "util";
 import { execFile } from "child_process";
@@ -20,7 +26,7 @@ export const $lib = createCadlLibrary({
   name: "JavaEmitter",
   diagnostics: {},
   emitter: {
-      options: EmitterOptionsSchema,
+    options: EmitterOptionsSchema,
   },
 });
 
@@ -67,7 +73,7 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     jarFileName,
     codeModelFileName,
     getNormalizedAbsolutePath(outputPath, undefined),
-  ]
+  ];
 
   const output = await promisify(execFile)("java", javaOptions);
   program.logger.info(output.stdout ? output.stdout : output.stderr);
