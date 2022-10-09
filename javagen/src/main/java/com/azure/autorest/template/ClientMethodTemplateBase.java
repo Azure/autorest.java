@@ -82,6 +82,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     String itemName = clientMethod.getMethodPageDetails().getItemName();
                     // rawResponseType has properties: 'value' and 'nextLink'
                     IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                    if (!(rawResponseType instanceof ClassType)) {
+                        throw new IllegalArgumentException("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method.");
+                    }
                     ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
                     List<ClientModelProperty> properties = new ArrayList<>();
                     traverseProperties(model, properties);
@@ -91,11 +94,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                             .map(valueListType -> {
                                 // value type is List<T>, we need to get the typeArguments
                                 IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
-                                if (listTypeArgs.length > 0) {
-                                   return listTypeArgs[0];
-                                } else {
-                                    return null;
+                                if (listTypeArgs.length == 0) {
+                                    throw new IllegalArgumentException("list type arguments' length for paging value should not be 0.");
                                 }
+                                return listTypeArgs[0];
                             })
                             .findFirst().orElse(null);
                 } else {
