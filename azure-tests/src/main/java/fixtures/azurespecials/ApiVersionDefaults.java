@@ -180,19 +180,6 @@ public final class ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodGlobalValid(Context context) {
-        getMethodGlobalValidWithResponse(context);
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
@@ -281,19 +268,6 @@ public final class ApiVersionDefaults {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getMethodGlobalNotProvidedValid() {
         getMethodGlobalNotProvidedValidWithResponse(Context.NONE);
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getMethodGlobalNotProvidedValid(Context context) {
-        getMethodGlobalNotProvidedValidWithResponse(context);
     }
 
     /**
@@ -391,19 +365,6 @@ public final class ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getPathGlobalValid(Context context) {
-        getPathGlobalValidWithResponse(context);
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
@@ -491,18 +452,5 @@ public final class ApiVersionDefaults {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getSwaggerGlobalValid() {
         getSwaggerGlobalValidWithResponse(Context.NONE);
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getSwaggerGlobalValid(Context context) {
-        getSwaggerGlobalValidWithResponse(context);
     }
 }

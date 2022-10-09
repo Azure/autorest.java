@@ -166,20 +166,6 @@ public final class ArraysImpl {
     }
 
     /**
-     * Get complex types with array property.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getValid(Context context) {
-        return getValidWithResponse(context).getValue();
-    }
-
-    /**
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
@@ -274,21 +260,6 @@ public final class ArraysImpl {
     }
 
     /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ArrayWrapper complexBody, Context context) {
-        putValidWithResponse(complexBody, context);
-    }
-
-    /**
      * Get complex types with array property which is empty.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -368,20 +339,6 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getEmpty() {
         return getEmptyWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getEmpty(Context context) {
-        return getEmptyWithResponse(context).getValue();
     }
 
     /**
@@ -473,20 +430,6 @@ public final class ArraysImpl {
     }
 
     /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(ArrayWrapper complexBody, Context context) {
-        putEmptyWithResponse(complexBody, context);
-    }
-
-    /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws ErrorException thrown if the request is rejected by server.
@@ -569,19 +512,5 @@ public final class ArraysImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getNotProvided() {
         return getNotProvidedWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getNotProvided(Context context) {
-        return getNotProvidedWithResponse(context).getValue();
     }
 }

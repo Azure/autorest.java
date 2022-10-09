@@ -76,12 +76,10 @@ import {
   ImplementationLocation,
   NumberSchema,
   ObjectSchema,
-  Operation as CodeModelOperation,
   Parameter,
   ParameterLocation,
   Property,
   Relations,
-  Request,
   Response,
   Schema,
   SchemaResponse,
@@ -93,8 +91,9 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
 } from "@autorest/codemodel";
-import { SchemaContext, SchemaUsage } from "./schemas/usage.js";
-import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice.js";
+import { Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
+import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
+import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
 
 export class CodeModelBuilder {
@@ -107,6 +106,7 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
+  private operationCache = new Map<Operation, CodeModelOperation>();
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
@@ -286,6 +286,9 @@ export class CodeModelBuilder {
       },
     });
 
+    // cache for later reference from operationLinks
+    this.operationCache.set(op.operation, operation);
+
     operation.addRequest(
       new Request({
         protocol: {
@@ -360,11 +363,30 @@ export class CodeModelBuilder {
   }
 
   private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[]) {
+    let pollingFoundInOperationLinks = false;
     const operationLinks = getOperationLinks(this.program, operation);
-    if (operationLinks && (operationLinks.has("polling") || operationLinks.has("final"))) {
+    if (operationLinks) {
+      op.operationLinks = {};
+
+      for (const [linkType, linkOperation] of operationLinks) {
+        if (linkType === "polling" || linkType === "final") {
+          pollingFoundInOperationLinks = true;
+        }
+
+        if (linkOperation.linkedOperation) {
+          // Cadl requires linked operation written before
+          const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
+          // parameters of operation link
+          if (linkOperation.parameters) {
+            opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
+          }
+          op.operationLinks[linkType] = opLink;
+        }
+      }
+    }
+    if (pollingFoundInOperationLinks) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
-
       return;
     }
 
@@ -380,10 +402,6 @@ export class CodeModelBuilder {
         }
       }
     }
-  }
-
-  private hasDecorator(type: DecoratedType, name: string): boolean {
-    return type.decorators.find((it) => it.decorator.name === name) !== undefined;
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
@@ -1180,7 +1198,7 @@ export class CodeModelBuilder {
   private isConvenienceMethod(op: OperationDetails) {
     // check @convenienceMethod
     let hasConvenienceMethod =
-      this.hasDecorator(op.operation, "$convenienceMethod") || this.hasDecorator(op.container, "$convenienceMethod");
+      hasDecorator(op.operation, "$convenienceMethod") || hasDecorator(op.container, "$convenienceMethod");
     if (!hasConvenienceMethod) {
       // check @extension with x-ms-convenient-api=true
       const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
@@ -1410,4 +1428,8 @@ function getNameForTemplate(target: Type): string {
 
 function containsIgnoreCase(stringList: string[], str: string) {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
+}
+
+function hasDecorator(type: DecoratedType, name: string): boolean {
+  return type.decorators.find((it) => it.decorator.name === name) !== undefined;
 }

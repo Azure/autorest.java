@@ -84,10 +84,12 @@ jobs:
           npm install -g @cadl-lang/compiler
         displayName: 'Install Cadl'
 
-      - script: |
-          bash ./generate.sh
+      - task: PowerShell@2
         displayName: 'Generate Code'
-        workingDirectory: ./cadl-tests
+        inputs:
+          pwsh: true
+          filePath: cadl-tests/Generate.ps1
+          workingDirectory: ./cadl-tests
 
       - task: Npm@1
         displayName: 'Check-Format Cadl Tests'
@@ -126,6 +128,11 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
+       - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
+        displayName: 'Stop Cadl Ranch Test Server'
+        workingDirectory: ./cadl-tests
+
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java.json
         displayName: 'Cadl Ranch Coverage Report'
@@ -137,11 +144,10 @@ jobs:
         displayName: 'Publish Cadl Ranch Coverage Report'
 
       - task: AzureCLI@2
-        displayName: 'Upload to Cadl Ranch Coverage Report'
+        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
         condition: eq(variables.isMain, 'true')
         inputs:
           azureSubscription: "Azure SDK Playground"
           scriptType: "bash"
           scriptLocation: "inlineScript"
           inlineScript: cadl-ranch upload-coverage --coverageFile ./cadl-ranch-coverage-java.json --generatorName java --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./cadl-extension/package.json').version")
-

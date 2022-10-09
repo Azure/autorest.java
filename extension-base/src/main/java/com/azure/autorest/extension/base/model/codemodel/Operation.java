@@ -5,6 +5,7 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -75,6 +76,8 @@ public class Operation extends Metadata {
     private ExternalDocumentation externalDocs;
 
     private List<String> specialHeaders;
+
+    private Map<String, OperationLink> operationLinks;
 
     // internal
     private OperationGroup operationGroup;
@@ -296,5 +299,16 @@ public class Operation extends Metadata {
 
     public void setSpecialHeaders(List<String> specialHeaders) {
         this.specialHeaders = specialHeaders;
+    }
+
+    /**
+     * @return the operation links, e.g. "polling" for the status monitor operation.
+     */
+    public Map<String, OperationLink> getOperationLinks() {
+        return operationLinks;
+    }
+
+    public void setOperationLinks(Map<String, OperationLink> operationLinks) {
+        this.operationLinks = operationLinks;
     }
 }

@@ -10,6 +10,7 @@ REM re-generate code
 RMDIR /S /Q "src\main\java\com\azure\mgmttest"
 RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 RMDIR /S /Q "src\samples"
+RMDIR /S /Q "src\test\java\com\azure\mgmtlitetest"
 
 SET AUTOREST_CORE_VERSION=3.8.4
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
@@ -54,6 +55,9 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=
 if %errorlevel% neq 0 exit /b %errorlevel%
 REM conflict property name from 2 x-ms-flatten in LabDetails and LabProperties
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education
+if %errorlevel% neq 0 exit /b %errorlevel%
+REM do not flatten if polymorphic in DevicePropertiesFormat
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM swagger customed Resource and ProxyResource

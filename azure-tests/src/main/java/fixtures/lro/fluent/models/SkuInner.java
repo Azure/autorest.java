@@ -22,6 +22,10 @@ public final class SkuInner {
     @JsonProperty(value = "id")
     private String id;
 
+    /** Creates an instance of SkuInner class. */
+    public SkuInner() {
+    }
+
     /**
      * Get the name property: The name property.
      *

@@ -9,6 +9,9 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
+import com.azure.mgmttest.hybridnetwork.fluent.models.DeviceInner;
+import com.azure.mgmttest.hybridnetwork.models.AzureStackEdgeFormat;
+import com.azure.mgmttest.hybridnetwork.models.DevicePropertiesFormat;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
@@ -108,8 +111,14 @@ public class CompilationTests {
         packetCaptureResult.withTarget(anyString());
         packetCaptureResult.target();
 
+        // nested x-ms-flatten from superclass in ExtendedProduct
         ExtendedProductInner extendedProduct = mock(ExtendedProductInner.class);
         extendedProduct.uri();
+
+        // do not flatten if polymorphic in DevicePropertiesFormat
+        DeviceInner device = mock(DeviceInner.class);
+        DevicePropertiesFormat devicePropertiesFormat = device.properties();
+        DevicePropertiesFormat azureStackEdgeFormat = mock(AzureStackEdgeFormat.class);
     }
 
     public void testProxyResourceOverride() {

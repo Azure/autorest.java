@@ -19,6 +19,10 @@ public final class ProductInner extends Resource {
     @JsonProperty(value = "properties")
     private ProductProperties innerProperties;
 
+    /** Creates an instance of ProductInner class. */
+    public ProductInner() {
+    }
+
     /**
      * Get the innerProperties property: The properties property.
      *

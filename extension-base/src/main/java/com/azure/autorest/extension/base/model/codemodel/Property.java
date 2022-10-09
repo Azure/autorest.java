@@ -29,9 +29,6 @@ public class Property extends Value {
      */
     private boolean isDiscriminator;
 
-    // internal use, not from modelerfour
-    private ObjectSchema parentSchema;
-
     /**
      * When a property is flattened, the property will be the set of serialized names to get to that target property.
      *
@@ -46,6 +43,9 @@ public class Property extends Value {
     private String clientDefaultValue;
 
     private String summary;
+
+    // internal use, not from modelerfour
+    private ObjectSchema parentSchema;
 
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)

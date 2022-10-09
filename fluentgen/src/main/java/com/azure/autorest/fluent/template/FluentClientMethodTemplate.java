@@ -23,8 +23,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean addContextParameter = !contextInParameters(clientMethod);
+        boolean mergeContextParameter = contextInParameters(clientMethod);
         boolean isLroPagination = GenericType.Mono(GenericType.Response(GenericType.FluxByteBuffer)).equals(restAPIMethod.getReturnType().getClientType());
         String endOfLine = addContextParameter ? "" : ";";
         String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());
@@ -196,8 +196,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean addContextParameter = settings.getAddContextParameter() && !(settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean addContextParameter = !contextInParameters(clientMethod);
+        boolean mergeContextParameter = contextInParameters(clientMethod);
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
@@ -227,9 +227,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
+            addOptionalVariables(function, clientMethod);
+            function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent(() -> {
                 function.line(".last()");
                 function.line(String.format(".flatMap(%s::getLroFinalResultOrError);", clientMethod.getClientReference()));
@@ -238,15 +239,30 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     }
 
     @Override
+    protected void generateLongRunningSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        super.generateSyncMethod(clientMethod, typeBlock, restAPIMethod, settings);
+//        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+//        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+//        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+//            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+//            if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+//                function.methodReturn(String.format("%s(%s).block()", asyncMethodName, clientMethod.getArgumentList()));
+//            } else {
+//                function.line("%s(%s).block();", asyncMethodName, clientMethod.getArgumentList());
+//            }
+//        });
+    }
+
+    @Override
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        boolean mergeContextParameter = settings.getAddContextParameter() && (settings.isContextClientMethodParameter() && contextInParameters(clientMethod));
+        boolean mergeContextParameter = contextInParameters(clientMethod);
         String contextParam = mergeContextParameter ? "context" : String.format("%s.getContext()", clientMethod.getClientReference());;
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[1];
 
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+            addOptionalVariables(function, clientMethod);
             if (mergeContextParameter) {
                 function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
             }
@@ -262,9 +278,10 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-            function.line("return %s(%s)", "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName()), clientMethod.getArgumentList());
+            addOptionalVariables(function, clientMethod);
+            function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
             function.indent((() -> {
                 function.text(".getSyncPoller();");
             }));
