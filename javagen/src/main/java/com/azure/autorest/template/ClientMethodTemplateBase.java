@@ -93,6 +93,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                             .map(clientModelProperty -> clientModelProperty.getClientType())
                             .map(valueListType -> {
                                 // value type is List<T>, we need to get the typeArguments
+                                if (!(valueListType instanceof ListType)) {
+                                    throw new IllegalArgumentException("value type must be list");
+                                }
                                 IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
                                 if (listTypeArgs.length == 0) {
                                     throw new IllegalArgumentException("list type arguments' length for paging value should not be 0.");
