@@ -9,7 +9,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /** The DatetimeWrapper model. */
 @Fluent
@@ -75,11 +77,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        jsonWriter.writeStringField("now", this.now == null ? null : this.now.toString(), false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("now", Objects.toString(this.now, null));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -89,7 +91,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * @return An instance of DatetimeWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DatetimeWrapper fromJson(JsonReader jsonReader) {
+    public static DatetimeWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     OffsetDateTime field = null;
@@ -99,9 +101,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
+                            field =
+                                    reader.getNullable(
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("now".equals(fieldName)) {
-                            now = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
+                            now = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

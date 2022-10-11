@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The Pet model. */
 @Fluent
@@ -74,11 +75,11 @@ public class Pet implements JsonSerializable<Pet> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", this.id, false);
-        jsonWriter.writeStringField("name", this.name, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeNumberField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -88,7 +89,7 @@ public class Pet implements JsonSerializable<Pet> {
      * @return An instance of Pet if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Pet fromJson(JsonReader jsonReader) {
+    public static Pet fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
@@ -98,9 +99,9 @@ public class Pet implements JsonSerializable<Pet> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

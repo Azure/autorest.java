@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The Cat model. */
@@ -94,13 +95,13 @@ public class Cat extends Pet {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", getId(), false);
-        jsonWriter.writeStringField("name", getName(), false);
-        jsonWriter.writeStringField("color", this.color, false);
-        jsonWriter.writeArrayField("hates", this.hates, false, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("color", this.color);
+        jsonWriter.writeArrayField("hates", this.hates, (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -110,7 +111,7 @@ public class Cat extends Pet {
      * @return An instance of Cat if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Cat fromJson(JsonReader jsonReader) {
+    public static Cat fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
@@ -122,11 +123,11 @@ public class Cat extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
+                            color = reader.getString();
                         } else if ("hates".equals(fieldName)) {
                             hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
                         } else {

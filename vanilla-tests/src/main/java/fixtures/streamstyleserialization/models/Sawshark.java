@@ -9,10 +9,11 @@ import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 /** The Sawshark model. */
 @Fluent
@@ -89,16 +90,16 @@ public final class Sawshark extends Shark {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype, false);
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : getBirthday().toString(), false);
-        jsonWriter.writeStringField("species", getSpecies(), false);
-        jsonWriter.writeArrayField("siblings", getSiblings(), false, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeIntegerField("age", getAge(), false);
-        jsonWriter.writeBinaryField("picture", this.picture, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeBinaryField("picture", this.picture);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -110,10 +111,9 @@ public final class Sawshark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Sawshark fromJson(JsonReader jsonReader) {
+    public static Sawshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    String fishtype = "sawshark";
                     boolean lengthFound = false;
                     float length = 0.0f;
                     boolean birthdayFound = false;
@@ -121,39 +121,48 @@ public final class Sawshark extends Shark {
                     String species = null;
                     List<Fish> siblings = null;
                     Integer age = null;
-                    byte[] picture = null;
+                    byte[] picture = new byte[0];
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("fishtype".equals(fieldName)) {
-                            fishtype = reader.getStringValue();
+                            String fishtype = reader.getString();
+                            if (!"sawshark".equals(fishtype)) {
+                                throw new IllegalStateException(
+                                        "'fishtype' was expected to be non-null and equal to 'sawshark'. The found 'fishtype' was '"
+                                                + fishtype
+                                                + "'.");
+                            }
                         } else if ("length".equals(fieldName)) {
-                            length = reader.getFloatValue();
+                            length = reader.getFloat();
                             lengthFound = true;
                         } else if ("birthday".equals(fieldName)) {
-                            birthday = reader.getNullableValue(r -> OffsetDateTime.parse(reader.getStringValue()));
+                            birthday =
+                                    reader.getNullable(
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                             birthdayFound = true;
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getStringValue();
+                            species = reader.getString();
                         } else if ("siblings".equals(fieldName)) {
                             siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                         } else if ("age".equals(fieldName)) {
-                            age = reader.getIntegerNullableValue();
+                            age = reader.getNullable(JsonReader::getInt);
                         } else if ("picture".equals(fieldName)) {
-                            picture = reader.getNullableValue(r -> Base64.getDecoder().decode(reader.getStringValue()));
+                            picture = reader.getBinary();
                         } else {
                             reader.skipChildren();
                         }
                     }
+                    if (lengthFound && birthdayFound) {
+                        Sawshark deserializedValue = new Sawshark(length, birthday);
+                        deserializedValue.setSpecies(species);
+                        deserializedValue.setSiblings(siblings);
+                        deserializedValue.setAge(age);
+                        deserializedValue.picture = picture;
 
-                    if (!"sawshark".equals(fishtype)) {
-                        throw new IllegalStateException(
-                                "'fishtype' was expected to be non-null and equal to 'sawshark'. The found 'fishtype' was '"
-                                        + fishtype
-                                        + "'.");
+                        return deserializedValue;
                     }
-
                     List<String> missingProperties = new ArrayList<>();
                     if (!lengthFound) {
                         missingProperties.add("length");
@@ -162,18 +171,8 @@ public final class Sawshark extends Shark {
                         missingProperties.add("birthday");
                     }
 
-                    if (!CoreUtils.isNullOrEmpty(missingProperties)) {
-                        throw new IllegalStateException(
-                                "Missing required property/properties: " + String.join(", ", missingProperties));
-                    }
-                    Sawshark deserializedValue = new Sawshark(length, birthday);
-                    deserializedValue.fishtype = fishtype;
-                    deserializedValue.setSpecies(species);
-                    deserializedValue.setSiblings(siblings);
-                    deserializedValue.setAge(age);
-                    deserializedValue.picture = picture;
-
-                    return deserializedValue;
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

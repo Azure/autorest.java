@@ -22,6 +22,7 @@ jobs:
     variables:
       JavaVersion: 1.8
       NodeVersion: '16.x'
+      isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -128,6 +129,11 @@ jobs:
           publishJUnitResults: false
 
       - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
+        displayName: 'Stop Cadl Ranch Test Server'
+        workingDirectory: ./cadl-tests
+
+      - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java.json
         displayName: 'Cadl Ranch Coverage Report'
         workingDirectory: ./cadl-tests
@@ -136,4 +142,12 @@ jobs:
       - publish: $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json
         artifact: CoverageReport
         displayName: 'Publish Cadl Ranch Coverage Report'
-        continueOnError: true
+
+      - task: AzureCLI@2
+        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
+        condition: eq(variables.isMain, 'true')
+        inputs:
+          azureSubscription: "Azure SDK Playground"
+          scriptType: "bash"
+          scriptLocation: "inlineScript"
+          inlineScript: node $(Build.SourcesDirectory)/cadl-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./cadl-extension/package.json').version")

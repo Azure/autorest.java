@@ -362,12 +362,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -403,12 +398,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -441,12 +431,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *
@@ -630,12 +615,7 @@ public final class DpgClientImpl {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *

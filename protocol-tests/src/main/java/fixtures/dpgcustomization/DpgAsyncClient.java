@@ -106,12 +106,7 @@ public final class DpgAsyncClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *

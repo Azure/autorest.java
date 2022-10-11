@@ -110,13 +110,8 @@ public final class ResiliencyDevDrivenClient {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             key: String (Required)
-     *             received: String(raw/model) (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     key: String (Required)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      *

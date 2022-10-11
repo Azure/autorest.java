@@ -38,15 +38,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     value (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -70,15 +65,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -102,15 +92,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -135,15 +120,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     value (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -179,15 +159,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -212,15 +187,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -256,15 +226,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -288,15 +253,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -332,15 +292,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     odata.nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -376,15 +331,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -410,15 +360,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -443,15 +388,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -475,15 +415,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -507,15 +442,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -539,15 +469,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -571,15 +496,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     odata.nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -606,15 +526,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     odata.nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -654,15 +569,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -687,15 +597,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -720,15 +625,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -752,15 +652,10 @@ public final class AutoRestPagingTestServiceClient {
      *
      * <pre>{@code
      * {
-     *     values (Optional): [
-     *          (Optional){
-     *             properties (Optional): {
-     *                 id: Integer (Optional)
-     *                 name: String (Optional)
-     *             }
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
      * }
      * }</pre>
      *
