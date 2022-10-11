@@ -104,7 +104,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                             })
                             .findFirst().orElse(null);
                     if (responseBodyType == null) {
-                        throw new IllegalStateException(String.format("responseBodyType should not be null for paging method. rawResponseType = %s", rawResponseType.toString()));
+                        throw new IllegalStateException(String.format("%s not found in properties of rawResponseType. rawResponseType = ", itemName, rawResponseType.toString()));
                     }
                 } else {
                     responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
