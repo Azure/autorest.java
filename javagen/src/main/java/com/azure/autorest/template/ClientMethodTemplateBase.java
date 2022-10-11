@@ -83,7 +83,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                     // rawResponseType has properties: 'value' and 'nextLink'
                     IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
                     if (!(rawResponseType instanceof ClassType)) {
-                        throw new IllegalArgumentException("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method.");
+                        throw new IllegalStateException(String.format("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method. rawResponseType = %s", rawResponseType.toString()));
                     }
                     ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
                     List<ClientModelProperty> properties = new ArrayList<>();
@@ -94,15 +94,18 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                             .map(valueListType -> {
                                 // value type is List<T>, we need to get the typeArguments
                                 if (!(valueListType instanceof ListType)) {
-                                    throw new IllegalArgumentException("value type must be list");
+                                    throw new IllegalStateException(String.format("value type must be list for paging method. rawResponseType = %s", rawResponseType.toString()));
                                 }
                                 IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
                                 if (listTypeArgs.length == 0) {
-                                    throw new IllegalArgumentException("list type arguments' length for paging value should not be 0.");
+                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s", rawResponseType.toString()));
                                 }
                                 return listTypeArgs[0];
                             })
                             .findFirst().orElse(null);
+                    if (responseBodyType == null) {
+                        throw new IllegalStateException(String.format("responseBodyType should not be null or void for paging method. rawResponseType = %s", rawResponseType.toString()));
+                    }
                 } else {
                     responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
                 }
