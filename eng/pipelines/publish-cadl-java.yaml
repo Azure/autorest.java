@@ -1,0 +1,71 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+jobs:
+  - job: Build
+
+    variables:
+      JavaVersion: 1.8
+      NodeVersion: '16.x'
+
+    steps:
+      - task: NodeTool@0
+        displayName: 'Install Node.js $(NodeVersion)'
+        inputs:
+          versionSpec: '$(NodeVersion)'
+
+      - task: Maven@3
+        retryCountOnTaskFailure: 3
+        displayName: 'Build JAR'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean verify package install'
+          options: '-P local,cadl -T 1C --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - task: Npm@1
+        displayName: 'Install Dependencies for CADL Java'
+        inputs:
+          command: install
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Build Cadl Java'
+        inputs:
+          command: custom
+          customCommand: run build
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Lint Cadl Java'
+        inputs:
+          command: custom
+          customCommand: run lint
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Check-Format Cadl Java'
+        inputs:
+          command: custom
+          customCommand: run check-format
+          workingDir: ./cadl-extension
+
+      - task: Npm@1
+        displayName: 'Pack Cadl Java'
+        inputs:
+          command: custom
+          customCommand: pack
+          workingDir: ./cadl-extension
+
+      - script: |
+          npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+          ls *.tgz | npm publish -0 --access public --tag dev
+          npm config delete //registry.npmjs.org/:_authToken
+        displayName: 'Publish Cadl Java to NPM'
+        workingDirectory: ./cadl-extension
