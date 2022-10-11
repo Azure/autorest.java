@@ -160,8 +160,8 @@ Remove-Item ./partial-update-tests/generated/src/main/java/module-info.java -For
 
 # docs
 @(
-    "--use:. docs/samples/specification/azure_key_credential/readme.md"
-    "--use:. docs/samples/specification/basic/readme.md"
+    "--use:. docs/samples/specification/azure_key_credential/readme.md",
+    "--use:. docs/samples/specification/basic/readme.md",
     "--use:. docs/samples/specification/management/readme.md"
 ) | ForEach-Object -Parallel $generateScript
 
