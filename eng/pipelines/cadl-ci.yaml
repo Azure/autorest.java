@@ -128,7 +128,7 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-       - script: |
+      - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
         displayName: 'Stop Cadl Ranch Test Server'
         workingDirectory: ./cadl-tests
