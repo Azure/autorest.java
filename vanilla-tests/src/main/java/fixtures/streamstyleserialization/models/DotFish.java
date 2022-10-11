@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The DotFish model. */
 @Fluent
@@ -49,10 +50,10 @@ public class DotFish implements JsonSerializable<DotFish> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("species", this.species, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("species", this.species);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -63,7 +64,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      *     JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static DotFish fromJson(JsonReader jsonReader) {
+    public static DotFish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
@@ -73,7 +74,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                     reader.nextToken();
                     if ("fish\\.type".equals(reader.getFieldName())) {
                         reader.nextToken();
-                        discriminatorValue = reader.getStringValue();
+                        discriminatorValue = reader.getString();
                         readerToUse = reader;
                     } else {
                         // If it isn't the discriminator field buffer the JSON to make it replayable and find the
@@ -84,7 +85,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
                             if ("fish\\.type".equals(fieldName)) {
-                                discriminatorValue = replayReader.getStringValue();
+                                discriminatorValue = replayReader.getString();
                                 break;
                             } else {
                                 replayReader.skipChildren();

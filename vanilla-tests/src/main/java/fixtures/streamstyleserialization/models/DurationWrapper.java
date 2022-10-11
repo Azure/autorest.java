@@ -9,7 +9,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Objects;
 
 /** The DurationWrapper model. */
 @Fluent
@@ -50,10 +52,10 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -63,7 +65,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      * @return An instance of DurationWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DurationWrapper fromJson(JsonReader jsonReader) {
+    public static DurationWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Duration field = null;
@@ -72,7 +74,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> Duration.parse(reader.getStringValue()));
+                            field = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

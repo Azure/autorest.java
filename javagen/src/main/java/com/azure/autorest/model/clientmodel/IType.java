@@ -3,6 +3,9 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.json.JsonWriter;
+import com.azure.xml.XmlWriter;
+
 import java.util.Set;
 
 /**
@@ -80,40 +83,61 @@ public interface IType {
     String validate(String expression);
 
     /**
-     * Indicates whether the type needs null guarding in deserialization.
+     * Gets the method that handles JSON deserialization for the type.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
+     * deserialization method and support needs to be added.
      *
-     * @return Whether the type needs null guarding in deserialization.
+     * @return The JSON deserialization method, or null i it isn't supported directly.
      */
-    default boolean deserializationNeedsNullGuarding() {
-        return true;
-    }
+    String jsonDeserializationMethod();
 
     /**
-     * Gets the method that handles field serialization for the type.
+     * Gets the method call that will handle JSON serialization.
      * <p>
-     * The field serialization method handles writing both the JSON field name and value.
+     * If {@code fieldName} is null it is assumed that a JSON value is being serialized.
      * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a field
-     * serialization method and support needs to be added.
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
+     * method and support needs to be added.
      *
-     * @return The field serialization method, or null if it isn't supported directly.
+     * @param jsonWriterName The name of the {@link JsonWriter} performing serialization.
+     * @param fieldName The name of the JSON field, optional.
+     * @param valueGetter The value getter.
+     * @return The method call that will handle JSON serialization, or null if it isn't supported directly.
      */
-    default String streamStyleJsonFieldSerializationMethod() {
-        return null;
-    }
+    String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter);
 
     /**
-     * Gets the method that handles value serialization for the type.
+     * Gets the method that handles XML deserialization for the type.
      * <p>
-     * The value serialization method only handles writing the JSON value. The enables it to be used in situations such
-     * as writing an array or writing to the root of the JSON string.
+     * This method handles both XML attributes and elements. If {@code attributeName} is null the XML element
+     * deserialization method is returned.
      * <p>
-     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a value
-     * serialization method and support needs to be added.
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an XML
+     * deserialization method and support needs to be added.
      *
-     * @return The value serialization method, or null if it isn't supported directly.
+     * @param attributeName The attribute name, if null this is considered to be an element call.
+     * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
+     * @return The XML deserialization method, or null i it isn't supported directly.
      */
-    default String streamStyleJsonValueSerializationMethod() {
-        return null;
-    }
+    String xmlDeserializationMethod(String attributeName, String attributeNamespace);
+
+    /**
+     * Gets the method call that will handle XML serialization.
+     * <p>
+     * If {@code attributeOrElementName} is null it is assumed that an XML value is being serialized.
+     * <p>
+     * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
+     * method and support needs to be added.
+     *
+     * @param xmlWriterName The name of the {@link XmlWriter} performing serialization.
+     * @param attributeOrElementName The name of the XML attribute or element, optional.
+     * @param namespaceUri The namespace URI of the XML attribute or element, optional.
+     * @param valueGetter The value getter.
+     * @param isAttribute Whether an attribute is being written, if true {@code attributeOrElementName} must be set.
+     * @param nameIsVariable Whether the {@code attributeOrElementName} is a variable instead of a string.
+     * @return The method call that will handle XML serialization, or null if it isn't supported directly.
+     */
+    String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute, boolean nameIsVariable);
 }

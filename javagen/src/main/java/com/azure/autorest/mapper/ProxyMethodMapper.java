@@ -341,7 +341,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     responseBodyType = GenericType.FluxByteBuffer;
                 }
                 IType genericResponseType = GenericType.RestResponse(
-                        Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
+                    Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
                 return createSingleValueAsyncReturnType(genericResponseType);
             } else {
                 ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation,

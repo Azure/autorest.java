@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The ArrayWrapper model. */
@@ -50,10 +51,10 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("array", this.array, false, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -63,7 +64,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * @return An instance of ArrayWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static ArrayWrapper fromJson(JsonReader jsonReader) {
+    public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     List<String> array = null;
@@ -72,7 +73,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array = reader.readArray(reader1 -> reader1.getStringValue());
+                            array = reader.readArray(reader1 -> reader1.getString());
                         } else {
                             reader.skipChildren();
                         }

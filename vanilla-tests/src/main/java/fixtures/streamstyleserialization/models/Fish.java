@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The Fish model. */
@@ -99,12 +100,12 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
-        jsonWriter.writeStringField("species", this.species, false);
-        jsonWriter.writeArrayField("siblings", this.siblings, false, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("species", this.species);
+        jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -116,7 +117,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
      */
-    public static Fish fromJson(JsonReader jsonReader) {
+    public static Fish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
@@ -126,7 +127,7 @@ public class Fish implements JsonSerializable<Fish> {
                     reader.nextToken();
                     if ("fishtype".equals(reader.getFieldName())) {
                         reader.nextToken();
-                        discriminatorValue = reader.getStringValue();
+                        discriminatorValue = reader.getString();
                         readerToUse = reader;
                     } else {
                         // If it isn't the discriminator field buffer the JSON to make it replayable and find the
@@ -137,7 +138,7 @@ public class Fish implements JsonSerializable<Fish> {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
                             if ("fishtype".equals(fieldName)) {
-                                discriminatorValue = replayReader.getStringValue();
+                                discriminatorValue = replayReader.getString();
                                 break;
                             } else {
                                 replayReader.skipChildren();

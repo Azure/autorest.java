@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** The Siamese model. */
@@ -80,14 +81,14 @@ public final class Siamese extends Cat {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", getId(), false);
-        jsonWriter.writeStringField("name", getName(), false);
-        jsonWriter.writeStringField("color", getColor(), false);
-        jsonWriter.writeArrayField("hates", getHates(), false, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("breed", this.breed, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("color", getColor());
+        jsonWriter.writeArrayField("hates", getHates(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("breed", this.breed);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -97,7 +98,7 @@ public final class Siamese extends Cat {
      * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Siamese fromJson(JsonReader jsonReader) {
+    public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
@@ -110,15 +111,15 @@ public final class Siamese extends Cat {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getStringValue();
+                            color = reader.getString();
                         } else if ("hates".equals(fieldName)) {
                             hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
                         } else if ("breed".equals(fieldName)) {
-                            breed = reader.getStringValue();
+                            breed = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

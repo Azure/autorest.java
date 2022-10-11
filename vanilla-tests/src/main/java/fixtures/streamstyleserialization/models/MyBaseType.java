@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The MyBaseType model. */
 @Fluent
@@ -74,15 +75,15 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("propB1", this.propB1, false);
+        jsonWriter.writeStringField("propB1", this.propB1);
         if (propBH1 != null) {
             jsonWriter.writeStartObject("helper");
-            jsonWriter.writeStringField("propBH1", this.propBH1, false);
+            jsonWriter.writeStringField("propBH1", this.propBH1);
             jsonWriter.writeEndObject();
         }
-        return jsonWriter.writeEndObject().flush();
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -93,7 +94,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      *     to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      */
-    public static MyBaseType fromJson(JsonReader jsonReader) {
+    public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
@@ -103,7 +104,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                     reader.nextToken();
                     if ("kind".equals(reader.getFieldName())) {
                         reader.nextToken();
-                        discriminatorValue = reader.getStringValue();
+                        discriminatorValue = reader.getString();
                         readerToUse = reader;
                     } else {
                         // If it isn't the discriminator field buffer the JSON to make it replayable and find the
@@ -114,7 +115,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                             String fieldName = replayReader.getFieldName();
                             replayReader.nextToken();
                             if ("kind".equals(fieldName)) {
-                                discriminatorValue = replayReader.getStringValue();
+                                discriminatorValue = replayReader.getString();
                                 break;
                             } else {
                                 replayReader.skipChildren();

@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The Dog model. */
 @Fluent
@@ -65,12 +66,12 @@ public final class Dog extends Pet {
     }
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntegerField("id", getId(), false);
-        jsonWriter.writeStringField("name", getName(), false);
-        jsonWriter.writeStringField("food", this.food, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("food", this.food);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -80,7 +81,7 @@ public final class Dog extends Pet {
      * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
      */
-    public static Dog fromJson(JsonReader jsonReader) {
+    public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Integer id = null;
@@ -91,11 +92,11 @@ public final class Dog extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getIntegerNullableValue();
+                            id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getStringValue();
+                            name = reader.getString();
                         } else if ("food".equals(fieldName)) {
-                            food = reader.getStringValue();
+                            food = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
