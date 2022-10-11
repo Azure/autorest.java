@@ -145,9 +145,10 @@ jobs:
 
       - task: AzureCLI@2
         displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
-        condition: eq(variables.isMain, 'true')
+#        condition: eq(variables.isMain, 'true')
         inputs:
           azureSubscription: "Azure SDK Playground"
           scriptType: "bash"
           scriptLocation: "inlineScript"
           inlineScript: node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile ./cadl-ranch-coverage-java.json --generatorName java --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./cadl-extension/package.json').version")
+          workingDir: ./cadl-tests
