@@ -317,7 +317,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property does not have setter 2. child does not contain property
+     * Override parent setters if: 1. parent property has setter 2. child does not contain property
      * that shadow this parent property, otherwise overridden parent setter methods will collide with child setter
      * methods
      *

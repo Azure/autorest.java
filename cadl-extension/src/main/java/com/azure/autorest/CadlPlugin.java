@@ -11,6 +11,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.cadl.model.EmitterOptions;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
 import com.azure.core.util.Configuration;
@@ -32,33 +33,6 @@ import java.util.Map;
 public class CadlPlugin extends Javagen {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
-
-    public static class Options {
-        private String namespace;
-        private String outputFolder;
-        private String serviceName;
-        private Boolean partialUpdate;
-
-        public Options setNamespace(String namespace) {
-            this.namespace = namespace;
-            return this;
-        }
-
-        public Options setOutputFolder(String outputFolder) {
-            this.outputFolder = outputFolder;
-            return this;
-        }
-
-        public Options setServiceName(String serviceName) {
-            this.serviceName = serviceName;
-            return this;
-        }
-
-        public Options setPartialUpdate(Boolean partialUpdate) {
-            this.partialUpdate = partialUpdate;
-            return this;
-        }
-    }
 
     public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
         return super.writeToTemplates(codeModel, client, settings, false);
@@ -143,6 +117,7 @@ public class CadlPlugin extends Javagen {
 
         SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
     }
+
     public static class MockConnection extends Connection {
 
         public MockConnection() {
@@ -150,21 +125,22 @@ public class CadlPlugin extends Javagen {
         }
 
     }
-    public CadlPlugin(Options options) {
+
+    public CadlPlugin(EmitterOptions options) {
         super(new MockConnection(), "dummy", "dummy");
-        SETTINGS_MAP.put("namespace", options.namespace);
-        if (!CoreUtils.isNullOrEmpty(options.outputFolder)) {
-            SETTINGS_MAP.put("output-folder", options.outputFolder);
+        SETTINGS_MAP.put("namespace", options.getNamespace());
+        if (!CoreUtils.isNullOrEmpty(options.getOutputPath())) {
+            SETTINGS_MAP.put("output-folder", options.getOutputPath());
         }
-        if (!CoreUtils.isNullOrEmpty(options.serviceName)) {
-            SETTINGS_MAP.put("service-name", options.serviceName);
+        if (!CoreUtils.isNullOrEmpty(options.getServiceName())) {
+            SETTINGS_MAP.put("service-name", options.getServiceName());
         }
-        if (options.partialUpdate != null) {
-            SETTINGS_MAP.put("partial-update", options.partialUpdate);
+        if (options.getPartialUpdate() != null) {
+            SETTINGS_MAP.put("partial-update", options.getPartialUpdate());
         }
 
         JavaSettingsAccessor.setHost(this);
-        LOGGER.info("Output folder: {}", options.outputFolder);
+        LOGGER.info("Output folder: {}", options.getOutputPath());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
 
         Mappers.setFactory(new CadlMapperFactory());

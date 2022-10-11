@@ -14,18 +14,20 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 export interface EmitterOptions {
-  "namespace": string;
-  "service-name": string;
-  "partial-update": boolean;
+  namespace: string;
+  serviceName: string;
+  partialUpdate: boolean;
+  outputPath: string;
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
   additionalProperties: false,
   properties: {
-    "namespace": { type: "string", nullable: true },
-    "service-name": { type: "string", nullable: true },
-    "partial-update": { type: "boolean", nullable: true },
+    namespace: { type: "string", nullable: true },
+    serviceName: { type: "string", nullable: true },
+    partialUpdate: { type: "boolean", nullable: true },
+    outputPath: { type: "string", nullable: true },
   },
   required: [],
 };
@@ -59,7 +61,10 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     (codeModel as any).configuration = configuration;
   }
 
-  const outputPath = program.compilerOptions.outputPath ?? getNormalizedAbsolutePath("./cadl-output", undefined);
+  const outputPath =
+    options.outputPath ?? program.compilerOptions.outputPath ?? getNormalizedAbsolutePath("./cadl-output", undefined);
+  options.outputPath = getNormalizedAbsolutePath(outputPath, undefined);
+
   const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 
   await promises.mkdir(outputPath).catch((err) => {
@@ -75,14 +80,11 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
   const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
   program.logger.info(`Exec JAR ${jarFileName}`);
 
-  const javaOptions = [
+  const output = await promisify(execFile)("java", [
     `-DemitterOptions=${JSON.stringify(options)}`,
     "-jar",
     jarFileName,
     codeModelFileName,
-    getNormalizedAbsolutePath(outputPath, undefined),
-  ];
-
-  const output = await promisify(execFile)("java", javaOptions);
+  ]);
   program.logger.info(output.stdout ? output.stdout : output.stderr);
 }

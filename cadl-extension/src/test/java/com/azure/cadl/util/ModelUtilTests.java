@@ -7,12 +7,12 @@ import com.azure.autorest.CadlPlugin;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.cadl.model.EmitterOptions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class ModelUtilTests {
@@ -20,8 +20,9 @@ public class ModelUtilTests {
     // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        CadlPlugin.Options options = new CadlPlugin.Options().setNamespace("com.azure.client");
-        CadlPlugin plugin = new CadlPlugin(options);
+        CadlPlugin plugin = new CadlPlugin(
+                new EmitterOptions()
+                        .setNamespace("com.azure.client"));
     }
 
     @Test

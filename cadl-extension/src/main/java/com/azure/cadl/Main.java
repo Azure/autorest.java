@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.cadl.model.EmitterOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,7 +30,6 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,10 +52,10 @@ public class Main {
         // load code-model.yaml
         CodeModel codeModel = loadCodeModel(inputYamlFileName);
 
-        CadlPlugin.Options options = loadCadlOptions(args, codeModel);
+        EmitterOptions emitterOptions = loadEmitterOptions(codeModel);
 
         // initialize plugin
-        CadlPlugin cadlPlugin = new CadlPlugin(options);
+        CadlPlugin cadlPlugin = new CadlPlugin(emitterOptions);
 
         // transform code model
         codeModel = new Transformer().transform(codeModel);
@@ -92,7 +92,7 @@ public class Main {
             try {
                 formattedSource = formatter.formatSourceAndFixImports(fileContent);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", filePath, e);
+                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputPath() + filePath, e);
                 // but we continue so user can still check the file and see why format fails
             }
             formattedFiles.put(filePath, formattedSource);
@@ -114,77 +114,33 @@ public class Main {
         }
     }
 
-    private static CadlPlugin.Options loadCadlOptions(String[] args, CodeModel codeModel) {
-        // output-folder
-        String outputFolder = "cadl-tests/cadl-output/";
-
-        if (args.length >= 2) {
-            outputFolder = args[1];
-            if (!outputFolder.endsWith("/")) {
-                outputFolder += "/";
-            }
-        }
-
-        final String outputFolderFinal = outputFolder;
+    private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
 
         String emitterOptionsJson = Configuration.getGlobalConfiguration().get("emitterOptions");
-        Map<String, Object> emitterOptions = parseJsonAsMap(emitterOptionsJson);
 
-        if (emitterOptions != null) {
-            // namespace
-            String namespace = getNonEmptyStringOrNull(emitterOptions, "namespace");
-            if (CoreUtils.isNullOrEmpty(namespace)) {
-                if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
-                    namespace = codeModel.getLanguage().getJava().getNamespace();
-                }
-            }
-
-            // service-name
-            String serviceName = getNonEmptyStringOrNull(emitterOptions, "service-name");
-
-            // partial-update
-            Boolean partialUpdate = getBoolean(emitterOptions, "partial-update");
-
-            return new CadlPlugin.Options()
-                    .setNamespace(namespace)
-                    .setOutputFolder(outputFolderFinal)
-                    .setServiceName(serviceName)
-                    .setPartialUpdate(partialUpdate);
-        } else {
-            return new CadlPlugin.Options();
-        }
-    }
-
-    private static Boolean getBoolean(Map<String, Object> emitterOptions, String key) {
-        final Object result = emitterOptions.get(key);
-        if (result != null) {
-            if (result instanceof Boolean) {
-                return (Boolean) result;
-            } else if (result instanceof String) {
-                return Boolean.valueOf((String) result);
-            }
-        }
-        return null;
-    }
-
-    private static Map<String, Object> parseJsonAsMap(String emitterOptionsJson) {
-        Map<String, Object> emitterOptions = new HashMap<>();
-        if (!CoreUtils.isNullOrEmpty(emitterOptionsJson)) {
+        if (emitterOptionsJson != null) {
             try {
-                emitterOptions = OBJECT_MAPPER.readValue(emitterOptionsJson, Map.class);
+                EmitterOptions options = OBJECT_MAPPER.readValue(emitterOptionsJson, EmitterOptions.class);
+                // namespace
+                if (CoreUtils.isNullOrEmpty(options.getNamespace())) {
+                    if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+                        options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
+                    }
+                }
+
+                // output path
+                if (CoreUtils.isNullOrEmpty(options.getOutputPath())) {
+                    options.setOutputPath("cadl-tests/cadl-output/");
+                } else if (!options.getOutputPath().endsWith("/")) {
+                    options.setOutputPath(options.getOutputPath() + "/");
+                }
+
+                return options;
             } catch (JsonProcessingException e) {
                 LOGGER.info("Read emitter options failed, emitter options json: {}", emitterOptionsJson);
             }
         }
-        return emitterOptions;
-    }
-
-    private static String getNonEmptyStringOrNull(Map<String, Object> emitterOptions, String key) {
-        final Object result = emitterOptions.get(key);
-        if (result != null && !"".equals(result)) {
-            return result.toString();
-        }
-        return null;
+        return new EmitterOptions();
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
