@@ -47,7 +47,7 @@ jobs:
           publishJUnitResults: false
 
       - task: Npm@1
-        displayName: 'Install Dependencies for CADL Java'
+        displayName: 'Install Dependencies for Cadl Java'
         inputs:
           command: install
           workingDir: ./cadl-extension
