@@ -364,15 +364,10 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -413,15 +408,10 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -451,15 +441,10 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -482,15 +467,10 @@ public final class CadlCoreOpsImpl {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *

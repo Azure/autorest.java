@@ -163,18 +163,37 @@ public class EnumType implements IType {
         return implementationDetails;
     }
 
-    public final boolean deserializationNeedsNullGuarding() {
-        return false;
+    @Override
+    public String jsonDeserializationMethod() {
+        return String.format("getNullable(enumReader -> %s.%s(enumReader.getString()))", name, getFromJsonMethodName());
     }
 
     @Override
-    public String streamStyleJsonFieldSerializationMethod() {
-        return "writeStringField";
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        return fieldName == null
+            ? String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter)
+            : String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
+                jsonWriterName, fieldName, valueGetter);
     }
 
     @Override
-    public String streamStyleJsonValueSerializationMethod() {
-        return "writeString";
+    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+        String createCall = name + "::" + getFromJsonMethodName();
+        if (attributeName == null) {
+            return String.format("getNullableElement(%s)", createCall);
+        } else {
+            return (attributeNamespace == null)
+                ? String.format("getNullableAttribute(null, \"%s\", %s)", attributeName, createCall)
+                : String.format("getNullableAttribute(\"%s\", \"%s\", %s)", attributeNamespace, attributeName, createCall);
+        }
+    }
+
+    @Override
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String value = "Objects.toString(" + valueGetter + ", null)";
+        return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeString", attributeOrElementName, namespaceUri,
+            value, isAttribute, nameIsVariable);
     }
 
     @Override

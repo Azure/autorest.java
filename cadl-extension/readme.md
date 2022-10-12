@@ -1,56 +1,47 @@
-# Cadl-Java
+# Prerequisite
 
-## Install Cadl
+Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node --version`)
 
-Install Node.js and [Cadl](https://github.com/microsoft/cadl/).
+Install [Java](https://docs.microsoft.com/en-us/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-```shell
-npm install -g @cadl-lang/compiler
+Install [Cadl](https://github.com/microsoft/cadl/).
+
+# Initialize Cadl Project
+
+Follow [Cadl Getting Started](https://github.com/microsoft/cadl/#using-node--npm) to initialize your Cadl project.
+
+Make sure `cadl compile .` runs correctly.
+
+# Add Cadl-Java
+
+Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@cadl-lang/compiler" as in your Cadl project.
+
+Modify `package.json`, add one line under `dependencies`:
+```diff
+    "dependencies": {
+      "@cadl-lang/compiler": "^0.35.0",
+      "@cadl-lang/rest": "^0.17.0",
+      "@azure-tools/cadl-azure-core": "^0.7.0",
++      "@azure-tools/cadl-java": "https://github.com/Azure/autorest.java/releases/download/%40azure-tools%2Fcadl-java_0.1.0-dev.7/cadl-extension.azure-tools-cadl-java-0.1.0-dev.7.tgz"
+    },
 ```
 
-## Build JAR
+Run `npm install` again to install `@azure-tools/cadl-java`.
 
-`mvn package -P local,cadl` in project root.
-
-This will build `./cadl-extension`, which is basically `preprocessor` and `javagen` combined.
-
-## Build and Install Cadl-Java
-
-`bash setup.sh` in `./cadl-tests` folder.
-
-It makes the npm package in `./cadl-extension`, then install it to `./cadl-tests` folder.
-
-## Generate Code
-
-`cadl compile <target.cadl>` in `./cadl-tests` folder.
-
-Generated code will be at `./cadl-tests/cadl-ouput/` folder.
-
-## Temporary Environment Variables for Testing
-
-`GENERATE_MODELS`: generate all models. Default is `false`.
-`GENERATE_CONVENIENCE_METHODS`: generate convenience methods for all operations. Default is `false`.
-`NAMESPACE`: the overriding namespace for the package.
-
-## Temporary Demonstration for Convenience Methods
-
-To enable generating convenience method for an operation or a group, add `convenienceMethod` decorator to the operation of the interface in Cadl.
-
-E.g.
-```typescript
-@convenienceMethod
-@route("/alertConfigs")
-interface AlertConfigs extends LifetimeOperations<AlertConfig, ListFilters> {
-}
+Modify (or create) `cadl-project.yaml`, add one line under `emitters`:
+```diff
+emitters:
++  '@azure-tools/cadl-java': true
 ```
 
-## Troubleshooting
+# Generate Java
 
-### New version of `@cadl-lang/compiler` etc.
+Same `cadl compile .` or `cadl compile . --outputPath=<target-folder>`.
 
-Force an install of new version via deleting `package-lock.json` and `node_modules` in `./cadl-extension` folder.
+If `outputPath` option is not provided, generated Java code will be under `cadl-output` folder.
 
-```shell
-rm -rf node_modules
-rm package-lock.json
-```
+# Optional Configuration (temporary solution)
+
+[Side-car](https://github.com/Azure/autorest.java/wiki/Cadl-to-Java#side-car-design-changes-expected) for override namespace or service name.
+
+[Convenience method](https://github.com/Azure/autorest.java/wiki/Cadl-to-Java#models-for-convenience-method-design-changes-expected) for generating models and methods for selected operations.

@@ -9,7 +9,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /** The DateWrapper model. */
 @Fluent
@@ -75,11 +77,11 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field == null ? null : this.field.toString(), false);
-        jsonWriter.writeStringField("leap", this.leap == null ? null : this.leap.toString(), false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("leap", Objects.toString(this.leap, null));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -89,7 +91,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DateWrapper fromJson(JsonReader jsonReader) {
+    public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     LocalDate field = null;
@@ -99,9 +101,9 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
+                            field = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else if ("leap".equals(fieldName)) {
-                            leap = reader.getNullableValue(r -> LocalDate.parse(reader.getStringValue()));
+                            leap = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

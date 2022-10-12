@@ -118,7 +118,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
-        return getFileWithResponseAsync().flatMapMany(Response::getValue);
+        return getFileWithResponseAsync().flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**
@@ -132,7 +132,8 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync(Context context) {
-        return getFileWithResponseAsync(context).flatMapMany(Response::getValue);
+        return getFileWithResponseAsync(context)
+                .flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**
@@ -229,7 +230,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
-        return getFileLargeWithResponseAsync().flatMapMany(Response::getValue);
+        return getFileLargeWithResponseAsync().flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**
@@ -243,7 +244,8 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync(Context context) {
-        return getFileLargeWithResponseAsync(context).flatMapMany(Response::getValue);
+        return getFileLargeWithResponseAsync(context)
+                .flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**
@@ -340,7 +342,7 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
-        return getEmptyFileWithResponseAsync().flatMapMany(Response::getValue);
+        return getEmptyFileWithResponseAsync().flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**
@@ -354,7 +356,8 @@ public final class Files {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync(Context context) {
-        return getEmptyFileWithResponseAsync(context).flatMapMany(Response::getValue);
+        return getEmptyFileWithResponseAsync(context)
+                .flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());
     }
 
     /**

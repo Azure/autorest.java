@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The LongWrapper model. */
 @Fluent
@@ -74,11 +75,11 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("field1", this.field1, false);
-        jsonWriter.writeLongField("field2", this.field2, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField("field2", this.field2);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -88,7 +89,7 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
      * @return An instance of LongWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static LongWrapper fromJson(JsonReader jsonReader) {
+    public static LongWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Long field1 = null;
@@ -98,9 +99,9 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getLongNullableValue();
+                            field1 = reader.getNullable(JsonReader::getLong);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getLongNullableValue();
+                            field2 = reader.getNullable(JsonReader::getLong);
                         } else {
                             reader.skipChildren();
                         }

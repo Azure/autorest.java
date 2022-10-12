@@ -39,14 +39,9 @@ public final class PagedClient {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      *

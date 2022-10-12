@@ -147,6 +147,14 @@ public class Transformer {
       for (Property property : objectSchema.getProperties()) {
         if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten() && property.getSchema() instanceof ObjectSchema) {
           ObjectSchema flattenedSchema = (ObjectSchema) property.getSchema();
+
+          boolean isPolymorphic = flattenedSchema.getDiscriminator() != null || flattenedSchema.getDiscriminatorValue() != null;
+          if (isPolymorphic) {
+//            LOGGER.warn("x-ms-client-flatten is not allowed on polymorphic model '{}', on property '{}'", flattenedSchema.getLanguage().getJava().getName(), property.getLanguage().getJava().getName());
+            property.getExtensions().setXmsClientFlatten(false);
+            continue;
+          }
+
           if (flattenedSchemas == null) {
             flattenedSchemas = new HashMap<>();
           }

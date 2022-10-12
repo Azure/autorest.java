@@ -149,10 +149,7 @@ public class JavaPackage {
     public final void addModel(String packageKeyword, String name, ClientModel model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
 
-        // If the model isn't XML and stream-style serialization is being used, use StreamSerializationModelTemplate
-        // to write the ClientModel. Eventually, this check will only validate if stream-style is being used but
-        // stream-style XML isn't ready yet.
-        if (!settings.isGenerateXmlSerialization() && settings.isStreamStyleSerialization()) {
+        if (settings.isStreamStyleSerialization()) {
             Templates.getStreamStyleModelTemplate().write(model, javaFile);
         } else {
             Templates.getModelTemplate().write(model, javaFile);
