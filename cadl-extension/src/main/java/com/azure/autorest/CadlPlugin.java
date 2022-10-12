@@ -34,6 +34,8 @@ public class CadlPlugin extends Javagen {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
 
+    private final EmitterOptions emitterOptions;
+
     public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
         return super.writeToTemplates(codeModel, client, settings, false);
     }
@@ -58,7 +60,7 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(getOutputFolder(), fileName).toAbsolutePath().toFile();
+        File outputFile = Paths.get(emitterOptions.getOutputPath(), fileName).toAbsolutePath().toFile();
         File parentFile = outputFile.getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
@@ -74,7 +76,7 @@ public class CadlPlugin extends Javagen {
     public String handlePartialUpdate(String filePath, String generatedContent) {
         if (filePath.endsWith(".java")) { // only handle for .java file
             // check if existingFile exists, if not, no need to handle partial update
-            Path absoluteFilePath = Paths.get(getOutputFolder(), filePath);
+            Path absoluteFilePath = Paths.get(emitterOptions.getOutputPath(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
                     String existingFileContent = new String(Files.readAllBytes(absoluteFilePath));
@@ -128,6 +130,7 @@ public class CadlPlugin extends Javagen {
 
     public CadlPlugin(EmitterOptions options) {
         super(new MockConnection(), "dummy", "dummy");
+        this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
         if (!CoreUtils.isNullOrEmpty(options.getOutputPath())) {
             SETTINGS_MAP.put("output-folder", options.getOutputPath());
@@ -177,9 +180,5 @@ public class CadlPlugin extends Javagen {
                 LOGGER.info(log);
                 break;
         }
-    }
-
-    private String getOutputFolder() {
-        return (String) SETTINGS_MAP.get("output-folder");
     }
 }
