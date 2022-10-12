@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The StringWrapper model. */
 @Fluent
@@ -99,12 +100,12 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", this.field, false);
-        jsonWriter.writeStringField("empty", this.empty, false);
-        jsonWriter.writeStringField("null", this.nullProperty, false);
-        return jsonWriter.writeEndObject().flush();
+        jsonWriter.writeStringField("field", this.field);
+        jsonWriter.writeStringField("empty", this.empty);
+        jsonWriter.writeStringField("null", this.nullProperty);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -114,7 +115,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @return An instance of StringWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static StringWrapper fromJson(JsonReader jsonReader) {
+    public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     String field = null;
@@ -125,11 +126,11 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getStringValue();
+                            field = reader.getString();
                         } else if ("empty".equals(fieldName)) {
-                            empty = reader.getStringValue();
+                            empty = reader.getString();
                         } else if ("null".equals(fieldName)) {
-                            nullProperty = reader.getStringValue();
+                            nullProperty = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

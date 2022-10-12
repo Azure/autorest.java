@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -76,7 +77,38 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             // Response body
             IType responseBodyType;
             if (JavaSettings.getInstance().isDataPlaneClient()) {
-                responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                // special handling for paging method
+                if (clientMethod.getType() == ClientMethodType.PagingSync || clientMethod.getType() == ClientMethodType.PagingAsync || clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage || clientMethod.getType() == ClientMethodType.PagingSyncSinglePage) {
+                    String itemName = clientMethod.getMethodPageDetails().getItemName();
+                    // rawResponseType has properties: 'value' and 'nextLink'
+                    IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                    if (!(rawResponseType instanceof ClassType)) {
+                        throw new IllegalStateException(String.format("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method. rawResponseType = %s", rawResponseType.toString()));
+                    }
+                    ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
+                    List<ClientModelProperty> properties = new ArrayList<>();
+                    traverseProperties(model, properties);
+                    responseBodyType = properties.stream()
+                            .filter(property -> property.getName().equals(itemName))
+                            .map(clientModelProperty -> clientModelProperty.getClientType())
+                            .map(valueListType -> {
+                                // value type is List<T>, we need to get the typeArguments
+                                if (!(valueListType instanceof ListType)) {
+                                    throw new IllegalStateException(String.format("value type must be list for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                }
+                                IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
+                                if (listTypeArgs.length == 0) {
+                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                }
+                                return listTypeArgs[0];
+                            })
+                            .findFirst().orElse(null);
+                    if (responseBodyType == null) {
+                        throw new IllegalStateException(String.format("%s not found in properties of rawResponseType. rawResponseType = ", itemName, rawResponseType.toString()));
+                    }
+                } else {
+                    responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
+                }
             } else {
                 responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
             }

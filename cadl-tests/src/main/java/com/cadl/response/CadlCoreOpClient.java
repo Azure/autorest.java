@@ -126,15 +126,10 @@ public final class CadlCoreOpClient {
      *
      * <pre>{@code
      * {
-     *     value (Required): [
-     *          (Required){
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
-     *     ]
-     *     nextLink: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      *

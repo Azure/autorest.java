@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The DoubleWrapper model. */
 @Fluent
@@ -79,14 +80,13 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     public void validate() {}
 
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) {
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeDoubleField("field1", this.field1, false);
-        jsonWriter.writeDoubleField(
+        jsonWriter.writeNumberField("field1", this.field1);
+        jsonWriter.writeNumberField(
                 "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose",
-                this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose,
-                false);
-        return jsonWriter.writeEndObject().flush();
+                this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * @return An instance of DoubleWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      */
-    public static DoubleWrapper fromJson(JsonReader jsonReader) {
+    public static DoubleWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
                     Double field1 = null;
@@ -106,11 +106,11 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getDoubleNullableValue();
+                            field1 = reader.getNullable(JsonReader::getDouble);
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
                             field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
-                                    reader.getDoubleNullableValue();
+                                    reader.getNullable(JsonReader::getDouble);
                         } else {
                             reader.skipChildren();
                         }

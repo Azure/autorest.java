@@ -16,6 +16,7 @@ public class PomMapper implements IMapper<Project, Pom> {
 
     protected static final String CLIENT_SDK_PARENT_PREFIX = "com.azure:azure-client-sdk-parent:";
     protected static final String JSON_PREFIX = "com.azure:azure-json:";
+    protected static final String XML_PREFIX = "com.azure:azure-xml:";
     protected static final String CORE_PREFIX = "com.azure:azure-core:";
     protected static final String CORE_HTTP_NETTY_PREFIX = "com.azure:azure-core-http-netty:";
     protected static final String CORE_TEST_PREFIX = "com.azure:azure-core-test:";
@@ -28,6 +29,7 @@ public class PomMapper implements IMapper<Project, Pom> {
 
     private static final List<String> KNOWN_DEPENDENCY_PREFIXES = Arrays.asList(
             JSON_PREFIX,
+            XML_PREFIX,
             CORE_PREFIX,
             CORE_HTTP_NETTY_PREFIX,
             CORE_TEST_PREFIX,
@@ -49,6 +51,7 @@ public class PomMapper implements IMapper<Project, Pom> {
         List<String> dependencyIdentifiers = new ArrayList<>();
         if (JavaSettings.getInstance().isStreamStyleSerialization()) {
             dependencyIdentifiers.add(JSON_PREFIX + project.getPackageVersions().getAzureJsonVersion());
+            dependencyIdentifiers.add(XML_PREFIX + project.getPackageVersions().getAzureXmlVersion());
         }
         dependencyIdentifiers.add(CORE_PREFIX + project.getPackageVersions().getAzureCoreVersion());
         dependencyIdentifiers.add(CORE_HTTP_NETTY_PREFIX + project.getPackageVersions().getAzureCoreHttpNettyVersion());

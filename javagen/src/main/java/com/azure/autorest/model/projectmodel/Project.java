@@ -53,6 +53,7 @@ public class Project {
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
         private String azureJsonVersion = "1.0.0-beta.1";
+        private String azureXmlVersion = "1.0.0-beta.1";
         private String azureCoreVersion = "1.32.0";
         private String azureCoreManagementVersion = "1.8.0";
         private String azureCoreHttpNettyVersion = "1.12.5";
@@ -68,6 +69,10 @@ public class Project {
 
         public String getAzureJsonVersion() {
             return azureJsonVersion;
+        }
+
+        public String getAzureXmlVersion() {
+            return azureXmlVersion;
         }
 
         public String getAzureCoreVersion() {
@@ -252,6 +257,7 @@ public class Project {
                 checkArtifact(line, "org.mockito:mockito-core").ifPresent(v -> packageVersions.mockitoVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-json").ifPresent(v -> packageVersions.azureJsonVersion = v);
+                checkArtifact(line, "com.azure:azure-xml").ifPresent(v -> packageVersions.azureXmlVersion = v);
                 checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
                 checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
