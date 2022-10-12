@@ -38,7 +38,6 @@ if (Test-Path ./cadl-output) {
 # enable convenience methods for tests
 $env:GENERATE_MODELS = "true"
 $env:GENERATE_CONVENIENCE_METHODS = "true"
-$env:PARTIAL_UPDATE = "true"
 
 #run other local tests except partial update
 foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {

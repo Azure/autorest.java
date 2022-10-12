@@ -23,7 +23,6 @@ rm -rf cadl-output
 # enable convenience methods for tests
 export GENERATE_MODELS=true
 export GENERATE_CONVENIENCE_METHODS=true
-export PARTIAL_UPDATE=true
 
 # run other local tests except partial update
 for f in $(find ./cadl/ -name "*.cadl")

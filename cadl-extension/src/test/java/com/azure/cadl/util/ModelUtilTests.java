@@ -7,6 +7,7 @@ import com.azure.autorest.CadlPlugin;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.cadl.model.EmitterOptions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class ModelUtilTests {
     @BeforeAll
     public static void ensurePlugin() {
         CadlPlugin plugin = new CadlPlugin(
-                new CadlPlugin.Options()
+                new EmitterOptions()
                         .setNamespace("com.azure.client"));
     }
 
