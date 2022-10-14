@@ -2,7 +2,7 @@
 
 Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node --version`)
 
-Install [Java](https://docs.microsoft.com/en-us/java/openjdk/download) 11 or above. (Verify by `java --version`)
+Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
 Install [Cadl](https://github.com/microsoft/cadl/).
 
@@ -22,7 +22,7 @@ Modify `package.json`, add one line under `dependencies`:
       "@cadl-lang/compiler": "^0.35.0",
       "@cadl-lang/rest": "^0.17.0",
       "@azure-tools/cadl-azure-core": "^0.7.0",
-+      "@azure-tools/cadl-java": "0.1.0-dev.8"
++      "@azure-tools/cadl-java": "0.1.0-dev.9"
     },
 ```
 
