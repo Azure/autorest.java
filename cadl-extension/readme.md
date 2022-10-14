@@ -2,7 +2,7 @@
 
 Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node --version`)
 
-Install [Java](https://docs.microsoft.com/en-us/java/openjdk/download) 11 or above. (Verify by `java --version`)
+Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
 Install [Cadl](https://github.com/microsoft/cadl/).
 
