@@ -192,8 +192,7 @@ public final class LroRetrysAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
-            RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteProvisioning202Accepted200Succeeded(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteProvisioning202Accepted200SucceededAsync(requestOptions);
     }
 
@@ -210,7 +209,7 @@ public final class LroRetrysAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDelete202Retry200(RequestOptions requestOptions) {
         return this.serviceClient.beginDelete202Retry200Async(requestOptions);
     }
 
@@ -227,7 +226,7 @@ public final class LroRetrysAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
         return this.serviceClient.beginDeleteAsyncRelativeRetrySucceededAsync(requestOptions);
     }
 
