@@ -29,10 +29,12 @@ import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
@@ -476,20 +478,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 
-            function.ifBlock("httpLogOptions == null", action -> {
-                function.line("httpLogOptions = new HttpLogOptions();");
-            });
-
-            function.ifBlock("clientOptions == null", action -> {
-                function.line("clientOptions = new ClientOptions();");
-            });
+            function.line("HttpLogOptions httpLogOptionsForPipeline = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;");
+            function.line("ClientOptions clientOptionsForPipeline = this.clientOptions == null ? new ClientOptions() : this.clientOptions;");
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-            function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
+            function.line("String applicationId = CoreUtils.getApplicationId(clientOptionsForPipeline, httpLogOptionsForPipeline);");
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
@@ -498,7 +495,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
+            function.line("clientOptionsForPipeline.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("policies.addAll(this.pipelinePolicies.stream()" +
@@ -539,7 +536,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
                     ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
                     ".httpClient(httpClient)" +
-                    ".clientOptions(clientOptions)" +
+                    ".clientOptions(clientOptionsForPipeline)" +
                     ".build();");
             function.methodReturn("httpPipeline");
         });
