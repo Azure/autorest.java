@@ -41,6 +41,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
@@ -364,14 +365,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             methodPollingDetails = new MethodPollingDetails(
                                     pollingDetails.getStrategy(),
                                     getPollingIntermediateType(pollingDetails, returnTypeHolder.syncReturnType),
-                                    getPollingFinalType(pollingDetails, returnTypeHolder.syncReturnType),
+                                    getPollingFinalType(pollingDetails, returnTypeHolder.syncReturnType, MethodUtil.getHttpMethod(operation)),
                                     pollingDetails.getPollIntervalInSeconds());
                         }
                     }
 
-                    if (methodPollingDetails != null && isProtocolMethod &&
-                        !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
-                            && ClassType.BinaryData.equals(methodPollingDetails.getFinalType()))) {
+                    if (methodPollingDetails != null && isProtocolMethod
+                        // pollingDetails from JavaSettings configures the models of LRO method for DPG
+                        && pollingDetails.getIntermediateType() != null && pollingDetails.getFinalType() != null) {
+
                         // a new method to be added as implementation only (not exposed to client) for developer
                         dpgMethodPollingDetailsWithModel = methodPollingDetails;
 
@@ -1122,14 +1124,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             pollResponseType = new ClassType.Builder().packageName(intermediateTypePackage).name(intermediateTypeName).build();
         }
         // azure-core wants poll response to be non-null
-        if (pollResponseType == ClassType.Void) {
+        if (pollResponseType.asNullable() == ClassType.Void) {
             pollResponseType = ClassType.BinaryData;
         }
 
         return pollResponseType;
     }
 
-    private IType getPollingFinalType(JavaSettings.PollingDetails details, IType syncReturnType) {
+    private IType getPollingFinalType(JavaSettings.PollingDetails details, IType syncReturnType, HttpMethod httpMethod) {
         IType resultType = syncReturnType.asNullable();
         if (JavaSettings.getInstance().isFluent()) {
             return resultType;
@@ -1147,8 +1149,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             resultType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
         }
         // azure-core wants poll response to be non-null
-        if (resultType == ClassType.Void) {
+        if (resultType.asNullable() == ClassType.Void) {
             resultType = ClassType.BinaryData;
+        }
+        // DELETE would not have final response as resource is deleted
+        if (httpMethod == HttpMethod.DELETE) {
+            resultType = PrimitiveType.Void;
         }
 
         return resultType;
@@ -1188,11 +1194,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             // Mono<Boolean> of HEAD method
             if (description == null
                 && baseType == PrimitiveType.Boolean
-                && operation.getRequests() != null && !operation.getRequests().isEmpty()
-                && operation.getRequests().get(0).getProtocol() != null
-                && operation.getRequests().get(0).getProtocol().getHttp() != null
-                && HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())
-            ) {
+                && HttpMethod.HEAD == MethodUtil.getHttpMethod(operation)) {
                 description = "whether resource exists";
             }
 
@@ -1250,10 +1252,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
             }
             if (intermediateType != null && finalType == null) {
-                if (!CoreUtils.isNullOrEmpty(operation.getRequests())
-                    && operation.getRequests().get(0).getProtocol() != null
-                    && operation.getRequests().get(0).getProtocol().getHttp() != null
-                    && HttpMethod.DELETE.name().equalsIgnoreCase(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                if (HttpMethod.DELETE == MethodUtil.getHttpMethod(operation)) {
                     // DELETE would not have final response as resource is deleted
                     finalType = PrimitiveType.Void;
                 } else {
