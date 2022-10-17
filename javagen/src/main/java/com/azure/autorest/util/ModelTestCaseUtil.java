@@ -219,7 +219,8 @@ public class ModelTestCaseUtil {
             "key",
             "code",
             "credential",
-            "token"
+            "token",
+            "secret"
     );
 
     private static void checkCredential(List<String> serializedNames) {
