@@ -35,6 +35,7 @@ model FormatString {
 
   @format("password")
   password: string;
+  uri: uri;
 }
 
 @format("date-time-rfc1123")

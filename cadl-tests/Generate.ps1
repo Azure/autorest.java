@@ -1,6 +1,6 @@
 function Generate($CadlFile) {
-  Write-Host "cadl compile $CadlFile"
-  Invoke-Expression "cadl compile $CadlFile"
+  Write-Host "cadl compile $CadlFile --trace *"
+  Invoke-Expression "cadl compile $CadlFile --trace *"
 
   if ($LASTEXITCODE) {
       exit 1

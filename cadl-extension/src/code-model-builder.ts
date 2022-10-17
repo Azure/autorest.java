@@ -1097,6 +1097,7 @@ export class CodeModelBuilder {
       case "date-time-rfc1123":
         return this.processDateTimeSchema(type, nameHint, true);
       case "password":
+      case "uri":
         return this.processStringSchema(type, nameHint);
     }
     throw new Error(`Unrecognized string format: '${format}'.`);
