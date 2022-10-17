@@ -62,13 +62,13 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
 
     await program.host.writeFile(codeModelFileName, dump(codeModel));
 
-    program.logger.info(`Code model file written to ${codeModelFileName}`);
+    program.trace("cadl-java", `Code model file written to ${codeModelFileName}`);
 
     const emitterOptions = JSON.stringify(options);
-    program.logger.info(`Emitter options ${emitterOptions}`);
+    program.trace("cadl-java", `Emitter options ${emitterOptions}`);
 
     const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
-    program.logger.info(`Exec JAR ${jarFileName}`);
+    program.trace("cadl-java", `Exec JAR ${jarFileName}`);
 
     const output = await promisify(execFile)("java", [
       `-DemitterOptions=${emitterOptions}`,
@@ -76,6 +76,6 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
       jarFileName,
       codeModelFileName,
     ]);
-    program.logger.info(output.stdout ? output.stdout : output.stderr);
+    program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
   }
 }

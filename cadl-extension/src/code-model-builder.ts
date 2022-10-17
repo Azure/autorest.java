@@ -35,8 +35,9 @@ import {
   TypeNameOptions,
   Union,
   UnionVariant,
+  getDiscriminator,
 } from "@cadl-lang/compiler";
-import { getDiscriminator, getResourceOperation, getSegment } from "@cadl-lang/rest";
+import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
   getAllRoutes,
   getAuthentication,
@@ -1172,7 +1173,7 @@ export class CodeModelBuilder {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
         const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
-        this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
+        this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
       } else {
         return target.name;
