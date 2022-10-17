@@ -371,8 +371,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
 
                     if (methodPollingDetails != null && isProtocolMethod
-                        // pollingDetails from JavaSettings configures the models of LRO method for DPG
-                        && pollingDetails.getIntermediateType() != null && pollingDetails.getFinalType() != null) {
+                        // models of LRO configured
+                        && !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
+                        && (ClassType.BinaryData.equals(methodPollingDetails.getFinalType()) || ClassType.Void.equals(methodPollingDetails.getFinalType().asNullable())))) {
 
                         // a new method to be added as implementation only (not exposed to client) for developer
                         dpgMethodPollingDetailsWithModel = methodPollingDetails;
