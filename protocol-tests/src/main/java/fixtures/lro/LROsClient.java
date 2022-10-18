@@ -1366,8 +1366,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202Accepted200Succeeded(RequestOptions requestOptions) {
         return this.client.beginDeleteProvisioning202Accepted200Succeeded(requestOptions).getSyncPoller();
     }
 
@@ -1403,8 +1402,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202DeletingFailed200(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202DeletingFailed200(RequestOptions requestOptions) {
         return this.client.beginDeleteProvisioning202DeletingFailed200(requestOptions).getSyncPoller();
     }
 
@@ -1440,8 +1438,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Deletingcanceled200(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202Deletingcanceled200(RequestOptions requestOptions) {
         return this.client.beginDeleteProvisioning202Deletingcanceled200(requestOptions).getSyncPoller();
     }
 
@@ -1457,7 +1454,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete204Succeeded(RequestOptions requestOptions) {
         return this.client.beginDelete204Succeeded(requestOptions).getSyncPoller();
     }
 
@@ -1492,7 +1489,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete202Retry200(RequestOptions requestOptions) {
         return this.client.beginDelete202Retry200(requestOptions).getSyncPoller();
     }
 
@@ -1527,7 +1524,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202NoRetry204(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete202NoRetry204(RequestOptions requestOptions) {
         return this.client.beginDelete202NoRetry204(requestOptions).getSyncPoller();
     }
 
@@ -1544,7 +1541,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteNoHeaderInRetry(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteNoHeaderInRetry(RequestOptions requestOptions) {
         return this.client.beginDeleteNoHeaderInRetry(requestOptions).getSyncPoller();
     }
 
@@ -1561,7 +1558,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetry(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoHeaderInRetry(RequestOptions requestOptions) {
         return this.client.beginDeleteAsyncNoHeaderInRetry(requestOptions).getSyncPoller();
     }
 
@@ -1578,7 +1575,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrySucceeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrySucceeded(RequestOptions requestOptions) {
         return this.client.beginDeleteAsyncRetrySucceeded(requestOptions).getSyncPoller();
     }
 
@@ -1595,7 +1592,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoRetrySucceeded(RequestOptions requestOptions) {
         return this.client.beginDeleteAsyncNoRetrySucceeded(requestOptions).getSyncPoller();
     }
 
@@ -1612,7 +1609,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetryFailed(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetryFailed(RequestOptions requestOptions) {
         return this.client.beginDeleteAsyncRetryFailed(requestOptions).getSyncPoller();
     }
 
@@ -1629,7 +1626,7 @@ public final class LROsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrycanceled(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrycanceled(RequestOptions requestOptions) {
         return this.client.beginDeleteAsyncRetrycanceled(requestOptions).getSyncPoller();
     }
 

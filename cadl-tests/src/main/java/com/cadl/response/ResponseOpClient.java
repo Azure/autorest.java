@@ -15,7 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.models.Resource;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
 @ServiceClient(builder = ResponseOpClientBuilder.class)
@@ -52,6 +54,35 @@ public final class ResponseOpClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
         return this.client.getBinaryWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The getArray operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
+     *     }
+     * ]
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getArrayWithResponse(RequestOptions requestOptions) {
+        return this.client.getArrayWithResponse(requestOptions).block();
     }
 
     /**
@@ -113,6 +144,24 @@ public final class ResponseOpClient {
         // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * The getArray operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public List<Resource> getArray() {
+        // Generated convenience method for getArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getArrayWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Resource>>() {});
     }
 
     /**

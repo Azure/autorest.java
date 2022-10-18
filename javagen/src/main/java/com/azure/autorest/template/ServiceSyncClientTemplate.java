@@ -18,6 +18,7 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 
 import java.util.HashSet;
 import java.util.List;
@@ -192,6 +193,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     imports.add(Objects.class.getName());
     imports.add(JacksonAdapter.class.getName());
     imports.add(CollectionFormat.class.getName());
+    imports.add(TypeReference.class.getName());
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {

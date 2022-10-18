@@ -65,7 +65,7 @@ jobs:
 
       - script: |
           npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-          ls *.tgz | npm publish -0 --access public --tag dev
+          ls *.tgz | npm publish -0 --access public
           npm config delete //registry.npmjs.org/:_authToken
         displayName: 'Publish Cadl Java to NPM'
         workingDirectory: ./cadl-extension
