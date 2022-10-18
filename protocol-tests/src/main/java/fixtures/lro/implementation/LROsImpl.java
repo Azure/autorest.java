@@ -5055,7 +5055,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200SucceededAsync(
+    public PollerFlux<BinaryData, Void> beginDeleteProvisioning202Accepted200SucceededAsync(
             RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -5068,7 +5068,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5102,8 +5102,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Accepted200Succeeded(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202Accepted200Succeeded(RequestOptions requestOptions) {
         return this.beginDeleteProvisioning202Accepted200SucceededAsync(requestOptions).getSyncPoller();
     }
 
@@ -5178,7 +5177,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202DeletingFailed200Async(
+    public PollerFlux<BinaryData, Void> beginDeleteProvisioning202DeletingFailed200Async(
             RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -5191,7 +5190,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5225,8 +5224,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202DeletingFailed200(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202DeletingFailed200(RequestOptions requestOptions) {
         return this.beginDeleteProvisioning202DeletingFailed200Async(requestOptions).getSyncPoller();
     }
 
@@ -5301,7 +5299,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteProvisioning202Deletingcanceled200Async(
+    public PollerFlux<BinaryData, Void> beginDeleteProvisioning202Deletingcanceled200Async(
             RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -5314,7 +5312,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5348,8 +5346,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteProvisioning202Deletingcanceled200(
-            RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteProvisioning202Deletingcanceled200(RequestOptions requestOptions) {
         return this.beginDeleteProvisioning202Deletingcanceled200Async(requestOptions).getSyncPoller();
     }
 
@@ -5381,7 +5378,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDelete204SucceededAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(requestOptions),
@@ -5393,7 +5390,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5407,7 +5404,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete204Succeeded(RequestOptions requestOptions) {
         return this.beginDelete204SucceededAsync(requestOptions).getSyncPoller();
     }
 
@@ -5477,7 +5474,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202Retry200Async(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDelete202Retry200Async(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(requestOptions),
@@ -5489,7 +5486,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5522,7 +5519,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202Retry200(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete202Retry200(RequestOptions requestOptions) {
         return this.beginDelete202Retry200Async(requestOptions).getSyncPoller();
     }
 
@@ -5592,7 +5589,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202NoRetry204Async(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDelete202NoRetry204Async(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NoRetry204WithResponseAsync(requestOptions),
@@ -5604,7 +5601,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5637,7 +5634,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202NoRetry204(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDelete202NoRetry204(RequestOptions requestOptions) {
         return this.beginDelete202NoRetry204Async(requestOptions).getSyncPoller();
     }
 
@@ -5671,7 +5668,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteNoHeaderInRetryAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteNoHeaderInRetryAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNoHeaderInRetryWithResponseAsync(requestOptions),
@@ -5683,7 +5680,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5698,7 +5695,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteNoHeaderInRetry(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteNoHeaderInRetry(RequestOptions requestOptions) {
         return this.beginDeleteNoHeaderInRetryAsync(requestOptions).getSyncPoller();
     }
 
@@ -5732,7 +5729,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetryAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoHeaderInRetryAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(requestOptions),
@@ -5744,7 +5741,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5759,7 +5756,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoHeaderInRetry(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoHeaderInRetry(RequestOptions requestOptions) {
         return this.beginDeleteAsyncNoHeaderInRetryAsync(requestOptions).getSyncPoller();
     }
 
@@ -5793,7 +5790,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetrySucceededAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrySucceededAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrySucceededWithResponseAsync(requestOptions),
@@ -5805,7 +5802,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5820,7 +5817,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrySucceeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrySucceeded(RequestOptions requestOptions) {
         return this.beginDeleteAsyncRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
@@ -5854,7 +5851,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceededAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoRetrySucceededAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(requestOptions),
@@ -5866,7 +5863,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5881,7 +5878,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncNoRetrySucceeded(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoRetrySucceeded(RequestOptions requestOptions) {
         return this.beginDeleteAsyncNoRetrySucceededAsync(requestOptions).getSyncPoller();
     }
 
@@ -5915,7 +5912,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetryFailedAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetryFailedAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetryFailedWithResponseAsync(requestOptions),
@@ -5927,7 +5924,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -5942,7 +5939,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetryFailed(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetryFailed(RequestOptions requestOptions) {
         return this.beginDeleteAsyncRetryFailedAsync(requestOptions).getSyncPoller();
     }
 
@@ -5976,7 +5973,7 @@ public final class LROsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRetrycanceledAsync(RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrycanceledAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(requestOptions),
@@ -5988,7 +5985,7 @@ public final class LROsImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -6003,7 +6000,7 @@ public final class LROsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRetrycanceled(RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrycanceled(RequestOptions requestOptions) {
         return this.beginDeleteAsyncRetrycanceledAsync(requestOptions).getSyncPoller();
     }
 
