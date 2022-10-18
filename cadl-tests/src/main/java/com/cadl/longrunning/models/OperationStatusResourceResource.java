@@ -9,13 +9,13 @@ import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The OperationStatusResourceResource model. */
+/** Provides status details for long running operations. */
 @Immutable
 public final class OperationStatusResourceResource {
     /*
      * The unique ID of the operation.
      */
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
@@ -31,22 +31,18 @@ public final class OperationStatusResourceResource {
     private ResponseError error;
 
     /*
-     * The operationId property.
+     * The result of the operation.
      */
-    @JsonProperty(value = "operationId", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private String operationId;
+    @JsonProperty(value = "result")
+    private Resource result;
 
     /**
      * Creates an instance of OperationStatusResourceResource class.
      *
-     * @param id the id value to set.
      * @param status the status value to set.
      */
     @JsonCreator
-    private OperationStatusResourceResource(
-            @JsonProperty(value = "id", required = true) String id,
-            @JsonProperty(value = "status", required = true) OperationState status) {
-        this.id = id;
+    private OperationStatusResourceResource(@JsonProperty(value = "status", required = true) OperationState status) {
         this.status = status;
     }
 
@@ -78,11 +74,11 @@ public final class OperationStatusResourceResource {
     }
 
     /**
-     * Get the operationId property: The operationId property.
+     * Get the result property: The result of the operation.
      *
-     * @return the operationId value.
+     * @return the result value.
      */
-    public String getOperationId() {
-        return this.operationId;
+    public Resource getResult() {
+        return this.result;
     }
 }

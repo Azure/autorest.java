@@ -35,7 +35,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Get a OperationStatusResource.
+     * The statusMonitor operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -44,18 +44,22 @@ public final class LongRunningClient {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
-     *     operationId: String (Required)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
      * @param name The name parameter.
-     * @param operationId The operationId parameter.
+     * @param operationId The unique ID of the operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a OperationStatusResource along with {@link Response}.
+     * @return provides status details for long running operations along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -65,7 +69,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -104,7 +108,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Get a Resource.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -122,7 +126,7 @@ public final class LongRunningClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a Resource along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -131,7 +135,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -149,7 +153,7 @@ public final class LongRunningClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status monitor resource for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -158,7 +162,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -177,7 +181,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -205,17 +209,17 @@ public final class LongRunningClient {
     }
 
     /**
-     * Get a OperationStatusResource.
+     * The statusMonitor operation.
      *
      * @param name The name parameter.
-     * @param operationId The operationId parameter.
+     * @param operationId The unique ID of the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a OperationStatusResource.
+     * @return provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -228,7 +232,7 @@ public final class LongRunningClient {
     }
 
     /**
-     * Get a Resource.
+     * The get operation.
      *
      * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -237,7 +241,7 @@ public final class LongRunningClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a Resource.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

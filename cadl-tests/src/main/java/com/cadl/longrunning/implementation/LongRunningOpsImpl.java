@@ -191,7 +191,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Get a OperationStatusResource.
+     * The statusMonitor operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -200,18 +200,23 @@ public final class LongRunningOpsImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
-     *     operationId: String (Required)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
      * @param name The name parameter.
-     * @param operationId The operationId parameter.
+     * @param operationId The unique ID of the operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a OperationStatusResource along with {@link Response} on successful completion of {@link Mono}.
+     * @return provides status details for long running operations along with {@link Response} on successful completion
+     *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> statusMonitorWithResponseAsync(
@@ -230,7 +235,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Get a OperationStatusResource.
+     * The statusMonitor operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -239,18 +244,22 @@ public final class LongRunningOpsImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
-     *     operationId: String (Required)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
      * @param name The name parameter.
-     * @param operationId The operationId parameter.
+     * @param operationId The unique ID of the operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a OperationStatusResource along with {@link Response}.
+     * @return provides status details for long running operations along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> statusMonitorWithResponse(
@@ -259,7 +268,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -309,7 +318,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -358,7 +367,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -396,7 +405,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -445,7 +454,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Creates or updates a Resource asynchronously.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -483,7 +492,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Get a Resource.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -501,7 +510,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a Resource along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(String name, RequestOptions requestOptions) {
@@ -518,7 +527,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Get a Resource.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -536,7 +545,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a Resource along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
@@ -544,7 +553,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -562,7 +571,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status monitor resource for long running operations along with {@link Response} on successful completion
+     * @return provides status details for long running operations along with {@link Response} on successful completion
      *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -580,7 +589,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -598,7 +607,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status monitor resource for long running operations.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsync(String name, RequestOptions requestOptions) {
@@ -617,7 +626,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -635,7 +644,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status monitor resource for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
@@ -643,7 +652,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -661,7 +670,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status monitor resource for long running operations.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<OperationStatusResourceResource, Void> beginDeleteWithModelAsync(
@@ -681,7 +690,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Delete a Resource asynchronously.
+     * The delete operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -699,7 +708,7 @@ public final class LongRunningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status monitor resource for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<OperationStatusResourceResource, Void> beginDeleteWithModel(
@@ -708,7 +717,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -736,7 +745,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -765,7 +774,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -783,7 +792,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -812,7 +821,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The export operation.
      *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
@@ -830,7 +839,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -867,7 +876,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -905,7 +914,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -932,7 +941,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -970,7 +979,7 @@ public final class LongRunningOpsImpl {
     }
 
     /**
-     * Runs a custom action on Resource.
+     * The importx operation.
      *
      * <p><strong>Request Body Schema</strong>
      *

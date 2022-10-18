@@ -54,7 +54,7 @@ public final class RecursiveModelValuesImpl {
     @ServiceInterface(name = "DictionaryRecursiveM")
     private interface RecursiveModelValuesService {
         @Get("/dictionary/model/recursive")
-        @ExpectedResponses({204})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -65,7 +65,8 @@ public final class RecursiveModelValuesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> get(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/dictionary/model/recursive")
         @ExpectedResponses({200})
@@ -89,15 +90,28 @@ public final class RecursiveModelValuesImpl {
     /**
      * The get operation.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     String (Required): {
+     *         property: String (Required)
+     *         children (Optional): {
+     *             String (Optional): (recursive schema, see String above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
     }
@@ -105,15 +119,28 @@ public final class RecursiveModelValuesImpl {
     /**
      * The get operation.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     String (Required): {
+     *         property: String (Required)
+     *         children (Optional): {
+     *             String (Optional): (recursive schema, see String above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         return getWithResponseAsync(requestOptions).block();
     }
 

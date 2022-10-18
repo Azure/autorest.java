@@ -36,16 +36,29 @@ public final class RecursiveModelValueClient {
     /**
      * The get operation.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     String (Required): {
+     *         property: String (Required)
+     *         children (Optional): {
+     *             String (Optional): (recursive schema, see String above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         return this.client.getWithResponse(requestOptions).block();
     }
 
@@ -87,13 +100,14 @@ public final class RecursiveModelValueClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get() {
+    public Map<String, InnerModel> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        getWithResponse(requestOptions).getValue();
+        return getWithResponse(requestOptions).getValue();
     }
 
     /**

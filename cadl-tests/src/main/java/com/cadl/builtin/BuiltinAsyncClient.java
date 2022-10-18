@@ -47,6 +47,7 @@ public final class BuiltinAsyncClient {
      *         dateTime: OffsetDateTime (Required)
      *         dateTimeRfc1123: DateTimeRfc1123 (Required)
      *         password: String (Required)
+     *         uri: String (Required)
      *     }
      *     boolean: boolean (Required)
      *     string: String (Required)

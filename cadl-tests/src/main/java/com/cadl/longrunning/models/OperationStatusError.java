@@ -9,9 +9,9 @@ import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Status monitor resource for long running operations. */
+/** Provides status details for long running operations. */
 @Immutable
-public final class OperationStatus {
+public final class OperationStatusError {
     /*
      * The unique ID of the operation.
      */
@@ -31,13 +31,13 @@ public final class OperationStatus {
     private ResponseError error;
 
     /**
-     * Creates an instance of OperationStatus class.
+     * Creates an instance of OperationStatusError class.
      *
      * @param id the id value to set.
      * @param status the status value to set.
      */
     @JsonCreator
-    private OperationStatus(
+    private OperationStatusError(
             @JsonProperty(value = "id", required = true) String id,
             @JsonProperty(value = "status", required = true) OperationState status) {
         this.id = id;
