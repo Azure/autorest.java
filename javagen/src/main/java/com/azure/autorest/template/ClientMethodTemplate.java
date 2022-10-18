@@ -736,39 +736,35 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
 
         boolean needsFluxUtilWithContext = settings.isContextClientMethodParameter() && !contextInParameters(clientMethod);
-        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                addOptionalVariables(function, clientMethod);
-                if (settings.isDataPlaneClient()) {
-                    function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
-                    function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
-                }
-                function.line("return new PagedFlux<>(");
-                function.indent(() -> {
-                    function.line("() -> %s%s(%s%s),",
-                        needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
-                        clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getArgumentList(),
-                        needsFluxUtilWithContext ? ", context" : "");
+        boolean hasNextPageMethod = clientMethod.getMethodPageDetails().nonNullNextLink();
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
 
-                    function.line("nextLink -> %s%s(%s%s));",
-                        needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
-                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"),
-                        needsFluxUtilWithContext ? ", context" : "");
-                });
-            });
-        } else {
-            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                addOptionalVariables(function, clientMethod);
-                function.line("return new PagedFlux<>(");
-                function.indent(() -> function.line("() -> %s%s(%s%s));",
+            if (settings.isDataPlaneClient() && hasNextPageMethod) {
+                function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
+                function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+            }
+
+            function.line("return new PagedFlux<>(");
+            function.indent(() -> {
+                function.line("() -> %s%s(%s%s)%s%s",
                     needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
                     clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
                     clientMethod.getArgumentList(),
-                    needsFluxUtilWithContext ? ", context" : ""));
+                    needsFluxUtilWithContext ? ", context" : "",
+                    needsFluxUtilWithContext ? ")" : "",
+                    hasNextPageMethod ? "," : ")");
+
+                if (hasNextPageMethod) {
+                    // The next page method already has context included.
+                    function.line("nextLink -> %s%s(%s))%s;",
+                        needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
+                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"),
+                        needsFluxUtilWithContext ? ")" : "");
+                }
             });
-        }
+        });
     }
 
     protected void generateResumable(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
