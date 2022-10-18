@@ -20,6 +20,8 @@ model Resource {
   type: string;
 }
 
+model ResourceArray is Resource[];
+
 // operation using Azure.Core
 @route("/cadl-core")
 interface CadlCoreOp {
@@ -45,6 +47,8 @@ interface ResponseOp {
     @header("content-type") contentType: "image/png";
     @body body: bytes;
   };
+
+  getArray(): ResourceArray;
 
   // response with headers
   @route("/create-with-headers")
