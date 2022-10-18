@@ -144,6 +144,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     protected String expressionConvertFromBinaryData(IType responseBodyType, String invocationExpression) {
         if (responseBodyType instanceof EnumType) {
             // enum
+            
             return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
