@@ -17,6 +17,7 @@ import com.azure.cadl.model.EmitterOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -37,6 +38,12 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    static {
+        OBJECT_MAPPER
+                .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
 
     // java -jar target/azure-cadl-extension-jar-with-dependencies.jar
 
@@ -116,11 +123,12 @@ public class Main {
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
 
+        EmitterOptions options = null;
         String emitterOptionsJson = Configuration.getGlobalConfiguration().get("emitterOptions");
 
         if (emitterOptionsJson != null) {
             try {
-                EmitterOptions options = OBJECT_MAPPER.readValue(emitterOptionsJson, EmitterOptions.class);
+                options = OBJECT_MAPPER.readValue(emitterOptionsJson, EmitterOptions.class);
                 // namespace
                 if (CoreUtils.isNullOrEmpty(options.getNamespace())) {
                     if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
@@ -134,13 +142,20 @@ public class Main {
                 } else if (!options.getOutputPath().endsWith("/")) {
                     options.setOutputPath(options.getOutputPath() + "/");
                 }
-
-                return options;
             } catch (JsonProcessingException e) {
                 LOGGER.info("Read emitter options failed, emitter options json: {}", emitterOptionsJson);
             }
         }
-        return new EmitterOptions();
+
+        if (options == null) {
+            // default if emitterOptions fails
+            options = new EmitterOptions();
+            options.setOutputPath("cadl-tests/cadl-output/");
+            if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+                options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
+            }
+        }
+        return options;
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
