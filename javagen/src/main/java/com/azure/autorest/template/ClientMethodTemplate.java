@@ -531,11 +531,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningSync:
-                if (settings.isSyncStackEnabled()) {
-                    generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
-                } else {
-                    generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
-                }
+                generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
                 break;
 
             case LongRunningBeginAsync:
