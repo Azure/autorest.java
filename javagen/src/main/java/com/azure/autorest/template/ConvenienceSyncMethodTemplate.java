@@ -145,6 +145,9 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         if (responseBodyType instanceof EnumType) {
             // enum
             return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
+        } else if (responseBodyType instanceof GenericType) {
+            // generic, e.g. list, map
+            return String.format("%2$s.toObject(new TypeReference<%1$s>() {})", responseBodyType, invocationExpression);
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
             return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);

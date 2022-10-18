@@ -110,6 +110,26 @@ public class MethodUtil {
     }
 
     /**
+     * Gets the HttpMethod from operation. Returns <code>null</code> if not recognized.
+     *
+     * @param operation the operation.
+     * @return the HttpMethod from operation. <code>null</code> if not recognized.
+     */
+    public static HttpMethod getHttpMethod(Operation operation) {
+        if (!CoreUtils.isNullOrEmpty(operation.getRequests())
+                && operation.getRequests().get(0).getProtocol() != null
+                && operation.getRequests().get(0).getProtocol().getHttp() != null) {
+            try {
+                return HttpMethod.valueOf(operation.getRequests().get(0).getProtocol().getHttp().getMethod().toUpperCase(Locale.ROOT));
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Find the first request consumes binary type, if no binary request, return the first request in requests.
      * If the selected binary request does not have content-type parameter, we will add one for it.
      * Update operation with the result requests list.

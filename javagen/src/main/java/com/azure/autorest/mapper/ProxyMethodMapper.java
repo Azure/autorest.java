@@ -649,8 +649,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     protected List<ProxyMethodParameter> getSpecialParameters(Operation operation) {
         List<ProxyMethodParameter> specialParameters = new ArrayList<>();
         if (!CoreUtils.isNullOrEmpty(operation.getSpecialHeaders()) && !CoreUtils.isNullOrEmpty(operation.getRequests())) {
-            HttpMethod httpMethod = HttpMethod.valueOf(
-                    operation.getRequests().get(0).getProtocol().getHttp().getMethod().toUpperCase());
+            HttpMethod httpMethod = MethodUtil.getHttpMethod(operation);
             if (MethodUtil.isHttpMethodSupportRepeatableRequestHeaders(httpMethod)) {
                 List<String> specialHeaders = operation.getSpecialHeaders().stream()
                         .map(s -> s.toLowerCase(Locale.ROOT))

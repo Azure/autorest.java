@@ -984,7 +984,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteNonRetry400Async() {
+    public PollerFlux<BinaryData, Void> beginDeleteNonRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNonRetry400WithResponseAsync(),
@@ -995,7 +995,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1008,7 +1008,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteNonRetry400Async(Context context) {
+    public PollerFlux<BinaryData, Void> beginDeleteNonRetry400Async(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNonRetry400WithResponseAsync(context),
@@ -1019,7 +1019,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1030,7 +1030,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteNonRetry400() {
+    public SyncPoller<BinaryData, Void> beginDeleteNonRetry400() {
         return this.beginDeleteNonRetry400Async().getSyncPoller();
     }
 
@@ -1044,7 +1044,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteNonRetry400(Context context) {
+    public SyncPoller<BinaryData, Void> beginDeleteNonRetry400(Context context) {
         return this.beginDeleteNonRetry400Async(context).getSyncPoller();
     }
 
@@ -1092,7 +1092,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202NonRetry400Async() {
+    public PollerFlux<BinaryData, Void> beginDelete202NonRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NonRetry400WithResponseAsync(),
@@ -1103,7 +1103,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1116,7 +1116,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202NonRetry400Async(Context context) {
+    public PollerFlux<BinaryData, Void> beginDelete202NonRetry400Async(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NonRetry400WithResponseAsync(context),
@@ -1127,7 +1127,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1138,7 +1138,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202NonRetry400() {
+    public SyncPoller<BinaryData, Void> beginDelete202NonRetry400() {
         return this.beginDelete202NonRetry400Async().getSyncPoller();
     }
 
@@ -1152,7 +1152,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202NonRetry400(Context context) {
+    public SyncPoller<BinaryData, Void> beginDelete202NonRetry400(Context context) {
         return this.beginDelete202NonRetry400Async(context).getSyncPoller();
     }
 
@@ -1205,7 +1205,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400Async() {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400Async() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetry400WithResponseAsync(),
@@ -1216,7 +1216,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1230,7 +1230,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400Async(Context context) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400Async(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetry400WithResponseAsync(context),
@@ -1241,7 +1241,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -1253,7 +1253,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400() {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400() {
         return this.beginDeleteAsyncRelativeRetry400Async().getSyncPoller();
     }
 
@@ -1268,7 +1268,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetry400(Context context) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400(Context context) {
         return this.beginDeleteAsyncRelativeRetry400Async(context).getSyncPoller();
     }
 
@@ -2327,7 +2327,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync() {
+    public PollerFlux<BinaryData, Void> beginDelete204SucceededAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(),
@@ -2338,7 +2338,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -2351,7 +2351,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete204SucceededAsync(Context context) {
+    public PollerFlux<BinaryData, Void> beginDelete204SucceededAsync(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(context),
@@ -2362,7 +2362,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -2373,7 +2373,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded() {
+    public SyncPoller<BinaryData, Void> beginDelete204Succeeded() {
         return this.beginDelete204SucceededAsync().getSyncPoller();
     }
 
@@ -2387,7 +2387,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete204Succeeded(Context context) {
+    public SyncPoller<BinaryData, Void> beginDelete204Succeeded(Context context) {
         return this.beginDelete204SucceededAsync(context).getSyncPoller();
     }
 
@@ -2440,7 +2440,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatusAsync() {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(),
@@ -2451,7 +2451,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -2465,7 +2465,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatusAsync(Context context) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusAsync(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(context),
@@ -2476,7 +2476,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -2488,7 +2488,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus() {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatus() {
         return this.beginDeleteAsyncRelativeRetryNoStatusAsync().getSyncPoller();
     }
 
@@ -2503,7 +2503,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryNoStatus(Context context) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatus(Context context) {
         return this.beginDeleteAsyncRelativeRetryNoStatusAsync(context).getSyncPoller();
     }
 
@@ -3406,7 +3406,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202RetryInvalidHeaderAsync() {
+    public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202RetryInvalidHeaderWithResponseAsync(),
@@ -3417,7 +3417,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3431,7 +3431,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDelete202RetryInvalidHeaderAsync(Context context) {
+    public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderAsync(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202RetryInvalidHeaderWithResponseAsync(context),
@@ -3442,7 +3442,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3454,7 +3454,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202RetryInvalidHeader() {
+    public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeader() {
         return this.beginDelete202RetryInvalidHeaderAsync().getSyncPoller();
     }
 
@@ -3469,7 +3469,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDelete202RetryInvalidHeader(Context context) {
+    public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeader(Context context) {
         return this.beginDelete202RetryInvalidHeaderAsync(context).getSyncPoller();
     }
 
@@ -3523,7 +3523,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(),
@@ -3534,7 +3534,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3548,7 +3548,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(Context context) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(context),
@@ -3559,7 +3559,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3571,7 +3571,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader() {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeader() {
         return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync().getSyncPoller();
     }
 
@@ -3586,7 +3586,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidHeader(Context context) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeader(Context context) {
         return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync(context).getSyncPoller();
     }
 
@@ -3640,7 +3640,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(),
@@ -3651,7 +3651,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3665,7 +3665,7 @@ public final class LrosaDs {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(Context context) {
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(context),
@@ -3676,7 +3676,7 @@ public final class LrosaDs {
                                 new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
                                 new StatusCheckPollingStrategy<>())),
                 TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -3688,7 +3688,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
         return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().getSyncPoller();
     }
 
@@ -3703,7 +3703,7 @@ public final class LrosaDs {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginDeleteAsyncRelativeRetryInvalidJsonPolling(Context context) {
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling(Context context) {
         return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(context).getSyncPoller();
     }
 
