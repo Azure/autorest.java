@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -37,6 +38,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -731,7 +733,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
 
-        boolean needsFluxUtilWithContext = settings.isContextClientMethodParameter() && !contextInParameters(clientMethod);
+        // Need to wrap the page retrieval in FluxUtils.withContext if the page retrieval method has a Context parameter
+        // but the ClientMethod doesn't have Context.
+        boolean needsFluxUtilWithContext = settings.isContextClientMethodParameter()
+            && !contextInParameters(clientMethod)
+            && contextInParameters(clientMethod.getProxyMethod().getParameters())
+            && !settings.isDataPlaneClient();
+
         boolean hasNextPageMethod = clientMethod.getMethodPageDetails().nonNullNextLink();
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
@@ -749,7 +757,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     clientMethod.getArgumentList(),
                     needsFluxUtilWithContext ? ", context" : "",
                     needsFluxUtilWithContext ? ")" : "",
-                    hasNextPageMethod ? "," : ")");
+                    hasNextPageMethod ? "," : ");");
 
                 if (hasNextPageMethod) {
                     // The next page method already has context included.
@@ -1176,7 +1184,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected boolean contextInParameters(ClientMethod clientMethod) {
-        return clientMethod.getParameters().stream().anyMatch(param -> getContextType().equals(param.getClientType()));
+        return contextInParameters(clientMethod.getParameters());
+    }
+
+    protected boolean contextInParameters(List<? extends MethodParameter> parameters) {
+        IType contextType = getContextType();
+        for (MethodParameter parameter : parameters) {
+            if (Objects.equals(parameter.getClientType(), contextType)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected IType getContextType() {
