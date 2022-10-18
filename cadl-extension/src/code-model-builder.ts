@@ -36,6 +36,7 @@ import {
   Union,
   UnionVariant,
   getDiscriminator,
+  isNeverType,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -992,11 +993,12 @@ export class CodeModelBuilder {
 
     // properties
     for (const prop of type.properties.values()) {
-      if (prop.name === discriminatorPropertyName) {
-        // skip the discriminator property
+      if (
+        prop.name === discriminatorPropertyName || // skip the discriminator property
+        isNeverType(prop.type) // skip property of type "never"
+      ) {
         continue;
       }
-
       objectSchema.addProperty(this.processModelProperty(prop));
     }
 
