@@ -531,7 +531,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningSync:
-                generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isSyncStackEnabled()) {
+                    generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
+                } else {
+                    generateLongRunningSync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case LongRunningBeginAsync:
@@ -730,6 +734,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+
+        boolean needsFluxUtilWithContext = settings.isContextClientMethodParameter() && !contextInParameters(clientMethod);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
@@ -739,21 +745,28 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
+                    function.line("() -> %s%s(%s%s),",
+                        needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
                         clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getArgumentList());
-                    function.line("nextLink -> %s(%s));",
+                        clientMethod.getArgumentList(),
+                        needsFluxUtilWithContext ? ", context" : "");
+
+                    function.line("nextLink -> %s%s(%s%s));",
+                        needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
                         clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"));
+                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"),
+                        needsFluxUtilWithContext ? ", context" : "");
                 });
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedFlux<>(");
-                function.indent(() -> function.line("() -> %s(%s));",
+                function.indent(() -> function.line("() -> %s%s(%s%s));",
+                    needsFluxUtilWithContext ? "FluxUtil.withContext(context -> " : "",
                     clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                    clientMethod.getArgumentList()));
+                    clientMethod.getArgumentList(),
+                    needsFluxUtilWithContext ? ", context" : ""));
             });
         }
     }
