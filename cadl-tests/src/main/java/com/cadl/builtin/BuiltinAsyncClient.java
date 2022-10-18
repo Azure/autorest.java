@@ -65,6 +65,7 @@ public final class BuiltinAsyncClient {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
+     *     uri: String (Required)
      * }
      * }</pre>
      *

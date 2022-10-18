@@ -20,6 +20,7 @@ model Builtin {
   dateTime: zonedDateTime;
   stringList: string[];
   bytesDict: Record<bytes>;
+  uri: uri;
 }
 
 model FormatString {
@@ -35,7 +36,9 @@ model FormatString {
 
   @format("password")
   password: string;
-  uri: uri;
+
+  @format("uri")
+  uri: string;
 }
 
 @format("date-time-rfc1123")

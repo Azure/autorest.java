@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import com.dictionary.implementation.Int64ValuesImpl;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -98,7 +99,9 @@ public final class Int64ValueAsyncClient {
     public Mono<Map<String, Long>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).map(Response::getValue);
+        return getWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<Map<String, Long>>() {}));
     }
 
     /**

@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
@@ -97,7 +98,7 @@ public final class DatetimeValueClient {
     public Map<String, OffsetDateTime> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue();
+        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, OffsetDateTime>>() {});
     }
 
     /**

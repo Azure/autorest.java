@@ -63,6 +63,7 @@ public final class BuiltinClient {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
+     *     uri: String (Required)
      * }
      * }</pre>
      *

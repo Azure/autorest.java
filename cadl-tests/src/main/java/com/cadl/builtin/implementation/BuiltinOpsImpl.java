@@ -101,6 +101,7 @@ public final class BuiltinOpsImpl {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
+     *     uri: String (Required)
      * }
      * }</pre>
      *
@@ -149,6 +150,7 @@ public final class BuiltinOpsImpl {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
+     *     uri: String (Required)
      * }
      * }</pre>
      *
