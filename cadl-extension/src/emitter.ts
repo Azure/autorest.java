@@ -14,7 +14,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 export interface EmitterOptions {
-  namespace?: string;
+  "namespace"?: string;
   "service-name"?: string;
   "partial-update"?: boolean;
   "output-dir"?: string;
@@ -24,7 +24,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
   additionalProperties: true,
   properties: {
-    namespace: { type: "string", nullable: true },
+    "namespace": { type: "string", nullable: true },
     "service-name": { type: "string", nullable: true },
     "partial-update": { type: "boolean", nullable: true },
     "output-dir": { type: "string", nullable: true },
@@ -49,7 +49,9 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     const moduleRoot = resolvePath(__dirname, "..", "..");
 
     const outputPath =
-      options["output-dir"] ?? program.compilerOptions.outputDir ?? getNormalizedAbsolutePath("./cadl-output", undefined);
+      options["output-dir"] ??
+      program.compilerOptions.outputDir ??
+      getNormalizedAbsolutePath("./cadl-output", undefined);
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
