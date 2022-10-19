@@ -136,6 +136,7 @@ public final class AuthClientBuilder
     @Generated
     @Override
     public AuthClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

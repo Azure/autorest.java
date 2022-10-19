@@ -123,6 +123,7 @@ public final class AzureLroClientBuilder
     @Generated
     @Override
     public AzureLroClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

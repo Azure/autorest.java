@@ -123,6 +123,7 @@ public final class DurationValueClientBuilder
     @Generated
     @Override
     public DurationValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

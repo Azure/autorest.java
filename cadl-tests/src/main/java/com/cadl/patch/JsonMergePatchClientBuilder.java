@@ -126,6 +126,7 @@ public final class JsonMergePatchClientBuilder
     @Generated
     @Override
     public JsonMergePatchClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

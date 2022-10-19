@@ -126,6 +126,7 @@ public final class NamingClientBuilder
     @Generated
     @Override
     public NamingClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

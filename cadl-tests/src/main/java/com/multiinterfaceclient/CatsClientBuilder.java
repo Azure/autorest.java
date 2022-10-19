@@ -123,6 +123,7 @@ public final class CatsClientBuilder implements HttpTrait<CatsClientBuilder>, Co
     @Generated
     @Override
     public CatsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -124,6 +124,7 @@ public final class ExtensibleEnumClientBuilder
     @Generated
     @Override
     public ExtensibleEnumClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

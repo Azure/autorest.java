@@ -126,6 +126,7 @@ public final class SpecialHeadersClientBuilder
     @Generated
     @Override
     public SpecialHeadersClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

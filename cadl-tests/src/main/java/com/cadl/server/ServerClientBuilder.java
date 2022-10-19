@@ -123,6 +123,7 @@ public final class ServerClientBuilder
     @Generated
     @Override
     public ServerClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

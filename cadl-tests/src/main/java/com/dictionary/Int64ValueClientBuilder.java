@@ -123,6 +123,7 @@ public final class Int64ValueClientBuilder
     @Generated
     @Override
     public Int64ValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

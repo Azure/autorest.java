@@ -126,6 +126,7 @@ public final class EnumServiceClientBuilder
     @Generated
     @Override
     public EnumServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

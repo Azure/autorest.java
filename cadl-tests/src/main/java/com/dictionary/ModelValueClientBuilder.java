@@ -123,6 +123,7 @@ public final class ModelValueClientBuilder
     @Generated
     @Override
     public ModelValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

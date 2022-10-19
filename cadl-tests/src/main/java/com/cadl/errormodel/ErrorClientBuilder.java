@@ -126,6 +126,7 @@ public final class ErrorClientBuilder
     @Generated
     @Override
     public ErrorClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

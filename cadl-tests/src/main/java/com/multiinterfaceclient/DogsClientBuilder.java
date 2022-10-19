@@ -123,6 +123,7 @@ public final class DogsClientBuilder implements HttpTrait<DogsClientBuilder>, Co
     @Generated
     @Override
     public DogsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -122,6 +122,7 @@ public final class HelloClientBuilder implements HttpTrait<HelloClientBuilder>, 
     @Generated
     @Override
     public HelloClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

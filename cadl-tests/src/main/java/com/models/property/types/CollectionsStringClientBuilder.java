@@ -124,6 +124,7 @@ public final class CollectionsStringClientBuilder
     @Generated
     @Override
     public CollectionsStringClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

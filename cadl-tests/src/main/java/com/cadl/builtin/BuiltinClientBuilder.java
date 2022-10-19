@@ -126,6 +126,7 @@ public final class BuiltinClientBuilder
     @Generated
     @Override
     public BuiltinClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

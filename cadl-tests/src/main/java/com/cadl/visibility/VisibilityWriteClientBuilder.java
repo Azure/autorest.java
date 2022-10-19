@@ -126,6 +126,7 @@ public final class VisibilityWriteClientBuilder
     @Generated
     @Override
     public VisibilityWriteClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

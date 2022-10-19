@@ -123,6 +123,7 @@ public final class UnknownValueClientBuilder
     @Generated
     @Override
     public UnknownValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

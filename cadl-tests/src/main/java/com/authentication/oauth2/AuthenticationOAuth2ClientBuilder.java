@@ -131,6 +131,7 @@ public final class AuthenticationOAuth2ClientBuilder
     @Generated
     @Override
     public AuthenticationOAuth2ClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

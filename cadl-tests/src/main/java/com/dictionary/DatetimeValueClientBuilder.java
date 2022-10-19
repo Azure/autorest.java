@@ -123,6 +123,7 @@ public final class DatetimeValueClientBuilder
     @Generated
     @Override
     public DatetimeValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

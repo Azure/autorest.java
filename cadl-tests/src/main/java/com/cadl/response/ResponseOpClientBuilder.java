@@ -126,6 +126,7 @@ public final class ResponseOpClientBuilder
     @Generated
     @Override
     public ResponseOpClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

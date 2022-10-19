@@ -124,6 +124,7 @@ public final class StringOperationClientBuilder
     @Generated
     @Override
     public StringOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

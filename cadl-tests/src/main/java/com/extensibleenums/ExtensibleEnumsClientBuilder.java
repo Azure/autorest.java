@@ -123,6 +123,7 @@ public final class ExtensibleEnumsClientBuilder
     @Generated
     @Override
     public ExtensibleEnumsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -123,6 +123,7 @@ public final class RecursiveModelValueClientBuilder
     @Generated
     @Override
     public RecursiveModelValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

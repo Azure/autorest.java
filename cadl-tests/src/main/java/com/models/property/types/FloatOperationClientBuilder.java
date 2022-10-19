@@ -124,6 +124,7 @@ public final class FloatOperationClientBuilder
     @Generated
     @Override
     public FloatOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

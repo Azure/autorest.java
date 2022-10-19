@@ -126,6 +126,7 @@ public final class OptionalClientBuilder
     @Generated
     @Override
     public OptionalClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

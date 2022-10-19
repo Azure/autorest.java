@@ -123,6 +123,7 @@ public final class StringValueClientBuilder
     @Generated
     @Override
     public StringValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

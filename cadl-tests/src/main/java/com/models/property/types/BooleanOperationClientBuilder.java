@@ -124,6 +124,7 @@ public final class BooleanOperationClientBuilder
     @Generated
     @Override
     public BooleanOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

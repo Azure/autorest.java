@@ -124,6 +124,7 @@ public final class DictionaryStringClientBuilder
     @Generated
     @Override
     public DictionaryStringClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

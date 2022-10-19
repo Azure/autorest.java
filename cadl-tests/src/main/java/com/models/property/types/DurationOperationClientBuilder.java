@@ -124,6 +124,7 @@ public final class DurationOperationClientBuilder
     @Generated
     @Override
     public DurationOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -123,6 +123,7 @@ public final class Float32ValueClientBuilder
     @Generated
     @Override
     public Float32ValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

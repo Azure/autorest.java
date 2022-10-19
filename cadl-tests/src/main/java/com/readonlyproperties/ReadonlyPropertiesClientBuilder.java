@@ -123,6 +123,7 @@ public final class ReadonlyPropertiesClientBuilder
     @Generated
     @Override
     public ReadonlyPropertiesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

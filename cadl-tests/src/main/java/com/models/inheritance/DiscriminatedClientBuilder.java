@@ -123,6 +123,7 @@ public final class DiscriminatedClientBuilder
     @Generated
     @Override
     public DiscriminatedClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

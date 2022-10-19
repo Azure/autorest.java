@@ -123,6 +123,7 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
     @Generated
     @Override
     public ModelClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

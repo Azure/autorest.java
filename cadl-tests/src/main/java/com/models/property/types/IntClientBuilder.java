@@ -123,6 +123,7 @@ public final class IntClientBuilder implements HttpTrait<IntClientBuilder>, Conf
     @Generated
     @Override
     public IntClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

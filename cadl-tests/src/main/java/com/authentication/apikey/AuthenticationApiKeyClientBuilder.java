@@ -129,6 +129,7 @@ public final class AuthenticationApiKeyClientBuilder
     @Generated
     @Override
     public AuthenticationApiKeyClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

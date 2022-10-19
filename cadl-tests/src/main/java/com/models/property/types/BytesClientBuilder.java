@@ -123,6 +123,7 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     @Generated
     @Override
     public BytesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -123,6 +123,7 @@ public final class BooleanValueClientBuilder
     @Generated
     @Override
     public BooleanValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

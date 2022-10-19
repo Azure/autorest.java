@@ -126,6 +126,7 @@ public final class CadlCoreOpClientBuilder
     @Generated
     @Override
     public CadlCoreOpClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

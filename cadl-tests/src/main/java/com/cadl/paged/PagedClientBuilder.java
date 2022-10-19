@@ -126,6 +126,7 @@ public final class PagedClientBuilder
     @Generated
     @Override
     public PagedClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -126,6 +126,7 @@ public final class PartialUpdateClientBuilder
     @Generated
     @Override
     public PartialUpdateClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }
