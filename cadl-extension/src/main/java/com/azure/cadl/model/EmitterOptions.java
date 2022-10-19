@@ -3,6 +3,7 @@
 
 package com.azure.cadl.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -12,11 +13,15 @@ import java.io.IOException;
 
 public class EmitterOptions {
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
+    @JsonProperty(value="namespace")
     private String namespace;
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
+    @JsonProperty(value="output-dir")
     private String outputDir;
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
+    @JsonProperty(value="service-name")
     private String serviceName;
+    @JsonProperty(value="partial-update")
     private Boolean partialUpdate;
 
     public String getNamespace() {
