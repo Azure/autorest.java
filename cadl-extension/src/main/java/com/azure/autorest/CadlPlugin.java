@@ -60,7 +60,7 @@ public class CadlPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(emitterOptions.getOutputPath(), fileName).toAbsolutePath().toFile();
+        File outputFile = Paths.get(emitterOptions.getOutputDir(), fileName).toAbsolutePath().toFile();
         File parentFile = outputFile.getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
@@ -76,7 +76,7 @@ public class CadlPlugin extends Javagen {
     public String handlePartialUpdate(String filePath, String generatedContent) {
         if (filePath.endsWith(".java")) { // only handle for .java file
             // check if existingFile exists, if not, no need to handle partial update
-            Path absoluteFilePath = Paths.get(emitterOptions.getOutputPath(), filePath);
+            Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
                     String existingFileContent = new String(Files.readAllBytes(absoluteFilePath));
@@ -132,8 +132,8 @@ public class CadlPlugin extends Javagen {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
-        if (!CoreUtils.isNullOrEmpty(options.getOutputPath())) {
-            SETTINGS_MAP.put("output-folder", options.getOutputPath());
+        if (!CoreUtils.isNullOrEmpty(options.getOutputDir())) {
+            SETTINGS_MAP.put("output-folder", options.getOutputDir());
         }
         if (!CoreUtils.isNullOrEmpty(options.getServiceName())) {
             SETTINGS_MAP.put("service-name", options.getServiceName());
@@ -143,7 +143,7 @@ public class CadlPlugin extends Javagen {
         }
 
         JavaSettingsAccessor.setHost(this);
-        LOGGER.info("Output folder: {}", options.getOutputPath());
+        LOGGER.info("Output folder: {}", options.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
 
         Mappers.setFactory(new CadlMapperFactory());

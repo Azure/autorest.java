@@ -99,7 +99,7 @@ public class Main {
             try {
                 formattedSource = formatter.formatSourceAndFixImports(fileContent);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputPath() + filePath, e);
+                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputDir() + filePath, e);
                 // but we continue so user can still check the file and see why format fails
             }
             formattedFiles.put(filePath, formattedSource);
@@ -137,10 +137,10 @@ public class Main {
                 }
 
                 // output path
-                if (CoreUtils.isNullOrEmpty(options.getOutputPath())) {
-                    options.setOutputPath("cadl-tests/cadl-output/");
-                } else if (!options.getOutputPath().endsWith("/")) {
-                    options.setOutputPath(options.getOutputPath() + "/");
+                if (CoreUtils.isNullOrEmpty(options.getOutputDir())) {
+                    options.setOutputDir("cadl-tests/cadl-output/");
+                } else if (!options.getOutputDir().endsWith("/")) {
+                    options.setOutputDir(options.getOutputDir() + "/");
                 }
             } catch (JsonProcessingException e) {
                 LOGGER.info("Read emitter options failed, emitter options json: {}", emitterOptionsJson);
@@ -150,7 +150,7 @@ public class Main {
         if (options == null) {
             // default if emitterOptions fails
             options = new EmitterOptions();
-            options.setOutputPath("cadl-tests/cadl-output/");
+            options.setOutputDir("cadl-tests/cadl-output/");
             if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
                 options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
             }

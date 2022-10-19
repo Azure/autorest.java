@@ -14,7 +14,7 @@ public class EmitterOptions {
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     private String namespace;
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
-    private String outputPath;
+    private String outputDir;
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     private String serviceName;
     private Boolean partialUpdate;
@@ -23,8 +23,8 @@ public class EmitterOptions {
         return namespace;
     }
 
-    public String getOutputPath() {
-        return outputPath;
+    public String getOutputDir() {
+        return outputDir;
     }
 
     public String getServiceName() {
@@ -40,8 +40,8 @@ public class EmitterOptions {
         return this;
     }
 
-    public EmitterOptions setOutputPath(String outputPath) {
-        this.outputPath = outputPath;
+    public EmitterOptions setOutputDir(String outputDir) {
+        this.outputDir = outputDir;
         return this;
     }
 
