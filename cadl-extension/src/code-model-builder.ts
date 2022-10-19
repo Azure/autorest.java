@@ -35,10 +35,11 @@ import {
   TypeNameOptions,
   Union,
   UnionVariant,
+  getDiscriminator,
+  isNeverType,
 } from "@cadl-lang/compiler";
-import { getDiscriminator, getResourceOperation, getSegment } from "@cadl-lang/rest";
+import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
-  getAllRoutes,
   getAuthentication,
   getHeaderFieldName,
   getPathParamName,
@@ -49,9 +50,10 @@ import {
   HttpOperationResponse,
   HttpServer,
   isStatusCode,
-  OperationDetails,
+  HttpOperation,
   ServiceAuthentication,
   StatusCode,
+  getAllHttpServices,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { fail } from "assert";
@@ -179,7 +181,9 @@ export class CodeModelBuilder {
   }
 
   public build(): CodeModel {
-    ignoreDiagnostics(getAllRoutes(this.program)).map((it) => this.processRoute(it));
+    ignoreDiagnostics(getAllHttpServices(this.program)).map((service) =>
+      service.operations.map((it) => this.processRoute(it)),
+    );
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -266,7 +270,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRoute(op: OperationDetails) {
+  private processRoute(op: HttpOperation) {
     const groupName = op.container.name;
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const opId = `${groupName}_${op.operation.name}`;
@@ -991,11 +995,12 @@ export class CodeModelBuilder {
 
     // properties
     for (const prop of type.properties.values()) {
-      if (prop.name === discriminatorPropertyName) {
-        // skip the discriminator property
+      if (
+        prop.name === discriminatorPropertyName || // skip the discriminator property
+        isNeverType(prop.type) // skip property of type "never"
+      ) {
         continue;
       }
-
       objectSchema.addProperty(this.processModelProperty(prop));
     }
 
@@ -1096,6 +1101,7 @@ export class CodeModelBuilder {
       case "date-time-rfc1123":
         return this.processDateTimeSchema(type, nameHint, true);
       case "password":
+      case "uri":
         return this.processStringSchema(type, nameHint);
     }
     throw new Error(`Unrecognized string format: '${format}'.`);
@@ -1172,7 +1178,7 @@ export class CodeModelBuilder {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
         const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
-        this.program.logger.warn(`Rename Cadl model '${cadlName}' to '${newName}'`);
+        this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
       } else {
         return target.name;
@@ -1195,7 +1201,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private isConvenienceMethod(op: OperationDetails) {
+  private isConvenienceMethod(op: HttpOperation) {
     // check @convenienceMethod
     let hasConvenienceMethod =
       hasDecorator(op.operation, "$convenienceMethod") || hasDecorator(op.container, "$convenienceMethod");

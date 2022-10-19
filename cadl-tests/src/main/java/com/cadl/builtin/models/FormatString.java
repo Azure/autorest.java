@@ -45,6 +45,12 @@ public final class FormatString {
     @JsonProperty(value = "password", required = true)
     private String password;
 
+    /*
+     * The uri property.
+     */
+    @JsonProperty(value = "uri", required = true)
+    private String uri;
+
     /**
      * Creates an instance of FormatString class.
      *
@@ -53,6 +59,7 @@ public final class FormatString {
      * @param dateTime the dateTime value to set.
      * @param dateTimeRfc1123 the dateTimeRfc1123 value to set.
      * @param password the password value to set.
+     * @param uri the uri value to set.
      */
     @JsonCreator
     private FormatString(
@@ -60,12 +67,14 @@ public final class FormatString {
             @JsonProperty(value = "binary", required = true) byte[] binary,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "dateTimeRfc1123", required = true) OffsetDateTime dateTimeRfc1123,
-            @JsonProperty(value = "password", required = true) String password) {
+            @JsonProperty(value = "password", required = true) String password,
+            @JsonProperty(value = "uri", required = true) String uri) {
         this.base64Encoded = Base64Url.encode(base64Encoded);
         this.binary = binary;
         this.dateTime = dateTime;
         this.dateTimeRfc1123 = new DateTimeRfc1123(dateTimeRfc1123);
         this.password = password;
+        this.uri = uri;
     }
 
     /**
@@ -117,5 +126,14 @@ public final class FormatString {
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * Get the uri property: The uri property.
+     *
+     * @return the uri value.
+     */
+    public String getUri() {
+        return this.uri;
     }
 }

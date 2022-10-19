@@ -55,10 +55,7 @@ interface LongRunningOp {
 namespace CustomCore {
   @parentResource(T)
   @resource("operations")
-  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
-    @key
-    operationId: string;
-  }
+  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus<T>;
 
   @route("operations")
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;

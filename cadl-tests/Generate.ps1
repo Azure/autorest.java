@@ -1,6 +1,6 @@
 function Generate($CadlFile) {
-  Write-Host "cadl compile $CadlFile"
-  Invoke-Expression "cadl compile $CadlFile"
+  Write-Host "cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
+  Invoke-Expression "cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
 
   if ($LASTEXITCODE) {
       exit 1

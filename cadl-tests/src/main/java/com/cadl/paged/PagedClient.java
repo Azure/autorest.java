@@ -33,7 +33,7 @@ public final class PagedClient {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -59,7 +59,7 @@ public final class PagedClient {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

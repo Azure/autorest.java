@@ -98,7 +98,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -141,7 +141,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -173,7 +173,7 @@ public final class PagedOpsImpl {
     }
 
     /**
-     * List Resource resources.
+     * The list operation.
      *
      * <p><strong>Response Body Schema</strong>
      *

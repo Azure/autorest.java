@@ -8,11 +8,11 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROProduct model. */
+/** Final response from LRO call. */
 @Immutable
 public final class LROProduct extends Product {
     /*
-     * The provisioningState property.
+     * Provisioning state returned by the service
      */
     @JsonProperty(value = "provisioningState", required = true)
     private String provisioningState;
@@ -32,7 +32,7 @@ public final class LROProduct extends Product {
     }
 
     /**
-     * Get the provisioningState property: The provisioningState property.
+     * Get the provisioningState property: Provisioning state returned by the service.
      *
      * @return the provisioningState value.
      */

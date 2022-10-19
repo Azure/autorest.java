@@ -94,6 +94,12 @@ public final class Builtin {
     @JsonProperty(value = "bytesDict", required = true)
     private Map<String, byte[]> bytesDict;
 
+    /*
+     * The uri property.
+     */
+    @JsonProperty(value = "uri", required = true)
+    private String uri;
+
     /**
      * Creates an instance of Builtin class.
      *
@@ -110,6 +116,7 @@ public final class Builtin {
      * @param dateTime the dateTime value to set.
      * @param stringList the stringList value to set.
      * @param bytesDict the bytesDict value to set.
+     * @param uri the uri value to set.
      */
     @JsonCreator
     private Builtin(
@@ -125,7 +132,8 @@ public final class Builtin {
             @JsonProperty(value = "duration", required = true) Duration duration,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "stringList", required = true) List<String> stringList,
-            @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict) {
+            @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
+            @JsonProperty(value = "uri", required = true) String uri) {
         this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
@@ -139,6 +147,7 @@ public final class Builtin {
         this.dateTime = dateTime;
         this.stringList = stringList;
         this.bytesDict = bytesDict;
+        this.uri = uri;
     }
 
     /**
@@ -256,5 +265,14 @@ public final class Builtin {
      */
     public Map<String, byte[]> getBytesDict() {
         return this.bytesDict;
+    }
+
+    /**
+     * Get the uri property: The uri property.
+     *
+     * @return the uri value.
+     */
+    public String getUri() {
+        return this.uri;
     }
 }

@@ -8,17 +8,17 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Product model. */
+/** Product resource. */
 @Immutable
 public class Product {
     /*
-     * The key property.
+     * key of product
      */
     @JsonProperty(value = "key", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String key;
 
     /*
-     * The received property.
+     * received mode
      */
     @JsonProperty(value = "received", required = true)
     private Mode received;
@@ -34,7 +34,7 @@ public class Product {
     }
 
     /**
-     * Get the key property: The key property.
+     * Get the key property: key of product.
      *
      * @return the key value.
      */
@@ -43,7 +43,7 @@ public class Product {
     }
 
     /**
-     * Get the received property: The received property.
+     * Get the received property: received mode.
      *
      * @return the received value.
      */

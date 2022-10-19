@@ -45,6 +45,7 @@ public final class BuiltinClient {
      *         dateTime: OffsetDateTime (Required)
      *         dateTimeRfc1123: DateTimeRfc1123 (Required)
      *         password: String (Required)
+     *         uri: String (Required)
      *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -62,6 +63,7 @@ public final class BuiltinClient {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
+     *     uri: String (Required)
      * }
      * }</pre>
      *

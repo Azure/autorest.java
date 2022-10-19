@@ -8,11 +8,11 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Input model. */
+/** Input to LRO call. */
 @Immutable
 public final class Input {
     /*
-     * The hello property.
+     * property on the input
      */
     @JsonProperty(value = "hello", required = true)
     private String hello;
@@ -28,7 +28,7 @@ public final class Input {
     }
 
     /**
-     * Get the hello property: The hello property.
+     * Get the hello property: property on the input.
      *
      * @return the hello value.
      */
