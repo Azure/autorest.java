@@ -88,7 +88,7 @@ public class ClientModelUtil {
                     .findAny()
                     .ifPresent(og -> {
                         og.getOperations().stream()
-                                .filter(o -> generateConvenienceMethods || (o.getExtensions() != null && o.getExtensions().isConvenienceMethod()))
+                                .filter(o -> generateConvenienceMethods || o.getConvenienceApi() != null)
                                 .forEach(o -> {
                                     List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
                                     if (!cMethods.isEmpty()) {

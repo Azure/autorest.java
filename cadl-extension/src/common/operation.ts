@@ -48,8 +48,19 @@ export interface Operation extends Aspect {
   /** the apiVersion to use for a given profile name */
   profile?: Record<string, ApiVersion>;
 
+  /** the name of convenience API */
+  convenienceApi?: ConvenienceApi;
+
   /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
   operationLinks?: Record<string, OperationLink>;
+}
+
+export class ConvenienceApi {
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  name: string
 }
 
 export class OperationLink {
