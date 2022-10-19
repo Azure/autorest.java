@@ -166,7 +166,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
                 }
                 addGeneratedAnnotation(classBlock);
-                classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.privateStaticFinalVariable(String.format("Map<String, String> properties = %s", propertiesValue));
 
                 addGeneratedAnnotation(classBlock);
                 classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
