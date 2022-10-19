@@ -514,7 +514,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public IntWrapper getIntSync(Context context) {
-        return getIntSyncWithResponse(context, Context.NONE).getValue();
+        return getIntSyncWithResponse(context).getValue();
     }
 
     /**
@@ -672,7 +672,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntSync(IntWrapper complexBody, Context context) {
-        putIntSyncWithResponse(complexBody, context, Context.NONE);
+        putIntSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -796,7 +796,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LongWrapper getLongSync(Context context) {
-        return getLongSyncWithResponse(context, Context.NONE).getValue();
+        return getLongSyncWithResponse(context).getValue();
     }
 
     /**
@@ -954,7 +954,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongSync(LongWrapper complexBody, Context context) {
-        putLongSyncWithResponse(complexBody, context, Context.NONE);
+        putLongSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -1078,7 +1078,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatWrapper getFloatSync(Context context) {
-        return getFloatSyncWithResponse(context, Context.NONE).getValue();
+        return getFloatSyncWithResponse(context).getValue();
     }
 
     /**
@@ -1236,7 +1236,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatSync(FloatWrapper complexBody, Context context) {
-        putFloatSyncWithResponse(complexBody, context, Context.NONE);
+        putFloatSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -1362,7 +1362,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DoubleWrapper getDoubleSync(Context context) {
-        return getDoubleSyncWithResponse(context, Context.NONE).getValue();
+        return getDoubleSyncWithResponse(context).getValue();
     }
 
     /**
@@ -1520,7 +1520,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleSync(DoubleWrapper complexBody, Context context) {
-        putDoubleSyncWithResponse(complexBody, context, Context.NONE);
+        putDoubleSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -1644,7 +1644,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanWrapper getBoolSync(Context context) {
-        return getBoolSyncWithResponse(context, Context.NONE).getValue();
+        return getBoolSyncWithResponse(context).getValue();
     }
 
     /**
@@ -1802,7 +1802,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBoolSync(BooleanWrapper complexBody, Context context) {
-        putBoolSyncWithResponse(complexBody, context, Context.NONE);
+        putBoolSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -1928,7 +1928,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StringWrapper getStringSync(Context context) {
-        return getStringSyncWithResponse(context, Context.NONE).getValue();
+        return getStringSyncWithResponse(context).getValue();
     }
 
     /**
@@ -2086,7 +2086,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringSync(StringWrapper complexBody, Context context) {
-        putStringSyncWithResponse(complexBody, context, Context.NONE);
+        putStringSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -2210,7 +2210,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DateWrapper getDateSync(Context context) {
-        return getDateSyncWithResponse(context, Context.NONE).getValue();
+        return getDateSyncWithResponse(context).getValue();
     }
 
     /**
@@ -2368,7 +2368,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateSync(DateWrapper complexBody, Context context) {
-        putDateSyncWithResponse(complexBody, context, Context.NONE);
+        putDateSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -2494,7 +2494,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DatetimeWrapper getDateTimeSync(Context context) {
-        return getDateTimeSyncWithResponse(context, Context.NONE).getValue();
+        return getDateTimeSyncWithResponse(context).getValue();
     }
 
     /**
@@ -2653,7 +2653,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeSync(DatetimeWrapper complexBody, Context context) {
-        putDateTimeSyncWithResponse(complexBody, context, Context.NONE);
+        putDateTimeSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -2779,7 +2779,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Datetimerfc1123Wrapper getDateTimeRfc1123Sync(Context context) {
-        return getDateTimeRfc1123SyncWithResponse(context, Context.NONE).getValue();
+        return getDateTimeRfc1123SyncWithResponse(context).getValue();
     }
 
     /**
@@ -2939,7 +2939,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Sync(Datetimerfc1123Wrapper complexBody, Context context) {
-        putDateTimeRfc1123SyncWithResponse(complexBody, context, Context.NONE);
+        putDateTimeRfc1123SyncWithResponse(complexBody, context);
     }
 
     /**
@@ -3065,7 +3065,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationWrapper getDurationSync(Context context) {
-        return getDurationSyncWithResponse(context, Context.NONE).getValue();
+        return getDurationSyncWithResponse(context).getValue();
     }
 
     /**
@@ -3224,7 +3224,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationSync(DurationWrapper complexBody, Context context) {
-        putDurationSyncWithResponse(complexBody, context, Context.NONE);
+        putDurationSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -3348,7 +3348,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ByteWrapper getByteSync(Context context) {
-        return getByteSyncWithResponse(context, Context.NONE).getValue();
+        return getByteSyncWithResponse(context).getValue();
     }
 
     /**
@@ -3506,7 +3506,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteSync(ByteWrapper complexBody, Context context) {
-        putByteSyncWithResponse(complexBody, context, Context.NONE);
+        putByteSyncWithResponse(complexBody, context);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Primitives.class);

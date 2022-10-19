@@ -258,7 +258,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -424,7 +424,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(DictionaryWrapper complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -550,7 +550,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmptySync(Context context) {
-        return getEmptySyncWithResponse(context, Context.NONE).getValue();
+        return getEmptySyncWithResponse(context).getValue();
     }
 
     /**
@@ -708,7 +708,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptySync(DictionaryWrapper complexBody, Context context) {
-        putEmptySyncWithResponse(complexBody, context, Context.NONE);
+        putEmptySyncWithResponse(complexBody, context);
     }
 
     /**
@@ -834,7 +834,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNullSync(Context context) {
-        return getNullSyncWithResponse(context, Context.NONE).getValue();
+        return getNullSyncWithResponse(context).getValue();
     }
 
     /**
@@ -964,7 +964,7 @@ public final class Dictionaries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvidedSync(Context context) {
-        return getNotProvidedSyncWithResponse(context, Context.NONE).getValue();
+        return getNotProvidedSyncWithResponse(context).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Dictionaries.class);

@@ -202,7 +202,7 @@ public final class Inheritances {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Siamese getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -376,7 +376,7 @@ public final class Inheritances {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(Siamese complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Inheritances.class);

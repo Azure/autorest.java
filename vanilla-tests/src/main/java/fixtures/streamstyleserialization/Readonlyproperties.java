@@ -205,7 +205,7 @@ public final class Readonlyproperties {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ReadonlyObj getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -363,7 +363,7 @@ public final class Readonlyproperties {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(ReadonlyObj complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Readonlyproperties.class);

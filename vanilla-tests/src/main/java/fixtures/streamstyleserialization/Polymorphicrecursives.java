@@ -207,7 +207,7 @@ public final class Polymorphicrecursives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -413,7 +413,7 @@ public final class Polymorphicrecursives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(Fish complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Polymorphicrecursives.class);

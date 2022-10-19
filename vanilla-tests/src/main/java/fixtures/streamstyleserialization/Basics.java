@@ -254,7 +254,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -416,7 +416,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(Basic complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -542,7 +542,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getInvalidSync(Context context) {
-        return getInvalidSyncWithResponse(context, Context.NONE).getValue();
+        return getInvalidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -666,7 +666,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getEmptySync(Context context) {
-        return getEmptySyncWithResponse(context, Context.NONE).getValue();
+        return getEmptySyncWithResponse(context).getValue();
     }
 
     /**
@@ -792,7 +792,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNullSync(Context context) {
-        return getNullSyncWithResponse(context, Context.NONE).getValue();
+        return getNullSyncWithResponse(context).getValue();
     }
 
     /**
@@ -920,7 +920,7 @@ public final class Basics {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Basic getNotProvidedSync(Context context) {
-        return getNotProvidedSyncWithResponse(context, Context.NONE).getValue();
+        return getNotProvidedSyncWithResponse(context).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Basics.class);

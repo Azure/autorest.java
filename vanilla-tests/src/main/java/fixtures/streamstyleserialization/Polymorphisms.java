@@ -307,7 +307,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -505,7 +505,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(Fish complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -631,7 +631,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFish getDotSyntaxSync(Context context) {
-        return getDotSyntaxSyncWithResponse(context, Context.NONE).getValue();
+        return getDotSyntaxSyncWithResponse(context).getValue();
     }
 
     /**
@@ -772,7 +772,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithDiscriminatorSync(Context context) {
-        return getComposedWithDiscriminatorSyncWithResponse(context, Context.NONE).getValue();
+        return getComposedWithDiscriminatorSyncWithResponse(context).getValue();
     }
 
     /**
@@ -914,7 +914,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithoutDiscriminatorSync(Context context) {
-        return getComposedWithoutDiscriminatorSyncWithResponse(context, Context.NONE).getValue();
+        return getComposedWithoutDiscriminatorSyncWithResponse(context).getValue();
     }
 
     /**
@@ -1046,7 +1046,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon getComplicatedSync(Context context) {
-        return getComplicatedSyncWithResponse(context, Context.NONE).getValue();
+        return getComplicatedSyncWithResponse(context).getValue();
     }
 
     /**
@@ -1205,7 +1205,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplicatedSync(Salmon complexBody, Context context) {
-        putComplicatedSyncWithResponse(complexBody, context, Context.NONE);
+        putComplicatedSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -1367,7 +1367,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon putMissingDiscriminatorSync(Salmon complexBody, Context context) {
-        return putMissingDiscriminatorSyncWithResponse(complexBody, context, Context.NONE).getValue();
+        return putMissingDiscriminatorSyncWithResponse(complexBody, context).getValue();
     }
 
     /**
@@ -1566,7 +1566,7 @@ public final class Polymorphisms {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidMissingRequiredSync(Fish complexBody, Context context) {
-        putValidMissingRequiredSyncWithResponse(complexBody, context, Context.NONE);
+        putValidMissingRequiredSyncWithResponse(complexBody, context);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Polymorphisms.class);

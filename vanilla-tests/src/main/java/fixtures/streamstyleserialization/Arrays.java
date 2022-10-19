@@ -243,7 +243,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -409,7 +409,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(ArrayWrapper complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context, Context.NONE);
+        putValidSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -535,7 +535,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getEmptySync(Context context) {
-        return getEmptySyncWithResponse(context, Context.NONE).getValue();
+        return getEmptySyncWithResponse(context).getValue();
     }
 
     /**
@@ -693,7 +693,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptySync(ArrayWrapper complexBody, Context context) {
-        putEmptySyncWithResponse(complexBody, context, Context.NONE);
+        putEmptySyncWithResponse(complexBody, context);
     }
 
     /**
@@ -823,7 +823,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArrayWrapper getNotProvidedSync(Context context) {
-        return getNotProvidedSyncWithResponse(context, Context.NONE).getValue();
+        return getNotProvidedSyncWithResponse(context).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Arrays.class);

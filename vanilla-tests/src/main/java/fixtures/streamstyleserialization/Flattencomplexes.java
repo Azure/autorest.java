@@ -183,7 +183,7 @@ public final class Flattencomplexes {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValidSync(Context context) {
-        return getValidSyncWithResponse(context, Context.NONE).getValue();
+        return getValidSyncWithResponse(context).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Flattencomplexes.class);

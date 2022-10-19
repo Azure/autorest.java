@@ -682,7 +682,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                     .stream()
-                    .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    .noneMatch(p -> p.getClientType() == ClassType.Context)) {
                     nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
                     if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
@@ -708,7 +708,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                     .stream()
-                    .noneMatch(param -> param == ClientMethodParameter.CONTEXT_PARAMETER)) {
+                    .noneMatch(p -> p.getClientType() == ClassType.Context)) {
                     if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
                     } else {
@@ -797,7 +797,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (CoreUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
-            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
                 // If the arguments don't contain Context append Context.NONE
                 argumentList += ", Context.NONE";
             }
@@ -827,7 +827,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (CoreUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
-            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
                 // If the arguments don't contain Context append Context.NONE
                 argumentList += ", Context.NONE";
             }
