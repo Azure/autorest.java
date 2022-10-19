@@ -156,6 +156,26 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property on successful completion of {@link Mono}.
@@ -163,6 +183,20 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getValidAsync() {
         return getValidWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with dictionary property.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DictionaryWrapper> getValidAsync(Context context) {
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -185,13 +219,46 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DictionaryWrapper> getValidSyncWithResponse(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getValidSync() {
-        return getValidSyncWithResponse().getValue();
+        return getValidSyncWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types with dictionary property.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DictionaryWrapper getValidSync(Context context) {
+        return getValidSyncWithResponse(context).getValue();
     }
 
     /**
@@ -225,6 +292,33 @@ public final class Dictionaries {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      *     "xls":"excel", "exe":"", "":null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValid(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
+     *     "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -233,6 +327,22 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
+     *     "xls":"excel", "exe":"", "":null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(DictionaryWrapper complexBody, Context context) {
+        return putValidWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -266,13 +376,55 @@ public final class Dictionaries {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      *     "xls":"excel", "exe":"", "":null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putValidSyncWithResponse(DictionaryWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
+     *     "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidSync(DictionaryWrapper complexBody) {
-        putValidSyncWithResponse(complexBody);
+        putValidSyncWithResponse(complexBody, Context.NONE);
+    }
+
+    /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
+     *     "xls":"excel", "exe":"", "":null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValidSync(DictionaryWrapper complexBody, Context context) {
+        putValidSyncWithResponse(complexBody, context);
     }
 
     /**
@@ -296,6 +448,26 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty on successful completion of {@link Mono}.
@@ -303,6 +475,20 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DictionaryWrapper> getEmptyAsync(Context context) {
+        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -325,13 +511,46 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DictionaryWrapper> getEmptySyncWithResponse(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmptySync() {
-        return getEmptySyncWithResponse().getValue();
+        return getEmptySyncWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is empty.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DictionaryWrapper getEmptySync(Context context) {
+        return getEmptySyncWithResponse(context).getValue();
     }
 
     /**
@@ -363,6 +582,32 @@ public final class Dictionaries {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putEmpty(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -371,6 +616,21 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithResponseAsync(complexBody).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody, Context context) {
+        return putEmptyWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -402,13 +662,53 @@ public final class Dictionaries {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> putEmptySyncWithResponse(DictionaryWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putEmptySync(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptySync(DictionaryWrapper complexBody) {
-        putEmptySyncWithResponse(complexBody);
+        putEmptySyncWithResponse(complexBody, Context.NONE);
+    }
+
+    /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putEmptySync(DictionaryWrapper complexBody, Context context) {
+        putEmptySyncWithResponse(complexBody, context);
     }
 
     /**
@@ -432,6 +732,26 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property which is null.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null on successful completion of {@link Mono}.
@@ -439,6 +759,20 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNullAsync() {
         return getNullWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with dictionary property which is null.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DictionaryWrapper> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -461,13 +795,46 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DictionaryWrapper> getNullSyncWithResponse(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNullSync(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property which is null.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNullSync() {
-        return getNullSyncWithResponse().getValue();
+        return getNullSyncWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types with dictionary property which is null.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property which is null.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DictionaryWrapper getNullSync(Context context) {
+        return getNullSyncWithResponse(context).getValue();
     }
 
     /**
@@ -491,6 +858,26 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNotProvided(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload on successful
@@ -499,6 +886,21 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DictionaryWrapper> getNotProvidedAsync(Context context) {
+        return getNotProvidedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -522,13 +924,47 @@ public final class Dictionaries {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<DictionaryWrapper> getNotProvidedSyncWithResponse(Context context) {
+        if (this.client.getHost() == null) {
+            throw LOGGER.logExceptionAsError(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvidedSync() {
-        return getNotProvidedSyncWithResponse().getValue();
+        return getNotProvidedSyncWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with dictionary property while server doesn't provide a response payload.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DictionaryWrapper getNotProvidedSync(Context context) {
+        return getNotProvidedSyncWithResponse(context).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Dictionaries.class);

@@ -243,6 +243,25 @@ public final class Numbers {
     /**
      * Get null Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Number value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Float>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null Number value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Number value on successful completion of {@link Mono}.
@@ -255,13 +274,29 @@ public final class Numbers {
     /**
      * Get null Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Number value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Float> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null Number value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Number value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Float> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<Float> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -273,7 +308,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -296,6 +331,25 @@ public final class Numbers {
     /**
      * Get invalid float Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid float Number value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Float>> getInvalidFloatWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidFloat(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid float Number value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid float Number value on successful completion of {@link Mono}.
@@ -308,13 +362,29 @@ public final class Numbers {
     /**
      * Get invalid float Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid float Number value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Float> getInvalidFloatAsync(Context context) {
+        return getInvalidFloatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid float Number value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid float Number value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Float> getInvalidFloatWithResponse() {
-        return getInvalidFloatWithResponseAsync().block();
+    public Response<Float> getInvalidFloatWithResponse(Context context) {
+        return getInvalidFloatWithResponseAsync(context).block();
     }
 
     /**
@@ -326,7 +396,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getInvalidFloat() {
-        return getInvalidFloatWithResponse().getValue();
+        return getInvalidFloatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -349,6 +419,25 @@ public final class Numbers {
     /**
      * Get invalid double Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid double Number value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getInvalidDoubleWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidDouble(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid double Number value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid double Number value on successful completion of {@link Mono}.
@@ -361,13 +450,29 @@ public final class Numbers {
     /**
      * Get invalid double Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid double Number value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getInvalidDoubleAsync(Context context) {
+        return getInvalidDoubleWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid double Number value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid double Number value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getInvalidDoubleWithResponse() {
-        return getInvalidDoubleWithResponseAsync().block();
+    public Response<Double> getInvalidDoubleWithResponse(Context context) {
+        return getInvalidDoubleWithResponseAsync(context).block();
     }
 
     /**
@@ -379,7 +484,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getInvalidDouble() {
-        return getInvalidDoubleWithResponse().getValue();
+        return getInvalidDoubleWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -402,6 +507,25 @@ public final class Numbers {
     /**
      * Get invalid decimal Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid decimal Number value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BigDecimal>> getInvalidDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid decimal Number value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid decimal Number value on successful completion of {@link Mono}.
@@ -414,13 +538,29 @@ public final class Numbers {
     /**
      * Get invalid decimal Number value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid decimal Number value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BigDecimal> getInvalidDecimalAsync(Context context) {
+        return getInvalidDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid decimal Number value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid decimal Number value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BigDecimal> getInvalidDecimalWithResponse() {
-        return getInvalidDecimalWithResponseAsync().block();
+    public Response<BigDecimal> getInvalidDecimalWithResponse(Context context) {
+        return getInvalidDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -432,7 +572,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalWithResponse().getValue();
+        return getInvalidDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -458,6 +598,26 @@ public final class Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigFloatWithResponseAsync(float numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putBigFloat(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -472,14 +632,30 @@ public final class Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigFloatAsync(float numberBody, Context context) {
+        return putBigFloatWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigFloatWithResponse(float numberBody) {
-        return putBigFloatWithResponseAsync(numberBody).block();
+    public Response<Void> putBigFloatWithResponse(float numberBody, Context context) {
+        return putBigFloatWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -492,7 +668,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigFloat(float numberBody) {
-        putBigFloatWithResponse(numberBody);
+        putBigFloatWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -515,6 +691,25 @@ public final class Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big float value 3.402823e+20 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Float>> getBigFloatWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigFloat(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big float value 3.402823e+20.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big float value 3.402823e+20 on successful completion of {@link Mono}.
@@ -527,13 +722,29 @@ public final class Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big float value 3.402823e+20 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Float> getBigFloatAsync(Context context) {
+        return getBigFloatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big float value 3.402823e+20.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big float value 3.402823e+20 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Float> getBigFloatWithResponse() {
-        return getBigFloatWithResponseAsync().block();
+    public Response<Float> getBigFloatWithResponse(Context context) {
+        return getBigFloatWithResponseAsync(context).block();
     }
 
     /**
@@ -545,7 +756,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getBigFloat() {
-        return getBigFloatWithResponse().getValue();
+        return getBigFloatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -572,6 +783,26 @@ public final class Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDoubleWithResponseAsync(double numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putBigDouble(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -586,14 +817,30 @@ public final class Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDoubleAsync(double numberBody, Context context) {
+        return putBigDoubleWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDoubleWithResponse(double numberBody) {
-        return putBigDoubleWithResponseAsync(numberBody).block();
+    public Response<Void> putBigDoubleWithResponse(double numberBody, Context context) {
+        return putBigDoubleWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -606,7 +853,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDouble(double numberBody) {
-        putBigDoubleWithResponse(numberBody);
+        putBigDoubleWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -629,6 +876,25 @@ public final class Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e+101 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getBigDoubleWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDouble(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big double value 2.5976931e+101.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e+101 on successful completion of {@link Mono}.
@@ -641,13 +907,29 @@ public final class Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e+101 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getBigDoubleAsync(Context context) {
+        return getBigDoubleWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big double value 2.5976931e+101.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e+101 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getBigDoubleWithResponse() {
-        return getBigDoubleWithResponseAsync().block();
+    public Response<Double> getBigDoubleWithResponse(Context context) {
+        return getBigDoubleWithResponseAsync(context).block();
     }
 
     /**
@@ -659,7 +941,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDouble() {
-        return getBigDoubleWithResponse().getValue();
+        return getBigDoubleWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -684,6 +966,26 @@ public final class Numbers {
     /**
      * Put big double value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDoublePositiveDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final double numberBody = 9.999999999E7;
+        final String accept = "application/json";
+        return service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big double value 99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -696,13 +998,29 @@ public final class Numbers {
     /**
      * Put big double value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDoublePositiveDecimalAsync(Context context) {
+        return putBigDoublePositiveDecimalWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big double value 99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDoublePositiveDecimalWithResponse() {
-        return putBigDoublePositiveDecimalWithResponseAsync().block();
+    public Response<Void> putBigDoublePositiveDecimalWithResponse(Context context) {
+        return putBigDoublePositiveDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -713,7 +1031,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoublePositiveDecimal() {
-        putBigDoublePositiveDecimalWithResponse();
+        putBigDoublePositiveDecimalWithResponse(Context.NONE);
     }
 
     /**
@@ -737,6 +1055,25 @@ public final class Numbers {
     /**
      * Get big double value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 99999999.99 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getBigDoublePositiveDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDoublePositiveDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big double value 99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 99999999.99 on successful completion of {@link Mono}.
@@ -749,13 +1086,29 @@ public final class Numbers {
     /**
      * Get big double value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 99999999.99 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getBigDoublePositiveDecimalAsync(Context context) {
+        return getBigDoublePositiveDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 99999999.99 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getBigDoublePositiveDecimalWithResponse() {
-        return getBigDoublePositiveDecimalWithResponseAsync().block();
+    public Response<Double> getBigDoublePositiveDecimalWithResponse(Context context) {
+        return getBigDoublePositiveDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -767,7 +1120,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalWithResponse().getValue();
+        return getBigDoublePositiveDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -792,6 +1145,26 @@ public final class Numbers {
     /**
      * Put big double value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDoubleNegativeDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final double numberBody = -9.999999999E7;
+        final String accept = "application/json";
+        return service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big double value -99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -804,13 +1177,29 @@ public final class Numbers {
     /**
      * Put big double value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDoubleNegativeDecimalAsync(Context context) {
+        return putBigDoubleNegativeDecimalWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDoubleNegativeDecimalWithResponse() {
-        return putBigDoubleNegativeDecimalWithResponseAsync().block();
+    public Response<Void> putBigDoubleNegativeDecimalWithResponse(Context context) {
+        return putBigDoubleNegativeDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -821,7 +1210,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoubleNegativeDecimal() {
-        putBigDoubleNegativeDecimalWithResponse();
+        putBigDoubleNegativeDecimalWithResponse(Context.NONE);
     }
 
     /**
@@ -845,6 +1234,25 @@ public final class Numbers {
     /**
      * Get big double value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value -99999999.99 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getBigDoubleNegativeDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDoubleNegativeDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big double value -99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value -99999999.99 on successful completion of {@link Mono}.
@@ -857,13 +1265,29 @@ public final class Numbers {
     /**
      * Get big double value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value -99999999.99 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getBigDoubleNegativeDecimalAsync(Context context) {
+        return getBigDoubleNegativeDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big double value -99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value -99999999.99 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getBigDoubleNegativeDecimalWithResponse() {
-        return getBigDoubleNegativeDecimalWithResponseAsync().block();
+    public Response<Double> getBigDoubleNegativeDecimalWithResponse(Context context) {
+        return getBigDoubleNegativeDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -875,7 +1299,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalWithResponse().getValue();
+        return getBigDoubleNegativeDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -905,6 +1329,29 @@ public final class Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDecimalWithResponseAsync(BigDecimal numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (numberBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putBigDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -919,14 +1366,30 @@ public final class Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDecimalAsync(BigDecimal numberBody, Context context) {
+        return putBigDecimalWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDecimalWithResponse(BigDecimal numberBody) {
-        return putBigDecimalWithResponseAsync(numberBody).block();
+    public Response<Void> putBigDecimalWithResponse(BigDecimal numberBody, Context context) {
+        return putBigDecimalWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -939,7 +1402,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalWithResponse(numberBody);
+        putBigDecimalWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -962,6 +1425,25 @@ public final class Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 2.5976931e+101 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BigDecimal>> getBigDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 2.5976931e+101 on successful completion of {@link Mono}.
@@ -974,13 +1456,29 @@ public final class Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 2.5976931e+101 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BigDecimal> getBigDecimalAsync(Context context) {
+        return getBigDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 2.5976931e+101 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BigDecimal> getBigDecimalWithResponse() {
-        return getBigDecimalWithResponseAsync().block();
+    public Response<BigDecimal> getBigDecimalWithResponse(Context context) {
+        return getBigDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -992,7 +1490,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimal() {
-        return getBigDecimalWithResponse().getValue();
+        return getBigDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1017,6 +1515,26 @@ public final class Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDecimalPositiveDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final BigDecimal numberBody = new BigDecimal("9.999999999E7");
+        final String accept = "application/json";
+        return service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big decimal value 99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1029,13 +1547,29 @@ public final class Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDecimalPositiveDecimalAsync(Context context) {
+        return putBigDecimalPositiveDecimalWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big decimal value 99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDecimalPositiveDecimalWithResponse() {
-        return putBigDecimalPositiveDecimalWithResponseAsync().block();
+    public Response<Void> putBigDecimalPositiveDecimalWithResponse(Context context) {
+        return putBigDecimalPositiveDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -1046,7 +1580,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalPositiveDecimal() {
-        putBigDecimalPositiveDecimalWithResponse();
+        putBigDecimalPositiveDecimalWithResponse(Context.NONE);
     }
 
     /**
@@ -1070,6 +1604,25 @@ public final class Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 99999999.99 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDecimalPositiveDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big decimal value 99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 99999999.99 on successful completion of {@link Mono}.
@@ -1082,13 +1635,29 @@ public final class Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value 99999999.99 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BigDecimal> getBigDecimalPositiveDecimalAsync(Context context) {
+        return getBigDecimalPositiveDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big decimal value 99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value 99999999.99 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BigDecimal> getBigDecimalPositiveDecimalWithResponse() {
-        return getBigDecimalPositiveDecimalWithResponseAsync().block();
+    public Response<BigDecimal> getBigDecimalPositiveDecimalWithResponse(Context context) {
+        return getBigDecimalPositiveDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -1100,7 +1669,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalWithResponse().getValue();
+        return getBigDecimalPositiveDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1125,6 +1694,26 @@ public final class Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBigDecimalNegativeDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
+        final String accept = "application/json";
+        return service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put big decimal value -99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1137,13 +1726,29 @@ public final class Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBigDecimalNegativeDecimalAsync(Context context) {
+        return putBigDecimalNegativeDecimalWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put big decimal value -99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBigDecimalNegativeDecimalWithResponse() {
-        return putBigDecimalNegativeDecimalWithResponseAsync().block();
+    public Response<Void> putBigDecimalNegativeDecimalWithResponse(Context context) {
+        return putBigDecimalNegativeDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -1154,7 +1759,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalNegativeDecimal() {
-        putBigDecimalNegativeDecimalWithResponse();
+        putBigDecimalNegativeDecimalWithResponse(Context.NONE);
     }
 
     /**
@@ -1178,6 +1783,25 @@ public final class Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value -99999999.99 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBigDecimalNegativeDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big decimal value -99999999.99.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value -99999999.99 on successful completion of {@link Mono}.
@@ -1190,13 +1814,29 @@ public final class Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big decimal value -99999999.99 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BigDecimal> getBigDecimalNegativeDecimalAsync(Context context) {
+        return getBigDecimalNegativeDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big decimal value -99999999.99.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big decimal value -99999999.99 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BigDecimal> getBigDecimalNegativeDecimalWithResponse() {
-        return getBigDecimalNegativeDecimalWithResponseAsync().block();
+    public Response<BigDecimal> getBigDecimalNegativeDecimalWithResponse(Context context) {
+        return getBigDecimalNegativeDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -1208,7 +1848,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalWithResponse().getValue();
+        return getBigDecimalNegativeDecimalWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1235,6 +1875,26 @@ public final class Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putSmallFloatWithResponseAsync(float numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putSmallFloat(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put small float value 3.402823e-20.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1249,14 +1909,30 @@ public final class Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putSmallFloatAsync(float numberBody, Context context) {
+        return putSmallFloatWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put small float value 3.402823e-20.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putSmallFloatWithResponse(float numberBody) {
-        return putSmallFloatWithResponseAsync(numberBody).block();
+    public Response<Void> putSmallFloatWithResponse(float numberBody, Context context) {
+        return putSmallFloatWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -1269,7 +1945,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallFloat(float numberBody) {
-        putSmallFloatWithResponse(numberBody);
+        putSmallFloatWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -1292,6 +1968,25 @@ public final class Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 3.402823e-20 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getSmallFloatWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getSmallFloat(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 3.402823e-20 on successful completion of {@link Mono}.
@@ -1304,13 +1999,29 @@ public final class Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 3.402823e-20 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getSmallFloatAsync(Context context) {
+        return getSmallFloatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 3.402823e-20 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getSmallFloatWithResponse() {
-        return getSmallFloatWithResponseAsync().block();
+    public Response<Double> getSmallFloatWithResponse(Context context) {
+        return getSmallFloatWithResponseAsync(context).block();
     }
 
     /**
@@ -1322,7 +2033,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallFloat() {
-        return getSmallFloatWithResponse().getValue();
+        return getSmallFloatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1349,6 +2060,26 @@ public final class Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putSmallDoubleWithResponseAsync(double numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putSmallDouble(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1363,14 +2094,30 @@ public final class Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putSmallDoubleAsync(double numberBody, Context context) {
+        return putSmallDoubleWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putSmallDoubleWithResponse(double numberBody) {
-        return putSmallDoubleWithResponseAsync(numberBody).block();
+    public Response<Void> putSmallDoubleWithResponse(double numberBody, Context context) {
+        return putSmallDoubleWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -1383,7 +2130,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleWithResponse(numberBody);
+        putSmallDoubleWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -1406,6 +2153,25 @@ public final class Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e-101 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Double>> getSmallDoubleWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getSmallDouble(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get big double value 2.5976931e-101.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e-101 on successful completion of {@link Mono}.
@@ -1418,13 +2184,29 @@ public final class Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return big double value 2.5976931e-101 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Double> getSmallDoubleAsync(Context context) {
+        return getSmallDoubleWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get big double value 2.5976931e-101.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return big double value 2.5976931e-101 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Double> getSmallDoubleWithResponse() {
-        return getSmallDoubleWithResponseAsync().block();
+    public Response<Double> getSmallDoubleWithResponse(Context context) {
+        return getSmallDoubleWithResponseAsync(context).block();
     }
 
     /**
@@ -1436,7 +2218,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallDouble() {
-        return getSmallDoubleWithResponse().getValue();
+        return getSmallDoubleWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1466,6 +2248,29 @@ public final class Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putSmallDecimalWithResponseAsync(BigDecimal numberBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (numberBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putSmallDecimal(this.client.getHost(), numberBody, accept, context);
+    }
+
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody number body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1480,14 +2285,30 @@ public final class Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody number body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putSmallDecimalAsync(BigDecimal numberBody, Context context) {
+        return putSmallDecimalWithResponseAsync(numberBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody number body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putSmallDecimalWithResponse(BigDecimal numberBody) {
-        return putSmallDecimalWithResponseAsync(numberBody).block();
+    public Response<Void> putSmallDecimalWithResponse(BigDecimal numberBody, Context context) {
+        return putSmallDecimalWithResponseAsync(numberBody, context).block();
     }
 
     /**
@@ -1500,7 +2321,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalWithResponse(numberBody);
+        putSmallDecimalWithResponse(numberBody, Context.NONE);
     }
 
     /**
@@ -1523,6 +2344,25 @@ public final class Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return small decimal value 2.5976931e-101 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BigDecimal>> getSmallDecimalWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getSmallDecimal(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return small decimal value 2.5976931e-101 on successful completion of {@link Mono}.
@@ -1535,13 +2375,29 @@ public final class Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return small decimal value 2.5976931e-101 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BigDecimal> getSmallDecimalAsync(Context context) {
+        return getSmallDecimalWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return small decimal value 2.5976931e-101 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BigDecimal> getSmallDecimalWithResponse() {
-        return getSmallDecimalWithResponseAsync().block();
+    public Response<BigDecimal> getSmallDecimalWithResponse(Context context) {
+        return getSmallDecimalWithResponseAsync(context).block();
     }
 
     /**
@@ -1553,6 +2409,6 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalWithResponse().getValue();
+        return getSmallDecimalWithResponse(Context.NONE).getValue();
     }
 }

@@ -554,6 +554,25 @@ public final class Arrays {
     /**
      * Get null array value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null array value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null array value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null array value on successful completion of {@link Mono}.
@@ -566,13 +585,29 @@ public final class Arrays {
     /**
      * Get null array value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null array value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null array value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null array value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<List<Integer>> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -584,7 +619,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -607,6 +642,25 @@ public final class Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid array [1, 2, 3 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid array [1, 2, 3 on successful completion of {@link Mono}.
@@ -619,13 +673,29 @@ public final class Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid array [1, 2, 3 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid array [1, 2, 3 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<List<Integer>> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -637,7 +707,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getInvalid() {
-        return getInvalidWithResponse().getValue();
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -660,6 +730,25 @@ public final class Arrays {
     /**
      * Get empty array value [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array value [] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get empty array value [].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array value [] on successful completion of {@link Mono}.
@@ -672,13 +761,29 @@ public final class Arrays {
     /**
      * Get empty array value [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array value [] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getEmptyAsync(Context context) {
+        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get empty array value [].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array value [] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getEmptyWithResponse() {
-        return getEmptyWithResponseAsync().block();
+    public Response<List<Integer>> getEmptyWithResponse(Context context) {
+        return getEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -690,7 +795,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getEmpty() {
-        return getEmptyWithResponse().getValue();
+        return getEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -719,6 +824,29 @@ public final class Arrays {
      * Set array value empty [].
      *
      * @param arrayBody The empty array value [].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putEmptyWithResponseAsync(List<String> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putEmpty(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody The empty array value [].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -733,14 +861,30 @@ public final class Arrays {
      * Set array value empty [].
      *
      * @param arrayBody The empty array value [].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEmptyAsync(List<String> arrayBody, Context context) {
+        return putEmptyWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody The empty array value [].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptyWithResponse(List<String> arrayBody) {
-        return putEmptyWithResponseAsync(arrayBody).block();
+    public Response<Void> putEmptyWithResponse(List<String> arrayBody, Context context) {
+        return putEmptyWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -753,7 +897,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(List<String> arrayBody) {
-        putEmptyWithResponse(arrayBody);
+        putEmptyWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -777,6 +921,26 @@ public final class Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, false, false, true] along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Boolean>>> getBooleanTfftWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanTfft(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, false, false, true] on successful completion of {@link Mono}.
@@ -789,13 +953,29 @@ public final class Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, false, false, true] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Boolean>> getBooleanTfftAsync(Context context) {
+        return getBooleanTfftWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, false, false, true] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Boolean>> getBooleanTfftWithResponse() {
-        return getBooleanTfftWithResponseAsync().block();
+    public Response<List<Boolean>> getBooleanTfftWithResponse(Context context) {
+        return getBooleanTfftWithResponseAsync(context).block();
     }
 
     /**
@@ -807,7 +987,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftWithResponse().getValue();
+        return getBooleanTfftWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -837,6 +1017,29 @@ public final class Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody The array value [true, false, false, true].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBooleanTfftWithResponseAsync(List<Boolean> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putBooleanTfft(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody The array value [true, false, false, true].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -851,14 +1054,30 @@ public final class Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody The array value [true, false, false, true].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBooleanTfftAsync(List<Boolean> arrayBody, Context context) {
+        return putBooleanTfftWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody The array value [true, false, false, true].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBooleanTfftWithResponse(List<Boolean> arrayBody) {
-        return putBooleanTfftWithResponseAsync(arrayBody).block();
+    public Response<Void> putBooleanTfftWithResponse(List<Boolean> arrayBody, Context context) {
+        return putBooleanTfftWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -871,7 +1090,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftWithResponse(arrayBody);
+        putBooleanTfftWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -895,6 +1114,26 @@ public final class Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, null, false] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Boolean>>> getBooleanInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, null, false] on successful completion of {@link Mono}.
@@ -907,13 +1146,29 @@ public final class Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, null, false] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Boolean>> getBooleanInvalidNullAsync(Context context) {
+        return getBooleanInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, null, false] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Boolean>> getBooleanInvalidNullWithResponse() {
-        return getBooleanInvalidNullWithResponseAsync().block();
+    public Response<List<Boolean>> getBooleanInvalidNullWithResponse(Context context) {
+        return getBooleanInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -925,7 +1180,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithResponse().getValue();
+        return getBooleanInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -949,6 +1204,26 @@ public final class Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, 'boolean', false] along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Boolean>>> getBooleanInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, 'boolean', false] on successful completion of {@link Mono}.
@@ -961,13 +1236,29 @@ public final class Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [true, 'boolean', false] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Boolean>> getBooleanInvalidStringAsync(Context context) {
+        return getBooleanInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [true, 'boolean', false] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Boolean>> getBooleanInvalidStringWithResponse() {
-        return getBooleanInvalidStringWithResponseAsync().block();
+    public Response<List<Boolean>> getBooleanInvalidStringWithResponse(Context context) {
+        return getBooleanInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -979,7 +1270,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithResponse().getValue();
+        return getBooleanInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1002,6 +1293,25 @@ public final class Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getIntegerValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntegerValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300] on successful completion of {@link Mono}.
@@ -1014,13 +1324,29 @@ public final class Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getIntegerValidAsync(Context context) {
+        return getIntegerValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getIntegerValidWithResponse() {
-        return getIntegerValidWithResponseAsync().block();
+    public Response<List<Integer>> getIntegerValidWithResponse(Context context) {
+        return getIntegerValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1032,7 +1358,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntegerValid() {
-        return getIntegerValidWithResponse().getValue();
+        return getIntegerValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1062,6 +1388,29 @@ public final class Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putIntegerValidWithResponseAsync(List<Integer> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putIntegerValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1076,14 +1425,30 @@ public final class Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putIntegerValidAsync(List<Integer> arrayBody, Context context) {
+        return putIntegerValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntegerValidWithResponse(List<Integer> arrayBody) {
-        return putIntegerValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putIntegerValidWithResponse(List<Integer> arrayBody, Context context) {
+        return putIntegerValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1096,7 +1461,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidWithResponse(arrayBody);
+        putIntegerValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1119,6 +1484,25 @@ public final class Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, null, 0] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getIntInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, null, 0] on successful completion of {@link Mono}.
@@ -1131,13 +1515,29 @@ public final class Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, null, 0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getIntInvalidNullAsync(Context context) {
+        return getIntInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, null, 0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getIntInvalidNullWithResponse() {
-        return getIntInvalidNullWithResponseAsync().block();
+    public Response<List<Integer>> getIntInvalidNullWithResponse(Context context) {
+        return getIntInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1149,7 +1549,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithResponse().getValue();
+        return getIntInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1173,6 +1573,26 @@ public final class Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, 'integer', 0] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Integer>>> getIntInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, 'integer', 0] on successful completion of {@link Mono}.
@@ -1185,13 +1605,29 @@ public final class Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, 'integer', 0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Integer>> getIntInvalidStringAsync(Context context) {
+        return getIntInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, 'integer', 0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Integer>> getIntInvalidStringWithResponse() {
-        return getIntInvalidStringWithResponseAsync().block();
+    public Response<List<Integer>> getIntInvalidStringWithResponse(Context context) {
+        return getIntInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1203,7 +1639,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringWithResponse().getValue();
+        return getIntInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1226,6 +1662,25 @@ public final class Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Long>>> getLongValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300] on successful completion of {@link Mono}.
@@ -1238,13 +1693,29 @@ public final class Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value [1, -1, 3, 300] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Long>> getLongValidAsync(Context context) {
+        return getLongValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value [1, -1, 3, 300] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Long>> getLongValidWithResponse() {
-        return getLongValidWithResponseAsync().block();
+    public Response<List<Long>> getLongValidWithResponse(Context context) {
+        return getLongValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1256,7 +1727,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongValid() {
-        return getLongValidWithResponse().getValue();
+        return getLongValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1285,6 +1756,29 @@ public final class Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLongValidWithResponseAsync(List<Long> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLongValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1299,14 +1793,30 @@ public final class Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLongValidAsync(List<Long> arrayBody, Context context) {
+        return putLongValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody The array value [1, -1, 3, 300].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongValidWithResponse(List<Long> arrayBody) {
-        return putLongValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putLongValidWithResponse(List<Long> arrayBody, Context context) {
+        return putLongValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1319,7 +1829,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidWithResponse(arrayBody);
+        putLongValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1342,6 +1852,25 @@ public final class Arrays {
     /**
      * Get long array value [1, null, 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, null, 0] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Long>>> getLongInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get long array value [1, null, 0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, null, 0] on successful completion of {@link Mono}.
@@ -1354,13 +1883,29 @@ public final class Arrays {
     /**
      * Get long array value [1, null, 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, null, 0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Long>> getLongInvalidNullAsync(Context context) {
+        return getLongInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, null, 0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Long>> getLongInvalidNullWithResponse() {
-        return getLongInvalidNullWithResponseAsync().block();
+    public Response<List<Long>> getLongInvalidNullWithResponse(Context context) {
+        return getLongInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1372,7 +1917,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullWithResponse().getValue();
+        return getLongInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1395,6 +1940,25 @@ public final class Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, 'integer', 0] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Long>>> getLongInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, 'integer', 0] on successful completion of {@link Mono}.
@@ -1407,13 +1971,29 @@ public final class Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long array value [1, 'integer', 0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Long>> getLongInvalidStringAsync(Context context) {
+        return getLongInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long array value [1, 'integer', 0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Long>> getLongInvalidStringWithResponse() {
-        return getLongInvalidStringWithResponseAsync().block();
+    public Response<List<Long>> getLongInvalidStringWithResponse(Context context) {
+        return getLongInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1425,7 +2005,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringWithResponse().getValue();
+        return getLongInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1449,6 +2029,26 @@ public final class Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Float>>> getFloatValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20] on successful completion of {@link Mono}.
@@ -1461,13 +2061,29 @@ public final class Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Float>> getFloatValidAsync(Context context) {
+        return getFloatValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Float>> getFloatValidWithResponse() {
-        return getFloatValidWithResponseAsync().block();
+    public Response<List<Float>> getFloatValidWithResponse(Context context) {
+        return getFloatValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1479,7 +2095,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatValid() {
-        return getFloatValidWithResponse().getValue();
+        return getFloatValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1509,6 +2125,29 @@ public final class Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putFloatValidWithResponseAsync(List<Float> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putFloatValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1523,14 +2162,30 @@ public final class Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFloatValidAsync(List<Float> arrayBody, Context context) {
+        return putFloatValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatValidWithResponse(List<Float> arrayBody) {
-        return putFloatValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putFloatValidWithResponse(List<Float> arrayBody, Context context) {
+        return putFloatValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1543,7 +2198,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatValid(List<Float> arrayBody) {
-        putFloatValidWithResponse(arrayBody);
+        putFloatValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1567,6 +2222,26 @@ public final class Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Float>>> getFloatInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20] on successful completion of {@link Mono}.
@@ -1579,13 +2254,29 @@ public final class Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Float>> getFloatInvalidNullAsync(Context context) {
+        return getFloatInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Float>> getFloatInvalidNullWithResponse() {
-        return getFloatInvalidNullWithResponseAsync().block();
+    public Response<List<Float>> getFloatInvalidNullWithResponse(Context context) {
+        return getFloatInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1597,7 +2288,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidNull() {
-        return getFloatInvalidNullWithResponse().getValue();
+        return getFloatInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1621,6 +2312,26 @@ public final class Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Float>>> getFloatInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0] on successful completion of {@link Mono}.
@@ -1633,13 +2344,29 @@ public final class Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Float>> getFloatInvalidStringAsync(Context context) {
+        return getFloatInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Float>> getFloatInvalidStringWithResponse() {
-        return getFloatInvalidStringWithResponseAsync().block();
+    public Response<List<Float>> getFloatInvalidStringWithResponse(Context context) {
+        return getFloatInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1651,7 +2378,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Float> getFloatInvalidString() {
-        return getFloatInvalidStringWithResponse().getValue();
+        return getFloatInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1675,6 +2402,26 @@ public final class Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Double>>> getDoubleValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20] on successful completion of {@link Mono}.
@@ -1687,13 +2434,29 @@ public final class Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0, -0.01, 1.2e20] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Double>> getDoubleValidAsync(Context context) {
+        return getDoubleValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0, -0.01, 1.2e20] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Double>> getDoubleValidWithResponse() {
-        return getDoubleValidWithResponseAsync().block();
+    public Response<List<Double>> getDoubleValidWithResponse(Context context) {
+        return getDoubleValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1705,7 +2468,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleValid() {
-        return getDoubleValidWithResponse().getValue();
+        return getDoubleValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1735,6 +2498,29 @@ public final class Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDoubleValidWithResponseAsync(List<Double> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDoubleValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1749,14 +2535,30 @@ public final class Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDoubleValidAsync(List<Double> arrayBody, Context context) {
+        return putDoubleValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody The array value [0, -0.01, 1.2e20].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleValidWithResponse(List<Double> arrayBody) {
-        return putDoubleValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDoubleValidWithResponse(List<Double> arrayBody, Context context) {
+        return putDoubleValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1769,7 +2571,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidWithResponse(arrayBody);
+        putDoubleValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1793,6 +2595,26 @@ public final class Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Double>>> getDoubleInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20] on successful completion of {@link Mono}.
@@ -1805,13 +2627,29 @@ public final class Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float array value [0.0, null, -1.2e20] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Double>> getDoubleInvalidNullAsync(Context context) {
+        return getDoubleInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float array value [0.0, null, -1.2e20] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Double>> getDoubleInvalidNullWithResponse() {
-        return getDoubleInvalidNullWithResponseAsync().block();
+    public Response<List<Double>> getDoubleInvalidNullWithResponse(Context context) {
+        return getDoubleInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1823,7 +2661,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithResponse().getValue();
+        return getDoubleInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1847,6 +2685,26 @@ public final class Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Double>>> getDoubleInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0] on successful completion of {@link Mono}.
@@ -1859,13 +2717,29 @@ public final class Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean array value [1.0, 'number', 0.0] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Double>> getDoubleInvalidStringAsync(Context context) {
+        return getDoubleInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean array value [1.0, 'number', 0.0] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Double>> getDoubleInvalidStringWithResponse() {
-        return getDoubleInvalidStringWithResponseAsync().block();
+    public Response<List<Double>> getDoubleInvalidStringWithResponse(Context context) {
+        return getDoubleInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1877,7 +2751,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithResponse().getValue();
+        return getDoubleInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1901,6 +2775,26 @@ public final class Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo1', 'foo2', 'foo3'] along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<String>>> getStringValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
@@ -1913,13 +2807,29 @@ public final class Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<String>> getStringValidAsync(Context context) {
+        return getStringValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<String>> getStringValidWithResponse() {
-        return getStringValidWithResponseAsync().block();
+    public Response<List<String>> getStringValidWithResponse(Context context) {
+        return getStringValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1931,7 +2841,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringValid() {
-        return getStringValidWithResponse().getValue();
+        return getStringValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1961,6 +2871,29 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putStringValidWithResponseAsync(List<String> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putStringValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1975,14 +2908,30 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putStringValidAsync(List<String> arrayBody, Context context) {
+        return putStringValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringValidWithResponse(List<String> arrayBody) {
-        return putStringValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putStringValidWithResponse(List<String> arrayBody, Context context) {
+        return putStringValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1995,7 +2944,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringValid(List<String> arrayBody) {
-        putStringValidWithResponse(arrayBody);
+        putStringValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2019,6 +2968,26 @@ public final class Arrays {
     /**
      * Get enum array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<FooEnum>>> getEnumValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEnumValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
@@ -2031,13 +3000,29 @@ public final class Arrays {
     /**
      * Get enum array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<FooEnum>> getEnumValidAsync(Context context) {
+        return getEnumValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<FooEnum>> getEnumValidWithResponse() {
-        return getEnumValidWithResponseAsync().block();
+    public Response<List<FooEnum>> getEnumValidWithResponse(Context context) {
+        return getEnumValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2049,7 +3034,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<FooEnum> getEnumValid() {
-        return getEnumValidWithResponse().getValue();
+        return getEnumValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2078,6 +3063,29 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putEnumValidWithResponseAsync(List<FooEnum> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putEnumValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2092,14 +3100,30 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEnumValidAsync(List<FooEnum> arrayBody, Context context) {
+        return putEnumValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEnumValidWithResponse(List<FooEnum> arrayBody) {
-        return putEnumValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putEnumValidWithResponse(List<FooEnum> arrayBody, Context context) {
+        return putEnumValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2112,7 +3136,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEnumValid(List<FooEnum> arrayBody) {
-        putEnumValidWithResponse(arrayBody);
+        putEnumValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2136,6 +3160,26 @@ public final class Arrays {
     /**
      * Get enum array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Enum0>>> getStringEnumValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringEnumValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
@@ -2148,13 +3192,29 @@ public final class Arrays {
     /**
      * Get enum array value ['foo1', 'foo2', 'foo3'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum array value ['foo1', 'foo2', 'foo3'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Enum0>> getStringEnumValidAsync(Context context) {
+        return getStringEnumValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum array value ['foo1', 'foo2', 'foo3'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Enum0>> getStringEnumValidWithResponse() {
-        return getStringEnumValidWithResponseAsync().block();
+    public Response<List<Enum0>> getStringEnumValidWithResponse(Context context) {
+        return getStringEnumValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2166,7 +3226,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Enum0> getStringEnumValid() {
-        return getStringEnumValidWithResponse().getValue();
+        return getStringEnumValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2196,6 +3256,29 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putStringEnumValidWithResponseAsync(List<Enum1> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putStringEnumValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2210,14 +3293,30 @@ public final class Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putStringEnumValidAsync(List<Enum1> arrayBody, Context context) {
+        return putStringEnumValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody The array value ['foo1', 'foo2', 'foo3'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringEnumValidWithResponse(List<Enum1> arrayBody) {
-        return putStringEnumValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putStringEnumValidWithResponse(List<Enum1> arrayBody, Context context) {
+        return putStringEnumValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2230,7 +3329,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringEnumValid(List<Enum1> arrayBody) {
-        putStringEnumValidWithResponse(arrayBody);
+        putStringEnumValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2254,6 +3353,26 @@ public final class Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', null, 'foo2'] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<String>>> getStringWithNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringWithNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', null, 'foo2'] on successful completion of {@link Mono}.
@@ -2266,13 +3385,29 @@ public final class Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', null, 'foo2'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<String>> getStringWithNullAsync(Context context) {
+        return getStringWithNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', null, 'foo2'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<String>> getStringWithNullWithResponse() {
-        return getStringWithNullWithResponseAsync().block();
+    public Response<List<String>> getStringWithNullWithResponse(Context context) {
+        return getStringWithNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2284,7 +3419,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringWithNull() {
-        return getStringWithNullWithResponse().getValue();
+        return getStringWithNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2308,6 +3443,26 @@ public final class Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', 123, 'foo2'] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<String>>> getStringWithInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringWithInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', 123, 'foo2'] on successful completion of {@link Mono}.
@@ -2320,13 +3475,29 @@ public final class Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string array value ['foo', 123, 'foo2'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<String>> getStringWithInvalidAsync(Context context) {
+        return getStringWithInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string array value ['foo', 123, 'foo2'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<String>> getStringWithInvalidWithResponse() {
-        return getStringWithInvalidWithResponseAsync().block();
+    public Response<List<String>> getStringWithInvalidWithResponse(Context context) {
+        return getStringWithInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -2338,7 +3509,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidWithResponse().getValue();
+        return getStringWithInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2364,6 +3535,27 @@ public final class Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<UUID>>> getUuidValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUuidValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
@@ -2378,14 +3570,32 @@ public final class Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<UUID>> getUuidValidAsync(Context context) {
+        return getUuidValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<UUID>> getUuidValidWithResponse() {
-        return getUuidValidWithResponseAsync().block();
+    public Response<List<UUID>> getUuidValidWithResponse(Context context) {
+        return getUuidValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2399,7 +3609,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<UUID> getUuidValid() {
-        return getUuidValidWithResponse().getValue();
+        return getUuidValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2432,6 +3642,31 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUuidValidWithResponseAsync(List<UUID> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putUuidValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2448,14 +3683,32 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
      *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUuidValidAsync(List<UUID> arrayBody, Context context) {
+        return putUuidValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     *     'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putUuidValidWithResponse(List<UUID> arrayBody) {
-        return putUuidValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putUuidValidWithResponse(List<UUID> arrayBody, Context context) {
+        return putUuidValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2470,7 +3723,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidWithResponse(arrayBody);
+        putUuidValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2494,6 +3747,26 @@ public final class Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'] along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<UUID>>> getUuidInvalidCharsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUuidInvalidChars(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'] on successful completion of {@link
@@ -2507,13 +3780,30 @@ public final class Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'] on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<UUID>> getUuidInvalidCharsAsync(Context context) {
+        return getUuidInvalidCharsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<UUID>> getUuidInvalidCharsWithResponse() {
-        return getUuidInvalidCharsWithResponseAsync().block();
+    public Response<List<UUID>> getUuidInvalidCharsWithResponse(Context context) {
+        return getUuidInvalidCharsWithResponseAsync(context).block();
     }
 
     /**
@@ -2525,7 +3815,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsWithResponse().getValue();
+        return getUuidInvalidCharsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2549,6 +3839,26 @@ public final class Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'] along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<LocalDate>>> getDateValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'] on successful completion of {@link Mono}.
@@ -2561,13 +3871,29 @@ public final class Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<LocalDate>> getDateValidAsync(Context context) {
+        return getDateValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer array value ['2000-12-01', '1980-01-02', '1492-10-12'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<LocalDate>> getDateValidWithResponse() {
-        return getDateValidWithResponseAsync().block();
+    public Response<List<LocalDate>> getDateValidWithResponse(Context context) {
+        return getDateValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2579,7 +3905,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateValid() {
-        return getDateValidWithResponse().getValue();
+        return getDateValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2608,6 +3934,29 @@ public final class Arrays {
      * Set array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody The array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateValidWithResponseAsync(List<LocalDate> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDateValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody The array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2622,14 +3971,30 @@ public final class Arrays {
      * Set array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody The array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateValidAsync(List<LocalDate> arrayBody, Context context) {
+        return putDateValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody The array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateValidWithResponse(List<LocalDate> arrayBody) {
-        return putDateValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateValidWithResponse(List<LocalDate> arrayBody, Context context) {
+        return putDateValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2642,7 +4007,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidWithResponse(arrayBody);
+        putDateValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2666,6 +4031,26 @@ public final class Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2012-01-01', null, '1776-07-04'] along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<LocalDate>>> getDateInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2012-01-01', null, '1776-07-04'] on successful completion of {@link Mono}.
@@ -2678,13 +4063,29 @@ public final class Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2012-01-01', null, '1776-07-04'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<LocalDate>> getDateInvalidNullAsync(Context context) {
+        return getDateInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2012-01-01', null, '1776-07-04'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<LocalDate>> getDateInvalidNullWithResponse() {
-        return getDateInvalidNullWithResponseAsync().block();
+    public Response<List<LocalDate>> getDateInvalidNullWithResponse(Context context) {
+        return getDateInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2696,7 +4097,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithResponse().getValue();
+        return getDateInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2720,6 +4121,26 @@ public final class Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2011-03-22', 'date'] along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<LocalDate>>> getDateInvalidCharsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateInvalidChars(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2011-03-22', 'date'] on successful completion of {@link Mono}.
@@ -2732,13 +4153,29 @@ public final class Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2011-03-22', 'date'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<LocalDate>> getDateInvalidCharsAsync(Context context) {
+        return getDateInvalidCharsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2011-03-22', 'date'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<LocalDate>> getDateInvalidCharsWithResponse() {
-        return getDateInvalidCharsWithResponseAsync().block();
+    public Response<List<LocalDate>> getDateInvalidCharsWithResponse(Context context) {
+        return getDateInvalidCharsWithResponseAsync(context).block();
     }
 
     /**
@@ -2750,7 +4187,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithResponse().getValue();
+        return getDateInvalidCharsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2774,6 +4211,26 @@ public final class Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
@@ -2787,14 +4244,31 @@ public final class Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<OffsetDateTime>> getDateTimeValidAsync(Context context) {
+        return getDateTimeValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<OffsetDateTime>> getDateTimeValidWithResponse() {
-        return getDateTimeValidWithResponseAsync().block();
+    public Response<List<OffsetDateTime>> getDateTimeValidWithResponse(Context context) {
+        return getDateTimeValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2806,7 +4280,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidWithResponse().getValue();
+        return getDateTimeValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2838,6 +4312,30 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      *     '1492-10-12T10:15:01-08:00'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeValidWithResponseAsync(List<OffsetDateTime> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDateTimeValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+     *     '1492-10-12T10:15:01-08:00'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2853,14 +4351,31 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      *     '1492-10-12T10:15:01-08:00'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeValidAsync(List<OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+     *     '1492-10-12T10:15:01-08:00'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeValidWithResponse(List<OffsetDateTime> arrayBody) {
-        return putDateTimeValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateTimeValidWithResponse(List<OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2874,7 +4389,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeValid(List<OffsetDateTime> arrayBody) {
-        putDateTimeValidWithResponse(arrayBody);
+        putDateTimeValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2898,6 +4413,26 @@ public final class Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', null] along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', null] on successful completion of {@link Mono}.
@@ -2910,13 +4445,29 @@ public final class Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', null] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<OffsetDateTime>> getDateTimeInvalidNullAsync(Context context) {
+        return getDateTimeInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', null] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<OffsetDateTime>> getDateTimeInvalidNullWithResponse() {
-        return getDateTimeInvalidNullWithResponseAsync().block();
+    public Response<List<OffsetDateTime>> getDateTimeInvalidNullWithResponse(Context context) {
+        return getDateTimeInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2928,7 +4479,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithResponse().getValue();
+        return getDateTimeInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2952,6 +4503,26 @@ public final class Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', 'date-time'] along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeInvalidChars(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', 'date-time'] on successful completion of {@link Mono}.
@@ -2964,13 +4535,29 @@ public final class Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date array value ['2000-12-01t00:00:01z', 'date-time'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<OffsetDateTime>> getDateTimeInvalidCharsAsync(Context context) {
+        return getDateTimeInvalidCharsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date array value ['2000-12-01t00:00:01z', 'date-time'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<OffsetDateTime>> getDateTimeInvalidCharsWithResponse() {
-        return getDateTimeInvalidCharsWithResponseAsync().block();
+    public Response<List<OffsetDateTime>> getDateTimeInvalidCharsWithResponse(Context context) {
+        return getDateTimeInvalidCharsWithResponseAsync(context).block();
     }
 
     /**
@@ -2982,7 +4569,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithResponse().getValue();
+        return getDateTimeInvalidCharsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3008,6 +4595,27 @@ public final class Arrays {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
      * 10:15:01 GMT'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123Valid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
+     * 10:15:01 GMT'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
@@ -3022,14 +4630,32 @@ public final class Arrays {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
      * 10:15:01 GMT'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync(Context context) {
+        return getDateTimeRfc1123ValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492
+     * 10:15:01 GMT'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
      *     1492 10:15:01 GMT'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<OffsetDateTime>> getDateTimeRfc1123ValidWithResponse() {
-        return getDateTimeRfc1123ValidWithResponseAsync().block();
+    public Response<List<OffsetDateTime>> getDateTimeRfc1123ValidWithResponse(Context context) {
+        return getDateTimeRfc1123ValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3043,7 +4669,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithResponse().getValue();
+        return getDateTimeRfc1123ValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3079,6 +4705,34 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
      *     1492 10:15:01 GMT'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(
+            List<OffsetDateTime> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        List<DateTimeRfc1123> arrayBodyConverted =
+                arrayBody.stream().map(el -> new DateTimeRfc1123(el)).collect(java.util.stream.Collectors.toList());
+        return service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, accept, context);
+    }
+
+    /**
+     * Set array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01
+     * GMT'].
+     *
+     * @param arrayBody The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3095,14 +4749,32 @@ public final class Arrays {
      *
      * @param arrayBody The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
      *     1492 10:15:01 GMT'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeRfc1123ValidAsync(List<OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01
+     * GMT'].
+     *
+     * @param arrayBody The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct
+     *     1492 10:15:01 GMT'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123ValidWithResponse(List<OffsetDateTime> arrayBody) {
-        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateTimeRfc1123ValidWithResponse(List<OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3117,7 +4789,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Valid(List<OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithResponse(arrayBody);
+        putDateTimeRfc1123ValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3141,6 +4813,26 @@ public final class Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'] along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Duration>>> getDurationValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDurationValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'] on successful completion of {@link Mono}.
@@ -3153,13 +4845,29 @@ public final class Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Duration>> getDurationValidAsync(Context context) {
+        return getDurationValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Duration>> getDurationValidWithResponse() {
-        return getDurationValidWithResponseAsync().block();
+    public Response<List<Duration>> getDurationValidWithResponse(Context context) {
+        return getDurationValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3171,7 +4879,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Duration> getDurationValid() {
-        return getDurationValidWithResponse().getValue();
+        return getDurationValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3201,6 +4909,29 @@ public final class Arrays {
      * Set array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDurationValidWithResponseAsync(List<Duration> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDurationValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3215,14 +4946,30 @@ public final class Arrays {
      * Set array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDurationValidAsync(List<Duration> arrayBody, Context context) {
+        return putDurationValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationValidWithResponse(List<Duration> arrayBody) {
-        return putDurationValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDurationValidWithResponse(List<Duration> arrayBody, Context context) {
+        return putDurationValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3235,7 +4982,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationValid(List<Duration> arrayBody) {
-        putDurationValidWithResponse(arrayBody);
+        putDurationValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3259,6 +5006,26 @@ public final class Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<byte[]>>> getByteValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByteValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64 on
@@ -3272,14 +5039,31 @@ public final class Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64 on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<byte[]>> getByteValidAsync(Context context) {
+        return getByteValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<byte[]>> getByteValidWithResponse() {
-        return getByteValidWithResponseAsync().block();
+    public Response<List<byte[]>> getByteValidWithResponse(Context context) {
+        return getByteValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3291,7 +5075,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getByteValid() {
-        return getByteValidWithResponse().getValue();
+        return getByteValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3322,6 +5106,30 @@ public final class Arrays {
      *
      * @param arrayBody The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in
      *     base 64.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putByteValidWithResponseAsync(List<byte[]> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putByteValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in
+     *     base 64.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3337,14 +5145,31 @@ public final class Arrays {
      *
      * @param arrayBody The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in
      *     base 64.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putByteValidAsync(List<byte[]> arrayBody, Context context) {
+        return putByteValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in
+     *     base 64.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteValidWithResponse(List<byte[]> arrayBody) {
-        return putByteValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putByteValidWithResponse(List<byte[]> arrayBody, Context context) {
+        return putByteValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3358,7 +5183,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidWithResponse(arrayBody);
+        putByteValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3382,6 +5207,26 @@ public final class Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded along with {@link Response}
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<byte[]>>> getByteInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByteInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded on successful completion of
@@ -3395,13 +5240,30 @@ public final class Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<byte[]>> getByteInvalidNullAsync(Context context) {
+        return getByteInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte array value [hex(AB, AC, AD), null] with the first item base64 encoded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<byte[]>> getByteInvalidNullWithResponse() {
-        return getByteInvalidNullWithResponseAsync().block();
+    public Response<List<byte[]>> getByteInvalidNullWithResponse(Context context) {
+        return getByteInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3413,7 +5275,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithResponse().getValue();
+        return getByteInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3439,6 +5301,27 @@ public final class Arrays {
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
      * base64url encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     *     base64url encoded along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<byte[]>>> getBase64UrlWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBase64Url(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     * base64url encoded.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
@@ -3453,14 +5336,32 @@ public final class Arrays {
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
      * base64url encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     *     base64url encoded on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<byte[]>> getBase64UrlAsync(Context context) {
+        return getBase64UrlWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
+     * base64url encoded.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items
      *     base64url encoded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<byte[]>> getBase64UrlWithResponse() {
-        return getBase64UrlWithResponseAsync().block();
+    public Response<List<byte[]>> getBase64UrlWithResponse(Context context) {
+        return getBase64UrlWithResponseAsync(context).block();
     }
 
     /**
@@ -3474,7 +5375,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<byte[]> getBase64Url() {
-        return getBase64UrlWithResponse().getValue();
+        return getBase64UrlWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3497,6 +5398,25 @@ public final class Arrays {
     /**
      * Get array of complex type null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type null value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> getComplexNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get array of complex type null value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type null value on successful completion of {@link Mono}.
@@ -3509,13 +5429,29 @@ public final class Arrays {
     /**
      * Get array of complex type null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type null value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Product>> getComplexNullAsync(Context context) {
+        return getComplexNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type null value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Product>> getComplexNullWithResponse() {
-        return getComplexNullWithResponseAsync().block();
+    public Response<List<Product>> getComplexNullWithResponse(Context context) {
+        return getComplexNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3527,7 +5463,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexNull() {
-        return getComplexNullWithResponse().getValue();
+        return getComplexNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3550,6 +5486,25 @@ public final class Arrays {
     /**
      * Get empty array of complex type [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array of complex type [] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> getComplexEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get empty array of complex type [].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array of complex type [] on successful completion of {@link Mono}.
@@ -3562,13 +5517,29 @@ public final class Arrays {
     /**
      * Get empty array of complex type [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty array of complex type [] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Product>> getComplexEmptyAsync(Context context) {
+        return getComplexEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty array of complex type [] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Product>> getComplexEmptyWithResponse() {
-        return getComplexEmptyWithResponseAsync().block();
+    public Response<List<Product>> getComplexEmptyWithResponse(Context context) {
+        return getComplexEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3580,7 +5551,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyWithResponse().getValue();
+        return getComplexEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3604,6 +5575,26 @@ public final class Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> getComplexItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
@@ -3617,14 +5608,31 @@ public final class Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Product>> getComplexItemNullAsync(Context context) {
+        return getComplexItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Product>> getComplexItemNullWithResponse() {
-        return getComplexItemNullWithResponseAsync().block();
+    public Response<List<Product>> getComplexItemNullWithResponse(Context context) {
+        return getComplexItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3636,7 +5644,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullWithResponse().getValue();
+        return getComplexItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3660,6 +5668,26 @@ public final class Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> getComplexItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
@@ -3673,14 +5701,31 @@ public final class Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Product>> getComplexItemEmptyAsync(Context context) {
+        return getComplexItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Product>> getComplexItemEmptyWithResponse() {
-        return getComplexItemEmptyWithResponseAsync().block();
+    public Response<List<Product>> getComplexItemEmptyWithResponse(Context context) {
+        return getComplexItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3692,7 +5737,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyWithResponse().getValue();
+        return getComplexItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3718,6 +5763,27 @@ public final class Arrays {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
      * 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     *     'string': '6'}] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> getComplexValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     * 'string': '6'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
@@ -3732,14 +5798,32 @@ public final class Arrays {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
      * 'string': '6'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     *     'string': '6'}] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Product>> getComplexValidAsync(Context context) {
+        return getComplexValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
+     * 'string': '6'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5,
      *     'string': '6'}] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Product>> getComplexValidWithResponse() {
-        return getComplexValidWithResponseAsync().block();
+    public Response<List<Product>> getComplexValidWithResponse(Context context) {
+        return getComplexValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3753,7 +5837,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Product> getComplexValid() {
-        return getComplexValidWithResponse().getValue();
+        return getComplexValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3789,6 +5873,33 @@ public final class Arrays {
      *
      * @param arrayBody array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
      *     {'integer': 5, 'string': '6'}].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putComplexValidWithResponseAsync(List<Product> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        } else {
+            arrayBody.forEach(e -> e.validate());
+        }
+        final String accept = "application/json";
+        return service.putComplexValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     * {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     *     {'integer': 5, 'string': '6'}].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3805,14 +5916,32 @@ public final class Arrays {
      *
      * @param arrayBody array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
      *     {'integer': 5, 'string': '6'}].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putComplexValidAsync(List<Product> arrayBody, Context context) {
+        return putComplexValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     * {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'},
+     *     {'integer': 5, 'string': '6'}].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplexValidWithResponse(List<Product> arrayBody) {
-        return putComplexValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putComplexValidWithResponse(List<Product> arrayBody, Context context) {
+        return putComplexValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3827,7 +5956,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidWithResponse(arrayBody);
+        putComplexValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3850,6 +5979,25 @@ public final class Arrays {
     /**
      * Get a null array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<List<String>>>> getArrayNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a null array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array on successful completion of {@link Mono}.
@@ -3862,13 +6010,29 @@ public final class Arrays {
     /**
      * Get a null array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<List<String>>> getArrayNullAsync(Context context) {
+        return getArrayNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a null array.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<List<String>>> getArrayNullWithResponse() {
-        return getArrayNullWithResponseAsync().block();
+    public Response<List<List<String>>> getArrayNullWithResponse(Context context) {
+        return getArrayNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3880,7 +6044,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayNull() {
-        return getArrayNullWithResponse().getValue();
+        return getArrayNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3903,6 +6067,25 @@ public final class Arrays {
     /**
      * Get an empty array [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<List<String>>>> getArrayEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an empty array [].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] on successful completion of {@link Mono}.
@@ -3915,13 +6098,29 @@ public final class Arrays {
     /**
      * Get an empty array [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<List<String>>> getArrayEmptyAsync(Context context) {
+        return getArrayEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an empty array [].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<List<String>>> getArrayEmptyWithResponse() {
-        return getArrayEmptyWithResponseAsync().block();
+    public Response<List<List<String>>> getArrayEmptyWithResponse(Context context) {
+        return getArrayEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3933,7 +6132,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyWithResponse().getValue();
+        return getArrayEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3957,6 +6156,26 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']] along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<List<String>>>> getArrayItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']] on successful completion of {@link
@@ -3970,13 +6189,30 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']] on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<List<String>>> getArrayItemNullAsync(Context context) {
+        return getArrayItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<List<String>>> getArrayItemNullWithResponse() {
-        return getArrayItemNullWithResponseAsync().block();
+    public Response<List<List<String>>> getArrayItemNullWithResponse(Context context) {
+        return getArrayItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3988,7 +6224,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullWithResponse().getValue();
+        return getArrayItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4012,6 +6248,26 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']] along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<List<String>>>> getArrayItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']] on successful completion of {@link
@@ -4025,13 +6281,30 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']] on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<List<String>>> getArrayItemEmptyAsync(Context context) {
+        return getArrayItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<List<String>>> getArrayItemEmptyWithResponse() {
-        return getArrayItemEmptyWithResponseAsync().block();
+    public Response<List<List<String>>> getArrayItemEmptyWithResponse(Context context) {
+        return getArrayItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -4043,7 +6316,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithResponse().getValue();
+        return getArrayItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4067,6 +6340,26 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']] along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<List<String>>>> getArrayValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']] on successful completion
@@ -4080,14 +6373,31 @@ public final class Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']] on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<List<String>>> getArrayValidAsync(Context context) {
+        return getArrayValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']] along with {@link
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<List<String>>> getArrayValidWithResponse() {
-        return getArrayValidWithResponseAsync().block();
+    public Response<List<List<String>>> getArrayValidWithResponse(Context context) {
+        return getArrayValidWithResponseAsync(context).block();
     }
 
     /**
@@ -4099,7 +6409,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<List<String>> getArrayValid() {
-        return getArrayValidWithResponse().getValue();
+        return getArrayValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4129,6 +6439,29 @@ public final class Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putArrayValidWithResponseAsync(List<List<String>> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putArrayValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4143,14 +6476,30 @@ public final class Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putArrayValidAsync(List<List<String>> arrayBody, Context context) {
+        return putArrayValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putArrayValidWithResponse(List<List<String>> arrayBody) {
-        return putArrayValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putArrayValidWithResponse(List<List<String>> arrayBody, Context context) {
+        return putArrayValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -4163,7 +6512,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidWithResponse(arrayBody);
+        putArrayValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -4187,6 +6536,26 @@ public final class Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries with value null along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Map<String, String>>>> getDictionaryNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries with value null on successful completion of {@link Mono}.
@@ -4199,13 +6568,29 @@ public final class Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries with value null on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Map<String, String>>> getDictionaryNullAsync(Context context) {
+        return getDictionaryNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries with value null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Map<String, String>>> getDictionaryNullWithResponse() {
-        return getDictionaryNullWithResponseAsync().block();
+    public Response<List<Map<String, String>>> getDictionaryNullWithResponse(Context context) {
+        return getDictionaryNullWithResponseAsync(context).block();
     }
 
     /**
@@ -4217,7 +6602,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithResponse().getValue();
+        return getDictionaryNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4241,6 +6626,26 @@ public final class Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [] along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Map<String, String>>>> getDictionaryEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [] on successful completion of {@link
@@ -4254,13 +6659,30 @@ public final class Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [] on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Map<String, String>>> getDictionaryEmptyAsync(Context context) {
+        return getDictionaryEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Map<String, String>>> getDictionaryEmptyWithResponse() {
-        return getDictionaryEmptyWithResponseAsync().block();
+    public Response<List<Map<String, String>>> getDictionaryEmptyWithResponse(Context context) {
+        return getDictionaryEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -4272,7 +6694,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithResponse().getValue();
+        return getDictionaryEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4299,6 +6721,28 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Map<String, String>>>> getDictionaryItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
@@ -4313,14 +6757,32 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Map<String, String>>> getDictionaryItemNullAsync(Context context) {
+        return getDictionaryItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
      *     'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Map<String, String>>> getDictionaryItemNullWithResponse() {
-        return getDictionaryItemNullWithResponseAsync().block();
+    public Response<List<Map<String, String>>> getDictionaryItemNullWithResponse(Context context) {
+        return getDictionaryItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -4334,7 +6796,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithResponse().getValue();
+        return getDictionaryItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4361,6 +6823,28 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
@@ -4375,14 +6859,32 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}] on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Map<String, String>>> getDictionaryItemEmptyAsync(Context context) {
+        return getDictionaryItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
      *     'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Map<String, String>>> getDictionaryItemEmptyWithResponse() {
-        return getDictionaryItemEmptyWithResponseAsync().block();
+    public Response<List<Map<String, String>>> getDictionaryItemEmptyWithResponse(Context context) {
+        return getDictionaryItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -4396,7 +6898,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithResponse().getValue();
+        return getDictionaryItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4423,6 +6925,28 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Map<String, String>>>> getDictionaryValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
@@ -4438,6 +6962,25 @@ public final class Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
      * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Map<String, String>>> getDictionaryValidAsync(Context context) {
+        return getDictionaryValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
@@ -4445,8 +6988,8 @@ public final class Arrays {
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<Map<String, String>>> getDictionaryValidWithResponse() {
-        return getDictionaryValidWithResponseAsync().block();
+    public Response<List<Map<String, String>>> getDictionaryValidWithResponse(Context context) {
+        return getDictionaryValidWithResponseAsync(context).block();
     }
 
     /**
@@ -4460,7 +7003,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithResponse().getValue();
+        return getDictionaryValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4496,6 +7039,34 @@ public final class Arrays {
      *
      * @param arrayBody An array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two',
      *     '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(
+            List<Map<String, String>> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDictionaryValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody An array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two',
+     *     '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4514,6 +7085,26 @@ public final class Arrays {
      *
      * @param arrayBody An array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two',
      *     '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3':
+     *     'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}] on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, Context context) {
+        return putDictionaryValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'},
+     * {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody An array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two',
+     *     '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4522,8 +7113,8 @@ public final class Arrays {
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDictionaryValidWithResponse(List<Map<String, String>> arrayBody) {
-        return putDictionaryValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDictionaryValidWithResponse(List<Map<String, String>> arrayBody, Context context) {
+        return putDictionaryValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -4538,6 +7129,6 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidWithResponse(arrayBody);
+        putDictionaryValidWithResponse(arrayBody, Context.NONE);
     }
 }

@@ -518,6 +518,25 @@ public final class DictionariesImpl {
     /**
      * Get null dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null dictionary value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null dictionary value on successful completion of {@link Mono}.
@@ -530,13 +549,29 @@ public final class DictionariesImpl {
     /**
      * Get null dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null dictionary value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null dictionary value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null dictionary value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<Map<String, Integer>> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -548,7 +583,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -571,6 +606,25 @@ public final class DictionariesImpl {
     /**
      * Get empty dictionary value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get empty dictionary value {}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary value {} on successful completion of {@link Mono}.
@@ -583,13 +637,29 @@ public final class DictionariesImpl {
     /**
      * Get empty dictionary value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary value {} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getEmptyAsync(Context context) {
+        return getEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get empty dictionary value {}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary value {} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getEmptyWithResponse() {
-        return getEmptyWithResponseAsync().block();
+    public Response<Map<String, Integer>> getEmptyWithResponse(Context context) {
+        return getEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -601,7 +671,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getEmpty() {
-        return getEmptyWithResponse().getValue();
+        return getEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -630,6 +700,29 @@ public final class DictionariesImpl {
      * Set dictionary value empty {}.
      *
      * @param arrayBody The empty dictionary value {}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putEmpty(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value empty {}.
+     *
+     * @param arrayBody The empty dictionary value {}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -644,14 +737,30 @@ public final class DictionariesImpl {
      * Set dictionary value empty {}.
      *
      * @param arrayBody The empty dictionary value {}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEmptyAsync(Map<String, String> arrayBody, Context context) {
+        return putEmptyWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value empty {}.
+     *
+     * @param arrayBody The empty dictionary value {}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptyWithResponse(Map<String, String> arrayBody) {
-        return putEmptyWithResponseAsync(arrayBody).block();
+    public Response<Void> putEmptyWithResponse(Map<String, String> arrayBody, Context context) {
+        return putEmptyWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -664,7 +773,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyWithResponse(arrayBody);
+        putEmptyWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -687,6 +796,25 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getNullValueWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNullValue(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get Dictionary with null value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null value on successful completion of {@link Mono}.
@@ -699,13 +827,29 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getNullValueAsync(Context context) {
+        return getNullValueWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get Dictionary with null value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getNullValueWithResponse() {
-        return getNullValueWithResponseAsync().block();
+    public Response<Map<String, String>> getNullValueWithResponse(Context context) {
+        return getNullValueWithResponseAsync(context).block();
     }
 
     /**
@@ -717,7 +861,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullValue() {
-        return getNullValueWithResponse().getValue();
+        return getNullValueWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -740,6 +884,25 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with null key.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getNullKeyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNullKey(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get Dictionary with null key.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null key on successful completion of {@link Mono}.
@@ -752,13 +915,29 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with null key.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with null key on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getNullKeyAsync(Context context) {
+        return getNullKeyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get Dictionary with null key.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null key along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getNullKeyWithResponse() {
-        return getNullKeyWithResponseAsync().block();
+    public Response<Map<String, String>> getNullKeyWithResponse(Context context) {
+        return getNullKeyWithResponseAsync(context).block();
     }
 
     /**
@@ -770,7 +949,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullKey() {
-        return getNullKeyWithResponse().getValue();
+        return getNullKeyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -793,6 +972,25 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with key as empty string.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getEmptyStringKeyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmptyStringKey(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get Dictionary with key as empty string.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with key as empty string on successful completion of {@link Mono}.
@@ -805,13 +1003,29 @@ public final class DictionariesImpl {
     /**
      * Get Dictionary with key as empty string.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary with key as empty string on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getEmptyStringKeyAsync(Context context) {
+        return getEmptyStringKeyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get Dictionary with key as empty string.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with key as empty string along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getEmptyStringKeyWithResponse() {
-        return getEmptyStringKeyWithResponseAsync().block();
+    public Response<Map<String, String>> getEmptyStringKeyWithResponse(Context context) {
+        return getEmptyStringKeyWithResponseAsync(context).block();
     }
 
     /**
@@ -823,7 +1037,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyWithResponse().getValue();
+        return getEmptyStringKeyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -846,6 +1060,25 @@ public final class DictionariesImpl {
     /**
      * Get invalid Dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid Dictionary value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Dictionary value on successful completion of {@link Mono}.
@@ -858,13 +1091,29 @@ public final class DictionariesImpl {
     /**
      * Get invalid Dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Dictionary value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid Dictionary value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Dictionary value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<Map<String, String>> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -876,7 +1125,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getInvalid() {
-        return getInvalidWithResponse().getValue();
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -900,6 +1149,26 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Boolean>>> getBooleanTfftWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanTfft(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } on successful completion of
@@ -913,13 +1182,30 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Boolean>> getBooleanTfftAsync(Context context) {
+        return getBooleanTfftWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanTfftWithResponse() {
-        return getBooleanTfftWithResponseAsync().block();
+    public Response<Map<String, Boolean>> getBooleanTfftWithResponse(Context context) {
+        return getBooleanTfftWithResponseAsync(context).block();
     }
 
     /**
@@ -931,7 +1217,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftWithResponse().getValue();
+        return getBooleanTfftWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -961,6 +1247,29 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putBooleanTfft(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -975,14 +1284,30 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, Context context) {
+        return putBooleanTfftWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody) {
-        return putBooleanTfftWithResponseAsync(arrayBody).block();
+    public Response<Void> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody, Context context) {
+        return putBooleanTfftWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -995,7 +1320,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftWithResponse(arrayBody);
+        putBooleanTfftWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1019,6 +1344,26 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false } along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": null, "2": false } on successful completion of {@link Mono}.
@@ -1031,13 +1376,29 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": true, "1": null, "2": false } on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync(Context context) {
+        return getBooleanInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": null, "2": false } along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanInvalidNullWithResponse() {
-        return getBooleanInvalidNullWithResponseAsync().block();
+    public Response<Map<String, Boolean>> getBooleanInvalidNullWithResponse(Context context) {
+        return getBooleanInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1049,7 +1410,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithResponse().getValue();
+        return getBooleanInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1073,6 +1434,26 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBooleanInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' on successful completion of {@link
@@ -1086,13 +1467,30 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync(Context context) {
+        return getBooleanInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanInvalidStringWithResponse() {
-        return getBooleanInvalidStringWithResponseAsync().block();
+    public Response<Map<String, Boolean>> getBooleanInvalidStringWithResponse(Context context) {
+        return getBooleanInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1104,7 +1502,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithResponse().getValue();
+        return getBooleanInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1128,6 +1526,26 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getIntegerValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntegerValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} on successful completion of {@link Mono}.
@@ -1140,13 +1558,29 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getIntegerValidAsync(Context context) {
+        return getIntegerValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntegerValidWithResponse() {
-        return getIntegerValidWithResponseAsync().block();
+    public Response<Map<String, Integer>> getIntegerValidWithResponse(Context context) {
+        return getIntegerValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1158,7 +1592,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidWithResponse().getValue();
+        return getIntegerValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1188,6 +1622,29 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putIntegerValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1202,14 +1659,30 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, Context context) {
+        return putIntegerValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntegerValidWithResponse(Map<String, Integer> arrayBody) {
-        return putIntegerValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putIntegerValidWithResponse(Map<String, Integer> arrayBody, Context context) {
+        return putIntegerValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1222,7 +1695,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidWithResponse(arrayBody);
+        putIntegerValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1246,6 +1719,26 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getIntInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": null, "2": 0} on successful completion of {@link Mono}.
@@ -1258,13 +1751,29 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getIntInvalidNullAsync(Context context) {
+        return getIntInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntInvalidNullWithResponse() {
-        return getIntInvalidNullWithResponseAsync().block();
+    public Response<Map<String, Integer>> getIntInvalidNullWithResponse(Context context) {
+        return getIntInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1276,7 +1785,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithResponse().getValue();
+        return getIntInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1300,6 +1809,26 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getIntInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getIntInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} on successful completion of {@link Mono}.
@@ -1312,13 +1841,29 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getIntInvalidStringAsync(Context context) {
+        return getIntInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntInvalidStringWithResponse() {
-        return getIntInvalidStringWithResponseAsync().block();
+    public Response<Map<String, Integer>> getIntInvalidStringWithResponse(Context context) {
+        return getIntInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1330,7 +1875,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringWithResponse().getValue();
+        return getIntInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1354,6 +1899,26 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Long>>> getLongValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} on successful completion of {@link Mono}.
@@ -1366,13 +1931,29 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Long>> getLongValidAsync(Context context) {
+        return getLongValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongValidWithResponse() {
-        return getLongValidWithResponseAsync().block();
+    public Response<Map<String, Long>> getLongValidWithResponse(Context context) {
+        return getLongValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1384,7 +1965,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongValid() {
-        return getLongValidWithResponse().getValue();
+        return getLongValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1413,6 +1994,29 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLongValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1427,14 +2031,30 @@ public final class DictionariesImpl {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody, Context context) {
+        return putLongValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongValidWithResponse(Map<String, Long> arrayBody) {
-        return putLongValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putLongValidWithResponse(Map<String, Long> arrayBody, Context context) {
+        return putLongValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1447,7 +2067,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidWithResponse(arrayBody);
+        putLongValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1471,6 +2091,26 @@ public final class DictionariesImpl {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Long>>> getLongInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": null, "2": 0} on successful completion of {@link Mono}.
@@ -1483,13 +2123,29 @@ public final class DictionariesImpl {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Long>> getLongInvalidNullAsync(Context context) {
+        return getLongInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongInvalidNullWithResponse() {
-        return getLongInvalidNullWithResponseAsync().block();
+    public Response<Map<String, Long>> getLongInvalidNullWithResponse(Context context) {
+        return getLongInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1501,7 +2157,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullWithResponse().getValue();
+        return getLongInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1525,6 +2181,26 @@ public final class DictionariesImpl {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Long>>> getLongInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLongInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0} on successful completion of {@link Mono}.
@@ -1537,13 +2213,29 @@ public final class DictionariesImpl {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return long dictionary value {"0": 1, "1": "integer", "2": 0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Long>> getLongInvalidStringAsync(Context context) {
+        return getLongInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongInvalidStringWithResponse() {
-        return getLongInvalidStringWithResponseAsync().block();
+    public Response<Map<String, Long>> getLongInvalidStringWithResponse(Context context) {
+        return getLongInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1555,7 +2247,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringWithResponse().getValue();
+        return getLongInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1579,6 +2271,26 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Float>>> getFloatValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} on successful completion of {@link Mono}.
@@ -1591,13 +2303,29 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Float>> getFloatValidAsync(Context context) {
+        return getFloatValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatValidWithResponse() {
-        return getFloatValidWithResponseAsync().block();
+    public Response<Map<String, Float>> getFloatValidWithResponse(Context context) {
+        return getFloatValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1609,7 +2337,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
-        return getFloatValidWithResponse().getValue();
+        return getFloatValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1639,6 +2367,29 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putFloatValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1653,14 +2404,30 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody, Context context) {
+        return putFloatValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatValidWithResponse(Map<String, Float> arrayBody) {
-        return putFloatValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putFloatValidWithResponse(Map<String, Float> arrayBody, Context context) {
+        return putFloatValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1673,7 +2440,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatValid(Map<String, Float> arrayBody) {
-        putFloatValidWithResponse(arrayBody);
+        putFloatValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1697,6 +2464,26 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Float>>> getFloatInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} on successful completion of {@link Mono}.
@@ -1709,13 +2496,29 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Float>> getFloatInvalidNullAsync(Context context) {
+        return getFloatInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatInvalidNullWithResponse() {
-        return getFloatInvalidNullWithResponseAsync().block();
+    public Response<Map<String, Float>> getFloatInvalidNullWithResponse(Context context) {
+        return getFloatInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1727,7 +2530,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
-        return getFloatInvalidNullWithResponse().getValue();
+        return getFloatInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1751,6 +2554,26 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Float>>> getFloatInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloatInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} on successful completion of {@link Mono}.
@@ -1763,13 +2586,29 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Float>> getFloatInvalidStringAsync(Context context) {
+        return getFloatInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatInvalidStringWithResponse() {
-        return getFloatInvalidStringWithResponseAsync().block();
+    public Response<Map<String, Float>> getFloatInvalidStringWithResponse(Context context) {
+        return getFloatInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -1781,7 +2620,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
-        return getFloatInvalidStringWithResponse().getValue();
+        return getFloatInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1805,6 +2644,26 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Double>>> getDoubleValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} on successful completion of {@link Mono}.
@@ -1817,13 +2676,29 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Double>> getDoubleValidAsync(Context context) {
+        return getDoubleValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleValidWithResponse() {
-        return getDoubleValidWithResponseAsync().block();
+    public Response<Map<String, Double>> getDoubleValidWithResponse(Context context) {
+        return getDoubleValidWithResponseAsync(context).block();
     }
 
     /**
@@ -1835,7 +2710,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidWithResponse().getValue();
+        return getDoubleValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1865,6 +2740,29 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDoubleValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1879,14 +2777,30 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody, Context context) {
+        return putDoubleValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleValidWithResponse(Map<String, Double> arrayBody) {
-        return putDoubleValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDoubleValidWithResponse(Map<String, Double> arrayBody, Context context) {
+        return putDoubleValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -1899,7 +2813,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidWithResponse(arrayBody);
+        putDoubleValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -1923,6 +2837,26 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} on successful completion of {@link Mono}.
@@ -1935,13 +2869,29 @@ public final class DictionariesImpl {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Double>> getDoubleInvalidNullAsync(Context context) {
+        return getDoubleInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleInvalidNullWithResponse() {
-        return getDoubleInvalidNullWithResponseAsync().block();
+    public Response<Map<String, Double>> getDoubleInvalidNullWithResponse(Context context) {
+        return getDoubleInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -1953,7 +2903,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithResponse().getValue();
+        return getDoubleInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1977,6 +2927,26 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDoubleInvalidString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} on successful completion of {@link Mono}.
@@ -1989,13 +2959,29 @@ public final class DictionariesImpl {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Double>> getDoubleInvalidStringAsync(Context context) {
+        return getDoubleInvalidStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleInvalidStringWithResponse() {
-        return getDoubleInvalidStringWithResponseAsync().block();
+    public Response<Map<String, Double>> getDoubleInvalidStringWithResponse(Context context) {
+        return getDoubleInvalidStringWithResponseAsync(context).block();
     }
 
     /**
@@ -2007,7 +2993,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithResponse().getValue();
+        return getDoubleInvalidStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2031,6 +3017,26 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getStringValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} on successful completion of {@link Mono}.
@@ -2043,13 +3049,29 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getStringValidAsync(Context context) {
+        return getStringValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringValidWithResponse() {
-        return getStringValidWithResponseAsync().block();
+    public Response<Map<String, String>> getStringValidWithResponse(Context context) {
+        return getStringValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2061,7 +3083,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringValid() {
-        return getStringValidWithResponse().getValue();
+        return getStringValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2091,6 +3113,29 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putStringValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2105,14 +3150,30 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putStringValidAsync(Map<String, String> arrayBody, Context context) {
+        return putStringValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringValidWithResponse(Map<String, String> arrayBody) {
-        return putStringValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putStringValidWithResponse(Map<String, String> arrayBody, Context context) {
+        return putStringValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2125,7 +3186,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidWithResponse(arrayBody);
+        putStringValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2149,6 +3210,26 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getStringWithNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringWithNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} on successful completion of {@link Mono}.
@@ -2161,13 +3242,29 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getStringWithNullAsync(Context context) {
+        return getStringWithNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringWithNullWithResponse() {
-        return getStringWithNullWithResponseAsync().block();
+    public Response<Map<String, String>> getStringWithNullWithResponse(Context context) {
+        return getStringWithNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2179,7 +3276,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullWithResponse().getValue();
+        return getStringWithNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2203,6 +3300,26 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, String>>> getStringWithInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getStringWithInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} on successful completion of {@link Mono}.
@@ -2215,13 +3332,29 @@ public final class DictionariesImpl {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, String>> getStringWithInvalidAsync(Context context) {
+        return getStringWithInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringWithInvalidWithResponse() {
-        return getStringWithInvalidWithResponseAsync().block();
+    public Response<Map<String, String>> getStringWithInvalidWithResponse(Context context) {
+        return getStringWithInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -2233,7 +3366,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidWithResponse().getValue();
+        return getStringWithInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2257,6 +3390,26 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, LocalDate>>> getDateValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} on successful
@@ -2270,14 +3423,31 @@ public final class DictionariesImpl {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, LocalDate>> getDateValidAsync(Context context) {
+        return getDateValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateValidWithResponse() {
-        return getDateValidWithResponseAsync().block();
+    public Response<Map<String, LocalDate>> getDateValidWithResponse(Context context) {
+        return getDateValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2289,7 +3459,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidWithResponse().getValue();
+        return getDateValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2318,6 +3488,29 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDateValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2332,14 +3525,30 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, Context context) {
+        return putDateValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateValidWithResponse(Map<String, LocalDate> arrayBody) {
-        return putDateValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateValidWithResponse(Map<String, LocalDate> arrayBody, Context context) {
+        return putDateValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2352,7 +3561,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidWithResponse(arrayBody);
+        putDateValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2376,6 +3585,26 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} on successful completion of
@@ -2389,13 +3618,30 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, LocalDate>> getDateInvalidNullAsync(Context context) {
+        return getDateInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateInvalidNullWithResponse() {
-        return getDateInvalidNullWithResponseAsync().block();
+    public Response<Map<String, LocalDate>> getDateInvalidNullWithResponse(Context context) {
+        return getDateInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2407,7 +3653,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithResponse().getValue();
+        return getDateInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2431,6 +3677,26 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateInvalidChars(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2011-03-22", "1": "date"} on successful completion of {@link Mono}.
@@ -2443,13 +3709,29 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2011-03-22", "1": "date"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync(Context context) {
+        return getDateInvalidCharsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2011-03-22", "1": "date"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateInvalidCharsWithResponse() {
-        return getDateInvalidCharsWithResponseAsync().block();
+    public Response<Map<String, LocalDate>> getDateInvalidCharsWithResponse(Context context) {
+        return getDateInvalidCharsWithResponseAsync(context).block();
     }
 
     /**
@@ -2461,7 +3743,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithResponse().getValue();
+        return getDateInvalidCharsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2487,6 +3769,27 @@ public final class DictionariesImpl {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
@@ -2501,14 +3804,32 @@ public final class DictionariesImpl {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync(Context context) {
+        return getDateTimeValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      *     "1492-10-12T10:15:01-08:00"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeValidWithResponse() {
-        return getDateTimeValidWithResponseAsync().block();
+    public Response<Map<String, OffsetDateTime>> getDateTimeValidWithResponse(Context context) {
+        return getDateTimeValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2522,7 +3843,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidWithResponse().getValue();
+        return getDateTimeValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2556,6 +3877,32 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      *     "1492-10-12T10:15:01-08:00"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeValidWithResponseAsync(
+            Map<String, OffsetDateTime> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDateTimeValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2572,14 +3919,32 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      *     "1492-10-12T10:15:01-08:00"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * "1492-10-12T10:15:01-08:00"}.
+     *
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     *     "1492-10-12T10:15:01-08:00"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
-        return putDateTimeValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2594,7 +3959,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeValid(Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeValidWithResponse(arrayBody);
+        putDateTimeValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2618,6 +3983,26 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} on successful completion of {@link Mono}.
@@ -2630,13 +4015,29 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync(Context context) {
+        return getDateTimeInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidNullWithResponse() {
-        return getDateTimeInvalidNullWithResponseAsync().block();
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidNullWithResponse(Context context) {
+        return getDateTimeInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -2648,7 +4049,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithResponse().getValue();
+        return getDateTimeInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2672,6 +4073,26 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeInvalidChars(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} on successful completion of {@link
@@ -2685,13 +4106,30 @@ public final class DictionariesImpl {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync(Context context) {
+        return getDateTimeInvalidCharsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidCharsWithResponse() {
-        return getDateTimeInvalidCharsWithResponseAsync().block();
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidCharsWithResponse(Context context) {
+        return getDateTimeInvalidCharsWithResponseAsync(context).block();
     }
 
     /**
@@ -2703,7 +4141,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithResponse().getValue();
+        return getDateTimeInvalidCharsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2730,6 +4168,28 @@ public final class DictionariesImpl {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123Valid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
@@ -2744,14 +4204,32 @@ public final class DictionariesImpl {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync(Context context) {
+        return getDateTimeRfc1123ValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidWithResponse() {
-        return getDateTimeRfc1123ValidWithResponseAsync().block();
+    public Response<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidWithResponse(Context context) {
+        return getDateTimeRfc1123ValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2765,7 +4243,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithResponse().getValue();
+        return getDateTimeRfc1123ValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2804,6 +4282,37 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(
+            Map<String, OffsetDateTime> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        Map<String, DateTimeRfc1123> arrayBodyConverted =
+                arrayBody.entrySet().stream()
+                        .collect(
+                                java.util.stream.Collectors.toMap(
+                                        Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
+        return service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, accept, context);
+    }
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
+     * "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2820,14 +4329,32 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
+     * "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
-        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2842,7 +4369,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Valid(Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithResponse(arrayBody);
+        putDateTimeRfc1123ValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2866,6 +4393,26 @@ public final class DictionariesImpl {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Duration>>> getDurationValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDurationValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} on successful completion of
@@ -2879,13 +4426,30 @@ public final class DictionariesImpl {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Duration>> getDurationValidAsync(Context context) {
+        return getDurationValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Duration>> getDurationValidWithResponse() {
-        return getDurationValidWithResponseAsync().block();
+    public Response<Map<String, Duration>> getDurationValidWithResponse(Context context) {
+        return getDurationValidWithResponseAsync(context).block();
     }
 
     /**
@@ -2897,7 +4461,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {
-        return getDurationValidWithResponse().getValue();
+        return getDurationValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2927,6 +4491,29 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDurationValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2941,14 +4528,30 @@ public final class DictionariesImpl {
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody, Context context) {
+        return putDurationValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationValidWithResponse(Map<String, Duration> arrayBody) {
-        return putDurationValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDurationValidWithResponse(Map<String, Duration> arrayBody, Context context) {
+        return putDurationValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -2961,7 +4564,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationValid(Map<String, Duration> arrayBody) {
-        putDurationValidWithResponse(arrayBody);
+        putDurationValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -2987,6 +4590,27 @@ public final class DictionariesImpl {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      * encoded in base64.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     *     encoded in base64 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, byte[]>>> getByteValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByteValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     * encoded in base64.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
@@ -3001,14 +4625,32 @@ public final class DictionariesImpl {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      * encoded in base64.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     *     encoded in base64 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, byte[]>> getByteValidAsync(Context context) {
+        return getByteValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
+     * encoded in base64.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      *     encoded in base64 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getByteValidWithResponse() {
-        return getByteValidWithResponseAsync().block();
+    public Response<Map<String, byte[]>> getByteValidWithResponse(Context context) {
+        return getByteValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3022,7 +4664,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteValid() {
-        return getByteValidWithResponse().getValue();
+        return getByteValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3055,6 +4697,31 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
      *     each elementencoded in base 64.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putByteValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
+     * elementencoded in base 64.
+     *
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
+     *     each elementencoded in base 64.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3071,14 +4738,32 @@ public final class DictionariesImpl {
      *
      * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
      *     each elementencoded in base 64.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody, Context context) {
+        return putByteValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
+     * elementencoded in base 64.
+     *
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
+     *     each elementencoded in base 64.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteValidWithResponse(Map<String, byte[]> arrayBody) {
-        return putByteValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putByteValidWithResponse(Map<String, byte[]> arrayBody, Context context) {
+        return putByteValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3093,7 +4778,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidWithResponse(arrayBody);
+        putByteValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3117,6 +4802,26 @@ public final class DictionariesImpl {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByteInvalidNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded on successful
@@ -3130,14 +4835,31 @@ public final class DictionariesImpl {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, byte[]>> getByteInvalidNullAsync(Context context) {
+        return getByteInvalidNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded along with
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getByteInvalidNullWithResponse() {
-        return getByteInvalidNullWithResponseAsync().block();
+    public Response<Map<String, byte[]>> getByteInvalidNullWithResponse(Context context) {
+        return getByteInvalidNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3149,7 +4871,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithResponse().getValue();
+        return getByteInvalidNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3175,6 +4897,27 @@ public final class DictionariesImpl {
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
      * ipsum"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
+     *     "Lorem ipsum"} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, byte[]>>> getBase64UrlWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBase64Url(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+     * ipsum"}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
@@ -3189,14 +4932,32 @@ public final class DictionariesImpl {
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
      * ipsum"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
+     *     "Lorem ipsum"} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, byte[]>> getBase64UrlAsync(Context context) {
+        return getBase64UrlWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+     * ipsum"}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
      *     "Lorem ipsum"} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getBase64UrlWithResponse() {
-        return getBase64UrlWithResponseAsync().block();
+    public Response<Map<String, byte[]>> getBase64UrlWithResponse(Context context) {
+        return getBase64UrlWithResponseAsync(context).block();
     }
 
     /**
@@ -3210,7 +4971,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlWithResponse().getValue();
+        return getBase64UrlWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3234,6 +4995,26 @@ public final class DictionariesImpl {
     /**
      * Get dictionary of complex type null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Widget>>> getComplexNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get dictionary of complex type null value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type null value on successful completion of {@link Mono}.
@@ -3246,13 +5027,29 @@ public final class DictionariesImpl {
     /**
      * Get dictionary of complex type null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type null value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Widget>> getComplexNullAsync(Context context) {
+        return getComplexNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get dictionary of complex type null value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type null value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexNullWithResponse() {
-        return getComplexNullWithResponseAsync().block();
+    public Response<Map<String, Widget>> getComplexNullWithResponse(Context context) {
+        return getComplexNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3264,7 +5061,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullWithResponse().getValue();
+        return getComplexNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3287,6 +5084,25 @@ public final class DictionariesImpl {
     /**
      * Get empty dictionary of complex type {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Widget>>> getComplexEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get empty dictionary of complex type {}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary of complex type {} on successful completion of {@link Mono}.
@@ -3299,13 +5115,29 @@ public final class DictionariesImpl {
     /**
      * Get empty dictionary of complex type {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty dictionary of complex type {} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Widget>> getComplexEmptyAsync(Context context) {
+        return getComplexEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get empty dictionary of complex type {}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary of complex type {} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexEmptyWithResponse() {
-        return getComplexEmptyWithResponseAsync().block();
+    public Response<Map<String, Widget>> getComplexEmptyWithResponse(Context context) {
+        return getComplexEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3317,7 +5149,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyWithResponse().getValue();
+        return getComplexEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3343,6 +5175,27 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
+     *     {"integer": 5, "string": "6"}} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Widget>>> getComplexItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
@@ -3357,14 +5210,32 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
+     *     {"integer": 5, "string": "6"}} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Widget>> getComplexItemNullAsync(Context context) {
+        return getComplexItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
      *     {"integer": 5, "string": "6"}} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexItemNullWithResponse() {
-        return getComplexItemNullWithResponseAsync().block();
+    public Response<Map<String, Widget>> getComplexItemNullWithResponse(Context context) {
+        return getComplexItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3378,7 +5249,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullWithResponse().getValue();
+        return getComplexItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3404,6 +5275,27 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
+     *     5, "string": "6"}} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
@@ -3418,14 +5310,32 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
+     *     5, "string": "6"}} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Widget>> getComplexItemEmptyAsync(Context context) {
+        return getComplexItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
+     * "string": "6"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
      *     5, "string": "6"}} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexItemEmptyWithResponse() {
-        return getComplexItemEmptyWithResponseAsync().block();
+    public Response<Map<String, Widget>> getComplexItemEmptyWithResponse(Context context) {
+        return getComplexItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3439,7 +5349,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyWithResponse().getValue();
+        return getComplexItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3465,6 +5375,27 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
      * {"integer": 5, "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
+     *     "2": {"integer": 5, "string": "6"}} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Widget>>> getComplexValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getComplexValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+     * {"integer": 5, "string": "6"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
@@ -3479,14 +5410,32 @@ public final class DictionariesImpl {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
      * {"integer": 5, "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
+     *     "2": {"integer": 5, "string": "6"}} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Widget>> getComplexValidAsync(Context context) {
+        return getComplexValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+     * {"integer": 5, "string": "6"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
      *     "2": {"integer": 5, "string": "6"}} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexValidWithResponse() {
-        return getComplexValidWithResponseAsync().block();
+    public Response<Map<String, Widget>> getComplexValidWithResponse(Context context) {
+        return getComplexValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3500,7 +5449,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidWithResponse().getValue();
+        return getComplexValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3543,6 +5492,40 @@ public final class DictionariesImpl {
      *
      * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
      *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        } else {
+            arrayBody
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
+        }
+        final String accept = "application/json";
+        return service.putComplexValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
+     * "4"}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
+     *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3559,14 +5542,32 @@ public final class DictionariesImpl {
      *
      * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
      *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody, Context context) {
+        return putComplexValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
+     * "4"}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
+     *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplexValidWithResponse(Map<String, Widget> arrayBody) {
-        return putComplexValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putComplexValidWithResponse(Map<String, Widget> arrayBody, Context context) {
+        return putComplexValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3581,7 +5582,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidWithResponse(arrayBody);
+        putComplexValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3604,6 +5605,25 @@ public final class DictionariesImpl {
     /**
      * Get a null array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, List<String>>>> getArrayNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a null array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array on successful completion of {@link Mono}.
@@ -3616,13 +5636,29 @@ public final class DictionariesImpl {
     /**
      * Get a null array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, List<String>>> getArrayNullAsync(Context context) {
+        return getArrayNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a null array.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayNullWithResponse() {
-        return getArrayNullWithResponseAsync().block();
+    public Response<Map<String, List<String>>> getArrayNullWithResponse(Context context) {
+        return getArrayNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3634,7 +5670,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullWithResponse().getValue();
+        return getArrayNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3657,6 +5693,25 @@ public final class DictionariesImpl {
     /**
      * Get an empty dictionary {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {} along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, List<String>>>> getArrayEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an empty dictionary {}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty dictionary {} on successful completion of {@link Mono}.
@@ -3669,13 +5724,29 @@ public final class DictionariesImpl {
     /**
      * Get an empty dictionary {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty dictionary {} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, List<String>>> getArrayEmptyAsync(Context context) {
+        return getArrayEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an empty dictionary {}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty dictionary {} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayEmptyWithResponse() {
-        return getArrayEmptyWithResponseAsync().block();
+    public Response<Map<String, List<String>>> getArrayEmptyWithResponse(Context context) {
+        return getArrayEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3687,7 +5758,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyWithResponse().getValue();
+        return getArrayEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3711,6 +5782,26 @@ public final class DictionariesImpl {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, List<String>>>> getArrayItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} on successful
@@ -3724,14 +5815,31 @@ public final class DictionariesImpl {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, List<String>>> getArrayItemNullAsync(Context context) {
+        return getArrayItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} along with
      *     {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayItemNullWithResponse() {
-        return getArrayItemNullWithResponseAsync().block();
+    public Response<Map<String, List<String>>> getArrayItemNullWithResponse(Context context) {
+        return getArrayItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3743,7 +5851,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullWithResponse().getValue();
+        return getArrayItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3767,6 +5875,26 @@ public final class DictionariesImpl {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} on successful
@@ -3780,14 +5908,31 @@ public final class DictionariesImpl {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, List<String>>> getArrayItemEmptyAsync(Context context) {
+        return getArrayItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayItemEmptyWithResponse() {
-        return getArrayItemEmptyWithResponseAsync().block();
+    public Response<Map<String, List<String>>> getArrayItemEmptyWithResponse(Context context) {
+        return getArrayItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -3799,7 +5944,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithResponse().getValue();
+        return getArrayItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3823,6 +5968,26 @@ public final class DictionariesImpl {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} along
+     *     with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, List<String>>>> getArrayValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArrayValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} on
@@ -3836,14 +6001,31 @@ public final class DictionariesImpl {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, List<String>>> getArrayValidAsync(Context context) {
+        return getArrayValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} along
      *     with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayValidWithResponse() {
-        return getArrayValidWithResponseAsync().block();
+    public Response<Map<String, List<String>>> getArrayValidWithResponse(Context context) {
+        return getArrayValidWithResponseAsync(context).block();
     }
 
     /**
@@ -3855,7 +6037,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidWithResponse().getValue();
+        return getArrayValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3885,6 +6067,29 @@ public final class DictionariesImpl {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putArrayValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3899,14 +6104,30 @@ public final class DictionariesImpl {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, Context context) {
+        return putArrayValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putArrayValidWithResponse(Map<String, List<String>> arrayBody) {
-        return putArrayValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putArrayValidWithResponse(Map<String, List<String>> arrayBody, Context context) {
+        return putArrayValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -3919,7 +6140,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidWithResponse(arrayBody);
+        putArrayValidWithResponse(arrayBody, Context.NONE);
     }
 
     /**
@@ -3943,6 +6164,26 @@ public final class DictionariesImpl {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries with value null on successful completion of {@link Mono}.
@@ -3955,13 +6196,29 @@ public final class DictionariesImpl {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries with value null on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Map<String, String>>> getDictionaryNullAsync(Context context) {
+        return getDictionaryNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries with value null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryNullWithResponse() {
-        return getDictionaryNullWithResponseAsync().block();
+    public Response<Map<String, Map<String, String>>> getDictionaryNullWithResponse(Context context) {
+        return getDictionaryNullWithResponseAsync(context).block();
     }
 
     /**
@@ -3973,7 +6230,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithResponse().getValue();
+        return getDictionaryNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3997,6 +6254,26 @@ public final class DictionariesImpl {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} along with {@link Response}
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} on successful completion of
@@ -4010,13 +6287,30 @@ public final class DictionariesImpl {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Map<String, String>>> getDictionaryEmptyAsync(Context context) {
+        return getDictionaryEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryEmptyWithResponse() {
-        return getDictionaryEmptyWithResponseAsync().block();
+    public Response<Map<String, Map<String, String>>> getDictionaryEmptyWithResponse(Context context) {
+        return getDictionaryEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -4028,7 +6322,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithResponse().getValue();
+        return getDictionaryEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4055,6 +6349,28 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryItemNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -4070,14 +6386,33 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemNullAsync(Context context) {
+        return getDictionaryItemNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
      *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryItemNullWithResponse() {
-        return getDictionaryItemNullWithResponseAsync().block();
+    public Response<Map<String, Map<String, String>>> getDictionaryItemNullWithResponse(Context context) {
+        return getDictionaryItemNullWithResponseAsync(context).block();
     }
 
     /**
@@ -4091,7 +6426,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithResponse().getValue();
+        return getDictionaryItemNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4118,6 +6453,28 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryItemEmpty(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -4133,14 +6490,33 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(Context context) {
+        return getDictionaryItemEmptyWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
      *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryItemEmptyWithResponse() {
-        return getDictionaryItemEmptyWithResponseAsync().block();
+    public Response<Map<String, Map<String, String>>> getDictionaryItemEmptyWithResponse(Context context) {
+        return getDictionaryItemEmptyWithResponseAsync(context).block();
     }
 
     /**
@@ -4154,7 +6530,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithResponse().getValue();
+        return getDictionaryItemEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4181,6 +6557,28 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Map<String, String>>>> getDictionaryValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionaryValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -4196,6 +6594,25 @@ public final class DictionariesImpl {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Map<String, String>>> getDictionaryValidAsync(Context context) {
+        return getDictionaryValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -4203,8 +6620,8 @@ public final class DictionariesImpl {
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryValidWithResponse() {
-        return getDictionaryValidWithResponseAsync().block();
+    public Response<Map<String, Map<String, String>>> getDictionaryValidWithResponse(Context context) {
+        return getDictionaryValidWithResponseAsync(context).block();
     }
 
     /**
@@ -4218,7 +6635,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithResponse().getValue();
+        return getDictionaryValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -4256,6 +6673,35 @@ public final class DictionariesImpl {
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
      *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
      *     "9": "nine"}}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(
+            Map<String, Map<String, String>> arrayBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (arrayBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putDictionaryValid(this.client.getHost(), arrayBody, accept, context);
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
+     *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
+     *     "9": "nine"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4275,6 +6721,27 @@ public final class DictionariesImpl {
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
      *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
      *     "9": "nine"}}.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
+     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+     *     on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, Context context) {
+        return putDictionaryValidWithResponseAsync(arrayBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
+     *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
+     *     "9": "nine"}}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4283,8 +6750,8 @@ public final class DictionariesImpl {
      *     along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDictionaryValidWithResponse(Map<String, Map<String, String>> arrayBody) {
-        return putDictionaryValidWithResponseAsync(arrayBody).block();
+    public Response<Void> putDictionaryValidWithResponse(Map<String, Map<String, String>> arrayBody, Context context) {
+        return putDictionaryValidWithResponseAsync(arrayBody, context).block();
     }
 
     /**
@@ -4300,6 +6767,6 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidWithResponse(arrayBody);
+        putDictionaryValidWithResponse(arrayBody, Context.NONE);
     }
 }

@@ -137,6 +137,32 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createAPTrue(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -151,14 +177,31 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters, Context context) {
+        return createAPTrueWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<PetAPTrue> createAPTrueWithResponse(PetAPTrue createParameters) {
-        return createAPTrueWithResponseAsync(createParameters).block();
+    public Response<PetAPTrue> createAPTrueWithResponse(PetAPTrue createParameters, Context context) {
+        return createAPTrueWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -172,7 +215,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPTrue createAPTrue(PetAPTrue createParameters) {
-        return createAPTrueWithResponse(createParameters).getValue();
+        return createAPTrueWithResponse(createParameters, Context.NONE).getValue();
     }
 
     /**
@@ -205,6 +248,32 @@ public final class Pets {
      * Create a CatAPTrue which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createCatAPTrue(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a CatAPTrue which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -219,14 +288,31 @@ public final class Pets {
      * Create a CatAPTrue which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters, Context context) {
+        return createCatAPTrueWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a CatAPTrue which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<CatAPTrue> createCatAPTrueWithResponse(CatAPTrue createParameters) {
-        return createCatAPTrueWithResponseAsync(createParameters).block();
+    public Response<CatAPTrue> createCatAPTrueWithResponse(CatAPTrue createParameters, Context context) {
+        return createCatAPTrueWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -240,7 +326,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CatAPTrue createCatAPTrue(CatAPTrue createParameters) {
-        return createCatAPTrueWithResponse(createParameters).getValue();
+        return createCatAPTrueWithResponse(createParameters, Context.NONE).getValue();
     }
 
     /**
@@ -273,6 +359,32 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createAPObject(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -287,14 +399,31 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters, Context context) {
+        return createAPObjectWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<PetAPObject> createAPObjectWithResponse(PetAPObject createParameters) {
-        return createAPObjectWithResponseAsync(createParameters).block();
+    public Response<PetAPObject> createAPObjectWithResponse(PetAPObject createParameters, Context context) {
+        return createAPObjectWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -308,7 +437,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPObject createAPObject(PetAPObject createParameters) {
-        return createAPObjectWithResponse(createParameters).getValue();
+        return createAPObjectWithResponse(createParameters, Context.NONE).getValue();
     }
 
     /**
@@ -341,6 +470,32 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createAPString(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -355,14 +510,31 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PetAPString> createAPStringAsync(PetAPString createParameters, Context context) {
+        return createAPStringWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<PetAPString> createAPStringWithResponse(PetAPString createParameters) {
-        return createAPStringWithResponseAsync(createParameters).block();
+    public Response<PetAPString> createAPStringWithResponse(PetAPString createParameters, Context context) {
+        return createAPStringWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -376,7 +548,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPString createAPString(PetAPString createParameters) {
-        return createAPStringWithResponse(createParameters).getValue();
+        return createAPStringWithResponse(createParameters, Context.NONE).getValue();
     }
 
     /**
@@ -409,6 +581,33 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(
+            PetAPInProperties createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createAPInProperties(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -423,14 +622,32 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters, Context context) {
+        return createAPInPropertiesWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<PetAPInProperties> createAPInPropertiesWithResponse(PetAPInProperties createParameters) {
-        return createAPInPropertiesWithResponseAsync(createParameters).block();
+    public Response<PetAPInProperties> createAPInPropertiesWithResponse(
+            PetAPInProperties createParameters, Context context) {
+        return createAPInPropertiesWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -444,7 +661,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInProperties createAPInProperties(PetAPInProperties createParameters) {
-        return createAPInPropertiesWithResponse(createParameters).getValue();
+        return createAPInPropertiesWithResponse(createParameters, Context.NONE).getValue();
     }
 
     /**
@@ -480,6 +697,33 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPStringWithResponseAsync(
+            PetAPInPropertiesWithAPString createParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (createParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
+        } else {
+            createParameters.validate();
+        }
+        final String accept = "application/json";
+        return service.createAPInPropertiesWithAPString(this.client.getHost(), createParameters, accept, context);
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -496,6 +740,24 @@ public final class Pets {
      * Create a Pet which contains more properties than what is defined.
      *
      * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PetAPInPropertiesWithAPString> createAPInPropertiesWithAPStringAsync(
+            PetAPInPropertiesWithAPString createParameters, Context context) {
+        return createAPInPropertiesWithAPStringWithResponseAsync(createParameters, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Create a Pet which contains more properties than what is defined.
+     *
+     * @param createParameters The createParameters parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -503,8 +765,8 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPInPropertiesWithAPString> createAPInPropertiesWithAPStringWithResponse(
-            PetAPInPropertiesWithAPString createParameters) {
-        return createAPInPropertiesWithAPStringWithResponseAsync(createParameters).block();
+            PetAPInPropertiesWithAPString createParameters, Context context) {
+        return createAPInPropertiesWithAPStringWithResponseAsync(createParameters, context).block();
     }
 
     /**
@@ -519,6 +781,6 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInPropertiesWithAPString createAPInPropertiesWithAPString(
             PetAPInPropertiesWithAPString createParameters) {
-        return createAPInPropertiesWithAPStringWithResponse(createParameters).getValue();
+        return createAPInPropertiesWithAPStringWithResponse(createParameters, Context.NONE).getValue();
     }
 }

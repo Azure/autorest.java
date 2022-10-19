@@ -215,6 +215,26 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
+            NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putNoModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -243,6 +263,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultAsync(
+            NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -250,8 +288,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(
-            NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        return putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+            NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -264,7 +302,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -276,7 +314,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueNoDefault() {
         final NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input = null;
-        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -297,6 +335,26 @@ public final class Contants {
         }
         return FluxUtil.withContext(
                 context -> service.putNoModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context));
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(
+            NoModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putNoModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context);
     }
 
     /**
@@ -331,6 +389,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringNoRequiredTwoValueDefaultAsync(
+            NoModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -338,8 +414,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(
-            NoModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        return putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input).block();
+            NoModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -352,7 +428,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
+        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -364,7 +440,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredTwoValueDefault() {
         final NoModelAsStringNoRequiredTwoValueDefaultOpEnum input = null;
-        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
+        putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -389,6 +465,25 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -401,13 +496,29 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringNoRequiredOneValueNoDefaultAsync(Context context) {
+        return putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse() {
-        return putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync().block();
+    public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(Context context) {
+        return putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(context).block();
     }
 
     /**
@@ -418,7 +529,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredOneValueNoDefault() {
-        putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse();
+        putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(Context.NONE);
     }
 
     /**
@@ -442,6 +553,25 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -454,13 +584,29 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringNoRequiredOneValueDefaultAsync(Context context) {
+        return putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse() {
-        return putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync().block();
+    public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse(Context context) {
+        return putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(context).block();
     }
 
     /**
@@ -471,7 +617,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringNoRequiredOneValueDefault() {
-        putNoModelAsStringNoRequiredOneValueDefaultWithResponse();
+        putNoModelAsStringNoRequiredOneValueDefaultWithResponse(Context.NONE);
     }
 
     /**
@@ -501,6 +647,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(
+            NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putNoModelAsStringRequiredTwoValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -516,6 +685,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringRequiredTwoValueNoDefaultAsync(
+            NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -523,8 +710,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            NoModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        return putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+            NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -537,7 +724,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredTwoValueNoDefault(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input);
+        putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -567,6 +754,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(
+            NoModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putNoModelAsStringRequiredTwoValueDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -582,6 +792,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringRequiredTwoValueDefaultAsync(
+            NoModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -589,8 +817,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
-            NoModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        return putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input).block();
+            NoModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -603,7 +831,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        putNoModelAsStringRequiredTwoValueDefaultWithResponse(input);
+        putNoModelAsStringRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -627,6 +855,25 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String input = "value1";
+        return service.putNoModelAsStringRequiredOneValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -639,13 +886,29 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringRequiredOneValueNoDefaultAsync(Context context) {
+        return putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse() {
-        return putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync().block();
+    public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse(Context context) {
+        return putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(context).block();
     }
 
     /**
@@ -656,7 +919,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredOneValueNoDefault() {
-        putNoModelAsStringRequiredOneValueNoDefaultWithResponse();
+        putNoModelAsStringRequiredOneValueNoDefaultWithResponse(Context.NONE);
     }
 
     /**
@@ -680,6 +943,25 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String input = "value1";
+        return service.putNoModelAsStringRequiredOneValueDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -692,13 +974,29 @@ public final class Contants {
     /**
      * Puts constants to the testserver.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNoModelAsStringRequiredOneValueDefaultAsync(Context context) {
+        return putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse() {
-        return putNoModelAsStringRequiredOneValueDefaultWithResponseAsync().block();
+    public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse(Context context) {
+        return putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(context).block();
     }
 
     /**
@@ -709,7 +1007,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNoModelAsStringRequiredOneValueDefault() {
-        putNoModelAsStringRequiredOneValueDefaultWithResponse();
+        putNoModelAsStringRequiredOneValueDefaultWithResponse(Context.NONE);
     }
 
     /**
@@ -730,6 +1028,26 @@ public final class Contants {
         }
         return FluxUtil.withContext(
                 context -> service.putModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), input, context));
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
+            ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), input, context);
     }
 
     /**
@@ -764,6 +1082,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringNoRequiredTwoValueNoDefaultAsync(
+            ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -771,8 +1107,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(
-            ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        return putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+            ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -785,7 +1121,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueNoDefault(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
+        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -797,7 +1133,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueNoDefault() {
         final ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input = null;
-        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input);
+        putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -818,6 +1154,26 @@ public final class Contants {
         }
         return FluxUtil.withContext(
                 context -> service.putModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context));
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(
+            ModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context);
     }
 
     /**
@@ -852,6 +1208,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringNoRequiredTwoValueDefaultAsync(
+            ModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -859,8 +1233,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueDefaultWithResponse(
-            ModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        return putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input).block();
+            ModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -873,7 +1247,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
+        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -885,7 +1259,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredTwoValueDefault() {
         final ModelAsStringNoRequiredTwoValueDefaultOpEnum input = null;
-        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input);
+        putModelAsStringNoRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -906,6 +1280,26 @@ public final class Contants {
         }
         return FluxUtil.withContext(
                 context -> service.putModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, context));
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
+            ModelAsStringNoRequiredOneValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, context);
     }
 
     /**
@@ -940,6 +1334,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringNoRequiredOneValueNoDefaultAsync(
+            ModelAsStringNoRequiredOneValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -947,8 +1359,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueNoDefaultWithResponse(
-            ModelAsStringNoRequiredOneValueNoDefaultOpEnum input) {
-        return putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(input).block();
+            ModelAsStringNoRequiredOneValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -961,7 +1373,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueNoDefault(ModelAsStringNoRequiredOneValueNoDefaultOpEnum input) {
-        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input);
+        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -973,7 +1385,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueNoDefault() {
         final ModelAsStringNoRequiredOneValueNoDefaultOpEnum input = null;
-        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input);
+        putModelAsStringNoRequiredOneValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -994,6 +1406,26 @@ public final class Contants {
         }
         return FluxUtil.withContext(
                 context -> service.putModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, context));
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
+            ModelAsStringNoRequiredOneValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, context);
     }
 
     /**
@@ -1028,6 +1460,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringNoRequiredOneValueDefaultAsync(
+            ModelAsStringNoRequiredOneValueDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1035,8 +1485,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueDefaultWithResponse(
-            ModelAsStringNoRequiredOneValueDefaultOpEnum input) {
-        return putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(input).block();
+            ModelAsStringNoRequiredOneValueDefaultOpEnum input, Context context) {
+        return putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -1049,7 +1499,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum input) {
-        putModelAsStringNoRequiredOneValueDefaultWithResponse(input);
+        putModelAsStringNoRequiredOneValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1061,7 +1511,7 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringNoRequiredOneValueDefault() {
         final ModelAsStringNoRequiredOneValueDefaultOpEnum input = null;
-        putModelAsStringNoRequiredOneValueDefaultWithResponse(input);
+        putModelAsStringNoRequiredOneValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1091,6 +1541,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(
+            ModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putModelAsStringRequiredTwoValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1106,6 +1579,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringRequiredTwoValueNoDefaultAsync(
+            ModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1113,8 +1604,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            ModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        return putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input).block();
+            ModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -1127,7 +1618,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredTwoValueNoDefault(ModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        putModelAsStringRequiredTwoValueNoDefaultWithResponse(input);
+        putModelAsStringRequiredTwoValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1157,6 +1648,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponseAsync(
+            ModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putModelAsStringRequiredTwoValueDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1171,6 +1685,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringRequiredTwoValueDefaultAsync(
+            ModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1178,8 +1710,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
-            ModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        return putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input).block();
+            ModelAsStringRequiredTwoValueDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -1192,7 +1724,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        putModelAsStringRequiredTwoValueDefaultWithResponse(input);
+        putModelAsStringRequiredTwoValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1222,6 +1754,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(
+            ModelAsStringRequiredOneValueNoDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putModelAsStringRequiredOneValueNoDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1237,6 +1792,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringRequiredOneValueNoDefaultAsync(
+            ModelAsStringRequiredOneValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1244,8 +1817,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
-            ModelAsStringRequiredOneValueNoDefaultOpEnum input) {
-        return putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input).block();
+            ModelAsStringRequiredOneValueNoDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -1258,7 +1831,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultOpEnum input) {
-        putModelAsStringRequiredOneValueNoDefaultWithResponse(input);
+        putModelAsStringRequiredOneValueNoDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1288,6 +1861,29 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponseAsync(
+            ModelAsStringRequiredOneValueDefaultOpEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (input == null) {
+            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
+        }
+        return service.putModelAsStringRequiredOneValueDefault(this.client.getHost(), input, context);
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1302,6 +1898,24 @@ public final class Contants {
      * Puts constants to the testserver.
      *
      * @param input The input parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putModelAsStringRequiredOneValueDefaultAsync(
+            ModelAsStringRequiredOneValueDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Puts constants to the testserver.
+     *
+     * @param input The input parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1309,8 +1923,8 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
-            ModelAsStringRequiredOneValueDefaultOpEnum input) {
-        return putModelAsStringRequiredOneValueDefaultWithResponseAsync(input).block();
+            ModelAsStringRequiredOneValueDefaultOpEnum input, Context context) {
+        return putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, context).block();
     }
 
     /**
@@ -1323,7 +1937,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum input) {
-        putModelAsStringRequiredOneValueDefaultWithResponse(input);
+        putModelAsStringRequiredOneValueDefaultWithResponse(input, Context.NONE);
     }
 
     /**
@@ -1352,6 +1966,29 @@ public final class Contants {
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putClientConstantsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.putClientConstants(
+                this.client.getHost(),
+                this.client.isHeaderConstant(),
+                this.client.getQueryConstant(),
+                this.client.getPathConstant(),
+                context);
+    }
+
+    /**
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1364,13 +2001,29 @@ public final class Contants {
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putClientConstantsAsync(Context context) {
+        return putClientConstantsWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putClientConstantsWithResponse() {
-        return putClientConstantsWithResponseAsync().block();
+    public Response<Void> putClientConstantsWithResponse(Context context) {
+        return putClientConstantsWithResponseAsync(context).block();
     }
 
     /**
@@ -1381,6 +2034,6 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putClientConstants() {
-        putClientConstantsWithResponse();
+        putClientConstantsWithResponse(Context.NONE);
     }
 }

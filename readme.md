@@ -60,8 +60,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generate-builder-per-client`| Requires `--generate-sync-async-clients`, and generates one ClientBuilder for each Client. Default is false.|
 |`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
 |`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
-|`--add-context-parameter`|Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.|
-|`--context-client-method-parameter`|Implies `--add-context-parameter` and indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Default is false.|
 |`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
 |`--required-parameter-client-methods`|Indicates whether client method overloads with only required parameters should be generated. Default is false.|
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
@@ -87,7 +85,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 `data-plane` option enables the generator to generate code for minimal data-plane clients.
 
 `data-plane` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `add-context-parameter`, `context-client-method-parameter` option is by default `true`.
+For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client` option is by default `true`.
 `polling` is by default enabled as default settings globally (`polling={}`).
 
 `sdk-integration` option can be used for integrating to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/).
@@ -122,7 +120,7 @@ Following settings only works when `fluent` option is specified.
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
 
 `fluent` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `context-client-method-parameter`, `required-parameter-client-methods` option is by default `true`.
+For example, `generate-client-interfaces`, `required-parameter-client-methods` option is by default `true`.
 
 The code formatter would require Java 11+ runtime.
 
@@ -342,12 +340,6 @@ help-content:
       - key: models-subpackage=STRING
         type: string
         description: The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.
-      - key: add-context-parameter
-        type: bool
-        description: Indicates whether the `com.azure.core.util.Context` parameter should be included in generated proxy methods. Default is false.
-      - key: context-client-method-parameter
-        type: bool
-        description: Implies `--add-context-parameter` and indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Default is false.
       - key: sync-methods
         type: string
         description: \[all|essential|none] Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods

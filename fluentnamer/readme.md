@@ -57,8 +57,6 @@ include-x-ms-examples-original-file: true
 license-header: MICROSOFT_MIT_SMALL
 regenerate-pom: true
 sync-methods: all
-add-context-parameter: true
-context-client-method-parameter: true
 client-side-validations: true
 client-logger: true
 generate-client-interfaces: true

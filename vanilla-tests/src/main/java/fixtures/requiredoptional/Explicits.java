@@ -331,6 +331,28 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
+            Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putOptionalBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -360,14 +382,33 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putOptionalBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    public Response<Void> putOptionalBinaryBodyWithResponse(
+            Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
@@ -381,7 +422,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(Flux<ByteBuffer> bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 
     /**
@@ -394,7 +435,7 @@ public final class Explicits {
     public void putOptionalBinaryBody() {
         final Flux<ByteBuffer> bodyParameter = null;
         final Long contentLength = null;
-        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 
     /**
@@ -425,6 +466,28 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
+            BinaryData bodyParameter, Long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putOptionalBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -440,14 +503,33 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putOptionalBinaryBodyAsync(BinaryData bodyParameter, Long contentLength, Context context) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putOptionalBinaryBodyWithResponse(BinaryData bodyParameter, Long contentLength) {
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    public Response<Void> putOptionalBinaryBodyWithResponse(
+            BinaryData bodyParameter, Long contentLength, Context context) {
+        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
@@ -461,7 +543,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength);
+        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 
     /**
@@ -496,6 +578,31 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putRequiredBinaryBodyWithResponseAsync(
+            Flux<ByteBuffer> bodyParameter, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putRequiredBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -511,14 +618,33 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putRequiredBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, long contentLength, Context context) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putRequiredBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, long contentLength) {
-        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    public Response<Void> putRequiredBinaryBodyWithResponse(
+            Flux<ByteBuffer> bodyParameter, long contentLength, Context context) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
@@ -532,7 +658,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRequiredBinaryBody(Flux<ByteBuffer> bodyParameter, long contentLength) {
-        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength);
+        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 
     /**
@@ -566,6 +692,31 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putRequiredBinaryBodyWithResponseAsync(
+            BinaryData bodyParameter, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putRequiredBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -581,14 +732,33 @@ public final class Explicits {
      *
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putRequiredBinaryBodyAsync(BinaryData bodyParameter, long contentLength, Context context) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required body parameter.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putRequiredBinaryBodyWithResponse(BinaryData bodyParameter, long contentLength) {
-        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength).block();
+    public Response<Void> putRequiredBinaryBodyWithResponse(
+            BinaryData bodyParameter, long contentLength, Context context) {
+        return putRequiredBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
@@ -602,7 +772,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRequiredBinaryBody(BinaryData bodyParameter, long contentLength) {
-        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength);
+        putRequiredBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 
     /**
@@ -629,6 +799,26 @@ public final class Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredIntegerParameterWithResponseAsync(int bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postRequiredIntegerParameter(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -643,14 +833,30 @@ public final class Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredIntegerParameterAsync(int bodyParameter, Context context) {
+        return postRequiredIntegerParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredIntegerParameterWithResponse(int bodyParameter) {
-        return postRequiredIntegerParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredIntegerParameterWithResponse(int bodyParameter, Context context) {
+        return postRequiredIntegerParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -663,7 +869,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerParameter(int bodyParameter) {
-        postRequiredIntegerParameterWithResponse(bodyParameter);
+        postRequiredIntegerParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -684,6 +890,26 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalIntegerParameter(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalIntegerParameterWithResponseAsync(Integer bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postOptionalIntegerParameter(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -717,14 +943,30 @@ public final class Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, Context context) {
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalIntegerParameterWithResponse(Integer bodyParameter) {
-        return postOptionalIntegerParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalIntegerParameterWithResponse(Integer bodyParameter, Context context) {
+        return postOptionalIntegerParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -737,7 +979,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterWithResponse(bodyParameter);
+        postOptionalIntegerParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -749,7 +991,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerParameter() {
         final Integer bodyParameter = null;
-        postOptionalIntegerParameterWithResponse(bodyParameter);
+        postOptionalIntegerParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -783,6 +1025,33 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredIntegerPropertyWithResponseAsync(
+            IntWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        } else {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postRequiredIntegerProperty(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -798,14 +1067,31 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, Context context) {
+        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredIntegerPropertyWithResponse(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredIntegerPropertyWithResponse(IntWrapper bodyParameter, Context context) {
+        return postRequiredIntegerPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -819,7 +1105,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        postRequiredIntegerPropertyWithResponse(bodyParameter);
+        postRequiredIntegerPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -843,6 +1129,30 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalIntegerProperty(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalIntegerPropertyWithResponseAsync(
+            IntOptionalWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter != null) {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postOptionalIntegerProperty(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -876,14 +1186,30 @@ public final class Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, Context context) {
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalIntegerPropertyWithResponse(IntOptionalWrapper bodyParameter) {
-        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalIntegerPropertyWithResponse(IntOptionalWrapper bodyParameter, Context context) {
+        return postOptionalIntegerPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -896,7 +1222,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyWithResponse(bodyParameter);
+        postOptionalIntegerPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -908,7 +1234,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerProperty() {
         final IntOptionalWrapper bodyParameter = null;
-        postOptionalIntegerPropertyWithResponse(bodyParameter);
+        postOptionalIntegerPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -937,6 +1263,27 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredIntegerHeaderWithResponseAsync(int headerParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postRequiredIntegerHeader(this.client.getHost(), headerParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -952,14 +1299,31 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredIntegerHeaderAsync(int headerParameter, Context context) {
+        return postRequiredIntegerHeaderWithResponseAsync(headerParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredIntegerHeaderWithResponse(int headerParameter) {
-        return postRequiredIntegerHeaderWithResponseAsync(headerParameter).block();
+    public Response<Void> postRequiredIntegerHeaderWithResponse(int headerParameter, Context context) {
+        return postRequiredIntegerHeaderWithResponseAsync(headerParameter, context).block();
     }
 
     /**
@@ -973,7 +1337,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredIntegerHeader(int headerParameter) {
-        postRequiredIntegerHeaderWithResponse(headerParameter);
+        postRequiredIntegerHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -994,6 +1358,26 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalIntegerHeader(this.client.getHost(), headerParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalIntegerHeaderWithResponseAsync(Integer headerParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postOptionalIntegerHeader(this.client.getHost(), headerParameter, accept, context);
     }
 
     /**
@@ -1027,14 +1411,30 @@ public final class Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, Context context) {
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalIntegerHeaderWithResponse(Integer headerParameter) {
-        return postOptionalIntegerHeaderWithResponseAsync(headerParameter).block();
+    public Response<Void> postOptionalIntegerHeaderWithResponse(Integer headerParameter, Context context) {
+        return postOptionalIntegerHeaderWithResponseAsync(headerParameter, context).block();
     }
 
     /**
@@ -1047,7 +1447,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderWithResponse(headerParameter);
+        postOptionalIntegerHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -1059,7 +1459,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalIntegerHeader() {
         final Integer headerParameter = null;
-        postOptionalIntegerHeaderWithResponse(headerParameter);
+        postOptionalIntegerHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -1089,6 +1489,29 @@ public final class Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredStringParameterWithResponseAsync(String bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postRequiredStringParameter(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1103,14 +1526,30 @@ public final class Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredStringParameterAsync(String bodyParameter, Context context) {
+        return postRequiredStringParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredStringParameterWithResponse(String bodyParameter) {
-        return postRequiredStringParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredStringParameterWithResponse(String bodyParameter, Context context) {
+        return postRequiredStringParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1123,7 +1562,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringParameter(String bodyParameter) {
-        postRequiredStringParameterWithResponse(bodyParameter);
+        postRequiredStringParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1144,6 +1583,26 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalStringParameter(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalStringParameterWithResponseAsync(String bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postOptionalStringParameter(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1177,14 +1636,30 @@ public final class Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringParameterAsync(String bodyParameter, Context context) {
+        return postOptionalStringParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalStringParameterWithResponse(String bodyParameter) {
-        return postOptionalStringParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalStringParameterWithResponse(String bodyParameter, Context context) {
+        return postOptionalStringParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1197,7 +1672,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterWithResponse(bodyParameter);
+        postOptionalStringParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1209,7 +1684,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringParameter() {
         final String bodyParameter = null;
-        postOptionalStringParameterWithResponse(bodyParameter);
+        postOptionalStringParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1243,6 +1718,33 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredStringPropertyWithResponseAsync(
+            StringWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        } else {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postRequiredStringProperty(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1258,14 +1760,31 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredStringPropertyAsync(StringWrapper bodyParameter, Context context) {
+        return postRequiredStringPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredStringPropertyWithResponse(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredStringPropertyWithResponse(StringWrapper bodyParameter, Context context) {
+        return postRequiredStringPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1279,7 +1798,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringProperty(StringWrapper bodyParameter) {
-        postRequiredStringPropertyWithResponse(bodyParameter);
+        postRequiredStringPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1303,6 +1822,30 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalStringProperty(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalStringPropertyWithResponseAsync(
+            StringOptionalWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter != null) {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postOptionalStringProperty(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1336,14 +1879,30 @@ public final class Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, Context context) {
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalStringPropertyWithResponse(StringOptionalWrapper bodyParameter) {
-        return postOptionalStringPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalStringPropertyWithResponse(StringOptionalWrapper bodyParameter, Context context) {
+        return postOptionalStringPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1356,7 +1915,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyWithResponse(bodyParameter);
+        postOptionalStringPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1368,7 +1927,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringProperty() {
         final StringOptionalWrapper bodyParameter = null;
-        postOptionalStringPropertyWithResponse(bodyParameter);
+        postOptionalStringPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1401,6 +1960,31 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredStringHeaderWithResponseAsync(String headerParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (headerParameter == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postRequiredStringHeader(this.client.getHost(), headerParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1416,14 +2000,31 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredStringHeaderAsync(String headerParameter, Context context) {
+        return postRequiredStringHeaderWithResponseAsync(headerParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter The headerParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredStringHeaderWithResponse(String headerParameter) {
-        return postRequiredStringHeaderWithResponseAsync(headerParameter).block();
+    public Response<Void> postRequiredStringHeaderWithResponse(String headerParameter, Context context) {
+        return postRequiredStringHeaderWithResponseAsync(headerParameter, context).block();
     }
 
     /**
@@ -1437,7 +2038,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredStringHeader(String headerParameter) {
-        postRequiredStringHeaderWithResponse(headerParameter);
+        postRequiredStringHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -1458,6 +2059,26 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalStringHeader(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalStringHeaderWithResponseAsync(String bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postOptionalStringHeader(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1491,14 +2112,30 @@ public final class Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalStringHeaderAsync(String bodyParameter, Context context) {
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalStringHeaderWithResponse(String bodyParameter) {
-        return postOptionalStringHeaderWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalStringHeaderWithResponse(String bodyParameter, Context context) {
+        return postOptionalStringHeaderWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1511,7 +2148,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderWithResponse(bodyParameter);
+        postOptionalStringHeaderWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1523,7 +2160,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalStringHeader() {
         final String bodyParameter = null;
-        postOptionalStringHeaderWithResponse(bodyParameter);
+        postOptionalStringHeaderWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1557,6 +2194,32 @@ public final class Explicits {
      * is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredClassParameterWithResponseAsync(Product bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        } else {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postRequiredClassParameter(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1572,14 +2235,31 @@ public final class Explicits {
      * is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredClassParameterAsync(Product bodyParameter, Context context) {
+        return postRequiredClassParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredClassParameterWithResponse(Product bodyParameter) {
-        return postRequiredClassParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredClassParameterWithResponse(Product bodyParameter, Context context) {
+        return postRequiredClassParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1593,7 +2273,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredClassParameter(Product bodyParameter) {
-        postRequiredClassParameterWithResponse(bodyParameter);
+        postRequiredClassParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1617,6 +2297,29 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalClassParameter(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalClassParameterWithResponseAsync(Product bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter != null) {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postOptionalClassParameter(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1650,14 +2353,30 @@ public final class Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalClassParameterAsync(Product bodyParameter, Context context) {
+        return postOptionalClassParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalClassParameterWithResponse(Product bodyParameter) {
-        return postOptionalClassParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalClassParameterWithResponse(Product bodyParameter, Context context) {
+        return postOptionalClassParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1670,7 +2389,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterWithResponse(bodyParameter);
+        postOptionalClassParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1682,7 +2401,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassParameter() {
         final Product bodyParameter = null;
-        postOptionalClassParameterWithResponse(bodyParameter);
+        postOptionalClassParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1716,6 +2435,33 @@ public final class Explicits {
      * library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredClassPropertyWithResponseAsync(
+            ClassWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        } else {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postRequiredClassProperty(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1731,14 +2477,31 @@ public final class Explicits {
      * library should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, Context context) {
+        return postRequiredClassPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredClassPropertyWithResponse(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredClassPropertyWithResponse(ClassWrapper bodyParameter, Context context) {
+        return postRequiredClassPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1752,7 +2515,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredClassProperty(ClassWrapper bodyParameter) {
-        postRequiredClassPropertyWithResponse(bodyParameter);
+        postRequiredClassPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1776,6 +2539,30 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalClassProperty(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalClassPropertyWithResponseAsync(
+            ClassOptionalWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter != null) {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postOptionalClassProperty(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1809,14 +2596,30 @@ public final class Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, Context context) {
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalClassPropertyWithResponse(ClassOptionalWrapper bodyParameter) {
-        return postOptionalClassPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalClassPropertyWithResponse(ClassOptionalWrapper bodyParameter, Context context) {
+        return postOptionalClassPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1829,7 +2632,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyWithResponse(bodyParameter);
+        postOptionalClassPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1841,7 +2644,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalClassProperty() {
         final ClassOptionalWrapper bodyParameter = null;
-        postOptionalClassPropertyWithResponse(bodyParameter);
+        postOptionalClassPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1871,6 +2674,30 @@ public final class Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter Array of PostContentSchemaItem.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredArrayParameterWithResponseAsync(
+            List<String> bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postRequiredArrayParameter(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter Array of PostContentSchemaItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1885,14 +2712,30 @@ public final class Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter Array of PostContentSchemaItem.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredArrayParameterAsync(List<String> bodyParameter, Context context) {
+        return postRequiredArrayParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredArrayParameterWithResponse(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredArrayParameterWithResponse(List<String> bodyParameter, Context context) {
+        return postRequiredArrayParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1905,7 +2748,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayParameter(List<String> bodyParameter) {
-        postRequiredArrayParameterWithResponse(bodyParameter);
+        postRequiredArrayParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1926,6 +2769,27 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalArrayParameter(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter Array of String.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalArrayParameterWithResponseAsync(
+            List<String> bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.postOptionalArrayParameter(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -1959,14 +2823,30 @@ public final class Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter Array of String.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, Context context) {
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter Array of String.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalArrayParameterWithResponse(List<String> bodyParameter) {
-        return postOptionalArrayParameterWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalArrayParameterWithResponse(List<String> bodyParameter, Context context) {
+        return postOptionalArrayParameterWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -1979,7 +2859,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterWithResponse(bodyParameter);
+        postOptionalArrayParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -1991,7 +2871,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayParameter() {
         final List<String> bodyParameter = null;
-        postOptionalArrayParameterWithResponse(bodyParameter);
+        postOptionalArrayParameterWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -2025,6 +2905,33 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredArrayPropertyWithResponseAsync(
+            ArrayWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter == null) {
+            return Mono.error(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        } else {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postRequiredArrayProperty(this.client.getHost(), bodyParameter, accept, context);
+    }
+
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2040,14 +2947,31 @@ public final class Explicits {
      * should throw before the request is sent.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, Context context) {
+        return postRequiredArrayPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredArrayPropertyWithResponse(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postRequiredArrayPropertyWithResponse(ArrayWrapper bodyParameter, Context context) {
+        return postRequiredArrayPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -2061,7 +2985,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        postRequiredArrayPropertyWithResponse(bodyParameter);
+        postRequiredArrayPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -2085,6 +3009,30 @@ public final class Explicits {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postOptionalArrayProperty(this.client.getHost(), bodyParameter, accept, context));
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalArrayPropertyWithResponseAsync(
+            ArrayOptionalWrapper bodyParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (bodyParameter != null) {
+            bodyParameter.validate();
+        }
+        final String accept = "application/json";
+        return service.postOptionalArrayProperty(this.client.getHost(), bodyParameter, accept, context);
     }
 
     /**
@@ -2118,14 +3066,30 @@ public final class Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, Context context) {
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter The bodyParameter parameter.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalArrayPropertyWithResponse(ArrayOptionalWrapper bodyParameter) {
-        return postOptionalArrayPropertyWithResponseAsync(bodyParameter).block();
+    public Response<Void> postOptionalArrayPropertyWithResponse(ArrayOptionalWrapper bodyParameter, Context context) {
+        return postOptionalArrayPropertyWithResponseAsync(bodyParameter, context).block();
     }
 
     /**
@@ -2138,7 +3102,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyWithResponse(bodyParameter);
+        postOptionalArrayPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -2150,7 +3114,7 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayProperty() {
         final ArrayOptionalWrapper bodyParameter = null;
-        postOptionalArrayPropertyWithResponse(bodyParameter);
+        postOptionalArrayPropertyWithResponse(bodyParameter, Context.NONE);
     }
 
     /**
@@ -2187,6 +3151,34 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter Array of Post0ItemsItem.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredArrayHeaderWithResponseAsync(
+            List<String> headerParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (headerParameter == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String headerParameterConverted =
+                headerParameter.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.postRequiredArrayHeader(this.client.getHost(), headerParameterConverted, accept, context);
+    }
+
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2202,14 +3194,31 @@ public final class Explicits {
      * throw before the request is sent.
      *
      * @param headerParameter Array of Post0ItemsItem.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredArrayHeaderAsync(List<String> headerParameter, Context context) {
+        return postRequiredArrayHeaderWithResponseAsync(headerParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
+     *
+     * @param headerParameter Array of Post0ItemsItem.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postRequiredArrayHeaderWithResponse(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithResponseAsync(headerParameter).block();
+    public Response<Void> postRequiredArrayHeaderWithResponse(List<String> headerParameter, Context context) {
+        return postRequiredArrayHeaderWithResponseAsync(headerParameter, context).block();
     }
 
     /**
@@ -2223,7 +3232,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequiredArrayHeader(List<String> headerParameter) {
-        postRequiredArrayHeaderWithResponse(headerParameter);
+        postRequiredArrayHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -2258,6 +3267,33 @@ public final class Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter Array of String.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalArrayHeaderWithResponseAsync(
+            List<String> headerParameter, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String headerParameterConverted =
+                (headerParameter == null)
+                        ? null
+                        : headerParameter.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
+        return service.postOptionalArrayHeader(this.client.getHost(), headerParameterConverted, accept, context);
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2285,14 +3321,30 @@ public final class Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter Array of String.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, Context context) {
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter Array of String.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postOptionalArrayHeaderWithResponse(List<String> headerParameter) {
-        return postOptionalArrayHeaderWithResponseAsync(headerParameter).block();
+    public Response<Void> postOptionalArrayHeaderWithResponse(List<String> headerParameter, Context context) {
+        return postOptionalArrayHeaderWithResponseAsync(headerParameter, context).block();
     }
 
     /**
@@ -2305,7 +3357,7 @@ public final class Explicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderWithResponse(headerParameter);
+        postOptionalArrayHeaderWithResponse(headerParameter, Context.NONE);
     }
 
     /**
@@ -2317,6 +3369,6 @@ public final class Explicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptionalArrayHeader() {
         final List<String> headerParameter = null;
-        postOptionalArrayHeaderWithResponse(headerParameter);
+        postOptionalArrayHeaderWithResponse(headerParameter, Context.NONE);
     }
 }

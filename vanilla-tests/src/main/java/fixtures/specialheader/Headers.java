@@ -141,6 +141,28 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        return service.paramRepeatabilityRequest(
+                this.client.getHost(), accept, repeatabilityRequestId, repeatabilityFirstSent, context);
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object on successful completion of {@link Mono}.
@@ -153,13 +175,29 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Object> paramRepeatabilityRequestAsync(Context context) {
+        return paramRepeatabilityRequestWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Object> paramRepeatabilityRequestWithResponse() {
-        return paramRepeatabilityRequestWithResponseAsync().block();
+    public Response<Object> paramRepeatabilityRequestWithResponse(Context context) {
+        return paramRepeatabilityRequestWithResponseAsync(context).block();
     }
 
     /**
@@ -171,7 +209,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequest() {
-        return paramRepeatabilityRequestWithResponse().getValue();
+        return paramRepeatabilityRequestWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -203,6 +241,28 @@ public final class Headers {
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        return service.paramRepeatabilityRequestPut(
+                this.client.getHost(), accept, repeatabilityRequestId, repeatabilityFirstSent, context);
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object on successful completion of {@link Mono}.
@@ -215,13 +275,29 @@ public final class Headers {
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Object> paramRepeatabilityRequestPutAsync(Context context) {
+        return paramRepeatabilityRequestPutWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Object> paramRepeatabilityRequestPutWithResponse() {
-        return paramRepeatabilityRequestPutWithResponseAsync().block();
+    public Response<Object> paramRepeatabilityRequestPutWithResponse(Context context) {
+        return paramRepeatabilityRequestPutWithResponseAsync(context).block();
     }
 
     /**
@@ -233,7 +309,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestPut() {
-        return paramRepeatabilityRequestPutWithResponse().getValue();
+        return paramRepeatabilityRequestPutWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -257,6 +333,25 @@ public final class Headers {
     /**
      * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.paramRepeatabilityRequestGet(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object on successful completion of {@link Mono}.
@@ -269,13 +364,29 @@ public final class Headers {
     /**
      * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Object> paramRepeatabilityRequestGetAsync(Context context) {
+        return paramRepeatabilityRequestGetWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Object> paramRepeatabilityRequestGetWithResponse() {
-        return paramRepeatabilityRequestGetWithResponseAsync().block();
+    public Response<Object> paramRepeatabilityRequestGetWithResponse(Context context) {
+        return paramRepeatabilityRequestGetWithResponseAsync(context).block();
     }
 
     /**
@@ -287,7 +398,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestGet() {
-        return paramRepeatabilityRequestGetWithResponse().getValue();
+        return paramRepeatabilityRequestGetWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -319,6 +430,28 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        return service.paramRepeatabilityRequestLRO(
+                this.client.getHost(), accept, repeatabilityRequestId, repeatabilityFirstSent, context);
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object on successful completion of {@link Mono}.
@@ -331,13 +464,29 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Object> paramRepeatabilityRequestLROAsync(Context context) {
+        return paramRepeatabilityRequestLROWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Object> paramRepeatabilityRequestLROWithResponse() {
-        return paramRepeatabilityRequestLROWithResponseAsync().block();
+    public Response<Object> paramRepeatabilityRequestLROWithResponse(Context context) {
+        return paramRepeatabilityRequestLROWithResponseAsync(context).block();
     }
 
     /**
@@ -349,7 +498,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestLRO() {
-        return paramRepeatabilityRequestLROWithResponse().getValue();
+        return paramRepeatabilityRequestLROWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -390,6 +539,37 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        return service.paramRepeatabilityRequestPageable(
+                        this.client.getHost(), accept, repeatabilityRequestId, repeatabilityFirstSent, context)
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValue(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedFlux}.
@@ -399,6 +579,22 @@ public final class Headers {
         return new PagedFlux<>(
                 () -> paramRepeatabilityRequestPageableSinglePageAsync(),
                 nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Object> paramRepeatabilityRequestPageableAsync(Context context) {
+        return new PagedFlux<>(
+                () -> paramRepeatabilityRequestPageableSinglePageAsync(context),
+                nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, context));
     }
 
     /**
@@ -416,6 +612,20 @@ public final class Headers {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage(Context context) {
+        return paramRepeatabilityRequestPageableSinglePageAsync(context).block();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the paginated response with {@link PagedIterable}.
@@ -423,6 +633,20 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Object> paramRepeatabilityRequestPageable() {
         return new PagedIterable<>(paramRepeatabilityRequestPageableAsync());
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Object> paramRepeatabilityRequestPageable(Context context) {
+        return new PagedIterable<>(paramRepeatabilityRequestPageableAsync(context));
     }
 
     /**
@@ -465,6 +689,40 @@ public final class Headers {
      *
      * @param nextLink The URL to get the next list of items
      *     <p>The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(
+            String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.paramRepeatabilityRequestPageableNext(nextLink, this.client.getHost(), accept, context)
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValue(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -473,5 +731,21 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
         return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink).block();
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink, Context context) {
+        return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, context).block();
     }
 }

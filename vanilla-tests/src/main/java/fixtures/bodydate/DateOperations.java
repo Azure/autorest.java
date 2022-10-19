@@ -124,6 +124,25 @@ public final class DateOperations {
     /**
      * Get null date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null date value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null date value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value on successful completion of {@link Mono}.
@@ -136,13 +155,29 @@ public final class DateOperations {
     /**
      * Get null date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null date value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null date value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null date value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<LocalDate> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -154,7 +189,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -177,6 +212,25 @@ public final class DateOperations {
     /**
      * Get invalid date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid date value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getInvalidDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid date value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value on successful completion of {@link Mono}.
@@ -189,13 +243,29 @@ public final class DateOperations {
     /**
      * Get invalid date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid date value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getInvalidDateAsync(Context context) {
+        return getInvalidDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid date value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid date value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getInvalidDateWithResponse() {
-        return getInvalidDateWithResponseAsync().block();
+    public Response<LocalDate> getInvalidDateWithResponse(Context context) {
+        return getInvalidDateWithResponseAsync(context).block();
     }
 
     /**
@@ -207,7 +277,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getInvalidDate() {
-        return getInvalidDateWithResponse().getValue();
+        return getInvalidDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -230,6 +300,25 @@ public final class DateOperations {
     /**
      * Get overflow date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow date value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getOverflowDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getOverflowDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get overflow date value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value on successful completion of {@link Mono}.
@@ -242,13 +331,29 @@ public final class DateOperations {
     /**
      * Get overflow date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow date value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getOverflowDateAsync(Context context) {
+        return getOverflowDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get overflow date value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow date value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getOverflowDateWithResponse() {
-        return getOverflowDateWithResponseAsync().block();
+    public Response<LocalDate> getOverflowDateWithResponse(Context context) {
+        return getOverflowDateWithResponseAsync(context).block();
     }
 
     /**
@@ -260,7 +365,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getOverflowDate() {
-        return getOverflowDateWithResponse().getValue();
+        return getOverflowDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -283,6 +388,25 @@ public final class DateOperations {
     /**
      * Get underflow date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow date value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getUnderflowDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUnderflowDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get underflow date value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value on successful completion of {@link Mono}.
@@ -295,13 +419,29 @@ public final class DateOperations {
     /**
      * Get underflow date value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow date value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getUnderflowDateAsync(Context context) {
+        return getUnderflowDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get underflow date value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow date value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getUnderflowDateWithResponse() {
-        return getUnderflowDateWithResponseAsync().block();
+    public Response<LocalDate> getUnderflowDateWithResponse(Context context) {
+        return getUnderflowDateWithResponseAsync(context).block();
     }
 
     /**
@@ -313,7 +453,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateWithResponse().getValue();
+        return getUnderflowDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -342,6 +482,29 @@ public final class DateOperations {
      * Put max date value 9999-12-31.
      *
      * @param dateBody date body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMaxDateWithResponseAsync(LocalDate dateBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (dateBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMaxDate(this.client.getHost(), dateBody, accept, context);
+    }
+
+    /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -356,14 +519,30 @@ public final class DateOperations {
      * Put max date value 9999-12-31.
      *
      * @param dateBody date body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMaxDateAsync(LocalDate dateBody, Context context) {
+        return putMaxDateWithResponseAsync(dateBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody date body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMaxDateWithResponse(LocalDate dateBody) {
-        return putMaxDateWithResponseAsync(dateBody).block();
+    public Response<Void> putMaxDateWithResponse(LocalDate dateBody, Context context) {
+        return putMaxDateWithResponseAsync(dateBody, context).block();
     }
 
     /**
@@ -376,7 +555,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateWithResponse(dateBody);
+        putMaxDateWithResponse(dateBody, Context.NONE);
     }
 
     /**
@@ -399,6 +578,25 @@ public final class DateOperations {
     /**
      * Get max date value 9999-12-31.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max date value 9999-12-31 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getMaxDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMaxDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max date value 9999-12-31.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31 on successful completion of {@link Mono}.
@@ -411,13 +609,29 @@ public final class DateOperations {
     /**
      * Get max date value 9999-12-31.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max date value 9999-12-31 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getMaxDateAsync(Context context) {
+        return getMaxDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max date value 9999-12-31.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max date value 9999-12-31 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getMaxDateWithResponse() {
-        return getMaxDateWithResponseAsync().block();
+    public Response<LocalDate> getMaxDateWithResponse(Context context) {
+        return getMaxDateWithResponseAsync(context).block();
     }
 
     /**
@@ -429,7 +643,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMaxDate() {
-        return getMaxDateWithResponse().getValue();
+        return getMaxDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -458,6 +672,29 @@ public final class DateOperations {
      * Put min date value 0000-01-01.
      *
      * @param dateBody date body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMinDateWithResponseAsync(LocalDate dateBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (dateBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMinDate(this.client.getHost(), dateBody, accept, context);
+    }
+
+    /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody date body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -472,14 +709,30 @@ public final class DateOperations {
      * Put min date value 0000-01-01.
      *
      * @param dateBody date body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMinDateAsync(LocalDate dateBody, Context context) {
+        return putMinDateWithResponseAsync(dateBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody date body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMinDateWithResponse(LocalDate dateBody) {
-        return putMinDateWithResponseAsync(dateBody).block();
+    public Response<Void> putMinDateWithResponse(LocalDate dateBody, Context context) {
+        return putMinDateWithResponseAsync(dateBody, context).block();
     }
 
     /**
@@ -492,7 +745,7 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMinDate(LocalDate dateBody) {
-        putMinDateWithResponse(dateBody);
+        putMinDateWithResponse(dateBody, Context.NONE);
     }
 
     /**
@@ -515,6 +768,25 @@ public final class DateOperations {
     /**
      * Get min date value 0000-01-01.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min date value 0000-01-01 along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LocalDate>> getMinDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getMinDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get min date value 0000-01-01.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01 on successful completion of {@link Mono}.
@@ -527,13 +799,29 @@ public final class DateOperations {
     /**
      * Get min date value 0000-01-01.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min date value 0000-01-01 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LocalDate> getMinDateAsync(Context context) {
+        return getMinDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get min date value 0000-01-01.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min date value 0000-01-01 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LocalDate> getMinDateWithResponse() {
-        return getMinDateWithResponseAsync().block();
+    public Response<LocalDate> getMinDateWithResponse(Context context) {
+        return getMinDateWithResponseAsync(context).block();
     }
 
     /**
@@ -545,6 +833,6 @@ public final class DateOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMinDate() {
-        return getMinDateWithResponse().getValue();
+        return getMinDateWithResponse(Context.NONE).getValue();
     }
 }
