@@ -52,7 +52,7 @@ public final class AuthenticationOAuth2ClientBuilder
     @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://security.microsoft.com/.default"};
 
     @Generated
-    private static final Map<String, String> properties = CoreUtils.getProperties("authentication-oauth2.properties");
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-oauth2.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

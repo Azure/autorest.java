@@ -48,7 +48,7 @@ public final class LongRunningClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final Map<String, String> properties = CoreUtils.getProperties("cadl-longrunning.properties");
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-longrunning.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

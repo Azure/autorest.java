@@ -45,7 +45,7 @@ public final class InheritanceClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final Map<String, String> properties = CoreUtils.getProperties("models-inheritance.properties");
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("models-inheritance.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

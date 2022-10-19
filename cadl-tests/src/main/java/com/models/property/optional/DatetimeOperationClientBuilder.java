@@ -45,7 +45,7 @@ public final class DatetimeOperationClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final Map<String, String> properties =
+    private static final Map<String, String> PROPERTIES =
             CoreUtils.getProperties("models-property-optional.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;

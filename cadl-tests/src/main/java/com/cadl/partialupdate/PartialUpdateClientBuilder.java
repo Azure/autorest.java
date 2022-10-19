@@ -47,9 +47,6 @@ public final class PartialUpdateClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated
-    private static final Map<String, String> properties = CoreUtils.getProperties("cadl-partialupdate.properties");
-
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /** Create an instance of the PartialUpdateClientBuilder. */
@@ -253,4 +250,7 @@ public final class PartialUpdateClientBuilder
     }
 
     public void test() {}
+
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-partialupdate.properties");
 }
