@@ -794,14 +794,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
-            if (settings.isContextClientMethodParameter()) {
-                if (CoreUtils.isNullOrEmpty(argumentList)) {
-                    // If there are no arguments the argument is Context.NONE
-                    argumentList = "Context.NONE";
-                } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
-                    // If the arguments don't contain Context append Context.NONE
-                    argumentList += ", Context.NONE";
-                }
+            if (CoreUtils.isNullOrEmpty(argumentList)) {
+                // If there are no arguments the argument is Context.NONE
+                argumentList = "Context.NONE";
+            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                // If the arguments don't contain Context append Context.NONE
+                argumentList += ", Context.NONE";
             }
 
             if (ClassType.StreamResponse.equals(clientMethod.getReturnValue().getType())) {
@@ -826,14 +824,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
-            if (settings.isContextClientMethodParameter()) {
-                if (CoreUtils.isNullOrEmpty(argumentList)) {
-                    // If there are no arguments the argument is Context.NONE
-                    argumentList = "Context.NONE";
-                } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
-                    // If the arguments don't contain Context append Context.NONE
-                    argumentList += ", Context.NONE";
-                }
+            if (CoreUtils.isNullOrEmpty(argumentList)) {
+                // If there are no arguments the argument is Context.NONE
+                argumentList = "Context.NONE";
+            } else if (!clientMethod.getParameters().contains(ClientMethodParameter.CONTEXT_PARAMETER)) {
+                // If the arguments don't contain Context append Context.NONE
+                argumentList += ", Context.NONE";
             }
 
             if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
@@ -1028,15 +1024,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.isAddContextParameter()) {
-                if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
-                    function.line(String.format("return %s", serviceMethodCall));
-                } else {
-                    function.line(String.format("return FluxUtil.withContext(context -> %s)",
-                        serviceMethodCall));
-                }
+            if (contextInParameters(clientMethod)) {
+                function.line(String.format("return %s", serviceMethodCall));
             } else {
-                function.line(String.format("return %s",
+                function.line(String.format("return FluxUtil.withContext(context -> %s)",
                     serviceMethodCall));
             }
             function.indent(() -> {
@@ -1158,14 +1149,10 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (settings.isAddContextParameter()) {
-                if (settings.isContextClientMethodParameter() && contextInParameters(clientMethod)) {
-                    function.methodReturn(serviceMethodCall);
-                } else {
-                    function.methodReturn(String.format("FluxUtil.withContext(context -> %s)", serviceMethodCall));
-                }
-            } else {
+            if (contextInParameters(clientMethod)) {
                 function.methodReturn(serviceMethodCall);
+            } else {
+                function.methodReturn(String.format("FluxUtil.withContext(context -> %s)", serviceMethodCall));
             }
         });
     }

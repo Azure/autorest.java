@@ -211,11 +211,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 allParameters.add(requestOptions);
                 parameters.add(requestOptions);
             }
-            if (settings.isAddContextParameter()) {
-                ProxyMethodParameter contextParameter = getContextParameter();
-                allParameters.add(contextParameter);
-                parameters.add(contextParameter);
-            }
+
+            ProxyMethodParameter contextParameter = getContextParameter();
+            allParameters.add(contextParameter);
+            parameters.add(contextParameter);
+
             appendCallbackParameter(parameters, responseBodyType);
             builder.allParameters(allParameters);
             builder.parameters(parameters);

@@ -9,8 +9,6 @@ license-header: MICROSOFT_MIT_SMALL
 required-parameter-client-methods: true
 sync-methods: all
 client-side-validations: true
-add-context-parameter: true
-context-client-method-parameter: true
 polling:
   default:
     strategy: >-
