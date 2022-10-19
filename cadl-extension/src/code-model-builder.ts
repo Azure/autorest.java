@@ -1201,7 +1201,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private isConvenienceMethod(op: OperationDetails) {
+  private isConvenienceMethod(op: HttpOperation) {
     // check @convenienceMethod
     let hasConvenienceMethod =
       hasDecorator(op.operation, "$convenienceMethod") || hasDecorator(op.container, "$convenienceMethod");
