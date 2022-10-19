@@ -2,8 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("Builtin")
-@serviceVersion("1.0.0")
+@service({
+  title: "Builtin",
+  version: "1.0.0",
+})
 namespace Cadl.Builtin;
 
 model Builtin {

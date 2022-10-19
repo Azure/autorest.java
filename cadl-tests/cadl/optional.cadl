@@ -2,8 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("Optional")
-@serviceVersion("1.0.0")
+@service({
+  title: "Optional",
+  version: "1.0.0",
+})
 namespace Cadl.Optional;
 
 model Optional {

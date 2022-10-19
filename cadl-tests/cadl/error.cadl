@@ -4,8 +4,10 @@ import "@azure-tools/cadl-azure-core";
 using Cadl.Http;
 using Azure.Core.Foundations;
 
-@serviceTitle("Error")
-@serviceVersion("1.0.0")
+@service({
+  title: "Error",
+  version: "1.0.0",
+})
 namespace Cadl.ErrorModel;
 
 model Diagnostic {

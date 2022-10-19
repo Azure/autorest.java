@@ -5,8 +5,10 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-@serviceTitle("Odata")
-@serviceVersion("1.0.0")
+@service({
+  title: "Odata",
+  version: "1.0.0",
+})
 namespace Cadl.Odata;
 
 model Resource {

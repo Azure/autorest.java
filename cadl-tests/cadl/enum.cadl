@@ -3,8 +3,10 @@ import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
 
-@serviceTitle("EnumService")
-@serviceVersion("1.0.0")
+@service({
+  title: "EnumService",
+  version: "1.0.0",
+})
 namespace Cadl.EnumService;
 
 enum Color {

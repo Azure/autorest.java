@@ -5,8 +5,10 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-@serviceTitle("Response")
-@serviceVersion("1.0.0")
+@service({
+  title: "Response",
+  version: "1.0.0",
+})
 namespace Cadl.Response;
 
 model Resource {

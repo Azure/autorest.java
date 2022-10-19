@@ -5,8 +5,10 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-@serviceTitle("Paged")
-@serviceVersion("1.0.0")
+@service({
+  title: "Paged",
+  version: "1.0.0",
+})
 namespace Cadl.Paged;
 
 model Resource {

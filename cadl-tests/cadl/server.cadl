@@ -2,8 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("Server")
-@serviceVersion("1.0.0")
+@service({
+  title: "Server",
+  version: "1.0.0",
+})
 @server(
   "https://{domain}.{tld}",
   "Httpbin endpoint",
