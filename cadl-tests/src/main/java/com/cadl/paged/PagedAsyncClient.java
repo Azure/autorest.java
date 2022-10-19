@@ -71,7 +71,7 @@ public final class PagedAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Resource> list() {
+    public PagedFlux<Resource> listConvenience() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         return list(requestOptions).mapPage(protocolMethodData -> protocolMethodData.toObject(Resource.class));
