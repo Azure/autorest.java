@@ -40,7 +40,6 @@ import {
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
-  getAllRoutes,
   getAuthentication,
   getHeaderFieldName,
   getPathParamName,
@@ -51,9 +50,10 @@ import {
   HttpOperationResponse,
   HttpServer,
   isStatusCode,
-  OperationDetails,
+  HttpOperation,
   ServiceAuthentication,
   StatusCode,
+  getAllHttpServices,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { fail } from "assert";
@@ -181,7 +181,9 @@ export class CodeModelBuilder {
   }
 
   public build(): CodeModel {
-    ignoreDiagnostics(getAllRoutes(this.program)).map((it) => this.processRoute(it));
+    ignoreDiagnostics(getAllHttpServices(this.program)).map((service) =>
+      service.operations.map((it) => this.processRoute(it)),
+    );
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -268,7 +270,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRoute(op: OperationDetails) {
+  private processRoute(op: HttpOperation) {
     const groupName = op.container.name;
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const opId = `${groupName}_${op.operation.name}`;
