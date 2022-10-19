@@ -5,8 +5,10 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-@serviceTitle("LongRunning")
-@serviceVersion("1.0.0")
+@service({
+  title: "LongRunning",
+  version: "1.0.0",
+})
 namespace Cadl.LongRunning;
 
 model Resource {

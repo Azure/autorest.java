@@ -6,8 +6,10 @@ using Cadl.Rest;
 using Azure.Core;
 using Azure.Core.Foundations;
 
-@serviceTitle("SpecialHeaders")
-@serviceVersion("1.0.0")
+@service({
+  title: "SpecialHeaders",
+  version: "1.0.0",
+})
 namespace Cadl.SpecialHeaders;
 
 model Resource {

@@ -2,8 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("Auth")
-@serviceVersion("1.0.0")
+@service({
+  title: "Auth",
+  version: "1.0.0",
+})
 @useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
 namespace Cadl.Auth;
 

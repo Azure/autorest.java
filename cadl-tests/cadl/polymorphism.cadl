@@ -3,8 +3,10 @@ import "@cadl-lang/rest";
 using Cadl.Http;
 using Cadl.Rest;
 
-@serviceTitle("Polymorphism")
-@serviceVersion("1.0.0")
+@service({
+  title: "Polymorphism",
+  version: "1.0.0",
+})
 namespace Cadl.Polymorphism;
 
 // discriminator
