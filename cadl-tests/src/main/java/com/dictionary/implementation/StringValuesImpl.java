@@ -68,7 +68,7 @@ public final class StringValuesImpl {
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/dictionary/string")
-        @ExpectedResponses({200})
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})

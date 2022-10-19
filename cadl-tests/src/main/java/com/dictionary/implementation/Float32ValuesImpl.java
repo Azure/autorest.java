@@ -68,7 +68,7 @@ public final class Float32ValuesImpl {
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/dictionary/float32")
-        @ExpectedResponses({200})
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
