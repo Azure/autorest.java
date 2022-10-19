@@ -45,7 +45,7 @@ public final class SpecialHeaderClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-specialheader.properties");
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-specialheader.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

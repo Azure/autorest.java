@@ -45,7 +45,7 @@ public final class AdditionalPropertiesClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = new HashMap<>();
+    @Generated private static final Map<String, String> properties = new HashMap<>();
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

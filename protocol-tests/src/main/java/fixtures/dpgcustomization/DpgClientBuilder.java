@@ -44,7 +44,8 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-dpgcustomization.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("fixtures-dpgcustomization.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

@@ -49,7 +49,8 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-url-multi.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-url-multi.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

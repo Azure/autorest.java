@@ -46,7 +46,8 @@ public final class AutoRestPagingTestServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-paging.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-paging.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

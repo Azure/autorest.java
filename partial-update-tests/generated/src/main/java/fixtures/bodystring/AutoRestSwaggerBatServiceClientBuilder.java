@@ -53,7 +53,8 @@ public final class AutoRestSwaggerBatServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodystring.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodystring.properties");
 
     /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
     @Generated

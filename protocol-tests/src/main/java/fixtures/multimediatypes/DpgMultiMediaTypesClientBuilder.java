@@ -45,7 +45,8 @@ public final class DpgMultiMediaTypesClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-multimediatypes.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("fixtures-multimediatypes.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

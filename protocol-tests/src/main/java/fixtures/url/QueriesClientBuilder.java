@@ -44,7 +44,7 @@ public final class QueriesClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-url.properties");
+    @Generated private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-url.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

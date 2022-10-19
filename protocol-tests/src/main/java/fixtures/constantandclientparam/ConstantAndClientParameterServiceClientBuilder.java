@@ -50,7 +50,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties =
+    private static final Map<String, String> properties =
             CoreUtils.getProperties("fixtures-constantandclientparam.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;

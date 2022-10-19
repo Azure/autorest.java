@@ -45,7 +45,8 @@ public final class HttpRedirectsClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-httpinfrastructure.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("fixtures-httpinfrastructure.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

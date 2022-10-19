@@ -48,7 +48,8 @@ public final class ParmaterizedEndpointClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-parameterizedendpoint.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("fixtures-parameterizedendpoint.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

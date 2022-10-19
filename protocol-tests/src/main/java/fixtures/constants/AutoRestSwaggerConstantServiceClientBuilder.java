@@ -46,7 +46,8 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-constants.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-constants.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

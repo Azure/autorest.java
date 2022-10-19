@@ -45,7 +45,7 @@ public final class PrimitiveClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodycomplex.properties");
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodycomplex.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

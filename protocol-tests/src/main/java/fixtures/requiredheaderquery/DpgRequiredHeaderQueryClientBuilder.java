@@ -46,7 +46,8 @@ public final class DpgRequiredHeaderQueryClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-requiredheaderquery.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("fixtures-requiredheaderquery.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

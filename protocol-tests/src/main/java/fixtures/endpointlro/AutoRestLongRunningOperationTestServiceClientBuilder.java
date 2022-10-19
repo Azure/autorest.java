@@ -52,7 +52,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("fixtures-endpointlro.properties");
+    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-endpointlro.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
