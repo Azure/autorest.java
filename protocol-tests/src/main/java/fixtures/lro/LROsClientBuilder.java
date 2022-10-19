@@ -43,7 +43,7 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-lro.properties");
+    @Generated private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-lro.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

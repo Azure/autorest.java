@@ -56,7 +56,7 @@ public final class AutorestSecurityInfoBuilder
 
     @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://atlas.microsoft.com/.default"};
 
-    @Generated private static final Map<String, String> properties = new HashMap<>();
+    @Generated private static final Map<String, String> PROPERTIES = new HashMap<>();
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

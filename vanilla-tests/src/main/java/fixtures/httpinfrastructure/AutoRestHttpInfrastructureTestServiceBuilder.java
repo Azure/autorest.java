@@ -46,7 +46,7 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> properties = new HashMap<>();
+    @Generated private static final Map<String, String> PROPERTIES = new HashMap<>();
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

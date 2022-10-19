@@ -53,9 +53,6 @@ public final class AutoRestSwaggerBatServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated
-    private static final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodystring.properties");
-
     /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
     @Generated
     public AutoRestSwaggerBatServiceClientBuilder() {
@@ -286,6 +283,9 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     public EnumClient buildEnumClient() {
         return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
     }
+
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-bodystring.properties");
 
     /*
      * The retry options to configure retry policy for failed requests.
