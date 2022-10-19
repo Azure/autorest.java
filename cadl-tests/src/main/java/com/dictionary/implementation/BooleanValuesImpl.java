@@ -68,7 +68,7 @@ public final class BooleanValuesImpl {
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/dictionary/boolean")
-        @ExpectedResponses({200})
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
