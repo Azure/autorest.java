@@ -116,6 +116,53 @@ public final class Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getEmptyWithResponseAsync(
+            String vault, String secret, String keyName, String keyVersion, Context context) {
+        if (vault == null) {
+            return Mono.error(new IllegalArgumentException("Parameter vault is required and cannot be null."));
+        }
+        if (secret == null) {
+            return Mono.error(new IllegalArgumentException("Parameter secret is required and cannot be null."));
+        }
+        if (this.client.getDnsSuffix() == null) {
+            return Mono.error(
+                    new IllegalArgumentException(
+                            "Parameter this.client.getDnsSuffix() is required and cannot be null."));
+        }
+        if (keyName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono.error(
+                    new IllegalArgumentException(
+                            "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmpty(
+                vault,
+                secret,
+                this.client.getDnsSuffix(),
+                keyName,
+                this.client.getSubscriptionId(),
+                keyVersion,
+                accept,
+                context);
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -150,14 +197,34 @@ public final class Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, Context context) {
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault.
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getEmptyWithResponse(String vault, String secret, String keyName, String keyVersion) {
-        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion).block();
+    public Response<Void> getEmptyWithResponse(
+            String vault, String secret, String keyName, String keyVersion, Context context) {
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion, context).block();
     }
 
     /**
@@ -173,7 +240,7 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyWithResponse(vault, secret, keyName, keyVersion);
+        getEmptyWithResponse(vault, secret, keyName, keyVersion, Context.NONE);
     }
 
     /**
@@ -189,6 +256,6 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String vault, String secret, String keyName) {
         final String keyVersion = null;
-        getEmptyWithResponse(vault, secret, keyName, keyVersion);
+        getEmptyWithResponse(vault, secret, keyName, keyVersion, Context.NONE);
     }
 }

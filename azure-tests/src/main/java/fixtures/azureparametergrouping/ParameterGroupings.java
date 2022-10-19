@@ -159,6 +159,38 @@ public final class ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postRequiredWithResponseAsync(
+            ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (parameterGroupingPostRequiredParameters == null) {
+            return Mono.error(
+                    new IllegalArgumentException(
+                            "Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
+        } else {
+            parameterGroupingPostRequiredParameters.validate();
+        }
+        final String accept = "application/json";
+        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        Integer query = parameterGroupingPostRequiredParameters.getQuery();
+        String path = parameterGroupingPostRequiredParameters.getPath();
+        int body = parameterGroupingPostRequiredParameters.getBody();
+        return service.postRequired(this.client.getHost(), customHeader, query, path, body, accept, context);
+    }
+
+    /**
+     * Post a bunch of required parameters grouped.
+     *
+     * @param parameterGroupingPostRequiredParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -174,6 +206,24 @@ public final class ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postRequiredAsync(
+            ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, Context context) {
+        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Post a bunch of required parameters grouped.
+     *
+     * @param parameterGroupingPostRequiredParameters Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -181,8 +231,8 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postRequiredWithResponse(
-            ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters).block();
+            ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, Context context) {
+        return postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters, context).block();
     }
 
     /**
@@ -195,7 +245,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        postRequiredWithResponse(parameterGroupingPostRequiredParameters);
+        postRequiredWithResponse(parameterGroupingPostRequiredParameters, Context.NONE);
     }
 
     /**
@@ -236,6 +286,40 @@ public final class ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postOptionalWithResponseAsync(
+            ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (parameterGroupingPostOptionalParameters != null) {
+            parameterGroupingPostOptionalParameters.validate();
+        }
+        final String accept = "application/json";
+        String customHeaderInternal = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeaderInternal = parameterGroupingPostOptionalParameters.getCustomHeader();
+        }
+        String customHeader = customHeaderInternal;
+        Integer queryInternal = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            queryInternal = parameterGroupingPostOptionalParameters.getQuery();
+        }
+        Integer query = queryInternal;
+        return service.postOptional(this.client.getHost(), customHeader, query, accept, context);
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param parameterGroupingPostOptionalParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -264,6 +348,24 @@ public final class ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postOptionalAsync(
+            ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, Context context) {
+        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param parameterGroupingPostOptionalParameters Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -271,8 +373,8 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postOptionalWithResponse(
-            ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters).block();
+            ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, Context context) {
+        return postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters, context).block();
     }
 
     /**
@@ -285,7 +387,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        postOptionalWithResponse(parameterGroupingPostOptionalParameters);
+        postOptionalWithResponse(parameterGroupingPostOptionalParameters, Context.NONE);
     }
 
     /**
@@ -297,7 +399,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postOptional() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
-        postOptionalWithResponse(parameterGroupingPostOptionalParameters);
+        postOptionalWithResponse(parameterGroupingPostOptionalParameters, Context.NONE);
     }
 
     /**
@@ -338,6 +440,41 @@ public final class ParameterGroupings {
      * Post a grouped parameters with reserved words.
      *
      * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postReservedWordsWithResponseAsync(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters,
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            parameterGroupingPostReservedWordsParameters.validate();
+        }
+        final String acceptParam = "application/json";
+        String fromInternal = null;
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            fromInternal = parameterGroupingPostReservedWordsParameters.getFrom();
+        }
+        String from = fromInternal;
+        String acceptInternal = null;
+        if (parameterGroupingPostReservedWordsParameters != null) {
+            acceptInternal = parameterGroupingPostReservedWordsParameters.getAccept();
+        }
+        String accept = acceptInternal;
+        return service.postReservedWords(this.client.getHost(), from, accept, acceptParam, context);
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -368,6 +505,25 @@ public final class ParameterGroupings {
      * Post a grouped parameters with reserved words.
      *
      * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postReservedWordsAsync(
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters,
+            Context context) {
+        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Post a grouped parameters with reserved words.
+     *
+     * @param parameterGroupingPostReservedWordsParameters Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -375,8 +531,9 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postReservedWordsWithResponse(
-            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
-        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters).block();
+            ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters,
+            Context context) {
+        return postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters, context).block();
     }
 
     /**
@@ -390,7 +547,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postReservedWords(
             ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
-        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters);
+        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters, Context.NONE);
     }
 
     /**
@@ -402,7 +559,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postReservedWords() {
         final ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null;
-        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters);
+        postReservedWordsWithResponse(parameterGroupingPostReservedWordsParameters, Context.NONE);
     }
 
     /**
@@ -462,6 +619,57 @@ public final class ParameterGroupings {
      *
      * @param firstParameterGroup Parameter group.
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postMultiParamGroupsWithResponseAsync(
+            FirstParameterGroup firstParameterGroup,
+            ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup,
+            Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (firstParameterGroup != null) {
+            firstParameterGroup.validate();
+        }
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            parameterGroupingPostMultiParamGroupsSecondParamGroup.validate();
+        }
+        final String accept = "application/json";
+        String headerOneInternal = null;
+        if (firstParameterGroup != null) {
+            headerOneInternal = firstParameterGroup.getHeaderOne();
+        }
+        String headerOne = headerOneInternal;
+        Integer queryOneInternal = null;
+        if (firstParameterGroup != null) {
+            queryOneInternal = firstParameterGroup.getQueryOne();
+        }
+        Integer queryOne = queryOneInternal;
+        String headerTwoInternal = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwoInternal = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+        }
+        String headerTwo = headerTwoInternal;
+        Integer queryTwoInternal = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            queryTwoInternal = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
+        }
+        Integer queryTwo = queryTwoInternal;
+        return service.postMultiParamGroups(
+                this.client.getHost(), headerOne, queryOne, headerTwo, queryTwo, accept, context);
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param firstParameterGroup Parameter group.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -499,6 +707,28 @@ public final class ParameterGroupings {
      *
      * @param firstParameterGroup Parameter group.
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postMultiParamGroupsAsync(
+            FirstParameterGroup firstParameterGroup,
+            ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup,
+            Context context) {
+        return postMultiParamGroupsWithResponseAsync(
+                        firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param firstParameterGroup Parameter group.
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -507,10 +737,10 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postMultiParamGroupsWithResponse(
             FirstParameterGroup firstParameterGroup,
-            ParameterGroupingPostMultiParamGroupsSecondParamGroup
-                    parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+            ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup,
+            Context context) {
         return postMultiParamGroupsWithResponseAsync(
-                        firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
+                        firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, context)
                 .block();
     }
 
@@ -528,7 +758,8 @@ public final class ParameterGroupings {
             FirstParameterGroup firstParameterGroup,
             ParameterGroupingPostMultiParamGroupsSecondParamGroup
                     parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsWithResponse(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
+        postMultiParamGroupsWithResponse(
+                firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, Context.NONE);
     }
 
     /**
@@ -542,7 +773,8 @@ public final class ParameterGroupings {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup
                 parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
-        postMultiParamGroupsWithResponse(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup);
+        postMultiParamGroupsWithResponse(
+                firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, Context.NONE);
     }
 
     /**
@@ -585,6 +817,40 @@ public final class ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postSharedParameterGroupObjectWithResponseAsync(
+            FirstParameterGroup firstParameterGroup, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (firstParameterGroup != null) {
+            firstParameterGroup.validate();
+        }
+        final String accept = "application/json";
+        String headerOneInternal = null;
+        if (firstParameterGroup != null) {
+            headerOneInternal = firstParameterGroup.getHeaderOne();
+        }
+        String headerOne = headerOneInternal;
+        Integer queryOneInternal = null;
+        if (firstParameterGroup != null) {
+            queryOneInternal = firstParameterGroup.getQueryOne();
+        }
+        Integer queryOne = queryOneInternal;
+        return service.postSharedParameterGroupObject(this.client.getHost(), headerOne, queryOne, accept, context);
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param firstParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -612,14 +878,32 @@ public final class ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, Context context) {
+        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param firstParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> postSharedParameterGroupObjectWithResponse(FirstParameterGroup firstParameterGroup) {
-        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup).block();
+    public Response<Void> postSharedParameterGroupObjectWithResponse(
+            FirstParameterGroup firstParameterGroup, Context context) {
+        return postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup, context).block();
     }
 
     /**
@@ -632,7 +916,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
-        postSharedParameterGroupObjectWithResponse(firstParameterGroup);
+        postSharedParameterGroupObjectWithResponse(firstParameterGroup, Context.NONE);
     }
 
     /**
@@ -644,7 +928,7 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void postSharedParameterGroupObject() {
         final FirstParameterGroup firstParameterGroup = null;
-        postSharedParameterGroupObjectWithResponse(firstParameterGroup);
+        postSharedParameterGroupObjectWithResponse(firstParameterGroup, Context.NONE);
     }
 
     /**
@@ -682,6 +966,35 @@ public final class ParameterGroupings {
      * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
      *
      * @param grouper Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> groupWithConstantWithResponseAsync(Grouper grouper, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (grouper != null) {
+            grouper.validate();
+        }
+        final String groupedConstant = "foo";
+        final String accept = "application/json";
+        String groupedParameterInternal = null;
+        if (grouper != null) {
+            groupedParameterInternal = grouper.getGroupedParameter();
+        }
+        String groupedParameter = groupedParameterInternal;
+        return service.groupWithConstant(this.client.getHost(), groupedConstant, groupedParameter, accept, context);
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -709,14 +1022,30 @@ public final class ParameterGroupings {
      * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
      *
      * @param grouper Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> groupWithConstantAsync(Grouper grouper, Context context) {
+        return groupWithConstantWithResponseAsync(grouper, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
+     *
+     * @param grouper Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> groupWithConstantWithResponse(Grouper grouper) {
-        return groupWithConstantWithResponseAsync(grouper).block();
+    public Response<Void> groupWithConstantWithResponse(Grouper grouper, Context context) {
+        return groupWithConstantWithResponseAsync(grouper, context).block();
     }
 
     /**
@@ -729,7 +1058,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void groupWithConstant(Grouper grouper) {
-        groupWithConstantWithResponse(grouper);
+        groupWithConstantWithResponse(grouper, Context.NONE);
     }
 
     /**
@@ -741,6 +1070,6 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void groupWithConstant() {
         final Grouper grouper = null;
-        groupWithConstantWithResponse(grouper);
+        groupWithConstantWithResponse(grouper, Context.NONE);
     }
 }

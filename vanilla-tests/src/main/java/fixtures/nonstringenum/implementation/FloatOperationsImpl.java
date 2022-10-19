@@ -88,6 +88,26 @@ public final class FloatOperationsImpl {
      * Put a float enum.
      *
      * @param input Input float enum.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putWithResponseAsync(FloatEnum input, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.put(this.client.getHost(), input, accept, context);
+    }
+
+    /**
+     * Put a float enum.
+     *
+     * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -115,14 +135,30 @@ public final class FloatOperationsImpl {
      * Put a float enum.
      *
      * @param input Input float enum.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putAsync(FloatEnum input, Context context) {
+        return putWithResponseAsync(input, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a float enum.
+     *
+     * @param input Input float enum.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putWithResponse(FloatEnum input) {
-        return putWithResponseAsync(input).block();
+    public Response<String> putWithResponse(FloatEnum input, Context context) {
+        return putWithResponseAsync(input, context).block();
     }
 
     /**
@@ -136,7 +172,7 @@ public final class FloatOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put(FloatEnum input) {
-        return putWithResponse(input).getValue();
+        return putWithResponse(input, Context.NONE).getValue();
     }
 
     /**
@@ -149,7 +185,7 @@ public final class FloatOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String put() {
         final FloatEnum input = null;
-        return putWithResponse(input).getValue();
+        return putWithResponse(input, Context.NONE).getValue();
     }
 
     /**
@@ -172,6 +208,25 @@ public final class FloatOperationsImpl {
     /**
      * Get a float enum.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a float enum along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<FloatEnum>> getWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a float enum.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum on successful completion of {@link Mono}.
@@ -184,13 +239,29 @@ public final class FloatOperationsImpl {
     /**
      * Get a float enum.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a float enum on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<FloatEnum> getAsync(Context context) {
+        return getWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a float enum.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatEnum> getWithResponse() {
-        return getWithResponseAsync().block();
+    public Response<FloatEnum> getWithResponse(Context context) {
+        return getWithResponseAsync(context).block();
     }
 
     /**
@@ -202,6 +273,6 @@ public final class FloatOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatEnum get() {
-        return getWithResponse().getValue();
+        return getWithResponse(Context.NONE).getValue();
     }
 }

@@ -94,6 +94,29 @@ public final class Pets {
      * get pet by id.
      *
      * @param petId Pet id.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return pet by id along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (petId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByPetId(this.client.getHost(), petId, accept, context);
+    }
+
+    /**
+     * get pet by id.
+     *
+     * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -108,14 +131,30 @@ public final class Pets {
      * get pet by id.
      *
      * @param petId Pet id.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return pet by id on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Pet> getByPetIdAsync(String petId, Context context) {
+        return getByPetIdWithResponseAsync(petId, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * get pet by id.
+     *
+     * @param petId Pet id.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return pet by id along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Pet> getByPetIdWithResponse(String petId) {
-        return getByPetIdWithResponseAsync(petId).block();
+    public Response<Pet> getByPetIdWithResponse(String petId, Context context) {
+        return getByPetIdWithResponseAsync(petId, context).block();
     }
 
     /**
@@ -129,7 +168,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getByPetId(String petId) {
-        return getByPetIdWithResponse(petId).getValue();
+        return getByPetIdWithResponse(petId, Context.NONE).getValue();
     }
 
     /**
@@ -152,6 +191,29 @@ public final class Pets {
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.addPet(this.client.getHost(), petParam, accept, context));
+    }
+
+    /**
+     * add pet.
+     *
+     * @param petParam pet param.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Pet>> addPetWithResponseAsync(Pet petParam, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (petParam != null) {
+            petParam.validate();
+        }
+        final String accept = "application/json";
+        return service.addPet(this.client.getHost(), petParam, accept, context);
     }
 
     /**
@@ -185,14 +247,30 @@ public final class Pets {
      * add pet.
      *
      * @param petParam pet param.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Pet> addPetAsync(Pet petParam, Context context) {
+        return addPetWithResponseAsync(petParam, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * add pet.
+     *
+     * @param petParam pet param.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Pet> addPetWithResponse(Pet petParam) {
-        return addPetWithResponseAsync(petParam).block();
+    public Response<Pet> addPetWithResponse(Pet petParam, Context context) {
+        return addPetWithResponseAsync(petParam, context).block();
     }
 
     /**
@@ -206,7 +284,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet(Pet petParam) {
-        return addPetWithResponse(petParam).getValue();
+        return addPetWithResponse(petParam, Context.NONE).getValue();
     }
 
     /**
@@ -219,6 +297,6 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet() {
         final Pet petParam = null;
-        return addPetWithResponse(petParam).getValue();
+        return addPetWithResponse(petParam, Context.NONE).getValue();
     }
 }

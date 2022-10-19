@@ -9,6 +9,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Context;
 import fixtures.nonstringenum.implementation.FloatOperationsImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 
@@ -30,6 +31,7 @@ public final class FloatOperationClient {
      * Put a float enum.
      *
      * @param input Input float enum.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -37,8 +39,8 @@ public final class FloatOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putWithResponse(FloatEnum input) {
-        return this.serviceClient.putWithResponse(input);
+    public Response<String> putWithResponse(FloatEnum input, Context context) {
+        return this.serviceClient.putWithResponse(input, context);
     }
 
     /**
@@ -72,14 +74,16 @@ public final class FloatOperationClient {
     /**
      * Get a float enum.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatEnum> getWithResponse() {
-        return this.serviceClient.getWithResponse();
+    public Response<FloatEnum> getWithResponse(Context context) {
+        return this.serviceClient.getWithResponse(context);
     }
 
     /**

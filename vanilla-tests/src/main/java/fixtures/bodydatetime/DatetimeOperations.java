@@ -240,6 +240,25 @@ public final class DatetimeOperations {
     /**
      * Get null datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null datetime value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null datetime value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value on successful completion of {@link Mono}.
@@ -252,13 +271,29 @@ public final class DatetimeOperations {
     /**
      * Get null datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null datetime value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null datetime value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null datetime value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<OffsetDateTime> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -270,7 +305,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -293,6 +328,25 @@ public final class DatetimeOperations {
     /**
      * Get invalid datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid datetime value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid datetime value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value on successful completion of {@link Mono}.
@@ -305,13 +359,29 @@ public final class DatetimeOperations {
     /**
      * Get invalid datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid datetime value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid datetime value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<OffsetDateTime> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -323,7 +393,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalid() {
-        return getInvalidWithResponse().getValue();
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -346,6 +416,25 @@ public final class DatetimeOperations {
     /**
      * Get overflow datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow datetime value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getOverflowWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getOverflow(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get overflow datetime value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value on successful completion of {@link Mono}.
@@ -358,13 +447,29 @@ public final class DatetimeOperations {
     /**
      * Get overflow datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow datetime value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getOverflowAsync(Context context) {
+        return getOverflowWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow datetime value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getOverflowWithResponse() {
-        return getOverflowWithResponseAsync().block();
+    public Response<OffsetDateTime> getOverflowWithResponse(Context context) {
+        return getOverflowWithResponseAsync(context).block();
     }
 
     /**
@@ -376,7 +481,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getOverflow() {
-        return getOverflowWithResponse().getValue();
+        return getOverflowWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -399,6 +504,25 @@ public final class DatetimeOperations {
     /**
      * Get underflow datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow datetime value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUnderflowWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUnderflow(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get underflow datetime value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value on successful completion of {@link Mono}.
@@ -411,13 +535,29 @@ public final class DatetimeOperations {
     /**
      * Get underflow datetime value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow datetime value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUnderflowAsync(Context context) {
+        return getUnderflowWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow datetime value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUnderflowWithResponse() {
-        return getUnderflowWithResponseAsync().block();
+    public Response<OffsetDateTime> getUnderflowWithResponse(Context context) {
+        return getUnderflowWithResponseAsync(context).block();
     }
 
     /**
@@ -429,7 +569,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnderflow() {
-        return getUnderflowWithResponse().getValue();
+        return getUnderflowWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -459,6 +599,29 @@ public final class DatetimeOperations {
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putUtcMaxDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.999Z.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -473,14 +636,30 @@ public final class DatetimeOperations {
      * Put max datetime value 9999-12-31T23:59:59.999Z.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUtcMaxDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMaxDateTimeWithResponseAsync(datetimeBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.999Z.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putUtcMaxDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putUtcMaxDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putUtcMaxDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMaxDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -493,7 +672,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMaxDateTime(OffsetDateTime datetimeBody) {
-        putUtcMaxDateTimeWithResponse(datetimeBody);
+        putUtcMaxDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -527,6 +706,32 @@ public final class DatetimeOperations {
      * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUtcMaxDateTime7DigitsWithResponseAsync(
+            OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putUtcMaxDateTime7Digits(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -543,14 +748,32 @@ public final class DatetimeOperations {
      * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUtcMaxDateTime7DigitsAsync(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMaxDateTime7DigitsWithResponseAsync(datetimeBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putUtcMaxDateTime7DigitsWithResponse(OffsetDateTime datetimeBody) {
-        return putUtcMaxDateTime7DigitsWithResponseAsync(datetimeBody).block();
+    public Response<Void> putUtcMaxDateTime7DigitsWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMaxDateTime7DigitsWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -565,7 +788,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMaxDateTime7Digits(OffsetDateTime datetimeBody) {
-        putUtcMaxDateTime7DigitsWithResponse(datetimeBody);
+        putUtcMaxDateTime7DigitsWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -590,6 +813,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31t23:59:59.999z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUtcLowercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.999z.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value 9999-12-31t23:59:59.999z on successful completion of {@link Mono}.
@@ -602,13 +845,29 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31t23:59:59.999z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value 9999-12-31t23:59:59.999z on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync(Context context) {
+        return getUtcLowercaseMaxDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.999z.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUtcLowercaseMaxDateTimeWithResponse() {
-        return getUtcLowercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getUtcLowercaseMaxDateTimeWithResponse(Context context) {
+        return getUtcLowercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -620,7 +879,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeWithResponse().getValue();
+        return getUtcLowercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -645,6 +904,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31T23:59:59.999Z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUtcUppercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.999Z.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value 9999-12-31T23:59:59.999Z on successful completion of {@link Mono}.
@@ -657,13 +936,29 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31T23:59:59.999Z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value 9999-12-31T23:59:59.999Z on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync(Context context) {
+        return getUtcUppercaseMaxDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.999Z.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUtcUppercaseMaxDateTimeWithResponse() {
-        return getUtcUppercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getUtcUppercaseMaxDateTimeWithResponse(Context context) {
+        return getUtcUppercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -675,7 +970,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeWithResponse().getValue();
+        return getUtcUppercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -703,6 +998,27 @@ public final class DatetimeOperations {
      *
      * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7DigitsWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUtcUppercaseMaxDateTime7Digits(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -717,13 +1033,32 @@ public final class DatetimeOperations {
      *
      * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsAsync(Context context) {
+        return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
+     *
+     * <p>This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsWithResponse() {
-        return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync().block();
+    public Response<OffsetDateTime> getUtcUppercaseMaxDateTime7DigitsWithResponse(Context context) {
+        return getUtcUppercaseMaxDateTime7DigitsWithResponseAsync(context).block();
     }
 
     /**
@@ -737,7 +1072,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime7Digits() {
-        return getUtcUppercaseMaxDateTime7DigitsWithResponse().getValue();
+        return getUtcUppercaseMaxDateTime7DigitsWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -769,6 +1104,30 @@ public final class DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLocalPositiveOffsetMaxDateTimeWithResponseAsync(
+            OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLocalPositiveOffsetMaxDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -783,14 +1142,31 @@ public final class DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLocalPositiveOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putLocalPositiveOffsetMaxDateTimeWithResponseAsync(datetimeBody, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLocalPositiveOffsetMaxDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putLocalPositiveOffsetMaxDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putLocalPositiveOffsetMaxDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putLocalPositiveOffsetMaxDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -803,7 +1179,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLocalPositiveOffsetMaxDateTime(OffsetDateTime datetimeBody) {
-        putLocalPositiveOffsetMaxDateTimeWithResponse(datetimeBody);
+        putLocalPositiveOffsetMaxDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -828,6 +1204,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalPositiveOffsetLowercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of
@@ -842,13 +1238,31 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(Context context) {
+        return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponse() {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponse(Context context) {
+        return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -860,7 +1274,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponse().getValue();
+        return getLocalPositiveOffsetLowercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -885,6 +1299,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalPositiveOffsetUppercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of
@@ -899,13 +1333,31 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(Context context) {
+        return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponse() {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponse(Context context) {
+        return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -917,7 +1369,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponse().getValue();
+        return getLocalPositiveOffsetUppercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -949,6 +1401,30 @@ public final class DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLocalNegativeOffsetMaxDateTimeWithResponseAsync(
+            OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLocalNegativeOffsetMaxDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -963,14 +1439,31 @@ public final class DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLocalNegativeOffsetMaxDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putLocalNegativeOffsetMaxDateTimeWithResponseAsync(datetimeBody, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLocalNegativeOffsetMaxDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putLocalNegativeOffsetMaxDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putLocalNegativeOffsetMaxDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putLocalNegativeOffsetMaxDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -983,7 +1476,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLocalNegativeOffsetMaxDateTime(OffsetDateTime datetimeBody) {
-        putLocalNegativeOffsetMaxDateTimeWithResponse(datetimeBody);
+        putLocalNegativeOffsetMaxDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -1008,6 +1501,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalNegativeOffsetUppercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of
@@ -1022,13 +1535,31 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(Context context) {
+        return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponse() {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponse(Context context) {
+        return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1040,7 +1571,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponse().getValue();
+        return getLocalNegativeOffsetUppercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1065,6 +1596,26 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalNegativeOffsetLowercaseMaxDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of
@@ -1079,13 +1630,31 @@ public final class DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(Context context) {
+        return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponse() {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponse(Context context) {
+        return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1097,7 +1666,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponse().getValue();
+        return getLocalNegativeOffsetLowercaseMaxDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1127,6 +1696,29 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putUtcMinDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1141,14 +1733,30 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUtcMinDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMinDateTimeWithResponseAsync(datetimeBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putUtcMinDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putUtcMinDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putUtcMinDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putUtcMinDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -1161,7 +1769,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMinDateTime(OffsetDateTime datetimeBody) {
-        putUtcMinDateTimeWithResponse(datetimeBody);
+        putUtcMinDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -1185,6 +1793,26 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUtcMinDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00Z on successful completion of {@link Mono}.
@@ -1197,13 +1825,29 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00Z on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUtcMinDateTimeAsync(Context context) {
+        return getUtcMinDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUtcMinDateTimeWithResponse() {
-        return getUtcMinDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getUtcMinDateTimeWithResponse(Context context) {
+        return getUtcMinDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1215,7 +1859,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeWithResponse().getValue();
+        return getUtcMinDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1247,6 +1891,30 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLocalPositiveOffsetMinDateTimeWithResponseAsync(
+            OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLocalPositiveOffsetMinDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1261,14 +1929,31 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLocalPositiveOffsetMinDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putLocalPositiveOffsetMinDateTimeWithResponseAsync(datetimeBody, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLocalPositiveOffsetMinDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putLocalPositiveOffsetMinDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putLocalPositiveOffsetMinDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putLocalPositiveOffsetMinDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -1281,7 +1966,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLocalPositiveOffsetMinDateTime(OffsetDateTime datetimeBody) {
-        putLocalPositiveOffsetMinDateTimeWithResponse(datetimeBody);
+        putLocalPositiveOffsetMinDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -1306,6 +1991,26 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalPositiveOffsetMinDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00+14:00 on successful completion of {@link Mono}.
@@ -1318,13 +2023,30 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00+14:00 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync(Context context) {
+        return getLocalPositiveOffsetMinDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalPositiveOffsetMinDateTimeWithResponse() {
-        return getLocalPositiveOffsetMinDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalPositiveOffsetMinDateTimeWithResponse(Context context) {
+        return getLocalPositiveOffsetMinDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1336,7 +2058,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalPositiveOffsetMinDateTime() {
-        return getLocalPositiveOffsetMinDateTimeWithResponse().getValue();
+        return getLocalPositiveOffsetMinDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1368,6 +2090,30 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLocalNegativeOffsetMinDateTimeWithResponseAsync(
+            OffsetDateTime datetimeBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (datetimeBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putLocalNegativeOffsetMinDateTime(this.client.getHost(), datetimeBody, accept, context);
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @param datetimeBody datetime body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1382,14 +2128,31 @@ public final class DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLocalNegativeOffsetMinDateTimeAsync(OffsetDateTime datetimeBody, Context context) {
+        return putLocalNegativeOffsetMinDateTimeWithResponseAsync(datetimeBody, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @param datetimeBody datetime body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLocalNegativeOffsetMinDateTimeWithResponse(OffsetDateTime datetimeBody) {
-        return putLocalNegativeOffsetMinDateTimeWithResponseAsync(datetimeBody).block();
+    public Response<Void> putLocalNegativeOffsetMinDateTimeWithResponse(OffsetDateTime datetimeBody, Context context) {
+        return putLocalNegativeOffsetMinDateTimeWithResponseAsync(datetimeBody, context).block();
     }
 
     /**
@@ -1402,7 +2165,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLocalNegativeOffsetMinDateTime(OffsetDateTime datetimeBody) {
-        putLocalNegativeOffsetMinDateTimeWithResponse(datetimeBody);
+        putLocalNegativeOffsetMinDateTimeWithResponse(datetimeBody, Context.NONE);
     }
 
     /**
@@ -1427,6 +2190,26 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalNegativeOffsetMinDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00-14:00 on successful completion of {@link Mono}.
@@ -1439,13 +2222,30 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00-14:00 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync(Context context) {
+        return getLocalNegativeOffsetMinDateTimeWithResponseAsync(context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalNegativeOffsetMinDateTimeWithResponse() {
-        return getLocalNegativeOffsetMinDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalNegativeOffsetMinDateTimeWithResponse(Context context) {
+        return getLocalNegativeOffsetMinDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1457,7 +2257,7 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNegativeOffsetMinDateTime() {
-        return getLocalNegativeOffsetMinDateTimeWithResponse().getValue();
+        return getLocalNegativeOffsetMinDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1482,6 +2282,26 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLocalNoOffsetMinDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00 on successful completion of {@link Mono}.
@@ -1494,13 +2314,29 @@ public final class DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return min datetime value 0001-01-01T00:00:00 on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getLocalNoOffsetMinDateTimeAsync(Context context) {
+        return getLocalNoOffsetMinDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return min datetime value 0001-01-01T00:00:00 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getLocalNoOffsetMinDateTimeWithResponse() {
-        return getLocalNoOffsetMinDateTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getLocalNoOffsetMinDateTimeWithResponse(Context context) {
+        return getLocalNoOffsetMinDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1512,6 +2348,6 @@ public final class DatetimeOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getLocalNoOffsetMinDateTime() {
-        return getLocalNoOffsetMinDateTimeWithResponse().getValue();
+        return getLocalNoOffsetMinDateTimeWithResponse(Context.NONE).getValue();
     }
 }

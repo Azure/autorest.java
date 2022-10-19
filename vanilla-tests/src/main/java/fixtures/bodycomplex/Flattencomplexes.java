@@ -75,6 +75,25 @@ public final class Flattencomplexes {
     /**
      * The getValid operation.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getValid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * The getValid operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -87,13 +106,29 @@ public final class Flattencomplexes {
     /**
      * The getValid operation.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MyBaseType> getValidAsync(Context context) {
+        return getValidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * The getValid operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<MyBaseType> getValidWithResponse() {
-        return getValidWithResponseAsync().block();
+    public Response<MyBaseType> getValidWithResponse(Context context) {
+        return getValidWithResponseAsync(context).block();
     }
 
     /**
@@ -105,6 +140,6 @@ public final class Flattencomplexes {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValid() {
-        return getValidWithResponse().getValue();
+        return getValidWithResponse(Context.NONE).getValue();
     }
 }

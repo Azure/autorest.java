@@ -243,6 +243,25 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> head400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.head400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -255,13 +274,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head400Async(Context context) {
+        return head400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head400WithResponse() {
-        return head400WithResponseAsync().block();
+    public Response<Void> head400WithResponse(Context context) {
+        return head400WithResponseAsync(context).block();
     }
 
     /**
@@ -272,7 +307,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head400() {
-        head400WithResponse();
+        head400WithResponse(Context.NONE);
     }
 
     /**
@@ -295,6 +330,25 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -307,13 +361,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get400Async(Context context) {
+        return get400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get400WithResponse() {
-        return get400WithResponseAsync().block();
+    public Response<Void> get400WithResponse(Context context) {
+        return get400WithResponseAsync(context).block();
     }
 
     /**
@@ -324,7 +394,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get400() {
-        get400WithResponse();
+        get400WithResponse(Context.NONE);
     }
 
     /**
@@ -347,6 +417,25 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.options400(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -359,13 +448,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options400Async(Context context) {
+        return options400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> options400WithResponse() {
-        return options400WithResponseAsync().block();
+    public Response<Void> options400WithResponse(Context context) {
+        return options400WithResponseAsync(context).block();
     }
 
     /**
@@ -376,7 +481,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options400() {
-        options400WithResponse();
+        options400WithResponse(Context.NONE);
     }
 
     /**
@@ -400,6 +505,26 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> put400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.put400(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -412,13 +537,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put400Async(Context context) {
+        return put400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put400WithResponse() {
-        return put400WithResponseAsync().block();
+    public Response<Void> put400WithResponse(Context context) {
+        return put400WithResponseAsync(context).block();
     }
 
     /**
@@ -429,7 +570,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put400() {
-        put400WithResponse();
+        put400WithResponse(Context.NONE);
     }
 
     /**
@@ -453,6 +594,26 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> patch400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.patch400(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -465,13 +626,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch400Async(Context context) {
+        return patch400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> patch400WithResponse() {
-        return patch400WithResponseAsync().block();
+    public Response<Void> patch400WithResponse(Context context) {
+        return patch400WithResponseAsync(context).block();
     }
 
     /**
@@ -482,7 +659,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch400() {
-        patch400WithResponse();
+        patch400WithResponse(Context.NONE);
     }
 
     /**
@@ -506,6 +683,26 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> post400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.post400(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -518,13 +715,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post400Async(Context context) {
+        return post400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> post400WithResponse() {
-        return post400WithResponseAsync().block();
+    public Response<Void> post400WithResponse(Context context) {
+        return post400WithResponseAsync(context).block();
     }
 
     /**
@@ -535,7 +748,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post400() {
-        post400WithResponse();
+        post400WithResponse(Context.NONE);
     }
 
     /**
@@ -559,6 +772,26 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> delete400WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.delete400(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -571,13 +804,29 @@ public final class HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete400Async(Context context) {
+        return delete400WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> delete400WithResponse() {
-        return delete400WithResponseAsync().block();
+    public Response<Void> delete400WithResponse(Context context) {
+        return delete400WithResponseAsync(context).block();
     }
 
     /**
@@ -588,7 +837,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete400() {
-        delete400WithResponse();
+        delete400WithResponse(Context.NONE);
     }
 
     /**
@@ -611,6 +860,25 @@ public final class HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> head401WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.head401(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -623,13 +891,29 @@ public final class HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head401Async(Context context) {
+        return head401WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head401WithResponse() {
-        return head401WithResponseAsync().block();
+    public Response<Void> head401WithResponse(Context context) {
+        return head401WithResponseAsync(context).block();
     }
 
     /**
@@ -640,7 +924,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head401() {
-        head401WithResponse();
+        head401WithResponse(Context.NONE);
     }
 
     /**
@@ -663,6 +947,25 @@ public final class HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get402WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get402(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -675,13 +978,29 @@ public final class HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get402Async(Context context) {
+        return get402WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get402WithResponse() {
-        return get402WithResponseAsync().block();
+    public Response<Void> get402WithResponse(Context context) {
+        return get402WithResponseAsync(context).block();
     }
 
     /**
@@ -692,7 +1011,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get402() {
-        get402WithResponse();
+        get402WithResponse(Context.NONE);
     }
 
     /**
@@ -715,6 +1034,25 @@ public final class HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options403WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.options403(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -727,13 +1065,29 @@ public final class HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options403Async(Context context) {
+        return options403WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> options403WithResponse() {
-        return options403WithResponseAsync().block();
+    public Response<Void> options403WithResponse(Context context) {
+        return options403WithResponseAsync(context).block();
     }
 
     /**
@@ -744,7 +1098,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options403() {
-        options403WithResponse();
+        options403WithResponse(Context.NONE);
     }
 
     /**
@@ -767,6 +1121,25 @@ public final class HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get403WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get403(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -779,13 +1152,29 @@ public final class HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get403Async(Context context) {
+        return get403WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get403WithResponse() {
-        return get403WithResponseAsync().block();
+    public Response<Void> get403WithResponse(Context context) {
+        return get403WithResponseAsync(context).block();
     }
 
     /**
@@ -796,7 +1185,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get403() {
-        get403WithResponse();
+        get403WithResponse(Context.NONE);
     }
 
     /**
@@ -820,6 +1209,26 @@ public final class HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> put404WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.put404(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -832,13 +1241,29 @@ public final class HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put404Async(Context context) {
+        return put404WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put404WithResponse() {
-        return put404WithResponseAsync().block();
+    public Response<Void> put404WithResponse(Context context) {
+        return put404WithResponseAsync(context).block();
     }
 
     /**
@@ -849,7 +1274,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put404() {
-        put404WithResponse();
+        put404WithResponse(Context.NONE);
     }
 
     /**
@@ -873,6 +1298,26 @@ public final class HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> patch405WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.patch405(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -885,13 +1330,29 @@ public final class HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch405Async(Context context) {
+        return patch405WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> patch405WithResponse() {
-        return patch405WithResponseAsync().block();
+    public Response<Void> patch405WithResponse(Context context) {
+        return patch405WithResponseAsync(context).block();
     }
 
     /**
@@ -902,7 +1363,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch405() {
-        patch405WithResponse();
+        patch405WithResponse(Context.NONE);
     }
 
     /**
@@ -926,6 +1387,26 @@ public final class HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> post406WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.post406(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -938,13 +1419,29 @@ public final class HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post406Async(Context context) {
+        return post406WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> post406WithResponse() {
-        return post406WithResponseAsync().block();
+    public Response<Void> post406WithResponse(Context context) {
+        return post406WithResponseAsync(context).block();
     }
 
     /**
@@ -955,7 +1452,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post406() {
-        post406WithResponse();
+        post406WithResponse(Context.NONE);
     }
 
     /**
@@ -979,6 +1476,26 @@ public final class HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> delete407WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.delete407(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -991,13 +1508,29 @@ public final class HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete407Async(Context context) {
+        return delete407WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> delete407WithResponse() {
-        return delete407WithResponseAsync().block();
+    public Response<Void> delete407WithResponse(Context context) {
+        return delete407WithResponseAsync(context).block();
     }
 
     /**
@@ -1008,7 +1541,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete407() {
-        delete407WithResponse();
+        delete407WithResponse(Context.NONE);
     }
 
     /**
@@ -1032,6 +1565,26 @@ public final class HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> put409WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.put409(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1044,13 +1597,29 @@ public final class HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put409Async(Context context) {
+        return put409WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put409WithResponse() {
-        return put409WithResponseAsync().block();
+    public Response<Void> put409WithResponse(Context context) {
+        return put409WithResponseAsync(context).block();
     }
 
     /**
@@ -1061,7 +1630,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put409() {
-        put409WithResponse();
+        put409WithResponse(Context.NONE);
     }
 
     /**
@@ -1084,6 +1653,25 @@ public final class HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> head410WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.head410(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1096,13 +1684,29 @@ public final class HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head410Async(Context context) {
+        return head410WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head410WithResponse() {
-        return head410WithResponseAsync().block();
+    public Response<Void> head410WithResponse(Context context) {
+        return head410WithResponseAsync(context).block();
     }
 
     /**
@@ -1113,7 +1717,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head410() {
-        head410WithResponse();
+        head410WithResponse(Context.NONE);
     }
 
     /**
@@ -1136,6 +1740,25 @@ public final class HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get411WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get411(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1148,13 +1771,29 @@ public final class HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get411Async(Context context) {
+        return get411WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get411WithResponse() {
-        return get411WithResponseAsync().block();
+    public Response<Void> get411WithResponse(Context context) {
+        return get411WithResponseAsync(context).block();
     }
 
     /**
@@ -1165,7 +1804,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get411() {
-        get411WithResponse();
+        get411WithResponse(Context.NONE);
     }
 
     /**
@@ -1188,6 +1827,25 @@ public final class HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> options412WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.options412(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1200,13 +1858,29 @@ public final class HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options412Async(Context context) {
+        return options412WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> options412WithResponse() {
-        return options412WithResponseAsync().block();
+    public Response<Void> options412WithResponse(Context context) {
+        return options412WithResponseAsync(context).block();
     }
 
     /**
@@ -1217,7 +1891,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void options412() {
-        options412WithResponse();
+        options412WithResponse(Context.NONE);
     }
 
     /**
@@ -1240,6 +1914,25 @@ public final class HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get412WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get412(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1252,13 +1945,29 @@ public final class HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get412Async(Context context) {
+        return get412WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get412WithResponse() {
-        return get412WithResponseAsync().block();
+    public Response<Void> get412WithResponse(Context context) {
+        return get412WithResponseAsync(context).block();
     }
 
     /**
@@ -1269,7 +1978,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get412() {
-        get412WithResponse();
+        get412WithResponse(Context.NONE);
     }
 
     /**
@@ -1293,6 +2002,26 @@ public final class HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> put413WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.put413(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1305,13 +2034,29 @@ public final class HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put413Async(Context context) {
+        return put413WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> put413WithResponse() {
-        return put413WithResponseAsync().block();
+    public Response<Void> put413WithResponse(Context context) {
+        return put413WithResponseAsync(context).block();
     }
 
     /**
@@ -1322,7 +2067,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put413() {
-        put413WithResponse();
+        put413WithResponse(Context.NONE);
     }
 
     /**
@@ -1346,6 +2091,26 @@ public final class HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> patch414WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.patch414(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1358,13 +2123,29 @@ public final class HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch414Async(Context context) {
+        return patch414WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> patch414WithResponse() {
-        return patch414WithResponseAsync().block();
+    public Response<Void> patch414WithResponse(Context context) {
+        return patch414WithResponseAsync(context).block();
     }
 
     /**
@@ -1375,7 +2156,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch414() {
-        patch414WithResponse();
+        patch414WithResponse(Context.NONE);
     }
 
     /**
@@ -1399,6 +2180,26 @@ public final class HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> post415WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.post415(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1411,13 +2212,29 @@ public final class HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post415Async(Context context) {
+        return post415WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> post415WithResponse() {
-        return post415WithResponseAsync().block();
+    public Response<Void> post415WithResponse(Context context) {
+        return post415WithResponseAsync(context).block();
     }
 
     /**
@@ -1428,7 +2245,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post415() {
-        post415WithResponse();
+        post415WithResponse(Context.NONE);
     }
 
     /**
@@ -1451,6 +2268,25 @@ public final class HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> get416WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get416(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1463,13 +2299,29 @@ public final class HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get416Async(Context context) {
+        return get416WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> get416WithResponse() {
-        return get416WithResponseAsync().block();
+    public Response<Void> get416WithResponse(Context context) {
+        return get416WithResponseAsync(context).block();
     }
 
     /**
@@ -1480,7 +2332,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get416() {
-        get416WithResponse();
+        get416WithResponse(Context.NONE);
     }
 
     /**
@@ -1504,6 +2356,26 @@ public final class HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> delete417WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final Boolean booleanValue = true;
+        final String accept = "application/json";
+        return service.delete417(this.client.getHost(), booleanValue, accept, context);
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1516,13 +2388,29 @@ public final class HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete417Async(Context context) {
+        return delete417WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> delete417WithResponse() {
-        return delete417WithResponseAsync().block();
+    public Response<Void> delete417WithResponse(Context context) {
+        return delete417WithResponseAsync(context).block();
     }
 
     /**
@@ -1533,7 +2421,7 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete417() {
-        delete417WithResponse();
+        delete417WithResponse(Context.NONE);
     }
 
     /**
@@ -1556,6 +2444,25 @@ public final class HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> head429WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.head429(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1568,13 +2475,29 @@ public final class HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head429Async(Context context) {
+        return head429WithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> head429WithResponse() {
-        return head429WithResponseAsync().block();
+    public Response<Void> head429WithResponse(Context context) {
+        return head429WithResponseAsync(context).block();
     }
 
     /**
@@ -1585,6 +2508,6 @@ public final class HttpClientFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head429() {
-        head429WithResponse();
+        head429WithResponse(Context.NONE);
     }
 }

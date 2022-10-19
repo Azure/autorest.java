@@ -9,6 +9,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Context;
 import fixtures.bodydictionary.implementation.DictionariesImpl;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
@@ -36,14 +37,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get null dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null dictionary value along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getNullWithResponse() {
-        return this.serviceClient.getNullWithResponse();
+    public Response<Map<String, Integer>> getNullWithResponse(Context context) {
+        return this.serviceClient.getNullWithResponse(context);
     }
 
     /**
@@ -62,14 +65,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get empty dictionary value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary value {} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getEmptyWithResponse() {
-        return this.serviceClient.getEmptyWithResponse();
+    public Response<Map<String, Integer>> getEmptyWithResponse(Context context) {
+        return this.serviceClient.getEmptyWithResponse(context);
     }
 
     /**
@@ -89,6 +94,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value empty {}.
      *
      * @param arrayBody The empty dictionary value {}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -96,8 +102,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptyWithResponse(Map<String, String> arrayBody) {
-        return this.serviceClient.putEmptyWithResponse(arrayBody);
+    public Response<Void> putEmptyWithResponse(Map<String, String> arrayBody, Context context) {
+        return this.serviceClient.putEmptyWithResponse(arrayBody, context);
     }
 
     /**
@@ -117,14 +123,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get Dictionary with null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null value along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getNullValueWithResponse() {
-        return this.serviceClient.getNullValueWithResponse();
+    public Response<Map<String, String>> getNullValueWithResponse(Context context) {
+        return this.serviceClient.getNullValueWithResponse(context);
     }
 
     /**
@@ -143,14 +151,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get Dictionary with null key.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null key along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getNullKeyWithResponse() {
-        return this.serviceClient.getNullKeyWithResponse();
+    public Response<Map<String, String>> getNullKeyWithResponse(Context context) {
+        return this.serviceClient.getNullKeyWithResponse(context);
     }
 
     /**
@@ -169,14 +179,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get Dictionary with key as empty string.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with key as empty string along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getEmptyStringKeyWithResponse() {
-        return this.serviceClient.getEmptyStringKeyWithResponse();
+    public Response<Map<String, String>> getEmptyStringKeyWithResponse(Context context) {
+        return this.serviceClient.getEmptyStringKeyWithResponse(context);
     }
 
     /**
@@ -195,14 +207,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get invalid Dictionary value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Dictionary value along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getInvalidWithResponse() {
-        return this.serviceClient.getInvalidWithResponse();
+    public Response<Map<String, String>> getInvalidWithResponse(Context context) {
+        return this.serviceClient.getInvalidWithResponse(context);
     }
 
     /**
@@ -221,14 +235,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true } along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanTfftWithResponse() {
-        return this.serviceClient.getBooleanTfftWithResponse();
+    public Response<Map<String, Boolean>> getBooleanTfftWithResponse(Context context) {
+        return this.serviceClient.getBooleanTfftWithResponse(context);
     }
 
     /**
@@ -248,6 +264,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -255,8 +272,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody) {
-        return this.serviceClient.putBooleanTfftWithResponse(arrayBody);
+    public Response<Void> putBooleanTfftWithResponse(Map<String, Boolean> arrayBody, Context context) {
+        return this.serviceClient.putBooleanTfftWithResponse(arrayBody, context);
     }
 
     /**
@@ -276,14 +293,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": null, "2": false } along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanInvalidNullWithResponse() {
-        return this.serviceClient.getBooleanInvalidNullWithResponse();
+    public Response<Map<String, Boolean>> getBooleanInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getBooleanInvalidNullWithResponse(context);
     }
 
     /**
@@ -302,14 +321,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Boolean>> getBooleanInvalidStringWithResponse() {
-        return this.serviceClient.getBooleanInvalidStringWithResponse();
+    public Response<Map<String, Boolean>> getBooleanInvalidStringWithResponse(Context context) {
+        return this.serviceClient.getBooleanInvalidStringWithResponse(context);
     }
 
     /**
@@ -328,14 +349,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntegerValidWithResponse() {
-        return this.serviceClient.getIntegerValidWithResponse();
+    public Response<Map<String, Integer>> getIntegerValidWithResponse(Context context) {
+        return this.serviceClient.getIntegerValidWithResponse(context);
     }
 
     /**
@@ -355,6 +378,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -362,8 +386,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntegerValidWithResponse(Map<String, Integer> arrayBody) {
-        return this.serviceClient.putIntegerValidWithResponse(arrayBody);
+    public Response<Void> putIntegerValidWithResponse(Map<String, Integer> arrayBody, Context context) {
+        return this.serviceClient.putIntegerValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -383,14 +407,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntInvalidNullWithResponse() {
-        return this.serviceClient.getIntInvalidNullWithResponse();
+    public Response<Map<String, Integer>> getIntInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getIntInvalidNullWithResponse(context);
     }
 
     /**
@@ -409,14 +435,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getIntInvalidStringWithResponse() {
-        return this.serviceClient.getIntInvalidStringWithResponse();
+    public Response<Map<String, Integer>> getIntInvalidStringWithResponse(Context context) {
+        return this.serviceClient.getIntInvalidStringWithResponse(context);
     }
 
     /**
@@ -435,14 +463,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongValidWithResponse() {
-        return this.serviceClient.getLongValidWithResponse();
+    public Response<Map<String, Long>> getLongValidWithResponse(Context context) {
+        return this.serviceClient.getLongValidWithResponse(context);
     }
 
     /**
@@ -462,6 +492,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -469,8 +500,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongValidWithResponse(Map<String, Long> arrayBody) {
-        return this.serviceClient.putLongValidWithResponse(arrayBody);
+    public Response<Void> putLongValidWithResponse(Map<String, Long> arrayBody, Context context) {
+        return this.serviceClient.putLongValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -490,14 +521,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongInvalidNullWithResponse() {
-        return this.serviceClient.getLongInvalidNullWithResponse();
+    public Response<Map<String, Long>> getLongInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getLongInvalidNullWithResponse(context);
     }
 
     /**
@@ -516,14 +549,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Long>> getLongInvalidStringWithResponse() {
-        return this.serviceClient.getLongInvalidStringWithResponse();
+    public Response<Map<String, Long>> getLongInvalidStringWithResponse(Context context) {
+        return this.serviceClient.getLongInvalidStringWithResponse(context);
     }
 
     /**
@@ -542,14 +577,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatValidWithResponse() {
-        return this.serviceClient.getFloatValidWithResponse();
+    public Response<Map<String, Float>> getFloatValidWithResponse(Context context) {
+        return this.serviceClient.getFloatValidWithResponse(context);
     }
 
     /**
@@ -569,6 +606,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -576,8 +614,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatValidWithResponse(Map<String, Float> arrayBody) {
-        return this.serviceClient.putFloatValidWithResponse(arrayBody);
+    public Response<Void> putFloatValidWithResponse(Map<String, Float> arrayBody, Context context) {
+        return this.serviceClient.putFloatValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -597,14 +635,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatInvalidNullWithResponse() {
-        return this.serviceClient.getFloatInvalidNullWithResponse();
+    public Response<Map<String, Float>> getFloatInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getFloatInvalidNullWithResponse(context);
     }
 
     /**
@@ -623,14 +663,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Float>> getFloatInvalidStringWithResponse() {
-        return this.serviceClient.getFloatInvalidStringWithResponse();
+    public Response<Map<String, Float>> getFloatInvalidStringWithResponse(Context context) {
+        return this.serviceClient.getFloatInvalidStringWithResponse(context);
     }
 
     /**
@@ -649,14 +691,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleValidWithResponse() {
-        return this.serviceClient.getDoubleValidWithResponse();
+    public Response<Map<String, Double>> getDoubleValidWithResponse(Context context) {
+        return this.serviceClient.getDoubleValidWithResponse(context);
     }
 
     /**
@@ -676,6 +720,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -683,8 +728,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleValidWithResponse(Map<String, Double> arrayBody) {
-        return this.serviceClient.putDoubleValidWithResponse(arrayBody);
+    public Response<Void> putDoubleValidWithResponse(Map<String, Double> arrayBody, Context context) {
+        return this.serviceClient.putDoubleValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -704,14 +749,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleInvalidNullWithResponse() {
-        return this.serviceClient.getDoubleInvalidNullWithResponse();
+    public Response<Map<String, Double>> getDoubleInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getDoubleInvalidNullWithResponse(context);
     }
 
     /**
@@ -730,14 +777,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Double>> getDoubleInvalidStringWithResponse() {
-        return this.serviceClient.getDoubleInvalidStringWithResponse();
+    public Response<Map<String, Double>> getDoubleInvalidStringWithResponse(Context context) {
+        return this.serviceClient.getDoubleInvalidStringWithResponse(context);
     }
 
     /**
@@ -756,14 +805,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringValidWithResponse() {
-        return this.serviceClient.getStringValidWithResponse();
+    public Response<Map<String, String>> getStringValidWithResponse(Context context) {
+        return this.serviceClient.getStringValidWithResponse(context);
     }
 
     /**
@@ -783,6 +834,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -790,8 +842,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringValidWithResponse(Map<String, String> arrayBody) {
-        return this.serviceClient.putStringValidWithResponse(arrayBody);
+    public Response<Void> putStringValidWithResponse(Map<String, String> arrayBody, Context context) {
+        return this.serviceClient.putStringValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -811,14 +863,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringWithNullWithResponse() {
-        return this.serviceClient.getStringWithNullWithResponse();
+    public Response<Map<String, String>> getStringWithNullWithResponse(Context context) {
+        return this.serviceClient.getStringWithNullWithResponse(context);
     }
 
     /**
@@ -837,14 +891,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, String>> getStringWithInvalidWithResponse() {
-        return this.serviceClient.getStringWithInvalidWithResponse();
+    public Response<Map<String, String>> getStringWithInvalidWithResponse(Context context) {
+        return this.serviceClient.getStringWithInvalidWithResponse(context);
     }
 
     /**
@@ -863,6 +919,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
@@ -870,8 +928,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateValidWithResponse() {
-        return this.serviceClient.getDateValidWithResponse();
+    public Response<Map<String, LocalDate>> getDateValidWithResponse(Context context) {
+        return this.serviceClient.getDateValidWithResponse(context);
     }
 
     /**
@@ -891,6 +949,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -898,8 +957,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateValidWithResponse(Map<String, LocalDate> arrayBody) {
-        return this.serviceClient.putDateValidWithResponse(arrayBody);
+    public Response<Void> putDateValidWithResponse(Map<String, LocalDate> arrayBody, Context context) {
+        return this.serviceClient.putDateValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -919,14 +978,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateInvalidNullWithResponse() {
-        return this.serviceClient.getDateInvalidNullWithResponse();
+    public Response<Map<String, LocalDate>> getDateInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getDateInvalidNullWithResponse(context);
     }
 
     /**
@@ -945,14 +1006,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2011-03-22", "1": "date"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, LocalDate>> getDateInvalidCharsWithResponse() {
-        return this.serviceClient.getDateInvalidCharsWithResponse();
+    public Response<Map<String, LocalDate>> getDateInvalidCharsWithResponse(Context context) {
+        return this.serviceClient.getDateInvalidCharsWithResponse(context);
     }
 
     /**
@@ -972,6 +1035,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
@@ -979,8 +1044,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeValidWithResponse() {
-        return this.serviceClient.getDateTimeValidWithResponse();
+    public Response<Map<String, OffsetDateTime>> getDateTimeValidWithResponse(Context context) {
+        return this.serviceClient.getDateTimeValidWithResponse(context);
     }
 
     /**
@@ -1004,6 +1069,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      *     "1492-10-12T10:15:01-08:00"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1011,8 +1077,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
-        return this.serviceClient.putDateTimeValidWithResponse(arrayBody);
+    public Response<Void> putDateTimeValidWithResponse(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return this.serviceClient.putDateTimeValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1034,14 +1100,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidNullWithResponse() {
-        return this.serviceClient.getDateTimeInvalidNullWithResponse();
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getDateTimeInvalidNullWithResponse(context);
     }
 
     /**
@@ -1060,14 +1128,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidCharsWithResponse() {
-        return this.serviceClient.getDateTimeInvalidCharsWithResponse();
+    public Response<Map<String, OffsetDateTime>> getDateTimeInvalidCharsWithResponse(Context context) {
+        return this.serviceClient.getDateTimeInvalidCharsWithResponse(context);
     }
 
     /**
@@ -1087,6 +1157,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
@@ -1094,8 +1166,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidWithResponse() {
-        return this.serviceClient.getDateTimeRfc1123ValidWithResponse();
+    public Response<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidWithResponse(Context context) {
+        return this.serviceClient.getDateTimeRfc1123ValidWithResponse(context);
     }
 
     /**
@@ -1119,6 +1191,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1126,8 +1199,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody) {
-        return this.serviceClient.putDateTimeRfc1123ValidWithResponse(arrayBody);
+    public Response<Void> putDateTimeRfc1123ValidWithResponse(Map<String, OffsetDateTime> arrayBody, Context context) {
+        return this.serviceClient.putDateTimeRfc1123ValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1149,14 +1222,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Duration>> getDurationValidWithResponse() {
-        return this.serviceClient.getDurationValidWithResponse();
+    public Response<Map<String, Duration>> getDurationValidWithResponse(Context context) {
+        return this.serviceClient.getDurationValidWithResponse(context);
     }
 
     /**
@@ -1176,6 +1251,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1183,8 +1259,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationValidWithResponse(Map<String, Duration> arrayBody) {
-        return this.serviceClient.putDurationValidWithResponse(arrayBody);
+    public Response<Void> putDurationValidWithResponse(Map<String, Duration> arrayBody, Context context) {
+        return this.serviceClient.putDurationValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1205,6 +1281,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      * encoded in base64.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
@@ -1212,8 +1290,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getByteValidWithResponse() {
-        return this.serviceClient.getByteValidWithResponse();
+    public Response<Map<String, byte[]>> getByteValidWithResponse(Context context) {
+        return this.serviceClient.getByteValidWithResponse(context);
     }
 
     /**
@@ -1237,6 +1315,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
      *     each elementencoded in base 64.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1244,8 +1323,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteValidWithResponse(Map<String, byte[]> arrayBody) {
-        return this.serviceClient.putByteValidWithResponse(arrayBody);
+    public Response<Void> putByteValidWithResponse(Map<String, byte[]> arrayBody, Context context) {
+        return this.serviceClient.putByteValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1267,6 +1346,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded along with
@@ -1274,8 +1355,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getByteInvalidNullWithResponse() {
-        return this.serviceClient.getByteInvalidNullWithResponse();
+    public Response<Map<String, byte[]>> getByteInvalidNullWithResponse(Context context) {
+        return this.serviceClient.getByteInvalidNullWithResponse(context);
     }
 
     /**
@@ -1295,6 +1376,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
      * ipsum"}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
@@ -1302,8 +1385,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, byte[]>> getBase64UrlWithResponse() {
-        return this.serviceClient.getBase64UrlWithResponse();
+    public Response<Map<String, byte[]>> getBase64UrlWithResponse(Context context) {
+        return this.serviceClient.getBase64UrlWithResponse(context);
     }
 
     /**
@@ -1324,14 +1407,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type null value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type null value along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexNullWithResponse() {
-        return this.serviceClient.getComplexNullWithResponse();
+    public Response<Map<String, Widget>> getComplexNullWithResponse(Context context) {
+        return this.serviceClient.getComplexNullWithResponse(context);
     }
 
     /**
@@ -1350,14 +1435,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get empty dictionary of complex type {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary of complex type {} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexEmptyWithResponse() {
-        return this.serviceClient.getComplexEmptyWithResponse();
+    public Response<Map<String, Widget>> getComplexEmptyWithResponse(Context context) {
+        return this.serviceClient.getComplexEmptyWithResponse(context);
     }
 
     /**
@@ -1377,6 +1464,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
@@ -1384,8 +1473,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexItemNullWithResponse() {
-        return this.serviceClient.getComplexItemNullWithResponse();
+    public Response<Map<String, Widget>> getComplexItemNullWithResponse(Context context) {
+        return this.serviceClient.getComplexItemNullWithResponse(context);
     }
 
     /**
@@ -1407,6 +1496,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
      * "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
@@ -1414,8 +1505,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexItemEmptyWithResponse() {
-        return this.serviceClient.getComplexItemEmptyWithResponse();
+    public Response<Map<String, Widget>> getComplexItemEmptyWithResponse(Context context) {
+        return this.serviceClient.getComplexItemEmptyWithResponse(context);
     }
 
     /**
@@ -1437,6 +1528,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
      * {"integer": 5, "string": "6"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
@@ -1444,8 +1537,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Widget>> getComplexValidWithResponse() {
-        return this.serviceClient.getComplexValidWithResponse();
+    public Response<Map<String, Widget>> getComplexValidWithResponse(Context context) {
+        return this.serviceClient.getComplexValidWithResponse(context);
     }
 
     /**
@@ -1469,6 +1562,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      *
      * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
      *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1476,8 +1570,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putComplexValidWithResponse(Map<String, Widget> arrayBody) {
-        return this.serviceClient.putComplexValidWithResponse(arrayBody);
+    public Response<Void> putComplexValidWithResponse(Map<String, Widget> arrayBody, Context context) {
+        return this.serviceClient.putComplexValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1499,14 +1593,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get a null array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayNullWithResponse() {
-        return this.serviceClient.getArrayNullWithResponse();
+    public Response<Map<String, List<String>>> getArrayNullWithResponse(Context context) {
+        return this.serviceClient.getArrayNullWithResponse(context);
     }
 
     /**
@@ -1525,14 +1621,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an empty dictionary {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty dictionary {} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayEmptyWithResponse() {
-        return this.serviceClient.getArrayEmptyWithResponse();
+    public Response<Map<String, List<String>>> getArrayEmptyWithResponse(Context context) {
+        return this.serviceClient.getArrayEmptyWithResponse(context);
     }
 
     /**
@@ -1551,6 +1649,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} along with
@@ -1558,8 +1658,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayItemNullWithResponse() {
-        return this.serviceClient.getArrayItemNullWithResponse();
+    public Response<Map<String, List<String>>> getArrayItemNullWithResponse(Context context) {
+        return this.serviceClient.getArrayItemNullWithResponse(context);
     }
 
     /**
@@ -1578,6 +1678,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
@@ -1585,8 +1687,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayItemEmptyWithResponse() {
-        return this.serviceClient.getArrayItemEmptyWithResponse();
+    public Response<Map<String, List<String>>> getArrayItemEmptyWithResponse(Context context) {
+        return this.serviceClient.getArrayItemEmptyWithResponse(context);
     }
 
     /**
@@ -1605,6 +1707,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} along
@@ -1612,8 +1716,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, List<String>>> getArrayValidWithResponse() {
-        return this.serviceClient.getArrayValidWithResponse();
+    public Response<Map<String, List<String>>> getArrayValidWithResponse(Context context) {
+        return this.serviceClient.getArrayValidWithResponse(context);
     }
 
     /**
@@ -1633,6 +1737,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1640,8 +1745,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putArrayValidWithResponse(Map<String, List<String>> arrayBody) {
-        return this.serviceClient.putArrayValidWithResponse(arrayBody);
+    public Response<Void> putArrayValidWithResponse(Map<String, List<String>> arrayBody, Context context) {
+        return this.serviceClient.putArrayValidWithResponse(arrayBody, context);
     }
 
     /**
@@ -1661,14 +1766,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries with value null along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryNullWithResponse() {
-        return this.serviceClient.getDictionaryNullWithResponse();
+    public Response<Map<String, Map<String, String>>> getDictionaryNullWithResponse(Context context) {
+        return this.serviceClient.getDictionaryNullWithResponse(context);
     }
 
     /**
@@ -1687,14 +1794,16 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryEmptyWithResponse() {
-        return this.serviceClient.getDictionaryEmptyWithResponse();
+    public Response<Map<String, Map<String, String>>> getDictionaryEmptyWithResponse(Context context) {
+        return this.serviceClient.getDictionaryEmptyWithResponse(context);
     }
 
     /**
@@ -1714,6 +1823,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -1721,8 +1832,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryItemNullWithResponse() {
-        return this.serviceClient.getDictionaryItemNullWithResponse();
+    public Response<Map<String, Map<String, String>>> getDictionaryItemNullWithResponse(Context context) {
+        return this.serviceClient.getDictionaryItemNullWithResponse(context);
     }
 
     /**
@@ -1744,6 +1855,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -1751,8 +1864,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryItemEmptyWithResponse() {
-        return this.serviceClient.getDictionaryItemEmptyWithResponse();
+    public Response<Map<String, Map<String, String>>> getDictionaryItemEmptyWithResponse(Context context) {
+        return this.serviceClient.getDictionaryItemEmptyWithResponse(context);
     }
 
     /**
@@ -1774,6 +1887,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
@@ -1782,8 +1897,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Map<String, String>>> getDictionaryValidWithResponse() {
-        return this.serviceClient.getDictionaryValidWithResponse();
+    public Response<Map<String, Map<String, String>>> getDictionaryValidWithResponse(Context context) {
+        return this.serviceClient.getDictionaryValidWithResponse(context);
     }
 
     /**
@@ -1808,6 +1923,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
      *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
      *     "9": "nine"}}.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1817,8 +1933,8 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDictionaryValidWithResponse(Map<String, Map<String, String>> arrayBody) {
-        return this.serviceClient.putDictionaryValidWithResponse(arrayBody);
+    public Response<Void> putDictionaryValidWithResponse(Map<String, Map<String, String>> arrayBody, Context context) {
+        return this.serviceClient.putDictionaryValidWithResponse(arrayBody, context);
     }
 
     /**

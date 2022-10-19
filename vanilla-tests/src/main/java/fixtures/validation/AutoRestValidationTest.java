@@ -243,6 +243,36 @@ public final class AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> validationOfMethodParametersWithResponseAsync(
+            String resourceGroupName, int id, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (this.getSubscriptionId() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.validationOfMethodParameters(
+                this.getHost(), this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion(), accept, context);
+    }
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -259,14 +289,33 @@ public final class AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, Context context) {
+        return validationOfMethodParametersWithResponseAsync(resourceGroupName, id, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Product> validationOfMethodParametersWithResponse(String resourceGroupName, int id) {
-        return validationOfMethodParametersWithResponseAsync(resourceGroupName, id).block();
+    public Response<Product> validationOfMethodParametersWithResponse(
+            String resourceGroupName, int id, Context context) {
+        return validationOfMethodParametersWithResponseAsync(resourceGroupName, id, context).block();
     }
 
     /**
@@ -281,7 +330,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersWithResponse(resourceGroupName, id).getValue();
+        return validationOfMethodParametersWithResponse(resourceGroupName, id, Context.NONE).getValue();
     }
 
     /**
@@ -331,6 +380,47 @@ public final class AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body The product documentation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> validationOfBodyWithResponseAsync(
+            String resourceGroupName, int id, Product body, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (this.getSubscriptionId() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (body != null) {
+            body.validate();
+        }
+        final String accept = "application/json";
+        return service.validationOfBody(
+                this.getHost(),
+                this.getSubscriptionId(),
+                resourceGroupName,
+                id,
+                this.getApiVersion(),
+                body,
+                accept,
+                context);
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body The product documentation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -365,14 +455,34 @@ public final class AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body The product documentation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, Context context) {
+        return validationOfBodyWithResponseAsync(resourceGroupName, id, body, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body The product documentation.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Product> validationOfBodyWithResponse(String resourceGroupName, int id, Product body) {
-        return validationOfBodyWithResponseAsync(resourceGroupName, id, body).block();
+    public Response<Product> validationOfBodyWithResponse(
+            String resourceGroupName, int id, Product body, Context context) {
+        return validationOfBodyWithResponseAsync(resourceGroupName, id, body, context).block();
     }
 
     /**
@@ -388,7 +498,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyWithResponse(resourceGroupName, id, body).getValue();
+        return validationOfBodyWithResponse(resourceGroupName, id, body, Context.NONE).getValue();
     }
 
     /**
@@ -404,7 +514,7 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product validationOfBody(String resourceGroupName, int id) {
         final Product body = null;
-        return validationOfBodyWithResponse(resourceGroupName, id, body).getValue();
+        return validationOfBodyWithResponse(resourceGroupName, id, body, Context.NONE).getValue();
     }
 
     /**
@@ -426,6 +536,24 @@ public final class AutoRestValidationTest {
     /**
      * The getWithConstantInPath operation.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getWithConstantInPathWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String constantParam = "constant";
+        return service.getWithConstantInPath(this.getHost(), constantParam, context);
+    }
+
+    /**
+     * The getWithConstantInPath operation.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -438,13 +566,29 @@ public final class AutoRestValidationTest {
     /**
      * The getWithConstantInPath operation.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getWithConstantInPathAsync(Context context) {
+        return getWithConstantInPathWithResponseAsync(context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * The getWithConstantInPath operation.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getWithConstantInPathWithResponse() {
-        return getWithConstantInPathWithResponseAsync().block();
+    public Response<Void> getWithConstantInPathWithResponse(Context context) {
+        return getWithConstantInPathWithResponseAsync(context).block();
     }
 
     /**
@@ -455,7 +599,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getWithConstantInPath() {
-        getWithConstantInPathWithResponse();
+        getWithConstantInPathWithResponse(Context.NONE);
     }
 
     /**
@@ -479,6 +623,29 @@ public final class AutoRestValidationTest {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.postWithConstantInBody(this.getHost(), constantParam, body, accept, context));
+    }
+
+    /**
+     * The postWithConstantInBody operation.
+     *
+     * @param body The product documentation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> postWithConstantInBodyWithResponseAsync(Product body, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (body != null) {
+            body.validate();
+        }
+        final String constantParam = "constant";
+        final String accept = "application/json";
+        return service.postWithConstantInBody(this.getHost(), constantParam, body, accept, context);
     }
 
     /**
@@ -512,14 +679,30 @@ public final class AutoRestValidationTest {
      * The postWithConstantInBody operation.
      *
      * @param body The product documentation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Product> postWithConstantInBodyAsync(Product body, Context context) {
+        return postWithConstantInBodyWithResponseAsync(body, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * The postWithConstantInBody operation.
+     *
+     * @param body The product documentation.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Product> postWithConstantInBodyWithResponse(Product body) {
-        return postWithConstantInBodyWithResponseAsync(body).block();
+    public Response<Product> postWithConstantInBodyWithResponse(Product body, Context context) {
+        return postWithConstantInBodyWithResponseAsync(body, context).block();
     }
 
     /**
@@ -533,7 +716,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyWithResponse(body).getValue();
+        return postWithConstantInBodyWithResponse(body, Context.NONE).getValue();
     }
 
     /**
@@ -546,6 +729,6 @@ public final class AutoRestValidationTest {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Product postWithConstantInBody() {
         final Product body = null;
-        return postWithConstantInBodyWithResponse(body).getValue();
+        return postWithConstantInBodyWithResponse(body, Context.NONE).getValue();
     }
 }

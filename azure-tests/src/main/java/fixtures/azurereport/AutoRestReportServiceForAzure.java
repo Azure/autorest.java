@@ -151,6 +151,26 @@ public final class AutoRestReportServiceForAzure {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
      *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, Integer>>> getReportWithResponseAsync(String qualifier, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getReport(this.getHost(), qualifier, accept, context);
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -179,14 +199,31 @@ public final class AutoRestReportServiceForAzure {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
      *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return test coverage report on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Integer>> getReportAsync(String qualifier, Context context) {
+        return getReportWithResponseAsync(qualifier, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
+     *     only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return test coverage report along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, Integer>> getReportWithResponse(String qualifier) {
-        return getReportWithResponseAsync(qualifier).block();
+    public Response<Map<String, Integer>> getReportWithResponse(String qualifier, Context context) {
+        return getReportWithResponseAsync(qualifier, context).block();
     }
 
     /**
@@ -201,7 +238,7 @@ public final class AutoRestReportServiceForAzure {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport(String qualifier) {
-        return getReportWithResponse(qualifier).getValue();
+        return getReportWithResponse(qualifier, Context.NONE).getValue();
     }
 
     /**
@@ -214,6 +251,6 @@ public final class AutoRestReportServiceForAzure {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getReport() {
         final String qualifier = null;
-        return getReportWithResponse(qualifier).getValue();
+        return getReportWithResponse(qualifier, Context.NONE).getValue();
     }
 }

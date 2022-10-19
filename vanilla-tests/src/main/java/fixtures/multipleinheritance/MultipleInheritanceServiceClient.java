@@ -219,6 +219,25 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Horse>> getHorseWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getHorse(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get a horse with name 'Fred' and isAShowHorse true.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true on successful completion of {@link Mono}.
@@ -231,13 +250,29 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a horse with name 'Fred' and isAShowHorse true on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Horse> getHorseAsync(Context context) {
+        return getHorseWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a horse with name 'Fred' and isAShowHorse true.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Horse> getHorseWithResponse() {
-        return getHorseWithResponseAsync().block();
+    public Response<Horse> getHorseWithResponse(Context context) {
+        return getHorseWithResponseAsync(context).block();
     }
 
     /**
@@ -249,7 +284,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Horse getHorse() {
-        return getHorseWithResponse().getValue();
+        return getHorseWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -279,6 +314,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a horse with name 'General' and isAShowHorse false.
      *
      * @param horse Put a horse with name 'General' and isAShowHorse false.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putHorseWithResponseAsync(Horse horse, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (horse == null) {
+            return Mono.error(new IllegalArgumentException("Parameter horse is required and cannot be null."));
+        } else {
+            horse.validate();
+        }
+        final String accept = "application/json";
+        return service.putHorse(this.getHost(), horse, accept, context);
+    }
+
+    /**
+     * Put a horse with name 'General' and isAShowHorse false.
+     *
+     * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -293,14 +352,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a horse with name 'General' and isAShowHorse false.
      *
      * @param horse Put a horse with name 'General' and isAShowHorse false.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putHorseAsync(Horse horse, Context context) {
+        return putHorseWithResponseAsync(horse, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a horse with name 'General' and isAShowHorse false.
+     *
+     * @param horse Put a horse with name 'General' and isAShowHorse false.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putHorseWithResponse(Horse horse) {
-        return putHorseWithResponseAsync(horse).block();
+    public Response<String> putHorseWithResponse(Horse horse, Context context) {
+        return putHorseWithResponseAsync(horse, context).block();
     }
 
     /**
@@ -314,7 +389,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putHorse(Horse horse) {
-        return putHorseWithResponse(horse).getValue();
+        return putHorseWithResponse(horse, Context.NONE).getValue();
     }
 
     /**
@@ -336,6 +411,24 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a pet with name 'Peanut'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a pet with name 'Peanut' along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Pet>> getPetWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getPet(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get a pet with name 'Peanut'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut' on successful completion of {@link Mono}.
@@ -348,13 +441,29 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a pet with name 'Peanut'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a pet with name 'Peanut' on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Pet> getPetAsync(Context context) {
+        return getPetWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a pet with name 'Peanut'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Pet> getPetWithResponse() {
-        return getPetWithResponseAsync().block();
+    public Response<Pet> getPetWithResponse(Context context) {
+        return getPetWithResponseAsync(context).block();
     }
 
     /**
@@ -366,7 +475,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getPet() {
-        return getPetWithResponse().getValue();
+        return getPetWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -396,6 +505,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a pet with name 'Butter'.
      *
      * @param pet Put a pet with name 'Butter'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putPetWithResponseAsync(Pet pet, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (pet == null) {
+            return Mono.error(new IllegalArgumentException("Parameter pet is required and cannot be null."));
+        } else {
+            pet.validate();
+        }
+        final String accept = "application/json";
+        return service.putPet(this.getHost(), pet, accept, context);
+    }
+
+    /**
+     * Put a pet with name 'Butter'.
+     *
+     * @param pet Put a pet with name 'Butter'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -410,14 +543,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a pet with name 'Butter'.
      *
      * @param pet Put a pet with name 'Butter'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putPetAsync(Pet pet, Context context) {
+        return putPetWithResponseAsync(pet, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a pet with name 'Butter'.
+     *
+     * @param pet Put a pet with name 'Butter'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putPetWithResponse(Pet pet) {
-        return putPetWithResponseAsync(pet).block();
+    public Response<String> putPetWithResponse(Pet pet, Context context) {
+        return putPetWithResponseAsync(pet, context).block();
     }
 
     /**
@@ -431,7 +580,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putPet(Pet pet) {
-        return putPetWithResponse(pet).getValue();
+        return putPetWithResponse(pet, Context.NONE).getValue();
     }
 
     /**
@@ -454,6 +603,25 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a feline where meows and hisses are true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Feline>> getFelineWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFeline(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get a feline where meows and hisses are true.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a feline where meows and hisses are true on successful completion of {@link Mono}.
@@ -466,13 +634,29 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a feline where meows and hisses are true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a feline where meows and hisses are true on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Feline> getFelineAsync(Context context) {
+        return getFelineWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a feline where meows and hisses are true.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a feline where meows and hisses are true along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Feline> getFelineWithResponse() {
-        return getFelineWithResponseAsync().block();
+    public Response<Feline> getFelineWithResponse(Context context) {
+        return getFelineWithResponseAsync(context).block();
     }
 
     /**
@@ -484,7 +668,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Feline getFeline() {
-        return getFelineWithResponse().getValue();
+        return getFelineWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -514,6 +698,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a feline who hisses and doesn't meow.
      *
      * @param feline Put a feline who hisses and doesn't meow.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putFelineWithResponseAsync(Feline feline, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (feline == null) {
+            return Mono.error(new IllegalArgumentException("Parameter feline is required and cannot be null."));
+        } else {
+            feline.validate();
+        }
+        final String accept = "application/json";
+        return service.putFeline(this.getHost(), feline, accept, context);
+    }
+
+    /**
+     * Put a feline who hisses and doesn't meow.
+     *
+     * @param feline Put a feline who hisses and doesn't meow.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -528,14 +736,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a feline who hisses and doesn't meow.
      *
      * @param feline Put a feline who hisses and doesn't meow.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putFelineAsync(Feline feline, Context context) {
+        return putFelineWithResponseAsync(feline, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a feline who hisses and doesn't meow.
+     *
+     * @param feline Put a feline who hisses and doesn't meow.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putFelineWithResponse(Feline feline) {
-        return putFelineWithResponseAsync(feline).block();
+    public Response<String> putFelineWithResponse(Feline feline, Context context) {
+        return putFelineWithResponseAsync(feline, context).block();
     }
 
     /**
@@ -549,7 +773,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putFeline(Feline feline) {
-        return putFelineWithResponse(feline).getValue();
+        return putFelineWithResponse(feline, Context.NONE).getValue();
     }
 
     /**
@@ -572,6 +796,25 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response} on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Cat>> getCatWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getCat(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of {@link
@@ -585,13 +828,30 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Cat> getCatAsync(Context context) {
+        return getCatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Cat> getCatWithResponse() {
-        return getCatWithResponseAsync().block();
+    public Response<Cat> getCatWithResponse(Context context) {
+        return getCatWithResponseAsync(context).block();
     }
 
     /**
@@ -603,7 +863,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Cat getCat() {
-        return getCatWithResponse().getValue();
+        return getCatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -633,6 +893,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      *
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putCatWithResponseAsync(Cat cat, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (cat == null) {
+            return Mono.error(new IllegalArgumentException("Parameter cat is required and cannot be null."));
+        } else {
+            cat.validate();
+        }
+        final String accept = "application/json";
+        return service.putCat(this.getHost(), cat, accept, context);
+    }
+
+    /**
+     * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     *
+     * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -647,14 +931,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      *
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putCatAsync(Cat cat, Context context) {
+        return putCatWithResponseAsync(cat, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     *
+     * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putCatWithResponse(Cat cat) {
-        return putCatWithResponseAsync(cat).block();
+    public Response<String> putCatWithResponse(Cat cat, Context context) {
+        return putCatWithResponseAsync(cat, context).block();
     }
 
     /**
@@ -668,7 +968,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putCat(Cat cat) {
-        return putCatWithResponse(cat).getValue();
+        return putCatWithResponse(cat, Context.NONE).getValue();
     }
 
     /**
@@ -691,6 +991,25 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
+     *     with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Kitten>> getKittenWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getKitten(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false on
@@ -704,14 +1023,31 @@ public final class MultipleInheritanceServiceClient {
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false on
+     *     successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Kitten> getKittenAsync(Context context) {
+        return getKittenWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
      *     with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Kitten> getKittenWithResponse() {
-        return getKittenWithResponseAsync().block();
+    public Response<Kitten> getKittenWithResponse(Context context) {
+        return getKittenWithResponseAsync(context).block();
     }
 
     /**
@@ -723,7 +1059,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Kitten getKitten() {
-        return getKittenWithResponse().getValue();
+        return getKittenWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -753,6 +1089,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      *
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<String>> putKittenWithResponseAsync(Kitten kitten, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (kitten == null) {
+            return Mono.error(new IllegalArgumentException("Parameter kitten is required and cannot be null."));
+        } else {
+            kitten.validate();
+        }
+        final String accept = "application/json";
+        return service.putKitten(this.getHost(), kitten, accept, context);
+    }
+
+    /**
+     * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     *
+     * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -767,14 +1127,30 @@ public final class MultipleInheritanceServiceClient {
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      *
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> putKittenAsync(Kitten kitten, Context context) {
+        return putKittenWithResponseAsync(kitten, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     *
+     * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> putKittenWithResponse(Kitten kitten) {
-        return putKittenWithResponseAsync(kitten).block();
+    public Response<String> putKittenWithResponse(Kitten kitten, Context context) {
+        return putKittenWithResponseAsync(kitten, context).block();
     }
 
     /**
@@ -788,6 +1164,6 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putKitten(Kitten kitten) {
-        return putKittenWithResponse(kitten).getValue();
+        return putKittenWithResponse(kitten, Context.NONE).getValue();
     }
 }
