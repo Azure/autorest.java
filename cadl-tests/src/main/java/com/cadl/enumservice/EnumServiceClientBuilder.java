@@ -47,7 +47,8 @@ public final class EnumServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("cadl-enumservice.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("cadl-enumservice.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

@@ -44,7 +44,8 @@ public final class ReadonlyPropertiesClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("readonlyproperties.properties");
+    @Generated
+    private static final Map<String, String> properties = CoreUtils.getProperties("readonlyproperties.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

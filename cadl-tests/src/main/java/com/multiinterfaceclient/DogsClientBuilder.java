@@ -44,7 +44,7 @@ public final class DogsClientBuilder implements HttpTrait<DogsClientBuilder>, Co
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("multiinterfaceclient.properties");
+    private static final Map<String, String> properties = CoreUtils.getProperties("multiinterfaceclient.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

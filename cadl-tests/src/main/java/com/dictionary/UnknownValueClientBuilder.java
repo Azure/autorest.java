@@ -44,7 +44,7 @@ public final class UnknownValueClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("dictionary.properties");
+    @Generated private static final Map<String, String> properties = CoreUtils.getProperties("dictionary.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

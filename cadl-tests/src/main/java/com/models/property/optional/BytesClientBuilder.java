@@ -44,7 +44,8 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("models-property-optional.properties");
+    private static final Map<String, String> properties =
+            CoreUtils.getProperties("models-property-optional.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

@@ -45,7 +45,7 @@ public final class ResiliencyDevDrivenClientBuilder
     @Generated private static final String SDK_VERSION = "version";
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("resiliency-devdriven.properties");
+    private static final Map<String, String> properties = CoreUtils.getProperties("resiliency-devdriven.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 

@@ -57,7 +57,7 @@ public final class AuthClientBuilder
 
     @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://api.example.com/.default"};
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("cadl-auth.properties");
+    @Generated private static final Map<String, String> properties = CoreUtils.getProperties("cadl-auth.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
