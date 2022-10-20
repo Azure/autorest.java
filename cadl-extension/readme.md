@@ -10,7 +10,7 @@ Install [Cadl](https://github.com/microsoft/cadl/) 0.36.
 
 Follow [Cadl Getting Started](https://github.com/microsoft/cadl/#using-node--npm) to initialize your Cadl project.
 
-Make sure `cadl compile .` runs correctly.
+Make sure `npx cadl compile .` runs correctly.
 
 # Add Cadl-Java
 
@@ -36,7 +36,7 @@ emitters:
 
 # Generate Java
 
-Same `cadl compile .` or `cadl compile . --outputPath=<target-folder>`.
+Same `npx cadl compile .` or `npx cadl compile . --outputPath=<target-folder>`.
 
 If `outputPath` option is not provided, generated Java code will be under `cadl-output` folder.
 
