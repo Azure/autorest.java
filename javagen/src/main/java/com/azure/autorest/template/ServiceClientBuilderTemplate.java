@@ -486,8 +486,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
-            function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
-            function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
+            function.line("String clientName = PROPERTIES.getOrDefault(SDK_NAME, \"UnknownName\");");
+            function.line("String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
             function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
