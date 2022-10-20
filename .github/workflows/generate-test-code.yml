@@ -20,14 +20,19 @@ jobs:
           npm install -g autorest
           npm install --no-bin-links
 
-      - name: Build and Package
+      - name: Build autorest-java, install modules
         run: |
-          mvn package -f pom.xml -P local --no-transfer-progress
-          npm pack
+          mvn package install -f pom.xml -P local,cadl --no-transfer-progress
 
-      - name: Generate code
+      - name: Generate test code for autorest-java
         shell: pwsh
         run: |
+          ./Generate.ps1
+
+      - name: Generate test code for cadl-java
+        shell: pwsh
+        run: |
+          cd cadl-test
           ./Generate.ps1
 
       - name: Commit generated code
