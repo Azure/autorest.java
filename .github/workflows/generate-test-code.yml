@@ -32,8 +32,9 @@ jobs:
       - name: Generate test code for cadl-java
         shell: pwsh
         run: |
-          cd cadl-test
+          cd cadl-tests
           ./Generate.ps1
+          cd ..
 
       - name: Commit generated code
         run: |
