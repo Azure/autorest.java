@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodNamer;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
@@ -227,7 +228,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
+        String beginAsyncMethodName = MethodNamer.getLroBeginAsyncMethodName(restAPIMethod.getName());
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());
@@ -278,7 +279,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
-        String beginAsyncMethodName = "begin" + CodeNamer.toPascalCase(restAPIMethod.getSimpleAsyncMethodName());
+        String beginAsyncMethodName = MethodNamer.getLroBeginAsyncMethodName(restAPIMethod.getName());
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", beginAsyncMethodName, clientMethod.getArgumentList());

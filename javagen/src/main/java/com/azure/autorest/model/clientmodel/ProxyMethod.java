@@ -12,6 +12,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 
@@ -234,23 +235,23 @@ public class ProxyMethod {
     }
 
     public final String getPagingAsyncSinglePageMethodName() {
-        return getName() + "SinglePageAsync";
+        return MethodNamer.getPagingAsyncSinglePageMethodName(getName());
     }
 
     public final String getPagingSinglePageMethodName() {
-        return getName() + "SinglePage";
+        return MethodNamer.getPagingSinglePageMethodName(getName());
     }
 
     public final String getSimpleAsyncMethodName() {
-        return getName() + "Async";
+        return MethodNamer.getSimpleAsyncMethodName(getName());
     }
 
     public final String getSimpleAsyncRestResponseMethodName() {
-        return getName() + "WithResponseAsync";
+        return MethodNamer.getSimpleAsyncRestResponseMethodName(getName());
     }
 
     public final String getSimpleRestResponseMethodName() {
-        return getName() + "WithResponse";
+        return MethodNamer.getSimpleRestResponseMethodName(getName());
     }
 
     public final Set<String> getResponseContentTypes() {

@@ -226,7 +226,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<OperationStatusResourceResource> statusMonitor(String name, String operationId) {
+    public Mono<OperationStatusResourceResource> statusMonitorConvenience(String name, String operationId) {
         // Generated convenience method for statusMonitorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusMonitorWithResponse(name, operationId, requestOptions)

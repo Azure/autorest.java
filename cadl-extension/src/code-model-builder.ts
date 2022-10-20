@@ -1,7 +1,6 @@
 import {
   ArrayModelType,
   BooleanLiteral,
-  DecoratedType,
   Enum,
   getDoc,
   getEffectiveModelType,
@@ -93,10 +92,11 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
 } from "@autorest/codemodel";
-import { Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
+import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
+import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -275,8 +275,6 @@ export class CodeModelBuilder {
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const opId = `${groupName}_${op.operation.name}`;
 
-    const requireConvenienceMethod = this.isConvenienceMethod(op);
-
     const operation = new CodeModelOperation(op.operation.name, this.getDoc(op.operation), {
       operationId: opId,
       summary: this.getSummary(op.operation),
@@ -285,10 +283,12 @@ export class CodeModelBuilder {
           version: this.version,
         },
       ],
-      extensions: {
-        convenienceMethod: requireConvenienceMethod,
-      },
     });
+
+    const convenienceApiName = this.getConvenienceApiName(op);
+    if (convenienceApiName) {
+      operation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    }
 
     // cache for later reference from operationLinks
     this.operationCache.set(op.operation, operation);
@@ -440,7 +440,7 @@ export class CodeModelBuilder {
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-      if (op.extensions?.convenienceMethod) {
+      if (op.convenienceApi) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
       }
 
@@ -509,7 +509,7 @@ export class CodeModelBuilder {
 
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-    if (op.extensions?.convenienceMethod) {
+    if (op.convenienceApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
     }
   }
@@ -598,7 +598,7 @@ export class CodeModelBuilder {
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
-        if (op.extensions?.convenienceMethod) {
+        if (op.convenienceApi) {
           this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceMethod] });
         }
       }
@@ -1201,11 +1201,10 @@ export class CodeModelBuilder {
     }
   }
 
-  private isConvenienceMethod(op: HttpOperation) {
+  private getConvenienceApiName(op: HttpOperation): string | undefined {
     // check @convenienceMethod
-    let hasConvenienceMethod =
-      hasDecorator(op.operation, "$convenienceMethod") || hasDecorator(op.container, "$convenienceMethod");
-    if (!hasConvenienceMethod) {
+    let convenienceApiName = getConvenienceAPIName(this.program, op.operation);
+    if (!convenienceApiName) {
       // check @extension with x-ms-convenient-api=true
       const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
       for (const extensionDecorator of extensionDecorators) {
@@ -1214,13 +1213,13 @@ export class CodeModelBuilder {
           const value = extensionDecorator.args[1].value;
 
           if (name === "x-ms-convenient-api" && value === true) {
-            hasConvenienceMethod = true;
+            convenienceApiName = op.operation.name;
             break;
           }
         }
       }
     }
-    return hasConvenienceMethod;
+    return convenienceApiName;
   }
 
   private _stringSchema?: StringSchema;
@@ -1436,6 +1435,6 @@ function containsIgnoreCase(stringList: string[], str: string) {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
 }
 
-function hasDecorator(type: DecoratedType, name: string): boolean {
-  return type.decorators.find((it) => it.decorator.name === name) !== undefined;
-}
+// function hasDecorator(type: DecoratedType, name: string): boolean {
+//   return type.decorators.find((it) => it.decorator.name === name) !== undefined;
+// }
