@@ -135,13 +135,4 @@ public class XmsExtensions {
     public void setXmsExamples(XmsExamples xmsExamples) {
         this.xmsExamples = xmsExamples;
     }
-
-    // temporary
-    private boolean convenienceMethod = false;
-    public boolean isConvenienceMethod() {
-        return convenienceMethod;
-    }
-    public void setConvenienceMethod(boolean convenienceMethod) {
-        this.convenienceMethod = convenienceMethod;
-    }
 }

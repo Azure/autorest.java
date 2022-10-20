@@ -79,6 +79,8 @@ public class Operation extends Metadata {
 
     private Map<String, OperationLink> operationLinks;
 
+    private ConvenienceApi convenienceApi;
+
     // internal
     private OperationGroup operationGroup;
 
@@ -310,5 +312,16 @@ public class Operation extends Metadata {
 
     public void setOperationLinks(Map<String, OperationLink> operationLinks) {
         this.operationLinks = operationLinks;
+    }
+
+    /**
+     * @return the configuration of convenience API
+     */
+    public ConvenienceApi getConvenienceApi() {
+        return convenienceApi;
+    }
+
+    public void setConvenienceApi(ConvenienceApi convenienceApi) {
+        this.convenienceApi = convenienceApi;
     }
 }

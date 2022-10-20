@@ -70,8 +70,8 @@ public final class PagedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Resource> list() {
+    public PagedIterable<Resource> listConvenience() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        return new PagedIterable<>(client.listConvenience());
     }
 }
