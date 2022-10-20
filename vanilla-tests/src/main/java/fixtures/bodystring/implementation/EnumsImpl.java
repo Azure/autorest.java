@@ -117,6 +117,26 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Colors>> getNotExpandableWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNotExpandable(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' on successful
@@ -130,14 +150,31 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Colors> getNotExpandableAsync(Context context) {
+        return getNotExpandableWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Colors> getNotExpandableWithResponse() {
-        return getNotExpandableWithResponseAsync().block();
+    public Response<Colors> getNotExpandableWithResponse(Context context) {
+        return getNotExpandableWithResponseAsync(context).block();
     }
 
     /**
@@ -149,7 +186,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getNotExpandable() {
-        return getNotExpandableWithResponse().getValue();
+        return getNotExpandableWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -179,6 +216,29 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (stringBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putNotExpandable(this.client.getHost(), stringBody, accept, context);
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -193,14 +253,30 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNotExpandableAsync(Colors stringBody, Context context) {
+        return putNotExpandableWithResponseAsync(stringBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody string body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNotExpandableWithResponse(Colors stringBody) {
-        return putNotExpandableWithResponseAsync(stringBody).block();
+    public Response<Void> putNotExpandableWithResponse(Colors stringBody, Context context) {
+        return putNotExpandableWithResponseAsync(stringBody, context).block();
     }
 
     /**
@@ -213,7 +289,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableWithResponse(stringBody);
+        putNotExpandableWithResponse(stringBody, Context.NONE);
     }
 
     /**
@@ -237,6 +313,26 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Colors>> getReferencedWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getReferenced(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' on successful
@@ -250,14 +346,31 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Colors> getReferencedAsync(Context context) {
+        return getReferencedWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Colors> getReferencedWithResponse() {
-        return getReferencedWithResponseAsync().block();
+    public Response<Colors> getReferencedWithResponse(Context context) {
+        return getReferencedWithResponseAsync(context).block();
     }
 
     /**
@@ -269,7 +382,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getReferenced() {
-        return getReferencedWithResponse().getValue();
+        return getReferencedWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -299,6 +412,29 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (enumStringBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putReferenced(this.client.getHost(), enumStringBody, accept, context);
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody enum string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -313,14 +449,30 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putReferencedAsync(Colors enumStringBody, Context context) {
+        return putReferencedWithResponseAsync(enumStringBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedWithResponse(Colors enumStringBody) {
-        return putReferencedWithResponseAsync(enumStringBody).block();
+    public Response<Void> putReferencedWithResponse(Colors enumStringBody, Context context) {
+        return putReferencedWithResponseAsync(enumStringBody, context).block();
     }
 
     /**
@@ -333,7 +485,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(Colors enumStringBody) {
-        putReferencedWithResponse(enumStringBody);
+        putReferencedWithResponse(enumStringBody, Context.NONE);
     }
 
     /**
@@ -357,6 +509,26 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value 'green-color' from the constant along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<RefColorConstant>> getReferencedConstantWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getReferencedConstant(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value 'green-color' from the constant on successful completion of {@link Mono}.
@@ -369,13 +541,29 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value 'green-color' from the constant on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<RefColorConstant> getReferencedConstantAsync(Context context) {
+        return getReferencedConstantWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value 'green-color' from the constant along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<RefColorConstant> getReferencedConstantWithResponse() {
-        return getReferencedConstantWithResponseAsync().block();
+    public Response<RefColorConstant> getReferencedConstantWithResponse(Context context) {
+        return getReferencedConstantWithResponseAsync(context).block();
     }
 
     /**
@@ -387,7 +575,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantWithResponse().getValue();
+        return getReferencedConstantWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -419,6 +607,32 @@ public final class EnumsImpl implements Enums {
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
+            RefColorConstant enumStringBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (enumStringBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
+        } else {
+            enumStringBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, context);
+    }
+
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody enum string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -433,14 +647,30 @@ public final class EnumsImpl implements Enums {
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, Context context) {
+        return putReferencedConstantWithResponseAsync(enumStringBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody enum string body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putReferencedConstantWithResponse(RefColorConstant enumStringBody) {
-        return putReferencedConstantWithResponseAsync(enumStringBody).block();
+    public Response<Void> putReferencedConstantWithResponse(RefColorConstant enumStringBody, Context context) {
+        return putReferencedConstantWithResponseAsync(enumStringBody, context).block();
     }
 
     /**
@@ -453,6 +683,6 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantWithResponse(enumStringBody);
+        putReferencedConstantWithResponse(enumStringBody, Context.NONE);
     }
 }

@@ -80,6 +80,24 @@ public final class HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> head200WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.head200(this.client.getHost(), context);
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists on successful completion of {@link Mono}.
@@ -92,13 +110,29 @@ public final class HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> head200Async(Context context) {
+        return head200WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> head200WithResponse() {
-        return head200WithResponseAsync().block();
+    public Response<Boolean> head200WithResponse(Context context) {
+        return head200WithResponseAsync(context).block();
     }
 
     /**
@@ -110,7 +144,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head200() {
-        return head200WithResponse().getValue();
+        return head200WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -132,6 +166,24 @@ public final class HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> head204WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.head204(this.client.getHost(), context);
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists on successful completion of {@link Mono}.
@@ -144,13 +196,29 @@ public final class HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> head204Async(Context context) {
+        return head204WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> head204WithResponse() {
-        return head204WithResponseAsync().block();
+    public Response<Boolean> head204WithResponse(Context context) {
+        return head204WithResponseAsync(context).block();
     }
 
     /**
@@ -162,7 +230,7 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head204() {
-        return head204WithResponse().getValue();
+        return head204WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -184,6 +252,24 @@ public final class HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> head404WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.head404(this.client.getHost(), context);
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists on successful completion of {@link Mono}.
@@ -196,13 +282,29 @@ public final class HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> head404Async(Context context) {
+        return head404WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> head404WithResponse() {
-        return head404WithResponseAsync().block();
+    public Response<Boolean> head404WithResponse(Context context) {
+        return head404WithResponseAsync(context).block();
     }
 
     /**
@@ -214,6 +316,6 @@ public final class HttpSuccess {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {
-        return head404WithResponse().getValue();
+        return head404WithResponse(Context.NONE).getValue();
     }
 }

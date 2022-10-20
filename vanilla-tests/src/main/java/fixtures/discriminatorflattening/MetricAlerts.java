@@ -74,6 +74,25 @@ public final class MetricAlerts {
     /**
      * Retrieve an alert rule definition.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the metric alert resource along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<MetricAlertResource>> getWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.get(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Retrieve an alert rule definition.
+     *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource on successful completion of {@link Mono}.
@@ -86,13 +105,29 @@ public final class MetricAlerts {
     /**
      * Retrieve an alert rule definition.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the metric alert resource on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MetricAlertResource> getAsync(Context context) {
+        return getWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Retrieve an alert rule definition.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<MetricAlertResource> getWithResponse() {
-        return getWithResponseAsync().block();
+    public Response<MetricAlertResource> getWithResponse(Context context) {
+        return getWithResponseAsync(context).block();
     }
 
     /**
@@ -104,6 +139,6 @@ public final class MetricAlerts {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MetricAlertResource get() {
-        return getWithResponse().getValue();
+        return getWithResponse(Context.NONE).getValue();
     }
 }

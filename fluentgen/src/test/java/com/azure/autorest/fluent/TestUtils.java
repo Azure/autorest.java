@@ -49,8 +49,6 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("namespace", "com.azure.resourcemanager.mock");
             DEFAULT_SETTINGS.put("fluent", "lite");
             DEFAULT_SETTINGS.put("sync-methods", "all");
-            DEFAULT_SETTINGS.put("add-context-parameter", true);
-            DEFAULT_SETTINGS.put("context-client-method-parameter", true);
             DEFAULT_SETTINGS.put("client-side-validations", true);
             DEFAULT_SETTINGS.put("client-logger", true);
             DEFAULT_SETTINGS.put("generate-client-interfaces", true);

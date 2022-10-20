@@ -103,8 +103,6 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("generate-client-as-impl", true);
         SETTINGS_MAP.put("generate-sync-async-clients", true);
         SETTINGS_MAP.put("generate-builder-per-client", true);
-        SETTINGS_MAP.put("add-context-parameter", true);
-        SETTINGS_MAP.put("context-client-method-parameter", true);
         SETTINGS_MAP.put("sync-methods", "all");
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);

@@ -2,8 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("PartialUpdate")
-@serviceVersion("1.0.0")
+@service({
+  title: "PartialUpdate",
+  version: "1.0.0",
+})
 namespace Cadl.Partialupdate;
 
 model PartialUpdateModel {

@@ -118,8 +118,6 @@ public class JavaSettings {
                 getStringValue(host, "custom-types-subpackage", ""),
                 getStringValue(host, "fluent-subpackage", "fluent"),
                 getBooleanValue(host, "required-parameter-client-methods", false),
-                getBooleanValue(host, "add-context-parameter", false),
-                getBooleanValue(host, "context-client-method-parameter", false),
                 getBooleanValue(host, "generate-sync-async-clients", false),
                 getBooleanValue(host, "generate-builder-per-client", false),
                 getStringValue(host, "sync-methods", "essential"),
@@ -215,8 +213,6 @@ public class JavaSettings {
         String customTypesSubpackage,
         String fluentSubpackage,
         boolean requiredParameterClientMethods,
-        boolean addContextParameter,
-        boolean contextClientMethodParameter,
         boolean generateSyncAsyncClients,
         boolean generateBuilderPerClient,
         String syncMethods,
@@ -275,8 +271,6 @@ public class JavaSettings {
         this.customTypesSubpackage = customTypesSubpackage;
         this.fluentSubpackage = fluentSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
-        this.addContextParameter = addContextParameter || contextClientMethodParameter;
-        this.contextClientMethodParameter = contextClientMethodParameter;
         this.generateSyncAsyncClients = generateSyncAsyncClients;
         this.generateBuilderPerClient = generateBuilderPerClient;
         this.syncMethods = SyncMethodsGeneration.fromValue(syncMethods);
@@ -614,21 +608,6 @@ public class JavaSettings {
 
     public final boolean isRequiredParameterClientMethods() {
         return requiredParameterClientMethods;
-    }
-
-    /**
-     * Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
-     */
-    private boolean addContextParameter;
-
-    public final boolean isAddContextParameter() {
-        return addContextParameter;
-    }
-
-    private boolean contextClientMethodParameter;
-
-    public final boolean isContextClientMethodParameter() {
-        return contextClientMethodParameter;
     }
 
     private boolean generateSyncAsyncClients;

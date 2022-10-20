@@ -81,6 +81,29 @@ public final class Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName, Context context) {
+        if (accountName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+        }
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getEmpty(accountName, this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -95,14 +118,30 @@ public final class Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a 200 to test a valid base uri on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getEmptyAsync(String accountName, Context context) {
+        return getEmptyWithResponseAsync(accountName, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a 200 to test a valid base uri along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getEmptyWithResponse(String accountName) {
-        return getEmptyWithResponseAsync(accountName).block();
+    public Response<Void> getEmptyWithResponse(String accountName, Context context) {
+        return getEmptyWithResponseAsync(accountName, context).block();
     }
 
     /**
@@ -115,6 +154,6 @@ public final class Paths {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getEmpty(String accountName) {
-        getEmptyWithResponse(accountName);
+        getEmptyWithResponse(accountName, Context.NONE);
     }
 }

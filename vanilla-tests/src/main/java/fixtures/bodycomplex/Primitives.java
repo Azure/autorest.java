@@ -246,6 +246,26 @@ public final class Primitives {
     /**
      * Get complex types with integer properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<IntWrapper>> getIntWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInt(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties on successful completion of {@link Mono}.
@@ -258,13 +278,29 @@ public final class Primitives {
     /**
      * Get complex types with integer properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<IntWrapper> getIntAsync(Context context) {
+        return getIntWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<IntWrapper> getIntWithResponse() {
-        return getIntWithResponseAsync().block();
+    public Response<IntWrapper> getIntWithResponse(Context context) {
+        return getIntWithResponseAsync(context).block();
     }
 
     /**
@@ -276,7 +312,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public IntWrapper getInt() {
-        return getIntWithResponse().getValue();
+        return getIntWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -307,6 +343,31 @@ public final class Primitives {
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putInt(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -321,14 +382,30 @@ public final class Primitives {
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putIntAsync(IntWrapper complexBody, Context context) {
+        return putIntWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntWithResponse(IntWrapper complexBody) {
-        return putIntWithResponseAsync(complexBody).block();
+    public Response<Void> putIntWithResponse(IntWrapper complexBody, Context context) {
+        return putIntWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -341,7 +418,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putInt(IntWrapper complexBody) {
-        putIntWithResponse(complexBody);
+        putIntWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -364,6 +441,25 @@ public final class Primitives {
     /**
      * Get complex types with long properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<LongWrapper>> getLongWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getLong(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties on successful completion of {@link Mono}.
@@ -376,13 +472,29 @@ public final class Primitives {
     /**
      * Get complex types with long properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LongWrapper> getLongAsync(Context context) {
+        return getLongWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LongWrapper> getLongWithResponse() {
-        return getLongWithResponseAsync().block();
+    public Response<LongWrapper> getLongWithResponse(Context context) {
+        return getLongWithResponseAsync(context).block();
     }
 
     /**
@@ -394,7 +506,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LongWrapper getLong() {
-        return getLongWithResponse().getValue();
+        return getLongWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -425,6 +537,31 @@ public final class Primitives {
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putLong(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -439,14 +576,30 @@ public final class Primitives {
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLongAsync(LongWrapper complexBody, Context context) {
+        return putLongWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongWithResponse(LongWrapper complexBody) {
-        return putLongWithResponseAsync(complexBody).block();
+    public Response<Void> putLongWithResponse(LongWrapper complexBody, Context context) {
+        return putLongWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -459,7 +612,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLong(LongWrapper complexBody) {
-        putLongWithResponse(complexBody);
+        putLongWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -482,6 +635,25 @@ public final class Primitives {
     /**
      * Get complex types with float properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<FloatWrapper>> getFloatWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getFloat(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties on successful completion of {@link Mono}.
@@ -494,13 +666,29 @@ public final class Primitives {
     /**
      * Get complex types with float properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<FloatWrapper> getFloatAsync(Context context) {
+        return getFloatWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatWrapper> getFloatWithResponse() {
-        return getFloatWithResponseAsync().block();
+    public Response<FloatWrapper> getFloatWithResponse(Context context) {
+        return getFloatWithResponseAsync(context).block();
     }
 
     /**
@@ -512,7 +700,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatWrapper getFloat() {
-        return getFloatWithResponse().getValue();
+        return getFloatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -543,6 +731,31 @@ public final class Primitives {
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putFloat(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -557,14 +770,30 @@ public final class Primitives {
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFloatAsync(FloatWrapper complexBody, Context context) {
+        return putFloatWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatWithResponse(FloatWrapper complexBody) {
-        return putFloatWithResponseAsync(complexBody).block();
+    public Response<Void> putFloatWithResponse(FloatWrapper complexBody, Context context) {
+        return putFloatWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -577,7 +806,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloat(FloatWrapper complexBody) {
-        putFloatWithResponse(complexBody);
+        putFloatWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -601,6 +830,26 @@ public final class Primitives {
     /**
      * Get complex types with double properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDouble(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties on successful completion of {@link Mono}.
@@ -613,13 +862,29 @@ public final class Primitives {
     /**
      * Get complex types with double properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DoubleWrapper> getDoubleAsync(Context context) {
+        return getDoubleWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DoubleWrapper> getDoubleWithResponse() {
-        return getDoubleWithResponseAsync().block();
+    public Response<DoubleWrapper> getDoubleWithResponse(Context context) {
+        return getDoubleWithResponseAsync(context).block();
     }
 
     /**
@@ -631,7 +896,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DoubleWrapper getDouble() {
-        return getDoubleWithResponse().getValue();
+        return getDoubleWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -662,6 +927,31 @@ public final class Primitives {
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDouble(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -676,14 +966,30 @@ public final class Primitives {
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDoubleAsync(DoubleWrapper complexBody, Context context) {
+        return putDoubleWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody) {
-        return putDoubleWithResponseAsync(complexBody).block();
+    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody, Context context) {
+        return putDoubleWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -696,7 +1002,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDouble(DoubleWrapper complexBody) {
-        putDoubleWithResponse(complexBody);
+        putDoubleWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -719,6 +1025,25 @@ public final class Primitives {
     /**
      * Get complex types with bool properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BooleanWrapper>> getBoolWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getBool(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties on successful completion of {@link Mono}.
@@ -731,13 +1056,29 @@ public final class Primitives {
     /**
      * Get complex types with bool properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BooleanWrapper> getBoolAsync(Context context) {
+        return getBoolWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BooleanWrapper> getBoolWithResponse() {
-        return getBoolWithResponseAsync().block();
+    public Response<BooleanWrapper> getBoolWithResponse(Context context) {
+        return getBoolWithResponseAsync(context).block();
     }
 
     /**
@@ -749,7 +1090,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanWrapper getBool() {
-        return getBoolWithResponse().getValue();
+        return getBoolWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -780,6 +1121,31 @@ public final class Primitives {
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putBool(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -794,14 +1160,30 @@ public final class Primitives {
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBoolAsync(BooleanWrapper complexBody, Context context) {
+        return putBoolWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody) {
-        return putBoolWithResponseAsync(complexBody).block();
+    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody, Context context) {
+        return putBoolWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -814,7 +1196,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBool(BooleanWrapper complexBody) {
-        putBoolWithResponse(complexBody);
+        putBoolWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -838,6 +1220,26 @@ public final class Primitives {
     /**
      * Get complex types with string properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<StringWrapper>> getStringWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getString(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties on successful completion of {@link Mono}.
@@ -850,13 +1252,29 @@ public final class Primitives {
     /**
      * Get complex types with string properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<StringWrapper> getStringAsync(Context context) {
+        return getStringWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<StringWrapper> getStringWithResponse() {
-        return getStringWithResponseAsync().block();
+    public Response<StringWrapper> getStringWithResponse(Context context) {
+        return getStringWithResponseAsync(context).block();
     }
 
     /**
@@ -868,7 +1286,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StringWrapper getString() {
-        return getStringWithResponse().getValue();
+        return getStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -899,6 +1317,31 @@ public final class Primitives {
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putString(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -913,14 +1356,30 @@ public final class Primitives {
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putStringAsync(StringWrapper complexBody, Context context) {
+        return putStringWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringWithResponse(StringWrapper complexBody) {
-        return putStringWithResponseAsync(complexBody).block();
+    public Response<Void> putStringWithResponse(StringWrapper complexBody, Context context) {
+        return putStringWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -933,7 +1392,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putString(StringWrapper complexBody) {
-        putStringWithResponse(complexBody);
+        putStringWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -956,6 +1415,25 @@ public final class Primitives {
     /**
      * Get complex types with date properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DateWrapper>> getDateWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDate(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties on successful completion of {@link Mono}.
@@ -968,13 +1446,29 @@ public final class Primitives {
     /**
      * Get complex types with date properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DateWrapper> getDateAsync(Context context) {
+        return getDateWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DateWrapper> getDateWithResponse() {
-        return getDateWithResponseAsync().block();
+    public Response<DateWrapper> getDateWithResponse(Context context) {
+        return getDateWithResponseAsync(context).block();
     }
 
     /**
@@ -986,7 +1480,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DateWrapper getDate() {
-        return getDateWithResponse().getValue();
+        return getDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1017,6 +1511,31 @@ public final class Primitives {
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDate(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1031,14 +1550,30 @@ public final class Primitives {
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateAsync(DateWrapper complexBody, Context context) {
+        return putDateWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateWithResponse(DateWrapper complexBody) {
-        return putDateWithResponseAsync(complexBody).block();
+    public Response<Void> putDateWithResponse(DateWrapper complexBody, Context context) {
+        return putDateWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -1051,7 +1586,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDate(DateWrapper complexBody) {
-        putDateWithResponse(complexBody);
+        putDateWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1075,6 +1610,26 @@ public final class Primitives {
     /**
      * Get complex types with datetime properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties on successful completion of {@link Mono}.
@@ -1087,13 +1642,29 @@ public final class Primitives {
     /**
      * Get complex types with datetime properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DatetimeWrapper> getDateTimeAsync(Context context) {
+        return getDateTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DatetimeWrapper> getDateTimeWithResponse() {
-        return getDateTimeWithResponseAsync().block();
+    public Response<DatetimeWrapper> getDateTimeWithResponse(Context context) {
+        return getDateTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -1105,7 +1676,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DatetimeWrapper getDateTime() {
-        return getDateTimeWithResponse().getValue();
+        return getDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1137,6 +1708,31 @@ public final class Primitives {
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDateTime(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1151,14 +1747,30 @@ public final class Primitives {
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeAsync(DatetimeWrapper complexBody, Context context) {
+        return putDateTimeWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody) {
-        return putDateTimeWithResponseAsync(complexBody).block();
+    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody, Context context) {
+        return putDateTimeWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -1171,7 +1783,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeWithResponse(complexBody);
+        putDateTimeWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1195,6 +1807,26 @@ public final class Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties on successful completion of {@link Mono}.
@@ -1207,13 +1839,29 @@ public final class Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(Context context) {
+        return getDateTimeRfc1123WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse() {
-        return getDateTimeRfc1123WithResponseAsync().block();
+    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse(Context context) {
+        return getDateTimeRfc1123WithResponseAsync(context).block();
     }
 
     /**
@@ -1225,7 +1873,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123WithResponse().getValue();
+        return getDateTimeRfc1123WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1257,6 +1905,32 @@ public final class Primitives {
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
+            Datetimerfc1123Wrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1271,14 +1945,30 @@ public final class Primitives {
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, Context context) {
+        return putDateTimeRfc1123WithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody).block();
+    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
+        return putDateTimeRfc1123WithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -1291,7 +1981,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123WithResponse(complexBody);
+        putDateTimeRfc1123WithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1315,6 +2005,26 @@ public final class Primitives {
     /**
      * Get complex types with duration properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<DurationWrapper>> getDurationWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDuration(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties on successful completion of {@link Mono}.
@@ -1327,13 +2037,29 @@ public final class Primitives {
     /**
      * Get complex types with duration properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DurationWrapper> getDurationAsync(Context context) {
+        return getDurationWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DurationWrapper> getDurationWithResponse() {
-        return getDurationWithResponseAsync().block();
+    public Response<DurationWrapper> getDurationWithResponse(Context context) {
+        return getDurationWithResponseAsync(context).block();
     }
 
     /**
@@ -1345,7 +2071,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationWrapper getDuration() {
-        return getDurationWithResponse().getValue();
+        return getDurationWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1377,6 +2103,31 @@ public final class Primitives {
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putDuration(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1391,14 +2142,30 @@ public final class Primitives {
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDurationAsync(DurationWrapper complexBody, Context context) {
+        return putDurationWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationWithResponse(DurationWrapper complexBody) {
-        return putDurationWithResponseAsync(complexBody).block();
+    public Response<Void> putDurationWithResponse(DurationWrapper complexBody, Context context) {
+        return putDurationWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -1411,7 +2178,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDuration(DurationWrapper complexBody) {
-        putDurationWithResponse(complexBody);
+        putDurationWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1434,6 +2201,25 @@ public final class Primitives {
     /**
      * Get complex types with byte properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<ByteWrapper>> getByteWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getByte(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties on successful completion of {@link Mono}.
@@ -1446,13 +2232,29 @@ public final class Primitives {
     /**
      * Get complex types with byte properties.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ByteWrapper> getByteAsync(Context context) {
+        return getByteWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ByteWrapper> getByteWithResponse() {
-        return getByteWithResponseAsync().block();
+    public Response<ByteWrapper> getByteWithResponse(Context context) {
+        return getByteWithResponseAsync(context).block();
     }
 
     /**
@@ -1464,7 +2266,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ByteWrapper getByte() {
-        return getByteWithResponse().getValue();
+        return getByteWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1495,6 +2297,31 @@ public final class Primitives {
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (complexBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        } else {
+            complexBody.validate();
+        }
+        final String accept = "application/json";
+        return service.putByte(this.client.getHost(), complexBody, accept, context);
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1509,14 +2336,30 @@ public final class Primitives {
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putByteAsync(ByteWrapper complexBody, Context context) {
+        return putByteWithResponseAsync(complexBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteWithResponse(ByteWrapper complexBody) {
-        return putByteWithResponseAsync(complexBody).block();
+    public Response<Void> putByteWithResponse(ByteWrapper complexBody, Context context) {
+        return putByteWithResponseAsync(complexBody, context).block();
     }
 
     /**
@@ -1529,6 +2372,6 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(ByteWrapper complexBody) {
-        putByteWithResponse(complexBody);
+        putByteWithResponse(complexBody, Context.NONE);
     }
 }

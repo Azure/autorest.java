@@ -98,6 +98,25 @@ public final class DurationOperations {
     /**
      * Get null duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Duration>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null duration value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value on successful completion of {@link Mono}.
@@ -110,13 +129,29 @@ public final class DurationOperations {
     /**
      * Get null duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null duration value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Duration> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null duration value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Duration> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<Duration> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -128,7 +163,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -158,6 +193,29 @@ public final class DurationOperations {
      * Put a positive duration value.
      *
      * @param durationBody duration body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (durationBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putPositiveDuration(this.client.getHost(), durationBody, accept, context);
+    }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody duration body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -172,14 +230,30 @@ public final class DurationOperations {
      * Put a positive duration value.
      *
      * @param durationBody duration body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putPositiveDurationAsync(Duration durationBody, Context context) {
+        return putPositiveDurationWithResponseAsync(durationBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody duration body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putPositiveDurationWithResponse(Duration durationBody) {
-        return putPositiveDurationWithResponseAsync(durationBody).block();
+    public Response<Void> putPositiveDurationWithResponse(Duration durationBody, Context context) {
+        return putPositiveDurationWithResponseAsync(durationBody, context).block();
     }
 
     /**
@@ -192,7 +266,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putPositiveDuration(Duration durationBody) {
-        putPositiveDurationWithResponse(durationBody);
+        putPositiveDurationWithResponse(durationBody, Context.NONE);
     }
 
     /**
@@ -215,6 +289,25 @@ public final class DurationOperations {
     /**
      * Get a positive duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Duration>> getPositiveDurationWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getPositiveDuration(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a positive duration value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value on successful completion of {@link Mono}.
@@ -227,13 +320,29 @@ public final class DurationOperations {
     /**
      * Get a positive duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a positive duration value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Duration> getPositiveDurationAsync(Context context) {
+        return getPositiveDurationWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get a positive duration value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Duration> getPositiveDurationWithResponse() {
-        return getPositiveDurationWithResponseAsync().block();
+    public Response<Duration> getPositiveDurationWithResponse(Context context) {
+        return getPositiveDurationWithResponseAsync(context).block();
     }
 
     /**
@@ -245,7 +354,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getPositiveDuration() {
-        return getPositiveDurationWithResponse().getValue();
+        return getPositiveDurationWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -268,6 +377,25 @@ public final class DurationOperations {
     /**
      * Get an invalid duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Duration>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get an invalid duration value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value on successful completion of {@link Mono}.
@@ -280,13 +408,29 @@ public final class DurationOperations {
     /**
      * Get an invalid duration value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an invalid duration value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Duration> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Duration> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<Duration> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -298,6 +442,6 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getInvalid() {
-        return getInvalidWithResponse().getValue();
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 }

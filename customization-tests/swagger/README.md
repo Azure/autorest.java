@@ -30,8 +30,6 @@ generate-client-interfaces: false
 sync-methods: all
 generate-sync-async-clients: true
 license-header: MICROSOFT_MIT_SMALL
-add-context-parameter: true
 models-subpackage: implementation.models
-context-client-method-parameter: true
 customization-class: src/main/java/BodyComplexCustomization.java
 ```

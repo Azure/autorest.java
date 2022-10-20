@@ -6,8 +6,10 @@ using Azure.Core.Foundations;
 
 @summary("summary of Naming")
 @doc("description of Naming")
-@serviceTitle("Naming")
-@serviceVersion("1.0.0")
+@service({
+  title: "Naming",
+  version: "1.0.0",
+})
 namespace Cadl.Naming;
 
 @summary("summary of Response")

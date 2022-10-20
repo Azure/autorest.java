@@ -245,6 +245,28 @@ public final class AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putArrayWithResponseAsync(List<Resource> resourceArray, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (resourceArray != null) {
+            resourceArray.forEach(e -> e.validate());
+        }
+        final String accept = "application/json";
+        return service.putArray(this.getHost(), resourceArray, accept, context);
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -272,14 +294,30 @@ public final class AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putArrayAsync(List<Resource> resourceArray, Context context) {
+        return putArrayWithResponseAsync(resourceArray, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putArrayWithResponse(List<Resource> resourceArray) {
-        return putArrayWithResponseAsync(resourceArray).block();
+    public Response<Void> putArrayWithResponse(List<Resource> resourceArray, Context context) {
+        return putArrayWithResponseAsync(resourceArray, context).block();
     }
 
     /**
@@ -292,7 +330,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArray(List<Resource> resourceArray) {
-        putArrayWithResponse(resourceArray);
+        putArrayWithResponse(resourceArray, Context.NONE);
     }
 
     /**
@@ -304,7 +342,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArray() {
         final List<Resource> resourceArray = null;
-        putArrayWithResponse(resourceArray);
+        putArrayWithResponse(resourceArray, Context.NONE);
     }
 
     /**
@@ -326,6 +364,24 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<FlattenedProduct>>> getArrayWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getArray(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array on successful completion of {@link Mono}.
@@ -338,13 +394,29 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as an Array on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<FlattenedProduct>> getArrayAsync(Context context) {
+        return getArrayWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as an Array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<FlattenedProduct>> getArrayWithResponse() {
-        return getArrayWithResponseAsync().block();
+    public Response<List<FlattenedProduct>> getArrayWithResponse(Context context) {
+        return getArrayWithResponseAsync(context).block();
     }
 
     /**
@@ -356,7 +428,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<FlattenedProduct> getArray() {
-        return getArrayWithResponse().getValue();
+        return getArrayWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -379,6 +451,29 @@ public final class AutoRestResourceFlatteningTestService {
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putWrappedArray(this.getHost(), resourceArray, accept, context));
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
+     * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putWrappedArrayWithResponseAsync(List<WrappedProduct> resourceArray, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (resourceArray != null) {
+            resourceArray.forEach(e -> e.validate());
+        }
+        final String accept = "application/json";
+        return service.putWrappedArray(this.getHost(), resourceArray, accept, context);
     }
 
     /**
@@ -415,14 +510,31 @@ public final class AutoRestResourceFlatteningTestService {
      * it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, Context context) {
+        return putWrappedArrayWithResponseAsync(resourceArray, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
+     * @param resourceArray External Resource as an Array to put.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putWrappedArrayWithResponse(List<WrappedProduct> resourceArray) {
-        return putWrappedArrayWithResponseAsync(resourceArray).block();
+    public Response<Void> putWrappedArrayWithResponse(List<WrappedProduct> resourceArray, Context context) {
+        return putWrappedArrayWithResponseAsync(resourceArray, context).block();
     }
 
     /**
@@ -436,7 +548,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
-        putWrappedArrayWithResponse(resourceArray);
+        putWrappedArrayWithResponse(resourceArray, Context.NONE);
     }
 
     /**
@@ -449,7 +561,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedArray() {
         final List<WrappedProduct> resourceArray = null;
-        putWrappedArrayWithResponse(resourceArray);
+        putWrappedArrayWithResponse(resourceArray, Context.NONE);
     }
 
     /**
@@ -473,6 +585,25 @@ public final class AutoRestResourceFlatteningTestService {
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
      * it's referenced in an array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<ProductWrapper>>> getWrappedArrayWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getWrappedArray(this.getHost(), accept, context);
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper on successful completion of {@link Mono}.
@@ -486,13 +617,30 @@ public final class AutoRestResourceFlatteningTestService {
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
      * it's referenced in an array.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of ProductWrapper on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<ProductWrapper>> getWrappedArrayAsync(Context context) {
+        return getWrappedArrayWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return array of ProductWrapper along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<ProductWrapper>> getWrappedArrayWithResponse() {
-        return getWrappedArrayWithResponseAsync().block();
+    public Response<List<ProductWrapper>> getWrappedArrayWithResponse(Context context) {
+        return getWrappedArrayWithResponseAsync(context).block();
     }
 
     /**
@@ -505,7 +653,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<ProductWrapper> getWrappedArray() {
-        return getWrappedArrayWithResponse().getValue();
+        return getWrappedArrayWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -541,6 +689,36 @@ public final class AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putDictionaryWithResponseAsync(
+            Map<String, FlattenedProduct> resourceDictionary, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (resourceDictionary != null) {
+            resourceDictionary
+                    .values()
+                    .forEach(
+                            e -> {
+                                if (e != null) {
+                                    e.validate();
+                                }
+                            });
+        }
+        final String accept = "application/json";
+        return service.putDictionary(this.getHost(), resourceDictionary, accept, context);
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -568,14 +746,30 @@ public final class AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, Context context) {
+        return putDictionaryWithResponseAsync(resourceDictionary, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDictionaryWithResponse(Map<String, FlattenedProduct> resourceDictionary) {
-        return putDictionaryWithResponseAsync(resourceDictionary).block();
+    public Response<Void> putDictionaryWithResponse(Map<String, FlattenedProduct> resourceDictionary, Context context) {
+        return putDictionaryWithResponseAsync(resourceDictionary, context).block();
     }
 
     /**
@@ -588,7 +782,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryWithResponse(resourceDictionary);
+        putDictionaryWithResponse(resourceDictionary, Context.NONE);
     }
 
     /**
@@ -600,7 +794,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionary() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
-        putDictionaryWithResponse(resourceDictionary);
+        putDictionaryWithResponse(resourceDictionary, Context.NONE);
     }
 
     /**
@@ -622,6 +816,24 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getDictionary(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary on successful completion of {@link Mono}.
@@ -634,13 +846,29 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a Dictionary on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, FlattenedProduct>> getDictionaryAsync(Context context) {
+        return getDictionaryWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a Dictionary along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Map<String, FlattenedProduct>> getDictionaryWithResponse() {
-        return getDictionaryWithResponseAsync().block();
+    public Response<Map<String, FlattenedProduct>> getDictionaryWithResponse(Context context) {
+        return getDictionaryWithResponseAsync(context).block();
     }
 
     /**
@@ -652,7 +880,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryWithResponse().getValue();
+        return getDictionaryWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -675,6 +903,29 @@ public final class AutoRestResourceFlatteningTestService {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.putResourceCollection(this.getHost(), resourceComplexObject, accept, context));
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putResourceCollectionWithResponseAsync(
+            ResourceCollection resourceComplexObject, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (resourceComplexObject != null) {
+            resourceComplexObject.validate();
+        }
+        final String accept = "application/json";
+        return service.putResourceCollection(this.getHost(), resourceComplexObject, accept, context);
     }
 
     /**
@@ -708,14 +959,30 @@ public final class AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, Context context) {
+        return putResourceCollectionWithResponseAsync(resourceComplexObject, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putResourceCollectionWithResponse(ResourceCollection resourceComplexObject) {
-        return putResourceCollectionWithResponseAsync(resourceComplexObject).block();
+    public Response<Void> putResourceCollectionWithResponse(ResourceCollection resourceComplexObject, Context context) {
+        return putResourceCollectionWithResponseAsync(resourceComplexObject, context).block();
     }
 
     /**
@@ -728,7 +995,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionWithResponse(resourceComplexObject);
+        putResourceCollectionWithResponse(resourceComplexObject, Context.NONE);
     }
 
     /**
@@ -740,7 +1007,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putResourceCollection() {
         final ResourceCollection resourceComplexObject = null;
-        putResourceCollectionWithResponse(resourceComplexObject);
+        putResourceCollectionWithResponse(resourceComplexObject, Context.NONE);
     }
 
     /**
@@ -763,6 +1030,25 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync(Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getResourceCollection(this.getHost(), accept, context);
+    }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection on successful completion of {@link Mono}.
@@ -775,13 +1061,29 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return external Resource as a ResourceCollection on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResourceCollection> getResourceCollectionAsync(Context context) {
+        return getResourceCollectionWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return external Resource as a ResourceCollection along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ResourceCollection> getResourceCollectionWithResponse() {
-        return getResourceCollectionWithResponseAsync().block();
+    public Response<ResourceCollection> getResourceCollectionWithResponse(Context context) {
+        return getResourceCollectionWithResponseAsync(context).block();
     }
 
     /**
@@ -793,7 +1095,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionWithResponse().getValue();
+        return getResourceCollectionWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -816,6 +1118,29 @@ public final class AutoRestResourceFlatteningTestService {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.putSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<SimpleProduct>> putSimpleProductWithResponseAsync(
+            SimpleProduct simpleBodyProduct, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (simpleBodyProduct != null) {
+            simpleBodyProduct.validate();
+        }
+        final String accept = "application/json";
+        return service.putSimpleProduct(this.getHost(), simpleBodyProduct, accept, context);
     }
 
     /**
@@ -849,14 +1174,31 @@ public final class AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      *
      * @param simpleBodyProduct Simple body product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, Context context) {
+        return putSimpleProductWithResponseAsync(simpleBodyProduct, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the product documentation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SimpleProduct> putSimpleProductWithResponse(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductWithResponseAsync(simpleBodyProduct).block();
+    public Response<SimpleProduct> putSimpleProductWithResponse(SimpleProduct simpleBodyProduct, Context context) {
+        return putSimpleProductWithResponseAsync(simpleBodyProduct, context).block();
     }
 
     /**
@@ -870,7 +1212,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductWithResponse(simpleBodyProduct).getValue();
+        return putSimpleProductWithResponse(simpleBodyProduct, Context.NONE).getValue();
     }
 
     /**
@@ -883,7 +1225,7 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProduct() {
         final SimpleProduct simpleBodyProduct = null;
-        return putSimpleProductWithResponse(simpleBodyProduct).getValue();
+        return putSimpleProductWithResponse(simpleBodyProduct, Context.NONE).getValue();
     }
 
     /**
@@ -933,6 +1275,56 @@ public final class AutoRestResourceFlatteningTestService {
         SimpleProduct simpleBodyProduct = simpleBodyProductInternal;
         return FluxUtil.withContext(
                 context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
+     * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
+     * @param genericValue Generic URL value.
+     * @param odataValue URL value.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
+            String genericValue,
+            String odataValue,
+            Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (productId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter productId is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        SimpleProduct simpleBodyProductInternal = null;
+        if (description != null
+                || maxProductDisplayName != null
+                || capacity != null
+                || genericValue != null
+                || odataValue != null) {
+            simpleBodyProductInternal = new SimpleProduct();
+            simpleBodyProductInternal.setProductId(productId);
+            simpleBodyProductInternal.setDescription(description);
+            simpleBodyProductInternal.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProductInternal.setCapacity(capacity);
+            simpleBodyProductInternal.setGenericValue(genericValue);
+            simpleBodyProductInternal.setOdataValue(odataValue);
+        }
+        SimpleProduct simpleBodyProduct = simpleBodyProductInternal;
+        return service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, accept, context);
     }
 
     /**
@@ -995,6 +1387,37 @@ public final class AutoRestResourceFlatteningTestService {
      * @param capacity Capacity of product. For example, 4 people.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleProduct> postFlattenedSimpleProductAsync(
+            String productId,
+            String description,
+            String maxProductDisplayName,
+            SimpleProductPropertiesMaxProductCapacity capacity,
+            String genericValue,
+            String odataValue,
+            Context context) {
+        return postFlattenedSimpleProductWithResponseAsync(
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     *     example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
+     * @param maxProductDisplayName Display name of product.
+     * @param capacity Capacity of product. For example, 4 people.
+     * @param genericValue Generic URL value.
+     * @param odataValue URL value.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1007,9 +1430,10 @@ public final class AutoRestResourceFlatteningTestService {
             String maxProductDisplayName,
             SimpleProductPropertiesMaxProductCapacity capacity,
             String genericValue,
-            String odataValue) {
+            String odataValue,
+            Context context) {
         return postFlattenedSimpleProductWithResponseAsync(
-                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue, context)
                 .block();
     }
 
@@ -1037,7 +1461,7 @@ public final class AutoRestResourceFlatteningTestService {
             String genericValue,
             String odataValue) {
         return postFlattenedSimpleProductWithResponse(
-                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue, Context.NONE)
                 .getValue();
     }
 
@@ -1059,7 +1483,7 @@ public final class AutoRestResourceFlatteningTestService {
         final String genericValue = null;
         final String odataValue = null;
         return postFlattenedSimpleProductWithResponse(
-                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue)
+                        productId, description, maxProductDisplayName, capacity, genericValue, odataValue, Context.NONE)
                 .getValue();
     }
 
@@ -1102,6 +1526,40 @@ public final class AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      *
      * @param flattenParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(
+            FlattenParameterGroup flattenParameterGroup, Context context) {
+        if (this.getHost() == null) {
+            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
+        }
+        if (flattenParameterGroup == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+        } else {
+            flattenParameterGroup.validate();
+        }
+        final String accept = "application/json";
+        String name = flattenParameterGroup.getName();
+        SimpleProduct simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.setProductId(flattenParameterGroup.getProductId());
+        simpleBodyProduct.setDescription(flattenParameterGroup.getDescription());
+        simpleBodyProduct.setMaxProductDisplayName(flattenParameterGroup.getMaxProductDisplayName());
+        simpleBodyProduct.setCapacity(flattenParameterGroup.getCapacity());
+        simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
+        simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
+        return service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, accept, context);
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1117,6 +1575,24 @@ public final class AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      *
      * @param flattenParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the product documentation on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(
+            FlattenParameterGroup flattenParameterGroup, Context context) {
+        return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup, context)
+                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1124,8 +1600,8 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<SimpleProduct> putSimpleProductWithGroupingWithResponse(
-            FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup).block();
+            FlattenParameterGroup flattenParameterGroup, Context context) {
+        return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup, context).block();
     }
 
     /**
@@ -1139,6 +1615,6 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingWithResponse(flattenParameterGroup).getValue();
+        return putSimpleProductWithGroupingWithResponse(flattenParameterGroup, Context.NONE).getValue();
     }
 }

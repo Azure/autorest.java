@@ -118,6 +118,37 @@ public final class Formdataurlencodeds {
      * @param petAge How many years is it old?.
      * @param name Updated name of the pet.
      * @param status Updated status of the pet.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> updatePetWithFormWithResponseAsync(
+            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (petType == null) {
+            return Mono.error(new IllegalArgumentException("Parameter petType is required and cannot be null."));
+        }
+        if (petFood == null) {
+            return Mono.error(new IllegalArgumentException("Parameter petFood is required and cannot be null."));
+        }
+        return service.updatePetWithForm(this.client.getHost(), petId, petType, petFood, petAge, name, status, context);
+    }
+
+    /**
+     * Updates a pet in the store with form data.
+     *
+     * @param petId ID of pet that needs to be updated.
+     * @param petType Can take a value of dog, or cat, or fish.
+     * @param petFood Can take a value of meat, or fish, or plant.
+     * @param petAge How many years is it old?.
+     * @param name Updated name of the pet.
+     * @param status Updated status of the pet.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -159,6 +190,29 @@ public final class Formdataurlencodeds {
      * @param petAge How many years is it old?.
      * @param name Updated name of the pet.
      * @param status Updated status of the pet.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> updatePetWithFormAsync(
+            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+        return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Updates a pet in the store with form data.
+     *
+     * @param petId ID of pet that needs to be updated.
+     * @param petType Can take a value of dog, or cat, or fish.
+     * @param petFood Can take a value of meat, or fish, or plant.
+     * @param petAge How many years is it old?.
+     * @param name Updated name of the pet.
+     * @param status Updated status of the pet.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -166,8 +220,8 @@ public final class Formdataurlencodeds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> updatePetWithFormWithResponse(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
-        return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status).block();
+            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+        return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status, context).block();
     }
 
     /**
@@ -185,7 +239,7 @@ public final class Formdataurlencodeds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void updatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
-        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status);
+        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status, Context.NONE);
     }
 
     /**
@@ -203,7 +257,7 @@ public final class Formdataurlencodeds {
     public void updatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge) {
         final String name = null;
         final String status = null;
-        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status);
+        updatePetWithFormWithResponse(petId, petType, petFood, petAge, name, status, Context.NONE);
     }
 
     /**
@@ -242,6 +296,35 @@ public final class Formdataurlencodeds {
      *
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> partialConstantBodyWithResponseAsync(
+            String serviceParam, String accessToken, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (serviceParam == null) {
+            return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
+        }
+        if (accessToken == null) {
+            return Mono.error(new IllegalArgumentException("Parameter accessToken is required and cannot be null."));
+        }
+        final String grantType = "access_token";
+        return service.partialConstantBody(this.client.getHost(), grantType, serviceParam, accessToken, context);
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -258,14 +341,33 @@ public final class Formdataurlencodeds {
      *
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> partialConstantBodyAsync(String serviceParam, String accessToken, Context context) {
+        return partialConstantBodyWithResponseAsync(serviceParam, accessToken, context)
+                .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
+     *
+     * @param serviceParam Indicates the name of your Azure container registry.
+     * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> partialConstantBodyWithResponse(String serviceParam, String accessToken) {
-        return partialConstantBodyWithResponseAsync(serviceParam, accessToken).block();
+    public Response<Void> partialConstantBodyWithResponse(String serviceParam, String accessToken, Context context) {
+        return partialConstantBodyWithResponseAsync(serviceParam, accessToken, context).block();
     }
 
     /**
@@ -280,6 +382,6 @@ public final class Formdataurlencodeds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void partialConstantBody(String serviceParam, String accessToken) {
-        partialConstantBodyWithResponse(serviceParam, accessToken);
+        partialConstantBodyWithResponse(serviceParam, accessToken, Context.NONE);
     }
 }

@@ -172,6 +172,25 @@ public final class Ints {
     /**
      * Get null Int value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Integer>> getNullWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNull(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null Int value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value on successful completion of {@link Mono}.
@@ -184,13 +203,29 @@ public final class Ints {
     /**
      * Get null Int value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Int value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Integer> getNullAsync(Context context) {
+        return getNullWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null Int value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Integer> getNullWithResponse() {
-        return getNullWithResponseAsync().block();
+    public Response<Integer> getNullWithResponse(Context context) {
+        return getNullWithResponseAsync(context).block();
     }
 
     /**
@@ -202,7 +237,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getNull() {
-        return getNullWithResponse().getValue();
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -225,6 +260,25 @@ public final class Ints {
     /**
      * Get invalid Int value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Integer>> getInvalidWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalid(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid Int value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value on successful completion of {@link Mono}.
@@ -237,13 +291,29 @@ public final class Ints {
     /**
      * Get invalid Int value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Int value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Integer> getInvalidAsync(Context context) {
+        return getInvalidWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid Int value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Integer> getInvalidWithResponse() {
-        return getInvalidWithResponseAsync().block();
+    public Response<Integer> getInvalidWithResponse(Context context) {
+        return getInvalidWithResponseAsync(context).block();
     }
 
     /**
@@ -255,7 +325,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getInvalid() {
-        return getInvalidWithResponse().getValue();
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -278,6 +348,25 @@ public final class Ints {
     /**
      * Get overflow Int32 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Integer>> getOverflowInt32WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getOverflowInt32(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get overflow Int32 value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value on successful completion of {@link Mono}.
@@ -290,13 +379,29 @@ public final class Ints {
     /**
      * Get overflow Int32 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int32 value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Integer> getOverflowInt32Async(Context context) {
+        return getOverflowInt32WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get overflow Int32 value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Integer> getOverflowInt32WithResponse() {
-        return getOverflowInt32WithResponseAsync().block();
+    public Response<Integer> getOverflowInt32WithResponse(Context context) {
+        return getOverflowInt32WithResponseAsync(context).block();
     }
 
     /**
@@ -308,7 +413,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getOverflowInt32() {
-        return getOverflowInt32WithResponse().getValue();
+        return getOverflowInt32WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -331,6 +436,25 @@ public final class Ints {
     /**
      * Get underflow Int32 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Integer>> getUnderflowInt32WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUnderflowInt32(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get underflow Int32 value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value on successful completion of {@link Mono}.
@@ -343,13 +467,29 @@ public final class Ints {
     /**
      * Get underflow Int32 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int32 value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Integer> getUnderflowInt32Async(Context context) {
+        return getUnderflowInt32WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get underflow Int32 value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Integer> getUnderflowInt32WithResponse() {
-        return getUnderflowInt32WithResponseAsync().block();
+    public Response<Integer> getUnderflowInt32WithResponse(Context context) {
+        return getUnderflowInt32WithResponseAsync(context).block();
     }
 
     /**
@@ -361,7 +501,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public int getUnderflowInt32() {
-        return getUnderflowInt32WithResponse().getValue();
+        return getUnderflowInt32WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -384,6 +524,25 @@ public final class Ints {
     /**
      * Get overflow Int64 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Long>> getOverflowInt64WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getOverflowInt64(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get overflow Int64 value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value on successful completion of {@link Mono}.
@@ -396,13 +555,29 @@ public final class Ints {
     /**
      * Get overflow Int64 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return overflow Int64 value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Long> getOverflowInt64Async(Context context) {
+        return getOverflowInt64WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get overflow Int64 value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Long> getOverflowInt64WithResponse() {
-        return getOverflowInt64WithResponseAsync().block();
+    public Response<Long> getOverflowInt64WithResponse(Context context) {
+        return getOverflowInt64WithResponseAsync(context).block();
     }
 
     /**
@@ -414,7 +589,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getOverflowInt64() {
-        return getOverflowInt64WithResponse().getValue();
+        return getOverflowInt64WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -437,6 +612,25 @@ public final class Ints {
     /**
      * Get underflow Int64 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Long>> getUnderflowInt64WithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUnderflowInt64(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get underflow Int64 value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value on successful completion of {@link Mono}.
@@ -449,13 +643,29 @@ public final class Ints {
     /**
      * Get underflow Int64 value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return underflow Int64 value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Long> getUnderflowInt64Async(Context context) {
+        return getUnderflowInt64WithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get underflow Int64 value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Long> getUnderflowInt64WithResponse() {
-        return getUnderflowInt64WithResponseAsync().block();
+    public Response<Long> getUnderflowInt64WithResponse(Context context) {
+        return getUnderflowInt64WithResponseAsync(context).block();
     }
 
     /**
@@ -467,7 +677,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public long getUnderflowInt64() {
-        return getUnderflowInt64WithResponse().getValue();
+        return getUnderflowInt64WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -493,6 +703,26 @@ public final class Ints {
      * Put max int32 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMax32WithResponseAsync(int intBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMax32(this.client.getHost(), intBody, accept, context);
+    }
+
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -507,14 +737,30 @@ public final class Ints {
      * Put max int32 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMax32Async(int intBody, Context context) {
+        return putMax32WithResponseAsync(intBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody int body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMax32WithResponse(int intBody) {
-        return putMax32WithResponseAsync(intBody).block();
+    public Response<Void> putMax32WithResponse(int intBody, Context context) {
+        return putMax32WithResponseAsync(intBody, context).block();
     }
 
     /**
@@ -527,7 +773,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMax32(int intBody) {
-        putMax32WithResponse(intBody);
+        putMax32WithResponse(intBody, Context.NONE);
     }
 
     /**
@@ -553,6 +799,26 @@ public final class Ints {
      * Put max int64 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMax64WithResponseAsync(long intBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMax64(this.client.getHost(), intBody, accept, context);
+    }
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -567,14 +833,30 @@ public final class Ints {
      * Put max int64 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMax64Async(long intBody, Context context) {
+        return putMax64WithResponseAsync(intBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody int body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMax64WithResponse(long intBody) {
-        return putMax64WithResponseAsync(intBody).block();
+    public Response<Void> putMax64WithResponse(long intBody, Context context) {
+        return putMax64WithResponseAsync(intBody, context).block();
     }
 
     /**
@@ -587,7 +869,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMax64(long intBody) {
-        putMax64WithResponse(intBody);
+        putMax64WithResponse(intBody, Context.NONE);
     }
 
     /**
@@ -613,6 +895,26 @@ public final class Ints {
      * Put min int32 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMin32WithResponseAsync(int intBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMin32(this.client.getHost(), intBody, accept, context);
+    }
+
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -627,14 +929,30 @@ public final class Ints {
      * Put min int32 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMin32Async(int intBody, Context context) {
+        return putMin32WithResponseAsync(intBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody int body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMin32WithResponse(int intBody) {
-        return putMin32WithResponseAsync(intBody).block();
+    public Response<Void> putMin32WithResponse(int intBody, Context context) {
+        return putMin32WithResponseAsync(intBody, context).block();
     }
 
     /**
@@ -647,7 +965,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMin32(int intBody) {
-        putMin32WithResponse(intBody);
+        putMin32WithResponse(intBody, Context.NONE);
     }
 
     /**
@@ -673,6 +991,26 @@ public final class Ints {
      * Put min int64 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putMin64WithResponseAsync(long intBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.putMin64(this.client.getHost(), intBody, accept, context);
+    }
+
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -687,14 +1025,30 @@ public final class Ints {
      * Put min int64 value.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMin64Async(long intBody, Context context) {
+        return putMin64WithResponseAsync(intBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody int body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putMin64WithResponse(long intBody) {
-        return putMin64WithResponseAsync(intBody).block();
+    public Response<Void> putMin64WithResponse(long intBody, Context context) {
+        return putMin64WithResponseAsync(intBody, context).block();
     }
 
     /**
@@ -707,7 +1061,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMin64(long intBody) {
-        putMin64WithResponse(intBody);
+        putMin64WithResponse(intBody, Context.NONE);
     }
 
     /**
@@ -730,6 +1084,25 @@ public final class Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getUnixTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getUnixTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value on successful completion of {@link Mono}.
@@ -742,13 +1115,29 @@ public final class Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return datetime encoded as Unix time value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getUnixTimeAsync(Context context) {
+        return getUnixTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getUnixTimeWithResponse() {
-        return getUnixTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getUnixTimeWithResponse(Context context) {
+        return getUnixTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -760,7 +1149,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnixTime() {
-        return getUnixTimeWithResponse().getValue();
+        return getUnixTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -791,6 +1180,30 @@ public final class Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (intBody == null) {
+            return Mono.error(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        long intBodyConverted = intBody.toEpochSecond();
+        return service.putUnixTimeDate(this.client.getHost(), intBodyConverted, accept, context);
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -805,14 +1218,30 @@ public final class Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody int body.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putUnixTimeDateAsync(OffsetDateTime intBody, Context context) {
+        return putUnixTimeDateWithResponseAsync(intBody, context).flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody int body.
+     * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putUnixTimeDateWithResponse(OffsetDateTime intBody) {
-        return putUnixTimeDateWithResponseAsync(intBody).block();
+    public Response<Void> putUnixTimeDateWithResponse(OffsetDateTime intBody, Context context) {
+        return putUnixTimeDateWithResponseAsync(intBody, context).block();
     }
 
     /**
@@ -825,7 +1254,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUnixTimeDate(OffsetDateTime intBody) {
-        putUnixTimeDateWithResponse(intBody);
+        putUnixTimeDateWithResponse(intBody, Context.NONE);
     }
 
     /**
@@ -848,6 +1277,25 @@ public final class Ints {
     /**
      * Get invalid Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getInvalidUnixTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value on successful completion of {@link Mono}.
@@ -860,13 +1308,29 @@ public final class Ints {
     /**
      * Get invalid Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return invalid Unix time value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getInvalidUnixTimeAsync(Context context) {
+        return getInvalidUnixTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getInvalidUnixTimeWithResponse() {
-        return getInvalidUnixTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getInvalidUnixTimeWithResponse(Context context) {
+        return getInvalidUnixTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -878,7 +1342,7 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeWithResponse().getValue();
+        return getInvalidUnixTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -901,6 +1365,25 @@ public final class Ints {
     /**
      * Get null Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<OffsetDateTime>> getNullUnixTimeWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.getNullUnixTime(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get null Unix time value.
+     *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value on successful completion of {@link Mono}.
@@ -913,13 +1396,29 @@ public final class Ints {
     /**
      * Get null Unix time value.
      *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Unix time value on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OffsetDateTime> getNullUnixTimeAsync(Context context) {
+        return getNullUnixTimeWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<OffsetDateTime> getNullUnixTimeWithResponse() {
-        return getNullUnixTimeWithResponseAsync().block();
+    public Response<OffsetDateTime> getNullUnixTimeWithResponse(Context context) {
+        return getNullUnixTimeWithResponseAsync(context).block();
     }
 
     /**
@@ -931,6 +1430,6 @@ public final class Ints {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNullUnixTime() {
-        return getNullUnixTimeWithResponse().getValue();
+        return getNullUnixTimeWithResponse(Context.NONE).getValue();
     }
 }
