@@ -612,7 +612,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             if (!settings.isSyncStackEnabled()) {
-                function.methodReturn(String.format("%s(%s).block()", clientMethod.getPagingAsyncSinglePageMethodName(),
+                function.methodReturn(String.format("%s(%s).block()", restAPIMethod.getPagingAsyncSinglePageMethodName(),
                     clientMethod.getArgumentList()));
                 return;
             }
@@ -663,7 +663,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
-            function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+            function.methodReturn(String.format("new PagedIterable<>(%s(%s))", restAPIMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
     }
 
@@ -846,9 +846,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
         ProxyMethod restAPIMethod, JavaSettings settings) {
-        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+        String asyncMethodName = restAPIMethod.getSimpleAsyncMethodName();
         if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
-            asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+            asyncMethodName = restAPIMethod.getSimpleAsyncRestResponseMethodName();
         }
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");

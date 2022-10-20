@@ -405,8 +405,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         String modelSuffix = "WithModel";
                         createLroMethods(operation, builder, methods,
-                            "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix + "Async"),
-                            "begin" + CodeNamer.toPascalCase(proxyMethod.getName() + modelSuffix),
+                            methodNamer.getLroModelBeginAsyncMethodName(),
+                            methodNamer.getLroModelBeginMethodName(),
                             parameters, returnTypeHolder.syncReturnType, dpgMethodPollingDetailsWithModel, isProtocolMethod,
                             generateOnlyRequiredParameters, defaultOverloadType, settings);
 
@@ -575,6 +575,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                                     MethodVisibilityFunction visibilityFunction, ClientMethodParameter contextParameter,
                                                     boolean generateClientMethodWithOnlyRequiredParameters, MethodOverloadType defaultOverloadType) {
 
+        MethodNamer methodNamer = resolveMethodNamer(proxyMethod, operation.getConvenienceApi(), isProtocolMethod);
+
         Operation nextOperation = operation.getExtensions().getXmsPageable().getNextOperation();
         String nextLinkName = operation.getExtensions().getXmsPageable().getNextLinkName();
         String itemName = operation.getExtensions().getXmsPageable().getItemName();
@@ -597,7 +599,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             nextMethod, lroIntermediateType, nextLinkName, itemName);
         builder.methodPageDetails(details);
 
-        String pageMethodName = isSync ? proxyMethod.getPagingSinglePageMethodName() : proxyMethod.getPagingAsyncSinglePageMethodName();
+        String pageMethodName = isSync ? methodNamer.getPagingSinglePageMethodName() : methodNamer.getPagingAsyncSinglePageMethodName();
         ClientMethodType pageMethodType = isSync ? ClientMethodType.PagingSyncSinglePage : ClientMethodType.PagingAsyncSinglePage;
 
         // Only generate maximum overload of Paging###SinglePage API, and it should not be exposed to user.
@@ -624,8 +626,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         // Otherwise repeat what we just did but for next page client methods.
-        MethodNamer methodNamer = resolveMethodNamer(proxyMethod, operation.getConvenienceApi(), isProtocolMethod);
-
         pageMethodName = isSync ? methodNamer.getMethodName() : methodNamer.getSimpleAsyncMethodName();
         pageMethodType = isSync ? ClientMethodType.PagingSync : ClientMethodType.PagingAsync;
 
@@ -1058,6 +1058,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     private static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
         List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
         ReturnValue returnValue, MethodPageDetails details, ClientMethodParameter contextParameter) {
+
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
         withContextParameters.add(contextParameter);
 
@@ -1082,6 +1083,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     protected static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
         List<ClientMethodParameter> parameters, ClientMethodParameter contextParameter) {
+
         List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
         withContextParameters.add(contextParameter);
 

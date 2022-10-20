@@ -285,7 +285,7 @@ export class CodeModelBuilder {
       ],
     });
 
-    const convenienceApiName = this.getConvenienceApiName(op)
+    const convenienceApiName = this.getConvenienceApiName(op);
     if (convenienceApiName) {
       operation.convenienceApi = new ConvenienceApi(convenienceApiName);
     }

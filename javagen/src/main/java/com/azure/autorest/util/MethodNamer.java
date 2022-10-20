@@ -5,6 +5,34 @@ package com.azure.autorest.util;
 
 public class MethodNamer {
 
+    public static String getPagingAsyncSinglePageMethodName(String baseName) {
+        return baseName + "SinglePageAsync";
+    }
+
+    public static String getPagingSinglePageMethodName(String baseName) {
+        return baseName + "SinglePage";
+    }
+
+    public static String getSimpleAsyncMethodName(String baseName) {
+        return baseName + "Async";
+    }
+
+    public static String getSimpleAsyncRestResponseMethodName(String baseName) {
+        return baseName + "WithResponseAsync";
+    }
+
+    public static String getSimpleRestResponseMethodName(String baseName) {
+        return baseName + "WithResponse";
+    }
+
+    public static String getLroBeginAsyncMethodName(String baseName) {
+        return "begin" + CodeNamer.toPascalCase(baseName) + "Async";
+    }
+
+    public static String getLroBeginMethodName(String baseName) {
+        return "begin" + CodeNamer.toPascalCase(baseName);
+    }
+
     private final String baseName;
 
     public MethodNamer(String baseName) {
@@ -16,30 +44,38 @@ public class MethodNamer {
     }
 
     public String getPagingAsyncSinglePageMethodName() {
-        return this.getMethodName() + "SinglePageAsync";
+        return getPagingAsyncSinglePageMethodName(this.getMethodName());
     }
 
     public String getPagingSinglePageMethodName() {
-        return this.getMethodName() + "SinglePage";
+        return getPagingSinglePageMethodName(this.getMethodName());
     }
 
     public String getSimpleAsyncMethodName() {
-        return this.getMethodName() + "Async";
+        return getSimpleAsyncMethodName(this.getMethodName());
     }
 
     public String getSimpleAsyncRestResponseMethodName() {
-        return this.getMethodName() + "WithResponseAsync";
+        return getSimpleAsyncRestResponseMethodName(this.getMethodName());
     }
 
     public String getSimpleRestResponseMethodName() {
-        return this.getMethodName() + "WithResponse";
-    }
-
-    public String getLroBeginMethodName() {
-        return "begin" + CodeNamer.toPascalCase(this.getMethodName());
+        return getSimpleRestResponseMethodName(this.getMethodName());
     }
 
     public String getLroBeginAsyncMethodName() {
-        return "begin" + CodeNamer.toPascalCase(this.getSimpleAsyncMethodName());
+        return getLroBeginAsyncMethodName(this.getSimpleAsyncMethodName());
+    }
+
+    public String getLroBeginMethodName() {
+        return getLroBeginMethodName(this.getMethodName());
+    }
+
+    public String getLroModelBeginMethodName() {
+        return "begin" + CodeNamer.toPascalCase(this.getMethodName()) + "WithModel";
+    }
+
+    public String getLroModelBeginAsyncMethodName() {
+        return "begin" + CodeNamer.toPascalCase(this.getMethodName()) + "WithModel" + "Async";
     }
 }

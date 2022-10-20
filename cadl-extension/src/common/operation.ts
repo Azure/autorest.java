@@ -60,7 +60,7 @@ export class ConvenienceApi {
     this.name = name;
   }
 
-  name: string
+  name: string;
 }
 
 export class OperationLink {
