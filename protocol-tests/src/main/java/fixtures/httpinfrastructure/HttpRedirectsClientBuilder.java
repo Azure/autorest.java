@@ -124,6 +124,7 @@ public final class HttpRedirectsClientBuilder
     @Generated
     @Override
     public HttpRedirectsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

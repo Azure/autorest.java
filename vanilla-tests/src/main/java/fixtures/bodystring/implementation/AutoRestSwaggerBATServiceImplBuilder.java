@@ -126,6 +126,7 @@ public final class AutoRestSwaggerBATServiceImplBuilder
     @Generated
     @Override
     public AutoRestSwaggerBATServiceImplBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

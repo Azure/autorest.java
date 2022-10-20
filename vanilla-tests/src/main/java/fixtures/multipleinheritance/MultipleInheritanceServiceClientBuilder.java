@@ -125,6 +125,7 @@ public final class MultipleInheritanceServiceClientBuilder
     @Generated
     @Override
     public MultipleInheritanceServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

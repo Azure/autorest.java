@@ -124,6 +124,7 @@ public final class PolymorphismClientBuilder
     @Generated
     @Override
     public PolymorphismClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

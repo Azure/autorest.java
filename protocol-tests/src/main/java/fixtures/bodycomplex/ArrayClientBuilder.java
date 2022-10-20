@@ -123,6 +123,7 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     @Generated
     @Override
     public ArrayClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

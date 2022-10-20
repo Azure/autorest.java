@@ -124,6 +124,7 @@ public final class HttpFailureClientBuilder
     @Generated
     @Override
     public HttpFailureClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

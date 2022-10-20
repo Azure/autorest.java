@@ -123,6 +123,7 @@ public final class PathItemsClientBuilder
     @Generated
     @Override
     public PathItemsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

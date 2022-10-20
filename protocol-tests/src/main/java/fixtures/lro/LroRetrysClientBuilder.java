@@ -123,6 +123,7 @@ public final class LroRetrysClientBuilder
     @Generated
     @Override
     public LroRetrysClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

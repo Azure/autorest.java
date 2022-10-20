@@ -125,6 +125,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
     @Generated
     @Override
     public AutoRestRequiredOptionalTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

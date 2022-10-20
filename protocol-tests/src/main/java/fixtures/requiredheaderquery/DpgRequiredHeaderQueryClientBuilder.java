@@ -125,6 +125,7 @@ public final class DpgRequiredHeaderQueryClientBuilder
     @Generated
     @Override
     public DpgRequiredHeaderQueryClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

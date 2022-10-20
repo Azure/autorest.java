@@ -123,6 +123,7 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     @Generated
     @Override
     public DpgClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

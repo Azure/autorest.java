@@ -124,6 +124,7 @@ public final class FlattencomplexClientBuilder
     @Generated
     @Override
     public FlattencomplexClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

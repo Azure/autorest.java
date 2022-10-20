@@ -124,6 +124,7 @@ public final class MonitorManagementClientBuilder
     @Generated
     @Override
     public MonitorManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

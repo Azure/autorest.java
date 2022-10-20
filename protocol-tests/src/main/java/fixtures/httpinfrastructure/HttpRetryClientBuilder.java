@@ -124,6 +124,7 @@ public final class HttpRetryClientBuilder
     @Generated
     @Override
     public HttpRetryClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -125,6 +125,7 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
     @Generated
     @Override
     public AutoRestHttpInfrastructureTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

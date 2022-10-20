@@ -124,6 +124,7 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     @Override
     public AdditionalPropertiesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -125,6 +125,7 @@ public final class AutoRestResourceFlatteningTestServiceBuilder
     @Generated
     @Override
     public AutoRestResourceFlatteningTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

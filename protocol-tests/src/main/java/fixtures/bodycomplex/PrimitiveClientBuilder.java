@@ -124,6 +124,7 @@ public final class PrimitiveClientBuilder
     @Generated
     @Override
     public PrimitiveClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

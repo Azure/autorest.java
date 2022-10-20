@@ -122,6 +122,7 @@ public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, Co
     @Generated
     @Override
     public EnumClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

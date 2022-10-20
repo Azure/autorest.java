@@ -125,6 +125,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
     @Generated
     @Override
     public AutoRestParameterizedCustomHostTestClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

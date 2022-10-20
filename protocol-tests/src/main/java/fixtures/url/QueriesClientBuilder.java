@@ -123,6 +123,7 @@ public final class QueriesClientBuilder
     @Generated
     @Override
     public QueriesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -130,6 +130,7 @@ public final class AutoRestSwaggerBATDictionaryServiceBuilder
     @Generated
     @Override
     public AutoRestSwaggerBATDictionaryServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

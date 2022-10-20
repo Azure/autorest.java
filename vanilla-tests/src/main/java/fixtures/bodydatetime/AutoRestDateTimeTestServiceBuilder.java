@@ -125,6 +125,7 @@ public final class AutoRestDateTimeTestServiceBuilder
     @Generated
     @Override
     public AutoRestDateTimeTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

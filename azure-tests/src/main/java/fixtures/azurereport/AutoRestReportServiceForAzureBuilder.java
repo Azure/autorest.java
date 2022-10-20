@@ -125,6 +125,7 @@ public final class AutoRestReportServiceForAzureBuilder
     @Generated
     @Override
     public AutoRestReportServiceForAzureBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

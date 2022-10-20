@@ -130,6 +130,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
     @Generated
     @Override
     public ConstantAndClientParameterServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

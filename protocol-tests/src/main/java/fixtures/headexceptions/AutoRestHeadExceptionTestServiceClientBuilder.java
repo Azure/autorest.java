@@ -129,6 +129,7 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestHeadExceptionTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -125,6 +125,7 @@ public final class AutoRestPagingTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestPagingTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

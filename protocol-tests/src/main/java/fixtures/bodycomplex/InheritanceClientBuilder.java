@@ -124,6 +124,7 @@ public final class InheritanceClientBuilder
     @Generated
     @Override
     public InheritanceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

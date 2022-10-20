@@ -125,6 +125,7 @@ public final class AutoRestParameterGroupingTestServiceBuilder
     @Generated
     @Override
     public AutoRestParameterGroupingTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

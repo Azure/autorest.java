@@ -123,6 +123,7 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     @Generated
     @Override
     public BasicClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

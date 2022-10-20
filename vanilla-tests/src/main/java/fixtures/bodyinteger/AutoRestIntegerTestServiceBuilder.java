@@ -124,6 +124,7 @@ public final class AutoRestIntegerTestServiceBuilder
     @Generated
     @Override
     public AutoRestIntegerTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

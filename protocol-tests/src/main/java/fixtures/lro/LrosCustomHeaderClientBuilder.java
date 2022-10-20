@@ -123,6 +123,7 @@ public final class LrosCustomHeaderClientBuilder
     @Generated
     @Override
     public LrosCustomHeaderClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

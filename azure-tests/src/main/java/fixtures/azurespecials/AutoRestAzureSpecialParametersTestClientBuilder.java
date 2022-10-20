@@ -125,6 +125,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     @Generated
     @Override
     public AutoRestAzureSpecialParametersTestClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -175,6 +175,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     @Generated
     @Override
     public AutoRestSwaggerBatServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

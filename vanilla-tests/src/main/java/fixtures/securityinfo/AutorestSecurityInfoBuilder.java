@@ -135,6 +135,7 @@ public final class AutorestSecurityInfoBuilder
     @Generated
     @Override
     public AutorestSecurityInfoBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

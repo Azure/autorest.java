@@ -122,6 +122,7 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
     @Generated
     @Override
     public PathsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

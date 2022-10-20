@@ -125,6 +125,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     @Generated
     @Override
     public AutoRestSwaggerConstantServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -124,6 +124,7 @@ public final class BodyFormsDataURLEncodedBuilder
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

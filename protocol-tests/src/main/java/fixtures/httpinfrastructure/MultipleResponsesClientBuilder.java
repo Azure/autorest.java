@@ -124,6 +124,7 @@ public final class MultipleResponsesClientBuilder
     @Generated
     @Override
     public MultipleResponsesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

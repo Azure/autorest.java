@@ -124,6 +124,7 @@ public final class DpgMultiMediaTypesClientBuilder
     @Generated
     @Override
     public DpgMultiMediaTypesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -125,6 +125,7 @@ public final class AutoRestParameterFlatteningBuilder
     @Generated
     @Override
     public AutoRestParameterFlatteningBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -127,6 +127,7 @@ public final class ParmaterizedEndpointClientBuilder
     @Generated
     @Override
     public ParmaterizedEndpointClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }

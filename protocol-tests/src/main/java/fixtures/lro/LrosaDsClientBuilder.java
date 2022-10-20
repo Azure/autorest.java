@@ -123,6 +123,7 @@ public final class LrosaDsClientBuilder
     @Generated
     @Override
     public LrosaDsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy);
         pipelinePolicies.add(customPolicy);
         return this;
     }
