@@ -613,7 +613,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             if (!settings.isSyncStackEnabled()) {
-                function.methodReturn(String.format("%s(%s).block()", MethodNamer.getPagingAsyncSinglePageMethodName(clientMethod.getName()),
+                function.methodReturn(String.format("%s(%s).block()", clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
                     clientMethod.getArgumentList()));
                 return;
             }
@@ -664,7 +664,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
-            function.methodReturn(String.format("new PagedIterable<>(%s(%s))", MethodNamer.getSimpleAsyncMethodName(clientMethod.getName()), clientMethod.getArgumentList()));
+            function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getProxyMethod().getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
     }
 
@@ -849,7 +849,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         ProxyMethod restAPIMethod, JavaSettings settings) {
         String asyncMethodName = MethodNamer.getSimpleAsyncMethodName(clientMethod.getName());
         if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
-            asyncMethodName = MethodNamer.getSimpleAsyncRestResponseMethodName(clientMethod.getName());
+            asyncMethodName = clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName();
         }
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
