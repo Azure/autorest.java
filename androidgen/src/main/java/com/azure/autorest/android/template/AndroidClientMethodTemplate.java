@@ -167,9 +167,9 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected void generateSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        String asyncMethodName = clientMethod.getSimpleAsyncMethodName();
+        String asyncMethodName = restAPIMethod.getSimpleAsyncMethodName();
         if (clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
-            asyncMethodName = clientMethod.getSimpleWithResponseAsyncMethodName();
+            asyncMethodName = restAPIMethod.getSimpleAsyncRestResponseMethodName();
         }
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
