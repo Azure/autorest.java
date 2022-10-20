@@ -64,7 +64,7 @@ public class MethodNamer {
     }
 
     public String getLroBeginAsyncMethodName() {
-        return getLroBeginAsyncMethodName(this.getSimpleAsyncMethodName());
+        return getLroBeginAsyncMethodName(this.getMethodName());
     }
 
     public String getLroBeginMethodName() {
