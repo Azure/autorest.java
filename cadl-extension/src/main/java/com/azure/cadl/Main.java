@@ -119,6 +119,8 @@ public class Main {
             cadlPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
+
+        System.exit(0);
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
