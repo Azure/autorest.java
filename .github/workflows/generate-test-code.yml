@@ -6,7 +6,7 @@ on:
         type: choice
         description: scope of the test code to generate
         required: true
-        default: all
+        default: autorest
         options:
           - all
           - autorest
