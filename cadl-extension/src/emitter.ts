@@ -72,12 +72,11 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
     program.trace("cadl-java", `Exec JAR ${jarFileName}`);
 
-    const output = await promisify(execFile)("java", [
-      `-DemitterOptions=${emitterOptions}`,
-      "-jar",
-      jarFileName,
-      codeModelFileName,
-    ]);
+    const output = await promisify(execFile)(
+      "java",
+      [`-DemitterOptions=${emitterOptions}`, "-jar", jarFileName, codeModelFileName],
+      { timeout: 5 * 60 * 1000 },
+    );
     program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
   }
 }
