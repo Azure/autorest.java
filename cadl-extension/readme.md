@@ -31,7 +31,7 @@ Run `npm install` again to install `@azure-tools/cadl-java`.
 Modify (or create) `cadl-project.yaml`, add one line under `emitters`:
 ```diff
 emitters:
-+  '@azure-tools/cadl-java': true
++  "@azure-tools/cadl-java": true
 ```
 
 # Generate Java
@@ -40,8 +40,21 @@ Same `npx cadl compile .` or `npx cadl compile . --outputPath=<target-folder>`.
 
 If `outputPath` option is not provided, generated Java code will be under `cadl-output` folder.
 
-# Optional Configuration (temporary solution)
+# Optional Configuration
 
-[Side-car](https://github.com/Azure/autorest.java/wiki/Cadl-to-Java#side-car-design-changes-expected) for override namespace or service name.
+## SDK
 
-[Convenience method](https://github.com/Azure/autorest.java/wiki/Cadl-to-Java#models-for-convenience-method-design-changes-expected) for generating models and methods for selected operations.
+One can further configure the SDK generated, using the emitter options on `@azure-tools/cadl-java`.
+
+```yaml
+emitters:
+  "@azure-tools/cadl-java":
+    "output-dir": "./azure-ai-language-authoring"
+    "namespace": "com.azure.ai.language.authoring"
+    "service-name": "Authoring"
+    "partial-update": true
+```
+
+## Convenience API
+
+Use "convenienceAPI" decorator from [cadl-dpg](https://github.com/Azure/cadl-azure/tree/main/packages/cadl-dpg).
