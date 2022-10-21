@@ -125,7 +125,7 @@ public final class HttpSuccessClientBuilder
     @Generated
     @Override
     public HttpSuccessClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

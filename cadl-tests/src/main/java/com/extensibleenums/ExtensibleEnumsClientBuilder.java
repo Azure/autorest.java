@@ -124,7 +124,7 @@ public final class ExtensibleEnumsClientBuilder
     @Generated
     @Override
     public ExtensibleEnumsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

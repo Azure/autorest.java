@@ -124,7 +124,7 @@ public final class PetStoreIncBuilder implements HttpTrait<PetStoreIncBuilder>, 
     @Generated
     @Override
     public PetStoreIncBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

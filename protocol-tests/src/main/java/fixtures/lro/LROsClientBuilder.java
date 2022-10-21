@@ -123,7 +123,7 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
     @Generated
     @Override
     public LROsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

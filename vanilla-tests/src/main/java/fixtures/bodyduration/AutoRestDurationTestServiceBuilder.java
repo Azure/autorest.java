@@ -126,7 +126,7 @@ public final class AutoRestDurationTestServiceBuilder
     @Generated
     @Override
     public AutoRestDurationTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

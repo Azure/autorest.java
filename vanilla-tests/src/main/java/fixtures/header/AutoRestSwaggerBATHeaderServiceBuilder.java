@@ -126,7 +126,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder
     @Generated
     @Override
     public AutoRestSwaggerBATHeaderServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

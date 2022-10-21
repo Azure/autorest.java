@@ -124,7 +124,7 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     @Generated
     @Override
     public BasicClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

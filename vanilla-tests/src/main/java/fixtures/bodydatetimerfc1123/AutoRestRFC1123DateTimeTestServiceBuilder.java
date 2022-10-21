@@ -126,7 +126,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder
     @Generated
     @Override
     public AutoRestRFC1123DateTimeTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

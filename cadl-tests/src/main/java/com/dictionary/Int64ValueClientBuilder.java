@@ -124,7 +124,7 @@ public final class Int64ValueClientBuilder
     @Generated
     @Override
     public Int64ValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

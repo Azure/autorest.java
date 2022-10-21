@@ -125,7 +125,7 @@ public final class MediaTypesClientBuilder
     @Generated
     @Override
     public MediaTypesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

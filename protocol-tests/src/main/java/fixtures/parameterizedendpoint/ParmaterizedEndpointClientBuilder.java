@@ -128,7 +128,7 @@ public final class ParmaterizedEndpointClientBuilder
     @Generated
     @Override
     public ParmaterizedEndpointClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -125,7 +125,7 @@ public final class PolymorphicrecursiveClientBuilder
     @Generated
     @Override
     public PolymorphicrecursiveClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -127,7 +127,7 @@ public final class ResiliencyServiceDriven1ClientBuilder
     @Generated
     @Override
     public ResiliencyServiceDriven1ClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

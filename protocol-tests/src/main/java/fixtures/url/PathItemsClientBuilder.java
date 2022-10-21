@@ -124,7 +124,7 @@ public final class PathItemsClientBuilder
     @Generated
     @Override
     public PathItemsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -129,7 +129,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestUrlMutliCollectionFormatTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -126,7 +126,7 @@ public final class AutoRestLongRunningOperationTestServiceBuilder
     @Generated
     @Override
     public AutoRestLongRunningOperationTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy);
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }
