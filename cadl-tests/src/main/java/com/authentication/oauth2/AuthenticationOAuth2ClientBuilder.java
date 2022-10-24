@@ -52,7 +52,7 @@ public final class AuthenticationOAuth2ClientBuilder
     @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://security.microsoft.com/.default"};
 
     @Generated
-    private final Map<String, String> properties = CoreUtils.getProperties("authentication-oauth2.properties");
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-oauth2.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
@@ -198,8 +198,8 @@ public final class AuthenticationOAuth2ClientBuilder
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
-        String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
-        String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
+        String clientName = PROPERTIES.getOrDefault(SDK_NAME, "UnknownName");
+        String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
         policies.add(new RequestIdPolicy());
