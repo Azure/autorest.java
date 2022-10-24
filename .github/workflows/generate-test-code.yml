@@ -1,9 +1,20 @@
 name: Generate test code
 on:
   workflow_dispatch:
+    inputs:
+      scope:
+        type: choice
+        description: scope of the test code to generate
+        required: true
+        default: autorest
+        options:
+          - all
+          - autorest
+          - cadl
 
 jobs:
   build:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -12,27 +23,37 @@ jobs:
           fetch-depth: 0
 
       - name: Setup node 16
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install autorest
         run: |
           npm install -g autorest
           npm install --no-bin-links
 
-      - name: Build and Package
+      - name: Build autorest-java, install modules
         run: |
-          mvn package -f pom.xml -P local --no-transfer-progress
-          npm pack
+          mvn package install -f pom.xml -P local,cadl --no-transfer-progress
 
-      - name: Generate code
+      - name: Generate test code for autorest-java
+        if: ${{ inputs.scope == 'all' || inputs.scope == 'autorest' }}
         shell: pwsh
         run: |
           ./Generate.ps1
+
+      - name: Generate test code for cadl-java
+        if: ${{ inputs.scope == 'all' || inputs.scope == 'cadl' }}
+        shell: pwsh
+        run: |
+          cd cadl-tests
+          ./Generate.ps1
+          cd ..
 
       - name: Commit generated code
         run: |
           git config --global user.name 'actions-user'
           git config --global user.email 'action@github.com'
-          git commit -am "re-generate test code"
+          git add .
+          git commit -m "re-generate test code"
           git push

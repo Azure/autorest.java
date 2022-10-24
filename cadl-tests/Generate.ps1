@@ -1,6 +1,6 @@
 function Generate($CadlFile) {
-  Write-Host "cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
-  Invoke-Expression "cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
+  Write-Host "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
+  Invoke-Expression "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
 
   if ($LASTEXITCODE) {
       exit 1
@@ -45,7 +45,7 @@ foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupda
 }
 
 #partial update test
-cadl compile ./cadl/partialupdate.cadl --outputPath=./existingcode/
+npx cadl compile ./cadl/partialupdate.cadl --outputPath=./existingcode/
 Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 

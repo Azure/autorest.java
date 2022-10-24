@@ -1244,11 +1244,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
             OperationLink finalOperationLink = operation.getOperationLinks().get("final");
 
-            if (pollingOperationLink != null) {
+            if (pollingOperationLink != null && pollingOperationLink.getOperation() != null) {
                 // type from polling operation
                 intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
             }
-            if (finalOperationLink != null) {
+            if (finalOperationLink != null && finalOperationLink.getOperation() != null) {
                 // type from final operation
                 finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
             }

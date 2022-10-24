@@ -53,6 +53,8 @@ public final class AutoRestSwaggerBatServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
+    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-bodystring.properties");
+
     /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
     @Generated
     public AutoRestSwaggerBatServiceClientBuilder() {
@@ -203,21 +205,17 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     private HttpPipeline createHttpPipeline() {
         Configuration buildConfiguration =
                 (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
-        if (httpLogOptions == null) {
-            httpLogOptions = new HttpLogOptions();
-        }
-        if (clientOptions == null) {
-            clientOptions = new ClientOptions();
-        }
+        HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
+        ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
-        String clientName = PROPERTIES.getOrDefault(SDK_NAME, "UnknownName");
-        String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
-        String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);
+        String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
+        String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
+        String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));
+        localClientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
@@ -239,7 +237,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder
                 new HttpPipelineBuilder()
                         .policies(policies.toArray(new HttpPipelinePolicy[0]))
                         .httpClient(httpClient)
-                        .clientOptions(clientOptions)
+                        .clientOptions(localClientOptions)
                         .build();
         return httpPipeline;
     }
@@ -283,9 +281,6 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     public EnumClient buildEnumClient() {
         return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
     }
-
-    @Generated
-    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-bodystring.properties");
 
     /*
      * The retry options to configure retry policy for failed requests.
