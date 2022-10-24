@@ -476,20 +476,18 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                     + ".getGlobalConfiguration() : configuration;");
 
-            function.ifBlock("httpLogOptions == null", action -> {
-                function.line("httpLogOptions = new HttpLogOptions();");
-            });
 
-            function.ifBlock("clientOptions == null", action -> {
-                function.line("clientOptions = new ClientOptions();");
-            });
+            String localHttpOptionsName = getLocalBuildVariableName("httpLogOptions");
+            String localClientOptionsName = getLocalBuildVariableName("ClientOptions");
+            function.line(String.format("HttpLogOptions %s = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;", localHttpOptionsName));
+            function.line(String.format("ClientOptions %s = this.clientOptions == null ? new ClientOptions() : this.clientOptions;", localClientOptionsName));
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
             function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
             function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-            function.line("String applicationId = CoreUtils.getApplicationId(clientOptions, httpLogOptions);");
+            function.line(String.format("String applicationId = CoreUtils.getApplicationId(%s, %s);", localClientOptionsName, localHttpOptionsName));
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
@@ -498,7 +496,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line("clientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));");
+            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));", localClientOptionsName));
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("policies.addAll(this.pipelinePolicies.stream()" +
@@ -539,7 +537,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
                     ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
                     ".httpClient(httpClient)" +
-                    ".clientOptions(clientOptions)" +
+                    String.format(".clientOptions(%s)", localClientOptionsName) +
                     ".build();");
             function.methodReturn("httpPipeline");
         });
