@@ -37,6 +37,7 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AuthenticationApiKeyClient type. */
@@ -129,6 +130,7 @@ public final class AuthenticationApiKeyClientBuilder
     @Generated
     @Override
     public AuthenticationApiKeyClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

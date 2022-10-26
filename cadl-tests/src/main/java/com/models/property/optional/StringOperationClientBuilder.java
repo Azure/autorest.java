@@ -34,6 +34,7 @@ import com.models.property.optional.implementation.ModelsPropertyOptionalClientI
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the StringOperationClient type. */
@@ -124,6 +125,7 @@ public final class StringOperationClientBuilder
     @Generated
     @Override
     public StringOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -34,6 +34,7 @@ import com.models.usage.implementation.ModelsUsageClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ModelsUsageClient type. */
@@ -123,6 +124,7 @@ public final class ModelsUsageClientBuilder
     @Generated
     @Override
     public ModelsUsageClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -34,6 +34,7 @@ import fixtures.paging.implementation.AutoRestPagingTestServiceClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AutoRestPagingTestServiceClient type. */
@@ -125,6 +126,7 @@ public final class AutoRestPagingTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestPagingTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

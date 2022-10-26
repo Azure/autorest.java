@@ -34,6 +34,7 @@ import com.dictionary.implementation.DictionaryClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ModelValueClient type. */
@@ -123,6 +124,7 @@ public final class ModelValueClientBuilder
     @Generated
     @Override
     public ModelValueClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

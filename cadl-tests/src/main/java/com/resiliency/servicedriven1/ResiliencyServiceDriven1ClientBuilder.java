@@ -34,6 +34,7 @@ import com.resiliency.servicedriven1.implementation.ResiliencyServiceDriven1Clie
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ResiliencyServiceDriven1Client type. */
@@ -126,6 +127,7 @@ public final class ResiliencyServiceDriven1ClientBuilder
     @Generated
     @Override
     public ResiliencyServiceDriven1ClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

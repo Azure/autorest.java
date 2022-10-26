@@ -34,6 +34,7 @@ import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ArrayClient type. */
@@ -123,6 +124,7 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     @Generated
     @Override
     public ArrayClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

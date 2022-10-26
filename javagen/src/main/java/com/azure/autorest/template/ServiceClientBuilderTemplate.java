@@ -85,6 +85,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
         imports.add("com.azure.core.http.HttpHeaders");
+        imports.add("java.util.Objects");
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);

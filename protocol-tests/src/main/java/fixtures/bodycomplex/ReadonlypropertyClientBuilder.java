@@ -34,6 +34,7 @@ import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ReadonlypropertyClient type. */
@@ -124,6 +125,7 @@ public final class ReadonlypropertyClientBuilder
     @Generated
     @Override
     public ReadonlypropertyClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

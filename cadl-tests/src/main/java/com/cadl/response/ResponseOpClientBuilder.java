@@ -35,6 +35,7 @@ import com.cadl.response.implementation.ResponseClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ResponseOpClient type. */
@@ -126,6 +127,7 @@ public final class ResponseOpClientBuilder
     @Generated
     @Override
     public ResponseOpClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

@@ -35,6 +35,7 @@ import com.cadl.odata.implementation.OdataClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the OdataClient type. */
@@ -126,6 +127,7 @@ public final class OdataClientBuilder
     @Generated
     @Override
     public OdataClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }

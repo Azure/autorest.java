@@ -34,6 +34,7 @@ import fixtures.url.multi.implementation.AutoRestUrlMutliCollectionFormatTestSer
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AutoRestUrlMutliCollectionFormatTestServiceClient type. */
@@ -128,6 +129,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestUrlMutliCollectionFormatTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }
