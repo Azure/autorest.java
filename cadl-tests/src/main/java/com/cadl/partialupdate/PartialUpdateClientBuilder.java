@@ -48,8 +48,6 @@ public final class PartialUpdateClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("cadl-partialupdate.properties");
-
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /** Create an instance of the PartialUpdateClientBuilder. */
@@ -195,8 +193,8 @@ public final class PartialUpdateClientBuilder
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
-        String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
-        String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
+        String clientName = PROPERTIES.getOrDefault(SDK_NAME, "UnknownName");
+        String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
         policies.add(new RequestIdPolicy());
@@ -250,4 +248,7 @@ public final class PartialUpdateClientBuilder
     }
 
     public void test() {}
+
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-partialupdate.properties");
 }
