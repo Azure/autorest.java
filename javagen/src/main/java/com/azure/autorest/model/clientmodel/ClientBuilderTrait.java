@@ -174,6 +174,7 @@ public class ClientBuilderTrait {
 
         // addPolicy
         Consumer<JavaBlock> addPolicyMethodImpl = function -> {
+            function.line("Objects.requireNonNull(customPolicy, \"'customPolicy' cannot be null.\");");
             function.line("pipelinePolicies.add(customPolicy);");
             function.methodReturn("this");
         };

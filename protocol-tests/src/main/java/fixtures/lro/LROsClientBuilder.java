@@ -34,6 +34,7 @@ import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceClient
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the LROsClient type. */
@@ -43,7 +44,7 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("fixtures-lro.properties");
+    @Generated private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-lro.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
@@ -122,6 +123,7 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
     @Generated
     @Override
     public LROsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -195,8 +197,8 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
-        String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
-        String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
+        String clientName = PROPERTIES.getOrDefault(SDK_NAME, "UnknownName");
+        String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
         policies.add(new RequestIdPolicy());

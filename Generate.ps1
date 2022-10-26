@@ -11,6 +11,9 @@ $generateScript = {
     $generateOutput = Invoke-Expression "autorest $_"
     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
+    if ($global:ExitCode -ne 0) {
+        exit 1
+    }
     Write-Host "
 ========================
 autorest $_
@@ -154,6 +157,7 @@ Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java -Force
 
 # customization
+Remove-Item ./customization-tests/src -Recurse -Force
 "--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger" | ForEach-Object $generateScript
 
 # partial update tests

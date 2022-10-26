@@ -85,6 +85,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
         imports.add("com.azure.core.http.HttpHeaders");
+        imports.add("java.util.Objects");
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -166,7 +167,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
                 }
                 addGeneratedAnnotation(classBlock);
-                classBlock.privateFinalMemberVariable("Map<String, String>", "properties", propertiesValue);
+                classBlock.privateStaticFinalVariable(String.format("Map<String, String> PROPERTIES = %s", propertiesValue));
 
                 addGeneratedAnnotation(classBlock);
                 classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
@@ -484,8 +485,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
 
-            function.line("String clientName = properties.getOrDefault(SDK_NAME, \"UnknownName\");");
-            function.line("String clientVersion = properties.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
+            function.line("String clientName = PROPERTIES.getOrDefault(SDK_NAME, \"UnknownName\");");
+            function.line("String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
             function.line(String.format("String applicationId = CoreUtils.getApplicationId(%s, %s);", localClientOptionsName, localHttpOptionsName));
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "

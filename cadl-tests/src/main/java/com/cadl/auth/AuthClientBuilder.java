@@ -41,6 +41,7 @@ import com.cadl.auth.implementation.AuthClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the AuthClient type. */
@@ -57,7 +58,7 @@ public final class AuthClientBuilder
 
     @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://api.example.com/.default"};
 
-    @Generated private final Map<String, String> properties = CoreUtils.getProperties("cadl-auth.properties");
+    @Generated private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-auth.properties");
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
@@ -136,6 +137,7 @@ public final class AuthClientBuilder
     @Generated
     @Override
     public AuthClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -229,8 +231,8 @@ public final class AuthClientBuilder
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
-        String clientName = properties.getOrDefault(SDK_NAME, "UnknownName");
-        String clientVersion = properties.getOrDefault(SDK_VERSION, "UnknownVersion");
+        String clientName = PROPERTIES.getOrDefault(SDK_NAME, "UnknownName");
+        String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
         policies.add(new RequestIdPolicy());
