@@ -6,7 +6,7 @@ To set up customizations, create a Maven project with dependency:
 <dependency>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-customization</artifactId>
-  <version>1.0.0-beta.5</version>
+  <version>1.0.0-beta.6</version>
 </dependency>
 ```
 
