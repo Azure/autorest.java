@@ -64,6 +64,10 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
     }
 
     private String getVersionIdentifier(String version) {
-        return "V" + VERSION_TO_ENUM.matcher(version).replaceAll("_").toUpperCase();
+        String versionInEnum = VERSION_TO_ENUM.matcher(version).replaceAll("_").toUpperCase();
+        if (!versionInEnum.startsWith("V")) {
+            versionInEnum = "V" + versionInEnum;
+        }
+        return versionInEnum;
     }
 }
