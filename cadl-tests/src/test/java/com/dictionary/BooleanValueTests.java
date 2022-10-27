@@ -4,13 +4,12 @@
 package com.dictionary;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DictionaryTests {
+public class BooleanValueTests {
 
     private final BooleanValueClient client = new BooleanValueClientBuilder().buildClient();
     private final Map<String, Boolean> expected = new HashMap<>();
