@@ -4,6 +4,8 @@
 package com.dictionary;
 
 import com.azure.core.util.BinaryData;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,11 @@ class UnknownValueClientTest {
     }
 
     @Test
-    void put() {
-        client.putWithResponse(BinaryData.fromString("{\"k1\":1,\"k2\":\"hello\",\"k3\":null}"), null);
+    void putWithResponse() {
+        ObjectNode map = JsonNodeFactory.instance.objectNode();
+        map.put("k1", 1);
+        map.put("k2", "hello");
+        map.set("k3", null);
+        client.putWithResponse(BinaryData.fromObject(map), null);
     }
 }
