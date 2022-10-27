@@ -5,6 +5,7 @@ package com.dictionary;
 
 import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ class UnknownValueClientTest {
         ObjectNode map = JsonNodeFactory.instance.objectNode();
         map.put("k1", 1);
         map.put("k2", "hello");
-        map.set("k3", null);
+        map.set("k3", NullNode.instance);
         client.putWithResponse(BinaryData.fromObject(map), null);
     }
 }
