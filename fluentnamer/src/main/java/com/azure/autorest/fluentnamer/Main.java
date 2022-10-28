@@ -18,6 +18,7 @@ public class Main {
         connection.dispatchNotification("Shutdown", connection::stop);
         // wait for something to do.
         connection.waitForAll();
+        System.exit(0);
     }
 }
 

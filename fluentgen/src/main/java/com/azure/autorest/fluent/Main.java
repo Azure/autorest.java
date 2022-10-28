@@ -17,5 +17,6 @@ public class Main {
 
         // wait for something to do.
         connection.waitForAll();
+        System.exit(0);
     }
 }
