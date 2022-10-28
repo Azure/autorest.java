@@ -164,6 +164,23 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     }
 
     /*
+     * Project name
+     */
+    @Generated private String projectName;
+
+    /**
+     * Sets Project name.
+     *
+     * @param projectName the projectName value.
+     * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestLongRunningOperationTestServiceClientBuilder projectName(String projectName) {
+        this.projectName = projectName;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -190,7 +207,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         AutoRestLongRunningOperationTestServiceClientImpl client =
                 new AutoRestLongRunningOperationTestServiceClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
         return client;
     }
 

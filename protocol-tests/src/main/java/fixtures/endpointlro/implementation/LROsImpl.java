@@ -52,7 +52,7 @@ public final class LROsImpl {
      * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy
      * service to perform REST calls.
      */
-    @Host("https://{Endpoint}/resource")
+    @Host("https://{Endpoint}/resource/{ProjectName}")
     @ServiceInterface(name = "AutoRestLongRunningO")
     private interface LROsService {
         @Put("/lro/put/200/succeeded")
@@ -69,6 +69,7 @@ public final class LROsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200Succeeded(
                 @HostParam("Endpoint") String endpoint,
+                @HostParam("ProjectName") String projectName,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -121,7 +122,13 @@ public final class LROsImpl {
     private Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put200Succeeded(this.client.getEndpoint(), accept, requestOptions, context));
+                context ->
+                        service.put200Succeeded(
+                                this.client.getEndpoint(),
+                                this.client.getProjectName(),
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
@@ -174,7 +181,9 @@ public final class LROsImpl {
                 () -> this.put200SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         this.client.getHttpPipeline(),
-                        "https://{Endpoint}/resource".replace("{Endpoint}", this.client.getEndpoint()),
+                        "https://{Endpoint}/resource/{ProjectName}"
+                                .replace("{Endpoint}", this.client.getEndpoint())
+                                .replace("{ProjectName}", this.client.getProjectName()),
                         null,
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
