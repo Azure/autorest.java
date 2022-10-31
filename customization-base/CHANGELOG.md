@@ -1,14 +1,10 @@
 # Release History
 
-## 1.0.0-beta.6 (Unreleased)
+## 1.0.0-beta.6 (2022-10-26)
 
 ### Features Added
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
+- Support for stream-style customizations using `azure-json` and `azure-xml`.
 
 ## 1.0.0-beta.5 (2022-05-24)
 
