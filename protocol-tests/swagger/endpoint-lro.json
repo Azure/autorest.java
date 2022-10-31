@@ -6,22 +6,30 @@
     "version": "1.0.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{Endpoint}/resource",
-    "useSchemePrefix": false,
+    "hostTemplate": "{Endpoint}/resource/{ProjectName}",
+    "useSchemePrefix": true,
     "parameters": [
       {
         "name": "Endpoint",
-        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "description": "The endpoint",
         "required": true,
         "type": "string",
         "in": "path",
         "x-ms-skip-url-encoding": true,
         "x-ms-parameter-location": "client"
+      },
+      {
+        "name": "ProjectName",
+        "description": "Project name",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-parameter-location": "client"
       }
     ]
   },
   "host": "localhost:3000",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "produces": ["application/json"],
   "consumes": ["application/json"],
   "paths": {
