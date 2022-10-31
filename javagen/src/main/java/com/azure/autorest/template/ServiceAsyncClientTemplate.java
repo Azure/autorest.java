@@ -3,10 +3,12 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -17,6 +19,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.core.client.traits.EndpointTrait;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
@@ -154,27 +157,36 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, ServiceClient serviceClient, String clientReference) {
     // expose "getEndpoint" as public, as companion to "sendRequest" method
     if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
-      clientBuilder.getBuilderTraits().stream()
-          .filter(t -> EndpointTrait.class.getSimpleName().equals(t.getTraitInterfaceName()))
-          .map(t -> t.getTraitMethods().iterator().next().getProperty())
-          .findAny().ifPresent(serviceClientProperty -> {
-            classBlock.javadocComment(comment -> {
-              comment.description("Gets the service endpoint that the client is connected to.");
-              comment.methodReturns("the service endpoint that the client is connected to.");
+      ClientMethod referenceClientMethod = !CoreUtils.isNullOrEmpty(serviceClient.getClientMethods())
+              ? serviceClient.getClientMethods().iterator().next()
+              : serviceClient.getMethodGroupClients().stream().flatMap(mg -> mg.getClientMethods().stream()).findFirst().orElse(null);
+
+      if (referenceClientMethod != null) {
+        final String baseUrl = serviceClient.getBaseUrl();
+        final String endpointReplacementExpr = referenceClientMethod.getProxyMethod().getParameters().stream()
+                .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
+                .map(p -> String.format(".replace(%1$s, %2$s)",
+                        ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                        p.getParameterReference()
+                )).collect(Collectors.joining());
+        final String endpointExpr = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+
+        clientBuilder.getBuilderTraits().stream()
+            .filter(t -> EndpointTrait.class.getSimpleName().equals(t.getTraitInterfaceName()))
+            .map(t -> t.getTraitMethods().iterator().next().getProperty())
+            .findAny().ifPresent(serviceClientProperty -> {
+              classBlock.javadocComment(comment -> {
+                comment.description("Gets the service endpoint that the client is connected to.");
+                comment.methodReturns("the service endpoint that the client is connected to.");
+              });
+              String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
+              classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
+                  serviceClientProperty.getType(), methodName), function -> {
+                function.methodReturn(endpointExpr);
+              });
             });
-            String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
-            classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
-                serviceClientProperty.getType(), methodName), function -> {
-              String endpointInvocation = String.format("%1$s.%2$s()", clientReference, methodName);
-              String baseUrl = serviceClient.getBaseUrl();
-              function.methodReturn(
-                  // if we get endpoint from EndpointTrait, it likely has serialized name of either "endpoint" or "Endpoint"
-                  String.format("%1$s.replace(%2$s, %3$s)",
-                      ClassType.String.defaultValueExpression(baseUrl),
-                      ClassType.String.defaultValueExpression('{' + serviceClientProperty.getRequestParameterName() + '}'),
-                      endpointInvocation));
-            });
-          });
+      }
     }
   }
 

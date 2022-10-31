@@ -1242,16 +1242,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
         String endpoint = "null";
         if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
-            final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
-            final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
-                    .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
-                    .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
-                    .map(p -> String.format(".replace(%1$s, %2$s)",
-                            ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
-                            p.getParameterReference()
-                    )).collect(Collectors.joining());
-            if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
-                endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                .anyMatch(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI && "endpoint".equals(p.getName()))) {
+                // has EndpointTrait
+
+                final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
+                final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
+                        .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                        .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
+                        .map(p -> String.format(".replace(%1$s, %2$s)",
+                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                                p.getParameterReference()
+                        )).collect(Collectors.joining());
+                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
+                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+                }
             }
         }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
