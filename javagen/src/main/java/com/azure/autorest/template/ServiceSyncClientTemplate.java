@@ -16,6 +16,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
@@ -129,24 +130,23 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   protected void writeMethods(AsyncSyncClient syncClient, JavaClass classBlock) {
     final ServiceClient serviceClient = syncClient.getServiceClient();
     final MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
-    final boolean wrapServiceClient = methodGroupClient == null;
-    if (wrapServiceClient) {
-      serviceClient.getClientMethods().stream()
-          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
-          .filter(clientMethod -> !clientMethod.isImplementationOnly())
-          .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
-          .forEach(clientMethod -> {
-            writeMethod(clientMethod, classBlock);
-          });
-    } else {
-      methodGroupClient.getClientMethods().stream()
-          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
-          .filter(clientMethod -> !clientMethod.isImplementationOnly())
-          .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
-          .forEach(clientMethod -> {
-            writeMethod(clientMethod, classBlock);
-          });
+
+    List<ClientMethod> clientMethods = serviceClient.getClientMethods();
+    if (CoreUtils.isNullOrEmpty(clientMethods)) {
+      clientMethods = methodGroupClient.getClientMethods();
     }
+
+    clientMethods.stream()
+        .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
+        .filter(clientMethod -> !clientMethod.isImplementationOnly())
+        .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
+        // service client methods generate overloads that are with and without context that aren't needed
+        // for wrapper public clients
+        .filter(clientMethod -> (clientMethod.getName().contains("WithResponse") && clientMethod.getParametersDeclaration().contains("Context context"))
+                || (!clientMethod.getName().contains("WithResponse") && !clientMethod.getParametersDeclaration().contains("Context context")))
+        .forEach(clientMethod -> {
+          writeMethod(clientMethod, classBlock);
+        });
 
     syncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
 
