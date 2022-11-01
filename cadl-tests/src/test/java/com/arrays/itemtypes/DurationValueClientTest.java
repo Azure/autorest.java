@@ -12,7 +12,7 @@ import java.util.List;
 
 class DurationValueClientTest {
 
-    DurationValueClient client = new DurationValueClientBuilder().buildClient();
+    DurationValueClient client = new ArraysItemTypesClientBuilder().buildDurationValueClient();
 
     @Test
     void get() {

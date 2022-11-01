@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringValueClientTest {
 
-    StringValueClient client = new StringValueClientBuilder().buildClient();
+    StringValueClient client = new ArraysItemTypesClientBuilder().buildStringValueClient();
 
     @Test
     void get() {

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UnknownValueClientTest {
 
-    UnknownValueClient client = new UnknownValueClientBuilder().buildClient();
+    UnknownValueClient client = new ArraysItemTypesClientBuilder().buildUnknownValueClient();
 
     @Test
     void get() {

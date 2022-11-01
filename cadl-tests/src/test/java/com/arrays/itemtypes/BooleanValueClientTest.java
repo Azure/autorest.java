@@ -11,7 +11,7 @@ import java.util.List;
 
 class BooleanValueClientTest {
 
-    BooleanValueClient client = new BooleanValueClientBuilder().buildClient();
+    BooleanValueClient client = new ArraysItemTypesClientBuilder().buildBooleanValueClient();
 
     @Test
     void get() {

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Int32ValueClientTest {
 
-    Int32ValueClient client = new Int32ValueClientBuilder().buildClient();
+    Int32ValueClient client = new ArraysItemTypesClientBuilder().buildInt32ValueClient();
 
     @Test
     void get() {

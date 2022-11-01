@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatetimeValueClientTest {
 
-    DatetimeValueClient client = new DatetimeValueClientBuilder().buildClient();
+    DatetimeValueClient client = new ArraysItemTypesClientBuilder().buildDatetimeValueClient();
 
     @Test
     void get() {

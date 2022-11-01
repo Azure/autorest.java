@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Float32ValueClientTest {
 
-    Float32ValueClient client = new Float32ValueClientBuilder().buildClient();
+    Float32ValueClient client = new ArraysItemTypesClientBuilder().buildFloat32ValueClient();
 
     @Test
     void get() {

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ModelValueClientTest {
 
-    ModelValueClient client = new ModelValueClientBuilder().buildClient();
+    ModelValueClient client = new ArraysItemTypesClientBuilder().buildModelValueClient();
 
     @Test
     void get() {
