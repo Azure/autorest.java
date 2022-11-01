@@ -237,7 +237,7 @@ public final class EnumServiceClientBuilder
      */
     @Generated
     public EnumServiceAsyncClient buildAsyncClient() {
-        return new EnumServiceAsyncClient(buildInnerClient().getEnumOps());
+        return new EnumServiceAsyncClient(buildInnerClient());
     }
 
     /**
@@ -247,6 +247,6 @@ public final class EnumServiceClientBuilder
      */
     @Generated
     public EnumServiceClient buildClient() {
-        return new EnumServiceClient(new EnumServiceAsyncClient(buildInnerClient().getEnumOps()));
+        return new EnumServiceClient(new EnumServiceAsyncClient(buildInnerClient()));
     }
 }

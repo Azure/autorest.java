@@ -22,7 +22,7 @@ import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResponseClient type. */
-@ServiceClient(builder = ResponseOpClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ResponseClientBuilder.class, isAsync = true)
 public final class ResponseOpAsyncClient {
     @Generated private final ResponseOpsImpl serviceClient;
 

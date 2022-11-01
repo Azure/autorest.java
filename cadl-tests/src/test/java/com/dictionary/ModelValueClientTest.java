@@ -12,7 +12,7 @@ import java.util.Map;
 
 class ModelValueClientTest {
 
-    ModelValueClient client = new ModelValueClientBuilder().buildClient();
+    ModelValueClient client = new DictionaryClientBuilder().buildModelValueClient();
 
     @Test
     void get() {

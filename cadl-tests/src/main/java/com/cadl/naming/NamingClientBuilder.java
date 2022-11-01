@@ -236,7 +236,7 @@ public final class NamingClientBuilder
      */
     @Generated
     public NamingAsyncClient buildAsyncClient() {
-        return new NamingAsyncClient(buildInnerClient().getNamingOps());
+        return new NamingAsyncClient(buildInnerClient());
     }
 
     /**
@@ -246,6 +246,6 @@ public final class NamingClientBuilder
      */
     @Generated
     public NamingClient buildClient() {
-        return new NamingClient(new NamingAsyncClient(buildInnerClient().getNamingOps()));
+        return new NamingClient(new NamingAsyncClient(buildInnerClient()));
     }
 }

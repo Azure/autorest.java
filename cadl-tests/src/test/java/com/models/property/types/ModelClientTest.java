@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class ModelClientTest {
 
-    ModelClient client = new ModelClientBuilder().buildClient();
+    ModelClient client = new ModelsPropertyTypesClientBuilder().buildModelClient();
 
     @Test
     void get() {

@@ -20,7 +20,7 @@ import com.cadl.response.models.Resource;
 import java.util.List;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
-@ServiceClient(builder = ResponseOpClientBuilder.class)
+@ServiceClient(builder = ResponseClientBuilder.class)
 public final class ResponseOpClient {
     @Generated private final ResponseOpAsyncClient client;
 

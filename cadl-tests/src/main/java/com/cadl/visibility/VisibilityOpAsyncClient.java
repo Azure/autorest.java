@@ -22,7 +22,7 @@ import com.cadl.visibility.models.WriteDog;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityOpClientBuilder.class, isAsync = true)
+@ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
 public final class VisibilityOpAsyncClient {
     @Generated private final VisibilityOpsImpl serviceClient;
 

@@ -20,7 +20,7 @@ import com.models.property.optional.models.CollectionsModelProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = CollectionsModelClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class, isAsync = true)
 public final class CollectionsModelAsyncClient {
     @Generated private final CollectionsModelsImpl serviceClient;
 

@@ -22,7 +22,7 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DictionaryClient type. */
-@ServiceClient(builder = DurationValueClientBuilder.class, isAsync = true)
+@ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class DurationValueAsyncClient {
     @Generated private final DurationValuesImpl serviceClient;
 

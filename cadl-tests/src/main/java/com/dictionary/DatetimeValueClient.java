@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
-@ServiceClient(builder = DatetimeValueClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class DatetimeValueClient {
     @Generated private final DatetimeValueAsyncClient client;
 

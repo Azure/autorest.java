@@ -220,7 +220,7 @@ public final class AzureLroClientBuilder
      */
     @Generated
     public AzureLroAsyncClient buildAsyncClient() {
-        return new AzureLroAsyncClient(buildInnerClient().getPollingSuccess());
+        return new AzureLroAsyncClient(buildInnerClient());
     }
 
     /**
@@ -230,6 +230,6 @@ public final class AzureLroClientBuilder
      */
     @Generated
     public AzureLroClient buildClient() {
-        return new AzureLroClient(new AzureLroAsyncClient(buildInnerClient().getPollingSuccess()));
+        return new AzureLroClient(new AzureLroAsyncClient(buildInnerClient()));
     }
 }

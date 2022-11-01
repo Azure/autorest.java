@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.models.property.types.models.ExtensibleEnumProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = ExtensibleEnumClientBuilder.class)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class)
 public final class ExtensibleEnumClient {
     @Generated private final ExtensibleEnumAsyncClient client;
 

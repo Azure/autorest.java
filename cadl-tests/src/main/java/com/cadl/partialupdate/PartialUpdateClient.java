@@ -58,6 +58,8 @@ public final class PartialUpdateClient {
         return this.client.readWithResponse(requestOptions).block();
     }
 
+    public void test() {}
+
     /**
      * The read operation.
      *
@@ -75,6 +77,4 @@ public final class PartialUpdateClient {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
     }
-
-    public void test() {}
 }

@@ -257,7 +257,7 @@ public final class SpecialHeadersClientBuilder
      */
     @Generated
     public SpecialHeadersAsyncClient buildAsyncClient() {
-        return new SpecialHeadersAsyncClient(buildInnerClient().getSpecialHeadersOps());
+        return new SpecialHeadersAsyncClient(buildInnerClient());
     }
 
     /**
@@ -267,6 +267,6 @@ public final class SpecialHeadersClientBuilder
      */
     @Generated
     public SpecialHeadersClient buildClient() {
-        return new SpecialHeadersClient(new SpecialHeadersAsyncClient(buildInnerClient().getSpecialHeadersOps()));
+        return new SpecialHeadersClient(new SpecialHeadersAsyncClient(buildInnerClient()));
     }
 }

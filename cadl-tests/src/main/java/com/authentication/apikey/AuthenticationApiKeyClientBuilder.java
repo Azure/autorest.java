@@ -242,7 +242,7 @@ public final class AuthenticationApiKeyClientBuilder
      */
     @Generated
     public AuthenticationApiKeyAsyncClient buildAsyncClient() {
-        return new AuthenticationApiKeyAsyncClient(buildInnerClient().getApiKeys());
+        return new AuthenticationApiKeyAsyncClient(buildInnerClient());
     }
 
     /**
@@ -252,6 +252,6 @@ public final class AuthenticationApiKeyClientBuilder
      */
     @Generated
     public AuthenticationApiKeyClient buildClient() {
-        return new AuthenticationApiKeyClient(new AuthenticationApiKeyAsyncClient(buildInnerClient().getApiKeys()));
+        return new AuthenticationApiKeyClient(new AuthenticationApiKeyAsyncClient(buildInnerClient()));
     }
 }

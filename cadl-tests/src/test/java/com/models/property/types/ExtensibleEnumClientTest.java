@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class ExtensibleEnumClientTest {
 
-    ExtensibleEnumClient client = new ExtensibleEnumClientBuilder().buildClient();
+    ExtensibleEnumClient client = new ModelsPropertyTypesClientBuilder().buildExtensibleEnumClient();
 
     @Test
     void get() {

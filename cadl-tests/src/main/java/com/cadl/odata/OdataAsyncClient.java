@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.cadl.odata.implementation.OdataOpsImpl;
+import com.cadl.odata.implementation.OdataClientImpl;
 import com.cadl.odata.models.Resource;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /** Initializes a new instance of the asynchronous OdataClient type. */
 @ServiceClient(builder = OdataClientBuilder.class, isAsync = true)
 public final class OdataAsyncClient {
-    @Generated private final OdataOpsImpl serviceClient;
+    @Generated private final OdataClientImpl serviceClient;
 
     /**
      * Initializes an instance of OdataAsyncClient class.
@@ -32,7 +32,7 @@ public final class OdataAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    OdataAsyncClient(OdataOpsImpl serviceClient) {
+    OdataAsyncClient(OdataClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

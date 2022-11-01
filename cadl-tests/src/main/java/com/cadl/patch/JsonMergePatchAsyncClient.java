@@ -15,14 +15,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.patch.implementation.PatchesImpl;
+import com.cadl.patch.implementation.JsonMergePatchClientImpl;
 import com.cadl.patch.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous JsonMergePatchClient type. */
 @ServiceClient(builder = JsonMergePatchClientBuilder.class, isAsync = true)
 public final class JsonMergePatchAsyncClient {
-    @Generated private final PatchesImpl serviceClient;
+    @Generated private final JsonMergePatchClientImpl serviceClient;
 
     /**
      * Initializes an instance of JsonMergePatchAsyncClient class.
@@ -30,7 +30,7 @@ public final class JsonMergePatchAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    JsonMergePatchAsyncClient(PatchesImpl serviceClient) {
+    JsonMergePatchAsyncClient(JsonMergePatchClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

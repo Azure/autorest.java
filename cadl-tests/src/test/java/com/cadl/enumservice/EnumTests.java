@@ -9,7 +9,7 @@ import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.cadl.enumservice.implementation.EnumOpsImpl;
+import com.cadl.enumservice.implementation.EnumServiceClientImpl;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Priority;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +31,7 @@ public class EnumTests {
     @SuppressWarnings("unchecked")
     @Test
     public void testStringArrayInParameter() throws Exception {
-        EnumOpsImpl impl = Mockito.mock(EnumOpsImpl.class);
+        EnumServiceClientImpl impl = Mockito.mock(EnumServiceClientImpl.class);
 
         ArgumentCaptor<List<String>> enumArrayArgumentCaptor = ArgumentCaptor.forClass(List.class);
         ArgumentCaptor<RequestOptions> requestOptionsArgumentCaptor = ArgumentCaptor.forClass(RequestOptions.class);
@@ -71,7 +71,7 @@ public class EnumTests {
     @SuppressWarnings("unchecked")
     @Test
     public void testIntArrayInParameter() throws Exception {
-        EnumOpsImpl impl = Mockito.mock(EnumOpsImpl.class);
+        EnumServiceClientImpl impl = Mockito.mock(EnumServiceClientImpl.class);
 
         ArgumentCaptor<List<String>> enumArrayArgumentCaptor = ArgumentCaptor.forClass(List.class);
         ArgumentCaptor<RequestOptions> requestOptionsArgumentCaptor = ArgumentCaptor.forClass(RequestOptions.class);

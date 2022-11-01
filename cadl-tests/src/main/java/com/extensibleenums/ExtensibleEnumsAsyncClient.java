@@ -15,14 +15,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.extensibleenums.implementation.StringOperationsImpl;
+import com.extensibleenums.implementation.ExtensibleEnumsClientImpl;
 import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ExtensibleEnumsClient type. */
 @ServiceClient(builder = ExtensibleEnumsClientBuilder.class, isAsync = true)
 public final class ExtensibleEnumsAsyncClient {
-    @Generated private final StringOperationsImpl serviceClient;
+    @Generated private final ExtensibleEnumsClientImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleEnumsAsyncClient class.
@@ -30,7 +30,7 @@ public final class ExtensibleEnumsAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ExtensibleEnumsAsyncClient(StringOperationsImpl serviceClient) {
+    ExtensibleEnumsAsyncClient(ExtensibleEnumsClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
