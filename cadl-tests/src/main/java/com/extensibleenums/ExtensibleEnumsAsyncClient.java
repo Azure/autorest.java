@@ -15,14 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.extensibleenums.implementation.StringOperationsImpl;
-import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
+import com.extensibleenums.implementation.ExtensibleEnumsClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ExtensibleEnumsClient type. */
 @ServiceClient(builder = ExtensibleEnumsClientBuilder.class, isAsync = true)
 public final class ExtensibleEnumsAsyncClient {
-    @Generated private final StringOperationsImpl serviceClient;
+    @Generated private final ExtensibleEnumsClientImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleEnumsAsyncClient class.
@@ -30,7 +29,7 @@ public final class ExtensibleEnumsAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ExtensibleEnumsAsyncClient(StringOperationsImpl serviceClient) {
+    ExtensibleEnumsAsyncClient(ExtensibleEnumsClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -122,85 +121,5 @@ public final class ExtensibleEnumsAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putUnknownValueWithResponseAsync(body, requestOptions);
-    }
-
-    /**
-     * The getKnownValue operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DaysOfWeekExtensibleEnum> getKnownValue() {
-        // Generated convenience method for getKnownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getKnownValueWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(DaysOfWeekExtensibleEnum::fromString);
-    }
-
-    /**
-     * The getUnknownValue operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DaysOfWeekExtensibleEnum> getUnknownValue() {
-        // Generated convenience method for getUnknownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getUnknownValueWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(DaysOfWeekExtensibleEnum::fromString);
-    }
-
-    /**
-     * The putKnownValue operation.
-     *
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putKnownValue(DaysOfWeekExtensibleEnum body) {
-        // Generated convenience method for putKnownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
-    }
-
-    /**
-     * The putUnknownValue operation.
-     *
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putUnknownValue(DaysOfWeekExtensibleEnum body) {
-        // Generated convenience method for putUnknownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
     }
 }

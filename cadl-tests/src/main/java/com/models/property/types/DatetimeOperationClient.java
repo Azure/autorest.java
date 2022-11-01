@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.models.property.types.models.DatetimeProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = DatetimeOperationClientBuilder.class)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class)
 public final class DatetimeOperationClient {
     @Generated private final DatetimeOperationAsyncClient client;
 

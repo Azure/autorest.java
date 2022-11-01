@@ -16,13 +16,13 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
-import com.azure.lro.implementation.PollingSuccessImpl;
+import com.azure.lro.implementation.AzureLroClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AzureLroClient type. */
 @ServiceClient(builder = AzureLroClientBuilder.class, isAsync = true)
 public final class AzureLroAsyncClient {
-    @Generated private final PollingSuccessImpl serviceClient;
+    @Generated private final AzureLroClientImpl serviceClient;
 
     /**
      * Initializes an instance of AzureLroAsyncClient class.
@@ -30,7 +30,7 @@ public final class AzureLroAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AzureLroAsyncClient(PollingSuccessImpl serviceClient) {
+    AzureLroAsyncClient(AzureLroClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -98,45 +98,5 @@ public final class AzureLroAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The polling url.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> polling() {
-        // Generated convenience method for pollingWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return pollingWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
-    }
-
-    /**
-     * The final url.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> get() {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

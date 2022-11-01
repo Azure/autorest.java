@@ -236,7 +236,7 @@ public final class BuiltinClientBuilder
      */
     @Generated
     public BuiltinAsyncClient buildAsyncClient() {
-        return new BuiltinAsyncClient(buildInnerClient().getBuiltinOps());
+        return new BuiltinAsyncClient(buildInnerClient());
     }
 
     /**
@@ -246,6 +246,6 @@ public final class BuiltinClientBuilder
      */
     @Generated
     public BuiltinClient buildClient() {
-        return new BuiltinClient(new BuiltinAsyncClient(buildInnerClient().getBuiltinOps()));
+        return new BuiltinClient(new BuiltinAsyncClient(buildInnerClient()));
     }
 }

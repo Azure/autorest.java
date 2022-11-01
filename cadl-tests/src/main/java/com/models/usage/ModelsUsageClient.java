@@ -15,9 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.models.usage.models.InputOutputRecord;
-import com.models.usage.models.InputRecord;
-import com.models.usage.models.OutputRecord;
 
 /** Initializes a new instance of the synchronous ModelsUsageClient type. */
 @ServiceClient(builder = ModelsUsageClientBuilder.class)
@@ -114,64 +111,5 @@ public final class ModelsUsageClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> inputAndOutputWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.client.inputAndOutputWithResponse(body, requestOptions).block();
-    }
-
-    /**
-     * The input operation.
-     *
-     * @param input Record used in operation parameters.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void input(InputRecord input) {
-        // Generated convenience method for inputWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        inputWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
-    }
-
-    /**
-     * The output operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return record used in operation return type.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public OutputRecord output() {
-        // Generated convenience method for outputWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return outputWithResponse(requestOptions).getValue().toObject(OutputRecord.class);
-    }
-
-    /**
-     * The inputAndOutput operation.
-     *
-     * @param body Record used both as operation parameter and return type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return record used both as operation parameter and return type.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public InputOutputRecord inputAndOutput(InputOutputRecord body) {
-        // Generated convenience method for inputAndOutputWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return inputAndOutputWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(InputOutputRecord.class);
     }
 }

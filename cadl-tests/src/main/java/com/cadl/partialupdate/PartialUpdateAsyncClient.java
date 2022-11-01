@@ -14,25 +14,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.partialupdate.implementation.PartialUpdateOpsImpl;
-import com.cadl.partialupdate.models.PartialUpdateModel;
+import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous PartialUpdateClient type. */
 @ServiceClient(builder = PartialUpdateClientBuilder.class, isAsync = true)
 public final class PartialUpdateAsyncClient {
 
-    @Generated private final PartialUpdateOpsImpl serviceClient;
-
-    /**
-     * Initializes an instance of PartialUpdateAsyncClient class.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    PartialUpdateAsyncClient(PartialUpdateOpsImpl serviceClient) {
-        this.serviceClient = serviceClient;
-    }
+    @Generated private final PartialUpdateClientImpl serviceClient;
 
     /**
      * The read operation.
@@ -61,22 +50,12 @@ public final class PartialUpdateAsyncClient {
     }
 
     /**
-     * The read operation.
+     * Initializes an instance of PartialUpdateAsyncClient class.
      *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PartialUpdateModel> read() {
-        // Generated convenience method for readWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
+    PartialUpdateAsyncClient(PartialUpdateClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 }

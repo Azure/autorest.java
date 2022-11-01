@@ -15,8 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.cadl.odata.models.Resource;
-import java.util.List;
 
 /** Initializes a new instance of the synchronous OdataClient type. */
 @ServiceClient(builder = OdataClientBuilder.class)
@@ -73,54 +71,5 @@ public final class OdataClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
         return new PagedIterable<>(this.client.list(requestOptions));
-    }
-
-    /**
-     * The list operation.
-     *
-     * @param filter The filter parameter.
-     * @param orderBy The orderBy parameter.
-     * @param skip The skip parameter.
-     * @param top The top parameter.
-     * @param maxPageSize The maxPageSize parameter.
-     * @param select The select parameter.
-     * @param expand The expand parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Resource> list(
-            String filter,
-            String orderBy,
-            Integer skip,
-            Integer top,
-            Integer maxPageSize,
-            List<String> select,
-            List<String> expand) {
-        // Generated convenience method for list
-        return new PagedIterable<>(client.list(filter, orderBy, skip, top, maxPageSize, select, expand));
-    }
-
-    /**
-     * The list operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Resource> list() {
-        // Generated convenience method for list
-        return new PagedIterable<>(client.list());
     }
 }

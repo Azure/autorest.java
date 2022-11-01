@@ -20,7 +20,7 @@ import java.time.Duration;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
-@ServiceClient(builder = DurationValueClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class DurationValueClient {
     @Generated private final DurationValueAsyncClient client;
 

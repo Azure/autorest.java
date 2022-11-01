@@ -15,15 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.resiliency.servicedriven1.implementation.ParamsImpl;
-import com.resiliency.servicedriven1.models.Message;
-import com.resiliency.servicedriven1.models.PostInput;
+import com.resiliency.servicedriven1.implementation.ResiliencyServiceDriven1ClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResiliencyServiceDriven1Client type. */
 @ServiceClient(builder = ResiliencyServiceDriven1ClientBuilder.class, isAsync = true)
 public final class ResiliencyServiceDriven1AsyncClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated private final ResiliencyServiceDriven1ClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResiliencyServiceDriven1AsyncClient class.
@@ -31,7 +29,7 @@ public final class ResiliencyServiceDriven1AsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ResiliencyServiceDriven1AsyncClient(ParamsImpl serviceClient) {
+    ResiliencyServiceDriven1AsyncClient(ResiliencyServiceDriven1ClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -183,169 +181,5 @@ public final class ResiliencyServiceDriven1AsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getOptionalWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> headNoParams() {
-        // Generated convenience method for headNoParamsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).then();
-    }
-
-    /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param parameter I am a required parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially only has one required Query Parameter on successful completion of
-     *     {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getRequired(String parameter) {
-        // Generated convenience method for getRequiredWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param requiredParam I am a required parameter.
-     * @param optionalParam I am an optional parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> putRequiredOptional(String requiredParam, String optionalParam) {
-        // Generated convenience method for putRequiredOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param requiredParam I am a required parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> putRequiredOptional(String requiredParam) {
-        // Generated convenience method for putRequiredOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /**
-     * POST a JSON.
-     *
-     * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> postParameters(PostInput parameter) {
-        // Generated convenience method for postParametersWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * @param optionalParam I am an optional parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
-     *     Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getOptional(String optionalParam) {
-        // Generated convenience method for getOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
-    }
-
-    /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter on successful completion of {@link
-     *     Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Message> getOptional() {
-        // Generated convenience method for getOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 }

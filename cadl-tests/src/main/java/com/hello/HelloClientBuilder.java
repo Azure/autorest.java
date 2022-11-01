@@ -218,7 +218,7 @@ public final class HelloClientBuilder implements HttpTrait<HelloClientBuilder>, 
      */
     @Generated
     public HelloAsyncClient buildAsyncClient() {
-        return new HelloAsyncClient(buildInnerClient().getHelloes());
+        return new HelloAsyncClient(buildInnerClient());
     }
 
     /**
@@ -228,6 +228,6 @@ public final class HelloClientBuilder implements HttpTrait<HelloClientBuilder>, 
      */
     @Generated
     public HelloClient buildClient() {
-        return new HelloClient(new HelloAsyncClient(buildInnerClient().getHelloes()));
+        return new HelloClient(new HelloAsyncClient(buildInnerClient()));
     }
 }

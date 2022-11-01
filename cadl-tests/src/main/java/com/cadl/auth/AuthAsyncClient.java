@@ -15,13 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.auth.implementation.AuthOpsImpl;
+import com.cadl.auth.implementation.AuthClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AuthClient type. */
 @ServiceClient(builder = AuthClientBuilder.class, isAsync = true)
 public final class AuthAsyncClient {
-    @Generated private final AuthOpsImpl serviceClient;
+    @Generated private final AuthClientImpl serviceClient;
 
     /**
      * Initializes an instance of AuthAsyncClient class.
@@ -29,7 +29,7 @@ public final class AuthAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AuthAsyncClient(AuthOpsImpl serviceClient) {
+    AuthAsyncClient(AuthClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -53,25 +53,5 @@ public final class AuthAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The get operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> get() {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

@@ -20,7 +20,7 @@ import com.models.property.types.models.BytesProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = BytesClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class BytesAsyncClient {
     @Generated private final BytesImpl serviceClient;
 

@@ -15,8 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.readonlyproperties.models.OutputModel;
-import com.readonlyproperties.models.RoundTripModel;
 
 /** Initializes a new instance of the synchronous ReadonlyPropertiesClient type. */
 @ServiceClient(builder = ReadonlyPropertiesClientBuilder.class)
@@ -145,45 +143,5 @@ public final class ReadonlyPropertiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setOptionalPropertyModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.setOptionalPropertyModelWithResponse(input, requestOptions).block();
-    }
-
-    /**
-     * The getOptionalPropertyModel operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return output model with readonly properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public OutputModel getOptionalPropertyModel() {
-        // Generated convenience method for getOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getOptionalPropertyModelWithResponse(requestOptions).getValue().toObject(OutputModel.class);
-    }
-
-    /**
-     * The setOptionalPropertyModel operation.
-     *
-     * @param input Round-trip model with readonly properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return round-trip model with readonly properties.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public RoundTripModel setOptionalPropertyModel(RoundTripModel input) {
-        // Generated convenience method for setOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
-                .getValue()
-                .toObject(RoundTripModel.class);
     }
 }

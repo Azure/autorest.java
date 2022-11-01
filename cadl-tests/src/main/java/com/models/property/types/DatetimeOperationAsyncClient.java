@@ -20,7 +20,7 @@ import com.models.property.types.models.DatetimeProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = DatetimeOperationClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class DatetimeOperationAsyncClient {
     @Generated private final DatetimeOperationsImpl serviceClient;
 

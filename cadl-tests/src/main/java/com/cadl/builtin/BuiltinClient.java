@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.builtin.models.Builtin;
 
 /** Initializes a new instance of the synchronous BuiltinClient type. */
 @ServiceClient(builder = BuiltinClientBuilder.class)
@@ -78,23 +77,5 @@ public final class BuiltinClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
         return this.client.readWithResponse(requestOptions).block();
-    }
-
-    /**
-     * The read operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Builtin read() {
-        // Generated convenience method for readWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).getValue().toObject(Builtin.class);
     }
 }

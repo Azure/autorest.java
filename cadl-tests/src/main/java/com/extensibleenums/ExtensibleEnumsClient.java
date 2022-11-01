@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
 
 /** Initializes a new instance of the synchronous ExtensibleEnumsClient type. */
 @ServiceClient(builder = ExtensibleEnumsClientBuilder.class)
@@ -120,79 +119,5 @@ public final class ExtensibleEnumsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.client.putUnknownValueWithResponse(body, requestOptions).block();
-    }
-
-    /**
-     * The getKnownValue operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DaysOfWeekExtensibleEnum getKnownValue() {
-        // Generated convenience method for getKnownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(getKnownValueWithResponse(requestOptions).getValue());
-    }
-
-    /**
-     * The getUnknownValue operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DaysOfWeekExtensibleEnum getUnknownValue() {
-        // Generated convenience method for getUnknownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(getUnknownValueWithResponse(requestOptions).getValue());
-    }
-
-    /**
-     * The putKnownValue operation.
-     *
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putKnownValue(DaysOfWeekExtensibleEnum body) {
-        // Generated convenience method for putKnownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
-    }
-
-    /**
-     * The putUnknownValue operation.
-     *
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putUnknownValue(DaysOfWeekExtensibleEnum body) {
-        // Generated convenience method for putUnknownValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

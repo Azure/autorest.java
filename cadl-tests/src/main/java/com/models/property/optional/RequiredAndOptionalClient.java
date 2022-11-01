@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.models.property.optional.models.RequiredAndOptionalProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = RequiredAndOptionalClientBuilder.class)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class)
 public final class RequiredAndOptionalClient {
     @Generated private final RequiredAndOptionalAsyncClient client;
 

@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.specialheaders.models.Resource;
 
 /** Initializes a new instance of the synchronous SpecialHeadersClient type. */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class)
@@ -213,67 +212,5 @@ public final class SpecialHeadersClient {
     public SyncPoller<BinaryData, BinaryData> beginCreateLro(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return this.client.beginCreateLro(name, resource, requestOptions).getSyncPoller();
-    }
-
-    /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String name) {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
-    }
-
-    /**
-     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource put(String name, Resource body) {
-        // Generated convenience method for putWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue().toObject(Resource.class);
-    }
-
-    /**
-     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource post(String name, Resource body) {
-        // Generated convenience method for postWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue().toObject(Resource.class);
     }
 }

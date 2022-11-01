@@ -236,7 +236,7 @@ public final class JsonMergePatchClientBuilder
      */
     @Generated
     public JsonMergePatchAsyncClient buildAsyncClient() {
-        return new JsonMergePatchAsyncClient(buildInnerClient().getPatches());
+        return new JsonMergePatchAsyncClient(buildInnerClient());
     }
 
     /**
@@ -246,6 +246,6 @@ public final class JsonMergePatchClientBuilder
      */
     @Generated
     public JsonMergePatchClient buildClient() {
-        return new JsonMergePatchClient(new JsonMergePatchAsyncClient(buildInnerClient().getPatches()));
+        return new JsonMergePatchClient(new JsonMergePatchAsyncClient(buildInnerClient()));
     }
 }

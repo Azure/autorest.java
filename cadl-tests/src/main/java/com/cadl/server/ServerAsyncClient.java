@@ -14,13 +14,13 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.cadl.server.implementation.ServerOpsImpl;
+import com.cadl.server.implementation.ServerClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ServerClient type. */
 @ServiceClient(builder = ServerClientBuilder.class, isAsync = true)
 public final class ServerAsyncClient {
-    @Generated private final ServerOpsImpl serviceClient;
+    @Generated private final ServerClientImpl serviceClient;
 
     /**
      * Initializes an instance of ServerAsyncClient class.
@@ -28,7 +28,7 @@ public final class ServerAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ServerAsyncClient(ServerOpsImpl serviceClient) {
+    ServerAsyncClient(ServerClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -47,25 +47,5 @@ public final class ServerAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> statusWithResponse(int code, RequestOptions requestOptions) {
         return this.serviceClient.statusWithResponseAsync(code, requestOptions);
-    }
-
-    /**
-     * The status operation.
-     *
-     * @param code The code parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> status(int code) {
-        // Generated convenience method for statusWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return statusWithResponse(code, requestOptions).then();
     }
 }

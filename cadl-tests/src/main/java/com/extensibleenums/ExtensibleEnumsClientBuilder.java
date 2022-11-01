@@ -221,7 +221,7 @@ public final class ExtensibleEnumsClientBuilder
      */
     @Generated
     public ExtensibleEnumsAsyncClient buildAsyncClient() {
-        return new ExtensibleEnumsAsyncClient(buildInnerClient().getStringOperations());
+        return new ExtensibleEnumsAsyncClient(buildInnerClient());
     }
 
     /**
@@ -231,6 +231,6 @@ public final class ExtensibleEnumsClientBuilder
      */
     @Generated
     public ExtensibleEnumsClient buildClient() {
-        return new ExtensibleEnumsClient(new ExtensibleEnumsAsyncClient(buildInnerClient().getStringOperations()));
+        return new ExtensibleEnumsClient(new ExtensibleEnumsAsyncClient(buildInnerClient()));
     }
 }

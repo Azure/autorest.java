@@ -16,14 +16,13 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.specialheaders.implementation.SpecialHeadersOpsImpl;
-import com.cadl.specialheaders.models.Resource;
+import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous SpecialHeadersClient type. */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class, isAsync = true)
 public final class SpecialHeadersAsyncClient {
-    @Generated private final SpecialHeadersOpsImpl serviceClient;
+    @Generated private final SpecialHeadersClientImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialHeadersAsyncClient class.
@@ -31,7 +30,7 @@ public final class SpecialHeadersAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    SpecialHeadersAsyncClient(SpecialHeadersOpsImpl serviceClient) {
+    SpecialHeadersAsyncClient(SpecialHeadersClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -215,73 +214,5 @@ public final class SpecialHeadersAsyncClient {
     public PollerFlux<BinaryData, BinaryData> beginCreateLro(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return this.serviceClient.beginCreateLroAsync(name, resource, requestOptions);
-    }
-
-    /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> get(String name) {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
-    }
-
-    /**
-     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> put(String name, Resource body) {
-        // Generated convenience method for putWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(name, BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
-    }
-
-    /**
-     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> post(String name, Resource body) {
-        // Generated convenience method for postWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

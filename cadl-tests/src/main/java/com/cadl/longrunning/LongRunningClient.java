@@ -16,8 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.longrunning.models.OperationStatusResourceResource;
-import com.cadl.longrunning.models.Resource;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class)
@@ -206,48 +204,5 @@ public final class LongRunningClient {
     public SyncPoller<BinaryData, Void> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.client.beginImportx(name, exportedResource, requestOptions).getSyncPoller();
-    }
-
-    /**
-     * The statusMonitor operation.
-     *
-     * @param name The name parameter.
-     * @param operationId The unique ID of the operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return provides status details for long running operations.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public OperationStatusResourceResource statusMonitorConvenience(String name, String operationId) {
-        // Generated convenience method for statusMonitorWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return statusMonitorWithResponse(name, operationId, requestOptions)
-                .getValue()
-                .toObject(OperationStatusResourceResource.class);
-    }
-
-    /**
-     * The get operation.
-     *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String name) {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
     }
 }

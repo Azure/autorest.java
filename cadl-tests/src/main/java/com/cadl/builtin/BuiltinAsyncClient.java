@@ -15,14 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.builtin.implementation.BuiltinOpsImpl;
-import com.cadl.builtin.models.Builtin;
+import com.cadl.builtin.implementation.BuiltinClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous BuiltinClient type. */
 @ServiceClient(builder = BuiltinClientBuilder.class, isAsync = true)
 public final class BuiltinAsyncClient {
-    @Generated private final BuiltinOpsImpl serviceClient;
+    @Generated private final BuiltinClientImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinAsyncClient class.
@@ -30,7 +29,7 @@ public final class BuiltinAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BuiltinAsyncClient(BuiltinOpsImpl serviceClient) {
+    BuiltinAsyncClient(BuiltinClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -80,25 +79,5 @@ public final class BuiltinAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.readWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The read operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Builtin> read() {
-        // Generated convenience method for readWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
     }
 }

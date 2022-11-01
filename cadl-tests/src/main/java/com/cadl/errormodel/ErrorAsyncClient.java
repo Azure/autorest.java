@@ -15,14 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.errormodel.implementation.ErrorOpsImpl;
-import com.cadl.errormodel.models.Diagnostic;
+import com.cadl.errormodel.implementation.ErrorClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ErrorClient type. */
 @ServiceClient(builder = ErrorClientBuilder.class, isAsync = true)
 public final class ErrorAsyncClient {
-    @Generated private final ErrorOpsImpl serviceClient;
+    @Generated private final ErrorClientImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorAsyncClient class.
@@ -30,7 +29,7 @@ public final class ErrorAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ErrorAsyncClient(ErrorOpsImpl serviceClient) {
+    ErrorAsyncClient(ErrorClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -57,25 +56,5 @@ public final class ErrorAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.readWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The read operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Diagnostic> read() {
-        // Generated convenience method for readWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
     }
 }

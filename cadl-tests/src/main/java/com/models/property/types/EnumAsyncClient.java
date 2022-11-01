@@ -20,7 +20,7 @@ import com.models.property.types.models.EnumProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = EnumClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class EnumAsyncClient {
     @Generated private final EnumsImpl serviceClient;
 

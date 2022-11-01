@@ -15,15 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.readonlyproperties.implementation.ReadonlyPropertiesImpl;
-import com.readonlyproperties.models.OutputModel;
-import com.readonlyproperties.models.RoundTripModel;
+import com.readonlyproperties.implementation.ReadonlyPropertiesClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ReadonlyPropertiesClient type. */
 @ServiceClient(builder = ReadonlyPropertiesClientBuilder.class, isAsync = true)
 public final class ReadonlyPropertiesAsyncClient {
-    @Generated private final ReadonlyPropertiesImpl serviceClient;
+    @Generated private final ReadonlyPropertiesClientImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlyPropertiesAsyncClient class.
@@ -31,7 +29,7 @@ public final class ReadonlyPropertiesAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ReadonlyPropertiesAsyncClient(ReadonlyPropertiesImpl serviceClient) {
+    ReadonlyPropertiesAsyncClient(ReadonlyPropertiesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -150,47 +148,5 @@ public final class ReadonlyPropertiesAsyncClient {
     public Mono<Response<BinaryData>> setOptionalPropertyModelWithResponse(
             BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.setOptionalPropertyModelWithResponseAsync(input, requestOptions);
-    }
-
-    /**
-     * The getOptionalPropertyModel operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return output model with readonly properties on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<OutputModel> getOptionalPropertyModel() {
-        // Generated convenience method for getOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getOptionalPropertyModelWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
-    }
-
-    /**
-     * The setOptionalPropertyModel operation.
-     *
-     * @param input Round-trip model with readonly properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return round-trip model with readonly properties on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<RoundTripModel> setOptionalPropertyModel(RoundTripModel input) {
-        // Generated convenience method for setOptionalPropertyModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }

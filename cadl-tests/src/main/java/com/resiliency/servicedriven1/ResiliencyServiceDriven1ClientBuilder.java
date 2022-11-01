@@ -224,7 +224,7 @@ public final class ResiliencyServiceDriven1ClientBuilder
      */
     @Generated
     public ResiliencyServiceDriven1AsyncClient buildAsyncClient() {
-        return new ResiliencyServiceDriven1AsyncClient(buildInnerClient().getParams());
+        return new ResiliencyServiceDriven1AsyncClient(buildInnerClient());
     }
 
     /**
@@ -234,7 +234,6 @@ public final class ResiliencyServiceDriven1ClientBuilder
      */
     @Generated
     public ResiliencyServiceDriven1Client buildClient() {
-        return new ResiliencyServiceDriven1Client(
-                new ResiliencyServiceDriven1AsyncClient(buildInnerClient().getParams()));
+        return new ResiliencyServiceDriven1Client(new ResiliencyServiceDriven1AsyncClient(buildInnerClient()));
     }
 }
