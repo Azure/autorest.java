@@ -142,8 +142,8 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
         // service client methods generate overloads that are with and without context that aren't needed
         // for wrapper public clients
-        .filter(clientMethod -> (clientMethod.getName().contains("WithResponse") && clientMethod.getParametersDeclaration().contains("Context context"))
-                || (!clientMethod.getName().contains("WithResponse") && !clientMethod.getParametersDeclaration().contains("Context context")))
+            .filter(clientMethod -> (JavaSettings.getInstance().isDataPlaneClient()) || ((clientMethod.getName().contains("WithResponse") && clientMethod.getParametersDeclaration().contains("Context context"))
+                    || (!clientMethod.getName().contains("WithResponse") && !clientMethod.getParametersDeclaration().contains("Context context"))))
         .forEach(clientMethod -> {
           writeMethod(clientMethod, classBlock);
         });
