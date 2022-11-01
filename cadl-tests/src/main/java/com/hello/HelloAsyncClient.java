@@ -54,4 +54,24 @@ public final class HelloAsyncClient {
     public Mono<Response<BinaryData>> worldWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.worldWithResponseAsync(requestOptions);
     }
+
+    /**
+     * The world operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> world() {
+        // Generated convenience method for worldWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return worldWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
 }

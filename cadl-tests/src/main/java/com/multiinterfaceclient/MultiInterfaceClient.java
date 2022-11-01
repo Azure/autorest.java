@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.multiinterfaceclient.models.Cat;
+import com.multiinterfaceclient.models.Dog;
 
 /** Initializes a new instance of the synchronous MultiInterfaceClient type. */
 @ServiceClient(builder = MultiInterfaceClientBuilder.class)
@@ -143,5 +145,81 @@ public final class MultiInterfaceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setCatsWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.client.setCatsWithResponse(input, requestOptions).block();
+    }
+
+    /**
+     * The getDogs operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Dog getDogs() {
+        // Generated convenience method for getDogsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDogsWithResponse(requestOptions).getValue().toObject(Dog.class);
+    }
+
+    /**
+     * The setDogs operation.
+     *
+     * @param input Simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Dog setDogs(Dog input) {
+        // Generated convenience method for setDogsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setDogsWithResponse(BinaryData.fromObject(input), requestOptions).getValue().toObject(Dog.class);
+    }
+
+    /**
+     * The getCats operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Cat getCats() {
+        // Generated convenience method for getCatsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getCatsWithResponse(requestOptions).getValue().toObject(Cat.class);
+    }
+
+    /**
+     * The setCats operation.
+     *
+     * @param input Simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Cat setCats(Cat input) {
+        // Generated convenience method for setCatsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setCatsWithResponse(BinaryData.fromObject(input), requestOptions).getValue().toObject(Cat.class);
     }
 }

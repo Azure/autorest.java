@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.inheritance.models.Fish;
+import com.models.inheritance.models.Siamese;
 
 /** Initializes a new instance of the synchronous ModelsInheritanceClient type. */
 @ServiceClient(builder = ModelsInheritanceClientBuilder.class)
@@ -269,5 +271,172 @@ public final class ModelsInheritanceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
         return this.client.getWrongDiscriminatorWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The postValid operation.
+     *
+     * @param input The third level model in the normal multiple levels inheritance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void postValid(Siamese input) {
+        // Generated convenience method for postValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        postValidWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The getValid operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the third level model in the normal multiple levels inheritance.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Siamese getValid() {
+        // Generated convenience method for getValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getValidWithResponse(requestOptions).getValue().toObject(Siamese.class);
+    }
+
+    /**
+     * The putValid operation.
+     *
+     * @param input The third level model in the normal multiple levels inheritance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the third level model in the normal multiple levels inheritance.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Siamese putValid(Siamese input) {
+        // Generated convenience method for putValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putValidWithResponse(BinaryData.fromObject(input), requestOptions).getValue().toObject(Siamese.class);
+    }
+
+    /**
+     * The getModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getModel() {
+        // Generated convenience method for getModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getModelWithResponse(requestOptions).getValue().toObject(Fish.class);
+    }
+
+    /**
+     * The putModel operation.
+     *
+     * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putModel(Fish input) {
+        // Generated convenience method for putModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The getRecursiveModel operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getRecursiveModel() {
+        // Generated convenience method for getRecursiveModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getRecursiveModelWithResponse(requestOptions).getValue().toObject(Fish.class);
+    }
+
+    /**
+     * The putRecursiveModel operation.
+     *
+     * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putRecursiveModel(Fish input) {
+        // Generated convenience method for putRecursiveModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putRecursiveModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The getMissingDiscriminator operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getMissingDiscriminator() {
+        // Generated convenience method for getMissingDiscriminatorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getMissingDiscriminatorWithResponse(requestOptions).getValue().toObject(Fish.class);
+    }
+
+    /**
+     * The getWrongDiscriminator operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getWrongDiscriminator() {
+        // Generated convenience method for getWrongDiscriminatorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWrongDiscriminatorWithResponse(requestOptions).getValue().toObject(Fish.class);
     }
 }

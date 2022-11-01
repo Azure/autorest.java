@@ -15,6 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.polymorphism.models.BaseType;
+import com.cadl.polymorphism.models.Pet;
+import com.cadl.polymorphism.models.Task;
 
 /** Initializes a new instance of the synchronous PolymorphismClient type. */
 @ServiceClient(builder = PolymorphismClientBuilder.class)
@@ -118,5 +121,63 @@ public final class PolymorphismClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.client.taskWithResponse(body, requestOptions).block();
+    }
+
+    /**
+     * The read operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Pet read() {
+        // Generated convenience method for readWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return readWithResponse(requestOptions).getValue().toObject(Pet.class);
+    }
+
+    /**
+     * The write operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BaseType write(BaseType body) {
+        // Generated convenience method for writeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return writeWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(BaseType.class);
+    }
+
+    /**
+     * The task operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Task task(Task body) {
+        // Generated convenience method for taskWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return taskWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Task.class);
     }
 }

@@ -63,4 +63,40 @@ public final class AuthenticationApiKeyAsyncClient {
     public Mono<Response<Void>> invalidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.invalidWithResponseAsync(requestOptions);
     }
+
+    /**
+     * Check whether client is authenticated.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> valid() {
+        // Generated convenience method for validWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return validWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Check whether client is authenticated.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> invalid() {
+        // Generated convenience method for invalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return invalidWithResponse(requestOptions).then();
+    }
 }

@@ -17,6 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
+import com.cadl.longrunning.models.OperationStatusResourceResource;
+import com.cadl.longrunning.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
@@ -207,5 +209,50 @@ public final class LongRunningAsyncClient {
     public PollerFlux<BinaryData, Void> beginImportx(
             String name, BinaryData exportedResource, RequestOptions requestOptions) {
         return this.serviceClient.beginImportxAsync(name, exportedResource, requestOptions);
+    }
+
+    /**
+     * The statusMonitor operation.
+     *
+     * @param name The name parameter.
+     * @param operationId The unique ID of the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return provides status details for long running operations on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<OperationStatusResourceResource> statusMonitorConvenience(String name, String operationId) {
+        // Generated convenience method for statusMonitorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return statusMonitorWithResponse(name, operationId, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(OperationStatusResourceResource.class));
+    }
+
+    /**
+     * The get operation.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Resource> get(String name) {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(name, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

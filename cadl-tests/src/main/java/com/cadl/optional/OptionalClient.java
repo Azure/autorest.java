@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.optional.models.AllPropertiesOptional;
+import com.cadl.optional.models.Optional;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
@@ -146,5 +148,104 @@ public final class OptionalClient {
                         stringRequiredNullable,
                         requestOptions)
                 .block();
+    }
+
+    /**
+     * The put operation.
+     *
+     * @param requestHeaderRequired The requestHeaderRequired parameter.
+     * @param booleanRequired The booleanRequired parameter.
+     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
+     * @param stringRequired The stringRequired parameter.
+     * @param stringRequiredNullable The stringRequiredNullable parameter.
+     * @param requestHeaderOptional The requestHeaderOptional parameter.
+     * @param booleanNullable The booleanNullable parameter.
+     * @param string The string parameter.
+     * @param stringNullable The stringNullable parameter.
+     * @param optional The optional parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public AllPropertiesOptional put(
+            String requestHeaderRequired,
+            boolean booleanRequired,
+            Boolean booleanRequiredNullable,
+            String stringRequired,
+            String stringRequiredNullable,
+            String requestHeaderOptional,
+            Boolean booleanNullable,
+            String string,
+            String stringNullable,
+            Optional optional) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (requestHeaderOptional != null) {
+            requestOptions.setHeader("request-header-optional", requestHeaderOptional);
+        }
+        if (booleanNullable != null) {
+            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
+        }
+        if (string != null) {
+            requestOptions.addQueryParam("string", string);
+        }
+        if (stringNullable != null) {
+            requestOptions.addQueryParam("stringNullable", stringNullable);
+        }
+        if (optional != null) {
+            requestOptions.setBody(BinaryData.fromObject(optional));
+        }
+        return putWithResponse(
+                        requestHeaderRequired,
+                        booleanRequired,
+                        booleanRequiredNullable,
+                        stringRequired,
+                        stringRequiredNullable,
+                        requestOptions)
+                .getValue()
+                .toObject(AllPropertiesOptional.class);
+    }
+
+    /**
+     * The put operation.
+     *
+     * @param requestHeaderRequired The requestHeaderRequired parameter.
+     * @param booleanRequired The booleanRequired parameter.
+     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
+     * @param stringRequired The stringRequired parameter.
+     * @param stringRequiredNullable The stringRequiredNullable parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public AllPropertiesOptional put(
+            String requestHeaderRequired,
+            boolean booleanRequired,
+            Boolean booleanRequiredNullable,
+            String stringRequired,
+            String stringRequiredNullable) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putWithResponse(
+                        requestHeaderRequired,
+                        booleanRequired,
+                        booleanRequiredNullable,
+                        stringRequired,
+                        stringRequiredNullable,
+                        requestOptions)
+                .getValue()
+                .toObject(AllPropertiesOptional.class);
     }
 }
