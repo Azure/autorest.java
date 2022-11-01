@@ -27,7 +27,9 @@ model Resource {
 model ResourceArray is Resource[];
 
 // operation using Azure.Core
+@Azure.DPG.client({name: "CoreClient", service: Cadl.Response})
 @route("/cadl-core")
+@doc("Cadl Core")
 interface CadlCoreOp {
   @doc("Creates a new resource or updates an existing one.")
   createOrUpdate is ResourceCreateOrReplace<Resource>;
@@ -42,7 +44,9 @@ interface CadlCoreOp {
   list is ResourceList<Resource>;
 }
 
+@Azure.DPG.client({name: "ResponseClient", service: Cadl.Response})
 @operationGroup
+@doc("Response")
 @route("/response")
 interface ResponseOp {
   // binary

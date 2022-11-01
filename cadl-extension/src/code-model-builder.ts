@@ -89,8 +89,10 @@ import {
   Security,
   OAuth2SecurityScheme,
   KeySecurityScheme,
+  OperationGroup,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
+import { Client as CodeModelClient } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -185,23 +187,7 @@ export class CodeModelBuilder {
   }
 
   public build(): CodeModel {
-    const clients = listClients(this.program);
-    // TODO: multiple clients
-    for (const client of clients) {
-      const operationGroups = listOperationGroups(this.program, client);
-
-      const operationWithoutGroup = listOperationsInOperationGroup(this.program, client);
-      for (const operation of operationWithoutGroup) {
-        this.processRoute("", operation);
-      }
-
-      for (const operationGroup of operationGroups) {
-        const operations = listOperationsInOperationGroup(this.program, operationGroup);
-        for (const operation of operations) {
-          this.processRoute(operationGroup.type.name, operation);
-        }
-      }
-    }
+    this.processClients();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -285,6 +271,38 @@ export class CodeModelBuilder {
       this.codeModel.security = new Security(true, {
         schemes: securitySchemes,
       });
+    }
+  }
+
+  private processClients() {
+    const clients = listClients(this.program);
+    for (const client of clients) {
+      const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
+        summary: this.getSummary(client.type),
+      });
+
+      const operationGroups = listOperationGroups(this.program, client);
+
+      const operationWithoutGroup = listOperationsInOperationGroup(this.program, client);
+      let codeModelGroup = new OperationGroup("");
+      for (const operation of operationWithoutGroup) {
+        codeModelGroup.addOperation(this.processRoute("", operation));
+      }
+      if (codeModelGroup.operations?.length > 0) {
+        codeModelClient.operationGroups.push(codeModelGroup);
+      }
+
+      for (const operationGroup of operationGroups) {
+        const operations = listOperationsInOperationGroup(this.program, operationGroup);
+        codeModelGroup = new OperationGroup(operationGroup.type.name);
+        for (const operation of operations) {
+          this.processRoute(operationGroup.type.name, operation);
+          codeModelGroup.addOperation(this.processRoute("", operation));
+        }
+        codeModelClient.operationGroups.push(codeModelGroup);
+      }
+
+      this.codeModel.clients.push(codeModelClient);
     }
   }
 
