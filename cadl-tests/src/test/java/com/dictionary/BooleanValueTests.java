@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class BooleanValueTests {
 
-    private final BooleanValueClient client = new BooleanValueClientBuilder().buildClient();
+    private final BooleanValueClient client = new DictionaryClientBuilder().buildBooleanValueClient();
     private final Map<String, Boolean> expected = new HashMap<>();
     {
         expected.put("k1", true);

@@ -11,7 +11,7 @@ import java.util.Map;
 
 class Int64ValueClientTest {
 
-    Int64ValueClient client = new Int64ValueClientBuilder().buildClient();
+    Int64ValueClient client = new DictionaryClientBuilder().buildInt64ValueClient();
 
     @Test
     void get() {

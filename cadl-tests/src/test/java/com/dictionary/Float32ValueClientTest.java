@@ -11,7 +11,7 @@ import java.util.Map;
 
 class Float32ValueClientTest {
 
-    Float32ValueClient client = new Float32ValueClientBuilder().buildClient();
+    Float32ValueClient client = new DictionaryClientBuilder().buildFloat32ValueClient();
 
     @Test
     void get() {

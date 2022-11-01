@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class BytesClientTest {
 
-    BytesClient client = new BytesClientBuilder().buildClient();
+    BytesClient client = new ModelsPropertyTypesClientBuilder().buildBytesClient();
 
     @Test
     void get() {

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class BooleanOperationClientTest {
 
-    BooleanOperationClient client = new BooleanOperationClientBuilder().buildClient();
+    BooleanOperationClient client = new ModelsPropertyTypesClientBuilder().buildBooleanOperationClient();
 
     @Test
     void get() {
