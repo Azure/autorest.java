@@ -154,7 +154,8 @@ public class JavaSettings {
                 getBooleanValue(host, "generic-response-type", false),
                 getBooleanValue(host, "stream-style-serialization", false),
                 getBooleanValue(host, "enable-sync-stack", false),
-                getBooleanValue(host, "output-model-immutable", false)
+                getBooleanValue(host, "output-model-immutable", false),
+                getBooleanValue(host, "stream-response-inputstream", false)
             );
         }
         return instance;
@@ -247,7 +248,8 @@ public class JavaSettings {
         boolean genericResponseTypes,
         boolean streamStyleSerialization,
         boolean isSyncStackEnabled,
-        boolean outputModelImmutable) {
+        boolean outputModelImmutable,
+        boolean streamResponseInputStream) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -337,6 +339,8 @@ public class JavaSettings {
         this.isSyncStackEnabled = isSyncStackEnabled;
 
         this.outputModelImmutable = outputModelImmutable;
+
+        this.streamResponseInputStream = streamResponseInputStream;
     }
 
     private String keyCredentialHeaderName;
@@ -928,6 +932,15 @@ public class JavaSettings {
      */
     public boolean isStreamStyleSerialization() {
         return streamStyleSerialization;
+    }
+
+    private final boolean streamResponseInputStream;
+
+    /**
+     * @return Whether return <code>InputStream</code> or <code>Flux&lt;ByteBuffer&gt;</code> for stream response.
+     */
+    public boolean isStreamResponseInputStream() {
+        return streamResponseInputStream;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",
