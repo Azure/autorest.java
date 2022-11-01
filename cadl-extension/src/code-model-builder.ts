@@ -63,7 +63,6 @@ import {
   BooleanSchema,
   ByteArraySchema,
   ChoiceValue,
-  CodeModel,
   ConstantSchema,
   ConstantValue,
   DateTimeSchema,
@@ -91,6 +90,7 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
 } from "@autorest/codemodel";
+import { CodeModel } from "./common/code-model.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -288,7 +288,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRoute(groupName: string, operation: Operation) {
+  private processRoute(groupName: string, operation: Operation): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -362,6 +362,8 @@ export class CodeModelBuilder {
     this.processRouteForLongRunning(codeModelOperation, operation, op.responses);
 
     operationGroup.addOperation(codeModelOperation);
+
+    return codeModelOperation;
   }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
