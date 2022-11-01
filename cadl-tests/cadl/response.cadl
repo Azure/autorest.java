@@ -27,7 +27,10 @@ model Resource {
 model ResourceArray is Resource[];
 
 // operation using Azure.Core
-@Azure.DPG.client({name: "CoreClient", service: Cadl.Response})
+@Azure.DPG.client({
+  name: "CoreClient",
+  service: Cadl.Response,
+})
 @route("/cadl-core")
 @doc("Cadl Core")
 interface CadlCoreOp {
@@ -44,7 +47,10 @@ interface CadlCoreOp {
   list is ResourceList<Resource>;
 }
 
-@Azure.DPG.client({name: "ResponseClient", service: Cadl.Response})
+@Azure.DPG.client({
+  name: "ResponseClient",
+  service: Cadl.Response,
+})
 @operationGroup
 @doc("Response")
 @route("/response")
