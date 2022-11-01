@@ -937,7 +937,7 @@ public class JavaSettings {
     private final boolean streamResponseInputStream;
 
     /**
-     * @return Whether return <code>InputStream</code> or <code>Flux&lt;ByteBuffer&gt;</code> for stream response.
+     * @return If true, return <code>InputStream</code> for stream response. If false, return <code>BinaryData</code>.
      */
     public boolean isStreamResponseInputStream() {
         return streamResponseInputStream;
