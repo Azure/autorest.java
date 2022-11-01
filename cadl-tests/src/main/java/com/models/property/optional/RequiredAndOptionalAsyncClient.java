@@ -20,7 +20,7 @@ import com.models.property.optional.models.RequiredAndOptionalProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = RequiredAndOptionalClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class, isAsync = true)
 public final class RequiredAndOptionalAsyncClient {
     @Generated private final RequiredAndOptionalsImpl serviceClient;
 

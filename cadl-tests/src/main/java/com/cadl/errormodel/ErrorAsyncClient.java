@@ -15,14 +15,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.errormodel.implementation.ErrorOpsImpl;
+import com.cadl.errormodel.implementation.ErrorClientImpl;
 import com.cadl.errormodel.models.Diagnostic;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ErrorClient type. */
 @ServiceClient(builder = ErrorClientBuilder.class, isAsync = true)
 public final class ErrorAsyncClient {
-    @Generated private final ErrorOpsImpl serviceClient;
+    @Generated private final ErrorClientImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorAsyncClient class.
@@ -30,7 +30,7 @@ public final class ErrorAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ErrorAsyncClient(ErrorOpsImpl serviceClient) {
+    ErrorAsyncClient(ErrorClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

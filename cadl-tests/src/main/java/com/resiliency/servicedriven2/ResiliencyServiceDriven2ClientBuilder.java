@@ -240,7 +240,7 @@ public final class ResiliencyServiceDriven2ClientBuilder
      */
     @Generated
     public ResiliencyServiceDriven2AsyncClient buildAsyncClient() {
-        return new ResiliencyServiceDriven2AsyncClient(buildInnerClient().getParams());
+        return new ResiliencyServiceDriven2AsyncClient(buildInnerClient());
     }
 
     /**
@@ -250,7 +250,6 @@ public final class ResiliencyServiceDriven2ClientBuilder
      */
     @Generated
     public ResiliencyServiceDriven2Client buildClient() {
-        return new ResiliencyServiceDriven2Client(
-                new ResiliencyServiceDriven2AsyncClient(buildInnerClient().getParams()));
+        return new ResiliencyServiceDriven2Client(new ResiliencyServiceDriven2AsyncClient(buildInnerClient()));
     }
 }

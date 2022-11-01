@@ -63,6 +63,25 @@ public class ClientModelUtil {
                     .packageName(packageName)
                     .serviceClient(serviceClient);
 
+            final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
+            codeModel.getOperationGroups().stream()
+                    .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
+                    .findAny()
+                    .ifPresent(og -> {
+                        og.getOperations().stream()
+                                .filter(o -> generateConvenienceMethods || o.getConvenienceApi() != null)
+                                .forEach(o -> {
+                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
+                                    if (!cMethods.isEmpty()) {
+                                        String methodName = cMethods.iterator().next().getProxyMethod().getName();
+                                        serviceClient.getClientMethods().stream()
+                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()))
+                                                .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
+                                    }
+                                });
+                    });
+            builder.convenienceMethods(convenienceMethods);
+
             String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
             asyncClients.add(builder.className(asyncClassName).build());
 

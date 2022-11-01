@@ -14,13 +14,13 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.cadl.server.implementation.ServerOpsImpl;
+import com.cadl.server.implementation.ServerClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ServerClient type. */
 @ServiceClient(builder = ServerClientBuilder.class, isAsync = true)
 public final class ServerAsyncClient {
-    @Generated private final ServerOpsImpl serviceClient;
+    @Generated private final ServerClientImpl serviceClient;
 
     /**
      * Initializes an instance of ServerAsyncClient class.
@@ -28,7 +28,7 @@ public final class ServerAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ServerAsyncClient(ServerOpsImpl serviceClient) {
+    ServerAsyncClient(ServerClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

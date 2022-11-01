@@ -1,6 +1,8 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @service({
   title: "Visibility",
@@ -29,18 +31,21 @@ model WriteDog {
   ...Dog;
 }
 
+@operationGroup
 interface VisibilityRead {
   @get
   @route("/read")
   get(): Dog;
 }
 
+@operationGroup
 interface VisibilityWrite {
   @put
   @route("/write")
   create(@body dog: WriteDog): Dog;
 }
 
+@operationGroup
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post

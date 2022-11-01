@@ -257,7 +257,7 @@ public final class ServerClientBuilder
      */
     @Generated
     public ServerAsyncClient buildAsyncClient() {
-        return new ServerAsyncClient(buildInnerClient().getServerOps());
+        return new ServerAsyncClient(buildInnerClient());
     }
 
     /**
@@ -267,6 +267,6 @@ public final class ServerClientBuilder
      */
     @Generated
     public ServerClient buildClient() {
-        return new ServerClient(new ServerAsyncClient(buildInnerClient().getServerOps()));
+        return new ServerClient(new ServerAsyncClient(buildInnerClient()));
     }
 }

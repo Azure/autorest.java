@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.resiliency.servicedriven2.implementation.ParamsImpl;
+import com.resiliency.servicedriven2.implementation.ResiliencyServiceDriven2ClientImpl;
 import com.resiliency.servicedriven2.models.ContentTypePath;
 import com.resiliency.servicedriven2.models.Message;
 import com.resiliency.servicedriven2.models.PostInput;
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous ResiliencyServiceDriven2Client type. */
 @ServiceClient(builder = ResiliencyServiceDriven2ClientBuilder.class, isAsync = true)
 public final class ResiliencyServiceDriven2AsyncClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated private final ResiliencyServiceDriven2ClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResiliencyServiceDriven2AsyncClient class.
@@ -32,7 +32,7 @@ public final class ResiliencyServiceDriven2AsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ResiliencyServiceDriven2AsyncClient(ParamsImpl serviceClient) {
+    ResiliencyServiceDriven2AsyncClient(ResiliencyServiceDriven2ClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

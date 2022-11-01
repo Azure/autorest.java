@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.visibility.models.Dog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityReadClientBuilder.class)
+@ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityReadClient {
     @Generated private final VisibilityReadAsyncClient client;
 

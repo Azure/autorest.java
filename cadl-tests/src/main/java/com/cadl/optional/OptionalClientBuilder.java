@@ -237,7 +237,7 @@ public final class OptionalClientBuilder
      */
     @Generated
     public OptionalAsyncClient buildAsyncClient() {
-        return new OptionalAsyncClient(buildInnerClient().getOptionalOps());
+        return new OptionalAsyncClient(buildInnerClient());
     }
 
     /**
@@ -247,6 +247,6 @@ public final class OptionalClientBuilder
      */
     @Generated
     public OptionalClient buildClient() {
-        return new OptionalClient(new OptionalAsyncClient(buildInnerClient().getOptionalOps()));
+        return new OptionalClient(new OptionalAsyncClient(buildInnerClient()));
     }
 }

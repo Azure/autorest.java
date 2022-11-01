@@ -15,14 +15,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.builtin.implementation.BuiltinOpsImpl;
+import com.cadl.builtin.implementation.BuiltinClientImpl;
 import com.cadl.builtin.models.Builtin;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous BuiltinClient type. */
 @ServiceClient(builder = BuiltinClientBuilder.class, isAsync = true)
 public final class BuiltinAsyncClient {
-    @Generated private final BuiltinOpsImpl serviceClient;
+    @Generated private final BuiltinClientImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinAsyncClient class.
@@ -30,7 +30,7 @@ public final class BuiltinAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BuiltinAsyncClient(BuiltinOpsImpl serviceClient) {
+    BuiltinAsyncClient(BuiltinClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

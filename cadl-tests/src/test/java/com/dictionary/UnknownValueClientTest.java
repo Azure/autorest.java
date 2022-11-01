@@ -14,7 +14,7 @@ import java.util.Map;
 
 class UnknownValueClientTest {
 
-    UnknownValueClient client = new UnknownValueClientBuilder().buildClient();
+    UnknownValueClient client = new DictionaryClientBuilder().buildUnknownValueClient();
 
     @Test
     void get() {

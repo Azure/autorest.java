@@ -20,7 +20,7 @@ import com.models.property.types.models.BooleanProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = BooleanOperationClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class BooleanOperationAsyncClient {
     @Generated private final BooleanOperationsImpl serviceClient;
 

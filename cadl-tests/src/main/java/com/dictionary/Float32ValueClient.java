@@ -19,7 +19,7 @@ import com.azure.core.util.serializer.TypeReference;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
-@ServiceClient(builder = Float32ValueClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class Float32ValueClient {
     @Generated private final Float32ValueAsyncClient client;
 

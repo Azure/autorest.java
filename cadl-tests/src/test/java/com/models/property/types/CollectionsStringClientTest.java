@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 class CollectionsStringClientTest {
 
-    CollectionsStringClient client = new CollectionsStringClientBuilder().buildClient();
+    CollectionsStringClient client = new ModelsPropertyTypesClientBuilder().buildCollectionsStringClient();
 
     @Test
     void get() {

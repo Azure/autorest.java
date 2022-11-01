@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class IntClientTest {
 
-    IntClient client = new IntClientBuilder().buildClient();
+    IntClient client = new ModelsPropertyTypesClientBuilder().buildIntClient();
 
     @Test
     void get() {

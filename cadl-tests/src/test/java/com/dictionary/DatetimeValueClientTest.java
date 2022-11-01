@@ -12,7 +12,7 @@ import java.util.Map;
 
 class DatetimeValueClientTest {
 
-    DatetimeValueClient client = new DatetimeValueClientBuilder().buildClient();
+    DatetimeValueClient client = new DictionaryClientBuilder().buildDatetimeValueClient();
 
     @Test
     void get() {

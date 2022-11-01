@@ -237,7 +237,7 @@ public final class PolymorphismClientBuilder
      */
     @Generated
     public PolymorphismAsyncClient buildAsyncClient() {
-        return new PolymorphismAsyncClient(buildInnerClient().getPolymorphisms());
+        return new PolymorphismAsyncClient(buildInnerClient());
     }
 
     /**
@@ -247,6 +247,6 @@ public final class PolymorphismClientBuilder
      */
     @Generated
     public PolymorphismClient buildClient() {
-        return new PolymorphismClient(new PolymorphismAsyncClient(buildInnerClient().getPolymorphisms()));
+        return new PolymorphismClient(new PolymorphismAsyncClient(buildInnerClient()));
     }
 }

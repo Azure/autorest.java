@@ -257,7 +257,7 @@ public final class LongRunningClientBuilder
      */
     @Generated
     public LongRunningAsyncClient buildAsyncClient() {
-        return new LongRunningAsyncClient(buildInnerClient().getLongRunningOps());
+        return new LongRunningAsyncClient(buildInnerClient());
     }
 
     /**
@@ -267,6 +267,6 @@ public final class LongRunningClientBuilder
      */
     @Generated
     public LongRunningClient buildClient() {
-        return new LongRunningClient(new LongRunningAsyncClient(buildInnerClient().getLongRunningOps()));
+        return new LongRunningClient(new LongRunningAsyncClient(buildInnerClient()));
     }
 }

@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.models.property.optional.models.CollectionsByteProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = CollectionsByteClientBuilder.class)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class)
 public final class CollectionsByteClient {
     @Generated private final CollectionsByteAsyncClient client;
 

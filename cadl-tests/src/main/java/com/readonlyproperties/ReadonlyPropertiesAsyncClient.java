@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.readonlyproperties.implementation.ReadonlyPropertiesImpl;
+import com.readonlyproperties.implementation.ReadonlyPropertiesClientImpl;
 import com.readonlyproperties.models.OutputModel;
 import com.readonlyproperties.models.RoundTripModel;
 import reactor.core.publisher.Mono;
@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous ReadonlyPropertiesClient type. */
 @ServiceClient(builder = ReadonlyPropertiesClientBuilder.class, isAsync = true)
 public final class ReadonlyPropertiesAsyncClient {
-    @Generated private final ReadonlyPropertiesImpl serviceClient;
+    @Generated private final ReadonlyPropertiesClientImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlyPropertiesAsyncClient class.
@@ -31,7 +31,7 @@ public final class ReadonlyPropertiesAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ReadonlyPropertiesAsyncClient(ReadonlyPropertiesImpl serviceClient) {
+    ReadonlyPropertiesAsyncClient(ReadonlyPropertiesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

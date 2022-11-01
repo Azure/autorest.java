@@ -20,7 +20,7 @@ import com.dictionary.models.InnerModel;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
-@ServiceClient(builder = RecursiveModelValueClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class RecursiveModelValueClient {
     @Generated private final RecursiveModelValueAsyncClient client;
 

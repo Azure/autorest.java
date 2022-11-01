@@ -221,7 +221,7 @@ public final class ReadonlyPropertiesClientBuilder
      */
     @Generated
     public ReadonlyPropertiesAsyncClient buildAsyncClient() {
-        return new ReadonlyPropertiesAsyncClient(buildInnerClient().getReadonlyProperties());
+        return new ReadonlyPropertiesAsyncClient(buildInnerClient());
     }
 
     /**
@@ -231,7 +231,6 @@ public final class ReadonlyPropertiesClientBuilder
      */
     @Generated
     public ReadonlyPropertiesClient buildClient() {
-        return new ReadonlyPropertiesClient(
-                new ReadonlyPropertiesAsyncClient(buildInnerClient().getReadonlyProperties()));
+        return new ReadonlyPropertiesClient(new ReadonlyPropertiesAsyncClient(buildInnerClient()));
     }
 }

@@ -241,7 +241,7 @@ public final class ResiliencyDevDrivenClientBuilder
      */
     @Generated
     public ResiliencyDevDrivenAsyncClient buildAsyncClient() {
-        return new ResiliencyDevDrivenAsyncClient(buildInnerClient().getDevDrivens());
+        return new ResiliencyDevDrivenAsyncClient(buildInnerClient());
     }
 
     /**
@@ -251,6 +251,6 @@ public final class ResiliencyDevDrivenClientBuilder
      */
     @Generated
     public ResiliencyDevDrivenClient buildClient() {
-        return new ResiliencyDevDrivenClient(new ResiliencyDevDrivenAsyncClient(buildInnerClient().getDevDrivens()));
+        return new ResiliencyDevDrivenClient(new ResiliencyDevDrivenAsyncClient(buildInnerClient()));
     }
 }

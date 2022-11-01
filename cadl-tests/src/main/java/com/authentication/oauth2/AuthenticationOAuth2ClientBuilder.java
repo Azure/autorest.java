@@ -244,7 +244,7 @@ public final class AuthenticationOAuth2ClientBuilder
      */
     @Generated
     public AuthenticationOAuth2AsyncClient buildAsyncClient() {
-        return new AuthenticationOAuth2AsyncClient(buildInnerClient().getOAuth2s());
+        return new AuthenticationOAuth2AsyncClient(buildInnerClient());
     }
 
     /**
@@ -254,6 +254,6 @@ public final class AuthenticationOAuth2ClientBuilder
      */
     @Generated
     public AuthenticationOAuth2Client buildClient() {
-        return new AuthenticationOAuth2Client(new AuthenticationOAuth2AsyncClient(buildInnerClient().getOAuth2s()));
+        return new AuthenticationOAuth2Client(new AuthenticationOAuth2AsyncClient(buildInnerClient()));
     }
 }

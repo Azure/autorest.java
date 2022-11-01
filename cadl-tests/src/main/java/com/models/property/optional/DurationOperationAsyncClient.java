@@ -20,7 +20,7 @@ import com.models.property.optional.models.DurationProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = DurationOperationClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class, isAsync = true)
 public final class DurationOperationAsyncClient {
     @Generated private final DurationOperationsImpl serviceClient;
 

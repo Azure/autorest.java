@@ -16,13 +16,13 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
-import com.azure.lro.implementation.PollingSuccessImpl;
+import com.azure.lro.implementation.AzureLroClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AzureLroClient type. */
 @ServiceClient(builder = AzureLroClientBuilder.class, isAsync = true)
 public final class AzureLroAsyncClient {
-    @Generated private final PollingSuccessImpl serviceClient;
+    @Generated private final AzureLroClientImpl serviceClient;
 
     /**
      * Initializes an instance of AzureLroAsyncClient class.
@@ -30,7 +30,7 @@ public final class AzureLroAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AzureLroAsyncClient(PollingSuccessImpl serviceClient) {
+    AzureLroAsyncClient(AzureLroClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

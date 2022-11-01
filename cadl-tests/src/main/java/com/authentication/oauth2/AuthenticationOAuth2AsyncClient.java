@@ -4,7 +4,7 @@
 
 package com.authentication.oauth2;
 
-import com.authentication.oauth2.implementation.OAuth2sImpl;
+import com.authentication.oauth2.implementation.AuthenticationOAuth2ClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AuthenticationOAuth2Client type. */
 @ServiceClient(builder = AuthenticationOAuth2ClientBuilder.class, isAsync = true)
 public final class AuthenticationOAuth2AsyncClient {
-    @Generated private final OAuth2sImpl serviceClient;
+    @Generated private final AuthenticationOAuth2ClientImpl serviceClient;
 
     /**
      * Initializes an instance of AuthenticationOAuth2AsyncClient class.
@@ -28,7 +28,7 @@ public final class AuthenticationOAuth2AsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AuthenticationOAuth2AsyncClient(OAuth2sImpl serviceClient) {
+    AuthenticationOAuth2AsyncClient(AuthenticationOAuth2ClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

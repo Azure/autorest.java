@@ -278,7 +278,7 @@ public final class AuthClientBuilder
      */
     @Generated
     public AuthAsyncClient buildAsyncClient() {
-        return new AuthAsyncClient(buildInnerClient().getAuthOps());
+        return new AuthAsyncClient(buildInnerClient());
     }
 
     /**
@@ -288,6 +288,6 @@ public final class AuthClientBuilder
      */
     @Generated
     public AuthClient buildClient() {
-        return new AuthClient(new AuthAsyncClient(buildInnerClient().getAuthOps()));
+        return new AuthClient(new AuthAsyncClient(buildInnerClient()));
     }
 }

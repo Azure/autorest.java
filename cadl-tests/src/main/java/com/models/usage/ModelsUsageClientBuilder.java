@@ -220,7 +220,7 @@ public final class ModelsUsageClientBuilder
      */
     @Generated
     public ModelsUsageAsyncClient buildAsyncClient() {
-        return new ModelsUsageAsyncClient(buildInnerClient().getUsages());
+        return new ModelsUsageAsyncClient(buildInnerClient());
     }
 
     /**
@@ -230,6 +230,6 @@ public final class ModelsUsageClientBuilder
      */
     @Generated
     public ModelsUsageClient buildClient() {
-        return new ModelsUsageClient(new ModelsUsageAsyncClient(buildInnerClient().getUsages()));
+        return new ModelsUsageClient(new ModelsUsageAsyncClient(buildInnerClient()));
     }
 }

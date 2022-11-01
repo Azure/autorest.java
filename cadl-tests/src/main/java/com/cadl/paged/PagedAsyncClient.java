@@ -15,13 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.cadl.paged.implementation.PagedOpsImpl;
+import com.cadl.paged.implementation.PagedClientImpl;
 import com.cadl.paged.models.Resource;
 
 /** Initializes a new instance of the asynchronous PagedClient type. */
 @ServiceClient(builder = PagedClientBuilder.class, isAsync = true)
 public final class PagedAsyncClient {
-    @Generated private final PagedOpsImpl serviceClient;
+    @Generated private final PagedClientImpl serviceClient;
 
     /**
      * Initializes an instance of PagedAsyncClient class.
@@ -29,7 +29,7 @@ public final class PagedAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PagedAsyncClient(PagedOpsImpl serviceClient) {
+    PagedAsyncClient(PagedClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

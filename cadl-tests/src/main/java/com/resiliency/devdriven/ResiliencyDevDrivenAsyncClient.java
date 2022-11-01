@@ -16,7 +16,7 @@ import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.resiliency.devdriven.implementation.DevDrivensImpl;
+import com.resiliency.devdriven.implementation.ResiliencyDevDrivenClientImpl;
 import com.resiliency.devdriven.models.Input;
 import com.resiliency.devdriven.models.LROProduct;
 import com.resiliency.devdriven.models.Mode;
@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous ResiliencyDevDrivenClient type. */
 @ServiceClient(builder = ResiliencyDevDrivenClientBuilder.class, isAsync = true)
 public final class ResiliencyDevDrivenAsyncClient {
-    @Generated private final DevDrivensImpl serviceClient;
+    @Generated private final ResiliencyDevDrivenClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResiliencyDevDrivenAsyncClient class.
@@ -34,7 +34,7 @@ public final class ResiliencyDevDrivenAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ResiliencyDevDrivenAsyncClient(DevDrivensImpl serviceClient) {
+    ResiliencyDevDrivenAsyncClient(ResiliencyDevDrivenClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
