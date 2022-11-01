@@ -15,13 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.auth.implementation.AuthOpsImpl;
+import com.cadl.auth.implementation.AuthClientImpl;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AuthClient type. */
 @ServiceClient(builder = AuthClientBuilder.class, isAsync = true)
 public final class AuthAsyncClient {
-    @Generated private final AuthOpsImpl serviceClient;
+    @Generated private final AuthClientImpl serviceClient;
 
     /**
      * Initializes an instance of AuthAsyncClient class.
@@ -29,7 +29,7 @@ public final class AuthAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AuthAsyncClient(AuthOpsImpl serviceClient) {
+    AuthAsyncClient(AuthClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

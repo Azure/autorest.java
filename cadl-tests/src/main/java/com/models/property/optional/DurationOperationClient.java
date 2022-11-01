@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.models.property.optional.models.DurationProperty;
 
 /** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = DurationOperationClientBuilder.class)
+@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class)
 public final class DurationOperationClient {
     @Generated private final DurationOperationAsyncClient client;
 

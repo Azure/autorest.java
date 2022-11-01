@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.models.usage.implementation.UsagesImpl;
+import com.models.usage.implementation.ModelsUsageClientImpl;
 import com.models.usage.models.InputOutputRecord;
 import com.models.usage.models.InputRecord;
 import com.models.usage.models.OutputRecord;
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous ModelsUsageClient type. */
 @ServiceClient(builder = ModelsUsageClientBuilder.class, isAsync = true)
 public final class ModelsUsageAsyncClient {
-    @Generated private final UsagesImpl serviceClient;
+    @Generated private final ModelsUsageClientImpl serviceClient;
 
     /**
      * Initializes an instance of ModelsUsageAsyncClient class.
@@ -32,7 +32,7 @@ public final class ModelsUsageAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelsUsageAsyncClient(UsagesImpl serviceClient) {
+    ModelsUsageAsyncClient(ModelsUsageClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

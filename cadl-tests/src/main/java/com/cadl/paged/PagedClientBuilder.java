@@ -256,7 +256,7 @@ public final class PagedClientBuilder
      */
     @Generated
     public PagedAsyncClient buildAsyncClient() {
-        return new PagedAsyncClient(buildInnerClient().getPagedOps());
+        return new PagedAsyncClient(buildInnerClient());
     }
 
     /**
@@ -266,6 +266,6 @@ public final class PagedClientBuilder
      */
     @Generated
     public PagedClient buildClient() {
-        return new PagedClient(new PagedAsyncClient(buildInnerClient().getPagedOps()));
+        return new PagedClient(new PagedAsyncClient(buildInnerClient()));
     }
 }

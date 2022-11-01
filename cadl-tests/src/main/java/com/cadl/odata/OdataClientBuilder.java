@@ -236,7 +236,7 @@ public final class OdataClientBuilder
      */
     @Generated
     public OdataAsyncClient buildAsyncClient() {
-        return new OdataAsyncClient(buildInnerClient().getOdataOps());
+        return new OdataAsyncClient(buildInnerClient());
     }
 
     /**
@@ -246,6 +246,6 @@ public final class OdataClientBuilder
      */
     @Generated
     public OdataClient buildClient() {
-        return new OdataClient(new OdataAsyncClient(buildInnerClient().getOdataOps()));
+        return new OdataClient(new OdataAsyncClient(buildInnerClient()));
     }
 }

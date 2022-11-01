@@ -12,7 +12,7 @@ import java.util.Map;
 
 class DurationValueClientTest {
 
-    DurationValueClient client = new DurationValueClientBuilder().buildClient();
+    DurationValueClient client = new DictionaryClientBuilder().buildDurationValueClient();
 
     @Test
     void get() {

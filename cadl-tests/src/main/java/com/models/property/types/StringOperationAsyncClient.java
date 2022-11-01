@@ -20,7 +20,7 @@ import com.models.property.types.models.StringProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = StringOperationClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class StringOperationAsyncClient {
     @Generated private final StringOperationsImpl serviceClient;
 

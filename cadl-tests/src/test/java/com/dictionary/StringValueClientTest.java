@@ -11,7 +11,7 @@ import java.util.Map;
 
 class StringValueClientTest {
 
-    StringValueClient client = new StringValueClientBuilder().buildClient();
+    StringValueClient client = new DictionaryClientBuilder().buildStringValueClient();
 
     @Test
     void get() {

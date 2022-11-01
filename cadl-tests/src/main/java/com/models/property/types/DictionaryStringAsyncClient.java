@@ -20,7 +20,7 @@ import com.models.property.types.models.DictionaryStringProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = DictionaryStringClientBuilder.class, isAsync = true)
+@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
 public final class DictionaryStringAsyncClient {
     @Generated private final DictionaryStringsImpl serviceClient;
 

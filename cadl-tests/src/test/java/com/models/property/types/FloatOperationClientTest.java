@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class FloatOperationClientTest {
 
-    FloatOperationClient client = new FloatOperationClientBuilder().buildClient();
+    FloatOperationClient client = new ModelsPropertyTypesClientBuilder().buildFloatOperationClient();
 
     @Test
     void get() {

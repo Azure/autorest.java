@@ -20,7 +20,7 @@ import com.dictionary.models.InnerModel;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
-@ServiceClient(builder = ModelValueClientBuilder.class)
+@ServiceClient(builder = DictionaryClientBuilder.class)
 public final class ModelValueClient {
     @Generated private final ModelValueAsyncClient client;
 

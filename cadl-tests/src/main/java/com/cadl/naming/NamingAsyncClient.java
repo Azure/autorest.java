@@ -15,14 +15,14 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.naming.implementation.NamingOpsImpl;
+import com.cadl.naming.implementation.NamingClientImpl;
 import com.cadl.naming.models.DataResponse;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous NamingClient type. */
 @ServiceClient(builder = NamingClientBuilder.class, isAsync = true)
 public final class NamingAsyncClient {
-    @Generated private final NamingOpsImpl serviceClient;
+    @Generated private final NamingClientImpl serviceClient;
 
     /**
      * Initializes an instance of NamingAsyncClient class.
@@ -30,7 +30,7 @@ public final class NamingAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    NamingAsyncClient(NamingOpsImpl serviceClient) {
+    NamingAsyncClient(NamingClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

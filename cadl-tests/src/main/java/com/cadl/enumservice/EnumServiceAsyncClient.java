@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.cadl.enumservice.implementation.EnumOpsImpl;
+import com.cadl.enumservice.implementation.EnumServiceClientImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
@@ -31,7 +31,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class, isAsync = true)
 public final class EnumServiceAsyncClient {
-    @Generated private final EnumOpsImpl serviceClient;
+    @Generated private final EnumServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumServiceAsyncClient class.
@@ -39,7 +39,7 @@ public final class EnumServiceAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    EnumServiceAsyncClient(EnumOpsImpl serviceClient) {
+    EnumServiceAsyncClient(EnumServiceClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

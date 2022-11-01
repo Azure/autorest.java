@@ -20,7 +20,7 @@ import com.cadl.visibility.models.ReadDog;
 import com.cadl.visibility.models.WriteDog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityOpClientBuilder.class)
+@ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityOpClient {
     @Generated private final VisibilityOpAsyncClient client;
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 class RecursiveModelValueClientTest {
 
-    RecursiveModelValueClient client = new RecursiveModelValueClientBuilder().buildClient();
+    RecursiveModelValueClient client = new DictionaryClientBuilder().buildRecursiveModelValueClient();
 
     @Test
     void get() {

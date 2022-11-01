@@ -12,7 +12,7 @@ import java.util.List;
 
 class CollectionsIntClientTest {
 
-    CollectionsIntClient client = new CollectionsIntClientBuilder().buildClient();
+    CollectionsIntClient client = new ModelsPropertyTypesClientBuilder().buildCollectionsIntClient();
 
     @Test
     void get() {

@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.polymorphism.implementation.PolymorphismsImpl;
+import com.cadl.polymorphism.implementation.PolymorphismClientImpl;
 import com.cadl.polymorphism.models.BaseType;
 import com.cadl.polymorphism.models.Pet;
 import com.cadl.polymorphism.models.Task;
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous PolymorphismClient type. */
 @ServiceClient(builder = PolymorphismClientBuilder.class, isAsync = true)
 public final class PolymorphismAsyncClient {
-    @Generated private final PolymorphismsImpl serviceClient;
+    @Generated private final PolymorphismClientImpl serviceClient;
 
     /**
      * Initializes an instance of PolymorphismAsyncClient class.
@@ -32,7 +32,7 @@ public final class PolymorphismAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PolymorphismAsyncClient(PolymorphismsImpl serviceClient) {
+    PolymorphismAsyncClient(PolymorphismClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

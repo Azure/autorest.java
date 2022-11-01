@@ -16,14 +16,14 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.specialheaders.implementation.SpecialHeadersOpsImpl;
+import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous SpecialHeadersClient type. */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class, isAsync = true)
 public final class SpecialHeadersAsyncClient {
-    @Generated private final SpecialHeadersOpsImpl serviceClient;
+    @Generated private final SpecialHeadersClientImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialHeadersAsyncClient class.
@@ -31,7 +31,7 @@ public final class SpecialHeadersAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    SpecialHeadersAsyncClient(SpecialHeadersOpsImpl serviceClient) {
+    SpecialHeadersAsyncClient(SpecialHeadersClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

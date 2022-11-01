@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.longrunning.implementation.LongRunningOpsImpl;
+import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.OperationStatusResourceResource;
 import com.cadl.longrunning.models.Resource;
 import reactor.core.publisher.Mono;
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class, isAsync = true)
 public final class LongRunningAsyncClient {
-    @Generated private final LongRunningOpsImpl serviceClient;
+    @Generated private final LongRunningClientImpl serviceClient;
 
     /**
      * Initializes an instance of LongRunningAsyncClient class.
@@ -32,7 +32,7 @@ public final class LongRunningAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LongRunningAsyncClient(LongRunningOpsImpl serviceClient) {
+    LongRunningAsyncClient(LongRunningClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

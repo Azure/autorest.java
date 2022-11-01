@@ -237,7 +237,7 @@ public final class ErrorClientBuilder
      */
     @Generated
     public ErrorAsyncClient buildAsyncClient() {
-        return new ErrorAsyncClient(buildInnerClient().getErrorOps());
+        return new ErrorAsyncClient(buildInnerClient());
     }
 
     /**
@@ -247,6 +247,6 @@ public final class ErrorClientBuilder
      */
     @Generated
     public ErrorClient buildClient() {
-        return new ErrorClient(new ErrorAsyncClient(buildInnerClient().getErrorOps()));
+        return new ErrorClient(new ErrorAsyncClient(buildInnerClient()));
     }
 }

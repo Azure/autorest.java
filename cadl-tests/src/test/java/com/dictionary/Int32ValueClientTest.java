@@ -11,7 +11,7 @@ import java.util.Map;
 
 class Int32ValueClientTest {
 
-    Int32ValueClient client = new Int32ValueClientBuilder().buildClient();
+    Int32ValueClient client = new DictionaryClientBuilder().buildInt32ValueClient();
 
     @Test
     void get() {

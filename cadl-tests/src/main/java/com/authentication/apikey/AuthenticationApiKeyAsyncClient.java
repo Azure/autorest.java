@@ -4,7 +4,7 @@
 
 package com.authentication.apikey;
 
-import com.authentication.apikey.implementation.ApiKeysImpl;
+import com.authentication.apikey.implementation.AuthenticationApiKeyClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the asynchronous AuthenticationApiKeyClient type. */
 @ServiceClient(builder = AuthenticationApiKeyClientBuilder.class, isAsync = true)
 public final class AuthenticationApiKeyAsyncClient {
-    @Generated private final ApiKeysImpl serviceClient;
+    @Generated private final AuthenticationApiKeyClientImpl serviceClient;
 
     /**
      * Initializes an instance of AuthenticationApiKeyAsyncClient class.
@@ -28,7 +28,7 @@ public final class AuthenticationApiKeyAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    AuthenticationApiKeyAsyncClient(ApiKeysImpl serviceClient) {
+    AuthenticationApiKeyAsyncClient(AuthenticationApiKeyClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

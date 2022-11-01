@@ -234,7 +234,7 @@ public final class PartialUpdateClientBuilder
      */
     @Generated
     public PartialUpdateAsyncClient buildAsyncClient() {
-        return new PartialUpdateAsyncClient(buildInnerClient().getPartialUpdateOps());
+        return new PartialUpdateAsyncClient(buildInnerClient());
     }
 
     /**
@@ -244,7 +244,7 @@ public final class PartialUpdateClientBuilder
      */
     @Generated
     public PartialUpdateClient buildClient() {
-        return new PartialUpdateClient(new PartialUpdateAsyncClient(buildInnerClient().getPartialUpdateOps()));
+        return new PartialUpdateClient(new PartialUpdateAsyncClient(buildInnerClient()));
     }
 
     public void test() {}
