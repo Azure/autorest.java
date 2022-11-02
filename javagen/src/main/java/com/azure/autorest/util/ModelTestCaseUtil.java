@@ -219,6 +219,7 @@ public class ModelTestCaseUtil {
             "key",
             "code",
             "credential",
+            "password",
             "token",
             "secret"
     );
