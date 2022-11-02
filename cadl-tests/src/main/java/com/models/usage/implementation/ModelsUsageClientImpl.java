@@ -99,7 +99,7 @@ public final class ModelsUsageClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsUsageClient")
     private interface ModelsUsageClientService {
-        @Post("/models/usages/input")
+        @Post("/models/usage/input")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -117,7 +117,7 @@ public final class ModelsUsageClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/models/usages/output")
+        @Get("/models/usage/output")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -132,7 +132,7 @@ public final class ModelsUsageClientImpl {
         Mono<Response<BinaryData>> output(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Post("/models/usages/input-output")
+        @Post("/models/usage/input-output")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
