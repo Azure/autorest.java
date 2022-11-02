@@ -6,7 +6,6 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -22,14 +21,6 @@ public class ClientBuilder {
     private final List<AsyncSyncClient> syncClients;
     private final List<AsyncSyncClient> asyncClients;
     private final List<ClientBuilderTrait> builderTraits = new ArrayList<>();
-
-    public ClientBuilder(String packageName, String className, ServiceClient serviceClient) {
-        this.packageName = Objects.requireNonNull(packageName);
-        this.className = Objects.requireNonNull(className);
-        this.serviceClient = Objects.requireNonNull(serviceClient);
-        this.syncClients = Collections.emptyList();
-        this.asyncClients = Collections.emptyList();
-    }
 
     public ClientBuilder(String packageName, String className,
                          ServiceClient serviceClient,
