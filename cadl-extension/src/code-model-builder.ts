@@ -279,6 +279,9 @@ export class CodeModelBuilder {
     for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
+
+        // at present, use global security definition
+        security: this.codeModel.security,
       });
 
       const operationGroups = listOperationGroups(this.program, client);
