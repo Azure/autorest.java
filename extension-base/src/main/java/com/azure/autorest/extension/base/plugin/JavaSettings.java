@@ -155,7 +155,7 @@ public class JavaSettings {
                 getBooleanValue(host, "stream-style-serialization", false),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
-                getBooleanValue(host, "stream-response-inputstream", false)
+                getBooleanValue(host, "use-input-stream-for-binary", false)
             );
         }
         return instance;
@@ -340,7 +340,7 @@ public class JavaSettings {
 
         this.outputModelImmutable = outputModelImmutable;
 
-        this.streamResponseInputStream = streamResponseInputStream;
+        this.isInputStreamForBinary = streamResponseInputStream;
     }
 
     private String keyCredentialHeaderName;
@@ -934,13 +934,13 @@ public class JavaSettings {
         return streamStyleSerialization;
     }
 
-    private final boolean streamResponseInputStream;
+    private final boolean isInputStreamForBinary;
 
     /**
-     * @return If true, return <code>InputStream</code> for stream response. If false, return <code>BinaryData</code>.
+     * @return If true, return <code>InputStream</code> for binary in response body. If false, return <code>BinaryData</code>.
      */
-    public boolean isStreamResponseInputStream() {
-        return streamResponseInputStream;
+    public boolean isInputStreamForBinary() {
+        return isInputStreamForBinary;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",

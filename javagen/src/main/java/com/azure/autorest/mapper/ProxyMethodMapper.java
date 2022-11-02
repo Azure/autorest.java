@@ -349,7 +349,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && settings.isStreamResponseInputStream() && responseBodyType.equals(ClassType.BinaryData))
+            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && settings.isInputStreamForBinary() && responseBodyType.equals(ClassType.BinaryData))
                 || responseBodyType.equals(ClassType.InputStream)) {
                 return createStreamContentAsyncReturnType();
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
