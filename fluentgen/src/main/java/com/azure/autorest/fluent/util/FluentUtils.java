@@ -12,6 +12,8 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
@@ -350,5 +352,24 @@ public class FluentUtils {
     public static boolean exampleIsUpdate(String name) {
         name = name.toLowerCase(Locale.ROOT);
         return name.contains("update") && !name.contains("create");
+    }
+
+    public static boolean validToGenerateExample(ClientMethod clientMethod) {
+        String requestContentType = clientMethod.getProxyMethod().getRequestContentType();
+        return clientMethod.getProxyMethod().getExamples() != null
+                && requiresExample(clientMethod)
+                // currently only generate for json payload, i.e. "text/json", "application/json"
+                && requestContentType != null && requestContentType.contains("json");
+    }
+
+    public static boolean requiresExample(ClientMethod clientMethod) {
+        if (clientMethod.getType() == ClientMethodType.SimpleSync
+                || clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse
+                || clientMethod.getType() == ClientMethodType.PagingSync
+                || clientMethod.getType() == ClientMethodType.LongRunningSync) {
+            // generate example for the method with full parameters
+            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
+        }
+        return false;
     }
 }
