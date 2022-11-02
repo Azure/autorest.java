@@ -132,6 +132,14 @@ public class ModelExampleUtil {
                         ExampleNode childNode = parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
                         node.getChildNodes().add(childNode);
                         clientModelNode.getClientModelProperties().put(childNode, modelProperty);
+
+                        // redact possible credential
+                        if (childNode instanceof LiteralNode && childObjectValue instanceof String) {
+                            LiteralNode literalChildNode = (LiteralNode) childNode;
+                            if (literalChildNode.getClientType() == ClassType.String && literalChildNode.getLiteralsValue() != null) {
+                                literalChildNode.setLiteralsValue(ModelTestCaseUtil.redactStringValue(jsonPropertyNames, literalChildNode.getLiteralsValue()));
+                            }
+                        }
                     }
                 }
 
