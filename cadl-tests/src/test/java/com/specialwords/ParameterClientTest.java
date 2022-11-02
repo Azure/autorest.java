@@ -5,8 +5,6 @@ package com.specialwords;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ParameterClientTest {
 
     ParameterClient client = new SpecialWordsClientBuilder().buildParameterClient();

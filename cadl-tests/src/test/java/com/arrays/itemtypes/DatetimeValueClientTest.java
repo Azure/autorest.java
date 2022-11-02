@@ -10,8 +10,6 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DatetimeValueClientTest {
 
     DatetimeValueClient client = new ArraysItemTypesClientBuilder().buildDatetimeValueClient();

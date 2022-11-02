@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class Int32ValueClientTest {
 
     Int32ValueClient client = new ArraysItemTypesClientBuilder().buildInt32ValueClient();
