@@ -62,4 +62,5 @@ client-logger: true
 generate-client-interfaces: true
 required-parameter-client-methods: true
 client-flattened-annotation-target: none
+use-input-stream-for-binary: true
 ```
