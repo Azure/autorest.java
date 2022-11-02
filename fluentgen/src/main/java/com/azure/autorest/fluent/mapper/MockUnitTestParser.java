@@ -62,7 +62,7 @@ public class MockUnitTestParser extends ExampleParser {
             List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-                if (FluentUtils.validToGenerateExample(clientMethod)) {
+                if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                     List<MethodParameter> methodParameters = getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
@@ -87,7 +87,7 @@ public class MockUnitTestParser extends ExampleParser {
 
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (FluentUtils.validToGenerateExample(clientMethod)) {
+            if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =
@@ -179,6 +179,20 @@ public class MockUnitTestParser extends ExampleParser {
         Map<String, Object> responseObject = new HashMap<>();
         responseObject.put("body", jsonObject);
         return new ResponseInfo(new ProxyMethodExample.Response(statusCode, responseObject), verificationNode, verificationObjectName);
+    }
+
+    private static boolean requiresExample(ClientMethod clientMethod) {
+        if (clientMethod.getType() == ClientMethodType.SimpleSync
+                || clientMethod.getType() == ClientMethodType.PagingSync
+                // limit the scope of LRO to status code of 200
+                || (clientMethod.getType() == ClientMethodType.LongRunningSync
+                && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
+                // also azure-core-management does not support LRO from GET
+                && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
+            // generate example for the method with full parameters
+            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
+        }
+        return false;
     }
 
     @SuppressWarnings("unchecked")
