@@ -13,6 +13,7 @@ import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollection
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -61,7 +62,7 @@ public class MockUnitTestParser extends ExampleParser {
             List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-                if (requiresExample(clientMethod)) {
+                if (FluentUtils.requiresExample(clientMethod)) {
                     List<MethodParameter> methodParameters = getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
@@ -86,7 +87,7 @@ public class MockUnitTestParser extends ExampleParser {
 
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (requiresExample(clientMethod)) {
+            if (FluentUtils.requiresExample(clientMethod)) {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =
@@ -178,20 +179,6 @@ public class MockUnitTestParser extends ExampleParser {
         Map<String, Object> responseObject = new HashMap<>();
         responseObject.put("body", jsonObject);
         return new ResponseInfo(new ProxyMethodExample.Response(statusCode, responseObject), verificationNode, verificationObjectName);
-    }
-
-    private static boolean requiresExample(ClientMethod clientMethod) {
-        if (clientMethod.getType() == ClientMethodType.SimpleSync
-                || clientMethod.getType() == ClientMethodType.PagingSync
-                // limit the scope of LRO to status code of 200
-                || (clientMethod.getType() == ClientMethodType.LongRunningSync
-                && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
-                // also azure-core-management does not support LRO from GET
-                && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
-            // generate example for the method with full parameters
-            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
-        }
-        return false;
     }
 
     @SuppressWarnings("unchecked")
