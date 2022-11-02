@@ -26,7 +26,7 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
         byte[] expected = Files.readAllBytes(resourcePath);
-        InputStream in = client.getFiles().getFile();
+        InputStream in = client.getFiles().getFile().toStream();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int length;
@@ -44,13 +44,13 @@ public class FilesTests {
     @Test
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
-        long skipped = client.getFiles().getFileLarge().skip(streamSize);
+        long skipped = client.getFiles().getFileLarge().toStream().skip(streamSize);
         assertEquals(streamSize, skipped);
     }
 
     @Test
     public void getEmptyFile() throws Exception {
-        InputStream in = client.getFiles().getEmptyFile();
+        InputStream in = client.getFiles().getEmptyFile().toStream();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int length;
