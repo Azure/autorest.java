@@ -296,8 +296,7 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.program, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          this.processRoute(operationGroup.type.name, operation);
-          codeModelGroup.addOperation(this.processRoute("", operation));
+          codeModelGroup.addOperation(this.processRoute(operationGroup.type.name, operation));
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
