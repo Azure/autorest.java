@@ -8,7 +8,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 
-public class FluentMethodUnitTest {
+public class FluentMethodMockUnitTest {
 
     // method with mock data
     private final FluentMethodExample fluentMethodExample;
@@ -23,7 +23,7 @@ public class FluentMethodUnitTest {
     private final String responseVerificationVariableName;
     private final ExampleNode responseVerificationNode;
 
-    public FluentMethodUnitTest(
+    public FluentMethodMockUnitTest(
             FluentMethodExample fluentMethodExample,
             FluentResourceCollection resourceCollection, FluentCollectionMethod fluentCollectionMethod,
             ProxyMethodExample.Response response,
@@ -38,7 +38,7 @@ public class FluentMethodUnitTest {
         this.responseVerificationNode = responseVerificationNode;
     }
 
-    public FluentMethodUnitTest(
+    public FluentMethodMockUnitTest(
             FluentResourceCreateExample fluentResourceCreateExample,
             FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod,
             ProxyMethodExample.Response response,

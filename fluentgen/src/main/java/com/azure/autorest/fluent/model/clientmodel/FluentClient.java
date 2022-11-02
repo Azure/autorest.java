@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.model.clientmodel;
 
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 
@@ -26,7 +26,7 @@ public class FluentClient {
     private final List<FluentResourceCollection> resourceCollections = new ArrayList<>();
 
     private final List<FluentExample> examples = new ArrayList<>();
-    private final List<FluentMethodUnitTest> unitTests = new ArrayList<>();
+    private final List<FluentMethodMockUnitTest> mockUnitTests = new ArrayList<>();
 
     private final List<FluentLiveTests> liveTests = new ArrayList<>();
 
@@ -66,8 +66,8 @@ public class FluentClient {
         return examples;
     }
 
-    public List<FluentMethodUnitTest> getUnitTests() {
-        return unitTests;
+    public List<FluentMethodMockUnitTest> getMockUnitTests() {
+        return mockUnitTests;
     }
 
     public List<FluentLiveTests> getLiveTests() {

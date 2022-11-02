@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.IType;
@@ -35,11 +35,11 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
     public static class ClientMethodInfo {
         private final String className;
 
-        private final FluentMethodUnitTest fluentMethodUnitTest;
+        private final FluentMethodMockUnitTest fluentMethodMockUnitTest;
 
-        public ClientMethodInfo(String className, FluentMethodUnitTest fluentMethodUnitTest) {
+        public ClientMethodInfo(String className, FluentMethodMockUnitTest fluentMethodMockUnitTest) {
             this.className = className;
-            this.fluentMethodUnitTest = fluentMethodUnitTest;
+            this.fluentMethodMockUnitTest = fluentMethodMockUnitTest;
         }
     }
 
@@ -75,18 +75,18 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         ));
 
         String className = info.className;
-        FluentMethodUnitTest fluentMethodUnitTest = info.fluentMethodUnitTest;
-        ClientMethod clientMethod = fluentMethodUnitTest.getCollectionMethod().getInnerClientMethod();
+        FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
+        ClientMethod clientMethod = fluentMethodMockUnitTest.getCollectionMethod().getInnerClientMethod();
         final boolean hasReturnValue = clientMethod.getReturnValue().getType() != PrimitiveType.Void;
-        IType fluentReturnType = fluentMethodUnitTest.getCollectionMethod().getFluentReturnType();
+        IType fluentReturnType = fluentMethodMockUnitTest.getCollectionMethod().getFluentReturnType();
 
         // method invocation
         String clientMethodInvocationWithResponse;
         FluentExampleTemplate.ExampleMethod exampleMethod;
-        if (fluentMethodUnitTest.getFluentResourceCreateExample() != null) {
-            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodUnitTest.getFluentResourceCreateExample());
-        } else if (fluentMethodUnitTest.getFluentMethodExample() != null) {
-            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodUnitTest.getFluentMethodExample());
+        if (fluentMethodMockUnitTest.getFluentResourceCreateExample() != null) {
+            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodMockUnitTest.getFluentResourceCreateExample());
+        } else if (fluentMethodMockUnitTest.getFluentMethodExample() != null) {
+            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodMockUnitTest.getFluentMethodExample());
         } else {
             throw new IllegalStateException();
         }
@@ -101,10 +101,10 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         fluentReturnType.addImportsTo(imports, false);
 
         // create response body with mocked data
-        int statusCode = fluentMethodUnitTest.getResponse().getStatusCode();
-        Object jsonObject = fluentMethodUnitTest.getResponse().getBody();
-        ExampleNode verificationNode = fluentMethodUnitTest.getResponseVerificationNode();
-        String verificationObjectName = fluentMethodUnitTest.getResponseVerificationVariableName();
+        int statusCode = fluentMethodMockUnitTest.getResponse().getStatusCode();
+        Object jsonObject = fluentMethodMockUnitTest.getResponse().getBody();
+        ExampleNode verificationNode = fluentMethodMockUnitTest.getResponseVerificationNode();
+        String verificationObjectName = fluentMethodMockUnitTest.getResponseVerificationVariableName();
         String jsonStr;
         try {
             jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);

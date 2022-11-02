@@ -19,7 +19,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
@@ -358,7 +358,7 @@ public class FluentGen extends Javagen {
                 }
 
                 // Unit tests for APIs
-                for (FluentMethodUnitTest unitTest : fluentClient.getUnitTests()) {
+                for (FluentMethodMockUnitTest unitTest : fluentClient.getMockUnitTests()) {
                     javaPackage.addOperationUnitTest(unitTest);
                 }
                 // enable inline mock maker for final class/method
