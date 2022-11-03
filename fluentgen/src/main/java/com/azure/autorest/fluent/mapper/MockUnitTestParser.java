@@ -10,9 +10,10 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -32,36 +33,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UnitTestParser extends ExampleParser {
+public class MockUnitTestParser extends ExampleParser {
 
-    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), UnitTestParser.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), MockUnitTestParser.class);
 
-    public List<FluentMethodUnitTest> parseResourceCollectionForUnitTest(FluentResourceCollection resourceCollection) {
-        List<FluentMethodUnitTest> fluentMethodUnitTests = new ArrayList<>();
+    public List<FluentMethodMockUnitTest> parseResourceCollectionForUnitTest(FluentResourceCollection resourceCollection) {
+        List<FluentMethodMockUnitTest> fluentMethodMockUnitTests = new ArrayList<>();
 
         resourceCollection.getMethodsForTemplate().forEach(m -> {
-            FluentMethodUnitTest example = parseMethod(resourceCollection, m);
+            FluentMethodMockUnitTest example = parseMethod(resourceCollection, m);
             if (example != null) {
-                fluentMethodUnitTests.add(example);
+                fluentMethodMockUnitTests.add(example);
             }
         });
         resourceCollection.getResourceCreates().forEach(rc -> {
-            FluentMethodUnitTest example = parseResourceCreate(resourceCollection, rc);
+            FluentMethodMockUnitTest example = parseResourceCreate(resourceCollection, rc);
             if (example != null) {
-                fluentMethodUnitTests.add(example);
+                fluentMethodMockUnitTests.add(example);
             }
         });
-        return fluentMethodUnitTests;
+        return fluentMethodMockUnitTests;
     }
 
-    private static FluentMethodUnitTest parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
-        FluentMethodUnitTest unitTest = null;
+    private static FluentMethodMockUnitTest parseResourceCreate(FluentResourceCollection collection, ResourceCreate resourceCreate) {
+        FluentMethodMockUnitTest unitTest = null;
 
         try {
             List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-                if (requiresExample(clientMethod)) {
+                if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                     List<MethodParameter> methodParameters = getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
@@ -69,7 +70,7 @@ public class UnitTestParser extends ExampleParser {
                             parseResourceCreate(collection, resourceCreate, proxyMethodExample, methodParameters, requestBodyParameter);
 
                     ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-                    unitTest = new FluentMethodUnitTest(resourceCreateExample, collection, collectionMethod,
+                    unitTest = new FluentMethodMockUnitTest(resourceCreateExample, collection, collectionMethod,
                             responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
 
                     break;
@@ -81,19 +82,19 @@ public class UnitTestParser extends ExampleParser {
         return unitTest;
     }
 
-    private static FluentMethodUnitTest parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
-        FluentMethodUnitTest unitTest = null;
+    private static FluentMethodMockUnitTest parseMethod(FluentResourceCollection collection, FluentCollectionMethod collectionMethod) {
+        FluentMethodMockUnitTest unitTest = null;
 
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (requiresExample(clientMethod)) {
+            if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =
                         parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
 
                 ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-                unitTest = new FluentMethodUnitTest(collectionMethodExample, collection, collectionMethod,
+                unitTest = new FluentMethodMockUnitTest(collectionMethodExample, collection, collectionMethod,
                         responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
             }
         } catch (PossibleCredentialException e) {

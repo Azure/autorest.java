@@ -86,6 +86,13 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
+    /**
+     * Compose a random JSON object according to the structure of client model.
+     *
+     * @param depth the current depth of the object from its root
+     * @param type the type
+     * @return the JSON object as Map
+     */
     public static Object jsonFromType(int depth, IType type) {
         if (type.asNullable() == ClassType.Integer) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
@@ -160,6 +167,20 @@ public class ModelTestCaseUtil {
         return null;
     }
 
+
+    public static String redactStringValue(List<String> serializedNames, String value) {
+        for (String keyName : serializedNames) {
+            String keyNameLower = keyName.toLowerCase(Locale.ROOT);
+            for (String key : POSSIBLE_CREDENTIAL_KEY) {
+                if (keyNameLower.contains(key)) {
+                    value = "fakeTokenPlaceholder";
+                    break;
+                }
+            }
+        }
+        return value;
+    }
+
     private static void addForProperty(int depth, Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
         Object value = null;
@@ -219,6 +240,7 @@ public class ModelTestCaseUtil {
             "key",
             "code",
             "credential",
+            "password",
             "token",
             "secret"
     );
