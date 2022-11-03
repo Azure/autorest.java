@@ -17,32 +17,34 @@ public final class SawsharkTests {
     public void testDeserialize() {
         Sawshark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"sawshark\",\"age\":1317068560,\"birthday\":\"2021-02-25T06:04:33Z\",\"species\":\"e\",\"length\":90.10362,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"b\",\"length\":0.13743639,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"mjqulngsn\",\"length\":75.88975,\"siblings\":[]}]}")
+                                "{\"fishtype\":\"sawshark\",\"age\":422670277,\"birthday\":\"2021-06-30T08:44:34Z\",\"species\":\"jdkwtnhxbnjb\",\"length\":57.91524,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gls\",\"length\":81.586426,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":77.7406,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"ljfmppee\",\"length\":43.36704,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"sabkyqduujitcjcz\",\"length\":99.2908,\"siblings\":[]}]}")
                         .toObject(Sawshark.class);
-        Assertions.assertEquals("e", model.getSpecies());
-        Assertions.assertEquals(90.10362f, model.getLength());
-        Assertions.assertEquals("b", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.13743639f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(1317068560, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-02-25T06:04:33Z"), model.getBirthday());
+        Assertions.assertEquals("jdkwtnhxbnjb", model.getSpecies());
+        Assertions.assertEquals(57.91524f, model.getLength());
+        Assertions.assertEquals("gls", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(81.586426f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(422670277, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-30T08:44:34Z"), model.getBirthday());
     }
 
     @Test
     public void testSerialize() {
         Sawshark model =
-                new Sawshark(90.10362f, OffsetDateTime.parse("2021-02-25T06:04:33Z"))
-                        .setSpecies("e")
+                new Sawshark(57.91524f, OffsetDateTime.parse("2021-06-30T08:44:34Z"))
+                        .setSpecies("jdkwtnhxbnjb")
                         .setSiblings(
                                 Arrays.asList(
-                                        new Fish(0.13743639f).setSpecies("b").setSiblings(Arrays.asList()),
-                                        new Fish(75.88975f).setSpecies("mjqulngsn").setSiblings(Arrays.asList())))
-                        .setAge(1317068560);
+                                        new Fish(81.586426f).setSpecies("gls").setSiblings(Arrays.asList()),
+                                        new Fish(77.7406f).setSpecies("p").setSiblings(Arrays.asList()),
+                                        new Fish(43.36704f).setSpecies("ljfmppee").setSiblings(Arrays.asList()),
+                                        new Fish(99.2908f).setSpecies("sabkyqduujitcjcz").setSiblings(Arrays.asList())))
+                        .setAge(422670277);
         model = BinaryData.fromObject(model).toObject(Sawshark.class);
-        Assertions.assertEquals("e", model.getSpecies());
-        Assertions.assertEquals(90.10362f, model.getLength());
-        Assertions.assertEquals("b", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(0.13743639f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(1317068560, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-02-25T06:04:33Z"), model.getBirthday());
+        Assertions.assertEquals("jdkwtnhxbnjb", model.getSpecies());
+        Assertions.assertEquals(57.91524f, model.getLength());
+        Assertions.assertEquals("gls", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(81.586426f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(422670277, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-30T08:44:34Z"), model.getBirthday());
     }
 }
