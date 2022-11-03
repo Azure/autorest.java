@@ -110,6 +110,8 @@ public class ModelTestCaseUtil {
             return RANDOM.nextBoolean();
         } else if (type == ClassType.String) {
             return randomString();
+        } else if (type.asNullable() == ClassType.UnixTimeLong) {
+            return RANDOM.nextLong() & Long.MAX_VALUE;
         } else if (type == ClassType.DateTime) {
             return randomDateTime().toString();
         } else if (type == ClassType.DateTimeRfc1123) {
@@ -128,6 +130,9 @@ public class ModelTestCaseUtil {
                 // NOOP
             }
             return url;
+        } else if (type == ClassType.Object) {
+            // unknown type, use a simple JSON object
+            return Collections.singletonMap("data", randomString());
         } else if (type instanceof EnumType) {
             IType elementType = ((EnumType) type).getElementType();
             List<String> values = ((EnumType) type).getValues().stream().map(ClientEnumValue::getValue).collect(Collectors.toList());

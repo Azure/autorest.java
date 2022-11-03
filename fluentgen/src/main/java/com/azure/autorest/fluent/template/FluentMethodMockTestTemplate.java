@@ -8,6 +8,7 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
@@ -30,7 +31,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestTemplate.ClientMethodInfo, JavaFile> {
+public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodMockTestTemplate.ClientMethodInfo, JavaFile> {
 
     public static class ClientMethodInfo {
         private final String className;
@@ -43,14 +44,14 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         }
     }
 
-    private static final FluentMethodTestTemplate INSTANCE = new FluentMethodTestTemplate();
+    private static final FluentMethodMockTestTemplate INSTANCE = new FluentMethodMockTestTemplate();
 
     private static final SerializerAdapter SERIALIZER = SerializerFactory.createDefaultManagementSerializerAdapter();
 
-    private FluentMethodTestTemplate() {
+    private FluentMethodMockTestTemplate() {
     }
 
-    public static FluentMethodTestTemplate getInstance() {
+    public static FluentMethodMockTestTemplate getInstance() {
         return INSTANCE;
     }
 
@@ -162,7 +163,7 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
             });
 
             // helper method
-            if (!exampleMethod.getHelperFeatures().isEmpty()) {
+            if (exampleMethod.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
                 ModelExampleWriter.writeMapOfMethod(classBlock);
             }
         });
