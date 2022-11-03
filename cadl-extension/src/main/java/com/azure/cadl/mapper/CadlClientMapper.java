@@ -3,10 +3,13 @@
 
 package com.azure.cadl.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.Client;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.mapper.ClientMapper;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.cadl.util.ModelUtil;
 
 import java.util.ArrayList;
@@ -23,6 +26,16 @@ public class CadlClientMapper extends ClientMapper {
     }
 
     protected CadlClientMapper() {
+    }
+
+    @Override
+    protected List<ServiceClient> processClients(List<Client> clients, CodeModel codeModel) {
+        List<ServiceClient> serviceClients = new ArrayList<>();
+        CadlServiceClientMapper mapper = new CadlServiceClientMapper();
+        for (Client client : clients) {
+            serviceClients.add(mapper.map(client, codeModel));
+        }
+        return serviceClients;
     }
 
     @Override

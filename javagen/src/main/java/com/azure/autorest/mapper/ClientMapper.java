@@ -137,13 +137,21 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
         builder.responseModels(responseModels);
 
-        // service client
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
-        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
-        builder.clientName(serviceClientName)
-                .clientDescription(serviceClientDescription)
-                .serviceClient(serviceClient);
+        builder.clientName(serviceClientName).clientDescription(serviceClientDescription);
+
+        List<ServiceClient> serviceClients = new ArrayList<>();
+        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            serviceClients = processClients(codeModel.getClients(), codeModel);
+            builder.serviceClients(serviceClients);
+        } else {
+            // service client
+            ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+            builder.serviceClient(serviceClient);
+
+            serviceClients.add(serviceClient);
+        }
 
         // package info
         Map<String, PackageInfo> packageInfos = new HashMap<>();
@@ -221,51 +229,53 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        if (settings.isGenerateSyncAsyncClients()) {
-            ClientModelUtil.getAsyncSyncClients(codeModel, serviceClient, asyncClients, syncClients);
-        }
-        builder.syncClients(syncClients);
-        builder.asyncClients(asyncClients);
+        List<ClientBuilder> clientBuilders = new ArrayList<>();
+        for (ServiceClient serviceClient : serviceClients) {
+            if (settings.isGenerateSyncAsyncClients()) {
+                ClientModelUtil.getAsyncSyncClients(codeModel, serviceClient, asyncClients, syncClients);
+            }
+            builder.syncClients(syncClients);
+            builder.asyncClients(asyncClients);
 
-        // service client builder
-        if (!serviceClient.builderDisabled()) {
-            List<ClientBuilder> clientBuilders = new ArrayList<>();
-            String builderSuffix = ClientModelUtil.getBuilderSuffix();
-            String builderName = serviceClient.getInterfaceName() + builderSuffix;
-            String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
-            if (settings.isGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
-                // service client builder per service client
-                for (int i = 0; i < asyncClients.size(); ++i) {
-                    AsyncSyncClient asyncClient = asyncClients.get(i);
-                    AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
-                    String clientName = ((syncClient != null)
-                            ? syncClient.getClassName()
-                            : asyncClient.getClassName().replace("AsyncClient", "Client"));
-                    String clientBuilderName = clientName + builderSuffix;
-                    ClientBuilder clientBuilder = new ClientBuilder(
-                            builderPackage, clientBuilderName, serviceClient,
-                            (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
-                            Collections.singletonList(asyncClient));
+            // service client builder
+            if (!serviceClient.builderDisabled()) {
+                String builderSuffix = ClientModelUtil.getBuilderSuffix();
+                String builderName = serviceClient.getInterfaceName() + builderSuffix;
+                String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
+                if (settings.isGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
+                    // service client builder per service client
+                    for (int i = 0; i < asyncClients.size(); ++i) {
+                        AsyncSyncClient asyncClient = asyncClients.get(i);
+                        AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
+                        String clientName = ((syncClient != null)
+                                ? syncClient.getClassName()
+                                : asyncClient.getClassName().replace("AsyncClient", "Client"));
+                        String clientBuilderName = clientName + builderSuffix;
+                        ClientBuilder clientBuilder = new ClientBuilder(
+                                builderPackage, clientBuilderName, serviceClient,
+                                (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
+                                Collections.singletonList(asyncClient));
 
+                        addBuilderTraits(clientBuilder, serviceClient);
+                        clientBuilders.add(clientBuilder);
+
+                        // there is a cross-reference between service client and service client builder
+                        asyncClient.setClientBuilder(clientBuilder);
+                        if (syncClient != null) {
+                            syncClient.setClientBuilder(clientBuilder);
+                        }
+                    }
+                } else {
+                    // service client builder
+                    ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
+                            serviceClient, syncClients, asyncClients);
                     addBuilderTraits(clientBuilder, serviceClient);
                     clientBuilders.add(clientBuilder);
 
                     // there is a cross-reference between service client and service client builder
-                    asyncClient.setClientBuilder(clientBuilder);
-                    if (syncClient != null) {
-                        syncClient.setClientBuilder(clientBuilder);
-                    }
+                    asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+                    syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
                 }
-            } else {
-                // service client builder
-                ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
-                        serviceClient, syncClients, asyncClients);
-                addBuilderTraits(clientBuilder, serviceClient);
-                clientBuilders.add(clientBuilder);
-
-                // there is a cross-reference between service client and service client builder
-                asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
-                syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
             }
             builder.clientBuilders(clientBuilders);
         }
@@ -307,6 +317,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         return builder.build();
+    }
+
+    /**
+     * Extension for processing multi-client. Supported in Cadl.
+     *
+     * @param clients List of clients.
+     * @return List of service clients.
+     */
+    protected List<ServiceClient> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
+        return Collections.emptyList();
     }
 
     private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {

@@ -3,7 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -187,13 +187,13 @@ public class Client {
         private List<PackageInfo> packageInfos;
         private Manager manager;
         private ServiceClient serviceClient;
-        private List<ServiceClient> serviceClients = new ArrayList<>();
+        private List<ServiceClient> serviceClients = Collections.emptyList();
         private ModuleInfo moduleInfo;
-        private List<AsyncSyncClient> syncClients = new ArrayList<>();
-        private List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        private List<ClientBuilder> clientBuilders = new ArrayList<>();
-        private List<ProtocolExample> protocolExamples = new ArrayList<>();
-        private List<LiveTests> liveTests = new ArrayList<>();
+        private List<AsyncSyncClient> syncClients = Collections.emptyList();
+        private List<AsyncSyncClient> asyncClients = Collections.emptyList();
+        private List<ClientBuilder> clientBuilders = Collections.emptyList();
+        private List<ProtocolExample> protocolExamples = Collections.emptyList();
+        private List<LiveTests> liveTests = Collections.emptyList();
 
         /**
          * Sets the name of this service client.
@@ -361,9 +361,7 @@ public class Client {
         }
 
         public Client build() {
-            if (serviceClients.isEmpty()) {
-                serviceClients.add(serviceClient);
-            } else if (serviceClient == null) {
+            if (serviceClient == null && !serviceClients.isEmpty()) {
                 serviceClient = serviceClients.iterator().next();
             }
             return new Client(clientName,
