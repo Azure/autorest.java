@@ -50,6 +50,7 @@ public class Client {
      * The serviceClient for this service.
      */
     private ServiceClient serviceClient;
+    private List<ServiceClient> serviceClients;
     /**
      * Get the module info.
      */
@@ -82,7 +83,7 @@ public class Client {
     private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions,
                    List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels,
                    List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager,
-                   ServiceClient serviceClient, ModuleInfo moduleInfo,
+                   ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
                    List<LiveTests> liveTests
@@ -97,6 +98,7 @@ public class Client {
         this.packageInfos = packageInfos;
         this.manager = manager;
         this.serviceClient = serviceClient;
+        this.serviceClients = serviceClients;
         this.moduleInfo = moduleInfo;
         this.syncClients = syncClients;
         this.asyncClients = asyncClients;
@@ -185,6 +187,7 @@ public class Client {
         private List<PackageInfo> packageInfos;
         private Manager manager;
         private ServiceClient serviceClient;
+        private List<ServiceClient> serviceClients = new ArrayList<>();
         private ModuleInfo moduleInfo;
         private List<AsyncSyncClient> syncClients = new ArrayList<>();
         private List<AsyncSyncClient> asyncClients = new ArrayList<>();
@@ -292,6 +295,11 @@ public class Client {
             return this;
         }
 
+        public Builder serviceClients(List<ServiceClient> serviceClients) {
+            this.serviceClients = serviceClients;
+            return this;
+        }
+
         /**
          * Sets the module info for this client.
          * @param moduleInfo the module info
@@ -353,6 +361,11 @@ public class Client {
         }
 
         public Client build() {
+            if (serviceClients.isEmpty()) {
+                serviceClients.add(serviceClient);
+            } else if (serviceClient == null) {
+                serviceClient = serviceClients.iterator().next();
+            }
             return new Client(clientName,
                     clientDescription,
                     enums,
@@ -363,6 +376,7 @@ public class Client {
                     packageInfos,
                     manager,
                     serviceClient,
+                    serviceClients,
                     moduleInfo,
                     syncClients,
                     asyncClients,
