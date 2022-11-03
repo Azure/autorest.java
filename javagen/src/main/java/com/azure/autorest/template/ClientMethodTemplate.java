@@ -915,7 +915,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generatePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
         ProxyMethod restAPIMethod, JavaSettings settings) {
-        String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
+        String effectiveProxyMethodName = clientMethod.getProxyMethod().getName();
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
 
@@ -928,7 +928,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                    effectiveMethodName, clientMethod.getArgumentList());
+                    effectiveProxyMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -940,7 +940,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s);", returnType.asNullable(),
-                        effectiveMethodName, clientMethod.getArgumentList());
+                        effectiveProxyMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -954,7 +954,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.methodReturn(serviceMethodCall);
                 }
             } else {
-                function.line("%s(%s);", effectiveMethodName, clientMethod.getArgumentList());
+                function.line("%s(%s);", effectiveProxyMethodName, clientMethod.getArgumentList());
             }
         });
     }

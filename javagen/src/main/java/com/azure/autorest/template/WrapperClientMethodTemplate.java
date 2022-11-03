@@ -56,9 +56,6 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             methodName = methodName.substring(0, methodName.length() - "Async".length());
         }
 
-        if (clientMethod.getType().name().contains("Sync")) {
-            methodName = methodName.replace("Sync", "");
-        }
         String declaration = String.format("%1$s %2$s(%3$s)", clientMethod.getReturnValue().getType(), methodName, clientMethod.getParametersDeclaration());
         typeBlock.publicMethod(declaration, function -> {
 

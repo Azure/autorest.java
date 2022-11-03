@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -142,12 +143,13 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
         // service client methods generate overloads that are with and without context that aren't needed
         // for wrapper public clients
-        .filter(clientMethod -> (JavaSettings.getInstance().isDataPlaneClient())
-                || ((clientMethod.getName().contains("WithResponse") && clientMethod.getParametersDeclaration().contains("Context context"))
-                || ((!clientMethod.getName().contains("WithResponse")
-                && !clientMethod.getParametersDeclaration().contains("Context context"))
-                || clientMethod.getType().name().contains("Paging")
-                || clientMethod.getType().name().contains("LongRunning"))))
+        // .filter(clientMethod -> (JavaSettings.getInstance().isDataPlaneClient())
+        //         || ((clientMethod.getName().contains("WithResponse") && clientMethod.getParametersDeclaration().contains("Context context"))
+        //         || ((!clientMethod.getName().contains("WithResponse")
+        //         && !clientMethod.getParametersDeclaration().contains("Context context"))
+        //         || clientMethod.getType().name().contains("Paging")
+        //         || clientMethod.getType().name().contains("LongRunning"))))
+            .filter(clientMethod -> clientMethod.getMethodVisibility().equals(JavaVisibility.Public))
         .forEach(clientMethod -> {
           writeMethod(clientMethod, classBlock);
         });

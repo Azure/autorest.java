@@ -1277,6 +1277,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (!isProtocolMethod && convenienceApi != null) {
             return new MethodNamer(convenienceApi.getName());
         } else {
+            if (proxyMethod.isSync()) {
+                return new MethodNamer(proxyMethod.getName().replace("Sync", ""));
+            }
             return new MethodNamer(proxyMethod.getName());
         }
     }
