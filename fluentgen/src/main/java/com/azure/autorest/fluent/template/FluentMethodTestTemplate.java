@@ -8,7 +8,6 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
@@ -78,7 +77,7 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         String className = info.className;
         FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
         ClientMethod clientMethod = fluentMethodMockUnitTest.getCollectionMethod().getInnerClientMethod();
-        IType fluentReturnType = fluentMethodMockUnitTest.getCollectionMethod().getFluentReturnType();
+        IType fluentReturnType = fluentMethodMockUnitTest.getFluentReturnType();
         final boolean isResponseType = FluentUtils.isResponseType(fluentReturnType);
         if (isResponseType) {
             fluentReturnType = FluentUtils.getValueTypeFromResponseType(fluentReturnType);
@@ -98,7 +97,7 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         String clientMethodInvocation = exampleMethod.getMethodContent();
         if (hasReturnValue) {
             // hack on replaceResponseForValue, as in "update" case, "exampleMethod.getMethodContent()" would be a code block, not a single line of code invocation.
-            clientMethodInvocationWithResponse = fluentReturnType + " response = " + replaceResponseForValue(clientMethodInvocation);
+            clientMethodInvocationWithResponse = fluentReturnType + " response = " + (isResponseType ? replaceResponseForValue(clientMethodInvocation) : clientMethodInvocation);
         } else {
             clientMethodInvocationWithResponse = clientMethodInvocation;
         }

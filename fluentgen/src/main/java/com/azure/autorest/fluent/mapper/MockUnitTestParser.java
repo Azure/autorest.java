@@ -71,6 +71,7 @@ public class MockUnitTestParser extends ExampleParser {
 
                     ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
                     unitTest = new FluentMethodMockUnitTest(resourceCreateExample, collection, collectionMethod,
+                            FluentUtils.isResponseType(collectionMethod.getFluentReturnType()) ? FluentUtils.getValueTypeFromResponseType(collectionMethod.getFluentReturnType()) : collectionMethod.getFluentReturnType(),
                             responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
 
                     break;
@@ -94,7 +95,7 @@ public class MockUnitTestParser extends ExampleParser {
                         parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
 
                 ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-                unitTest = new FluentMethodMockUnitTest(collectionMethodExample, collection, collectionMethod,
+                unitTest = new FluentMethodMockUnitTest(collectionMethodExample, collection, collectionMethod, collectionMethod.getFluentReturnType(),
                         responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
             }
         } catch (PossibleCredentialException e) {
