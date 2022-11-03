@@ -45,6 +45,8 @@ public class CodeModel extends Metadata {
      */
     private Security security;
 
+    private List<Client> clients = new ArrayList<>();
+
     /**
      * test model definition
      */
@@ -136,6 +138,14 @@ public class CodeModel extends Metadata {
      */
     public void setSecurity(Security security) {
         this.security = security;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 
     public TestModel getTestModel() {

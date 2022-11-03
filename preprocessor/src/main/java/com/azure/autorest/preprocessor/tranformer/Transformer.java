@@ -6,6 +6,7 @@ package com.azure.autorest.preprocessor.tranformer;
 import com.azure.autorest.extension.base.model.codemodel.AndSchema;
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
@@ -51,6 +52,10 @@ public class Transformer {
       markFlattenedSchemas(codeModel);
     }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
+    // multi-clients for Cadl
+    if (codeModel.getClients() != null) {
+      transformClients(codeModel.getClients(), codeModel);
+    }
     return codeModel;
   }
 
@@ -74,6 +79,27 @@ public class Transformer {
     }
     for (DictionarySchema dictionarySchema : schemas.getDictionaries()) {
       renameType(dictionarySchema);
+    }
+  }
+
+  private void transformClients(List<Client> clients, CodeModel codeModel) {
+    for (Client client : clients) {
+      Language language = client.getLanguage().getDefault();
+      Language java = addJavaLanguage(client);
+      java.setName(CodeNamer.toPascalCase(language.getName())); // Name of client should always ends with Client, hence it should not require escaping
+      java.setSerializedName(language.getSerializedName());
+      java.setDescription(language.getDescription());
+      client.getLanguage().setJava(java);
+
+      if (client.getOperationGroups() != null) {
+        for (OperationGroup operationGroup : client.getOperationGroups()) {
+          operationGroup.setCodeModel(codeModel);
+          renameMethodGroup(operationGroup);
+          for (Operation operation : operationGroup.getOperations()) {
+            operation.setOperationGroup(operationGroup);
+          }
+        }
+      }
     }
   }
 
