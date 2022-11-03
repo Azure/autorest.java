@@ -151,6 +151,10 @@ public class Client {
         return serviceClient;
     }
 
+    public final List<ServiceClient> getServiceClients() {
+        return serviceClients;
+    }
+
     /** @return the sync service clients */
     public List<AsyncSyncClient> getSyncClients() {
         return syncClients;

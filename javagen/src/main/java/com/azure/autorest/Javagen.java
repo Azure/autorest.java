@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
@@ -156,9 +157,16 @@ public class Javagen extends NewPlugin {
                                  boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
-        javaPackage
-            .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                client.getServiceClient());
+        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            javaPackage
+                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                    client.getServiceClient());
+        } else {
+            // multi-client
+            for (ServiceClient serviceClient : client.getServiceClients()) {
+                javaPackage.addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
+            }
+        }
 
         if (settings.isGenerateClientInterfaces()) {
             javaPackage
