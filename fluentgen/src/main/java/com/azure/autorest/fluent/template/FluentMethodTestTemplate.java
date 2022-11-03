@@ -4,6 +4,7 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.IType;
@@ -77,8 +78,12 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         String className = info.className;
         FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
         ClientMethod clientMethod = fluentMethodMockUnitTest.getCollectionMethod().getInnerClientMethod();
-        final boolean hasReturnValue = clientMethod.getReturnValue().getType() != PrimitiveType.Void;
         IType fluentReturnType = fluentMethodMockUnitTest.getCollectionMethod().getFluentReturnType();
+        final boolean isResponseType = FluentUtils.isResponseType(fluentReturnType);
+        if (isResponseType) {
+            fluentReturnType = FluentUtils.getValueTypeFromResponseType(fluentReturnType);
+        }
+        final boolean hasReturnValue = fluentReturnType.asNullable() != ClassType.Void;
 
         // method invocation
         String clientMethodInvocationWithResponse;
@@ -92,7 +97,8 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         }
         String clientMethodInvocation = exampleMethod.getMethodContent();
         if (hasReturnValue) {
-            clientMethodInvocationWithResponse = fluentReturnType.toString() + " response = " + clientMethodInvocation;
+            // hack on replaceResponseForValue, as in "update" case, "exampleMethod.getMethodContent()" would be a code block, not a single line of code invocation.
+            clientMethodInvocationWithResponse = fluentReturnType + " response = " + replaceResponseForValue(clientMethodInvocation);
         } else {
             clientMethodInvocationWithResponse = clientMethodInvocation;
         }
@@ -161,5 +167,13 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
                 ModelExampleWriter.writeMapOfMethod(classBlock);
             }
         });
+    }
+
+    private static String replaceResponseForValue(String clientMethodInvocation) {
+        if (clientMethodInvocation.endsWith(";")) {
+            clientMethodInvocation = clientMethodInvocation.substring(0, clientMethodInvocation.length() - 1);
+            clientMethodInvocation += ".getValue();";
+        }
+        return clientMethodInvocation;
     }
 }

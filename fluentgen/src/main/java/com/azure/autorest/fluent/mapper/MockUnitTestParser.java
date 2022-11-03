@@ -143,10 +143,17 @@ public class MockUnitTestParser extends ExampleParser {
         Object jsonObject;
         ExampleNode verificationNode;
         String verificationObjectName;
+
+        IType clientReturnType = clientMethod.getReturnValue().getType();
+        final boolean isResponseType = FluentUtils.isResponseType(clientReturnType);
+        if (isResponseType) {
+            clientReturnType = FluentUtils.getValueTypeFromResponseType(clientReturnType);
+        }
+
         if (clientMethod.getType() == ClientMethodType.PagingSync) {
             // pageable
-            if (clientMethod.getReturnValue().getType() instanceof GenericType) {
-                IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
+            if (clientReturnType instanceof GenericType) {
+                IType elementType = ((GenericType) clientReturnType).getTypeArguments()[0];
 
                 Object firstJsonObjectInPageable = ModelTestCaseUtil.jsonFromType(0, elementType);
                 // put to first element in array
@@ -163,7 +170,7 @@ public class MockUnitTestParser extends ExampleParser {
             }
         } else {
             // simple or LRO
-            jsonObject = ModelTestCaseUtil.jsonFromType(0, clientMethod.getReturnValue().getType());
+            jsonObject = ModelTestCaseUtil.jsonFromType(0, clientReturnType);
 
             if (jsonObject == null) {
                 jsonObject = new Object();
@@ -174,7 +181,7 @@ public class MockUnitTestParser extends ExampleParser {
             }
 
             verificationObjectName = "response";
-            verificationNode = ModelExampleUtil.parseNode(clientMethod.getReturnValue().getType(), jsonObject);
+            verificationNode = ModelExampleUtil.parseNode(clientReturnType, jsonObject);
         }
         Map<String, Object> responseObject = new HashMap<>();
         responseObject.put("body", jsonObject);
@@ -183,6 +190,7 @@ public class MockUnitTestParser extends ExampleParser {
 
     private static boolean requiresExample(ClientMethod clientMethod) {
         if (clientMethod.getType() == ClientMethodType.SimpleSync
+                || clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 || clientMethod.getType() == ClientMethodType.PagingSync
                 // limit the scope of LRO to status code of 200
                 || (clientMethod.getType() == ClientMethodType.LongRunningSync
