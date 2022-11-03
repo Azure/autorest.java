@@ -62,7 +62,7 @@ public class MockUnitTestParser extends ExampleParser {
             List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-                if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
+                if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                     List<MethodParameter> methodParameters = getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
@@ -87,7 +87,7 @@ public class MockUnitTestParser extends ExampleParser {
 
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =

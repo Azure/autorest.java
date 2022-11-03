@@ -354,12 +354,21 @@ public class FluentUtils {
         return name.contains("update") && !name.contains("create");
     }
 
-    public static boolean validToGenerateExample(ClientMethod clientMethod) {
+    public static boolean validRequestContentTypeToGenerateExample(ClientMethod clientMethod) {
+        // for now, only accept JSON as request body
+
         String requestContentType = clientMethod.getProxyMethod().getRequestContentType();
         return clientMethod.getProxyMethod().getExamples() != null
                 && requiresExample(clientMethod)
                 // currently only generate for json payload, i.e. "text/json", "application/json"
                 && requestContentType != null && requestContentType.contains("json");
+    }
+
+    public static boolean validResponseContentTypeToGenerateExample(ClientMethod clientMethod) {
+        // for now, avoid binary as response body
+
+        IType responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
+        return !(responseBodyType == ClassType.BinaryData || responseBodyType == GenericType.FluxByteBuffer);
     }
 
     public static boolean requiresExample(ClientMethod clientMethod) {
