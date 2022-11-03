@@ -25,5 +25,6 @@ class DurationValueClientTest {
     void put() {
         Map<String, Duration> map = new HashMap<>();
         map.put("k1", Duration.parse("P123DT22H14M12.011S"));
+        client.put(map);
     }
 }
