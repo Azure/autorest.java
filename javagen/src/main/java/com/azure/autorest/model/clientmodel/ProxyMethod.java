@@ -217,7 +217,7 @@ public class ProxyMethod {
     }
 
     public final String getBaseName() {
-        return baseName;
+        return baseName == null ? name : baseName;
     }
 
     public final List<ProxyMethodParameter> getParameters() {
