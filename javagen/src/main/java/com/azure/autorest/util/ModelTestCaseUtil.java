@@ -131,8 +131,8 @@ public class ModelTestCaseUtil {
             }
             return url;
         } else if (type == ClassType.Object) {
-            // unknown type, use a simple JSON object
-            return Collections.singletonMap("data", randomString());
+            // unknown type, use a simple string
+            return "data" + randomString();
         } else if (type instanceof EnumType) {
             IType elementType = ((EnumType) type).getElementType();
             List<String> values = ((EnumType) type).getValues().stream().map(ClientEnumValue::getValue).collect(Collectors.toList());
