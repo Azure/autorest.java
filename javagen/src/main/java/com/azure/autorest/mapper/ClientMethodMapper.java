@@ -1044,9 +1044,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
-            if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
+            if (methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
                 return NOT_GENERATE;
-            } else if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSync && hasContextParameter) {
+            } else if (methodType == ClientMethodType.SimpleSync && hasContextParameter) {
                 return NOT_GENERATE;
             }
             return VISIBLE;
