@@ -4,6 +4,7 @@
 
 package fixtures.paging.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
@@ -25,6 +26,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.paging.models.BodyParam;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.OdataProductResult;
 import fixtures.paging.models.PagingGetMultiplePagesLroOptions;
@@ -79,6 +81,15 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePages(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Get("/paging/single/getWithBodyParams")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ProductResult>> getSinglePagesWithBodyParams(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BodyParam parameters,
+                @HeaderParam("Accept") String accept,
+                Context context);
 
         @Get("/paging/firstResponseEmpty/1")
         @ExpectedResponses({200})
@@ -277,6 +288,15 @@ public final class PagingsImpl {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesNext(
+                @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ProductResult>> getSinglePagesWithBodyParamsNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
@@ -830,6 +850,189 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePages(Context context) {
         return new PagedIterable<>(getSinglePagesAsync(context));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsSinglePageAsync(String name) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        BodyParam parameters = new BodyParam();
+        parameters.setName(name);
+        return FluxUtil.withContext(
+                        context ->
+                                service.getSinglePagesWithBodyParams(
+                                        this.client.getHost(), parameters, accept, context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsSinglePageAsync(String name, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        BodyParam parameters = new BodyParam();
+        parameters.setName(name);
+        return service.getSinglePagesWithBodyParams(this.client.getHost(), parameters, accept, context)
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getSinglePagesWithBodyParamsAsync(String name) {
+        return new PagedFlux<>(
+                () -> getSinglePagesWithBodyParamsSinglePageAsync(name),
+                nextLink -> getSinglePagesWithBodyParamsNextSinglePageAsync(nextLink, name));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getSinglePagesWithBodyParamsAsync() {
+        final String name = null;
+        return new PagedFlux<>(
+                () -> getSinglePagesWithBodyParamsSinglePageAsync(name),
+                nextLink -> getSinglePagesWithBodyParamsNextSinglePageAsync(nextLink, name));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getSinglePagesWithBodyParamsAsync(String name, Context context) {
+        return new PagedFlux<>(
+                () -> getSinglePagesWithBodyParamsSinglePageAsync(name, context),
+                nextLink -> getSinglePagesWithBodyParamsNextSinglePageAsync(nextLink, name, context));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getSinglePagesWithBodyParamsSinglePage(String name) {
+        return getSinglePagesWithBodyParamsSinglePageAsync(name).block();
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getSinglePagesWithBodyParamsSinglePage(String name, Context context) {
+        return getSinglePagesWithBodyParamsSinglePageAsync(name, context).block();
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams(String name) {
+        return new PagedIterable<>(getSinglePagesWithBodyParamsAsync(name));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams() {
+        final String name = null;
+        return new PagedIterable<>(getSinglePagesWithBodyParamsAsync(name));
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams(String name, Context context) {
+        return new PagedIterable<>(getSinglePagesWithBodyParamsAsync(name, context));
     }
 
     /**
@@ -4413,6 +4616,115 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesNextSinglePage(String nextLink, Context context) {
         return getSinglePagesNextSinglePageAsync(nextLink, context).block();
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsNextSinglePageAsync(String nextLink, String name) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        BodyParam parameters = new BodyParam();
+        parameters.setName(name);
+        return FluxUtil.withContext(
+                        context ->
+                                service.getSinglePagesWithBodyParamsNext(
+                                        nextLink, this.client.getHost(), accept, context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsNextSinglePageAsync(
+            String nextLink, String name, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        BodyParam parameters = new BodyParam();
+        parameters.setName(name);
+        return service.getSinglePagesWithBodyParamsNext(nextLink, this.client.getHost(), accept, context)
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        res.getValue().getValues(),
+                                        res.getValue().getNextLink(),
+                                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getSinglePagesWithBodyParamsNextSinglePage(String nextLink, String name) {
+        return getSinglePagesWithBodyParamsNextSinglePageAsync(nextLink, name).block();
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getSinglePagesWithBodyParamsNextSinglePage(
+            String nextLink, String name, Context context) {
+        return getSinglePagesWithBodyParamsNextSinglePageAsync(nextLink, name, context).block();
     }
 
     /**

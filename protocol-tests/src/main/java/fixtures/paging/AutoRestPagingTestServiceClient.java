@@ -113,6 +113,43 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Optional)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param parameters put {'name': 'body'} to pass the test.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getSinglePagesWithBodyParams(
+            BinaryData parameters, RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.getSinglePagesWithBodyParams(parameters, requestOptions));
+    }
+
+    /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *
