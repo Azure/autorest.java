@@ -6,14 +6,14 @@ package fixtures.endpointlro;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of AutoRestLongRunningOperationTestServiceClient. */
-public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVersion {
+/** Service version of LroEndpoint. */
+public enum LroEndpointServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
     private final String version;
 
-    AutoRestLongRunningOperationTestServiceVersion(String version) {
+    LroEndpointServiceVersion(String version) {
         this.version = version;
     }
 
@@ -26,9 +26,9 @@ public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVer
     /**
      * Gets the latest service version supported by this client library.
      *
-     * @return The latest {@link AutoRestLongRunningOperationTestServiceVersion}.
+     * @return The latest {@link LroEndpointServiceVersion}.
      */
-    public static AutoRestLongRunningOperationTestServiceVersion getLatest() {
+    public static LroEndpointServiceVersion getLatest() {
         return V1_0_0;
     }
 }

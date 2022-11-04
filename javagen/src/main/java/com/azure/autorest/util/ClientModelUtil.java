@@ -161,7 +161,7 @@ public class ClientModelUtil {
             // mandate ending Client for LLC
             if (!serviceClientInterfaceName.endsWith("Client")) {
                 String serviceName = settings.getServiceName();
-                if (serviceName != null) {
+                if (serviceName != null && codeModel instanceof CodeModel) {
                     serviceName = SPACE.matcher(serviceName).replaceAll("");
                     serviceClientInterfaceName = serviceName.endsWith("Client") ? serviceName : (serviceName + "Client");
                 } else {

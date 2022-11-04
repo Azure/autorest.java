@@ -14,21 +14,22 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.polling.PollerFlux;
+import fixtures.endpointlro.implementation.LROsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class)
-public final class AutoRestLongRunningOperationTestServiceClient {
-    @Generated private final AutoRestLongRunningOperationTestServiceAsyncClient client;
+/** Initializes a new instance of the asynchronous LroEndpointClient type. */
+@ServiceClient(builder = LroEndpointClientBuilder.class, isAsync = true)
+public final class LroEndpointAsyncClient {
+    @Generated private final LROsImpl serviceClient;
 
     /**
-     * Initializes an instance of AutoRestLongRunningOperationTestServiceClient class.
+     * Initializes an instance of LroEndpointAsyncClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    AutoRestLongRunningOperationTestServiceClient(AutoRestLongRunningOperationTestServiceAsyncClient client) {
-        this.client = client;
+    LroEndpointAsyncClient(LROsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -72,11 +73,11 @@ public final class AutoRestLongRunningOperationTestServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
-        return this.client.beginPut200Succeeded(requestOptions).getSyncPoller();
+    public PollerFlux<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
+        return this.serviceClient.beginPut200SucceededAsync(requestOptions);
     }
 }

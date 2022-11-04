@@ -31,23 +31,19 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
-import fixtures.endpointlro.implementation.AutoRestLongRunningOperationTestServiceClientImpl;
+import fixtures.endpointlro.implementation.LroEndpointClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            AutoRestLongRunningOperationTestServiceClient.class,
-            AutoRestLongRunningOperationTestServiceAsyncClient.class
-        })
-public final class AutoRestLongRunningOperationTestServiceClientBuilder
-        implements HttpTrait<AutoRestLongRunningOperationTestServiceClientBuilder>,
-                ConfigurationTrait<AutoRestLongRunningOperationTestServiceClientBuilder>,
-                EndpointTrait<AutoRestLongRunningOperationTestServiceClientBuilder> {
+/** A builder for creating a new instance of the LroEndpointClient type. */
+@ServiceClientBuilder(serviceClients = {LroEndpointClient.class, LroEndpointAsyncClient.class})
+public final class LroEndpointClientBuilder
+        implements HttpTrait<LroEndpointClientBuilder>,
+                ConfigurationTrait<LroEndpointClientBuilder>,
+                EndpointTrait<LroEndpointClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -57,9 +53,9 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the AutoRestLongRunningOperationTestServiceClientBuilder. */
+    /** Create an instance of the LroEndpointClientBuilder. */
     @Generated
-    public AutoRestLongRunningOperationTestServiceClientBuilder() {
+    public LroEndpointClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -71,7 +67,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
+    public LroEndpointClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -84,7 +80,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder httpClient(HttpClient httpClient) {
+    public LroEndpointClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -97,7 +93,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public LroEndpointClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -110,7 +106,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder clientOptions(ClientOptions clientOptions) {
+    public LroEndpointClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -123,7 +119,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder retryOptions(RetryOptions retryOptions) {
+    public LroEndpointClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -131,7 +127,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public LroEndpointClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -145,7 +141,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder configuration(Configuration configuration) {
+    public LroEndpointClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -158,7 +154,7 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AutoRestLongRunningOperationTestServiceClientBuilder endpoint(String endpoint) {
+    public LroEndpointClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -172,10 +168,10 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
      * Sets Project name.
      *
      * @param projectName the projectName value.
-     * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
+     * @return the LroEndpointClientBuilder.
      */
     @Generated
-    public AutoRestLongRunningOperationTestServiceClientBuilder projectName(String projectName) {
+    public LroEndpointClientBuilder projectName(String projectName) {
         this.projectName = projectName;
         return this;
     }
@@ -189,24 +185,24 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AutoRestLongRunningOperationTestServiceClientBuilder.
+     * @return the LroEndpointClientBuilder.
      */
     @Generated
-    public AutoRestLongRunningOperationTestServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public LroEndpointClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestLongRunningOperationTestServiceClientImpl with the provided parameters.
+     * Builds an instance of LroEndpointClientImpl with the provided parameters.
      *
-     * @return an instance of AutoRestLongRunningOperationTestServiceClientImpl.
+     * @return an instance of LroEndpointClientImpl.
      */
     @Generated
-    private AutoRestLongRunningOperationTestServiceClientImpl buildInnerClient() {
+    private LroEndpointClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        AutoRestLongRunningOperationTestServiceClientImpl client =
-                new AutoRestLongRunningOperationTestServiceClientImpl(
+        LroEndpointClientImpl client =
+                new LroEndpointClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
         return client;
     }
@@ -253,23 +249,22 @@ public final class AutoRestLongRunningOperationTestServiceClientBuilder
     }
 
     /**
-     * Builds an instance of AutoRestLongRunningOperationTestServiceAsyncClient class.
+     * Builds an instance of LroEndpointAsyncClient class.
      *
-     * @return an instance of AutoRestLongRunningOperationTestServiceAsyncClient.
+     * @return an instance of LroEndpointAsyncClient.
      */
     @Generated
-    public AutoRestLongRunningOperationTestServiceAsyncClient buildAsyncClient() {
-        return new AutoRestLongRunningOperationTestServiceAsyncClient(buildInnerClient().getLROs());
+    public LroEndpointAsyncClient buildAsyncClient() {
+        return new LroEndpointAsyncClient(buildInnerClient().getLROs());
     }
 
     /**
-     * Builds an instance of AutoRestLongRunningOperationTestServiceClient class.
+     * Builds an instance of LroEndpointClient class.
      *
-     * @return an instance of AutoRestLongRunningOperationTestServiceClient.
+     * @return an instance of LroEndpointClient.
      */
     @Generated
-    public AutoRestLongRunningOperationTestServiceClient buildClient() {
-        return new AutoRestLongRunningOperationTestServiceClient(
-                new AutoRestLongRunningOperationTestServiceAsyncClient(buildInnerClient().getLROs()));
+    public LroEndpointClient buildClient() {
+        return new LroEndpointClient(new LroEndpointAsyncClient(buildInnerClient().getLROs()));
     }
 }

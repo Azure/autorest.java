@@ -12,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AutoRestLongRunningOperationTestServiceClient type. */
-public final class AutoRestLongRunningOperationTestServiceClientImpl {
+/** Initializes a new instance of the LroEndpointClient type. */
+public final class LroEndpointClientImpl {
     /** The endpoint. */
     private final String endpoint;
 
@@ -75,12 +75,12 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestLongRunningOperationTestServiceClient client.
+     * Initializes an instance of LroEndpointClient client.
      *
      * @param endpoint The endpoint.
      * @param projectName Project name.
      */
-    public AutoRestLongRunningOperationTestServiceClientImpl(String endpoint, String projectName) {
+    public LroEndpointClientImpl(String endpoint, String projectName) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -91,26 +91,25 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
     }
 
     /**
-     * Initializes an instance of AutoRestLongRunningOperationTestServiceClient client.
+     * Initializes an instance of LroEndpointClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The endpoint.
      * @param projectName Project name.
      */
-    public AutoRestLongRunningOperationTestServiceClientImpl(
-            HttpPipeline httpPipeline, String endpoint, String projectName) {
+    public LroEndpointClientImpl(HttpPipeline httpPipeline, String endpoint, String projectName) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
     }
 
     /**
-     * Initializes an instance of AutoRestLongRunningOperationTestServiceClient client.
+     * Initializes an instance of LroEndpointClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The endpoint.
      * @param projectName Project name.
      */
-    public AutoRestLongRunningOperationTestServiceClientImpl(
+    public LroEndpointClientImpl(
             HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String projectName) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;

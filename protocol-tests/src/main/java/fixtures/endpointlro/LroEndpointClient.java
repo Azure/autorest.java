@@ -14,22 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.polling.PollerFlux;
-import fixtures.endpointlro.implementation.LROsImpl;
+import com.azure.core.util.polling.SyncPoller;
 
-/** Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestServiceClient type. */
-@ServiceClient(builder = AutoRestLongRunningOperationTestServiceClientBuilder.class, isAsync = true)
-public final class AutoRestLongRunningOperationTestServiceAsyncClient {
-    @Generated private final LROsImpl serviceClient;
+/** Initializes a new instance of the synchronous LroEndpointClient type. */
+@ServiceClient(builder = LroEndpointClientBuilder.class)
+public final class LroEndpointClient {
+    @Generated private final LroEndpointAsyncClient client;
 
     /**
-     * Initializes an instance of AutoRestLongRunningOperationTestServiceAsyncClient class.
+     * Initializes an instance of LroEndpointClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param client the async client.
      */
     @Generated
-    AutoRestLongRunningOperationTestServiceAsyncClient(LROsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    LroEndpointClient(LroEndpointAsyncClient client) {
+        this.client = client;
     }
 
     /**
@@ -73,11 +72,11 @@ public final class AutoRestLongRunningOperationTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
-        return this.serviceClient.beginPut200SucceededAsync(requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
+        return this.client.beginPut200Succeeded(requestOptions).getSyncPoller();
     }
 }

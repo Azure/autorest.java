@@ -63,14 +63,14 @@ public class Utils {
         }
     }
 
-    public static String getNameForUngroupedOperations(Client codeModel, FluentJavaSettings settings) {
+    public static String getNameForUngroupedOperations(Client client, FluentJavaSettings settings) {
         String nameForUngroupOperations = null;
         if (settings.getNameForUngroupedOperations().isPresent()) {
             nameForUngroupOperations = settings.getNameForUngroupedOperations().get();
         } else if (JavaSettings.getInstance().isFluentLite()) {
             nameForUngroupOperations = Constants.DEFAULT_NAME_FOR_UNGROUPED_OPERATIONS;
 
-            Set<String> operationGroupNames = codeModel.getOperationGroups().stream()
+            Set<String> operationGroupNames = client.getOperationGroups().stream()
                 .map(Utils::getDefaultName)
                 .collect(Collectors.toSet());
             if (operationGroupNames.contains(nameForUngroupOperations)) {
