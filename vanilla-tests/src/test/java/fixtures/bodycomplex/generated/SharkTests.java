@@ -17,32 +17,32 @@ public final class SharkTests {
     public void testDeserialize() {
         Shark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"shark\",\"age\":1323562973,\"birthday\":\"2020-12-24T20:28:32Z\",\"species\":\"hn\",\"length\":9.845084,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"wjzrnfygxgisp\",\"length\":59.519714,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"fkufublj\",\"length\":34.64574,\"siblings\":[]}]}")
+                                "{\"fishtype\":\"shark\",\"age\":91789189,\"birthday\":\"2021-08-17T04:19:07Z\",\"species\":\"mjqulngsn\",\"length\":75.88975,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"kzgcwrwcl\",\"length\":99.26511,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"jdous\",\"length\":84.4235,\"siblings\":[]}]}")
                         .toObject(Shark.class);
-        Assertions.assertEquals("hn", model.getSpecies());
-        Assertions.assertEquals(9.845084f, model.getLength());
-        Assertions.assertEquals("wjzrnfygxgisp", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(59.519714f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(1323562973, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2020-12-24T20:28:32Z"), model.getBirthday());
+        Assertions.assertEquals("mjqulngsn", model.getSpecies());
+        Assertions.assertEquals(75.88975f, model.getLength());
+        Assertions.assertEquals("kzgcwrwcl", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(99.26511f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(91789189, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-08-17T04:19:07Z"), model.getBirthday());
     }
 
     @Test
     public void testSerialize() {
         Shark model =
-                new Shark(9.845084f, OffsetDateTime.parse("2020-12-24T20:28:32Z"))
-                        .setSpecies("hn")
+                new Shark(75.88975f, OffsetDateTime.parse("2021-08-17T04:19:07Z"))
+                        .setSpecies("mjqulngsn")
                         .setSiblings(
                                 Arrays.asList(
-                                        new Fish(59.519714f).setSpecies("wjzrnfygxgisp").setSiblings(Arrays.asList()),
-                                        new Fish(34.64574f).setSpecies("fkufublj").setSiblings(Arrays.asList())))
-                        .setAge(1323562973);
+                                        new Fish(99.26511f).setSpecies("kzgcwrwcl").setSiblings(Arrays.asList()),
+                                        new Fish(84.4235f).setSpecies("jdous").setSiblings(Arrays.asList())))
+                        .setAge(91789189);
         model = BinaryData.fromObject(model).toObject(Shark.class);
-        Assertions.assertEquals("hn", model.getSpecies());
-        Assertions.assertEquals(9.845084f, model.getLength());
-        Assertions.assertEquals("wjzrnfygxgisp", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(59.519714f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(1323562973, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2020-12-24T20:28:32Z"), model.getBirthday());
+        Assertions.assertEquals("mjqulngsn", model.getSpecies());
+        Assertions.assertEquals(75.88975f, model.getLength());
+        Assertions.assertEquals("kzgcwrwcl", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(99.26511f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(91789189, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-08-17T04:19:07Z"), model.getBirthday());
     }
 }

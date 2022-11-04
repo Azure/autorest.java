@@ -4,10 +4,11 @@
 package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
@@ -30,7 +31,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestTemplate.ClientMethodInfo, JavaFile> {
+public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodMockTestTemplate.ClientMethodInfo, JavaFile> {
 
     public static class ClientMethodInfo {
         private final String className;
@@ -43,14 +44,14 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         }
     }
 
-    private static final FluentMethodTestTemplate INSTANCE = new FluentMethodTestTemplate();
+    private static final FluentMethodMockTestTemplate INSTANCE = new FluentMethodMockTestTemplate();
 
     private static final SerializerAdapter SERIALIZER = SerializerFactory.createDefaultManagementSerializerAdapter();
 
-    private FluentMethodTestTemplate() {
+    private FluentMethodMockTestTemplate() {
     }
 
-    public static FluentMethodTestTemplate getInstance() {
+    public static FluentMethodMockTestTemplate getInstance() {
         return INSTANCE;
     }
 
@@ -77,8 +78,12 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         String className = info.className;
         FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
         ClientMethod clientMethod = fluentMethodMockUnitTest.getCollectionMethod().getInnerClientMethod();
-        final boolean hasReturnValue = clientMethod.getReturnValue().getType() != PrimitiveType.Void;
-        IType fluentReturnType = fluentMethodMockUnitTest.getCollectionMethod().getFluentReturnType();
+        IType fluentReturnType = fluentMethodMockUnitTest.getFluentReturnType();
+        final boolean isResponseType = FluentUtils.isResponseType(fluentReturnType);
+        if (isResponseType) {
+            fluentReturnType = FluentUtils.getValueTypeFromResponseType(fluentReturnType);
+        }
+        final boolean hasReturnValue = fluentReturnType.asNullable() != ClassType.Void;
 
         // method invocation
         String clientMethodInvocationWithResponse;
@@ -92,7 +97,8 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
         }
         String clientMethodInvocation = exampleMethod.getMethodContent();
         if (hasReturnValue) {
-            clientMethodInvocationWithResponse = fluentReturnType.toString() + " response = " + clientMethodInvocation;
+            // hack on replaceResponseForValue, as in "update" case, "exampleMethod.getMethodContent()" would be a code block, not a single line of code invocation.
+            clientMethodInvocationWithResponse = fluentReturnType + " response = " + (isResponseType ? replaceResponseForValue(clientMethodInvocation) : clientMethodInvocation);
         } else {
             clientMethodInvocationWithResponse = clientMethodInvocation;
         }
@@ -157,9 +163,17 @@ public class FluentMethodTestTemplate implements IJavaTemplate<FluentMethodTestT
             });
 
             // helper method
-            if (!exampleMethod.getHelperFeatures().isEmpty()) {
+            if (exampleMethod.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
                 ModelExampleWriter.writeMapOfMethod(classBlock);
             }
         });
+    }
+
+    private static String replaceResponseForValue(String clientMethodInvocation) {
+        if (clientMethodInvocation.endsWith(";")) {
+            clientMethodInvocation = clientMethodInvocation.substring(0, clientMethodInvocation.length() - 1);
+            clientMethodInvocation += ".getValue();";
+        }
+        return clientMethodInvocation;
     }
 }

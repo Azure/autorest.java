@@ -162,7 +162,7 @@ public class ExampleParser {
         List<FluentCollectionMethodExample> ret = null;
 
         ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-        if (FluentUtils.validToGenerateExample(clientMethod)) {
+        if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -180,7 +180,7 @@ public class ExampleParser {
     private static List<FluentClientMethodExample> parseMethod(MethodGroupClient methodGroup, ClientMethod clientMethod) {
         List<FluentClientMethodExample> ret = null;
 
-        if (FluentUtils.validToGenerateExample(clientMethod)) {
+        if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -245,7 +245,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (FluentUtils.validToGenerateExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
@@ -361,7 +361,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceUpdate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (FluentUtils.validToGenerateExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
