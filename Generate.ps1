@@ -1,4 +1,4 @@
-$AUTOREST_CORE_VERSION = "3.8.4"
+$AUTOREST_CORE_VERSION = "3.9.3"
 $VANILLA_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
 $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
 # $ARM_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false"
