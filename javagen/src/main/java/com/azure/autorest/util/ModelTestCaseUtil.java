@@ -14,6 +14,9 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ModelTestCaseUtil {
@@ -86,6 +90,13 @@ public class ModelTestCaseUtil {
         return jsonObject;
     }
 
+    /**
+     * Compose a random JSON object according to the structure of client model.
+     *
+     * @param depth the current depth of the object from its root
+     * @param type the type
+     * @return the JSON object as Map
+     */
     public static Object jsonFromType(int depth, IType type) {
         if (type.asNullable() == ClassType.Integer) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
@@ -99,6 +110,8 @@ public class ModelTestCaseUtil {
             return RANDOM.nextBoolean();
         } else if (type == ClassType.String) {
             return randomString();
+        } else if (type.asNullable() == ClassType.UnixTimeLong) {
+            return RANDOM.nextLong() & Long.MAX_VALUE;
         } else if (type == ClassType.DateTime) {
             return randomDateTime().toString();
         } else if (type == ClassType.DateTimeRfc1123) {
@@ -107,6 +120,19 @@ public class ModelTestCaseUtil {
             Duration duration = Duration.parse("PT0S");
             duration = duration.plusSeconds(RANDOM.nextInt(10 * 24 * 60 * 60));
             return duration.toString();
+        } else if (type == ClassType.UUID) {
+            return UUID.randomUUID().toString();
+        } else if (type == ClassType.URL) {
+            String url = "http://example.org/";
+            try {
+                url += URLEncoder.encode(randomString(), StandardCharsets.UTF_8.name());
+            } catch (UnsupportedEncodingException e) {
+                // NOOP
+            }
+            return url;
+        } else if (type == ClassType.Object) {
+            // unknown type, use a simple string
+            return "data" + randomString();
         } else if (type instanceof EnumType) {
             IType elementType = ((EnumType) type).getElementType();
             List<String> values = ((EnumType) type).getValues().stream().map(ClientEnumValue::getValue).collect(Collectors.toList());
@@ -158,6 +184,20 @@ public class ModelTestCaseUtil {
             }
         }
         return null;
+    }
+
+
+    public static String redactStringValue(List<String> serializedNames, String value) {
+        for (String keyName : serializedNames) {
+            String keyNameLower = keyName.toLowerCase(Locale.ROOT);
+            for (String key : POSSIBLE_CREDENTIAL_KEY) {
+                if (keyNameLower.contains(key)) {
+                    value = "fakeTokenPlaceholder";
+                    break;
+                }
+            }
+        }
+        return value;
     }
 
     private static void addForProperty(int depth, Map<String, Object> jsonObject,
@@ -219,6 +259,7 @@ public class ModelTestCaseUtil {
             "key",
             "code",
             "credential",
+            "password",
             "token",
             "secret"
     );

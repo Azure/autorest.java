@@ -11,10 +11,10 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodUnitTest;
+import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.projectmodel.Changelog;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.template.FluentMethodTestTemplate;
+import com.azure.autorest.fluent.template.FluentMethodMockTestTemplate;
 import com.azure.autorest.fluent.template.FluentLiveTestsTemplate;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.template.ChangelogTemplate;
@@ -110,15 +110,15 @@ public class FluentJavaPackage extends JavaPackage {
         return javaFile;
     }
 
-    public void addOperationUnitTest(FluentMethodUnitTest unitTest) {
+    public void addOperationUnitTest(FluentMethodMockUnitTest unitTest) {
 
         String className = unitTest.getResourceCollection().getInterfaceType().getName()
                 + CodeNamer.toPascalCase(unitTest.getCollectionMethod().getMethodName())
                 + "MockTests";
         JavaFile javaFile = getJavaFileFactory().createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
-        FluentMethodTestTemplate.ClientMethodInfo info = new FluentMethodTestTemplate.ClientMethodInfo(
+        FluentMethodMockTestTemplate.ClientMethodInfo info = new FluentMethodMockTestTemplate.ClientMethodInfo(
                 className, unitTest);
-        FluentMethodTestTemplate.getInstance().write(info, javaFile);
+        FluentMethodMockTestTemplate.getInstance().write(info, javaFile);
         addJavaFile(javaFile);
     }
 

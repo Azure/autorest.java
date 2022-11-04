@@ -6,7 +6,7 @@ pass-thru:
   - subset-reducer
 
 use-extension:
-  "@autorest/modelerfour": "4.23.7"
+  "@autorest/modelerfour": "4.25.0"
 
 pipeline:
 
@@ -62,4 +62,5 @@ client-logger: true
 generate-client-interfaces: true
 required-parameter-client-methods: true
 client-flattened-annotation-target: none
+use-input-stream-for-binary: true
 ```

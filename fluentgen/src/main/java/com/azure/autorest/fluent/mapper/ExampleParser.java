@@ -38,7 +38,6 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
@@ -163,7 +162,7 @@ public class ExampleParser {
         List<FluentCollectionMethodExample> ret = null;
 
         ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-        if (needToGenerateExample(clientMethod)) {
+        if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -181,7 +180,7 @@ public class ExampleParser {
     private static List<FluentClientMethodExample> parseMethod(MethodGroupClient methodGroup, ClientMethod clientMethod) {
         List<FluentClientMethodExample> ret = null;
 
-        if (needToGenerateExample(clientMethod)) {
+        if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
             List<MethodParameter> methodParameters = getParameters(clientMethod);
@@ -208,7 +207,7 @@ public class ExampleParser {
     }
 
     public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, Collection<FluentCollectionMethod> collectionMethods, ProxyMethodExample example) {
-        FluentCollectionMethod collectionMethod = collectionMethods.stream().filter(method -> requiresExample(method.getInnerClientMethod())).findFirst().get();
+        FluentCollectionMethod collectionMethod = collectionMethods.stream().filter(method -> FluentUtils.requiresExample(method.getInnerClientMethod())).findFirst().get();
         return parseMethodForExample(resourceCollection, collectionMethod, getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
     }
 
@@ -246,7 +245,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (needToGenerateExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
@@ -341,7 +340,7 @@ public class ExampleParser {
         List<MethodParameter> methodParameters = getParameters(
             create.getMethodReferences()
                 .stream()
-                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .filter(collectionMethod-> FluentUtils.requiresExample(collectionMethod.getInnerClientMethod()))
                 .findFirst().get()
                 .getInnerClientMethod());
         MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
@@ -362,7 +361,7 @@ public class ExampleParser {
         List<FluentCollectionMethod> collectionMethods = resourceUpdate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (needToGenerateExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
                 if (ret == null) {
                     ret = new ArrayList<>();
                 }
@@ -387,14 +386,6 @@ public class ExampleParser {
             }
         }
         return ret;
-    }
-
-    private static boolean needToGenerateExample(ClientMethod clientMethod) {
-        String requestContentType = clientMethod.getProxyMethod().getRequestContentType();
-        return clientMethod.getProxyMethod().getExamples() != null
-                && requiresExample(clientMethod)
-                // currently only generate for json payload, i.e. "text/json", "application/json"
-                && requestContentType != null && requestContentType.contains("json");
     }
 
     private static FluentCollectionMethod findResourceGetMethod(ResourceUpdate resourceUpdate) {
@@ -459,7 +450,7 @@ public class ExampleParser {
         List<MethodParameter> methodParameters = getParameters(
             resourceUpdate.getMethodReferences()
                 .stream()
-                .filter(collectionMethod-> requiresExample(collectionMethod.getInnerClientMethod()))
+                .filter(collectionMethod-> FluentUtils.requiresExample(collectionMethod.getInnerClientMethod()))
                 .findFirst().get()
                 .getInnerClientMethod()
         );
@@ -598,17 +589,6 @@ public class ExampleParser {
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
-    }
-
-    private static boolean requiresExample(ClientMethod clientMethod) {
-        if (clientMethod.getType() == ClientMethodType.SimpleSync
-                || clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse
-                || clientMethod.getType() == ClientMethodType.PagingSync
-                || clientMethod.getType() == ClientMethodType.LongRunningSync) {
-            // generate example for the method with full parameters
-            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
-        }
-        return false;
     }
 
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {

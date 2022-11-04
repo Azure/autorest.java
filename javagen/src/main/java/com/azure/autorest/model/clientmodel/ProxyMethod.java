@@ -630,7 +630,7 @@ public class ProxyMethod {
         /**
          * Sets the metia-types in response.
          *
-         * @param responseContentTypes the metia-types in response
+         * @param responseContentTypes the media-types in response
          * @return the Builder itself
          */
         public Builder responseContentTypes(Set<String> responseContentTypes) {

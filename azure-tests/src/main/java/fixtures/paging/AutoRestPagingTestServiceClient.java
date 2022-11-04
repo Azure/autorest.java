@@ -119,6 +119,50 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams(String name) {
+        return this.serviceClient.getSinglePagesWithBodyParams(name);
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams() {
+        return this.serviceClient.getSinglePagesWithBodyParams();
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param name The name parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams(String name, Context context) {
+        return this.serviceClient.getSinglePagesWithBodyParams(name, context);
+    }
+
+    /**
      * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
      * call, will give you an items list of 1.
      *

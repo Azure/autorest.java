@@ -18,35 +18,37 @@ public final class SmartSalmonTests {
     public void testDeserialize() {
         SmartSalmon model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"ayhuy\",\"\":{},\"location\":\"odepoogin\",\"iswild\":true,\"species\":\"iheogna\",\"length\":41.474594,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"heotusiv\",\"length\":74.332695,\"siblings\":[]}]}")
+                                "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"ayhuy\",\"\":{\"inuvamiheogn\":\"datapodepoo\",\"usivye\":\"datarxzxtheo\"},\"location\":\"ciqihnhung\",\"iswild\":false,\"species\":\"rnfygxgispem\",\"length\":55.453957,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ufubl\",\"length\":16.258835,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"eofjaeqjh\",\"length\":91.61654,\"siblings\":[]}]}")
                         .toObject(SmartSalmon.class);
-        Assertions.assertEquals("iheogna", model.getSpecies());
-        Assertions.assertEquals(41.474594f, model.getLength());
-        Assertions.assertEquals("heotusiv", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(74.332695f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("odepoogin", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
+        Assertions.assertEquals("rnfygxgispem", model.getSpecies());
+        Assertions.assertEquals(55.453957f, model.getLength());
+        Assertions.assertEquals("ufubl", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(16.258835f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("ciqihnhung", model.getLocation());
+        Assertions.assertEquals(false, model.iswild());
         Assertions.assertEquals("ayhuy", model.getCollegeDegree());
     }
 
     @Test
     public void testSerialize() {
         SmartSalmon model =
-                new SmartSalmon(41.474594f)
-                        .setSpecies("iheogna")
+                new SmartSalmon(55.453957f)
+                        .setSpecies("rnfygxgispem")
                         .setSiblings(
-                                Arrays.asList(new Fish(74.332695f).setSpecies("heotusiv").setSiblings(Arrays.asList())))
-                        .setLocation("odepoogin")
-                        .setIswild(true)
+                                Arrays.asList(
+                                        new Fish(16.258835f).setSpecies("ufubl").setSiblings(Arrays.asList()),
+                                        new Fish(91.61654f).setSpecies("eofjaeqjh").setSiblings(Arrays.asList())))
+                        .setLocation("ciqihnhung")
+                        .setIswild(false)
                         .setCollegeDegree("ayhuy")
                         .setAdditionalProperties(mapOf("fishtype", "smart_salmon"));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
-        Assertions.assertEquals("iheogna", model.getSpecies());
-        Assertions.assertEquals(41.474594f, model.getLength());
-        Assertions.assertEquals("heotusiv", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(74.332695f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("odepoogin", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
+        Assertions.assertEquals("rnfygxgispem", model.getSpecies());
+        Assertions.assertEquals(55.453957f, model.getLength());
+        Assertions.assertEquals("ufubl", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(16.258835f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("ciqihnhung", model.getLocation());
+        Assertions.assertEquals(false, model.iswild());
         Assertions.assertEquals("ayhuy", model.getCollegeDegree());
     }
 

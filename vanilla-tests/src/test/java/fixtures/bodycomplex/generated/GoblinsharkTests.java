@@ -18,40 +18,41 @@ public final class GoblinsharkTests {
     public void testDeserialize() {
         Goblinshark model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"goblin\",\"jawsize\":105854038,\"color\":\"RED\",\"age\":823404328,\"birthday\":\"2021-06-16T21:35:22Z\",\"species\":\"clxxwrljdo\",\"length\":70.73601,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vkocrcjdkwtn\",\"length\":50.567795,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"biksq\",\"length\":16.933006,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"ainqpjwnzlljfm\",\"length\":18.06193,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"vmgxsab\",\"length\":49.296616,\"siblings\":[]}]}")
+                                "{\"fishtype\":\"goblin\",\"jawsize\":1757775346,\"color\":\"gray\",\"age\":968287955,\"birthday\":\"2021-07-01T17:17:50Z\",\"species\":\"appd\",\"length\":56.1473,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"wrwjfeu\",\"length\":93.839714,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"je\",\"length\":87.67903,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"dhugjzzdatqxhocd\",\"length\":25.122803,\"siblings\":[]}]}")
                         .toObject(Goblinshark.class);
-        Assertions.assertEquals("clxxwrljdo", model.getSpecies());
-        Assertions.assertEquals(70.73601f, model.getLength());
-        Assertions.assertEquals("vkocrcjdkwtn", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(50.567795f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(823404328, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-16T21:35:22Z"), model.getBirthday());
-        Assertions.assertEquals(105854038, model.getJawsize());
-        Assertions.assertEquals(GoblinSharkColor.UPPER_RED, model.getColor());
+        Assertions.assertEquals("appd", model.getSpecies());
+        Assertions.assertEquals(56.1473f, model.getLength());
+        Assertions.assertEquals("wrwjfeu", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(93.839714f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(968287955, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-01T17:17:50Z"), model.getBirthday());
+        Assertions.assertEquals(1757775346, model.getJawsize());
+        Assertions.assertEquals(GoblinSharkColor.GRAY, model.getColor());
     }
 
     @Test
     public void testSerialize() {
         Goblinshark model =
-                new Goblinshark(70.73601f, OffsetDateTime.parse("2021-06-16T21:35:22Z"))
-                        .setSpecies("clxxwrljdo")
+                new Goblinshark(56.1473f, OffsetDateTime.parse("2021-07-01T17:17:50Z"))
+                        .setSpecies("appd")
                         .setSiblings(
                                 Arrays.asList(
-                                        new Fish(50.567795f).setSpecies("vkocrcjdkwtn").setSiblings(Arrays.asList()),
-                                        new Fish(16.933006f).setSpecies("biksq").setSiblings(Arrays.asList()),
-                                        new Fish(18.06193f).setSpecies("ainqpjwnzlljfm").setSiblings(Arrays.asList()),
-                                        new Fish(49.296616f).setSpecies("vmgxsab").setSiblings(Arrays.asList())))
-                        .setAge(823404328)
-                        .setJawsize(105854038)
-                        .setColor(GoblinSharkColor.UPPER_RED);
+                                        new Fish(93.839714f).setSpecies("wrwjfeu").setSiblings(Arrays.asList()),
+                                        new Fish(87.67903f).setSpecies("je").setSiblings(Arrays.asList()),
+                                        new Fish(25.122803f)
+                                                .setSpecies("dhugjzzdatqxhocd")
+                                                .setSiblings(Arrays.asList())))
+                        .setAge(968287955)
+                        .setJawsize(1757775346)
+                        .setColor(GoblinSharkColor.GRAY);
         model = BinaryData.fromObject(model).toObject(Goblinshark.class);
-        Assertions.assertEquals("clxxwrljdo", model.getSpecies());
-        Assertions.assertEquals(70.73601f, model.getLength());
-        Assertions.assertEquals("vkocrcjdkwtn", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(50.567795f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals(823404328, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-16T21:35:22Z"), model.getBirthday());
-        Assertions.assertEquals(105854038, model.getJawsize());
-        Assertions.assertEquals(GoblinSharkColor.UPPER_RED, model.getColor());
+        Assertions.assertEquals("appd", model.getSpecies());
+        Assertions.assertEquals(56.1473f, model.getLength());
+        Assertions.assertEquals("wrwjfeu", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(93.839714f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals(968287955, model.getAge());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-01T17:17:50Z"), model.getBirthday());
+        Assertions.assertEquals(1757775346, model.getJawsize());
+        Assertions.assertEquals(GoblinSharkColor.GRAY, model.getColor());
     }
 }
