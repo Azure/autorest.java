@@ -62,7 +62,7 @@ public class MockUnitTestParser extends ExampleParser {
             List<FluentCollectionMethod> collectionMethods = resourceCreate.getMethodReferences();
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-                if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
+                if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                     List<MethodParameter> methodParameters = getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
@@ -71,6 +71,7 @@ public class MockUnitTestParser extends ExampleParser {
 
                     ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
                     unitTest = new FluentMethodMockUnitTest(resourceCreateExample, collection, collectionMethod,
+                            FluentUtils.isResponseType(collectionMethod.getFluentReturnType()) ? FluentUtils.getValueTypeFromResponseType(collectionMethod.getFluentReturnType()) : collectionMethod.getFluentReturnType(),
                             responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
 
                     break;
@@ -87,14 +88,14 @@ public class MockUnitTestParser extends ExampleParser {
 
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
-            if (FluentUtils.validToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
+            if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
                 List<MethodParameter> methodParameters = getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =
                         parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
 
                 ResponseInfo responseInfo = createProxyMethodExampleResponse(clientMethod);
-                unitTest = new FluentMethodMockUnitTest(collectionMethodExample, collection, collectionMethod,
+                unitTest = new FluentMethodMockUnitTest(collectionMethodExample, collection, collectionMethod, collectionMethod.getFluentReturnType(),
                         responseInfo.responseExample, responseInfo.verificationObjectName, responseInfo.verificationNode);
             }
         } catch (PossibleCredentialException e) {
@@ -143,10 +144,17 @@ public class MockUnitTestParser extends ExampleParser {
         Object jsonObject;
         ExampleNode verificationNode;
         String verificationObjectName;
+
+        IType clientReturnType = clientMethod.getReturnValue().getType();
+        final boolean isResponseType = FluentUtils.isResponseType(clientReturnType);
+        if (isResponseType) {
+            clientReturnType = FluentUtils.getValueTypeFromResponseType(clientReturnType);
+        }
+
         if (clientMethod.getType() == ClientMethodType.PagingSync) {
             // pageable
-            if (clientMethod.getReturnValue().getType() instanceof GenericType) {
-                IType elementType = ((GenericType) clientMethod.getReturnValue().getType()).getTypeArguments()[0];
+            if (clientReturnType instanceof GenericType) {
+                IType elementType = ((GenericType) clientReturnType).getTypeArguments()[0];
 
                 Object firstJsonObjectInPageable = ModelTestCaseUtil.jsonFromType(0, elementType);
                 // put to first element in array
@@ -163,7 +171,7 @@ public class MockUnitTestParser extends ExampleParser {
             }
         } else {
             // simple or LRO
-            jsonObject = ModelTestCaseUtil.jsonFromType(0, clientMethod.getReturnValue().getType());
+            jsonObject = ModelTestCaseUtil.jsonFromType(0, clientReturnType);
 
             if (jsonObject == null) {
                 jsonObject = new Object();
@@ -174,7 +182,7 @@ public class MockUnitTestParser extends ExampleParser {
             }
 
             verificationObjectName = "response";
-            verificationNode = ModelExampleUtil.parseNode(clientMethod.getReturnValue().getType(), jsonObject);
+            verificationNode = ModelExampleUtil.parseNode(clientReturnType, jsonObject);
         }
         Map<String, Object> responseObject = new HashMap<>();
         responseObject.put("body", jsonObject);
@@ -183,6 +191,7 @@ public class MockUnitTestParser extends ExampleParser {
 
     private static boolean requiresExample(ClientMethod clientMethod) {
         if (clientMethod.getType() == ClientMethodType.SimpleSync
+                || clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 || clientMethod.getType() == ClientMethodType.PagingSync
                 // limit the scope of LRO to status code of 200
                 || (clientMethod.getType() == ClientMethodType.LongRunningSync

@@ -24,5 +24,6 @@ class Float32ValueClientTest {
     void put() {
         Map<String, Double> map = new HashMap<>();
         map.put("k1", 42.42);
+        client.put(map);
     }
 }

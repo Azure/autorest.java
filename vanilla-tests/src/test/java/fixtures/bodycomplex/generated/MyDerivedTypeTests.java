@@ -14,9 +14,9 @@ public final class MyDerivedTypeTests {
     public void testDeserialize() {
         MyDerivedType model =
                 BinaryData.fromString(
-                                "{\"kind\":\"Kind1\",\"propD1\":\"gphuticndvka\",\"propB1\":\"wyiftyhxhur\",\"helper\":{\"propBH1\":\"ftyxolniw\"}}")
+                                "{\"kind\":\"Kind1\",\"propD1\":\"awxklr\",\"propB1\":\"lwckbasyypnddhs\",\"helper\":{\"propBH1\":\"bacphejko\"}}")
                         .toObject(MyDerivedType.class);
-        Assertions.assertEquals("wyiftyhxhur", model.getPropB1());
-        Assertions.assertEquals("gphuticndvka", model.getPropD1());
+        Assertions.assertEquals("lwckbasyypnddhs", model.getPropB1());
+        Assertions.assertEquals("awxklr", model.getPropD1());
     }
 }

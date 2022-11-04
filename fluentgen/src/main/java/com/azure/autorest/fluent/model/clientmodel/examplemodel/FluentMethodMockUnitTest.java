@@ -5,6 +5,7 @@ package com.azure.autorest.fluent.model.clientmodel.examplemodel;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 
@@ -12,6 +13,7 @@ public class FluentMethodMockUnitTest {
 
     // method with mock data
     private final FluentMethodExample fluentMethodExample;
+    private final IType fluentReturnType;
     private final FluentResourceCreateExample fluentResourceCreateExample;
 
     private final FluentResourceCollection resourceCollection;
@@ -26,13 +28,14 @@ public class FluentMethodMockUnitTest {
     public FluentMethodMockUnitTest(
             FluentMethodExample fluentMethodExample,
             FluentResourceCollection resourceCollection, FluentCollectionMethod fluentCollectionMethod,
-            ProxyMethodExample.Response response,
+            IType fluentReturnType, ProxyMethodExample.Response response,
             String responseVerificationVariableName, ExampleNode responseVerificationNode) {
 
         this.fluentMethodExample = fluentMethodExample;
         this.fluentResourceCreateExample = null;
         this.resourceCollection = resourceCollection;
         this.collectionMethod = fluentCollectionMethod;
+        this.fluentReturnType = fluentReturnType;
         this.response = response;
         this.responseVerificationVariableName = responseVerificationVariableName;
         this.responseVerificationNode = responseVerificationNode;
@@ -41,13 +44,14 @@ public class FluentMethodMockUnitTest {
     public FluentMethodMockUnitTest(
             FluentResourceCreateExample fluentResourceCreateExample,
             FluentResourceCollection resourceCollection, FluentCollectionMethod collectionMethod,
-            ProxyMethodExample.Response response,
+            IType fluentReturnType, ProxyMethodExample.Response response,
             String responseVerificationVariableName, ExampleNode responseVerificationNode) {
 
         this.fluentMethodExample = null;
         this.fluentResourceCreateExample = fluentResourceCreateExample;
         this.resourceCollection = resourceCollection;
         this.collectionMethod = collectionMethod;
+        this.fluentReturnType = fluentReturnType;
         this.response = response;
         this.responseVerificationVariableName = responseVerificationVariableName;
         this.responseVerificationNode = responseVerificationNode;
@@ -58,6 +62,13 @@ public class FluentMethodMockUnitTest {
      */
     public FluentMethodExample getFluentMethodExample() {
         return fluentMethodExample;
+    }
+
+    /**
+     * @return return type. It could be the inner client model type of Fluent resource create/update/get method.
+     */
+    public IType getFluentReturnType() {
+        return fluentReturnType;
     }
 
     /**
