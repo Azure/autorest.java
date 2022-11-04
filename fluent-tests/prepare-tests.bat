@@ -12,7 +12,7 @@ RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 RMDIR /S /Q "src\samples"
 RMDIR /S /Q "src\test\java\com\azure\mgmtlitetest"
 
-SET AUTOREST_CORE_VERSION=3.8.4
+SET AUTOREST_CORE_VERSION=3.9.3
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
 SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --generate-samples --generate-tests
