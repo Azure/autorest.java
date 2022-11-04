@@ -90,8 +90,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
         builder.methodGroupClients(serviceClientMethodGroupClients);
 
-        if (proxy == null) {
-            proxy = serviceClientMethodGroupClients.get(0).getProxy();
+        if (proxy == null && !serviceClientMethodGroupClients.isEmpty()) {
+            proxy = serviceClientMethodGroupClients.iterator().next().getProxy();
         }
 
         processParametersAndConstructors(builder, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
