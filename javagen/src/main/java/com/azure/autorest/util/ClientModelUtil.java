@@ -4,9 +4,9 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
+import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
-import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
@@ -49,7 +49,7 @@ public class ClientModelUtil {
      * @param asyncClients output, the async clients.
      * @param syncClients output, the sync client.
      */
-    public static void getAsyncSyncClients(ClientTrait client, ServiceClient serviceClient,
+    public static void getAsyncSyncClients(Client client, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
         boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient()
                 // TODO: switch to CADL side-car
@@ -153,7 +153,7 @@ public class ClientModelUtil {
      * @param codeModel the code model
      * @return the interface name of service client.
      */
-    public static String getClientInterfaceName(CodeModel codeModel) {
+    public static String getClientInterfaceName(Client codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
@@ -176,7 +176,7 @@ public class ClientModelUtil {
      * @param codeModel the code model
      * @return the class name of service client implementation.
      */
-    public static String getClientImplementClassName(CodeModel codeModel) {
+    public static String getClientImplementClassName(Client codeModel) {
         String serviceClientInterfaceName = getClientInterfaceName(codeModel);
         return getClientImplementClassName(serviceClientInterfaceName);
     }

@@ -13,7 +13,7 @@ import java.util.List;
  * the model that contains all the information required to generate a service api
  * 
  */
-public class CodeModel extends Metadata implements ClientTrait {
+public class CodeModel extends Client {
 
     /**
      * code model information
@@ -28,22 +28,10 @@ public class CodeModel extends Metadata implements ClientTrait {
      */
     private Schemas schemas;
     /**
-     * All operations
-     * (Required)
-     * 
-     */
-    private List<OperationGroup> operationGroups = new ArrayList<OperationGroup>();
-    /**
      * all global parameters (ie, ImplementationLocation = client )
      * 
      */
     private List<Parameter> globalParameters = new ArrayList<Parameter>();
-    /**
-     * Security Configuration
-     * (Optional)
-     *
-     */
-    private Security security;
 
     private List<Client> clients = new ArrayList<>();
 
@@ -89,24 +77,6 @@ public class CodeModel extends Metadata implements ClientTrait {
     }
 
     /**
-     * All operations
-     * (Required)
-     * 
-     */
-    public List<OperationGroup> getOperationGroups() {
-        return operationGroups;
-    }
-
-    /**
-     * All operations
-     * (Required)
-     * 
-     */
-    public void setOperationGroups(List<OperationGroup> operationGroups) {
-        this.operationGroups = operationGroups;
-    }
-
-    /**
      * all global parameters (ie, ImplementationLocation = client )
      * 
      */
@@ -120,24 +90,6 @@ public class CodeModel extends Metadata implements ClientTrait {
      */
     public void setGlobalParameters(List<Parameter> globalParameters) {
         this.globalParameters = globalParameters;
-    }
-
-    /**
-     * Security Configuration
-     * (Optional)
-     *
-     */
-    public Security getSecurity() {
-        return security;
-    }
-
-    /**
-     * Security Configuration
-     * (Optional)
-     *
-     */
-    public void setSecurity(Security security) {
-        this.security = security;
     }
 
     public List<Client> getClients() {

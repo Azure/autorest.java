@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.util;
 
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
@@ -63,7 +63,7 @@ public class Utils {
         }
     }
 
-    public static String getNameForUngroupedOperations(CodeModel codeModel, FluentJavaSettings settings) {
+    public static String getNameForUngroupedOperations(Client codeModel, FluentJavaSettings settings) {
         String nameForUngroupOperations = null;
         if (settings.getNameForUngroupedOperations().isPresent()) {
             nameForUngroupOperations = settings.getNameForUngroupedOperations().get();

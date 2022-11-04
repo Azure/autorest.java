@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
-import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
@@ -96,7 +95,7 @@ public class Transformer {
         for (OperationGroup operationGroup : client.getOperationGroups()) {
           List<Operation> pagingOperations = new ArrayList<>();
 
-          operationGroup.setCodeModel(codeModel);
+          operationGroup.setCodeModel(client);
           renameMethodGroup(operationGroup);
           for (Operation operation : operationGroup.getOperations()) {
             operation.setOperationGroup(operationGroup);
@@ -109,7 +108,7 @@ public class Transformer {
           // paging
           for (Operation operation : pagingOperations) {
             if (nonNullNextLink(operation)) {
-              addPagingNextOperation(codeModel, client, operation.getOperationGroup(), operation);
+              addPagingNextOperation(client, operation.getOperationGroup(), operation);
             }
           }
         }
@@ -176,7 +175,7 @@ public class Transformer {
     // paging
     for (Operation operation : pagingOperations) {
       if (nonNullNextLink(operation)) {
-        addPagingNextOperation(codeModel, codeModel, operation.getOperationGroup(), operation);
+        addPagingNextOperation(codeModel, operation.getOperationGroup(), operation);
       }
     }
   }
@@ -236,7 +235,7 @@ public class Transformer {
 
   private final Map<PagingNextOperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
 
-  private void addPagingNextOperation(CodeModel codeModel, ClientTrait client, OperationGroup operationGroup, Operation operation) {
+  private void addPagingNextOperation(Client client, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
     if (operation.getExtensions().getXmsPageable().getOperationName() != null) {
@@ -272,7 +271,7 @@ public class Transformer {
     if (!client.getOperationGroups().stream()
         .anyMatch(og -> og.getLanguage().getJava().getName().equals(operationGroupName))) {
       OperationGroup newOg = new OperationGroup();
-      newOg.setCodeModel(codeModel);
+      newOg.setCodeModel(client);
       newOg.set$key(operationGroupName);
       newOg.setOperations(new ArrayList<>());
       newOg.setExtensions(operationGroup.getExtensions());

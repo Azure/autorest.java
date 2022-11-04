@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
-import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -143,7 +142,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         String serviceClientDescription = codeModel.getInfo().getDescription();
         builder.clientName(serviceClientName).clientDescription(serviceClientDescription);
 
-        Map<ServiceClient, ClientTrait> serviceClientsMap = new LinkedHashMap<>();
+        Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> serviceClientsMap = new LinkedHashMap<>();
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
             serviceClientsMap = processClients(codeModel.getClients(), codeModel);
             builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
@@ -232,12 +231,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<ClientBuilder> clientBuilders = new ArrayList<>();
-        for (Map.Entry<ServiceClient, ClientTrait> entry : serviceClientsMap.entrySet()) {
+        for (Map.Entry<ServiceClient, ? extends com.azure.autorest.extension.base.model.codemodel.Client> entry : serviceClientsMap.entrySet()) {
             List<AsyncSyncClient> syncClientsLocal = new ArrayList<>();
             List<AsyncSyncClient> asyncClientsLocal = new ArrayList<>();
 
             ServiceClient serviceClient = entry.getKey();
-            ClientTrait client = entry.getValue();
+            com.azure.autorest.extension.base.model.codemodel.Client client = entry.getValue();
             if (settings.isGenerateSyncAsyncClients()) {
                 ClientModelUtil.getAsyncSyncClients(client, serviceClient, asyncClientsLocal, syncClientsLocal);
             }
@@ -335,7 +334,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
      * @param clients List of clients.
      * @return List of service clients.
      */
-    protected Map<ServiceClient, ClientTrait> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
+    protected Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
         return Collections.emptyMap();
     }
 
