@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class DiscriminatedClientTest {
 
-    ModelsInheritanceClient client = new ModelsInheritanceClientBuilder().buildClient();
+    InheritanceClient client = new InheritanceClientBuilder().buildClient();
 
     @Test
     void getModel() {

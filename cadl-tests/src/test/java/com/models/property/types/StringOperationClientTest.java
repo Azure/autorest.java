@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class StringOperationClientTest {
 
-    StringOperationClient client = new ModelsPropertyTypesClientBuilder().buildStringOperationClient();
+    StringOperationClient client = new TypesClientBuilder().buildStringOperationClient();
 
     @Test
     void get() {

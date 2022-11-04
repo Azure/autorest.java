@@ -12,7 +12,7 @@ public class ApiKeyTests {
 
     @Test
     public void testValid() {
-        AuthenticationApiKeyAsyncClient client = new AuthenticationApiKeyClientBuilder()
+        ApiKeyAsyncClient client = new ApiKeyClientBuilder()
                 // AzureKeyCredentialPolicy from core requires HTTPS
                 .addPolicy(new AzureKeyCredentialPolicy("x-ms-api-key", new AzureKeyCredential("valid-key")))
                 .buildAsyncClient();
@@ -22,7 +22,7 @@ public class ApiKeyTests {
 
     @Test
     public void testInvalid() {
-        AuthenticationApiKeyClient client = new AuthenticationApiKeyClientBuilder()
+        ApiKeyClient client = new ApiKeyClientBuilder()
                 // AzureKeyCredentialPolicy from core requires HTTPS
                 .addPolicy(new AzureKeyCredentialPolicy("x-ms-api-key", new AzureKeyCredential("valid-key")))
                 .buildClient();

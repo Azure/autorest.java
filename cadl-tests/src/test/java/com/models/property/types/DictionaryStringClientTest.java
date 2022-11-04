@@ -12,7 +12,7 @@ import java.util.Map;
 
 class DictionaryStringClientTest {
 
-    DictionaryStringClient client = new ModelsPropertyTypesClientBuilder().buildDictionaryStringClient();
+    DictionaryStringClient client = new TypesClientBuilder().buildDictionaryStringClient();
 
     @Test
     void get() {

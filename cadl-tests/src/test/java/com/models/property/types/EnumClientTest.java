@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class EnumClientTest {
 
-    EnumClient client = new ModelsPropertyTypesClientBuilder().buildEnumClient();
+    EnumClient client = new TypesClientBuilder().buildEnumClient();
 
     @Test
     void get() {

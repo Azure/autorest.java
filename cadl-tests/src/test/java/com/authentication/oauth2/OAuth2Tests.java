@@ -13,8 +13,8 @@ import java.time.OffsetDateTime;
 
 public class OAuth2Tests {
 
-    private static AuthenticationOAuth2Client buildClient() {
-        return new AuthenticationOAuth2ClientBuilder()
+    private static OAuth2Client buildClient() {
+        return new OAuth2ClientBuilder()
                 // not able to use azure-identity in this test.
                 .addPolicy(new BearerTokenAuthenticationPolicy(tokenRequestContext -> Mono.just(new AccessToken("https://security.microsoft.com/.default", OffsetDateTime.now().plusHours(1)))))
                 .buildClient();
@@ -22,14 +22,14 @@ public class OAuth2Tests {
 
     @Test
     public void testValid() {
-        AuthenticationOAuth2Client client = buildClient();
+        OAuth2Client client = buildClient();
 
         client.valid();
     }
 
     @Test
     public void testInvalid() {
-        AuthenticationOAuth2Client client = buildClient();
+        OAuth2Client client = buildClient();
 
         // assert HttpResponseException
         Assertions.assertThrows(HttpResponseException.class, client::invalid);
