@@ -26,7 +26,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import fixtures.paging.models.BodyParam;
+import fixtures.paging.models.BodyParamModel;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.OdataProductResult;
 import fixtures.paging.models.PagingGetMultiplePagesLroOptions;
@@ -87,7 +87,7 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesWithBodyParams(
                 @HostParam("$host") String host,
-                @BodyParam("application/json") BodyParam parameters,
+                @BodyParam("application/json") BodyParamModel parameters,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -868,7 +868,7 @@ public final class PagingsImpl {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        BodyParam parameters = new BodyParam();
+        BodyParamModel parameters = new BodyParamModel();
         parameters.setName(name);
         return FluxUtil.withContext(
                         context ->
@@ -902,7 +902,7 @@ public final class PagingsImpl {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        BodyParam parameters = new BodyParam();
+        BodyParamModel parameters = new BodyParamModel();
         parameters.setName(name);
         return service.getSinglePagesWithBodyParams(this.client.getHost(), parameters, accept, context)
                 .map(
@@ -4639,7 +4639,7 @@ public final class PagingsImpl {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        BodyParam parameters = new BodyParam();
+        BodyParamModel parameters = new BodyParamModel();
         parameters.setName(name);
         return FluxUtil.withContext(
                         context ->
@@ -4679,7 +4679,7 @@ public final class PagingsImpl {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        BodyParam parameters = new BodyParam();
+        BodyParamModel parameters = new BodyParamModel();
         parameters.setName(name);
         return service.getSinglePagesWithBodyParamsNext(nextLink, this.client.getHost(), accept, context)
                 .map(

@@ -7,17 +7,17 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The BodyParam model. */
+/** The BodyParamModel model. */
 @Fluent
-public final class BodyParam {
+public final class BodyParamModel {
     /*
      * The name property.
      */
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of BodyParam class. */
-    public BodyParam() {}
+    /** Creates an instance of BodyParamModel class. */
+    public BodyParamModel() {}
 
     /**
      * Get the name property: The name property.
@@ -32,9 +32,9 @@ public final class BodyParam {
      * Set the name property: The name property.
      *
      * @param name the name value to set.
-     * @return the BodyParam object itself.
+     * @return the BodyParamModel object itself.
      */
-    public BodyParam setName(String name) {
+    public BodyParamModel setName(String name) {
         this.name = name;
         return this;
     }
