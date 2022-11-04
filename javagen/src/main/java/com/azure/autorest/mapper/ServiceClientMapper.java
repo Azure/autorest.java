@@ -75,7 +75,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         Proxy proxy = null;
         if (!codeModelRestAPIMethods.isEmpty()) {
-            proxy = processClientOperations(builder, codeModelRestAPIMethods, serviceClientClassName);
+            proxy = processClientOperations(builder, codeModelRestAPIMethods, serviceClientInterfaceName);
         } else {
             builder.clientMethods(Collections.emptyList());
         }
