@@ -12,11 +12,12 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.models.Resource;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
 @ServiceClient(builder = ResponseClientBuilder.class)
@@ -34,32 +35,14 @@ public final class ResponseClient {
     }
 
     /**
-     * Creates a new resource or updates an existing one.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
+     * The getBinary operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
+     * BinaryData
      * }</pre>
      *
-     * @param name The name parameter.
-     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -69,13 +52,41 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateWithResponse(
-            String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(name, resource, requestOptions).block();
+    public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
+        return this.client.getBinaryWithResponse(requestOptions).block();
     }
 
     /**
-     * Gets the details of a resource.
+     * The getArray operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
+     *     }
+     * ]
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getArrayWithResponse(RequestOptions requestOptions) {
+        return this.client.getArrayWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The createWithHeaders operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -88,24 +99,22 @@ public final class ResponseClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of a resource along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getWithResponse(name, requestOptions).block();
+    public Response<BinaryData> createWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.client.createWithHeadersWithResponse(requestOptions).block();
     }
 
     /**
-     * Deletes a resource.
+     * The deleteWithHeaders operation.
      *
-     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -115,43 +124,13 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.deleteWithResponse(name, requestOptions).block();
+    public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
+        return this.client.deleteWithHeadersWithResponse(requestOptions).block();
     }
 
     /**
-     * Lists the existing resources.
+     * The getBinary operation.
      *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
-    }
-
-    /**
-     * Creates a new resource or updates an existing one.
-     *
-     * @param name The name parameter.
-     * @param resource The resource parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -161,39 +140,51 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource createOrUpdate(String name, Resource resource) {
-        // Generated convenience method for createOrUpdateWithResponse
+    public BinaryData getBinary() {
+        // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateWithResponse(name, BinaryData.fromObject(resource), requestOptions)
-                .getValue()
-                .toObject(Resource.class);
+        return getBinaryWithResponse(requestOptions).getValue();
     }
 
     /**
-     * Gets the details of a resource.
+     * The getArray operation.
      *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the details of a resource.
+     * @return the response.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String name) {
-        // Generated convenience method for getWithResponse
+    public List<Resource> getArray() {
+        // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+        return getArrayWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Resource>>() {});
     }
 
     /**
-     * Deletes a resource.
+     * The createWithHeaders operation.
      *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource createWithHeaders() {
+        // Generated convenience method for createWithHeadersWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithHeadersWithResponse(requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * The deleteWithHeaders operation.
+     *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -202,26 +193,9 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete(String name) {
-        // Generated convenience method for deleteWithResponse
+    public void deleteWithHeaders() {
+        // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        deleteWithResponse(name, requestOptions).getValue();
-    }
-
-    /**
-     * Lists the existing resources.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Resource> list() {
-        // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        deleteWithHeadersWithResponse(requestOptions).getValue();
     }
 }

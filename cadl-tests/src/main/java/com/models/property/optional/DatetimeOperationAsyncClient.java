@@ -19,8 +19,8 @@ import com.models.property.optional.implementation.DatetimeOperationsImpl;
 import com.models.property.optional.models.DatetimeProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous OptionalClient type. */
+@ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class DatetimeOperationAsyncClient {
     @Generated private final DatetimeOperationsImpl serviceClient;
 

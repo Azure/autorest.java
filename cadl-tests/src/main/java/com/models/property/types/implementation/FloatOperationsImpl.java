@@ -32,25 +32,25 @@ public final class FloatOperationsImpl {
     private final FloatOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of FloatOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    FloatOperationsImpl(ModelsPropertyTypesClientImpl client) {
+    FloatOperationsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(FloatOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesFloatOperations to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for TypesClientFloatOperations to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesF")
+    @ServiceInterface(name = "TypesClientFloatOper")
     private interface FloatOperationsService {
         @Get("/models/properties/types/float")
         @ExpectedResponses({200})

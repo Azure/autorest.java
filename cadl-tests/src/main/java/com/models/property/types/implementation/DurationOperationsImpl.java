@@ -32,14 +32,14 @@ public final class DurationOperationsImpl {
     private final DurationOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of DurationOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DurationOperationsImpl(ModelsPropertyTypesClientImpl client) {
+    DurationOperationsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(
                         DurationOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class DurationOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesDurationOperations to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for TypesClientDurationOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesD")
+    @ServiceInterface(name = "TypesClientDurationO")
     private interface DurationOperationsService {
         @Get("/models/properties/types/duration")
         @ExpectedResponses({200})

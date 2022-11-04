@@ -46,11 +46,11 @@ public final class BooleanValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryBooleanValues to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DictionaryClientBooleanValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryBooleanVal")
+    @ServiceInterface(name = "DictionaryClientBool")
     private interface BooleanValuesService {
         @Get("/dictionary/boolean")
         @ExpectedResponses({200})
