@@ -54,8 +54,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
     @Override
     public ServiceClient map(CodeModel codeModel) {
-        JavaSettings settings = JavaSettings.getInstance();
-
         ServiceClient.Builder builder = createClientBuilder();
         builder.builderDisabled(JavaSettings.getInstance().clientBuilderDisabled());
 
@@ -96,7 +94,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             proxy = serviceClientMethodGroupClients.get(0).getProxy();
         }
 
-        processParametersAndConstructors(builder, codeModel, serviceClientInterfaceName, proxy);
+        processParametersAndConstructors(builder, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
 
         return builder.build();
     }
@@ -184,7 +182,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         return proxy;
     }
 
-    protected void processParametersAndConstructors(ServiceClient.Builder builder, CodeModel codeModel, String baseName, Proxy proxy) {
+    protected void processParametersAndConstructors(ServiceClient.Builder builder, CodeModel codeModel, String serviceVersionClassName, Proxy proxy) {
         JavaSettings settings = JavaSettings.getInstance();
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
@@ -216,15 +214,14 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serializedName = p.getLanguage().getDefault().getSerializedName();
 
             if (settings.isDataPlaneClient() && ParameterSynthesizedOrigin.fromValue(p.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION) {
-                String enumTypeName = ClientModelUtil.getServiceVersionClassName(baseName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()
-                        .name(enumTypeName)
+                        .name(serviceVersionClassName)
                         .packageName(settings.getPackage())
                         .build();
                 serviceClientPropertyName = "serviceVersion";
                 serviceClientPropertyIsReadOnly = false;
-                serviceClientPropertyDefaultValueExpression = enumTypeName + ".getLatest()";
+                serviceClientPropertyDefaultValueExpression = serviceVersionClassName + ".getLatest()";
                 serviceClientPropertyRequired = false;
             }
 

@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
@@ -93,10 +94,23 @@ public class Transformer {
 
       if (client.getOperationGroups() != null) {
         for (OperationGroup operationGroup : client.getOperationGroups()) {
+          List<Operation> pagingOperations = new ArrayList<>();
+
           operationGroup.setCodeModel(codeModel);
           renameMethodGroup(operationGroup);
           for (Operation operation : operationGroup.getOperations()) {
             operation.setOperationGroup(operationGroup);
+
+            if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
+              pagingOperations.add(operation);
+            }
+          }
+
+          // paging
+          for (Operation operation : pagingOperations) {
+            if (nonNullNextLink(operation)) {
+              addPagingNextOperation(codeModel, client, operation.getOperationGroup(), operation);
+            }
           }
         }
       }
@@ -162,7 +176,7 @@ public class Transformer {
     // paging
     for (Operation operation : pagingOperations) {
       if (nonNullNextLink(operation)) {
-        addPagingNextOperation(codeModel, operation.getOperationGroup(), operation);
+        addPagingNextOperation(codeModel, codeModel, operation.getOperationGroup(), operation);
       }
     }
   }
@@ -222,7 +236,7 @@ public class Transformer {
 
   private final Map<PagingNextOperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
 
-  private void addPagingNextOperation(CodeModel codeModel, OperationGroup operationGroup, Operation operation) {
+  private void addPagingNextOperation(CodeModel codeModel, ClientTrait client, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
     if (operation.getExtensions().getXmsPageable().getOperationName() != null) {
@@ -255,7 +269,7 @@ public class Transformer {
       operationGroupName = operationGroup.getLanguage().getJava().getName();
       operationName = operation.getLanguage().getJava().getName() + "Next";
     }
-    if (!codeModel.getOperationGroups().stream()
+    if (!client.getOperationGroups().stream()
         .anyMatch(og -> og.getLanguage().getJava().getName().equals(operationGroupName))) {
       OperationGroup newOg = new OperationGroup();
       newOg.setCodeModel(codeModel);
@@ -268,7 +282,7 @@ public class Transformer {
       newOg.getLanguage().getJava().setDescription(operationGroup.getLanguage().getJava().getDescription());
       newOg.setProtocol(operationGroup.getProtocol());
 
-      codeModel.getOperationGroups().add(newOg);
+      client.getOperationGroups().add(newOg);
       operationGroup = newOg;
     }
 

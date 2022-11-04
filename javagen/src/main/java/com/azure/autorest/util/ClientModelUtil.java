@@ -6,6 +6,7 @@ package com.azure.autorest.util;
 import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
@@ -48,7 +49,7 @@ public class ClientModelUtil {
      * @param asyncClients output, the async clients.
      * @param syncClients output, the sync client.
      */
-    public static void getAsyncSyncClients(CodeModel codeModel, ServiceClient serviceClient,
+    public static void getAsyncSyncClients(ClientTrait client, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
         boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient()
                 // TODO: switch to CADL side-car
@@ -64,7 +65,7 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient);
 
             final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            codeModel.getOperationGroups().stream()
+            client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
                     .findAny()
                     .ifPresent(og -> {
@@ -102,7 +103,7 @@ public class ClientModelUtil {
                     .methodGroupClient(methodGroupClient);
 
             final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            codeModel.getOperationGroups().stream()
+            client.getOperationGroups().stream()
                     .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
                     .findAny()
                     .ifPresent(og -> {

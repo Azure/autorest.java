@@ -13,7 +13,7 @@ import java.util.List;
  * the model that contains all the information required to generate a service api
  * 
  */
-public class CodeModel extends Metadata {
+public class CodeModel extends Metadata implements ClientTrait {
 
     /**
      * code model information

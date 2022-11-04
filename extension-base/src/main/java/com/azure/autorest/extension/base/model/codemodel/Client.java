@@ -6,7 +6,7 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client extends Metadata {
+public class Client extends Metadata implements ClientTrait {
 
     private String summary;
 

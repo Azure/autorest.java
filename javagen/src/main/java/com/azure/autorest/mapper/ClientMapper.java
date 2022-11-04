@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.ClientTrait;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
@@ -51,6 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -141,16 +143,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         String serviceClientDescription = codeModel.getInfo().getDescription();
         builder.clientName(serviceClientName).clientDescription(serviceClientDescription);
 
-        List<ServiceClient> serviceClients = new ArrayList<>();
+        Map<ServiceClient, ClientTrait> serviceClientsMap = new LinkedHashMap<>();
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
-            serviceClients = processClients(codeModel.getClients(), codeModel);
-            builder.serviceClients(serviceClients);
+            serviceClientsMap = processClients(codeModel.getClients(), codeModel);
+            builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
         } else {
             // service client
             ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
             builder.serviceClient(serviceClient);
 
-            serviceClients.add(serviceClient);
+            serviceClientsMap.put(serviceClient, codeModel);
         }
 
         // package info
@@ -230,9 +232,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<AsyncSyncClient> syncClients = new ArrayList<>();
         List<AsyncSyncClient> asyncClients = new ArrayList<>();
         List<ClientBuilder> clientBuilders = new ArrayList<>();
-        for (ServiceClient serviceClient : serviceClients) {
+        for (Map.Entry<ServiceClient, ClientTrait> entry : serviceClientsMap.entrySet()) {
+            List<AsyncSyncClient> syncClientsLocal = new ArrayList<>();
+            List<AsyncSyncClient> asyncClientsLocal = new ArrayList<>();
+
+            ServiceClient serviceClient = entry.getKey();
+            ClientTrait client = entry.getValue();
             if (settings.isGenerateSyncAsyncClients()) {
-                ClientModelUtil.getAsyncSyncClients(codeModel, serviceClient, asyncClients, syncClients);
+                ClientModelUtil.getAsyncSyncClients(client, serviceClient, asyncClientsLocal, syncClientsLocal);
             }
             builder.syncClients(syncClients);
             builder.asyncClients(asyncClients);
@@ -244,9 +251,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
                 if (settings.isGenerateSyncAsyncClients() && settings.isGenerateBuilderPerClient()) {
                     // service client builder per service client
-                    for (int i = 0; i < asyncClients.size(); ++i) {
-                        AsyncSyncClient asyncClient = asyncClients.get(i);
-                        AsyncSyncClient syncClient = (i >= syncClients.size()) ? null : syncClients.get(i);
+                    for (int i = 0; i < asyncClientsLocal.size(); ++i) {
+                        AsyncSyncClient asyncClient = asyncClientsLocal.get(i);
+                        AsyncSyncClient syncClient = (i >= syncClientsLocal.size()) ? null : syncClientsLocal.get(i);
                         String clientName = ((syncClient != null)
                                 ? syncClient.getClassName()
                                 : asyncClient.getClassName().replace("AsyncClient", "Client"));
@@ -268,17 +275,20 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 } else {
                     // service client builder
                     ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
-                            serviceClient, syncClients, asyncClients);
+                            serviceClient, syncClientsLocal, asyncClientsLocal);
                     addBuilderTraits(clientBuilder, serviceClient);
                     clientBuilders.add(clientBuilder);
 
                     // there is a cross-reference between service client and service client builder
-                    asyncClients.forEach(c -> c.setClientBuilder(clientBuilder));
-                    syncClients.forEach(c -> c.setClientBuilder(clientBuilder));
+                    asyncClientsLocal.forEach(c -> c.setClientBuilder(clientBuilder));
+                    syncClientsLocal.forEach(c -> c.setClientBuilder(clientBuilder));
                 }
             }
-            builder.clientBuilders(clientBuilders);
+
+            syncClients.addAll(syncClientsLocal);
+            asyncClients.addAll(asyncClientsLocal);
         }
+        builder.clientBuilders(clientBuilders);
 
         // example/test
         if (settings.isDataPlaneClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
@@ -325,8 +335,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
      * @param clients List of clients.
      * @return List of service clients.
      */
-    protected List<ServiceClient> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
-        return Collections.emptyList();
+    protected Map<ServiceClient, ClientTrait> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
+        return Collections.emptyMap();
     }
 
     private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {

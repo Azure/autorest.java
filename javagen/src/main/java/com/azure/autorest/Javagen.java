@@ -239,7 +239,7 @@ public class Javagen extends NewPlugin {
             } else {
                 serviceName = settings.getServiceName();
             }
-            String className = ClientModelUtil.getServiceVersionClassName(client.getServiceClient().getInterfaceName());
+            String className = ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel));
             javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
