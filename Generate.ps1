@@ -5,7 +5,11 @@ $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-fol
 $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=protocol-tests --data-plane --generate-samples"
 $PROTOCOL_RESILIENCE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --data-plane"
 $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
-$PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
+$PARALLELIZATION = 3
+if ($IsWindows) {
+    $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
+}
+
 $ExitCode = 0
 
 $generateScript = {
