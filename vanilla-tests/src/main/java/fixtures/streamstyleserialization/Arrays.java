@@ -187,23 +187,6 @@ public final class Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getValidSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with array property.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -211,7 +194,7 @@ public final class Arrays {
      * @return complex types with array property along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getValidSyncWithResponse(Context context) {
+    public Response<ArrayWrapper> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -228,22 +211,8 @@ public final class Arrays {
      * @return complex types with array property.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getValidSync() {
-        return getValidSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getValidSync(Context context) {
-        return getValidSyncWithResponse(context).getValue();
+    public ArrayWrapper getValid() {
+        return getValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -335,32 +304,6 @@ public final class Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      *     jumps over the lazy dog".
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(ArrayWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -368,7 +311,7 @@ public final class Arrays {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(ArrayWrapper complexBody, Context context) {
+    public Response<Void> putValidWithResponse(ArrayWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -393,23 +336,8 @@ public final class Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(ArrayWrapper complexBody) {
-        putValidSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(ArrayWrapper complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context);
+    public void putValid(ArrayWrapper complexBody) {
+        putValidWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -479,23 +407,6 @@ public final class Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getEmptySyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getEmptySync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -503,7 +414,7 @@ public final class Arrays {
      * @return complex types with array property which is empty along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getEmptySyncWithResponse(Context context) {
+    public Response<ArrayWrapper> getEmptyWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -520,22 +431,8 @@ public final class Arrays {
      * @return complex types with array property which is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getEmptySync() {
-        return getEmptySyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getEmptySync(Context context) {
-        return getEmptySyncWithResponse(context).getValue();
+    public ArrayWrapper getEmpty() {
+        return getEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -622,31 +519,6 @@ public final class Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptySyncWithResponse(ArrayWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putEmptySync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -654,7 +526,7 @@ public final class Arrays {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putEmptySyncWithResponse(ArrayWrapper complexBody, Context context) {
+    public Response<Void> putEmptyWithResponse(ArrayWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -678,22 +550,8 @@ public final class Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmptySync(ArrayWrapper complexBody) {
-        putEmptySyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmptySync(ArrayWrapper complexBody, Context context) {
-        putEmptySyncWithResponse(complexBody, context);
+    public void putEmpty(ArrayWrapper complexBody) {
+        putEmptyWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -765,24 +623,6 @@ public final class Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     *     Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getNotProvidedSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getNotProvidedSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -791,7 +631,7 @@ public final class Arrays {
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ArrayWrapper> getNotProvidedSyncWithResponse(Context context) {
+    public Response<ArrayWrapper> getNotProvidedWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -808,22 +648,8 @@ public final class Arrays {
      * @return complex types with array property while server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getNotProvidedSync() {
-        return getNotProvidedSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ArrayWrapper getNotProvidedSync(Context context) {
-        return getNotProvidedSyncWithResponse(context).getValue();
+    public ArrayWrapper getNotProvided() {
+        return getNotProvidedWithResponse(Context.NONE).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Arrays.class);

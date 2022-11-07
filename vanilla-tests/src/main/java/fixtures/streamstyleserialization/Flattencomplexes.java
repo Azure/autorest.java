@@ -127,23 +127,6 @@ public final class Flattencomplexes {
     /**
      * The getValid operation.
      *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<MyBaseType> getValidSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * The getValid operation.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -151,7 +134,7 @@ public final class Flattencomplexes {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<MyBaseType> getValidSyncWithResponse(Context context) {
+    public Response<MyBaseType> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -168,22 +151,8 @@ public final class Flattencomplexes {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public MyBaseType getValidSync() {
-        return getValidSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * The getValid operation.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public MyBaseType getValidSync(Context context) {
-        return getValidSyncWithResponse(context).getValue();
+    public MyBaseType getValid() {
+        return getValidWithResponse(Context.NONE).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Flattencomplexes.class);

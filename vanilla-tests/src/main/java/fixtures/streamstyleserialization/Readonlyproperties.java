@@ -149,23 +149,6 @@ public final class Readonlyproperties {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ReadonlyObj> getValidSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types that have readonly properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -173,7 +156,7 @@ public final class Readonlyproperties {
      * @return complex types that have readonly properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ReadonlyObj> getValidSyncWithResponse(Context context) {
+    public Response<ReadonlyObj> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -190,22 +173,8 @@ public final class Readonlyproperties {
      * @return complex types that have readonly properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ReadonlyObj getValidSync() {
-        return getValidSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ReadonlyObj getValidSync(Context context) {
-        return getValidSyncWithResponse(context).getValue();
+    public ReadonlyObj getValid() {
+        return getValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -292,31 +261,6 @@ public final class Readonlyproperties {
      * Put complex types that have readonly properties.
      *
      * @param complexBody The complexBody parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(ReadonlyObj complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putValidSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -324,7 +268,7 @@ public final class Readonlyproperties {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(ReadonlyObj complexBody, Context context) {
+    public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -348,22 +292,8 @@ public final class Readonlyproperties {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(ReadonlyObj complexBody) {
-        putValidSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * @param complexBody The complexBody parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(ReadonlyObj complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context);
+    public void putValid(ReadonlyObj complexBody) {
+        putValidWithResponse(complexBody, Context.NONE);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Readonlyproperties.class);
