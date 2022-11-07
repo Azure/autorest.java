@@ -19,6 +19,8 @@ public final class HeadersResponseDatetimeRfc1123Headers {
     @JsonProperty(value = "value")
     private DateTimeRfc1123 value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDatetimeRfc1123Headers class.
@@ -26,7 +28,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDatetimeRfc1123Headers(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = new DateTimeRfc1123(value);
         }

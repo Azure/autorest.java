@@ -17,6 +17,8 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
     @JsonProperty(value = "foo-request-id")
     private String fooRequestId;
 
+    private static final HttpHeaderName FOO_REQUEST_ID = HttpHeaderName.fromString(foo - request - id);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersCustomNamedRequestIdParamGroupingHeaders class.
@@ -24,7 +26,7 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersCustomNamedRequestIdParamGroupingHeaders(HttpHeaders rawHeaders) {
-        this.fooRequestId = rawHeaders.getValue("foo-request-id");
+        this.fooRequestId = rawHeaders.getValue(FOO_REQUEST_ID);
     }
 
     /**

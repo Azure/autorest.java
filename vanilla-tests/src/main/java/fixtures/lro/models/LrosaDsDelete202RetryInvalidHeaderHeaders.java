@@ -30,11 +30,11 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsDelete202RetryInvalidHeaderHeaders(HttpHeaders rawHeaders) {
-        String retryAfter = rawHeaders.getValue("Retry-After");
+        String retryAfter = rawHeaders.getValue(RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         }
-        this.location = rawHeaders.getValue("Location");
+        this.location = rawHeaders.getValue(LOCATION);
     }
 
     /**

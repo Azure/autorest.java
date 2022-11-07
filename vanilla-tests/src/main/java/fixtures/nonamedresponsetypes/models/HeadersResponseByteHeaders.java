@@ -19,6 +19,8 @@ public final class HeadersResponseByteHeaders {
     @JsonProperty(value = "value")
     private byte[] value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseByteHeaders class.
@@ -26,7 +28,7 @@ public final class HeadersResponseByteHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Base64.getDecoder().decode(value);
         }

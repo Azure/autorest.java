@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -18,6 +19,8 @@ public final class HeadersResponseDatetimeHeaders {
     @JsonProperty(value = "value")
     private OffsetDateTime value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDatetimeHeaders class.
@@ -25,7 +28,7 @@ public final class HeadersResponseDatetimeHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDatetimeHeaders(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = OffsetDateTime.parse(value);
         }

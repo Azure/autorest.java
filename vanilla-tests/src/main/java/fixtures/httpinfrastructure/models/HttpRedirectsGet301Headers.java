@@ -24,7 +24,7 @@ public final class HttpRedirectsGet301Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsGet301Headers(HttpHeaders rawHeaders) {
-        this.location = rawHeaders.getValue("Location");
+        this.location = rawHeaders.getValue(LOCATION);
     }
 
     /**

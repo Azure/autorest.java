@@ -19,6 +19,8 @@ public final class XmlsGetHeadersHeaders {
     @JsonProperty(value = "Custom-Header")
     private String customHeader;
 
+    private static final HttpHeaderName CUSTOM_HEADER = HttpHeaderName.fromString(Custom - Header);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of XmlsGetHeadersHeaders class.
@@ -26,7 +28,7 @@ public final class XmlsGetHeadersHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public XmlsGetHeadersHeaders(HttpHeaders rawHeaders) {
-        this.customHeader = rawHeaders.getValue("Custom-Header");
+        this.customHeader = rawHeaders.getValue(CUSTOM_HEADER);
     }
 
     /**

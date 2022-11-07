@@ -24,7 +24,7 @@ public final class LROsPutNoHeaderInRetryHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPutNoHeaderInRetryHeaders(HttpHeaders rawHeaders) {
-        this.location = rawHeaders.getValue("location");
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**

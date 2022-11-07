@@ -17,6 +17,8 @@ public final class HeadersResponseDoubleHeaders {
     @JsonProperty(value = "value")
     private Double value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDoubleHeaders class.
@@ -24,7 +26,7 @@ public final class HeadersResponseDoubleHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDoubleHeaders(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Double.parseDouble(value);
         }

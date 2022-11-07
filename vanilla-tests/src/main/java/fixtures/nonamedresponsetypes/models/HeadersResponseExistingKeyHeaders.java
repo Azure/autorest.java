@@ -24,7 +24,7 @@ public final class HeadersResponseExistingKeyHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseExistingKeyHeaders(HttpHeaders rawHeaders) {
-        this.userAgent = rawHeaders.getValue("User-Agent");
+        this.userAgent = rawHeaders.getValue(USER_AGENT);
     }
 
     /**

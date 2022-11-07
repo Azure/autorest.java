@@ -17,6 +17,8 @@ public final class HeadersResponseStringHeaders {
     @JsonProperty(value = "value")
     private String value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseStringHeaders class.
@@ -24,7 +26,7 @@ public final class HeadersResponseStringHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseStringHeaders(HttpHeaders rawHeaders) {
-        this.value = rawHeaders.getValue("value");
+        this.value = rawHeaders.getValue(VALUE);
     }
 
     /**

@@ -24,7 +24,7 @@ public final class HeadersResponseProtectedKeyHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseProtectedKeyHeaders(HttpHeaders rawHeaders) {
-        this.contentType = rawHeaders.getValue("Content-Type");
+        this.contentType = rawHeaders.getValue(CONTENT_TYPE);
     }
 
     /**

@@ -18,6 +18,8 @@ public final class HeadersResponseDurationHeaders {
     @JsonProperty(value = "value")
     private Duration value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDurationHeaders class.
@@ -25,7 +27,7 @@ public final class HeadersResponseDurationHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDurationHeaders(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Duration.parse(value);
         }
