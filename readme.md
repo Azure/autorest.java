@@ -92,6 +92,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
+|`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
 
 ## Settings for minimal data-plane clients
 

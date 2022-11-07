@@ -7,6 +7,8 @@ pool:
 jobs:
   - job: Build
 
+    timeoutInMinutes: 30
+
     variables:
       JavaVersion: 1.8
       NodeVersion: '16.x'
