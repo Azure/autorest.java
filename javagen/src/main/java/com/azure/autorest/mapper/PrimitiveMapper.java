@@ -82,6 +82,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
 //                iType = GenericType.FluxByteBuffer;
 //                break;
             case STRING: return ClassType.String;
+            case ARM_ID: return ClassType.String;
             case URI: return isLowLevelClient ? ClassType.String : ClassType.URL;
             case DURATION: return ClassType.Duration;
             case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
