@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,7 +20,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
     @JsonProperty(value = "value")
     private DateTimeRfc1123 value;
 
-    private static final HttpHeaderName VALUE = HttpHeaderName.fromString(value);
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
 
     // HttpHeaders containing the raw property values.
     /**

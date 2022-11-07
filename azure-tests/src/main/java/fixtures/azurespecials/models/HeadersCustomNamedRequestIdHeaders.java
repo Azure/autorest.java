@@ -5,6 +5,7 @@
 package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,7 +18,7 @@ public final class HeadersCustomNamedRequestIdHeaders {
     @JsonProperty(value = "foo-request-id")
     private String fooRequestId;
 
-    private static final HttpHeaderName FOO_REQUEST_ID = HttpHeaderName.fromString(foo - request - id);
+    private static final HttpHeaderName FOO_REQUEST_ID = HttpHeaderName.fromString("foo-request-id");
 
     // HttpHeaders containing the raw property values.
     /**
