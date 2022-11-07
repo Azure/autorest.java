@@ -59,6 +59,8 @@ Settings for handwritten SDK:
 - `generate-client-as-impl: true`, generate Client in implementation package, for customization.
 - `models-subpackage: implementation.models`, generate model classes in implementation package.
 - `custom-types-subpackage: models`, generate selected model classes in models package.
+- `service-interface-as-public: true`, generate the interface consumed by `RestProxy` as public to resolve issues with `SecurityManager`.
+- `generic-response-type: true`, use `ResponseBase` instead a sub-type of `ResponseBase`, performance and reflective access improvement.
 
 # Settings
 Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/main/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
