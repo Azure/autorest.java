@@ -127,7 +127,7 @@ public final class ModelTemplateHeaderHelper {
                 || wireType instanceof EnumType || wireType instanceof GenericType);
 
         // No matter the wire type the rawHeaders will need to be accessed.
-        String httpHeaderName = HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(property.getSerializedName())
+        String httpHeaderName = HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(property.getSerializedName().toLowerCase(Locale.ROOT))
             ? "HttpHeaderName." + CodeNamer.getEnumMemberName(property.getSerializedName())
             : CodeNamer.getEnumMemberName(property.getSerializedName());
 

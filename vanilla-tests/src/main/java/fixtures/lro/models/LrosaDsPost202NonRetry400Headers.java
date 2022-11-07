@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,11 +31,11 @@ public final class LrosaDsPost202NonRetry400Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsPost202NonRetry400Headers(HttpHeaders rawHeaders) {
-        String retryAfter = rawHeaders.getValue(RETRY_AFTER);
+        String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         }
-        this.location = rawHeaders.getValue(LOCATION);
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**

@@ -34,7 +34,7 @@ public final class LROsPutAsyncNoRetrySucceededHeaders {
      */
     public LROsPutAsyncNoRetrySucceededHeaders(HttpHeaders rawHeaders) {
         this.azureAsyncOperation = rawHeaders.getValue(AZURE_ASYNC_OPERATION);
-        this.location = rawHeaders.getValue(LOCATION);
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**
