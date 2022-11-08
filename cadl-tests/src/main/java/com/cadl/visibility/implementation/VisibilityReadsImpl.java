@@ -45,11 +45,11 @@ public final class VisibilityReadsImpl {
     }
 
     /**
-     * The interface defining all the services for VisibilityVisibilityReads to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for VisibilityClientVisibilityReads to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "VisibilityVisibility")
+    @ServiceInterface(name = "VisibilityClientVisi")
     private interface VisibilityReadsService {
         @Get("/read")
         @ExpectedResponses({200})

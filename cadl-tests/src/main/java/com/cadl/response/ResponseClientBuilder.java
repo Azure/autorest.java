@@ -39,13 +39,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** A builder for creating a new instance of the ResponseClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            ResponseClient.class,
-            ResponseOpClient.class,
-            ResponseAsyncClient.class,
-            ResponseOpAsyncClient.class
-        })
+@ServiceClientBuilder(serviceClients = {ResponseClient.class, ResponseAsyncClient.class})
 public final class ResponseClientBuilder
         implements HttpTrait<ResponseClientBuilder>,
                 ConfigurationTrait<ResponseClientBuilder>,
@@ -262,18 +256,8 @@ public final class ResponseClientBuilder
      * @return an instance of ResponseAsyncClient.
      */
     @Generated
-    public ResponseAsyncClient buildResponseAsyncClient() {
+    public ResponseAsyncClient buildAsyncClient() {
         return new ResponseAsyncClient(buildInnerClient());
-    }
-
-    /**
-     * Builds an instance of ResponseOpAsyncClient class.
-     *
-     * @return an instance of ResponseOpAsyncClient.
-     */
-    @Generated
-    public ResponseOpAsyncClient buildResponseOpAsyncClient() {
-        return new ResponseOpAsyncClient(buildInnerClient().getResponseOps());
     }
 
     /**
@@ -282,17 +266,7 @@ public final class ResponseClientBuilder
      * @return an instance of ResponseClient.
      */
     @Generated
-    public ResponseClient buildResponseClient() {
+    public ResponseClient buildClient() {
         return new ResponseClient(new ResponseAsyncClient(buildInnerClient()));
-    }
-
-    /**
-     * Builds an instance of ResponseOpClient class.
-     *
-     * @return an instance of ResponseOpClient.
-     */
-    @Generated
-    public ResponseOpClient buildResponseOpClient() {
-        return new ResponseOpClient(new ResponseOpAsyncClient(buildInnerClient().getResponseOps()));
     }
 }

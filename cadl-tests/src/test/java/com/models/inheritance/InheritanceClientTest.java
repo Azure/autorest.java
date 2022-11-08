@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class InheritanceClientTest {
 
-    ModelsInheritanceClient client = new ModelsInheritanceClientBuilder().buildClient();
+    InheritanceClient client = new InheritanceClientBuilder().buildClient();
 
     @Test
     void postValid() {

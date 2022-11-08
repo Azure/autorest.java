@@ -12,7 +12,7 @@ import java.util.List;
 
 class ModelValueClientTest {
 
-    ModelValueClient client = new ArraysItemTypesClientBuilder().buildModelValueClient();
+    ModelValueClient client = new ItemTypesClientBuilder().buildModelValueClient();
 
     @Test
     void get() {

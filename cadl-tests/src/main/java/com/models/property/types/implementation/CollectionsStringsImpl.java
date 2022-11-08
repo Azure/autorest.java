@@ -32,14 +32,14 @@ public final class CollectionsStringsImpl {
     private final CollectionsStringsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of CollectionsStringsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    CollectionsStringsImpl(ModelsPropertyTypesClientImpl client) {
+    CollectionsStringsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(
                         CollectionsStringsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class CollectionsStringsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesCollectionsStrings to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for TypesClientCollectionsStrings to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesC")
+    @ServiceInterface(name = "TypesClientCollectio")
     private interface CollectionsStringsService {
         @Get("/models/properties/types/collections/string")
         @ExpectedResponses({200})

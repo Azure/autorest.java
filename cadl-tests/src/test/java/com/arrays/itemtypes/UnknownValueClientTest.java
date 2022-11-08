@@ -11,7 +11,7 @@ import java.util.List;
 
 class UnknownValueClientTest {
 
-    UnknownValueClient client = new ArraysItemTypesClientBuilder().buildUnknownValueClient();
+    UnknownValueClient client = new ItemTypesClientBuilder().buildUnknownValueClient();
 
     @Test
     void get() {

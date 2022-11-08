@@ -19,8 +19,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.TypeReference;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous ArraysItemTypesClient type. */
-@ServiceClient(builder = ArraysItemTypesClientBuilder.class)
+/** Initializes a new instance of the synchronous ItemTypesClient type. */
+@ServiceClient(builder = ItemTypesClientBuilder.class)
 public final class ModelValueClient {
     @Generated private final ModelValueAsyncClient client;
 

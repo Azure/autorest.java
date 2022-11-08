@@ -46,11 +46,11 @@ public final class StringValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryStringValues to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DictionaryClientStringValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryStringValu")
+    @ServiceInterface(name = "DictionaryClientStri")
     private interface StringValuesService {
         @Get("/dictionary/string")
         @ExpectedResponses({200})

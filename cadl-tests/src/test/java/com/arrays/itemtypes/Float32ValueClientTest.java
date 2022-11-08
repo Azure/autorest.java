@@ -11,7 +11,7 @@ import java.util.List;
 
 class Float32ValueClientTest {
 
-    Float32ValueClient client = new ArraysItemTypesClientBuilder().buildFloat32ValueClient();
+    Float32ValueClient client = new ItemTypesClientBuilder().buildFloat32ValueClient();
 
     @Test
     void get() {

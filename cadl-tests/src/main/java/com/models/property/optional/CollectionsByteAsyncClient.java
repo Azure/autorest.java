@@ -19,8 +19,8 @@ import com.models.property.optional.implementation.CollectionsBytesImpl;
 import com.models.property.optional.models.CollectionsByteProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous OptionalClient type. */
+@ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class CollectionsByteAsyncClient {
     @Generated private final CollectionsBytesImpl serviceClient;
 

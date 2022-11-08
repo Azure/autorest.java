@@ -54,8 +54,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
     @Override
     public ServiceClient map(CodeModel codeModel) {
-        JavaSettings settings = JavaSettings.getInstance();
-
         ServiceClient.Builder builder = createClientBuilder();
         builder.builderDisabled(JavaSettings.getInstance().clientBuilderDisabled());
 
@@ -66,53 +64,20 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .className(serviceClientClassName)
                 .packageName(packageName);
 
-        // assume all operations share the same base url
         if (!CoreUtils.isNullOrEmpty(codeModel.getOperationGroups())) {
-            builder.baseUrl(
-                    codeModel.getOperationGroups().get(0).getOperations().get(0).getRequests().get(0)
-                            .getProtocol().getHttp().getUri());
+            builder.baseUrl(getBaseUrl(codeModel));
         }
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getJava().getName() == null ||
-                        og.getLanguage().getJava().getName().isEmpty())
+                .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
 
         Proxy proxy = null;
         if (!codeModelRestAPIMethods.isEmpty()) {
-            // TODO: Assume all operations share the same base url
-            Proxy.Builder proxyBuilder = getProxyBuilder()
-                    .name(serviceClientInterfaceName + "Service")
-                    .clientTypeName(serviceClientInterfaceName)
-                    .baseURL(codeModel.getOperationGroups().stream()
-                            .filter(og -> og.getLanguage().getJava().getName() == null ||
-                                    og.getLanguage().getJava().getName().isEmpty())
-                            .map(og -> og.getOperations().get(0))
-                            .findFirst().get().getRequests().get(0)
-                            .getProtocol().getHttp().getUri());
-            List<ProxyMethod> restAPIMethods = new ArrayList<>();
-            for (Operation method : codeModelRestAPIMethods) {
-                if (settings.isDataPlaneClient()) {
-                    MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
-                }
-                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
-            }
-            proxyBuilder.methods(restAPIMethods);
-            proxy = proxyBuilder.build();
-            builder.proxy(proxy);
-            List<ClientMethod> clientMethods = codeModelRestAPIMethods.stream()
-                    .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
-                    .collect(Collectors.toList());
-            if (settings.isGenerateSendRequestMethod()) {
-                clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(false));
-                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(false));
-                }
-            }
-            builder.clientMethods(clientMethods);
+            proxy = processClientOperations(builder, codeModelRestAPIMethods, serviceClientInterfaceName);
         } else {
-            builder.clientMethods(new ArrayList<>());
+            builder.clientMethods(Collections.emptyList());
         }
 
         List<MethodGroupClient> serviceClientMethodGroupClients = new ArrayList<>();
@@ -125,14 +90,107 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         }
         builder.methodGroupClients(serviceClientMethodGroupClients);
 
-        boolean usesCredentials = false;
+        if (proxy == null && !serviceClientMethodGroupClients.isEmpty()) {
+            proxy = serviceClientMethodGroupClients.iterator().next().getProxy();
+        }
+
+        processParametersAndConstructors(builder, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
+
+        return builder.build();
+    }
+
+    protected Proxy.Builder getProxyBuilder() {
+        return new Proxy.Builder();
+    }
+
+    protected ClientMethodParameter createSerializerAdapterParameter() {
+        return new ClientMethodParameter.Builder()
+                .description("The serializer to serialize an object into a string")
+                .finalParameter(false)
+                .wireType(ClassType.SerializerAdapter)
+                .name("serializerAdapter")
+                .required(true)
+                .constant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
+                        ? Collections.singletonList(ClassType.NonNull)
+                        : new ArrayList<>())
+                .build();
+    }
+
+    protected IType getHttpPipelineClassType() {
+        return ClassType.HttpPipeline;
+    }
+
+    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
+        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+    }
+
+    protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
+        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
+                ClassType.HttpPipeline, "httpPipeline", true, null));
+    }
+
+    protected ServiceClient.Builder createClientBuilder() {
+        return new ServiceClient.Builder();
+    }
+
+    protected static String getBaseUrl(CodeModel codeModel) {
+        // assume all operations share the same base url
+        return codeModel.getOperationGroups().get(0).getOperations().get(0).getRequests().get(0)
+                .getProtocol().getHttp().getUri();
+    }
+
+    protected static String getBaseUrl(Operation operation) {
+        // assume all operations share the same base url
+        return operation.getRequests().get(0)
+                .getProtocol().getHttp().getUri();
+    }
+
+    protected Proxy processClientOperations(ServiceClient.Builder builder, List<Operation> operations, String baseName) {
+        JavaSettings settings = JavaSettings.getInstance();
+
+        // TODO: Assume all operations share the same base url
+        Proxy.Builder proxyBuilder = getProxyBuilder()
+                .name(baseName + "Service")
+                .clientTypeName(baseName)
+                .baseURL(getBaseUrl(operations.iterator().next()));
+        List<ProxyMethod> restAPIMethods = new ArrayList<>();
+        for (Operation operation : operations) {
+            if (settings.isDataPlaneClient()) {
+                MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(operation.getRequests(), operation);
+            }
+            restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(operation).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
+        }
+        proxyBuilder.methods(restAPIMethods);
+        Proxy proxy = proxyBuilder.build();
+        builder.proxy(proxy);
+        List<ClientMethod> clientMethods = operations.stream()
+                .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
+                .collect(Collectors.toList());
+        if (settings.isGenerateSendRequestMethod()) {
+            clientMethods.add(ClientMethod.getAsyncSendRequestClientMethod(false));
+            if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                clientMethods.add(ClientMethod.getSyncSendRequestClientMethod(false));
+            }
+        }
+        builder.clientMethods(clientMethods);
+
+        return proxy;
+    }
+
+    protected void processParametersAndConstructors(ServiceClient.Builder builder, CodeModel codeModel, String serviceVersionClassName, Proxy proxy) {
+        JavaSettings settings = JavaSettings.getInstance();
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
         List<Parameter> clientParameters = Stream.concat(codeModel.getGlobalParameters().stream(),
-                codeModel.getOperationGroups().stream()
-                        .flatMap(og -> og.getOperations().stream())
-                        .flatMap(o -> o.getRequests().stream())
-                        .flatMap(r -> r.getParameters().stream()))
+                        codeModel.getOperationGroups().stream()
+                                .flatMap(og -> og.getOperations().stream())
+                                .flatMap(o -> o.getRequests().stream())
+                                .flatMap(r -> r.getParameters().stream()))
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
                 .collect(Collectors.toList());
@@ -156,21 +214,18 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serializedName = p.getLanguage().getDefault().getSerializedName();
 
             if (settings.isDataPlaneClient() && ParameterSynthesizedOrigin.fromValue(p.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION) {
-                String enumTypeName = ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName);
                 serviceClientPropertyDescription = "Service version";
                 serviceClientPropertyClientType = new ClassType.Builder()
-                        .name(enumTypeName)
+                        .name(serviceVersionClassName)
                         .packageName(settings.getPackage())
                         .build();
                 serviceClientPropertyName = "serviceVersion";
                 serviceClientPropertyIsReadOnly = false;
-                serviceClientPropertyDefaultValueExpression = enumTypeName + ".getLatest()";
+                serviceClientPropertyDefaultValueExpression = serviceVersionClassName + ".getLatest()";
                 serviceClientPropertyRequired = false;
             }
 
-            if (serviceClientPropertyClientType == ClassType.TokenCredential) {
-                usesCredentials = true;
-            } else {
+            if (serviceClientPropertyClientType != ClassType.TokenCredential) {
                 ServiceClientProperty serviceClientProperty =
                         new ServiceClientProperty.Builder()
                                 .description(serviceClientPropertyDescription)
@@ -289,9 +344,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 scopeParams = "DEFAULT_SCOPES";
             } else {
                 // Remove trailing / and all relative paths
-                if (proxy == null) {
-                    proxy = serviceClientMethodGroupClients.get(0).getProxy();
-                }
                 String host = TRAILING_FORWARD_SLASH.matcher(proxy.getBaseURL()).replaceAll("");
                 host = URL_PATH.matcher(host).replaceAll("");
                 List<String> parameters = new ArrayList<>();
@@ -362,46 +414,5 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .serializerAdapterParameter(serializerAdapterParameter)
                     .constructors(serviceClientConstructors);
         }
-
-        return builder.build();
-    }
-
-    protected Proxy.Builder getProxyBuilder() {
-        return new Proxy.Builder();
-    }
-
-    protected ClientMethodParameter createSerializerAdapterParameter() {
-        return new ClientMethodParameter.Builder()
-                .description("The serializer to serialize an object into a string")
-                .finalParameter(false)
-                .wireType(ClassType.SerializerAdapter)
-                .name("serializerAdapter")
-                .required(true)
-                .constant(false)
-                .fromClient(true)
-                .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NonNull)
-                        : new ArrayList<>())
-                .build();
-    }
-
-    protected IType getHttpPipelineClassType() {
-        return ClassType.HttpPipeline;
-    }
-
-    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
-        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
-    }
-
-    protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
-        serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.HttpPipeline, "httpPipeline", true, null));
-    }
-
-    protected ServiceClient.Builder createClientBuilder() {
-        return new ServiceClient.Builder();
     }
 }
