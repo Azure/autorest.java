@@ -10,27 +10,30 @@ public class MethodPageDetails {
     /**
      * Get whether or not this method is a request to get the next page of a sequence of pages.
      */
-    private String nextLinkName;
-    private String itemName;
+    private final String nextLinkName;
+    private final IType nextLinkType;
+
+    private final String itemName;
 
     /**
      * Serialized nextLink name. It is the name in swagger and in response.
      */
-    private String serializedNextLinkName;
+    private final String serializedNextLinkName;
     /**
      * Serialized item name. It is the name in swagger and in response.
      */
-    private String serializedItemName;
+    private final String serializedItemName;
 
-    private ClientMethod nextMethod;
+    private final ClientMethod nextMethod;
 
     // Proxy method return type is Flux<ByteBuffer>. Client method return type is PagedResponse<>.
     // This intermediate type is the type of pagination response (the type with values and nextLink).
-    private IType lroIntermediateType;
+    private final IType lroIntermediateType;
 
-    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
+    public MethodPageDetails(String nextLinkName, IType nextLinkType, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
                              String serializedNextLinkName, String serializedItemName) {
         this.nextLinkName = nextLinkName;
+        this.nextLinkType = nextLinkType;
         this.itemName = itemName;
         this.nextMethod = nextMethod;
         this.lroIntermediateType = lroIntermediateType;
@@ -40,6 +43,10 @@ public class MethodPageDetails {
 
     public String getNextLinkName() {
         return nextLinkName;
+    }
+
+    public IType getNextLinkType() {
+        return nextLinkType;
     }
 
     public String getSerializedNextLinkName() {

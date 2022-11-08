@@ -87,7 +87,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
                             function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
-                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line(nextLinkLine(clientMethod));
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
                                 function.line(String.format("res.getDeserializedHeaders()))%s", endOfLine));
@@ -99,7 +99,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                             function.line("res.getT1().getStatusCode(),");
                             function.line("res.getT1().getHeaders(),");
                             function.line("res.getT2().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
-                            function.line("res.getT2().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line(nextLinkLine(clientMethod, "getT2()"));
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
                                 function.line(String.format("res.getT2().getDeserializedHeaders()))%s", endOfLine));

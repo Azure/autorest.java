@@ -639,13 +639,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (settings.isDataPlaneClient()) {
                 function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
             } else {
-                function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                function.line(nextLinkLine(clientMethod));
             }
             if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                 if (settings.isDataPlaneClient()) {
                     function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedNextLinkName());
                 } else {
-                    function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                    function.line(nextLinkLine(clientMethod));
                 }
             } else {
                 function.line("null,");
@@ -1040,13 +1040,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     if (settings.isDataPlaneClient()) {
                         function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
                     } else {
-                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                        function.line(nextLinkLine(clientMethod));
                     }
                     if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                         if (settings.isDataPlaneClient()) {
                             function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedNextLinkName());
                         } else {
-                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line(nextLinkLine(clientMethod));
                         }
                     } else {
                         function.line("null,");
@@ -1060,6 +1060,17 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 });
             });
         });
+    }
+
+    protected static String nextLinkLine(ClientMethod clientMethod) {
+        return nextLinkLine(clientMethod, "getValue()");
+    }
+
+    protected static String nextLinkLine(ClientMethod clientMethod, String valueExpression) {
+        return String.format("res.%3$s.%1$s()%2$s,",
+            CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()),
+            (clientMethod.getMethodPageDetails().getNextLinkType() == ClassType.String ? "" : ".toString()"),   // nextLink could be type URL
+            valueExpression);
     }
 
     private static boolean responseTypeHasDeserializedHeaders(IType type) {
