@@ -1048,9 +1048,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
-            if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
+            if (methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
                 return NOT_GENERATE;
-            } else if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSync && hasContextParameter) {
+            } else if (methodType == ClientMethodType.SimpleSync && hasContextParameter) {
                 return NOT_GENERATE;
             }
             return VISIBLE;
@@ -1286,6 +1286,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (!isProtocolMethod && convenienceApi != null) {
             return new MethodNamer(convenienceApi.getName());
         } else {
+            if (proxyMethod.isSync()) {
+                return new MethodNamer(proxyMethod.getName().replace("Sync", ""));
+            }
             return new MethodNamer(proxyMethod.getName());
         }
     }

@@ -59,6 +59,12 @@ public class ProxyMethod {
      * Get the name of this Rest API method.
      */
     private final String name;
+
+    /**
+     * Get the base name of this Rest API method.
+     */
+    private final String baseName;
+
     /**
      * Get the parameters that are provided to this method.
      */
@@ -114,7 +120,7 @@ public class ProxyMethod {
         this(requestContentType, returnType, httpMethod, baseUrl, urlPath, responseExpectedStatusCodes,
             unexpectedResponseExceptionType, unexpectedResponseExceptionTypes, name, parameters, allParameters,
             description, returnValueWireType, responseBodyType, rawResponseBodyType, isResumable,
-            responseContentTypes, operationId, examples, specialHeaders, false);
+            responseContentTypes, operationId, examples, specialHeaders, false, name);
     }
 
     /**
@@ -136,6 +142,9 @@ public class ProxyMethod {
      * @param responseContentTypes The media-types in response.
      * @param operationId the operation ID
      * @param examples the examples for the method.
+     * @param specialHeaders list of special headers
+     * @param isSync indicates if this proxy method is a synchronous method.
+     * @param baseName the base name of the REST method.
      */
     protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
         String urlPath, List<Integer> responseExpectedStatusCodes,
@@ -146,7 +155,7 @@ public class ProxyMethod {
         IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
         boolean isResumable, Set<String> responseContentTypes,
         String operationId, Map<String, ProxyMethodExample> examples,
-        List<String> specialHeaders, boolean isSync) {
+        List<String> specialHeaders, boolean isSync, String baseName) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -168,6 +177,7 @@ public class ProxyMethod {
         this.examples = examples;
         this.specialHeaders = specialHeaders;
         this.isSync = isSync;
+        this.baseName = baseName;
     }
 
     public final String getRequestContentType() {
@@ -206,6 +216,10 @@ public class ProxyMethod {
         return name;
     }
 
+    public final String getBaseName() {
+        return baseName == null ? name : baseName;
+    }
+
     public final List<ProxyMethodParameter> getParameters() {
         return parameters;
     }
@@ -239,7 +253,7 @@ public class ProxyMethod {
     }
 
     public final String getPagingSinglePageMethodName() {
-        return MethodNamer.getPagingSinglePageMethodName(getName());
+        return MethodNamer.getPagingSinglePageMethodName(getBaseName());
     }
 
     public final String getSimpleAsyncMethodName() {
@@ -251,7 +265,7 @@ public class ProxyMethod {
     }
 
     public final String getSimpleRestResponseMethodName() {
-        return MethodNamer.getSimpleRestResponseMethodName(getName());
+        return MethodNamer.getSimpleRestResponseMethodName(getBaseName());
     }
 
     public final Set<String> getResponseContentTypes() {
@@ -297,6 +311,7 @@ public class ProxyMethod {
             .parameters(syncParams)
             .httpMethod(this.getHttpMethod())
             .name(this.getName() + "Sync")
+            .baseName(this.getName())
             .description(this.getDescription())
             .baseURL(this.getBaseUrl())
             .operationId(this.getOperationId())
@@ -422,6 +437,7 @@ public class ProxyMethod {
         protected String operationId;
         protected List<String> specialHeaders;
         protected boolean isSync;
+        protected String baseName;
 
         /*
          * Sets the Content-Type of the request.
@@ -520,6 +536,17 @@ public class ProxyMethod {
          */
         public Builder name(String name) {
             this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the base name of this Rest API method.
+         *
+         * @param baseName the name of this Rest API method
+         * @return the Builder itself
+         */
+        public Builder baseName(String baseName) {
+            this.baseName = baseName;
             return this;
         }
 
@@ -673,7 +700,8 @@ public class ProxyMethod {
                 operationId,
                 examples,
                 specialHeaders,
-                isSync);
+                isSync,
+                baseName);
         }
     }
 }

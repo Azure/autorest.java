@@ -198,23 +198,6 @@ public final class Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getValidSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getValidSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -222,7 +205,7 @@ public final class Basics {
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getValidSyncWithResponse(Context context) {
+    public Response<Basic> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -239,22 +222,8 @@ public final class Basics {
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getValidSync() {
-        return getValidSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getValidSync(Context context) {
-        return getValidSyncWithResponse(context).getValue();
+    public Basic getValid() {
+        return getValidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -344,32 +313,6 @@ public final class Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(Basic complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putValidSync(
-                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -377,7 +320,7 @@ public final class Basics {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putValidSyncWithResponse(Basic complexBody, Context context) {
+    public Response<Void> putValidWithResponse(Basic complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -401,22 +344,8 @@ public final class Basics {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(Basic complexBody) {
-        putValidSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidSync(Basic complexBody, Context context) {
-        putValidSyncWithResponse(complexBody, context);
+    public void putValid(Basic complexBody) {
+        putValidWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -486,23 +415,6 @@ public final class Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is invalid for the local strong type along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getInvalidSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getInvalidSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -510,7 +422,7 @@ public final class Basics {
      * @return a basic complex type that is invalid for the local strong type along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getInvalidSyncWithResponse(Context context) {
+    public Response<Basic> getInvalidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -527,22 +439,8 @@ public final class Basics {
      * @return a basic complex type that is invalid for the local strong type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getInvalidSync() {
-        return getInvalidSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is invalid for the local strong type.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getInvalidSync(Context context) {
-        return getInvalidSyncWithResponse(context).getValue();
+    public Basic getInvalid() {
+        return getInvalidWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -610,23 +508,6 @@ public final class Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is empty along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getEmptySyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getEmptySync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get a basic complex type that is empty.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -634,7 +515,7 @@ public final class Basics {
      * @return a basic complex type that is empty along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getEmptySyncWithResponse(Context context) {
+    public Response<Basic> getEmptyWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -651,22 +532,8 @@ public final class Basics {
      * @return a basic complex type that is empty.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getEmptySync() {
-        return getEmptySyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get a basic complex type that is empty.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type that is empty.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getEmptySync(Context context) {
-        return getEmptySyncWithResponse(context).getValue();
+    public Basic getEmpty() {
+        return getEmptyWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -736,23 +603,6 @@ public final class Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type whose properties are null along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNullSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getNullSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get a basic complex type whose properties are null.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -760,7 +610,7 @@ public final class Basics {
      * @return a basic complex type whose properties are null along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNullSyncWithResponse(Context context) {
+    public Response<Basic> getNullWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -777,22 +627,8 @@ public final class Basics {
      * @return a basic complex type whose properties are null.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNullSync() {
-        return getNullSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get a basic complex type whose properties are null.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type whose properties are null.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNullSync(Context context) {
-        return getNullSyncWithResponse(context).getValue();
+    public Basic getNull() {
+        return getNullWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -864,23 +700,6 @@ public final class Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type while the server doesn't provide a response payload along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNotProvidedSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getNotProvidedSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -888,7 +707,7 @@ public final class Basics {
      * @return a basic complex type while the server doesn't provide a response payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Basic> getNotProvidedSyncWithResponse(Context context) {
+    public Response<Basic> getNotProvidedWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -905,22 +724,8 @@ public final class Basics {
      * @return a basic complex type while the server doesn't provide a response payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNotProvidedSync() {
-        return getNotProvidedSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a basic complex type while the server doesn't provide a response payload.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Basic getNotProvidedSync(Context context) {
-        return getNotProvidedSyncWithResponse(context).getValue();
+    public Basic getNotProvided() {
+        return getNotProvidedWithResponse(Context.NONE).getValue();
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Basics.class);
