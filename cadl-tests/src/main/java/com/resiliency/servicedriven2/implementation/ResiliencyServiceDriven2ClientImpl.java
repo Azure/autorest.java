@@ -127,7 +127,7 @@ public final class ResiliencyServiceDriven2ClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ResiliencyServiceDri")
-    private interface ResiliencyServiceDriven2ClientService {
+    public interface ResiliencyServiceDriven2ClientService {
         @Head("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

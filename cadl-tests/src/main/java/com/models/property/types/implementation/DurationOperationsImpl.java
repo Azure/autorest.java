@@ -52,7 +52,7 @@ public final class DurationOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesD")
-    private interface DurationOperationsService {
+    public interface DurationOperationsService {
         @Get("/models/properties/types/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

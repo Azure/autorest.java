@@ -97,7 +97,7 @@ public final class AuthenticationApiKeyClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AuthenticationApiKey")
-    private interface AuthenticationApiKeyClientService {
+    public interface AuthenticationApiKeyClientService {
         @Get("/authentication/api-key/valid")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

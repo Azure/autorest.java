@@ -48,7 +48,7 @@ public final class FloatOperationsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "NonStringEnumsClient")
-    private interface FloatOperationsService {
+    public interface FloatOperationsService {
         @Put("/nonStringEnums/float/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

@@ -121,7 +121,7 @@ public final class MediaTypesClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "MediaTypesClient")
-    private interface MediaTypesClientService {
+    public interface MediaTypesClientService {
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

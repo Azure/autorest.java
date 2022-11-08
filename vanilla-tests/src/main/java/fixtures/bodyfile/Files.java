@@ -45,7 +45,7 @@ public final class Files {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATFi")
-    private interface FilesService {
+    public interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

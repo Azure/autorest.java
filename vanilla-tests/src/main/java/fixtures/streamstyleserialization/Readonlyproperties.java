@@ -50,7 +50,7 @@ public final class Readonlyproperties {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface ReadonlypropertiesService {
+    public interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

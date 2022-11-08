@@ -122,7 +122,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "MultipleInheritanceS")
-    private interface MultipleInheritanceServiceClientService {
+    public interface MultipleInheritanceServiceClientService {
         @Get("/multipleInheritance/horse")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -124,7 +124,7 @@ public final class OdataClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "OdataClient")
-    private interface OdataClientService {
+    public interface OdataClientService {
         @Get("/odata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

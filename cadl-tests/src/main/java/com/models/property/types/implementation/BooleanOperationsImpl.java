@@ -52,7 +52,7 @@ public final class BooleanOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesB")
-    private interface BooleanOperationsService {
+    public interface BooleanOperationsService {
         @Get("/models/properties/types/boolean")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

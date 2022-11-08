@@ -51,7 +51,7 @@ public final class ExtensibleEnumsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesE")
-    private interface ExtensibleEnumsService {
+    public interface ExtensibleEnumsService {
         @Get("/models/properties/types/extensible-enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

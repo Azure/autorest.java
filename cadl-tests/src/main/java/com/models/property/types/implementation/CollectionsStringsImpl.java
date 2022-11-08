@@ -52,7 +52,7 @@ public final class CollectionsStringsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesC")
-    private interface CollectionsStringsService {
+    public interface CollectionsStringsService {
         @Get("/models/properties/types/collections/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -51,7 +51,7 @@ public final class UnknownValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryUnknownVal")
-    private interface UnknownValuesService {
+    public interface UnknownValuesService {
         @Get("/dictionary/unknown")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

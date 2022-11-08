@@ -48,7 +48,7 @@ public final class Dictionaries {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface DictionariesService {
+    public interface DictionariesService {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

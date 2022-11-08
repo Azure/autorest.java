@@ -61,7 +61,7 @@ public final class LROsCustomHeaders {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LROsCustomHeadersService {
+    public interface LROsCustomHeadersService {
         @Put("/lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudErrorException.class)

@@ -51,7 +51,7 @@ public final class CollectionsIntsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesC")
-    private interface CollectionsIntsService {
+    public interface CollectionsIntsService {
         @Get("/models/properties/types/collections/int")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -52,7 +52,7 @@ public final class StringOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyOption")
-    private interface StringOperationsService {
+    public interface StringOperationsService {
         @Get("/models/properties/optional/string/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

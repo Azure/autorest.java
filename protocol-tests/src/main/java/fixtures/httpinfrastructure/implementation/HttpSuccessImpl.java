@@ -57,7 +57,7 @@ public final class HttpSuccessImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpSuccessService {
+    public interface HttpSuccessService {
         @Head("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

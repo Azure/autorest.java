@@ -52,7 +52,7 @@ public final class HttpRetries {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpRetriesService {
+    public interface HttpRetriesService {
         @Head("/http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

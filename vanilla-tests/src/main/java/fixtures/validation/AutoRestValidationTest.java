@@ -159,7 +159,7 @@ public final class AutoRestValidationTest {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestValidationTe")
-    private interface AutoRestValidationTestService {
+    public interface AutoRestValidationTestService {
         @Get("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

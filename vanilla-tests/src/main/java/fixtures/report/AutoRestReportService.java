@@ -115,7 +115,7 @@ public final class AutoRestReportService {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestReportServic")
-    private interface AutoRestReportServiceService {
+    public interface AutoRestReportServiceService {
         @Get("/report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

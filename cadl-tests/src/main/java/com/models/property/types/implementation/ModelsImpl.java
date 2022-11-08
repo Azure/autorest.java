@@ -50,7 +50,7 @@ public final class ModelsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesM")
-    private interface ModelsService {
+    public interface ModelsService {
         @Get("/models/properties/types/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

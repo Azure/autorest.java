@@ -52,7 +52,7 @@ public final class RecursiveModelValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryRecursiveM")
-    private interface RecursiveModelValuesService {
+    public interface RecursiveModelValuesService {
         @Get("/dictionary/model/recursive")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

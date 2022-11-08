@@ -116,7 +116,7 @@ public final class BuiltinClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "BuiltinClient")
-    private interface BuiltinClientService {
+    public interface BuiltinClientService {
         @Get("/builtin")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -51,16 +51,12 @@ To debug, add `--java.debugger` to the argument list. The JVM will suspend at th
 
 - `client-logger: true`, Exception is required to be thrown via `ClientLogger`.
 - `use-default-http-status-code-to-exception-type-mapping: true`, use subclass of `HttpResponseException` defined in azure-core, when service returns unexpected status code.
-- `generic-response-type: true`, use `ResponseBase<H, T>` for response with HTTP headers.
+- `generic-response-type: true`, use `ResponseBase<>`, instead a subclass of `ResponseBase<>`, for response with HTTP headers. Performance and reflective access improvement.
 - `output-model-immutable: true`, make model classes immutable, if model is used only in response.
-
-Settings for handwritten SDK:
 
 - `generate-client-as-impl: true`, generate Client in implementation package, for customization.
 - `models-subpackage: implementation.models`, generate model classes in implementation package.
 - `custom-types-subpackage: models`, generate selected model classes in models package.
-- `service-interface-as-public: true`, generate the interface consumed by `RestProxy` as public to resolve issues with `SecurityManager`.
-- `generic-response-type: true`, use `ResponseBase` instead a sub-type of `ResponseBase`, performance and reflective access improvement.
 
 # Settings
 Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/main/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
@@ -80,7 +76,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types=COMMA,SEPARATED,STRINGS`|Specifies a list of files to put in the package specified in `--custom-types-subpackage`.|
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
-|`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is false.|
+|`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is true.|
 |`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|

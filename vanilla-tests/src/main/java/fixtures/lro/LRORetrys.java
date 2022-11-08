@@ -64,7 +64,7 @@ public final class LRORetrys {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LRORetrysService {
+    public interface LRORetrysService {
         @Put("/lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(CloudErrorException.class)

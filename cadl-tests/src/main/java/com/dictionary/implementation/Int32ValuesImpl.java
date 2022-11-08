@@ -51,7 +51,7 @@ public final class Int32ValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryInt32Value")
-    private interface Int32ValuesService {
+    public interface Int32ValuesService {
         @Get("/dictionary/int32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

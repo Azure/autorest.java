@@ -51,7 +51,7 @@ public final class StringValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ArraysItemTypesStrin")
-    private interface StringValuesService {
+    public interface StringValuesService {
         @Get("/arrays/item-types/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

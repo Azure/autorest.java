@@ -50,7 +50,7 @@ public final class IntsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesI")
-    private interface IntsService {
+    public interface IntsService {
         @Get("/models/properties/types/int")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
