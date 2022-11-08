@@ -639,7 +639,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (settings.isDataPlaneClient()) {
                 function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
             } else {
-                function.line(nextLinkLine(clientMethod));
+                function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
             }
             if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                 if (settings.isDataPlaneClient()) {
@@ -1040,7 +1040,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     if (settings.isDataPlaneClient()) {
                         function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
                     } else {
-                        function.line(nextLinkLine(clientMethod));
+                        function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                     }
                     if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                         if (settings.isDataPlaneClient()) {

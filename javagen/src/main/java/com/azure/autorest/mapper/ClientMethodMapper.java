@@ -292,7 +292,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
                     && shouldGeneratePagingMethods()) {
-                    String pageableItemName = getPageableItemName(operation.getExtensions().getXmsPageable(), proxyMethod.getResponseBodyType());
+                    String pageableItemName = getPageableItemName(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
                     if (pageableItemName == null) {
                         // There is no pageable item name for this operation, skip it.
                         continue;
@@ -597,7 +597,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         ClientMethod nextMethod = (nextMethods == null) ? null
             : nextMethods.stream().filter(m -> m.getType() == nextMethodType).findFirst().orElse(null);
 
-        IType nextLinkType = getPageableNextLinkType(operation.getExtensions().getXmsPageable(), proxyMethod.getResponseBodyType());
+        IType nextLinkType = getPageableNextLinkType(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
 
         MethodPageDetails details = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName), nextLinkType, pageableItemName,
             nextMethod, lroIntermediateType, nextLinkName, itemName);
