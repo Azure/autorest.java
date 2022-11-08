@@ -11,15 +11,17 @@ public class MethodPageDetails {
      * Get whether or not this method is a request to get the next page of a sequence of pages.
      */
     private String nextLinkName;
-    /**
-     * Raw nextLink name. It is the name in swagger and in response.
-     */
-    private String rawNextLinkName;
     private String itemName;
+
     /**
-     * Raw item name. It is the name in swagger and in response.
+     * Serialized nextLink name. It is the name in swagger and in response.
      */
-    private String rawItemName;
+    private String serializedNextLinkName;
+    /**
+     * Serialized item name. It is the name in swagger and in response.
+     */
+    private String serializedItemName;
+
     private ClientMethod nextMethod;
 
     // Proxy method return type is Flux<ByteBuffer>. Client method return type is PagedResponse<>.
@@ -27,29 +29,29 @@ public class MethodPageDetails {
     private IType lroIntermediateType;
 
     public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
-                             String rawNextLinkName, String rawItemName) {
+                             String serializedNextLinkName, String serializedItemName) {
         this.nextLinkName = nextLinkName;
         this.itemName = itemName;
         this.nextMethod = nextMethod;
         this.lroIntermediateType = lroIntermediateType;
-        this.rawNextLinkName = rawNextLinkName;
-        this.rawItemName = rawItemName;
+        this.serializedNextLinkName = serializedNextLinkName;
+        this.serializedItemName = serializedItemName;
     }
 
     public String getNextLinkName() {
         return nextLinkName;
     }
 
-    public String getRawNextLinkName() {
-        return rawNextLinkName;
+    public String getSerializedNextLinkName() {
+        return serializedNextLinkName;
     }
 
     public String getItemName() {
         return itemName;
     }
 
-    public String getRawItemName() {
-        return rawItemName;
+    public String getSerializedItemName() {
+        return serializedItemName;
     }
 
     public ClientMethod getNextMethod() {
