@@ -75,7 +75,7 @@ public final class ClientModelPropertiesManager {
             // Ignore additional and discriminator properties.
             if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
                 continue;
-            } else if (property.isRequired() && requiredFieldsAsConstructorArgs) {
+            } else if (property.isRequired() && requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
                 superRequiredProperties.add(property);
             } else {
                 superSetterProperties.add(property);
@@ -100,7 +100,7 @@ public final class ClientModelPropertiesManager {
         ClientModelProperty discriminatorProperty = null;
         ClientModelProperty additionalProperties = null;
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isRequired() && requiredFieldsAsConstructorArgs) {
+            if (property.isRequired() && requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
                 requiredProperties.add(property);
             } else if (property.isAdditionalProperties()) {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization
